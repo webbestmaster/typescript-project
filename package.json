@@ -3,9 +3,6 @@
   "version": "0.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/webbestmaster/typescript-project.git"
@@ -16,5 +13,76 @@
   "bugs": {
     "url": "https://github.com/webbestmaster/typescript-project/issues"
   },
-  "homepage": "https://github.com/webbestmaster/typescript-project#readme"
+  "homepage": "https://github.com/webbestmaster/typescript-project#readme",
+  "scripts": {
+    "start": "cross-env NODE_ENV=development webpack-cli serve --progress",
+    "start:hot": "cross-env NODE_ENV=development webpack-cli serve --progress --hot",
+    "build": "cross-env NODE_ENV=production webpack --progress",
+    "start-dev-server:build": "cross-env NODE_ENV=production IS_BUILD_SERVER=YES webpack-cli serve --progress",
+    "check": "npm run eslint && npm run stylelint",
+    "check:fix": "npm run prettier && npm run eslint:fix && npm run stylelint:fix",
+    "eslint": "eslint .",
+    "eslint:fix": "eslint . --fix",
+    "stylelint": "stylelint ./**/*.scss",
+    "stylelint:fix": "stylelint ./**/*.scss --fix",
+    "prettier": "prettier --write \"./**/*.(js|ts|tsx)\"",
+    "mdlint": "eslint --ext md .",
+    "mdlint:fix": "eslint --ext md . --fix",
+    "pre-commit-hook": "npm run eslint && npm run stylelint"
+  },
+  "dependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@babel/node": "^7.12.6",
+    "@babel/plugin-transform-runtime": "^7.12.1",
+    "@babel/plugin-transform-strict-mode": "^7.12.1",
+    "@babel/preset-env": "^7.12.7",
+    "@babel/preset-react": "^7.12.7",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.2.2",
+    "circular-dependency-plugin": "^5.2.2",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^6.4.0",
+    "cross-env": "^7.0.3",
+    "css-loader": "^5.0.1",
+    "duplicate-package-checker-webpack-plugin": "^3.0.0",
+    "eslint": "^7.15.0",
+    "eslint-plugin-babel": "^5.3.1",
+    "eslint-plugin-filenames": "^1.3.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-markdown": "^1.0.2",
+    "eslint-plugin-no-loops": "^0.3.0",
+    "eslint-plugin-no-use-extend-native": "^0.5.0",
+    "eslint-plugin-optimize-regex": "^1.2.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-sonarjs": "^0.5.0",
+    "eslint-plugin-unicorn": "^23.0.0",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^4.5.0",
+    "husky": "^4.3.5",
+    "mini-css-extract-plugin": "^1.3.2",
+    "node-sass": "^5.0.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.4",
+    "prettier": "^2.2.1",
+    "raw-loader": "^4.0.2",
+    "react-hot-loader": "^4.13.0",
+    "sass-loader": "^10.1.0",
+    "script-ext-html-webpack-plugin": "^2.1.5",
+    "style-loader": "^2.0.0",
+    "stylelint": "^13.8.0",
+    "stylelint-config-sass-guidelines": "^7.1.0",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-scss": "^3.18.0",
+    "terser-webpack-plugin": "^5.0.3",
+    "webpack": "^5.10.0",
+    "webpack-bundle-analyzer": "^4.2.0",
+    "webpack-cli": "^4.2.0",
+    "webpack-dev-server": "^3.11.0"
+  }
 }
