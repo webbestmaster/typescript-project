@@ -21,6 +21,7 @@
         "allowUnusedLabels": false,
         "downlevelIteration": false,
         "noEmitHelpers": false,
+        "noEmit": false,
         "noLib": false,
         "noStrictGenericChecks": false,
         "noUnusedLocals": false,
