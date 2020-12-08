@@ -4,7 +4,7 @@ const {isProduction, isDevelopment, fileRegExp, pathToLoadedFileFolder} = requir
 
 const styleLoader = {
     loader: 'style-loader',
-    options: {attributes: {'class': 'my-css-module'}},
+    options: {attributes: {class: 'my-css-module'}},
 };
 
 const cssLoader = isProduction ? MiniCssExtractPlugin.loader : styleLoader;

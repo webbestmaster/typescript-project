@@ -72,7 +72,7 @@ pluginList.push(
     }),
     new CopyWebpackPlugin({
         patterns: staticFilesSiteList,
-    })
+    }),
 );
 
 module.exports.plugins = pluginList;
