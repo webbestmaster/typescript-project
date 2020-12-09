@@ -31,7 +31,9 @@
     "pre-commit-hook": "npm run eslint && npm run stylelint"
   },
   "dependencies": {
+    "markdown-pro": "^1.0.10",
     "react": "^17.0.1",
+    "react-audio-player-pro": "0.0.39",
     "react-dom": "^17.0.1"
   },
   "devDependencies": {

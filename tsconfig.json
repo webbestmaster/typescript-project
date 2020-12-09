@@ -17,7 +17,7 @@
         "noImplicitReturns": true,
         "useDefineForClassFields": false,
         "alwaysStrict": true,
-        "allowUnreachableCode": false,
+        "allowUnreachableCode": true,
         "allowUnusedLabels": false,
         "downlevelIteration": false,
         "noEmitHelpers": false,
