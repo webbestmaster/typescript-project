@@ -4,7 +4,7 @@ import React from 'react';
 import {render} from 'react-dom';
 
 import {selector} from './const';
-import {App} from './js/component/app/c-app';
+import {App} from './component/app/c-app';
 
 const nodeWrapper = document.querySelector(selector.appWrapper);
 

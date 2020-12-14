@@ -8,6 +8,9 @@ node_modules
 /webpack
 /webpack.config.js
 
+# report
+/coverage-ts
+
 # example
 
 # /* eslint consistent-this: ["error", "unit", "aggressor"] */
