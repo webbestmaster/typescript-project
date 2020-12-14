@@ -108,7 +108,7 @@ export function App(): JSX.Element {
         <div>
             <AudioPlayerControlSprite/>
 
-            <h1 className={appStyle.app_header}>Test TypeScript Syping</h1>
+            <h1 className={appStyle.app_header}>Test TypeScript typing</h1>
 
             <h2>Test Audio</h2>
             <Audio mediaMetadata={singleAudioData.mediaMetadata} src={singleAudioData.src} useRepeatButton/>

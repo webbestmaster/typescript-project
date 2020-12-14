@@ -14,9 +14,6 @@
     "url": "https://github.com/webbestmaster/typescript-project/issues"
   },
   "homepage": "https://github.com/webbestmaster/typescript-project#readme",
-  "typeCoverage": {
-    "ignoreFiles": ["demo1/*.ts", "demo2/foo.ts"]
-  },
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-cli serve --progress",
     "start:hot": "cross-env NODE_ENV=development webpack-cli serve --progress --hot",
@@ -58,6 +55,7 @@
     "copy-webpack-plugin": "^7.0.0",
     "cross-env": "^7.0.3",
     "css-loader": "^5.0.1",
+    "css-modules-typescript-loader": "^4.0.1",
     "duplicate-package-checker-webpack-plugin": "^3.0.0",
     "eslint": "^7.15.0",
     "eslint-import-resolver-typescript": "^2.3.0",

@@ -38,6 +38,7 @@ module.exports.rules = [
         test: /\.scss$/,
         use: [
             cssLoader,
+            'css-modules-typescript-loader',
             {
                 loader: 'css-loader',
                 options: {
@@ -55,6 +56,7 @@ module.exports.rules = [
         test: /\.css$/,
         use: [
             cssLoader,
+            'css-modules-typescript-loader',
             {
                 loader: 'css-loader',
                 options: {
