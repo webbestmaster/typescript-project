@@ -14,6 +14,9 @@
     "url": "https://github.com/webbestmaster/typescript-project/issues"
   },
   "homepage": "https://github.com/webbestmaster/typescript-project#readme",
+  "typeCoverage": {
+    "ignoreFiles": ["demo1/*.ts", "demo2/foo.ts"]
+  },
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-cli serve --progress",
     "start:hot": "cross-env NODE_ENV=development webpack-cli serve --progress --hot",

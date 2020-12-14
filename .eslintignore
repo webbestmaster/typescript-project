@@ -11,6 +11,9 @@ node_modules
 # report
 /coverage-ts
 
+# style's d.ts
+*.scss.d.ts
+
 # example
 
 # /* eslint consistent-this: ["error", "unit", "aggressor"] */
