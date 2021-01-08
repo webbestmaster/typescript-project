@@ -16,5 +16,8 @@ package-lock.json
 # report
 /coverage-ts
 
+# style's d.ts
+*.scss.d.ts
+
 # other
 .DS_Store
