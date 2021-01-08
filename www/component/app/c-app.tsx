@@ -111,9 +111,11 @@ export function App(): JSX.Element {
             <h1 className={appStyle.app_header}>Test TypeScript typing</h1>
 
             <h2>Test Audio</h2>
+
             <Audio mediaMetadata={singleAudioData.mediaMetadata} src={singleAudioData.src} useRepeatButton/>
 
             <h2>Test AudioPlayer</h2>
+
             <AudioPlayer
                 defaultState={{
                     isMuted: false,
@@ -128,6 +130,7 @@ export function App(): JSX.Element {
             <h2>Markdown</h2>
 
             <div dangerouslySetInnerHTML={{__html: markdownPro('### markdown is here')}}/>
+
             <div
                 dangerouslySetInnerHTML={{
                     __html: markdownPro('### markdown still is here', {
