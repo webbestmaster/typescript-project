@@ -4,7 +4,14 @@ import * as React from 'react';
 
 import markdownPro from 'markdown-pro';
 import markdownProStyle from 'markdown-pro/dist/style.css';
-import {AudioPlayerControlSprite, Audio, AudioPlayer, TrackType} from 'react-audio-player-pro';
+import {
+    AudioPlayerControlSprite,
+    Audio,
+    AudioPlayer,
+    TrackType,
+    PlayListProvider,
+    PlayListPanel,
+} from 'react-audio-player-pro';
 import reactAudioPlayerProStyle from 'react-audio-player-pro/dist/style.css';
 
 import appStyle from './app.scss';
@@ -106,26 +113,32 @@ const audioDataList: Array<TrackType> = [
 export function App(): JSX.Element {
     return (
         <div>
-            <AudioPlayerControlSprite/>
+            <PlayListProvider>
+                <AudioPlayerControlSprite/>
 
-            <h1 className={appStyle.app_header}>Test TypeScript typing</h1>
+                <h1 className={appStyle.app_header}>Test TypeScript typing</h1>
 
-            <h2>Test Audio</h2>
+                <h2>Test Audio</h2>
 
-            <Audio mediaMetadata={singleAudioData.mediaMetadata} src={singleAudioData.src} useRepeatButton/>
+                <Audio mediaMetadata={singleAudioData.mediaMetadata} src={singleAudioData.src} useRepeatButton/>
 
-            <h2>Test AudioPlayer</h2>
+                <h2>Test AudioPlayer</h2>
 
-            <AudioPlayer
-                defaultState={{
-                    isMuted: false,
-                    activeIndex: 0,
-                    isShuffleOn: false,
-                    isTrackListOpen: true,
-                    repeatingState: 'none',
-                }}
-                trackList={audioDataList}
-            />
+                <AudioPlayer
+                    defaultState={{
+                        isMuted: false,
+                        activeIndex: 0,
+                        isShuffleOn: false,
+                        isTrackListOpen: true,
+                        repeatingState: 'none',
+                    }}
+                    trackList={audioDataList}
+                />
+
+                <hr/>
+
+                <PlayListPanel/>
+            </PlayListProvider>
 
             <h2>Markdown</h2>
 
