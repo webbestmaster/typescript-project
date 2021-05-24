@@ -14,18 +14,23 @@ module.exports.optimization = isDevelopment
                       priority: -30,
                       reuseExistingChunk: true,
                   },
-
                   assets: {
                       chunks: 'initial',
                       name: 'assets',
-                      priority: -25,
+                      priority: -26,
                       test: /www\/assets/,
                   },
                   util: {
                       chunks: 'initial',
                       name: 'util',
-                      priority: -24,
+                      priority: -25,
                       test: /www\/util/,
+                  },
+                  page: {
+                      chunks: 'initial',
+                      name: 'page',
+                      priority: -24,
+                      test: /www\/page/,
                   },
                   layout: {
                       chunks: 'initial',

@@ -1,24 +1,24 @@
+import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
+
 import {SystemProvider} from '../../provider/system/c-system-context';
 import {LocaleProvider} from '../../provider/locale/c-locale-context';
 
-import appStyle from './app.scss';
+import {Home} from '../../page/home/c-home';
+import {Error404} from '../../page/error-404/c-error-404';
 
-import pngImageSrc from './image/marker-icon-2x.png';
-import svgImageSrc, {ReactComponent as SvgAsReactComponent} from './image/questions-with-an-official-answer.svg';
+import {appRoute} from './app-route';
 
 export function App(): JSX.Element {
     return (
         <SystemProvider>
             <LocaleProvider>
-                <div>
-                    <img alt="" src={pngImageSrc} />
+                <BrowserRouter>
+                    <Switch>
+                        <Route component={Home} exact path={appRoute.root.path} />
 
-                    <img alt="" src={svgImageSrc} />
-
-                    <SvgAsReactComponent />
-
-                    <h1 className={appStyle.app_header}>app name</h1>
-                </div>
+                        <Route component={Error404} />
+                    </Switch>
+                </BrowserRouter>
             </LocaleProvider>
         </SystemProvider>
     );
