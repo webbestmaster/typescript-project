@@ -9,21 +9,19 @@ const {
     pathToDist,
     cwd,
     nodeEnvironment,
-    isBuildServer,
 } = require('./webpack/config');
 
 const webpackConfig = {
     entry: ['./www/css/root.scss', './www/root.tsx'],
     output: {
         path: path.join(cwd, pathToDist),
-        publicPath: `${isDevelopment || isBuildServer ? '' : pathToStaticFileFolder}`,
-        // publicPath: '',
+        publicPath: isDevelopment ? '/' : pathToStaticFileFolder,
         filename: isDevelopment ? '[name].js' : 'index.js',
         chunkFilename: isDevelopment ? '[name].chunk.js' : '[name].[hash:6].chunk.js',
     },
 
     mode: nodeEnvironment,
-    devtool: isProduction ? false : 'source-map',
+    devtool: 'source-map',
     optimization: require('./webpack/setting/optimization').optimization,
     module: {rules: require('./webpack/setting/module/rules').rules},
     resolve: {

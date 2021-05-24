@@ -11,9 +11,41 @@ module.exports.optimization = isDevelopment
                   main: {
                       chunks: 'initial',
                       name: 'main',
-                      priority: -25,
+                      priority: -30,
                       reuseExistingChunk: true,
                   },
+
+                  assets: {
+                      chunks: 'initial',
+                      name: 'assets',
+                      priority: -25,
+                      test: /www\/assets/,
+                  },
+                  util: {
+                      chunks: 'initial',
+                      name: 'util',
+                      priority: -24,
+                      test: /www\/util/,
+                  },
+                  layout: {
+                      chunks: 'initial',
+                      name: 'layout',
+                      priority: -23,
+                      test: /www\/layout/,
+                  },
+                  provider: {
+                      chunks: 'initial',
+                      name: 'provider',
+                      priority: -22,
+                      test: /www\/provider/,
+                  },
+                  service: {
+                      chunks: 'initial',
+                      name: 'service',
+                      priority: -21,
+                      test: /www\/service/,
+                  },
+
                   style: {
                       chunks: 'initial',
                       name: 'style',
@@ -46,7 +78,7 @@ module.exports.optimization = isDevelopment
                           beautify: false,
                       },
                       compress: {
-                          drop_console: true, // eslint-disable-line camelcase, id-match
+                          pure_funcs: ['console.log'], // eslint-disable-line camelcase, id-match
                           passes: 3,
                       },
                   },

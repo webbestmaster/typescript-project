@@ -2,7 +2,7 @@
 // Rule 'space-return-throw-case' was removed and replaced by: keyword-spacing  space-return-throw-case
 
 {
-    "parser":  "@typescript-eslint/parser",
+    "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaVersion": 2020,
         "sourceType": "module",
@@ -39,7 +39,6 @@
         "unicorn",
         "no-loops",
         "filenames",
-        "markdown",
         "babel"
     ],
     "env": {
@@ -56,8 +55,46 @@
         }
     },
     "rules": {
+        "@typescript-eslint/array-type": [
+            "error",
+            {
+                "default": "generic"
+            }
+        ],
+        "@typescript-eslint/ban-ts-comment": 0,
+        "@typescript-eslint/naming-convention": [
+            "error",
+            {
+                "selector": "typeAlias",
+                "format": [
+                    "StrictPascalCase"
+                ],
+                "suffix": ["Type"]
+            },
+            {
+                "selector": "enum",
+                "format": [
+                    "StrictPascalCase"
+                ],
+                "suffix": ["Enum"]
+            }
+        ],
+        "@typescript-eslint/no-shadow": [
+            1,
+            {
+                "builtinGlobals": true,
+                "hoist": "all"
+            }
+        ],
+        "@typescript-eslint/no-unused-vars": 0,
+        "@typescript-eslint/no-use-before-define": 1,
+        "promise/always-return": 0,
+        "unicorn/prefer-node-protocol": 0,
+        "unicorn/no-array-callback-reference": 0,
+        "unicorn/no-array-for-each": 0,
         "unicorn/filename-case":  0,
         "unicorn/no-reduce": 0,
+        "unicorn/no-array-reduce": 0,
         "unicorn/no-null": 0,
         "unicorn/no-fn-reference-in-iterator": 0,
         "unicorn/prevent-abbreviations": [
@@ -92,6 +129,7 @@
         "jsx-a11y/label-has-for": 0,
         "jsx-a11y/no-access-key": 0,
         "jsx-a11y/no-autofocus": 0,
+        "jsx-a11y/no-onchange": 0,
         "filenames/no-index": 2,
         "import/no-useless-path-segments": 2,
         "import/no-default-export": 2,
@@ -112,6 +150,9 @@
         "no-loops/no-loops": 2,
         "optimize-regex/optimize-regex": 1,
         "no-use-extend-native/no-use-extend-native": 2,
+        "react/jsx-uses-react": 0,
+        "react/react-in-jsx-scope": 0,
+        "react/jsx-no-bind": 0,
         "react/jsx-filename-extension": [
             1,
             {
@@ -145,14 +186,14 @@
         "react/jsx-max-depth": [
             1,
             {
-                "max": 3
+                "max": 5
             }
         ],
         "react/jsx-tag-spacing": [
             1,
             {
                 "closingSlash": "never",
-                "beforeSelfClosing": "never",
+                "beforeSelfClosing": "always",
                 "afterOpening": "never",
                 "beforeClosing": "never"
             }
@@ -350,13 +391,7 @@
         "no-delete-var": 1,
         "no-label-var": 1,
         "no-shadow-restricted-names": 1,
-        "no-shadow": [
-            1,
-            {
-                "builtinGlobals": true,
-                "hoist": "all"
-            }
-        ],
+        "no-shadow": 0,
         "no-undef-init": 1,
         "no-undef": 1,
         "no-undefined": 1,
@@ -389,8 +424,15 @@
             "1tbs",
             {}
         ],
+        // TODO: try to fix it
+//        "camelcase": [
+//            1,
+//            {
+//                "properties": "always"
+//            }
+//        ],
         "camelcase": [
-            1,
+            0,
             {
                 "properties": "always"
             }
@@ -440,11 +482,11 @@
                 "min": 3,
                 "max": 34,
                 "exceptions": [
-                    "tv",
                     "id",
                     "to",
                     "x",
-                    "y"
+                    "y",
+                    "q"
                 ]
             }
         ],
@@ -572,14 +614,23 @@
             "single",
             "avoid-escape"
         ],
+        // TODO: try to fix it
         "id-match": [
-            1,
+            0,
             "^\\$?[a-zA-Z0-9\\$]+$",
             {
                 "onlyDeclarations": false,
                 "properties": true
             }
         ],
+//        "id-match": [
+//            1,
+//            "^\\$?[a-zA-Z0-9\\$]+$",
+//            {
+//                "onlyDeclarations": false,
+//                "properties": true
+//            }
+//        ],
         "semi-spacing": [
             1,
             {

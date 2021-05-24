@@ -1,6 +1,6 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const {isProduction, isDevelopment, fileRegExp, pathToLoadedFileFolder} = require('./../../config');
+const {isProduction, isDevelopment, fileRegExp} = require('./../../config');
 
 const styleLoader = {
     loader: 'style-loader',
@@ -12,24 +12,37 @@ const cssLoader = isProduction ? MiniCssExtractPlugin.loader : styleLoader;
 module.exports.rules = [
     {
         test: /\.tsx?$/,
-        use: 'ts-loader',
         exclude: /node_modules/,
+        use: [
+            {
+                loader: 'ts-loader',
+                options: {
+                    configFile: isProduction ? './../tsconfig.json' : './../tsconfig.dev.json',
+                    // disable type checker for building
+                    transpileOnly: isProduction,
+                },
+            },
+        ],
     },
-
-    /*
-    {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-    },
-*/
     {
         test: fileRegExp,
         use: [
             {
                 loader: 'file-loader',
                 options: {
-                    name: pathToLoadedFileFolder.replace(/^\//, '') + '/[name]-[md5:hash:hex:7].[ext]',
+                    name: '[name]-[md5:hash:hex:7].[ext]',
+                },
+            },
+        ],
+    },
+    {
+        test: /\.svg$/,
+        use: [
+            '@svgr/webpack',
+            {
+                loader: 'file-loader',
+                options: {
+                    name: '[name]-[md5:hash:hex:7].[ext]',
                 },
             },
         ],

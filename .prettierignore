@@ -3,12 +3,9 @@
 
 # Logs
 logs
-*.log
-npm-debug.log*
 
 # npm
 node_modules
-package-lock.json
 
 # dist
 /dist
@@ -16,11 +13,3 @@ package-lock.json
 # report
 /coverage-ts
 /tsc-check
-
-# style's d.ts
-*.scss.d.ts
-
-# other
-.DS_Store
-
-.env

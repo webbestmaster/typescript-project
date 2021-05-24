@@ -1,11 +1,10 @@
 {
     "compilerOptions": {
-        "outDir": "./dist/",
-        "baseUrl": "www/src",
+        "outDir": "./tsc-check/",
 
-        "target": "es6",
-        "jsx": "react",
-        "module": "es6",
+        "target": "es2019",
+        "jsx": "react-jsx",
+        "module": "es2020",
         "moduleResolution": "node",
 
         "noImplicitAny": false,
@@ -27,17 +26,19 @@
         "noUnusedLocals": false,
         "noUnusedParameters": false,
         "esModuleInterop": true,
-        "preserveConstEnums": false,
+        "preserveConstEnums": true,
         "removeComments": false,
-        "skipLibCheck": false,
+        "skipLibCheck": true,
         "checkJs": false,
         "allowJs": true,
         "declaration": false,
         "experimentalDecorators": false,
         "emitDecoratorMetadata": false,
-
+        "sourceMap": true,
     },
     "exclude": [
-        "node_modules"
+        "./dist",
+        "./tsc-check/",
+        "node_modules",
     ]
 }

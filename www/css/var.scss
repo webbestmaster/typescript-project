@@ -1,28 +1,10 @@
 $main-font-family: 'Helvetica Neue', helvetica, arial, sans-serif;
 $main-font-family-monospace: 'Lucida Console', 'Monaco', monospace;
+
 $main-font-color: #1a1a1a;
 $secondary-font-color: #8d8d8d;
-$button-font-color: #19aa1d;
-$positive-color: #18ab1c;
-$negative-color: #d61717;
-$main-border-radius: 8px;
-$main-link-blue: #1c61e2;
 
-$outer-padding: 16px;
+$main-link-color: #1c61e2;
 
 $desktop-width: 1024px;
 $tablet-width: 768px;
-
-/*
-@media screen and (max-width: $desktop-width) {
-    body {
-        background-color: #0c0;
-    }
-}
-
-@media screen and (max-width: $tablet-width) {
-    body {
-        background-color: #00c;
-    }
-}
-*/

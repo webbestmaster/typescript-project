@@ -10,9 +10,11 @@ node_modules
 
 # report
 /coverage-ts
+/tsc-check
 
 # style's d.ts
 *.scss.d.ts
+*.css.d.ts
 
 # example
 

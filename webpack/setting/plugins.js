@@ -9,29 +9,25 @@ const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 
 const {isProduction, isDevelopment} = require('./../config');
+const filePathPrefix = isProduction ? './../' : './';
 
-// const date = new Date();
+const date = new Date();
 
 const definePluginParameters = {
+    // eslint-disable-next-line id-match
     // BUILD_DATE: JSON.stringify(date.getTime()),
-    // BUILD_DATE_H: JSON.stringify(date.toString()),
+    // eslint-disable-next-line id-match
+    BUILD_DATE_H: JSON.stringify(date.toISOString()),
     // NODE_ENV: JSON.stringify(NODE_ENV),
-    // IS_PRODUCTION: JSON.stringify(isProduction),
+    IS_PRODUCTION: JSON.stringify(isProduction),
     // PROJECT_ID: JSON.stringify('my-best-project')
     // IS_DEVELOPMENT: JSON.stringify(IS_DEVELOPMENT)
 };
 
-const staticFilesLibraryList = [
-    {
-        from: '@types/index.d.ts',
-        to: './index.d.ts',
-    },
-];
-
 const staticFilesSiteList = [
     {
         from: './www/favicon.ico',
-        to: './favicon.ico',
+        to: filePathPrefix + 'favicon.ico',
     },
 ];
 
@@ -52,27 +48,24 @@ const pluginList = [
     // new UnusedFilesWebpackPlugin({
     //     patterns: ['www/**/*.*'],
     //     globOptions: {
-    //         ignore: ['www/asset/**/*'],
+    //         ignore: ['www/**/*.scss.flow', 'www/**/*.css.flow', 'www/asset/**/*'],
     //     },
     // }),
-    // new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /en/),
-];
-
-pluginList.push(
     new HtmlWebpackPlugin({
-        template: './www/index.html',
         minify: {
             collapseWhitespace: isProduction,
             removeComments: isProduction,
             minifyCSS: isProduction,
             minifyJS: isProduction,
+            keepClosingSlash: true,
         },
         hash: true,
-        filename: './index.html',
+        template: './www/index.html',
     }),
     new CopyWebpackPlugin({
         patterns: staticFilesSiteList,
     }),
-);
+    new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /en|ru/),
+];
 
 module.exports.plugins = pluginList;
