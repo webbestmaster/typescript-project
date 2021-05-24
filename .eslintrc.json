@@ -424,15 +424,8 @@
             "1tbs",
             {}
         ],
-        // TODO: try to fix it
-//        "camelcase": [
-//            1,
-//            {
-//                "properties": "always"
-//            }
-//        ],
         "camelcase": [
-            0,
+            1,
             {
                 "properties": "always"
             }
@@ -614,10 +607,9 @@
             "single",
             "avoid-escape"
         ],
-        // TODO: try to fix it
         "id-match": [
             0,
-            "^\\$?[a-zA-Z0-9\\$]+$",
+            "^\\[a-zA-Z0-9\\$]+$",
             {
                 "onlyDeclarations": false,
                 "properties": true
