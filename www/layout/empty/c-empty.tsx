@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext, useMemo, useCallback, useRef, SyntheticEvent} from 'react';
+import React, {useMemo} from 'react';
 
 import {LangKeyType} from '../../provider/locale/translation/type';
 import {Locale} from '../../provider/locale/c-locale';

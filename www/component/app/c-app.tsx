@@ -1,4 +1,4 @@
-import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 import {SystemProvider} from '../../provider/system/c-system-context';
 import {LocaleProvider} from '../../provider/locale/c-locale-context';

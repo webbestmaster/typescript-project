@@ -1,6 +1,4 @@
-import {useCallback, useEffect, useState, useMemo} from 'react';
-
-import {UseHookType} from './api-hook-type';
+import {useCallback, useMemo, useState} from 'react';
 
 type StateHooksType<DateType> = {
     isInProgress: boolean;

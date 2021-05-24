@@ -1,6 +1,6 @@
 /* global Location */
 
-import {useMemo, useCallback} from 'react';
+import {useCallback, useMemo} from 'react';
 import {useHistory} from 'react-router-dom';
 
 import {getParametersFromUrl, objectToUrlParameters} from '../url';

@@ -3,15 +3,15 @@ export type LangDataType = {
 
     META__LANGUAGE_NAME: string;
 
-    POPUP__BUTTON__YES: string;
-    POPUP__BUTTON__NO: string;
-    POPUP__BUTTON__CANCEL: string;
-    POPUP__BUTTON__CLOSE: string;
-    POPUP__BUTTON__SEND: string;
-    POPUP__BUTTON__OK: string;
-    POPUP__BUTTON__APPLY: string;
-    POPUP__BUTTON__CONFIRM: string;
-    POPUP__BUTTON__DECLINE: string;
+    BUTTON__YES: string;
+    BUTTON__NO: string;
+    BUTTON__CANCEL: string;
+    BUTTON__CLOSE: string;
+    BUTTON__SEND: string;
+    BUTTON__OK: string;
+    BUTTON__APPLY: string;
+    BUTTON__CONFIRM: string;
+    BUTTON__DECLINE: string;
 
     WEEK_DAY__MONDAY: string;
     WEEK_DAY__TUESDAY: string;

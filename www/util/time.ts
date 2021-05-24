@@ -2,7 +2,7 @@
 
 import {LocaleNameEnum} from '../provider/locale/locale-context-type';
 
-import {NumberFormatOptionsType, getFormattedNumber, TimeSizeEnum} from './format';
+import {getFormattedNumber, NumberFormatOptionsType, TimeSizeEnum} from './format';
 
 export type TimeItemType = {count: number; unitType: TimeSizeEnum};
 

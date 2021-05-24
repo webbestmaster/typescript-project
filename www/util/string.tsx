@@ -1,5 +1,3 @@
-import {Fragment} from 'react';
-
 import {ShortLocaleNameEnum} from '../provider/locale/locale-context-type';
 
 export function getHash(data: Record<string, unknown> | string | Array<unknown>): string {

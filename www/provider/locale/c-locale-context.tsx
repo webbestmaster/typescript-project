@@ -1,6 +1,6 @@
 import {Context, createContext, useCallback, useMemo, useState} from 'react';
 
-import {LocaleContextValueMapType, LocaleContextType, LocaleNameEnum} from './locale-context-type';
+import {LocaleContextType, LocaleContextValueMapType, LocaleNameEnum} from './locale-context-type';
 import {
     getDefaultLocaleContextData,
     getLocalizedString as getLocalizedStringHelper,
