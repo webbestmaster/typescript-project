@@ -1,4 +1,4 @@
-export enum PositionEnum {
+export enum SpinnerPositionEnum {
     static = 'static',
     absolute = 'absolute',
     fixed = 'fixed',
