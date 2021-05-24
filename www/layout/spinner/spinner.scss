@@ -43,8 +43,6 @@ $z-index-wrapper: 5;
 }
 
 .spinner_wrapper {
-    @extend %show-spinner-animation;
-
     align-items: center;
     background-color: rgba(255, 255, 255, 0.5);
     box-sizing: border-box;
@@ -59,10 +57,6 @@ $z-index-wrapper: 5;
     top: 0;
     width: 100%;
     z-index: $z-index-wrapper;
-}
-
-.spinner_wrapper__static {
-    z-index: auto;
 }
 
 .spinner_image {

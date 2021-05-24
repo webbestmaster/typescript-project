@@ -1,10 +1,10 @@
 import {classNames} from '../../util/css';
 
 import spinnerStyle from './spinner.scss';
-import {defaultData, positionValueMap} from './spinner-const';
-import {PositionType} from './spinner-type';
+import {defaultSpinnerData} from './spinner-const';
+import {PositionEnum} from './spinner-type';
 
-const {size: defaultSize} = defaultData;
+const {size: defaultSize} = defaultSpinnerData;
 
 type PropsType = {
     size?: number; // default - 48px
@@ -12,7 +12,7 @@ type PropsType = {
     arcColor?: string; // default - $color-border
     circleColor?: string; // default - $light-gray
     isShow?: boolean; // default - true
-    position?: PositionType; // default - static
+    position?: keyof typeof PositionEnum; // default - static
     wrapperColor?: string; // default - transparent
     wrapperPadding?: string | number; // default - 12px
     wrapperWidth?: string | number; // default - 100%
@@ -39,7 +39,7 @@ export function Spinner(props: PropsType): JSX.Element | null {
         return null;
     }
 
-    const position = rawPosition || positionValueMap.static;
+    const position = rawPosition || PositionEnum.static;
     const size = rawSize || defaultSize;
 
     const spinnerImageStyle = {
@@ -61,12 +61,7 @@ export function Spinner(props: PropsType): JSX.Element | null {
     };
 
     return (
-        <div
-            className={classNames(spinnerStyle.spinner_wrapper, className, {
-                [spinnerStyle.spinner_wrapper__static]: position === positionValueMap.static,
-            })}
-            style={spinnerWrapperStyle}
-        >
+        <div className={classNames(spinnerStyle.spinner_wrapper, className)} style={spinnerWrapperStyle}>
             <div className={spinnerStyle.spinner_image} style={spinnerImageStyle} />
         </div>
     );

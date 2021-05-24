@@ -9,11 +9,11 @@ export function Error404(): JSX.Element {
             <h1>Page 404</h1>
 
             <IsRender isRender={false}>
-                <IsHidden isHidden>
+                <IsHidden isHidden={false}>
                     <div>
                         <Empty />
 
-                        <Spinner />
+                        <Spinner position="static" />
                     </div>
                 </IsHidden>
             </IsRender>
