@@ -32,11 +32,12 @@ $ depcheck
 
 Run
 ```
-$ /usr/bin/nginx [-t] [-c ~/my-nginx.conf]
+$ /usr/bin/nginx [-t] [-c ~/my-nginx.conf] [-g "daemon off;"]
 ```
 
 `-t` - Don’t run, just test the configuration file. NGINX checks configuration for correct syntax and then try to open files referred in configuration.
 `-c` - Specify which configuration file NGINX should use instead of the default.
+`-g "daemon off;"` - do not exit from terminal
 
 ```
 $ sudo nginx -s stop
