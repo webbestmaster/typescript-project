@@ -9,9 +9,7 @@ import {ObjectToUrlParametersType, QueryMapType} from '../type';
 import {UseUrlHookOptionsType, UseUrlHookType} from './url-hook-type';
 import {urlHookDefaultOptions} from './url-hook-const';
 
-export function useUrl<
-    QueryMap extends ObjectToUrlParametersType = ObjectToUrlParametersType,
->(): UseUrlHookType<QueryMap> {
+export function useUrl<QueryMap extends ObjectToUrlParametersType>(): UseUrlHookType<QueryMap> {
     const routerHistory = useHistory<Location>();
 
     const {search, pathname: currentPathname} = routerHistory.location;

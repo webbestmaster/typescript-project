@@ -1,6 +1,6 @@
 /* global URL */
 
-import {ObjectToUrlParametersType, QueryMapType, QuerySimpleValueType, QueryValueType} from './type';
+import {ObjectToUrlParametersType, QueryKeyType, QueryMapType, QuerySimpleValueType, QueryValueType} from './type';
 
 // eslint-disable-next-line complexity
 function stringifyUrlParameterSimpleValue(value: QuerySimpleValueType): string | null {
@@ -62,14 +62,14 @@ export function objectToUrlParameters(options?: ObjectToUrlParametersType): stri
     return parameterList.join('&');
 }
 
-export function getParametersFromUrl(fullUrlString: string): QueryMapType {
+export function getParametersFromUrl(fullUrlString: string): QueryMapType<QueryKeyType> {
     const url: URL = new URL(fullUrlString);
 
     const {searchParams} = url;
 
     const keyList: Array<string> = [...searchParams.keys()];
 
-    return keyList.reduce((data: QueryMapType, key: string): QueryMapType => {
+    return keyList.reduce((data: QueryMapType<QueryKeyType>, key: string): QueryMapType<QueryKeyType> => {
         const value = searchParams.get(key);
 
         if (typeof value !== 'string') {

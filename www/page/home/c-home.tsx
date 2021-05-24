@@ -1,6 +1,5 @@
 import pngImageSrc from './image/marker-icon-2x.png';
 import svgImageSrc, {ReactComponent as SvgAsReactComponent} from './image/questions-with-an-official-answer.svg';
-
 import homeStyle from './home.scss';
 
 export function Home(): JSX.Element {
