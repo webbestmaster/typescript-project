@@ -60,6 +60,7 @@ const pluginList = [
             keepClosingSlash: true,
         },
         hash: true,
+        filename: filePathPrefix + 'index.html',
         template: './www/index.html',
     }),
     new CopyWebpackPlugin({

@@ -7,7 +7,7 @@ const host = 'localhost';
 const mainProxyUrlSetting = {
     // pathRewrite: {'^/!*': ''},
     secure: false,
-    target: 'https://api.rocketdata.io/',
+    target: 'https://api.site.io/',
     changeOrigin: true, // for this option only: see documentations here https://github.com/chimurai/http-proxy-middleware#http-proxy-middleware-options
 };
 */
@@ -27,10 +27,11 @@ module.exports.devServer = {
     // proxy: {
     //     '/reports/': mainProxyUrlSetting,
     // },
+    /*
     proxy: {
         '/op/api': {
             secure: false,
-            target: 'https://cp.rocketdata.io',
+            target: 'https://cp.site.io',
             changeOrigin: true,
             cookieDomainRewrite: 'localhost',
             onProxyRes: proxyResponse => {
@@ -46,4 +47,5 @@ module.exports.devServer = {
             },
         },
     },
+*/
 };

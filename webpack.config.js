@@ -21,7 +21,7 @@ const webpackConfig = {
     },
 
     mode: nodeEnvironment,
-    devtool: 'source-map',
+    devtool: isDevelopment ? 'source-map' : false,
     optimization: require('./webpack/setting/optimization').optimization,
     module: {rules: require('./webpack/setting/module/rules').rules},
     resolve: {

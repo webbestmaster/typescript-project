@@ -5,7 +5,7 @@
   "main": "",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com/rocketdata.io/antcp.git"
+    "url": "git+https://github.com/webbestmaster/typescript-project.git"
   },
   "engines": {
     "node": "^14.0.0",
@@ -14,9 +14,9 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://gitlab.com/rocketdata.io/antcp/issues"
+    "url": "https://github.com/webbestmaster/typescript-project/issues"
   },
-  "homepage": "https://gitlab.com/rocketdata.io/antcp#readme",
+  "homepage": "https://github.com/webbestmaster/typescript-project#readme",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-cli serve --progress",
     "start:hot": "cross-env NODE_ENV=development webpack-cli serve --progress --hot",
