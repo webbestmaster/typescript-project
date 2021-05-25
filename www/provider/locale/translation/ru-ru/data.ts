@@ -23,6 +23,11 @@ export const ruRu: LangDataType = {
     WEEK_DAY__SUNDAY: 'Воскресенье',
     WEEK_DAY__ALL_DAYS: 'Все дни',
 
+    EMPTY__THERE_IS_NOTHING_HERE_YET: 'Здесь пока ничего нет.',
+    EMPTY__THERES_NOTHING_HERE: 'Здесь ничего нет.',
+    EMPTY__TRY_CHANGING_FILTERS: 'Попробуйте изменить фильтры.',
+    EMPTY__EMPTY: 'Пусто.',
+
     /* eslint-enable id-match, id-length, max-len,sonarjs/no-duplicate-string */
 };
 

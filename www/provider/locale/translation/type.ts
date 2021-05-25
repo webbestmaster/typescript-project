@@ -22,6 +22,11 @@ export type LangDataType = {
     WEEK_DAY__SUNDAY: string;
     WEEK_DAY__ALL_DAYS: string;
 
+    EMPTY__THERE_IS_NOTHING_HERE_YET: string;
+    EMPTY__THERES_NOTHING_HERE: string;
+    EMPTY__TRY_CHANGING_FILTERS: string;
+    EMPTY__EMPTY: string;
+
     /* eslint-enable id-match, id-length, max-len */
 };
 

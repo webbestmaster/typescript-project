@@ -10,11 +10,9 @@ export function Error404(): JSX.Element {
 
             <IsRender isRender={false}>
                 <IsHidden isHidden={false}>
-                    <div>
-                        <Empty />
+                    <Empty mainText="EMPTY__THERE_IS_NOTHING_HERE_YET" secondaryText="EMPTY__TRY_CHANGING_FILTERS" />
 
-                        <Spinner position="static" />
-                    </div>
+                    <Spinner position="static" />
                 </IsHidden>
             </IsRender>
         </div>

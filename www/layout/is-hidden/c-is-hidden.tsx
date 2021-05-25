@@ -2,11 +2,9 @@ import {classNames} from '../../util/css';
 
 import isHiddenStyle from './is-hidden.scss';
 
-type IsHiddenChildrenType = JSX.Element;
-
 type PropsType = {
     isHidden: boolean;
-    children: IsHiddenChildrenType;
+    children?: JSX.Element | Array<JSX.Element | string> | string;
     className?: string;
 };
 
