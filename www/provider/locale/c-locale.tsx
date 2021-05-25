@@ -1,10 +1,10 @@
-import {Fragment, useContext} from 'react';
+import {Fragment} from 'react';
 
-import {LocaleContextType, LocaleContextValueMapType} from './locale-context-type';
+import {LocaleContextValueMapType} from './locale-context-type';
 import {getLocalizedString} from './locale-context-helper';
 import {LangKeyType} from './translation/type';
-import {LocaleContext} from './c-locale-context';
 import {allLocalesData, splitValueStringRegExp} from './locale-context-const';
+import {useLocale} from './locale-hook';
 
 type PropsType = {
     stringKey: LangKeyType;
@@ -14,8 +14,7 @@ type PropsType = {
 export function Locale(props: PropsType): JSX.Element {
     const {stringKey, valueMap} = props;
 
-    const localeContextData = useContext<LocaleContextType>(LocaleContext);
-    const {localeName} = localeContextData;
+    const {localeName} = useLocale();
 
     if (!valueMap) {
         return <>{getLocalizedString(stringKey, localeName, valueMap)}</>;
