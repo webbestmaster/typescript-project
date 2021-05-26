@@ -52,7 +52,7 @@ export function SystemProvider(props: PropsType): JSX.Element {
     );
 
     useEffect(() => {
-        const handleResizeDebounced = debounce(handleResize, 150);
+        const handleResizeDebounced = debounce<[]>(handleResize, 150);
 
         window.addEventListener('resize', handleResizeDebounced, {capture: false, passive: true});
         window.addEventListener('load', handleWindowLoad, false);
