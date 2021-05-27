@@ -14,6 +14,7 @@ const {
 const webpackConfig = {
     entry: ['./www/css/root.scss', './www/root.tsx'],
     output: {
+        pathinfo: false,
         path: path.join(cwd, pathToDist),
         publicPath: isDevelopment ? '/' : pathToStaticFileFolder,
         filename: isDevelopment ? '[name].js' : 'index.js',
