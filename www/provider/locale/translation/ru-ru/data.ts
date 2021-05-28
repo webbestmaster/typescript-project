@@ -28,6 +28,8 @@ export const ruRu: LangDataType = {
     EMPTY__TRY_CHANGING_FILTERS: 'Попробуйте изменить фильтры.',
     EMPTY__EMPTY: 'Пусто.',
 
+    ERROR__CAN_NOT_LOAD_THE_COMPONENT: 'Не получилось загрузить компонент',
+
     /* eslint-enable id-match, id-length, max-len,sonarjs/no-duplicate-string */
 };
 

@@ -27,6 +27,8 @@ export type LangDataType = {
     EMPTY__TRY_CHANGING_FILTERS: string;
     EMPTY__EMPTY: string;
 
+    ERROR__CAN_NOT_LOAD_THE_COMPONENT: string;
+
     /* eslint-enable id-match, id-length, max-len */
 };
 
