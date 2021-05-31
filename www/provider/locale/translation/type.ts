@@ -18,7 +18,9 @@ export type LangDataType = {
     BUTTON__PREVIOUS_STEP: string;
     BUTTON__NEXT_STEP: string;
     BUTTON__ADD: string;
+    BUTTON__CREATE: string;
     BUTTON__UPLOAD_IMAGE: string;
+    BUTTON__UPDATE: string;
     BUTTON__UPDATE_INFO: string;
     BUTTON__SAVE_INFORMATION: string;
     BUTTON__COMPLETE_CREATION: string;
