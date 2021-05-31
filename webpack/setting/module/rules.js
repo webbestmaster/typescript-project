@@ -1,6 +1,6 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const {isProduction, isDevelopment, fileRegExp} = require('./../../config');
+const {isProduction, isDevelopment, fileRegExp, isTsTranspileOnly} = require('./../../config');
 
 const styleLoader = {
     loader: 'style-loader',
@@ -19,7 +19,7 @@ module.exports.rules = [
                 options: {
                     configFile: isProduction ? './../tsconfig.json' : './../tsconfig.dev.json',
                     // disable type checker for building
-                    transpileOnly: isProduction,
+                    transpileOnly: isTsTranspileOnly || isProduction,
                 },
             },
         ],
