@@ -23,4 +23,4 @@ module.exports.pathToDist = '/dist' + pathToStaticFileFolder;
 
 module.exports.webpackDevServerPort = 9090;
 
-module.exports.isTsTranspileOnly = process.env.TS_TRANSPILE_ONLY === 'TRUE';
+module.exports.isTsTranspileOnly = process.env.TS_TRANSPILE_ONLY === 'true';

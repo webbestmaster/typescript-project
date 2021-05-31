@@ -29,7 +29,7 @@
     "stylelint": "stylelint ./**.scss",
     "stylelint:fix": "stylelint ./**.scss --fix",
     "prettier": "prettier --write \"./**/*.(js|ts|tsx)\"",
-    "start:hot:transpile-only": "cross-env NODE_ENV=development TS_TRANSPILE_ONLY=TRUE webpack-cli serve --progress --hot",
+    "start:hot:transpile-only": "cross-env NODE_ENV=development TS_TRANSPILE_ONLY=true webpack-cli serve --progress --hot",
     "tsc-watch": "tsc -p ./tsconfig.json --watch",
     "tsc": "tsc -p ./tsconfig.json",
     "ts-coverage": "typescript-coverage-report",
