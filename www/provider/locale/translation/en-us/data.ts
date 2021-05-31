@@ -16,6 +16,7 @@ export const enUs: LangDataType = {
     BUTTON__UPLOAD: 'Upload',
     BUTTON__DOWNLOAD: 'Download',
     BUTTON__SELECT: 'Select',
+    BUTTON__SELECT_A_FILE: 'Select a file',
     BUTTON__PREVIOUS_STEP: 'Previous step',
     BUTTON__NEXT_STEP: 'Next step',
     BUTTON__ADD: 'Add',

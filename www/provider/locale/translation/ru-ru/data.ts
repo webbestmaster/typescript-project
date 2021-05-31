@@ -16,6 +16,7 @@ export const ruRu: LangDataType = {
     BUTTON__UPLOAD: 'Загрузить',
     BUTTON__DOWNLOAD: 'Скачать',
     BUTTON__SELECT: 'Выбрать',
+    BUTTON__SELECT_A_FILE: 'Выбрать файл',
     BUTTON__PREVIOUS_STEP: 'Предыдущий шаг',
     BUTTON__NEXT_STEP: 'Следующий шаг',
     BUTTON__ADD: 'Добавить',
