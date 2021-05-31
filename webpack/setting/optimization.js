@@ -66,9 +66,9 @@ module.exports.optimization = isDevelopment
                       test: /\.s?css$/,
                       reuseExistingChunk: true,
                   },
-                  asset: {
+                  files: {
                       chunks: 'all',
-                      name: 'asset',
+                      name: 'files',
                       priority: -15,
                       test: fileRegExp,
                       reuseExistingChunk: true,
