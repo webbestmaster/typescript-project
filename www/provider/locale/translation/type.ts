@@ -12,6 +12,24 @@ export type LangDataType = {
     BUTTON__APPLY: string;
     BUTTON__CONFIRM: string;
     BUTTON__DECLINE: string;
+    BUTTON__UPLOAD: string;
+    BUTTON__DOWNLOAD: string;
+    BUTTON__SELECT: string;
+    BUTTON__PREVIOUS_STEP: string;
+    BUTTON__NEXT_STEP: string;
+    BUTTON__ADD: string;
+    BUTTON__UPLOAD_IMAGE: string;
+    BUTTON__UPDATE_INFO: string;
+    BUTTON__SAVE_INFORMATION: string;
+    BUTTON__COMPLETE_CREATION: string;
+    BUTTON__CHANGE_PASSWORD: string;
+    BUTTON__SAVE: string;
+    BUTTON__SAVE_SETTINGS: string;
+    BUTTON__DELETE: string;
+    BUTTON__DELETE_SELECTED: string;
+    BUTTON__ACTIONS: string;
+    BUTTON__MOVE_SELECTED: string;
+    BUTTON__RESET_CHANGES: string;
 
     WEEK_DAY__MONDAY: string;
     WEEK_DAY__TUESDAY: string;
