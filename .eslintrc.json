@@ -118,6 +118,12 @@
         "babel/new-cap": 1,
         "babel/no-invalid-this": 1,
         "babel/object-curly-spacing": 1,
+/*
+        "babel/quotes": [
+            1,
+            "single"
+        ],
+*/
         "babel/quotes": "off",
         "babel/semi": 1,
         "babel/no-unused-expressions": 1,
@@ -257,6 +263,12 @@
         "no-empty": 1,
         "no-ex-assign": 1,
         "no-extra-boolean-cast": 1,
+/*
+        "no-extra-parens": [
+            1,
+            "all"
+        ],
+*/
         "no-extra-parens": "off",
         "no-extra-semi": 1,
         "no-func-assign": 1,
@@ -618,14 +630,6 @@
                 "properties": true
             }
         ],
-//        "id-match": [
-//            1,
-//            "^\\$?[a-zA-Z0-9\\$]+$",
-//            {
-//                "onlyDeclarations": false,
-//                "properties": true
-//            }
-//        ],
         "semi-spacing": [
             1,
             {
