@@ -45,7 +45,7 @@ export const enUs: LangDataType = {
     WEEK_DAY__ALL_DAYS: 'All days',
 
     EMPTY__THERE_IS_NOTHING_HERE_YET: 'There is nothing here yet.',
-    EMPTY__THERES_NOTHING_HERE: 'There\'s nothing here.',
+    EMPTY__THERES_NOTHING_HERE: "There's nothing here.",
     EMPTY__TRY_CHANGING_FILTERS: 'Try changing filters.',
     EMPTY__EMPTY: 'Empty.',
 

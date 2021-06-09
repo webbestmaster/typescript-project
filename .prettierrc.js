@@ -10,5 +10,6 @@ module.exports = {
     htmlWhitespaceSensitivity: 'strict',
     proseWrap: 'never',
     arrowParens: 'avoid',
-    trailingComma: 'all',
+    trailingComma: 'es5',
+    quoteProps: 'preserve',
 };

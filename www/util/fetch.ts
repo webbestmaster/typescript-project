@@ -54,7 +54,7 @@ export function fetchX<ExpectedResponseType>(url: string, options?: OptionsType)
 
     const definedOptions: OptionsType = {
         credentials: 'include',
-        ...options || {},
+        ...(options || {}),
     };
 
     const fetchResult = fetch(url, definedOptions)

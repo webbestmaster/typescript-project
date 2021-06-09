@@ -118,10 +118,7 @@
         "babel/new-cap": 1,
         "babel/no-invalid-this": 1,
         "babel/object-curly-spacing": 1,
-        "babel/quotes": [
-            1,
-            "single"
-        ],
+        "babel/quotes": "off",
         "babel/semi": 1,
         "babel/no-unused-expressions": 1,
         "babel/valid-typeof": 1,
@@ -153,6 +150,7 @@
         "react/jsx-uses-react": 0,
         "react/react-in-jsx-scope": 0,
         "react/jsx-no-bind": 0,
+        "react/jsx-newline": "off",
         "react/jsx-filename-extension": [
             1,
             {
@@ -259,10 +257,7 @@
         "no-empty": 1,
         "no-ex-assign": 1,
         "no-extra-boolean-cast": 1,
-        "no-extra-parens": [
-            1,
-            "all"
-        ],
+        "no-extra-parens": "off",
         "no-extra-semi": 1,
         "no-func-assign": 1,
         "no-inner-declarations": [
@@ -482,6 +477,7 @@
                 ]
             }
         ],
+/*
         "indent": [
             1,
             4,
@@ -505,6 +501,8 @@
                 "ObjectExpression": 1
             }
         ],
+*/
+        "indent": "off",
         "key-spacing": [
             1,
             {
@@ -519,6 +517,7 @@
                 "after": true
             }
         ],
+/*
         "lines-around-comment": [
             1,
             {
@@ -530,6 +529,8 @@
                 "allowBlockEnd": false
             }
         ],
+*/
+        "lines-around-comment": "off",
         "linebreak-style": [
             1,
             "unix"
@@ -580,10 +581,13 @@
             1,
             "always"
         ],
+/*
         "operator-linebreak": [
             1,
             "before"
         ],
+*/
+        "operator-linebreak": "off",
         "padded-blocks": [
             1,
             {

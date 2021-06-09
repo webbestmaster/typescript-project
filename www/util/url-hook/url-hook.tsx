@@ -21,7 +21,7 @@ export function useUrl<QueryMap extends ObjectToUrlParametersType>(): UseUrlHook
 
     const persistRoute = useCallback(
         (pathname: string, queriesInner: ObjectToUrlParametersType, options?: UseUrlHookOptionsType): void => {
-            const definedOptions = {...urlHookDefaultOptions, ...options || {}};
+            const definedOptions = {...urlHookDefaultOptions, ...(options || {})};
 
             const resultQueryMap = definedOptions.isSaveQuery ? {...queries, ...queriesInner} : queriesInner;
 

@@ -43,8 +43,8 @@ export function getDateTimeHumanSize(option: GetDateTimeDifferenceOptionType): s
     // const weekPart = Math.floor(weeks);
     const dayPart = Math.floor(days) % monthSize;
     const hourPart = Math.floor(hours) % daySize;
-    const minutePart = Math.floor(minutes) % 24 % hourSize;
-    const secondPart = Math.floor(seconds) % 24 % 60 % minuteSize;
+    const minutePart = (Math.floor(minutes) % 24) % hourSize;
+    const secondPart = ((Math.floor(seconds) % 24) % 60) % minuteSize;
 
     return [
         {count: yearPart, unitType: TimeSizeEnum.year},

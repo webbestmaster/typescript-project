@@ -69,7 +69,7 @@ export function getLocalizedString(
 }
 
 export function getShortLocaleName(localeName: LocaleNameEnum): ShortLocaleNameEnum {
-    return localeName.split('-')[0] as ShortLocaleNameEnum || localeConst.defaults.shortLocaleName;
+    return (localeName.split('-')[0] as ShortLocaleNameEnum) || localeConst.defaults.shortLocaleName;
 }
 
 export function getDefaultLocaleContextData(): LocaleContextType {
