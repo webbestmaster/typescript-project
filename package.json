@@ -19,7 +19,7 @@
   "homepage": "https://github.com/webbestmaster/typescript-project#readme",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-cli serve --progress",
-    "start:hot": "cross-env NODE_ENV=development webpack-cli serve --progress --hot",
+    "start:hot-css": "cross-env NODE_ENV=development webpack-cli serve --progress --hot",
     "build": "cross-env NODE_ENV=production NODE_OPTIONS=--max-old-space-size=2048 webpack --progress",
     "check": "npm run eslint && npm run stylelint && npm run tsc",
     "check:all": "npm run prettier; npm run eslint:fix; npm run stylelint:fix; npm run tsc",
@@ -29,7 +29,7 @@
     "stylelint": "stylelint ./**.scss",
     "stylelint:fix": "stylelint ./**.scss --fix",
     "prettier": "prettier --write \"./**/*.(js|ts|tsx)\"",
-    "start:hot:transpile-only": "cross-env NODE_ENV=development TS_TRANSPILE_ONLY=true webpack-cli serve --progress --hot",
+    "start:hot-css:transpile-only": "cross-env NODE_ENV=development TS_TRANSPILE_ONLY=true webpack-cli serve --progress --hot",
     "tsc-watch": "tsc -p ./tsconfig.json --watch",
     "tsc": "tsc -p ./tsconfig.json",
     "ts-coverage": "typescript-coverage-report",
@@ -37,8 +37,8 @@
     "postinstall": "cp ./git-hooks/pre-commit ./.git/hooks"
   },
   "dependencies": {
-    "@types/react": "^17.0.9",
-    "@types/react-dom": "^17.0.6",
+    "@types/react": "^17.0.11",
+    "@types/react-dom": "^17.0.7",
     "@types/react-router": "^5.1.15",
     "@types/react-router-dom": "^5.1.7",
     "react": "^17.0.2",
