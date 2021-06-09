@@ -2,9 +2,9 @@
 
 ## Installation
 
-1. install nodejs (node v14.15.4, npm v6.14.10) for your platform
+1. install nodejs (node v14.x+npm v6.x or node v16.x+npm v7.x) for your platform
 2. go to project's directory
-3. run `npm i`
+3. run `npm i` or `npm i --legacy-peer-deps`
 
 
 ## Dev mode
@@ -53,6 +53,8 @@ Build
 ```
 $ docker build -t project-name:0.0.1 .
 ```
+
+`-t` - add project name
 
 Run
 ```

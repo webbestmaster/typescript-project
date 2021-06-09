@@ -8,8 +8,8 @@
     "url": "git+https://github.com/webbestmaster/typescript-project.git"
   },
   "engines": {
-    "node": "^14.0.0",
-    "npm": "^6.0.0"
+    "node": "^16.0.0",
+    "npm": "^7.0.0"
   },
   "author": "",
   "license": "ISC",
