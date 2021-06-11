@@ -42,10 +42,8 @@ export function Locale(props: PropsType): JSX.Element {
             const endOfString = part.slice(replacedPart.length);
 
             return (
-                // eslint-disable-next-line react/no-array-index-key
-                <Fragment key={objectKey + '-' + index}>
+                <Fragment key={String(objectKey + '-' + index)}>
                     {valueMap[objectKey]}
-
                     {endOfString}
                 </Fragment>
             );
