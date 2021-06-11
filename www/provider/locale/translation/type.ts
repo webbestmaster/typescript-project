@@ -33,6 +33,10 @@ export type LangDataType = {
     BUTTON__ACTIONS: string;
     BUTTON__MOVE_SELECTED: string;
     BUTTON__RESET_CHANGES: string;
+    BUTTON__SIGN_IN: string;
+    BUTTON__SIGN_OUT: string;
+    BUTTON__LOG_IN: string;
+    BUTTON__LOG_OUT: string;
 
     WEEK_DAY__MONDAY: string;
     WEEK_DAY__TUESDAY: string;

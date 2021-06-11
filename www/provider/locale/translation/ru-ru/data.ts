@@ -34,6 +34,10 @@ export const ruRu: LangDataType = {
     BUTTON__ACTIONS: 'Действия',
     BUTTON__MOVE_SELECTED: 'Переместить выбранные',
     BUTTON__RESET_CHANGES: 'Отменить изменения',
+    BUTTON__SIGN_IN: 'Войти',
+    BUTTON__SIGN_OUT: 'Выйти',
+    BUTTON__LOG_IN: 'Войти',
+    BUTTON__LOG_OUT: 'Выйти',
 
     WEEK_DAY__MONDAY: 'Понедельник',
     WEEK_DAY__TUESDAY: 'Вторник',

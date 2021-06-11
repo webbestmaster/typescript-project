@@ -34,6 +34,10 @@ export const enUs: LangDataType = {
     BUTTON__ACTIONS: 'Actions',
     BUTTON__MOVE_SELECTED: 'Move selected',
     BUTTON__RESET_CHANGES: 'Reset changes',
+    BUTTON__SIGN_IN: 'Sign in',
+    BUTTON__SIGN_OUT: 'Sign out',
+    BUTTON__LOG_IN: 'Log in',
+    BUTTON__LOG_OUT: 'Log out',
 
     WEEK_DAY__MONDAY: 'Monday',
     WEEK_DAY__TUESDAY: 'Tuesday',
