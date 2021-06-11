@@ -13,9 +13,10 @@ export enum TimeSizeEnum {
 
 export type NumberFormatOptionsType = Intl.NumberFormatOptions & {
     style?: 'decimal' | 'currency' | 'percent' | 'unit';
-    unit?: TimeSizeEnum | 'liter';
+    unit?: TimeSizeEnum | 'liter' | 'percent';
     unitDisplay?: 'long' | 'short' | 'narrow';
     signDisplay?: 'auto' | 'never' | 'always' | 'exceptZero';
+    notation?: 'compact' | 'scientific' | 'engineering';
 };
 
 export function getFormattedNumber(
