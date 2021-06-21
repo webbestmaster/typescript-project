@@ -11,31 +11,29 @@ import {urlHookDefaultOptions} from './url-hook-const';
 
 export function useUrl<QueryMap extends ObjectToUrlParametersType>(): UseUrlHookType<QueryMap> {
     const routerHistory = useHistory<Location>();
+    const {location: routerLocation} = routerHistory;
+    const {search, pathname} = routerLocation;
 
     const queries: QueryMapType<keyof QueryMap> = useMemo(() => {
-        const {search} = routerHistory.location;
-
         return getParametersFromUrl('http://localhost/' + search);
-    }, [routerHistory]);
+    }, [search]);
 
     const persistRoute = useCallback(
-        (pathname: string, queriesInner: ObjectToUrlParametersType, options?: UseUrlHookOptionsType): void => {
+        (newPathname: string, queriesInner: ObjectToUrlParametersType, options?: UseUrlHookOptionsType): void => {
             const definedOptions = {...urlHookDefaultOptions, ...(options || {})};
 
             const resultQueryMap = definedOptions.isSaveQuery ? {...queries, ...queriesInner} : queriesInner;
 
-            routerHistory.push({pathname, search: objectToUrlParameters(resultQueryMap)});
+            routerHistory.push({pathname: newPathname, search: objectToUrlParameters(resultQueryMap)});
         },
         [queries, routerHistory]
     );
 
     const setQuery = useCallback(
         (queryMap: Partial<QueryMap>, options?: UseUrlHookOptionsType): void => {
-            const {pathname} = routerHistory.location;
-
             persistRoute(pathname, queryMap, options);
         },
-        [routerHistory, persistRoute]
+        [persistRoute, pathname]
     );
 
     const getQuery = useCallback(
@@ -49,14 +47,13 @@ export function useUrl<QueryMap extends ObjectToUrlParametersType>(): UseUrlHook
 
     const deleteQuery = useCallback(
         (key: keyof QueryMap): void => {
-            const {pathname} = routerHistory.location;
             const queriesInner = {...queries};
 
             Reflect.deleteProperty(queriesInner, key);
 
             persistRoute(pathname, queriesInner, {isSaveQuery: false});
         },
-        [routerHistory, queries, persistRoute]
+        [pathname, queries, persistRoute]
     );
 
     const pushUrl = useCallback(
