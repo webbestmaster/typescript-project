@@ -71,6 +71,6 @@ export function useUrl<QueryMap extends ObjectToUrlParametersType>(): UseUrlHook
     );
 
     return useMemo((): UseUrlHookType<QueryMap> => {
-        return {setQuery, getQuery, deleteQuery, pushUrl, pushState, queries};
-    }, [setQuery, getQuery, deleteQuery, pushUrl, pushState, queries]);
+        return {setQuery, getQuery, deleteQuery, pushUrl, pushState, queries, pathname};
+    }, [setQuery, getQuery, deleteQuery, pushUrl, pushState, queries, pathname]);
 }

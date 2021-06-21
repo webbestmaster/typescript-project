@@ -14,5 +14,6 @@ export type UseUrlHookType<QueryMap extends ObjectToUrlParametersType = ObjectTo
     deleteQuery: (key: keyof QueryMap) => void;
     pushUrl: (pathname: string, options?: UseUrlHookOptionsType) => void;
     pushState: (pathname: string, queryMap: Partial<QueryMap>, options?: UseUrlHookOptionsType) => void;
+    pathname: string;
     queries: QueryMapType<keyof QueryMap>;
 }>;
