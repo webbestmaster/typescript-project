@@ -1,6 +1,7 @@
 const path = require('path');
 
-const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer'); // eslint-disable-line no-unused-vars
+// eslint-disable-next-line no-unused-vars
+const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 
 const {
     pathToStaticFileFolder,
