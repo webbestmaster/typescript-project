@@ -34,6 +34,7 @@
     "tsc": "tsc -p ./tsconfig.json",
     "ts-coverage": "typescript-coverage-report",
     "pre-commit-hook": "npm run check",
+    "test:2e2": "ts-mocha --timeout 10000 -p ./tsconfig.test.json ./test/*",
     "postinstall": "cp ./git-hooks/pre-commit ./.git/hooks"
   },
   "dependencies": {

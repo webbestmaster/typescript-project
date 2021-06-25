@@ -85,3 +85,18 @@ Remove image
 ```
 $ docker image rm -f <image id>
 ```
+
+
+### Autotests
+
+Required libraries:
+1. mocha
+1. ts-mocha
+2. @types/mocha
+3. puppeteer
+4. @types/puppeteer
+
+Running example:
+```
+$ ts-mocha --timeout 10000 -p ./tsconfig.test.json ./test/*
+```
