@@ -2,6 +2,7 @@
 
 /* global before, after, describe, it */
 
+/*
 import assert from 'assert';
 
 import puppeteer, {Browser, Page} from 'puppeteer';
@@ -56,3 +57,4 @@ describe('Smoke test', () => {
         assert(sum(1, 2) === 3, '1 + 2 === 3');
     });
 });
+*/

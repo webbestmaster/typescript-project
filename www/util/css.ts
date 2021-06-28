@@ -1,5 +1,3 @@
-// @flow
-
 type ClassNamesArgumentValueType = string | void | null;
 
 type ClassNamesArgumentType = ClassNamesArgumentValueType | {[key: string]: ClassNamesArgumentValueType | boolean};

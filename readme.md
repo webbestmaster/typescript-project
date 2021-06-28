@@ -95,8 +95,15 @@ Required libraries:
 2. @types/mocha
 3. puppeteer
 4. @types/puppeteer
+5*. mochawesome
 
 Running example:
 ```
 $ ts-mocha --timeout 10000 -p ./tsconfig.test.json ./test/*
+```
+
+Use reporter
+```
+npm i mochawesome
+$ ts-mocha --timeout 10000 -p ./tsconfig.test.json ./test/* --reporter mochawesome --reporter-options reportDir=customReportDir,reportFilename=customReportFilename
 ```
