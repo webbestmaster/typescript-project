@@ -1,5 +1,5 @@
 # dist
-/dist
+/dist/
 
 # npm
 node_modules
@@ -9,8 +9,9 @@ node_modules
 /webpack.config.js
 
 # report
-/coverage-ts
-/tsc-check
+/coverage-ts/
+/tsc-check/
+/coverage/
 
 # style's d.ts
 *.scss.d.ts

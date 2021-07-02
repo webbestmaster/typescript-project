@@ -1,5 +1,6 @@
 #IDE
-/.idea
+/.idea/
+/.vscode/
 
 # Logs
 logs
@@ -11,11 +12,12 @@ node_modules
 package-lock.json
 
 # dist
-/dist
+/dist/
 
 # report
-/coverage-ts
-/tsc-check
+/coverage-ts/
+/tsc-check/
+/coverage/
 
 # style's d.ts
 *.scss.d.ts
