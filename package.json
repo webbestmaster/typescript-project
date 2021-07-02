@@ -34,11 +34,10 @@
     "tsc": "tsc -p ./tsconfig.json",
     "ts-coverage": "typescript-coverage-report",
     "pre-commit-hook": "npm run check",
-    "test:e2e": "ts-mocha --timeout 10000 -p ./tsconfig.test.json ./test/*",
     "postinstall": "cp ./git-hooks/pre-commit ./.git/hooks"
   },
   "dependencies": {
-    "@types/react": "^17.0.11",
+    "@types/react": "^17.0.13",
     "@types/react-dom": "^17.0.8",
     "@types/react-router": "^5.1.15",
     "@types/react-router-dom": "^5.1.7",
@@ -78,7 +77,7 @@
     "eslint-plugin-unicorn": "^34.0.1",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.2",
-    "mini-css-extract-plugin": "^1.6.2",
+    "mini-css-extract-plugin": "^2.0.0",
     "optimize-css-assets-webpack-plugin": "^6.0.1",
     "prettier": "^2.3.2",
     "raw-loader": "^4.0.2",
@@ -92,9 +91,9 @@
     "stylelint-scss": "^3.19.0",
     "terser-webpack-plugin": "^5.1.4",
     "ts-loader": "^9.2.3",
-    "typescript": "^4.3.4",
+    "typescript": "^4.3.5",
     "typescript-coverage-report": "^0.6.0",
-    "webpack": "^5.41.1",
+    "webpack": "^5.42.0",
     "webpack-bundle-analyzer": "^4.4.2",
     "webpack-cli": "^4.7.2",
     "webpack-dev-server": "^3.11.2"
