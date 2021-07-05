@@ -34,9 +34,9 @@ export function findInArrayByValueEnsure<ItemType>(
     value: unknown,
     defaultValue: ItemType
 ): ItemType {
-    const index = list.indexOf(value as ItemType);
+    const findResult = findInArrayByValue<ItemType>(list, value);
 
-    return index === -1 ? defaultValue : list[index];
+    return findResult === null ? defaultValue : findResult;
 }
 
 export function getUniqueListByKey<ItemType>(list: Array<ItemType>, keyName: keyof ItemType): Array<ItemType> {

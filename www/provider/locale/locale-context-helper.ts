@@ -1,6 +1,7 @@
 /* global localStorage, navigator */
 
 import {noop} from '../../util/function';
+import {getEnumValueEnsure} from '../../util/enum';
 
 import {allLocalesData, localeConst, localeNameList} from './locale-context-const';
 import {LangKeyType} from './translation/type';
@@ -69,7 +70,13 @@ export function getLocalizedString(
 }
 
 export function getShortLocaleName(localeName: LocaleNameEnum): ShortLocaleNameEnum {
-    return (localeName.split('-')[0] as ShortLocaleNameEnum) || localeConst.defaults.shortLocaleName;
+    const mayBeShortLocaleName = localeName.split('-')[0];
+
+    return getEnumValueEnsure<ShortLocaleNameEnum>(
+        ShortLocaleNameEnum,
+        mayBeShortLocaleName,
+        localeConst.defaults.shortLocaleName
+    );
 }
 
 export function getDefaultLocaleContextData(): LocaleContextType {
