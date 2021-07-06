@@ -40,7 +40,17 @@ function validateCache(options?: OptionsType) {
     });
 }
 
-export function fetchX<ExpectedResponseType>(url: string, options?: OptionsType): Promise<ExpectedResponseType> {
+function fetchEndCallBack(fetchBeginTimeStamp: number, url: string) {
+    const maxFetchingTime = 2e3; // 2 seconds
+    const fetchEndTimeStamp = Date.now();
+    const fetchingTime = fetchEndTimeStamp - fetchBeginTimeStamp;
+
+    if (fetchingTime > maxFetchingTime) {
+        console.log(`%c[WARNING]: "${url}" took %c${fetchingTime / 1e3}s`, 'color: #00c', 'color: #c00');
+    }
+}
+
+export async function fetchX<ExpectedResponseType>(url: string, options?: OptionsType): Promise<ExpectedResponseType> {
     validateCache(options);
 
     const cacheProperty = `${url} - ${JSON.stringify(options || '[empty]')}`;
@@ -57,21 +67,23 @@ export function fetchX<ExpectedResponseType>(url: string, options?: OptionsType)
         ...(options || {}),
     };
 
-    const fetchResult = fetch(url, definedOptions)
-        .then((result: Response): Promise<ExpectedResponseType> => {
-            if (result.ok) {
-                return result.json();
-            }
+    const fetchBeginTimeStamp = Date.now();
 
-            throw new Error(JSON.stringify(result));
-        })
-        .catch((error: Error): Error => {
-            fetchCache[cacheProperty] = null;
+    const response = await fetch(url, definedOptions);
 
-            throw error;
-        });
+    if (response.ok) {
+        const resultAsJson = await response.json();
 
-    fetchCache[cacheProperty] = fetchResult;
+        fetchEndCallBack(fetchBeginTimeStamp, url);
 
-    return fetchResult as Promise<ExpectedResponseType>;
+        fetchCache[cacheProperty] = resultAsJson;
+
+        return resultAsJson;
+    }
+
+    fetchCache[cacheProperty] = null;
+
+    const errorText = await response.text();
+
+    throw new Error(errorText);
 }

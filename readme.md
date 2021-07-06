@@ -10,7 +10,7 @@
 ## Dev mode
 
 1. make installation
-2. do to project's directory
+2. go to project's directory
 3. run `npm start`
 
 
