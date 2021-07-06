@@ -33,7 +33,7 @@
     "prettier": "prettier --write \"./**/*.(js|ts|tsx)\"",
     "tsc": "tsc -p ./tsconfig.json",
     "ts-coverage": "typescript-coverage-report --threshold=99 --strict=true --project ./www/",
-    "test:e2e": "jest ./test-e2e/",
+    "test:e2e": "jest ./test-e2e/ --runInBand",
     "test:unit": "jest ./test-unit/ --coverage",
     "pre-commit-hook": "npm run check",
     "postinstall": "cp ./git-hooks/pre-commit ./.git/hooks"

@@ -101,8 +101,11 @@ Required libraries:
 
 Running example:
 ```
-$ jest ./test-e2e/
+$ jest ./test-e2e/ [--runInBand]
 ```
+
+`--runInBand` - run tests sequentially
+
 
 #### Unit test: jest + react-*
 
