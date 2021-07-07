@@ -1,6 +1,6 @@
 /* global URL */
 
-import {ObjectToUrlParametersType, QueryKeyType, QueryMapType, QuerySimpleValueType, QueryValueType} from './type';
+import {ObjectToUrlParametersType, QueryMapType, QuerySimpleValueType, QueryValueType} from './type';
 
 // eslint-disable-next-line complexity
 function stringifyUrlParameterSimpleValue(value: QuerySimpleValueType): string | null {
@@ -11,27 +11,19 @@ function stringifyUrlParameterSimpleValue(value: QuerySimpleValueType): string |
         return null;
     }
 
-    // empty string
-    if (typeof value === 'string' && value.trim() === '') {
-        return null;
-    }
-
-    // Date
-    if (value instanceof Date && !Number.isNaN(value)) {
-        return value.toISOString();
+    // Date, `Number.isNaN(value.getTime())` - check for valid Date
+    if (value instanceof Date) {
+        return Number.isNaN(value.getTime()) ? null : value.toISOString();
     }
 
     // boolean | number | string
     return value.toString();
 }
 
-export function objectToUrlParameters(options?: ObjectToUrlParametersType): string {
-    if (!options) {
-        return '';
-    }
-
+export function objectToUrlParameters(options: ObjectToUrlParametersType): string {
     const parameterList: Array<string> = [];
 
+    // eslint-disable-next-line complexity
     Object.keys(options).forEach((key: string) => {
         const value: QueryValueType = options[key];
 
@@ -41,20 +33,22 @@ export function objectToUrlParameters(options?: ObjectToUrlParametersType): stri
 
         if (Array.isArray(value)) {
             const stringList: Array<string> = value
-                .map<string | null>((simpleValue: QuerySimpleValueType): string | null =>
-                    stringifyUrlParameterSimpleValue(simpleValue)
-                )
-                .filter<string>((stringValueInner: string | null): stringValueInner is string =>
-                    Boolean(stringValueInner)
+                .map<string | null>(stringifyUrlParameterSimpleValue)
+                .filter<string>(
+                    (stringValueInner: string | null): stringValueInner is string =>
+                        typeof stringValueInner === 'string'
                 );
 
-            parameterList.push(encodeURIComponent(key) + '=' + encodeURIComponent(stringList.join(',')));
+            if (stringList.length > 0) {
+                parameterList.push(encodeURIComponent(key) + '=' + encodeURIComponent(stringList.join(',')));
+            }
+
             return;
         }
 
         const stringValue: string | null = stringifyUrlParameterSimpleValue(value);
 
-        if (stringValue) {
+        if (typeof stringValue === 'string') {
             parameterList.push(encodeURIComponent(key) + '=' + encodeURIComponent(stringValue));
         }
     });
@@ -62,19 +56,15 @@ export function objectToUrlParameters(options?: ObjectToUrlParametersType): stri
     return parameterList.join('&');
 }
 
-export function getParametersFromUrl(fullUrlString: string): QueryMapType<QueryKeyType> {
+export function getParametersFromUrl(fullUrlString: string): QueryMapType {
     const url: URL = new URL(fullUrlString);
 
     const {searchParams} = url;
 
     const keyList: Array<string> = [...searchParams.keys()];
 
-    return keyList.reduce((data: QueryMapType<QueryKeyType>, key: string): QueryMapType<QueryKeyType> => {
-        const value = searchParams.get(key);
-
-        if (typeof value !== 'string') {
-            return data;
-        }
+    return keyList.reduce((data: QueryMapType, key: string): QueryMapType => {
+        const value = String(searchParams.get(key));
 
         return {...data, [key]: value};
     }, {});
