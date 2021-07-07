@@ -1,3 +1,7 @@
+/* global setTimeout */
+
+import {useState} from 'react';
+
 import {Locale} from '../../provider/locale/c-locale';
 import {useLocale} from '../../provider/locale/locale-hook';
 
@@ -11,6 +15,15 @@ import homeStyle from './home.scss';
 
 export function Home(): JSX.Element {
     const {getLocalizedString} = useLocale();
+
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+
+    setTimeout(() => {
+        console.log(isOpen);
+        setIsOpen(false);
+    }, 1e3);
+
+    console.log('evaluate home');
 
     return (
         <div>
