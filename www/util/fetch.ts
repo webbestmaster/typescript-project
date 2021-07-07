@@ -72,7 +72,7 @@ export async function fetchX<ExpectedResponseType>(url: string, options?: Option
     const response = await fetch(url, definedOptions);
 
     if (response.ok) {
-        const resultAsJson = await response.json();
+        const resultAsJson: Promise<ExpectedResponseType> = await response.json();
 
         fetchEndCallBack(fetchBeginTimeStamp, url);
 
