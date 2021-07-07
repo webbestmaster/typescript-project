@@ -6,7 +6,7 @@ const {isDevelopment, fileRegExp} = require('./../config');
 module.exports.optimization = isDevelopment
     ? {
           removeAvailableModules: false,
-          removeEmptyChunks: false,
+          removeEmptyChunks: true,
           runtimeChunk: true,
           splitChunks: {
               cacheGroups: {
