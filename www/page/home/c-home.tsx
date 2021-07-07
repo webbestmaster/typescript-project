@@ -1,6 +1,6 @@
 /* global setTimeout */
 
-import {useState, lazy, ComponentType, Suspense} from 'react';
+import {useState, lazy, Suspense} from 'react';
 
 import {Locale} from '../../provider/locale/c-locale';
 import {useLocale} from '../../provider/locale/locale-hook';
@@ -13,7 +13,13 @@ import pngImageSrc from './image/marker-icon-2x.png';
 import svgImageSrc, {ReactComponent as SvgAsReactComponent} from './image/questions-with-an-official-answer.svg';
 import homeStyle from './home.scss';
 
-const LoadMeAsyncLazy = lazy(() => import('../../component/load-me-async-lazy/load-me-async-lazy'));
+const LoadMeAsyncLazy = lazy(
+    () =>
+        import(
+            /* webpackChunkName: 'load-me-async-lazy' */
+            '../../component/load-me-async-lazy/load-me-async-lazy'
+        )
+);
 
 export function Home(): JSX.Element {
     const {getLocalizedString} = useLocale();
