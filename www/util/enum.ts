@@ -1,13 +1,13 @@
-export function getEnumValue<EnumType>(enumData: Record<string, string>, value: unknown): EnumType | null {
-    if (Object.values(enumData).includes(value as string)) {
-        return value as EnumType;
-    }
+import {findInArrayByValue} from './array';
 
-    return null;
+export function getEnumValue<EnumType>(enumData: Record<string, EnumType>, value: unknown): EnumType | null {
+    const valueList: Array<EnumType> = Object.values(enumData);
+
+    return findInArrayByValue<EnumType>(valueList, value);
 }
 
 export function getEnumValueEnsure<EnumType>(
-    enumData: Record<string, string>,
+    enumData: Record<string, EnumType>,
     value: unknown,
     defaultValue: EnumType
 ): EnumType {
