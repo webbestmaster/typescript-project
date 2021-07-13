@@ -50,7 +50,7 @@ function fetchEndCallBack(fetchBeginTimeStamp: number, url: string) {
     }
 }
 
-export async function fetchX<ExpectedResponseType>(url: string, options?: OptionsType): Promise<ExpectedResponseType> {
+export function fetchX<ExpectedResponseType>(url: string, options?: OptionsType): Promise<ExpectedResponseType> {
     validateCache(options);
 
     const cacheProperty = `${url} - ${JSON.stringify(options || '[empty]')}`;
@@ -69,21 +69,27 @@ export async function fetchX<ExpectedResponseType>(url: string, options?: Option
 
     const fetchBeginTimeStamp = Date.now();
 
-    const response = await fetch(url, definedOptions);
+    const fetchResult: Promise<ExpectedResponseType> = fetch(url, definedOptions)
+        .then((response: Response): Promise<ExpectedResponseType> => {
+            if (response.ok) {
+                return response.json();
+            }
 
-    if (response.ok) {
-        const resultAsJson: Promise<ExpectedResponseType> = await response.json();
+            // eslint-disable-next-line promise/no-nesting
+            return response.text().then((text: string) => {
+                throw new Error(text);
+            });
+        })
+        .finally(() => {
+            fetchEndCallBack(fetchBeginTimeStamp, url);
+        })
+        .catch((error: Error) => {
+            fetchCache[cacheProperty] = null;
+            console.error(error);
+            throw error;
+        });
 
-        fetchEndCallBack(fetchBeginTimeStamp, url);
+    fetchCache[cacheProperty] = fetchResult;
 
-        fetchCache[cacheProperty] = resultAsJson;
-
-        return resultAsJson;
-    }
-
-    fetchCache[cacheProperty] = null;
-
-    const errorText = await response.text();
-
-    throw new Error(errorText);
+    return fetchResult;
 }
