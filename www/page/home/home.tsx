@@ -2,12 +2,10 @@
 
 import {useState, lazy, Suspense} from 'react';
 
-import {Locale} from '../../provider/locale/c-locale';
+import {Locale} from '../../provider/locale/locale';
 import {useLocale} from '../../provider/locale/locale-hook';
-
-import {LoadComponent} from '../../util/c-load-component';
-import {Spinner} from '../../layout/spinner/c-spinner';
-import {ErrorData} from '../../layout/error-data/c-error-data';
+import {Spinner} from '../../layout/spinner/spinner';
+import {ErrorData} from '../../layout/error-data/error-data';
 
 import pngImageSrc from './image/marker-icon-2x.png';
 import svgImageSrc, {ReactComponent as SvgAsReactComponent} from './image/questions-with-an-official-answer.svg';
@@ -46,16 +44,6 @@ export function Home(): JSX.Element {
             <img alt="" src={svgImageSrc} />
 
             <SvgAsReactComponent />
-
-            <LoadComponent error={<ErrorData langKey="ERROR__CAN_NOT_LOAD_THE_COMPONENT" />} spinner={<Spinner />}>
-                {async (): Promise<JSX.Element> => {
-                    const {LoadMeAsync} = await import(
-                        /* webpackChunkName: 'the-load-me-async' */ '../../component/load-me-async/load-me-async'
-                    );
-
-                    return <LoadMeAsync />;
-                }}
-            </LoadComponent>
 
             <Suspense fallback={<Spinner position="absolute" />}>
                 <LoadMeAsyncLazy smth="asfsa" />

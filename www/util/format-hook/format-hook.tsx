@@ -1,7 +1,7 @@
 import {useCallback, useContext} from 'react';
 
 import {LocaleContextType} from '../../provider/locale/locale-context-type';
-import {LocaleContext} from '../../provider/locale/c-locale-context';
+import {LocaleContext} from '../../provider/locale/locale-context';
 import {DateTimeFormatOptionsType, getFormattedDateTime, getFormattedNumber, NumberFormatOptionsType} from '../format';
 
 import {UseFormatHookType} from './format-hook-type';

@@ -3,7 +3,7 @@
 import {render} from 'react-dom';
 
 import {selector} from './const';
-import {App} from './component/app/c-app';
+import {App} from './component/app/app';
 
 const nodeWrapper = document.querySelector(selector.appWrapper);
 

@@ -1,7 +1,7 @@
 import {classNames} from '../../util/css';
 
 import {LangKeyType} from '../../provider/locale/translation/type';
-import {Locale} from '../../provider/locale/c-locale';
+import {Locale} from '../../provider/locale/locale';
 
 import errorDataStyle from './error-data.scss';
 
