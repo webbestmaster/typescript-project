@@ -25,7 +25,7 @@ export function useFormat(): UseFormatHookType {
     );
 
     return {
-        getFormattedNumber: getFormattedNumberWrapper,
         getFormattedDateTime: getFormattedDateTimeWrapper,
+        getFormattedNumber: getFormattedNumberWrapper,
     };
 }

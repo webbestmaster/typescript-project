@@ -43,21 +43,21 @@ export function Spinner(props: PropsType): JSX.Element | null {
     const size = rawSize || defaultSize;
 
     const spinnerImageStyle = {
-        borderWidth: lineWidth,
-        width: size,
-        height: size,
         borderColor: circleColor,
         borderTopColor: arcColor,
+        borderWidth: lineWidth,
+        height: size,
+        width: size,
     };
 
     const spinnerWrapperStyle = {
+        backgroundColor: wrapperColor,
+        height: wrapperHeight,
         minHeight: size,
         minWidth: size,
-        position,
-        backgroundColor: wrapperColor,
-        width: wrapperWidth,
-        height: wrapperHeight,
         padding: wrapperPadding,
+        position,
+        width: wrapperWidth,
     };
 
     return (

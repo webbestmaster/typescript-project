@@ -5,10 +5,6 @@ import {defaultPageGoToOption, pageFullUrl, user} from './const';
 type PuppeteerLaunchOptionsType = BrowserConnectOptions & BrowserLaunchArgumentOptions & LaunchOptions;
 
 const defaultBrowserOptions: PuppeteerLaunchOptionsType = {
-    headless: false,
-    // slowMo: 100,
-    // timeout: 10e3,
-    defaultViewport: null,
     args: [
         // https://github.com/puppeteer/puppeteer/blob/main/docs/api.md - api
         // https://peter.sh/experiments/chromium-command-line-switches/ - all arguments for chrome
@@ -21,6 +17,10 @@ const defaultBrowserOptions: PuppeteerLaunchOptionsType = {
         '--disable-infobars',
         `--window-size=${1200},${800}`,
     ],
+    defaultViewport: null,
+    headless: false,
+    // slowMo: 100,
+    // timeout: 10e3,
 };
 
 export function createBrowser(

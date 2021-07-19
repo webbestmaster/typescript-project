@@ -11,13 +11,26 @@ function stringifyUrlParameterSimpleValue(value: QuerySimpleValueType): string |
         return null;
     }
 
+    // empty string
+    if (typeof value === 'string') {
+        return value.trim() || null;
+    }
+
     // Date, `Number.isNaN(value.getTime())` - check for valid Date
     if (value instanceof Date) {
         return Number.isNaN(value.getTime()) ? null : value.toISOString();
     }
 
-    // boolean | number | string
-    return value.toString();
+    if (typeof value === 'number') {
+        // check for Infinity and NaN
+        return JSON.parse(JSON.stringify(value));
+    }
+
+    // if (typeof value === 'boolean') {
+    return value ? 'true' : 'false';
+    // }
+
+    // return null;
 }
 
 export function objectToUrlParameters(options: ObjectToUrlParametersType): string {
@@ -33,10 +46,11 @@ export function objectToUrlParameters(options: ObjectToUrlParametersType): strin
 
         if (Array.isArray(value)) {
             const stringList: Array<string> = value
-                .map<string | null>(stringifyUrlParameterSimpleValue)
-                .filter<string>(
-                    (stringValueInner: string | null): stringValueInner is string =>
-                        typeof stringValueInner === 'string'
+                .map<string | null>((simpleValue: QuerySimpleValueType): string | null =>
+                    stringifyUrlParameterSimpleValue(simpleValue)
+                )
+                .filter<string>((stringValueInner: string | null): stringValueInner is string =>
+                    Boolean(stringValueInner)
                 );
 
             if (stringList.length > 0) {
@@ -48,7 +62,7 @@ export function objectToUrlParameters(options: ObjectToUrlParametersType): strin
 
         const stringValue: string | null = stringifyUrlParameterSimpleValue(value);
 
-        if (typeof stringValue === 'string') {
+        if (stringValue) {
             parameterList.push(encodeURIComponent(key) + '=' + encodeURIComponent(stringValue));
         }
     });

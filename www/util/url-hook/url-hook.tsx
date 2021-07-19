@@ -73,6 +73,14 @@ export function useUrl<
     );
 
     return useMemo((): UseUrlHookType<QueryMap> => {
-        return {setQuery, getQuery, deleteQuery, pushUrl, pushState, queries, pathname};
+        return {
+            deleteQuery,
+            getQuery,
+            pathname,
+            pushState,
+            pushUrl,
+            queries,
+            setQuery,
+        };
     }, [setQuery, getQuery, deleteQuery, pushUrl, pushState, queries, pathname]);
 }

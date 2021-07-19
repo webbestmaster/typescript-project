@@ -228,6 +228,7 @@
         "react/no-set-state": 0,
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "error",
+        "sort-keys": 2,
         "prefer-destructuring": [
             "error",
             {

@@ -1,7 +1,7 @@
 import {LangDataType} from '../type';
 
 export const enUs: LangDataType = {
-    /* eslint-disable id-match, id-length, max-len, sonarjs/no-duplicate-string */
+    /* eslint-disable id-match, id-length, max-len, sonarjs/no-duplicate-string, sort-keys */
     META__LANGUAGE_NAME: 'English',
 
     BUTTON__YES: 'Yes',
@@ -55,7 +55,7 @@ export const enUs: LangDataType = {
 
     ERROR__CAN_NOT_LOAD_THE_COMPONENT: 'Can not load the component',
 
-    /* eslint-enable id-match, id-length, max-len,sonarjs/no-duplicate-string */
+    /* eslint-enable id-match, id-length, max-len,sonarjs/no-duplicate-string, sort-keys */
 };
 
 /*

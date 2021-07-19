@@ -35,8 +35,8 @@ function getLittleThenList(screenWidth: number): Array<ScreenWidthNameType> {
 
 function getScreenSize(): {width: number; height: number} {
     const defaultSize = {
-        width: screenMinWidth.desktop,
         height: screenMinWidth.desktop,
+        width: screenMinWidth.desktop,
     };
 
     if (typeof document === 'undefined') {
@@ -51,7 +51,7 @@ function getScreenSize(): {width: number; height: number} {
 
     const {clientWidth: width, clientHeight: height} = documentElement;
 
-    return {width, height};
+    return {height, width};
 }
 
 export function getDevicePixelRatio(): number {
@@ -81,16 +81,16 @@ function getScreenState(): SystemContextScreenType {
     const screenName = getScreenName(width);
 
     return {
-        width,
-        height,
-        name: screenName,
-        littleThenList: getLittleThenList(width),
-        isDesktop: screenName === screenNameReference.desktop,
-        isTablet: screenName === screenNameReference.tablet,
-        isMobile: screenName === screenNameReference.mobile,
-        isLandscape,
-        isPortrait: !isLandscape,
         devicePixelRatio: getDevicePixelRatio(),
+        height,
+        isDesktop: screenName === screenNameReference.desktop,
+        isLandscape,
+        isMobile: screenName === screenNameReference.mobile,
+        isPortrait: !isLandscape,
+        isTablet: screenName === screenNameReference.tablet,
+        littleThenList: getLittleThenList(width),
+        name: screenName,
+        width,
     };
 }
 
@@ -112,10 +112,10 @@ function getIsAndroid(): boolean {
 
 export function getSystemState(): SystemContextType {
     return {
-        screen: getScreenState(),
+        isAndroid: getIsAndroid(),
+        isIOS: getIsIOS(),
         isScriptLoaded: typeof window !== 'undefined',
         isWindowLoaded: false,
-        isIOS: getIsIOS(),
-        isAndroid: getIsAndroid(),
+        screen: getScreenState(),
     };
 }

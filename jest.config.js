@@ -1,13 +1,13 @@
 // eslint-disable-next-line unicorn/prefer-module
 module.exports = {
-    preset: 'ts-jest',
-    modulePathIgnorePatterns: ['<rootDir>/tsc-check/'],
     globals: {
         'ts-jest': {
             tsconfig: './tsconfig.test.json',
         },
     },
-    testEnvironment: 'jsdom', // @testing-library/jest-dom
+    modulePathIgnorePatterns: ['<rootDir>/tsc-check/'],
+    preset: 'ts-jest',
     setupFilesAfterEnv: ['./test-unit/setup-jest.ts'],
+    testEnvironment: 'jsdom', // @testing-library/jest-dom
     testTimeout: 10e3,
 };

@@ -1,28 +1,12 @@
 /* global beforeAll, afterAll, beforeEach, afterEach, describe, it, expect, location */
 import {useEffect} from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
-import {render} from '@testing-library/react';
+import {render, screen} from '@testing-library/react';
 
 import {useUrl} from '../../www/util/url-hook/url-hook';
 import {UseUrlHookOptionsType} from '../../www/util/url-hook/url-hook-type';
 import {QueryValueType} from '../../www/util/type';
-
-type NavigationProviderPropsType = {
-    component: () => JSX.Element;
-};
-
-// eslint-disable-next-line react/no-multi-comp
-function NavigationProvider(props: NavigationProviderPropsType): JSX.Element {
-    const {component} = props;
-
-    return (
-        <BrowserRouter>
-            <Switch>
-                <Route component={component} />
-            </Switch>
-        </BrowserRouter>
-    );
-}
+import {NavigationProvider} from '../test-util/c-navigation-provider';
 
 function useResetHookState<QueryMap>(
     pushState: (pathname: string, queryMap: Partial<QueryMap>, options?: UseUrlHookOptionsType) => void
@@ -247,11 +231,12 @@ describe('useUrl', () => {
                     list: [
                         new Date(0), // valid date - include
                         new Date('2020-123-123'), // invalid date - exclude
-                        '', // include
+                        '', // exclude
+                        ' ', // exclude
                         'str', // include
                         0, // include
-                        Number.NaN, // include
-                        Number.POSITIVE_INFINITY, // include
+                        Number.NaN, // exclude
+                        Number.POSITIVE_INFINITY, // exclude
                         1, // include
                         true, // include
                         false, // include
@@ -259,6 +244,8 @@ describe('useUrl', () => {
                         // eslint-disable-next-line no-undefined
                         undefined, // exclude
                     ],
+                    emptyString: '', // empty string - exclude
+                    spaceOnlyString: '     ', // space only string - exclude
                     emptyList: [], // empty list - exclude
                     // eslint-disable-next-line no-undefined
                     wrongList: [undefined, null], // wrong list - exclude
@@ -270,9 +257,7 @@ describe('useUrl', () => {
 
         const {unmount} = render(<NavigationProvider component={SetQueryPassAnyParameters} />);
 
-        expect(location.search).toEqual(
-            '?list=1970-01-01T00%3A00%3A00.000Z%2C%2Cstr%2C0%2CNaN%2CInfinity%2C1%2Ctrue%2Cfalse'
-        );
+        expect(location.search).toEqual('?list=1970-01-01T00%3A00%3A00.000Z%2Cstr%2C1%2Ctrue%2Cfalse');
 
         unmount();
     });
@@ -371,6 +356,46 @@ describe('useUrl', () => {
 
         render(<NavigationProvider component={PathnameAndQueriesPrepare} />);
         const {unmount} = render(<NavigationProvider component={PathnameAndQueries} />);
+
+        unmount();
+    });
+
+    it('navigate from page to page', () => {
+        // eslint-disable-next-line react/no-multi-comp
+        function FirstPage(): JSX.Element {
+            const {pushUrl} = useUrl<Record<string, string>>();
+
+            useEffect(() => {
+                pushUrl('/second-page');
+            }, [pushUrl]);
+
+            return <p>First Page</p>;
+        }
+
+        // eslint-disable-next-line react/no-multi-comp
+        function SecondPage(): JSX.Element {
+            const {pushState} = useUrl<Record<string, string>>();
+
+            useResetHookState(pushState);
+
+            return <p>Second Page</p>;
+        }
+
+        // eslint-disable-next-line react/no-multi-comp
+        function TwoPageApp(): JSX.Element {
+            return (
+                <BrowserRouter>
+                    <Switch>
+                        <Route component={FirstPage} exact path="/" />
+                        <Route component={SecondPage} exact path="/second-page" />
+                    </Switch>
+                </BrowserRouter>
+            );
+        }
+
+        const {unmount} = render(<TwoPageApp />);
+
+        expect(screen.getByText('Second Page')).toBeInTheDocument();
 
         unmount();
     });

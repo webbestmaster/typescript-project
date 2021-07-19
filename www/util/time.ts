@@ -62,8 +62,8 @@ export function getDateTimeHumanSize(option: GetDateTimeDifferenceOptionType): s
 
             return getFormattedNumber(localeName, count, {
                 style: 'unit',
-                unitDisplay: 'long',
                 unit: unitType,
+                unitDisplay: 'long',
                 ...formatOption,
             });
         })

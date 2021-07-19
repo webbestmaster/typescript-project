@@ -35,10 +35,10 @@ export function LocaleProvider(props: PropsType): JSX.Element {
 
     const providedData: LocaleContextType = useMemo((): LocaleContextType => {
         return {
-            localeName,
-            shortLocaleName: getShortLocaleName(localeName),
-            setLocaleName: memoizedSetLocaleName,
             getLocalizedString,
+            localeName,
+            setLocaleName: memoizedSetLocaleName,
+            shortLocaleName: getShortLocaleName(localeName),
         };
     }, [localeName, memoizedSetLocaleName, getLocalizedString]);
 

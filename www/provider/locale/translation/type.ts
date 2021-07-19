@@ -1,5 +1,5 @@
 export type LangDataType = {
-    /* eslint-disable id-match, id-length, max-len */
+    /* eslint-disable id-match, id-length, max-len, sort-keys */
 
     META__LANGUAGE_NAME: string;
 
@@ -54,7 +54,7 @@ export type LangDataType = {
 
     ERROR__CAN_NOT_LOAD_THE_COMPONENT: string;
 
-    /* eslint-enable id-match, id-length, max-len */
+    /* eslint-enable id-match, id-length, max-len, sort-keys */
 };
 
 export type LangKeyType = keyof LangDataType;

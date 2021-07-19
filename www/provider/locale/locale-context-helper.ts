@@ -80,13 +80,13 @@ export function getShortLocaleName(localeName: LocaleNameEnum): ShortLocaleNameE
 }
 
 export function getDefaultLocaleContextData(): LocaleContextType {
-    const localeName = getSavedLocaleName();
+    const savedLocaleName = getSavedLocaleName();
 
     return {
-        localeName,
-        shortLocaleName: getShortLocaleName(localeName),
-        setLocaleName: noop,
         getLocalizedString: (stringKey: LangKeyType, valueMap?: LocaleContextValueMapType): string =>
             getLocalizedString(stringKey, localeConst.defaults.localeName, valueMap),
+        localeName: savedLocaleName,
+        setLocaleName: noop,
+        shortLocaleName: getShortLocaleName(savedLocaleName),
     };
 }

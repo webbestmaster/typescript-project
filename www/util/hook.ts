@@ -9,7 +9,7 @@ export function useRefreshId(): UseRefreshApiHookType {
 
     const refresh = useCallback(() => setRefreshId(getRandomString()), [setRefreshId]);
 
-    return useMemo(() => ({refreshId, refresh}), [refreshId, refresh]);
+    return useMemo(() => ({refresh, refreshId}), [refreshId, refresh]);
 }
 
 export function useUpdaterInList<ItemType>(

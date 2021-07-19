@@ -1,7 +1,7 @@
 import type {LangDataType} from '../type';
 
 export const ruRu: LangDataType = {
-    /* eslint-disable id-match, id-length, max-len, sonarjs/no-duplicate-string */
+    /* eslint-disable id-match, id-length, max-len, sonarjs/no-duplicate-string, sort-keys */
     META__LANGUAGE_NAME: 'Русский',
 
     BUTTON__YES: 'Да',
@@ -55,7 +55,7 @@ export const ruRu: LangDataType = {
 
     ERROR__CAN_NOT_LOAD_THE_COMPONENT: 'Не получилось загрузить компонент',
 
-    /* eslint-enable id-match, id-length, max-len,sonarjs/no-duplicate-string */
+    /* eslint-enable id-match, id-length, max-len,sonarjs/no-duplicate-string, sort-keys */
 };
 
 /*

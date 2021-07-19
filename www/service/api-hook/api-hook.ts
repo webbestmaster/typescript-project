@@ -24,12 +24,12 @@ export function useApiHooks<DateType>(): StateHooksType<DateType> {
     return useMemo(() => {
         return {
             isInProgress,
-            setIsInProgress,
             processError,
-            setProcessError,
-            result,
-            setResult,
             reset,
+            result,
+            setIsInProgress,
+            setProcessError,
+            setResult,
         };
     }, [isInProgress, setIsInProgress, processError, setProcessError, result, setResult, reset]);
 }
