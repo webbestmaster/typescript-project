@@ -9,10 +9,10 @@ import {LocaleContextType, LocaleContextValueMapType, LocaleNameEnum, ShortLocal
 
 // eslint-disable-next-line complexity
 export function getSavedLocaleName(): LocaleNameEnum {
-    const localeName: LocaleNameEnum = localeConst.defaults.localeName;
+    const defaultLocaleName = localeConst.defaults.localeName;
 
     if (typeof localStorage === 'undefined' || typeof navigator === 'undefined') {
-        return localeName;
+        return defaultLocaleName;
     }
 
     const savedLocaleName = localStorage.getItem(localeConst.key.localStorage.localeName);
@@ -36,7 +36,7 @@ export function getSavedLocaleName(): LocaleNameEnum {
         }
     }
 
-    return localeName;
+    return defaultLocaleName;
 }
 
 export function saveLocaleName(localeName: LocaleNameEnum): LocaleNameEnum {
@@ -70,7 +70,7 @@ export function getLocalizedString(
 }
 
 export function getShortLocaleName(localeName: LocaleNameEnum): ShortLocaleNameEnum {
-    const mayBeShortLocaleName = localeName.split('-')[0];
+    const [mayBeShortLocaleName] = localeName.split('-');
 
     return getEnumValueEnsure<ShortLocaleNameEnum>(
         ShortLocaleNameEnum,
