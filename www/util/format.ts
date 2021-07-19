@@ -8,7 +8,7 @@ export enum TimeSizeEnum {
     minute = 'minute',
     month = 'month',
     second = 'second',
-    year = 'year'
+    year = 'year',
 }
 
 export type NumberFormatOptionsType = Intl.NumberFormatOptions & {
