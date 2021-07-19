@@ -13,6 +13,7 @@
     "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
+        "plugin:typescript-sort-keys/recommended",
         "plugin:jsx-a11y/recommended",
         "plugin:react/all",
         "plugin:import/errors",
@@ -39,6 +40,7 @@
         "unicorn",
         "no-loops",
         "filenames",
+        "typescript-sort-keys",
         "babel"
     ],
     "env": {

@@ -7,10 +7,10 @@ import {getFormattedNumber, NumberFormatOptionsType, TimeSizeEnum} from './forma
 export type TimeItemType = {count: number; unitType: TimeSizeEnum};
 
 export type GetDateTimeDifferenceOptionType = {
+    formatOption?: NumberFormatOptionsType;
+    localeName: LocaleNameEnum;
     milliseconds: number;
     sliceSize: number;
-    localeName: LocaleNameEnum;
-    formatOption?: NumberFormatOptionsType;
 };
 
 export function waitForTime(timeInMs: number): Promise<void> {

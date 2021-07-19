@@ -3,20 +3,20 @@
 import {LocaleNameEnum} from '../provider/locale/locale-context-type';
 
 export enum TimeSizeEnum {
-    year = 'year',
-    month = 'month',
     day = 'day',
     hour = 'hour',
     minute = 'minute',
+    month = 'month',
     second = 'second',
+    year = 'year'
 }
 
 export type NumberFormatOptionsType = Intl.NumberFormatOptions & {
+    notation?: 'compact' | 'engineering' | 'scientific';
+    signDisplay?: 'always' | 'auto' | 'exceptZero' | 'never';
     style?: 'currency' | 'decimal' | 'percent' | 'unit';
     unit?: TimeSizeEnum | 'liter' | 'percent';
     unitDisplay?: 'long' | 'narrow' | 'short';
-    signDisplay?: 'always' | 'auto' | 'exceptZero' | 'never';
-    notation?: 'compact' | 'engineering' | 'scientific';
 };
 
 export function getFormattedNumber(
