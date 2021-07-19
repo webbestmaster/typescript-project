@@ -4,7 +4,7 @@ import isHiddenStyle from './is-hidden.scss';
 
 type PropsType = {
     isHidden: boolean;
-    children?: JSX.Element | Array<JSX.Element | string> | string;
+    children?: Array<JSX.Element | string> | JSX.Element | string;
     className?: string;
 };
 

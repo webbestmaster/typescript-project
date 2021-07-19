@@ -1,6 +1,6 @@
-export type QueryKeyType = string | number | symbol;
+export type QueryKeyType = number | string | symbol;
 
-export type QuerySimpleValueType = Date | string | number | boolean | null | void;
+export type QuerySimpleValueType = Date | boolean | number | string | null | void;
 
 export type QueryValueType = Array<QuerySimpleValueType> | QuerySimpleValueType;
 

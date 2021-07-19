@@ -1,4 +1,4 @@
-export type ScreenWidthNameType = 'desktop' | 'tablet' | 'mobile';
+export type ScreenWidthNameType = 'desktop' | 'mobile' | 'tablet';
 
 export type SystemContextScreenType = {
     width: number;

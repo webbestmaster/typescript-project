@@ -12,19 +12,19 @@ type OptionsType = {
     method?: FetchMethodEnum; // GET, POST, PUT, DELETE, etc. (default: GET)
     mode?: 'cors' | 'no-cors' | 'same-origin'; // no-cors, cors, same-origin (default: same-origin)
     // cache?: 'default'; // default, no-cache, reload, force-cache, only-if-cached (default: default)
-    credentials?: 'include' | 'same-origin' | 'omit'; // include, same-origin, omit (default: same-origin)
+    credentials?: 'include' | 'omit' | 'same-origin'; // include, same-origin, omit (default: same-origin)
     // headers?: {
     //     'Access-Control-Allow-Headers'?: '*',
     //     Accept?: 'application/json, text/javascript, */*; q=0.01',
     //     'Content-Type'?: 'application/x-www-form-urlencoded; charset=UTF-8',
     // },
-    headers?: Headers | Array<Array<string>> | Record<string, string>;
+    headers?: Array<Array<string>> | Headers | Record<string, string>;
     // redirect?: 'follow'; // manual, follow, error (default: follow)
     // referrer?: 'no-referrer'; // no-referrer, client (default: client)
     body?: File | FormData | string; // body data type must match "Content-Type" header
 };
 
-type FetchCacheType = Record<string, null | Promise<unknown>>;
+type FetchCacheType = Record<string, Promise<unknown> | null>;
 
 const fetchCache: FetchCacheType = {};
 

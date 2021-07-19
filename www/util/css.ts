@@ -1,4 +1,4 @@
-type ClassNamesArgumentValueType = string | void | null;
+type ClassNamesArgumentValueType = string | null | void;
 
 type ClassNamesArgumentType = ClassNamesArgumentValueType | {[key: string]: ClassNamesArgumentValueType | boolean};
 

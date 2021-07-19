@@ -1,6 +1,6 @@
 import {ShortLocaleNameEnum} from '../provider/locale/locale-context-type';
 
-export function getHash(data: Record<string, unknown> | string | Array<unknown>): string {
+export function getHash(data: Array<unknown> | Record<string, unknown> | string): string {
     let result = 0;
     const fullString: string = typeof data === 'string' ? data : JSON.stringify(data, null, 0);
     const stringLength = fullString.length;

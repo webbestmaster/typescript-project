@@ -1,6 +1,6 @@
 import {LangKeyType} from './translation/type';
 
-export type LocaleContextValueMapType = Record<string, JSX.Element | string | number>;
+export type LocaleContextValueMapType = Record<string, JSX.Element | number | string>;
 
 export enum LocaleNameEnum {
     enUs = 'en-US',

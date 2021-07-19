@@ -1,6 +1,6 @@
 type PropsType = {
     isRender: boolean;
-    children?: JSX.Element | Array<JSX.Element | string> | string;
+    children?: Array<JSX.Element | string> | JSX.Element | string;
 };
 
 export function IsRender(props: PropsType): JSX.Element | null {

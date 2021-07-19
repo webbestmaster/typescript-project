@@ -14,9 +14,9 @@ type PropsType = {
     isShow?: boolean; // default - true
     position?: keyof typeof SpinnerPositionEnum; // default - static
     wrapperColor?: string; // default - transparent
-    wrapperPadding?: string | number; // default - 12px
-    wrapperWidth?: string | number; // default - 100%
-    wrapperHeight?: string | number; // default - 100%
+    wrapperPadding?: number | string; // default - 12px
+    wrapperWidth?: number | string; // default - 100%
+    wrapperHeight?: number | string; // default - 100%
     className?: string; // default = ''
 };
 

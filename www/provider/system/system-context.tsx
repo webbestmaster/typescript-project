@@ -12,7 +12,7 @@ const defaultSystemContextData = getSystemState();
 export const SystemContext: Context<SystemContextType> = createContext<SystemContextType>(defaultSystemContextData);
 
 type PropsType = {
-    children: JSX.Element | Array<JSX.Element> | string;
+    children: Array<JSX.Element> | JSX.Element | string;
 };
 
 export function SystemProvider(props: PropsType): JSX.Element {

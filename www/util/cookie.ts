@@ -1,7 +1,7 @@
 /* global document */
 
 type SetCookieOptionsType = {
-    [key: string]: Date | string | number | boolean | null;
+    [key: string]: Date | boolean | number | string | null;
 };
 
 export function getCookie(name: string): string | null {

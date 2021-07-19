@@ -55,22 +55,7 @@
         }
     },
     "rules": {
-        "prefer-destructuring": [
-            "error",
-            {
-                "VariableDeclarator": {
-                    "array": true,
-                    "object": true
-                },
-                "AssignmentExpression": {
-                    "array": true,
-                    "object": true
-                }
-            },
-            {
-                "enforceForRenamedProperties": false
-            }
-        ],
+        "@typescript-eslint/sort-type-union-intersection-members": 2,
         "@typescript-eslint/array-type": [
             "error",
             {
@@ -243,6 +228,22 @@
         "react/no-set-state": 0,
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "error",
+        "prefer-destructuring": [
+            "error",
+            {
+                "VariableDeclarator": {
+                    "array": true,
+                    "object": true
+                },
+                "AssignmentExpression": {
+                    "array": true,
+                    "object": true
+                }
+            },
+            {
+                "enforceForRenamedProperties": false
+            }
+        ],
         "no-return-await": 1,
         "no-console": 0,
         "no-empty-label": 0,

@@ -12,11 +12,11 @@ export enum TimeSizeEnum {
 }
 
 export type NumberFormatOptionsType = Intl.NumberFormatOptions & {
-    style?: 'decimal' | 'currency' | 'percent' | 'unit';
+    style?: 'currency' | 'decimal' | 'percent' | 'unit';
     unit?: TimeSizeEnum | 'liter' | 'percent';
-    unitDisplay?: 'long' | 'short' | 'narrow';
-    signDisplay?: 'auto' | 'never' | 'always' | 'exceptZero';
-    notation?: 'compact' | 'scientific' | 'engineering';
+    unitDisplay?: 'long' | 'narrow' | 'short';
+    signDisplay?: 'always' | 'auto' | 'exceptZero' | 'never';
+    notation?: 'compact' | 'engineering' | 'scientific';
 };
 
 export function getFormattedNumber(
@@ -29,11 +29,11 @@ export function getFormattedNumber(
     return formatter.format(value);
 }
 
-type FormatMainType = 'numeric' | '2-digit';
+type FormatMainType = '2-digit' | 'numeric';
 
 export type DateTimeFormatOptionsType = {
     [TimeSizeEnum.year]?: FormatMainType;
-    [TimeSizeEnum.month]?: FormatMainType | 'narrow' | 'short' | 'long';
+    [TimeSizeEnum.month]?: FormatMainType | 'long' | 'narrow' | 'short';
     [TimeSizeEnum.day]?: FormatMainType;
     [TimeSizeEnum.hour]?: FormatMainType;
     [TimeSizeEnum.minute]?: FormatMainType;

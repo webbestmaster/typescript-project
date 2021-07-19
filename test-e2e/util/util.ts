@@ -2,7 +2,7 @@ import puppeteer, {Browser, BrowserConnectOptions, BrowserLaunchArgumentOptions,
 
 import {defaultPageGoToOption, pageFullUrl, user} from './const';
 
-type PuppeteerLaunchOptionsType = LaunchOptions & BrowserLaunchArgumentOptions & BrowserConnectOptions;
+type PuppeteerLaunchOptionsType = BrowserConnectOptions & BrowserLaunchArgumentOptions & LaunchOptions;
 
 const defaultBrowserOptions: PuppeteerLaunchOptionsType = {
     headless: false,
