@@ -2,12 +2,12 @@ import {useCallback, useMemo, useState} from 'react';
 
 type StateHooksType<DateType> = {
     isInProgress: boolean;
-    setIsInProgress: (isInProgress: boolean) => void;
     processError: Error | null;
-    setProcessError: (processError: Error | null) => void;
-    result: DateType | null;
-    setResult: (result: DateType | null) => void;
     reset: () => void;
+    result: DateType | null;
+    setIsInProgress: (isInProgress: boolean) => void;
+    setProcessError: (processError: Error | null) => void;
+    setResult: (result: DateType | null) => void;
 };
 
 export function useApiHooks<DateType>(): StateHooksType<DateType> {

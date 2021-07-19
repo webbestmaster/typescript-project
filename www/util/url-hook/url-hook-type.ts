@@ -9,11 +9,11 @@ export type UseUrlHookOptionsDefinedType = {
 };
 
 export type UseUrlHookType<QueryMap extends ObjectToUrlParametersType = ObjectToUrlParametersType> = Readonly<{
-    setQuery: (queryMap: Partial<QueryMap>, options?: UseUrlHookOptionsType) => void;
-    getQuery: (key: keyof QueryMap) => string | null;
     deleteQuery: (key: keyof QueryMap) => void;
-    pushUrl: (pathname: string, options?: UseUrlHookOptionsType) => void;
-    pushState: (pathname: string, queryMap: Partial<QueryMap>, options?: UseUrlHookOptionsType) => void;
+    getQuery: (key: keyof QueryMap) => string | null;
     pathname: string;
+    pushState: (pathname: string, queryMap: Partial<QueryMap>, options?: UseUrlHookOptionsType) => void;
+    pushUrl: (pathname: string, options?: UseUrlHookOptionsType) => void;
     queries: QueryMapType<keyof QueryMap>;
+    setQuery: (queryMap: Partial<QueryMap>, options?: UseUrlHookOptionsType) => void;
 }>;

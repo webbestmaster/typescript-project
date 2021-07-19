@@ -1,8 +1,8 @@
 export type UseHookType<HookData> = {
     isInProgress: boolean;
     processError: Error | null;
-    result: HookData | null;
     reset: () => void;
+    result: HookData | null;
 };
 
 export type UseRefreshApiHookType = {

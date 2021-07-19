@@ -33,7 +33,7 @@ function getLittleThenList(screenWidth: number): Array<ScreenWidthNameType> {
     return littleThenList;
 }
 
-function getScreenSize(): {width: number; height: number} {
+function getScreenSize(): {height: number, width: number;} {
     const defaultSize = {
         height: screenMinWidth.desktop,
         width: screenMinWidth.desktop,

@@ -1,22 +1,22 @@
 export type ScreenWidthNameType = 'desktop' | 'mobile' | 'tablet';
 
 export type SystemContextScreenType = {
-    width: number;
-    height: number;
-    name: ScreenWidthNameType;
-    isDesktop: boolean;
-    isTablet: boolean;
-    isMobile: boolean;
-    littleThenList: Array<ScreenWidthNameType>;
-    isLandscape: boolean;
-    isPortrait: boolean;
     devicePixelRatio: number;
+    height: number;
+    isDesktop: boolean;
+    isLandscape: boolean;
+    isMobile: boolean;
+    isPortrait: boolean;
+    isTablet: boolean;
+    littleThenList: Array<ScreenWidthNameType>;
+    name: ScreenWidthNameType;
+    width: number;
 };
 
 export type SystemContextType = {
-    screen: SystemContextScreenType;
-    isIOS: boolean;
     isAndroid: boolean;
+    isIOS: boolean;
     isScriptLoaded: boolean;
     isWindowLoaded: boolean;
+    screen: SystemContextScreenType;
 };

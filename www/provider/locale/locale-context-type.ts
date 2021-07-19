@@ -16,10 +16,10 @@ export enum ShortLocaleNameEnum {
 }
 
 export type LocaleContextType = {
-    localeName: LocaleNameEnum;
-    shortLocaleName: ShortLocaleNameEnum;
-    setLocaleName: (localeName: LocaleNameEnum) => void;
     getLocalizedString: (stringKey: LangKeyType, valueMap?: LocaleContextValueMapType) => string;
+    localeName: LocaleNameEnum;
+    setLocaleName: (localeName: LocaleNameEnum) => void;
+    shortLocaleName: ShortLocaleNameEnum;
 };
 
 export type LocaleConstType = {

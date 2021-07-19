@@ -3,9 +3,9 @@ import {classNames} from '../../util/css';
 import isHiddenStyle from './is-hidden.scss';
 
 type PropsType = {
-    isHidden: boolean;
     children?: Array<JSX.Element | string> | JSX.Element | string;
     className?: string;
+    isHidden: boolean;
 };
 
 export function IsHidden(props: PropsType): JSX.Element {

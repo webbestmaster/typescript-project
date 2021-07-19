@@ -7,11 +7,11 @@ import {Link as RouterLink, useHistory} from 'react-router-dom';
 // import linkStyle from './navigation-link.scss';
 
 type PropsType = {
-    className?: string;
-    to: string;
     children?: Array<JSX.Element> | JSX.Element | number | string;
-    useQuery?: boolean;
+    className?: string;
     title?: string;
+    to: string;
+    useQuery?: boolean;
 };
 
 export function NavigationLink(props: PropsType): JSX.Element {
