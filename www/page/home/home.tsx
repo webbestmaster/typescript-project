@@ -6,6 +6,7 @@ import {Locale} from '../../provider/locale/locale';
 import {useLocale} from '../../provider/locale/locale-hook';
 import {Spinner} from '../../layout/spinner/spinner';
 import {ErrorData} from '../../layout/error-data/error-data';
+import {useSystem} from '../../provider/system/system-hook';
 
 import pngImageSrc from './image/marker-icon-2x.png';
 import svgImageSrc, {ReactComponent as SvgAsReactComponent} from './image/questions-with-an-official-answer.svg';
@@ -21,6 +22,7 @@ const LoadMeAsyncLazy = lazy(
 
 export function Home(): JSX.Element {
     const {getLocalizedString} = useLocale();
+    const {screen} = useSystem();
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -34,6 +36,8 @@ export function Home(): JSX.Element {
     return (
         <div>
             <h1 className={homeStyle.home_header}>home page</h1>
+
+            <pre>{JSON.stringify(screen, null, 4)}</pre>
 
             <Locale stringKey="BUTTON__APPLY" />
 

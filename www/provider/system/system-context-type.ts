@@ -1,4 +1,8 @@
-export type ScreenWidthNameType = 'desktop' | 'mobile' | 'tablet';
+export enum ScreenWidthNameEnum {
+    'desktop' = 'desktop',
+    'mobile' = 'mobile',
+    'tablet' = 'tablet',
+}
 
 export type SystemContextScreenType = {
     devicePixelRatio: number;
@@ -8,8 +12,8 @@ export type SystemContextScreenType = {
     isMobile: boolean;
     isPortrait: boolean;
     isTablet: boolean;
-    littleThenList: Array<ScreenWidthNameType>;
-    name: ScreenWidthNameType;
+    littleThenList: Array<ScreenWidthNameEnum>;
+    name: ScreenWidthNameEnum;
     width: number;
 };
 

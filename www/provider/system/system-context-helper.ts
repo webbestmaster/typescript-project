@@ -1,33 +1,33 @@
 /* global window, document, navigator */
 
-import {ScreenWidthNameType, SystemContextScreenType, SystemContextType} from './system-context-type';
-import {screenMinWidth, screenNameReference} from './system-context-const';
+import {ScreenWidthNameEnum, SystemContextScreenType, SystemContextType} from './system-context-type';
+import {screenMinWidth} from './system-context-const';
 
-function getScreenName(screenWidth: number): ScreenWidthNameType {
-    if (screenWidth >= screenMinWidth.desktop) {
-        return screenNameReference.desktop;
+function getScreenName(screenWidth: number): ScreenWidthNameEnum {
+    if (screenWidth >= screenMinWidth[ScreenWidthNameEnum.desktop]) {
+        return ScreenWidthNameEnum.desktop;
     }
 
-    if (screenWidth >= screenMinWidth.tablet) {
-        return screenNameReference.tablet;
+    if (screenWidth >= screenMinWidth[ScreenWidthNameEnum.tablet]) {
+        return ScreenWidthNameEnum.tablet;
     }
 
-    return screenNameReference.mobile;
+    return ScreenWidthNameEnum.mobile;
 }
 
-function getLittleThenList(screenWidth: number): Array<ScreenWidthNameType> {
-    const littleThenList: Array<ScreenWidthNameType> = [];
+function getLittleThenList(screenWidth: number): Array<ScreenWidthNameEnum> {
+    const littleThenList: Array<ScreenWidthNameEnum> = [];
 
     if (screenWidth < screenMinWidth.desktop) {
-        littleThenList.push(screenNameReference.desktop);
+        littleThenList.push(ScreenWidthNameEnum.desktop);
     }
 
     if (screenWidth < screenMinWidth.tablet) {
-        littleThenList.push(screenNameReference.tablet);
+        littleThenList.push(ScreenWidthNameEnum.tablet);
     }
 
     if (screenWidth < screenMinWidth.mobile) {
-        littleThenList.push(screenNameReference.mobile);
+        littleThenList.push(ScreenWidthNameEnum.mobile);
     }
 
     return littleThenList;
@@ -83,11 +83,11 @@ function getScreenState(): SystemContextScreenType {
     return {
         devicePixelRatio: getDevicePixelRatio(),
         height,
-        isDesktop: screenName === screenNameReference.desktop,
+        isDesktop: screenName === ScreenWidthNameEnum.desktop,
         isLandscape,
-        isMobile: screenName === screenNameReference.mobile,
+        isMobile: screenName === ScreenWidthNameEnum.mobile,
         isPortrait: !isLandscape,
-        isTablet: screenName === screenNameReference.tablet,
+        isTablet: screenName === ScreenWidthNameEnum.tablet,
         littleThenList: getLittleThenList(width),
         name: screenName,
         width,
