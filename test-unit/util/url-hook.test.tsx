@@ -62,7 +62,7 @@ describe('useUrl', () => {
             useResetHookState(pushState);
 
             useEffect(() => {
-                setQuery({foo: '1', bar: '2'});
+                setQuery({bar: '2', foo: '1'});
             }, [setQuery]);
 
             useEffect(() => {
@@ -75,7 +75,7 @@ describe('useUrl', () => {
         const {unmount} = render(<NavigationProvider component={PushUrlSaveQuery} />);
 
         expect(location.pathname).toEqual('/test-push-url-save-query');
-        expect(location.search).toEqual('?foo=1&bar=2');
+        expect(location.search).toEqual('?bar=2&foo=1');
 
         unmount();
     });
@@ -88,7 +88,7 @@ describe('useUrl', () => {
             useResetHookState(pushState);
 
             useEffect(() => {
-                setQuery({nick: '1', mike: '2'});
+                setQuery({mike: '2', nick: '1'});
             }, [setQuery]);
 
             useEffect(() => {
@@ -114,7 +114,7 @@ describe('useUrl', () => {
             useResetHookState(pushState);
 
             useEffect(() => {
-                pushState('/test-push-state', {nick: 'push-nick', mike: 'push-mike'});
+                pushState('/test-push-state', {mike: 'push-mike', nick: 'push-nick'});
             }, [pushState]);
 
             return <div />;
@@ -124,7 +124,7 @@ describe('useUrl', () => {
 
         expect(location.pathname).toEqual('/test-push-state');
 
-        expect(location.search).toEqual('?nick=push-nick&mike=push-mike');
+        expect(location.search).toEqual('?mike=push-mike&nick=push-nick');
 
         unmount();
     });
@@ -137,7 +137,7 @@ describe('useUrl', () => {
             useResetHookState(pushState);
 
             useEffect(() => {
-                setQuery({nick: 'nick-query', mike: 'mike-query'});
+                setQuery({mike: 'mike-query', nick: 'nick-query'});
             }, [setQuery]);
 
             return <div />;
@@ -146,7 +146,7 @@ describe('useUrl', () => {
         const {unmount} = render(<NavigationProvider component={SetQuery} />);
 
         expect(location.pathname).toEqual('/');
-        expect(location.search).toEqual('?nick=nick-query&mike=mike-query');
+        expect(location.search).toEqual('?mike=mike-query&nick=nick-query');
 
         unmount();
     });
@@ -157,7 +157,7 @@ describe('useUrl', () => {
             const {setQuery, pushState, queries, pathname} = useUrl<Record<string, number>>();
 
             useEffect(() => {
-                setQuery({nick: 1, mike: 2});
+                setQuery({mike: 2, nick: 1});
             }, [setQuery, queries, pushState, pathname]);
 
             return <div />;
@@ -179,7 +179,7 @@ describe('useUrl', () => {
         render(<NavigationProvider component={SetQuerySaveQueryPrepare} />);
         const {unmount} = render(<NavigationProvider component={SetQuerySaveQuery} />);
 
-        expect(location.search).toEqual('?nick=1&mike=2&one=1&two=2');
+        expect(location.search).toEqual('?mike=2&nick=1&one=1&two=2');
 
         unmount();
     });
@@ -190,7 +190,7 @@ describe('useUrl', () => {
             const {setQuery} = useUrl<Record<string, number>>();
 
             useEffect(() => {
-                setQuery({nick: 1, mike: 2}, {isSaveQuery: false});
+                setQuery({mike: 2, nick: 1}, {isSaveQuery: false});
             }, [setQuery]);
 
             return <div />;
@@ -203,7 +203,7 @@ describe('useUrl', () => {
             useResetHookState(pushState);
 
             useEffect(() => {
-                setQuery({nick: 1, mike: 2}, {isSaveQuery: false});
+                setQuery({mike: 2, nick: 1}, {isSaveQuery: false});
             }, [setQuery]);
 
             return <div />;
@@ -212,7 +212,7 @@ describe('useUrl', () => {
         render(<NavigationProvider component={SetQueryCleanQueryPrepare} />);
         const {unmount} = render(<NavigationProvider component={SetQueryCleanQuery} />);
 
-        expect(location.search).toEqual('?nick=1&mike=2');
+        expect(location.search).toEqual('?mike=2&nick=1');
 
         unmount();
     });
@@ -227,6 +227,8 @@ describe('useUrl', () => {
             useEffect(() => {
                 // Date | string | number | boolean | null | void
                 setQuery({
+                    emptyList: [], // empty list - exclude
+                    emptyString: '', // empty string - exclude
                     invalidDate: new Date('2020-123-123'), // invalid date - exclude
                     list: [
                         new Date(0), // valid date - include
@@ -244,9 +246,7 @@ describe('useUrl', () => {
                         // eslint-disable-next-line no-undefined
                         undefined, // exclude
                     ],
-                    emptyString: '', // empty string - exclude
                     spaceOnlyString: '     ', // space only string - exclude
-                    emptyList: [], // empty list - exclude
                     // eslint-disable-next-line no-undefined
                     wrongList: [undefined, null], // wrong list - exclude
                 });
@@ -268,7 +268,7 @@ describe('useUrl', () => {
             const {setQuery} = useUrl<Record<string, string>>();
 
             useEffect(() => {
-                setQuery({nick: 'foo', mike: 'bar'});
+                setQuery({mike: 'bar', nick: 'foo'});
             }, [setQuery]);
 
             return <div />;
@@ -303,7 +303,7 @@ describe('useUrl', () => {
             const {setQuery} = useUrl<Record<string, string>>();
 
             useEffect(() => {
-                setQuery({nick: 'foo', mike: 'bar'});
+                setQuery({mike: 'bar', nick: 'foo'});
             }, [setQuery]);
 
             return <div />;
@@ -336,7 +336,7 @@ describe('useUrl', () => {
             const {pushState} = useUrl<Record<string, string>>();
 
             useEffect(() => {
-                pushState('/some-test-path', {nick: 'foo-query', mike: 'bar-query'});
+                pushState('/some-test-path', {mike: 'bar-query', nick: 'foo-query'});
             }, [pushState]);
 
             return <div />;
@@ -349,7 +349,7 @@ describe('useUrl', () => {
             useResetHookState(pushState);
 
             expect(pathname).toEqual('/some-test-path');
-            expect(queries).toEqual({nick: 'foo-query', mike: 'bar-query'});
+            expect(queries).toEqual({mike: 'bar-query', nick: 'foo-query'});
 
             return <div />;
         }
