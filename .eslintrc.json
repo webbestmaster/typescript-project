@@ -134,6 +134,8 @@
         "jsx-a11y/no-autofocus": 0,
         "jsx-a11y/no-onchange": 0,
         "filenames/no-index": 2,
+        "filenames/match-regex": [2, "^[a-z\\.\\-\\d]+$", true],
+        "filenames/match-exported": 0,
         "import/no-useless-path-segments": 2,
         "import/no-default-export": 2,
         "import/order": [
