@@ -2,27 +2,40 @@
 
 import {Link as RouterLink, useHistory} from 'react-router-dom';
 
+import {ObjectToUrlParametersType} from './url-hook-type';
+import {useUrl} from './url-hook';
+import {objectToUrlParameters} from './url-hook-helper';
+
 // import {classNames} from '../../util/css';
 
 // import linkStyle from './navigation-link.scss';
 
-type PropsType = {
+type PropsType<QueryMap> = {
     children?: Array<JSX.Element> | JSX.Element | number | string;
     className?: string;
+    isSaveQueries?: boolean;
+    queries?: QueryMap;
     title?: string;
     to: string;
-    useQuery?: boolean;
 };
 
-export function NavigationLink(props: PropsType): JSX.Element {
-    const {className, to, children, useQuery, title} = props;
+export function NavigationLink<QueryMap extends ObjectToUrlParametersType = ObjectToUrlParametersType>(
+    props: PropsType<QueryMap>
+): JSX.Element {
+    const {className, to, children, isSaveQueries = true, title, queries: passedQueries = {}} = props;
 
-    const routerHistory = useHistory<Location>();
+    const {queries: currentQueries} = useUrl<QueryMap>();
 
-    const query = useQuery === false ? '' : routerHistory.location.search;
+    const resultQueries: ObjectToUrlParametersType = isSaveQueries
+        ? {...currentQueries, ...passedQueries}
+        : passedQueries;
+
+    const queriesAsString: string = objectToUrlParameters(resultQueries);
+
+    const queriesAsPartUrl = queriesAsString && `?${queriesAsString}`;
 
     return (
-        <RouterLink className={className} title={title} to={to + query}>
+        <RouterLink className={className} title={title} to={to + queriesAsPartUrl}>
             {children}
         </RouterLink>
     );

@@ -1,6 +1,6 @@
 /* global URL */
 
-import {ObjectToUrlParametersType, QueryMapType, QuerySimpleValueType, QueryValueType} from './type';
+import {ObjectToUrlParametersType, QueryMapType, QuerySimpleValueType, QueryValueType} from './url-hook-type';
 
 // eslint-disable-next-line complexity
 function stringifyUrlParameterSimpleValue(value: QuerySimpleValueType): string | null {

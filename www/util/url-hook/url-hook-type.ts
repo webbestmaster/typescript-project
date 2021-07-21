@@ -1,19 +1,27 @@
-import {ObjectToUrlParametersType, QueryMapType} from '../type';
+export type QueryKeyType = number | string | symbol;
+
+export type QuerySimpleValueType = Date | boolean | number | string | null | void;
+
+export type QueryValueType = Array<QuerySimpleValueType> | QuerySimpleValueType;
+
+export type ObjectToUrlParametersType = Readonly<Record<string, QueryValueType>>;
+
+export type QueryMapType<QueryKey extends QueryKeyType = QueryKeyType> = Readonly<Record<QueryKey, string | void>>;
 
 export type UseUrlHookOptionsType = {
-    isSaveQuery?: boolean;
+    isSaveQueries?: boolean;
 };
 
 export type UseUrlHookOptionsDefinedType = {
-    isSaveQuery: boolean;
+    isSaveQueries: boolean;
 };
 
 export type UseUrlHookType<QueryMap extends ObjectToUrlParametersType = ObjectToUrlParametersType> = Readonly<{
     deleteQuery: (key: keyof QueryMap) => void;
     getQuery: (key: keyof QueryMap) => string | null;
-    pathname: string;
+    pathname: Readonly<string>;
     pushState: (pathname: string, queryMap: Partial<QueryMap>, options?: UseUrlHookOptionsType) => void;
     pushUrl: (pathname: string, options?: UseUrlHookOptionsType) => void;
-    queries: QueryMapType<keyof QueryMap>;
+    queries: Readonly<QueryMapType<keyof QueryMap>>;
     setQuery: (queryMap: Partial<QueryMap>, options?: UseUrlHookOptionsType) => void;
 }>;

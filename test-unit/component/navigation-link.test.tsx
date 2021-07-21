@@ -74,7 +74,7 @@ describe('NavigationLink', () => {
                 setQuery({nick: 'mike'});
             }, [setQuery]);
 
-            return <NavigationLink to="/use-query-by-props" useQuery />;
+            return <NavigationLink isSaveQueries to="/use-query-by-props" />;
         }
 
         const {unmount, container} = render(<NavigationProvider component={UseQuery} />);
@@ -95,7 +95,7 @@ describe('NavigationLink', () => {
                 setQuery({nick: 'mike'});
             }, [setQuery]);
 
-            return <NavigationLink to="/do-not-use-query" useQuery={false} />;
+            return <NavigationLink isSaveQueries={false} to="/do-not-use-query" />;
         }
 
         const {unmount, container} = render(<NavigationProvider component={DoNotUseQuery} />);

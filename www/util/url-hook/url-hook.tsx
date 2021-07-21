@@ -3,10 +3,8 @@
 import {useCallback, useMemo} from 'react';
 import {useHistory} from 'react-router-dom';
 
-import {getParametersFromUrl, objectToUrlParameters} from '../url';
-import {ObjectToUrlParametersType, QueryMapType} from '../type';
-
-import {UseUrlHookOptionsType, UseUrlHookType} from './url-hook-type';
+import {getParametersFromUrl, objectToUrlParameters} from './url-hook-helper';
+import {ObjectToUrlParametersType, QueryMapType, UseUrlHookOptionsType, UseUrlHookType} from './url-hook-type';
 import {urlHookDefaultOptions} from './url-hook-const';
 
 export function useUrl<
@@ -24,7 +22,7 @@ export function useUrl<
         (newPathname: string, queriesInner: ObjectToUrlParametersType, options?: UseUrlHookOptionsType): void => {
             const definedOptions = {...urlHookDefaultOptions, ...(options || {})};
 
-            const resultQueryMap = definedOptions.isSaveQuery ? {...queries, ...queriesInner} : queriesInner;
+            const resultQueryMap = definedOptions.isSaveQueries ? {...queries, ...queriesInner} : queriesInner;
 
             routerHistory.push({pathname: newPathname, search: objectToUrlParameters(resultQueryMap)});
         },
@@ -53,7 +51,7 @@ export function useUrl<
 
             Reflect.deleteProperty(queriesInner, key);
 
-            persistRoute(pathname, queriesInner, {isSaveQuery: false});
+            persistRoute(pathname, queriesInner, {isSaveQueries: false});
         },
         [pathname, queries, persistRoute]
     );

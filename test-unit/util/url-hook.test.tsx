@@ -4,8 +4,7 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import {render, screen} from '@testing-library/react';
 
 import {useUrl} from '../../www/util/url-hook/url-hook';
-import {UseUrlHookOptionsType} from '../../www/util/url-hook/url-hook-type';
-import {QueryValueType} from '../../www/util/type';
+import {QueryValueType, UseUrlHookOptionsType} from '../../www/util/url-hook/url-hook-type';
 import {NavigationProvider} from '../test-util/c-navigation-provider';
 
 function useResetHookState<QueryMap>(
@@ -13,7 +12,7 @@ function useResetHookState<QueryMap>(
 ) {
     useEffect(() => {
         return () => {
-            pushState('/', {}, {isSaveQuery: false});
+            pushState('/', {}, {isSaveQueries: false});
         };
     }, [pushState]);
 }
@@ -92,7 +91,7 @@ describe('useUrl', () => {
             }, [setQuery]);
 
             useEffect(() => {
-                pushUrl('/test-push-url-clean-query', {isSaveQuery: false});
+                pushUrl('/test-push-url-clean-query', {isSaveQueries: false});
             }, [pushUrl]);
 
             return <div />;
@@ -190,7 +189,7 @@ describe('useUrl', () => {
             const {setQuery} = useUrl<Record<string, number>>();
 
             useEffect(() => {
-                setQuery({mike: 2, nick: 1}, {isSaveQuery: false});
+                setQuery({mike: 2, nick: 1}, {isSaveQueries: false});
             }, [setQuery]);
 
             return <div />;
@@ -203,7 +202,7 @@ describe('useUrl', () => {
             useResetHookState(pushState);
 
             useEffect(() => {
-                setQuery({mike: 2, nick: 1}, {isSaveQuery: false});
+                setQuery({mike: 2, nick: 1}, {isSaveQueries: false});
             }, [setQuery]);
 
             return <div />;
