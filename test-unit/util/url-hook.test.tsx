@@ -5,7 +5,7 @@ import {render, screen} from '@testing-library/react';
 
 import {useUrl} from '../../www/util/url-hook/url-hook';
 import {QueryValueType, UseUrlHookOptionsType} from '../../www/util/url-hook/url-hook-type';
-import {NavigationProvider} from '../test-util/c-navigation-provider';
+import {NavigationProvider} from '../test-util/navigation-provider';
 
 function useResetHookState<QueryMap>(
     pushState: (pathname: string, queryMap: Partial<QueryMap>, options?: UseUrlHookOptionsType) => void
