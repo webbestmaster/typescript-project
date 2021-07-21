@@ -106,4 +106,46 @@ describe('NavigationLink', () => {
 
         unmount();
     });
+
+    it('use own queries', () => {
+        // eslint-disable-next-line react/no-multi-comp
+        function UseOwnQueries(): JSX.Element {
+            const {setQuery} = useUrl();
+
+            useEffect(() => {
+                setQuery({nick: 'mike'});
+            }, [setQuery]);
+
+            return <NavigationLink queries={{foo: 'bar'}} to="/use-own-queries" />;
+        }
+
+        const {unmount, container} = render(<NavigationProvider component={UseOwnQueries} />);
+
+        const link = container.querySelector('a[href="/use-own-queries?nick=mike&foo=bar"]');
+
+        expect(link).toBeInTheDocument();
+
+        unmount();
+    });
+
+    it('use own queries only', () => {
+        // eslint-disable-next-line react/no-multi-comp
+        function UseOwnQueriesOnly(): JSX.Element {
+            const {setQuery} = useUrl();
+
+            useEffect(() => {
+                setQuery({nick: 'mike'});
+            }, [setQuery]);
+
+            return <NavigationLink isSaveQueries={false} queries={{foo: 'bar'}} to="/use-own-queries-only" />;
+        }
+
+        const {unmount, container} = render(<NavigationProvider component={UseOwnQueriesOnly} />);
+
+        const link = container.querySelector('a[href="/use-own-queries-only?foo=bar"]');
+
+        expect(link).toBeInTheDocument();
+
+        unmount();
+    });
 });
