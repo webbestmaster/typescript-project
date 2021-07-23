@@ -50,6 +50,10 @@ function fetchEndCallBack(fetchBeginTimeStamp: number, url: string) {
     }
 }
 
+async function throwErrorByResponse(response: Response) {
+    throw new Error(await response.text());
+}
+
 export function fetchX<ExpectedResponseType>(url: string, options?: OptionsType): Promise<ExpectedResponseType> {
     validateCache(options);
 
@@ -71,14 +75,7 @@ export function fetchX<ExpectedResponseType>(url: string, options?: OptionsType)
 
     const fetchResult: Promise<ExpectedResponseType> = fetch(url, definedOptions)
         .then((response: Response): Promise<ExpectedResponseType> => {
-            if (response.ok) {
-                return response.json();
-            }
-
-            // eslint-disable-next-line promise/no-nesting
-            return response.text().then((text: string) => {
-                throw new Error(text);
-            });
+            return response.ok ? response.json() : throwErrorByResponse(response);
         })
         .finally(() => {
             fetchEndCallBack(fetchBeginTimeStamp, url);
