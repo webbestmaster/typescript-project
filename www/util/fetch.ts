@@ -66,14 +66,9 @@ export function fetchX<ExpectedResponseType>(url: string, options?: OptionsType)
         return savedPromiseResult as Promise<ExpectedResponseType>;
     }
 
-    const definedOptions: OptionsType = {
-        credentials: 'include',
-        ...(options || {}),
-    };
-
     const fetchBeginTimeStamp = Date.now();
 
-    const fetchResult: Promise<ExpectedResponseType> = fetch(url, definedOptions)
+    const fetchResult: Promise<ExpectedResponseType> = fetch(url, options)
         .then((response: Response): Promise<ExpectedResponseType> => {
             return response.ok ? response.json() : throwErrorByResponse(response);
         })
