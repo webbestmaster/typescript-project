@@ -20,7 +20,9 @@
         "plugin:import/warnings",
         "plugin:promise/recommended",
         "plugin:sonarjs/recommended",
-        "plugin:unicorn/recommended"
+        "plugin:unicorn/recommended",
+        "plugin:import/recommended",
+        "plugin:import/typescript"
     ],
     "globals": {
         "JSX": true,
@@ -147,6 +149,9 @@
             true
         ],
         "filenames/match-exported": 0,
+        "import/no-named-as-default-member": 0,
+        "import/default": 0,
+        "import/no-unused-modules": 1,
         "import/no-useless-path-segments": 2,
         "import/no-default-export": 2,
         "import/order": [
