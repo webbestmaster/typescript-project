@@ -14,7 +14,7 @@ const defaultLocaleContextData = getDefaultLocaleContextData();
 export const LocaleContext: Context<LocaleContextType> = createContext<LocaleContextType>(defaultLocaleContextData);
 
 type PropsType = {
-    children: JSX.Element;
+    children: Array<JSX.Element> | JSX.Element;
 };
 
 export function LocaleProvider(props: PropsType): JSX.Element {

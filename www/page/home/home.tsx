@@ -12,6 +12,8 @@ import pngImageSrc from './image/marker-icon-2x.png';
 import svgImageSrc, {ReactComponent as SvgAsReactComponent} from './image/questions-with-an-official-answer.svg';
 import homeStyle from './home.scss';
 
+console.log(ErrorData);
+
 const LoadMeAsyncLazy = lazy(
     () =>
         import(
@@ -28,7 +30,6 @@ export function Home(): JSX.Element {
 
     setTimeout(() => {
         console.log(isOpen);
-        console.log(ErrorData);
         setIsOpen(false);
     }, 1e3);
 
