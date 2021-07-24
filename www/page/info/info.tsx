@@ -12,9 +12,9 @@ import {NavigationLink} from '../../hook/url-hook/navigation-link';
 
 import {appRoute} from '../../component/app/app-route';
 
-import pngImageSrc from './image/marker-icon-2x.png';
-import svgImageSrc, {ReactComponent as SvgAsReactComponent} from './image/questions-with-an-official-answer.svg';
-import homeStyle from './home.scss';
+import pngImageSrc from '../home/image/marker-icon-2x.png';
+import svgImageSrc, {ReactComponent as SvgAsReactComponent} from '../home/image/questions-with-an-official-answer.svg';
+import homeStyle from '../home/home.scss';
 
 console.log(ErrorData);
 
@@ -26,7 +26,7 @@ const LoadMeAsyncLazy = lazy(
         )
 );
 
-export function Home(): JSX.Element {
+export function Info(): JSX.Element {
     const {getLocalizedString} = useLocale();
     const {screen} = useSystem();
 
@@ -37,13 +37,13 @@ export function Home(): JSX.Element {
         setIsOpen(false);
     }, 1e3);
 
-    console.log('evaluate home');
+    console.log('evaluate info');
 
     return (
         <div>
-            <h1 className={homeStyle.home_header}>home page</h1>
+            <h1 className={homeStyle.home_header}>info page</h1>
 
-            <NavigationLink to={appRoute.info.path}>to info</NavigationLink>
+            <NavigationLink to={appRoute.root.path}>to home</NavigationLink>
 
             <pre>{JSON.stringify(screen, null, 4)}</pre>
 
@@ -58,7 +58,7 @@ export function Home(): JSX.Element {
             <SvgAsReactComponent />
 
             <Suspense fallback={<Spinner position="absolute" />}>
-                <LoadMeAsyncLazy smth="home" />
+                <LoadMeAsyncLazy smth="info" />
             </Suspense>
         </div>
     );

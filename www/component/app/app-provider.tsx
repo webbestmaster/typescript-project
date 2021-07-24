@@ -1,6 +1,5 @@
 import {StrictMode} from 'react';
 
-import {SystemProvider} from '../../provider/system/system-context';
 import {LocaleProvider} from '../../provider/locale/locale-context';
 
 type PropsType = {
@@ -12,9 +11,7 @@ export function AppProvider(props: PropsType): JSX.Element {
 
     return (
         <StrictMode>
-            <SystemProvider>
-                <LocaleProvider>{children}</LocaleProvider>
-            </SystemProvider>
+            <LocaleProvider>{children}</LocaleProvider>
         </StrictMode>
     );
 }

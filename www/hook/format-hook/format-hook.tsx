@@ -2,7 +2,12 @@ import {useCallback, useContext} from 'react';
 
 import {LocaleContextType} from '../../provider/locale/locale-context-type';
 import {LocaleContext} from '../../provider/locale/locale-context';
-import {DateTimeFormatOptionsType, getFormattedDateTime, getFormattedNumber, NumberFormatOptionsType} from '../format';
+import {
+    DateTimeFormatOptionsType,
+    getFormattedDateTime,
+    getFormattedNumber,
+    NumberFormatOptionsType,
+} from '../../util/format';
 
 import {UseFormatHookType} from './format-hook-type';
 

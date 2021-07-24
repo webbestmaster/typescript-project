@@ -4,7 +4,12 @@ export enum ScreenWidthNameEnum {
     'tablet' = 'tablet',
 }
 
-export type SystemContextScreenType = {
+export type RectangleSizeType = Readonly<{
+    height: number;
+    width: number;
+}>;
+
+export type SystemScreenDataType = Readonly<{
     devicePixelRatio: number;
     height: number;
     isDesktop: boolean;
@@ -15,12 +20,11 @@ export type SystemContextScreenType = {
     littleThenList: Array<ScreenWidthNameEnum>;
     name: ScreenWidthNameEnum;
     width: number;
-};
+}>;
 
-export type SystemContextType = {
+export type SystemHookType = Readonly<{
     isAndroid: boolean;
+    isBrowser: boolean;
     isIOS: boolean;
-    isScriptLoaded: boolean;
-    isWindowLoaded: boolean;
-    screen: SystemContextScreenType;
-};
+    screen: SystemScreenDataType;
+}>;

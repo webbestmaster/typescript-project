@@ -1,7 +1,6 @@
 /* global window, document, navigator */
-
-import {ScreenWidthNameEnum, SystemContextScreenType, SystemContextType} from './system-context-type';
-import {screenMinWidth} from './system-context-const';
+import {RectangleSizeType, ScreenWidthNameEnum, SystemScreenDataType} from './system-hook-type';
+import {defaultScreenSize, screenMinWidth} from './system-hook-const';
 
 function getScreenName(screenWidth: number): ScreenWidthNameEnum {
     if (screenWidth >= screenMinWidth[ScreenWidthNameEnum.desktop]) {
@@ -33,20 +32,15 @@ function getLittleThenList(screenWidth: number): Array<ScreenWidthNameEnum> {
     return littleThenList;
 }
 
-function getScreenSize(): {height: number; width: number} {
-    const defaultSize = {
-        height: screenMinWidth.desktop,
-        width: screenMinWidth.desktop,
-    };
-
+export function getScreenSize(): RectangleSizeType {
     if (typeof document === 'undefined') {
-        return defaultSize;
+        return defaultScreenSize;
     }
 
     const {documentElement} = document;
 
     if (!documentElement) {
-        return defaultSize;
+        return defaultScreenSize;
     }
 
     const {clientWidth: width, clientHeight: height} = documentElement;
@@ -74,9 +68,7 @@ export function getDevicePixelRatio(): number {
     return devicePixelRatio;
 }
 
-function getScreenState(): SystemContextScreenType {
-    const {width, height} = getScreenSize();
-
+export function getScreenState(width: number, height: number): SystemScreenDataType {
     const isLandscape = width > height; // use >, do not use >=, if width === height it is portrait
     const screenName = getScreenName(width);
 
@@ -94,7 +86,7 @@ function getScreenState(): SystemContextScreenType {
     };
 }
 
-function getIsIOS(): boolean {
+export function getIsIOS(): boolean {
     if (typeof navigator === 'undefined') {
         return false;
     }
@@ -102,20 +94,10 @@ function getIsIOS(): boolean {
     return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 }
 
-function getIsAndroid(): boolean {
+export function getIsAndroid(): boolean {
     if (typeof navigator === 'undefined') {
         return false;
     }
 
     return /(android)/i.test(navigator.userAgent);
-}
-
-export function getSystemState(): SystemContextType {
-    return {
-        isAndroid: getIsAndroid(),
-        isIOS: getIsIOS(),
-        isScriptLoaded: typeof window !== 'undefined',
-        isWindowLoaded: false,
-        screen: getScreenState(),
-    };
 }

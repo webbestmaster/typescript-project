@@ -2,8 +2,8 @@
 import {useEffect} from 'react';
 import {render, screen} from '@testing-library/react';
 
-import {useUrl} from '../../www/util/url-hook/url-hook';
-import {NavigationLink} from '../../www/util/url-hook/navigation-link';
+import {useUrl} from '../../www/hook/url-hook/url-hook';
+import {NavigationLink} from '../../www/hook/url-hook/navigation-link';
 import {NavigationProvider} from '../test-util/navigation-provider';
 
 describe('NavigationLink', () => {

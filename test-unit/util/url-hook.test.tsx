@@ -3,8 +3,8 @@ import {useEffect} from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import {render, screen} from '@testing-library/react';
 
-import {useUrl} from '../../www/util/url-hook/url-hook';
-import {QueryValueType, UseUrlHookOptionsType} from '../../www/util/url-hook/url-hook-type';
+import {useUrl} from '../../www/hook/url-hook/url-hook';
+import {QueryValueType, UseUrlHookOptionsType} from '../../www/hook/url-hook/url-hook-type';
 import {NavigationProvider} from '../test-util/navigation-provider';
 
 function useResetHookState<QueryMap>(
