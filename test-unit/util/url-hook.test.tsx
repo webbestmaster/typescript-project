@@ -1,4 +1,4 @@
-/* global beforeAll, afterAll, beforeEach, afterEach, describe, it, expect, location */
+/* global describe, it, expect, location */
 import {useEffect} from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import {render, screen} from '@testing-library/react';
@@ -56,7 +56,7 @@ describe('useUrl', () => {
     it('pushUrl: save query', () => {
         // eslint-disable-next-line react/no-multi-comp
         function PushUrlSaveQuery(): JSX.Element {
-            const {setQuery, pushUrl, queries, pushState} = useUrl<Record<string, string>>();
+            const {setQuery, pushUrl, pushState} = useUrl<Record<string, string>>();
 
             useResetHookState(pushState);
 

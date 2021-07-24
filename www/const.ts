@@ -26,7 +26,7 @@ function sayHi() {
     log(hiString);
 
     log('Build date:', BUILD_DATE_H);
-    // log('Is production:', IS_PRODUCTION);
+    log('Is production:', IS_PRODUCTION);
 }
 
 sayHi();

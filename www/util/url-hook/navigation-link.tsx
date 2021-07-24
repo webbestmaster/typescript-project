@@ -1,5 +1,3 @@
-/* global Location */
-
 import {Link as RouterLink} from 'react-router-dom';
 
 import {ObjectToUrlParametersType} from './url-hook-type';

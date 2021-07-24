@@ -1,4 +1,4 @@
-/* global beforeAll, afterAll, beforeEach, afterEach, describe, it, expect, location */
+/* global describe, it, expect */
 import {useEffect} from 'react';
 import {render, screen} from '@testing-library/react';
 

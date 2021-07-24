@@ -95,7 +95,7 @@
                 "hoist": "all"
             }
         ],
-        "@typescript-eslint/no-unused-vars": 0,
+        "@typescript-eslint/no-unused-vars": 1,
         "@typescript-eslint/no-use-before-define": 1,
         "promise/always-return": 0,
         "unicorn/prefer-node-protocol": 0,
@@ -184,7 +184,7 @@
                 ]
             }
         ],
-        "react/no-unused-prop-types": 0,
+        "react/no-unused-prop-types": 1,
         "react/sort-comp": 1,
         "react/jsx-sort-props": [
             2,
@@ -256,7 +256,7 @@
         "no-console": 0,
         "no-empty-label": 0,
         "no-warning-comments": 0,
-        "no-unused-vars": 0,
+        "no-unused-vars": 1,
         "consistent-this": 1,
         "no-inline-comments": 0,
         "no-ternary": 0,
