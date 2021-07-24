@@ -5,7 +5,6 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
-// const {UnusedFilesWebpackPlugin} = require('unused-files-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 
 const {isProduction, isDevelopment} = require('./../config');
@@ -45,12 +44,6 @@ const pluginList = [
         filename: isDevelopment ? '[name].css' : 'style.css',
         chunkFilename: isDevelopment ? '[id].css' : '[id].[hash:6].css',
     }),
-    // new UnusedFilesWebpackPlugin({
-    //     patterns: ['www/**/*.*'],
-    //     globOptions: {
-    //         ignore: ['www/**/*.scss.flow', 'www/**/*.css.flow', 'www/asset/**/*'],
-    //     },
-    // }),
     new HtmlWebpackPlugin({
         minify: {
             collapseWhitespace: isProduction,
