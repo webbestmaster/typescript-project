@@ -1,6 +1,6 @@
 /* global Location */
 
-import {Link as RouterLink, useHistory} from 'react-router-dom';
+import {Link as RouterLink} from 'react-router-dom';
 
 import {ObjectToUrlParametersType} from './url-hook-type';
 import {useUrl} from './url-hook';

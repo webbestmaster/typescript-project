@@ -1,6 +1,6 @@
 /* global setTimeout */
 
-import {useState, lazy, Suspense} from 'react';
+import {lazy, Suspense, useState} from 'react';
 
 import {Locale} from '../../provider/locale/locale';
 import {useLocale} from '../../provider/locale/locale-hook';
@@ -28,6 +28,7 @@ export function Home(): JSX.Element {
 
     setTimeout(() => {
         console.log(isOpen);
+        console.log(ErrorData);
         setIsOpen(false);
     }, 1e3);
 
