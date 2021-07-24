@@ -1,10 +1,10 @@
 /* global window */
 
-import {useCallback, useEffect, useState, useMemo} from 'react';
+import {useCallback, useEffect, useMemo, useState} from 'react';
 
 import {debounce} from '../../util/function';
 
-import {SystemHookType} from './system-hook-type';
+import {ScreenWidthNameEnum, SystemHookType, SystemScreenDataType} from './system-hook-type';
 import {getIsAndroid, getIsIOS, getScreenSize, getScreenState} from './system-hook-helper';
 
 export function useSystem(): SystemHookType {
@@ -14,15 +14,45 @@ export function useSystem(): SystemHookType {
 
     const {width: defaultWidth, height: defaultHeight} = getScreenSize();
 
-    const [width, setWidth] = useState<number>(defaultWidth);
-    const [height, setHeight] = useState<number>(defaultHeight);
+    const {
+        devicePixelRatio: defaultDevicePixelRatio,
+        isDesktop: defaultIsDesktop,
+        isLandscape: defaultIsLandscape,
+        isMobile: defaultIsMobile,
+        isPortrait: defaultIsPortrait,
+        isTablet: defaultIsTablet,
+        name: defaultName,
+    } = getScreenState(defaultWidth, defaultHeight);
+
+    const [devicePixelRatio, setDevicePixelRatio] = useState<number>(defaultDevicePixelRatio);
+    const [isDesktop, setIsDesktop] = useState<boolean>(defaultIsDesktop);
+    const [isLandscape, setIsLandscape] = useState<boolean>(defaultIsLandscape);
+    const [isMobile, setIsMobile] = useState<boolean>(defaultIsMobile);
+    const [isPortrait, setIsPortrait] = useState<boolean>(defaultIsPortrait);
+    const [isTablet, setIsTablet] = useState<boolean>(defaultIsTablet);
+    const [name, setName] = useState<ScreenWidthNameEnum>(defaultName);
 
     const handleResize = useCallback(() => {
         const {width: newWidth, height: newHeight} = getScreenSize();
 
-        setWidth(newWidth);
-        setHeight(newHeight);
-    }, [setWidth, setHeight]);
+        const {
+            devicePixelRatio: newDevicePixelRatio,
+            isDesktop: newIsDesktop,
+            isLandscape: newIsLandscape,
+            isMobile: newIsMobile,
+            isPortrait: newIsPortrait,
+            isTablet: newIsTablet,
+            name: newName,
+        } = getScreenState(newWidth, newHeight);
+
+        setDevicePixelRatio(newDevicePixelRatio);
+        setIsDesktop(newIsDesktop);
+        setIsLandscape(newIsLandscape);
+        setIsMobile(newIsMobile);
+        setIsPortrait(newIsPortrait);
+        setIsTablet(newIsTablet);
+        setName(newName);
+    }, []);
 
     useEffect(() => {
         const handleResizeDebounced = debounce<[]>(handleResize, 150);
@@ -34,7 +64,19 @@ export function useSystem(): SystemHookType {
         };
     }, [handleResize]);
 
+    const systemScreen: SystemScreenDataType = useMemo((): SystemScreenDataType => {
+        return {
+            devicePixelRatio,
+            isDesktop,
+            isLandscape,
+            isMobile,
+            isPortrait,
+            isTablet,
+            name,
+        };
+    }, [devicePixelRatio, isDesktop, isLandscape, isMobile, isPortrait, isTablet, name]);
+
     return useMemo((): SystemHookType => {
-        return {isAndroid, isBrowser, isIOS, screen: getScreenState(width, height)};
-    }, [isAndroid, isBrowser, isIOS, width, height]);
+        return {isAndroid, isBrowser, isIOS, screen: systemScreen};
+    }, [isAndroid, isBrowser, isIOS, systemScreen]);
 }

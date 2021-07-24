@@ -1,15 +1,13 @@
 /* global setTimeout */
 
-import {lazy, Suspense, useState} from 'react';
+import {lazy, Suspense, useState, useEffect} from 'react';
 
 import {Locale} from '../../provider/locale/locale';
 import {useLocale} from '../../provider/locale/locale-hook';
 import {Spinner} from '../../layout/spinner/spinner';
 import {ErrorData} from '../../layout/error-data/error-data';
 import {useSystem} from '../../hook/system-hook/system-hook';
-
 import {NavigationLink} from '../../hook/url-hook/navigation-link';
-
 import {appRoute} from '../../component/app/app-route';
 
 import pngImageSrc from './image/marker-icon-2x.png';
@@ -36,6 +34,10 @@ export function Home(): JSX.Element {
         console.log(isOpen);
         setIsOpen(false);
     }, 1e3);
+
+    useEffect(() => {
+        console.log('home');
+    });
 
     console.log('evaluate home');
 

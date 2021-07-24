@@ -14,24 +14,6 @@ function getScreenName(screenWidth: number): ScreenWidthNameEnum {
     return ScreenWidthNameEnum.mobile;
 }
 
-function getLittleThenList(screenWidth: number): Array<ScreenWidthNameEnum> {
-    const littleThenList: Array<ScreenWidthNameEnum> = [];
-
-    if (screenWidth < screenMinWidth.desktop) {
-        littleThenList.push(ScreenWidthNameEnum.desktop);
-    }
-
-    if (screenWidth < screenMinWidth.tablet) {
-        littleThenList.push(ScreenWidthNameEnum.tablet);
-    }
-
-    if (screenWidth < screenMinWidth.mobile) {
-        littleThenList.push(ScreenWidthNameEnum.mobile);
-    }
-
-    return littleThenList;
-}
-
 export function getScreenSize(): RectangleSizeType {
     if (typeof document === 'undefined') {
         return defaultScreenSize;
@@ -74,15 +56,12 @@ export function getScreenState(width: number, height: number): SystemScreenDataT
 
     return {
         devicePixelRatio: getDevicePixelRatio(),
-        height,
         isDesktop: screenName === ScreenWidthNameEnum.desktop,
         isLandscape,
         isMobile: screenName === ScreenWidthNameEnum.mobile,
         isPortrait: !isLandscape,
         isTablet: screenName === ScreenWidthNameEnum.tablet,
-        littleThenList: getLittleThenList(width),
         name: screenName,
-        width,
     };
 }
 

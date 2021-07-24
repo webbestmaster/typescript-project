@@ -11,15 +11,12 @@ export type RectangleSizeType = Readonly<{
 
 export type SystemScreenDataType = Readonly<{
     devicePixelRatio: number;
-    height: number;
     isDesktop: boolean;
     isLandscape: boolean;
     isMobile: boolean;
     isPortrait: boolean;
     isTablet: boolean;
-    littleThenList: Array<ScreenWidthNameEnum>;
     name: ScreenWidthNameEnum;
-    width: number;
 }>;
 
 export type SystemHookType = Readonly<{
