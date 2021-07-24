@@ -13,14 +13,12 @@ export function useScreenSize(): RectangleSizeType {
     const [width, setWidth] = useState<number>(defaultWidth);
     const [height, setHeight] = useState<number>(defaultHeight);
 
-    const handleUpdate = useCallback(() => {
+    const handleResize = useCallback(() => {
         const {width: newWidth, height: newHeight} = getScreenSize();
 
         setWidth(newWidth);
         setHeight(newHeight);
     }, []);
-
-    const handleResize = useCallback(handleUpdate, [handleUpdate]);
 
     useEffect(() => {
         const handleResizeDebounced = debounce<[]>(handleResize, 150);
