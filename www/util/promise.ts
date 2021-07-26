@@ -1,7 +1,7 @@
-export function catchError(error: Error): Error {
-    console.warn('Catch a error in promise!');
+export function throwError(error: Error): void {
+    console.warn('Throw a error!');
     console.error(error);
-    return error;
+    throw error;
 }
 
 export type PromiseResolveType<Result> = (result: Result) => unknown;

@@ -14,7 +14,7 @@ export function getHash(data: Array<unknown> | Record<string, unknown> | string)
 }
 
 export function getRandomString(): string {
-    return getHash(String(Date.now() + Math.random()));
+    return getHash(String(Math.random()).replace('0.', ''));
 }
 
 export function findString(input: string, searchQuery: string, flags: '' | 'g' | 'gi' = 'gi'): Array<string> {
