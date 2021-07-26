@@ -3,7 +3,7 @@ import {ruRu} from './translation/ru-ru/data';
 import {zhCn} from './translation/zh-cn/data';
 import {zhTw} from './translation/zh-tw/data';
 import {LocaleConstType, LocaleNameEnum, ShortLocaleNameEnum} from './locale-context-type';
-import {LangDataType, LangKeyType} from './translation/type';
+import {LangDataType} from './translation/type';
 
 export const allLocalesData: Record<LocaleNameEnum, LangDataType> = {
     [LocaleNameEnum.enUs]: enUs,
@@ -20,16 +20,6 @@ export const localeNameList: Array<LocaleNameEnum> = [
 ];
 
 export const splitValueStringRegExp = /(?={\w+?})/g;
-
-export const weekDayList: Array<LangKeyType> = [
-    'WEEK_DAY__MONDAY',
-    'WEEK_DAY__TUESDAY',
-    'WEEK_DAY__WEDNESDAY',
-    'WEEK_DAY__THURSDAY',
-    'WEEK_DAY__FRIDAY',
-    'WEEK_DAY__SATURDAY',
-    'WEEK_DAY__SUNDAY',
-];
 
 export const localeConst: LocaleConstType = {
     defaults: {
