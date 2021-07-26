@@ -1,10 +1,8 @@
 import {classNames} from '../../util/css';
 
 import spinnerStyle from './spinner.scss';
-import {defaultSpinnerData} from './spinner-const';
+import {defaultSpinnerSize} from './spinner-const';
 import {SpinnerPositionEnum} from './spinner-type';
-
-const {size: defaultSize} = defaultSpinnerData;
 
 type PropsType = {
     arcColor?: string; // default - $color-border
@@ -14,7 +12,7 @@ type PropsType = {
     lineWidth?: number; // default - 5px
     position?: keyof typeof SpinnerPositionEnum; // default - static
     size?: number; // default - 48px
-    wrapperColor?: string; // default - transparent
+    wrapperColor?: string; // default - rgba(255, 255, 255, 0.5)
     wrapperHeight?: number | string; // default - 100%
     wrapperPadding?: number | string; // default - 12px
     wrapperWidth?: number | string; // default - 100%
@@ -22,14 +20,14 @@ type PropsType = {
 
 export function Spinner(props: PropsType): JSX.Element | null {
     const {
-        size: rawSize,
+        size = defaultSpinnerSize,
         lineWidth,
         arcColor,
         circleColor,
         isShow,
         wrapperWidth,
         wrapperHeight,
-        position: rawPosition,
+        position = SpinnerPositionEnum.static,
         wrapperColor,
         wrapperPadding,
         className,
@@ -38,9 +36,6 @@ export function Spinner(props: PropsType): JSX.Element | null {
     if (isShow === false) {
         return null;
     }
-
-    const position = rawPosition || SpinnerPositionEnum.static;
-    const size = rawSize || defaultSize;
 
     const spinnerImageStyle = {
         borderColor: circleColor,

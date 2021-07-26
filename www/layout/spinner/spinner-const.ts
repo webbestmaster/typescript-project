@@ -1,3 +1,1 @@
-export const defaultSpinnerData = {
-    size: 48,
-};
+export const defaultSpinnerSize = 48;
