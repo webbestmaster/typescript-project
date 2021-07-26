@@ -1,6 +1,6 @@
 /* global setTimeout */
 
-import {lazy, Suspense, useState, useEffect} from 'react';
+import {lazy, Suspense, useEffect, useState} from 'react';
 
 import {Locale} from '../../provider/locale/locale';
 import {useLocale} from '../../provider/locale/locale-hook';
@@ -9,6 +9,7 @@ import {ErrorData} from '../../layout/error-data/error-data';
 import {useSystem} from '../../hook/system-hook/system-hook';
 import {NavigationLink} from '../../hook/url-hook/navigation-link';
 import {appRoute} from '../../component/app/app-route';
+import {LocaleNameEnum} from '../../provider/locale/locale-context-type';
 
 import pngImageSrc from './image/marker-icon-2x.png';
 import svgImageSrc, {ReactComponent as SvgAsReactComponent} from './image/questions-with-an-official-answer.svg';
@@ -25,7 +26,7 @@ const LoadMeAsyncLazy = lazy(
 );
 
 export function Home(): JSX.Element {
-    const {getLocalizedString} = useLocale();
+    const {getLocalizedString, setLocaleName, localeName} = useLocale();
     const {screen} = useSystem();
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -44,6 +45,18 @@ export function Home(): JSX.Element {
     return (
         <div>
             <h1 className={homeStyle.home_header}>home page</h1>
+
+            <hr />
+
+            <button
+                onClick={() =>
+                    setLocaleName(localeName === LocaleNameEnum.enUs ? LocaleNameEnum.ruRu : LocaleNameEnum.enUs)}
+                type="button"
+            >
+                {localeName}
+            </button>
+
+            <hr />
 
             <NavigationLink to={appRoute.info.path}>to info</NavigationLink>
 
