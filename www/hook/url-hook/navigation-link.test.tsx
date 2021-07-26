@@ -2,9 +2,10 @@
 import {useEffect} from 'react';
 import {render, screen} from '@testing-library/react';
 
-import {useUrl} from '../../www/hook/url-hook/url-hook';
-import {NavigationLink} from '../../www/hook/url-hook/navigation-link';
-import {NavigationProvider} from '../test-util/navigation-provider';
+import {NavigationProvider} from '../../../test-unit/util/navigation-provider';
+
+import {useUrl} from './url-hook';
+import {NavigationLink} from './navigation-link';
 
 describe('NavigationLink', () => {
     it('default state', () => {
