@@ -1,9 +1,8 @@
 /* global setTimeout */
 
-import {lazy, Suspense, useState, useEffect} from 'react';
+import {lazy, Suspense, useEffect, useState} from 'react';
 
-import {Locale} from '../../provider/locale/locale';
-import {useLocale} from '../../provider/locale/locale-hook';
+import {Locale, useLocale} from '../../provider/locale/locale-context';
 import {Spinner} from '../../layout/spinner/spinner';
 import {ErrorData} from '../../layout/error-data/error-data';
 import {useSystem} from '../../hook/system-hook/system-hook';

@@ -1,4 +1,4 @@
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 type NavigationProviderPropsType = {
     component: () => JSX.Element;

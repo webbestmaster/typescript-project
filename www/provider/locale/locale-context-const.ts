@@ -12,15 +12,6 @@ export const allLocalesData: Record<LocaleNameEnum, LangDataType> = {
     [LocaleNameEnum.zhTw]: zhTw,
 };
 
-export const localeNameList: Array<LocaleNameEnum> = [
-    LocaleNameEnum.enUs,
-    LocaleNameEnum.ruRu,
-    LocaleNameEnum.zhCn,
-    LocaleNameEnum.zhTw,
-];
-
-export const splitValueStringRegExp = /(?={\w+?})/g;
-
 export const localeConst: LocaleConstType = {
     defaults: {
         localeName: LocaleNameEnum.enUs,

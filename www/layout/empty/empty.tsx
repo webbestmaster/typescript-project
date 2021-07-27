@@ -1,7 +1,7 @@
 import React, {useMemo} from 'react';
 
 import {LangKeyType} from '../../provider/locale/translation/type';
-import {Locale} from '../../provider/locale/locale';
+import {Locale} from '../../provider/locale/locale-context';
 import {classNames} from '../../util/css';
 
 import emptyImageSrc from './image/empty.svg';

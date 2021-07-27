@@ -2,14 +2,14 @@
 
 import {lazy, Suspense, useEffect, useState} from 'react';
 
-import {Locale} from '../../provider/locale/locale';
-import {useLocale} from '../../provider/locale/locale-hook';
+import {Locale, useLocale} from '../../provider/locale/locale-context';
 import {Spinner} from '../../layout/spinner/spinner';
 import {ErrorData} from '../../layout/error-data/error-data';
 import {useSystem} from '../../hook/system-hook/system-hook';
 import {NavigationLink} from '../../hook/url-hook/navigation-link';
 import {appRoute} from '../../component/app/app-route';
 import {LocaleNameEnum} from '../../provider/locale/locale-context-type';
+import {useFormat} from '../../hook/format-hook/format-hook';
 
 import pngImageSrc from './image/marker-icon-2x.png';
 import svgImageSrc, {ReactComponent as SvgAsReactComponent} from './image/questions-with-an-official-answer.svg';
@@ -27,6 +27,7 @@ const LoadMeAsyncLazy = lazy(
 
 export function Home(): JSX.Element {
     const {getLocalizedString, setLocaleName, localeName} = useLocale();
+    const {getFormattedNumber} = useFormat();
     const {screen} = useSystem();
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -59,6 +60,10 @@ export function Home(): JSX.Element {
             <hr />
 
             <NavigationLink to={appRoute.info.path}>to info</NavigationLink>
+
+            <hr />
+
+            <code>{getFormattedNumber(321, {style: 'unit', unit: 'liter', unitDisplay: 'long'})}</code>
 
             <pre>{JSON.stringify(screen, null, 4)}</pre>
 

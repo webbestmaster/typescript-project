@@ -1,6 +1,6 @@
 /* global describe, it, expect, location */
 import {useEffect} from 'react';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {render, screen} from '@testing-library/react';
 
 import {NavigationProvider} from '../../../test-unit/util/navigation-provider';

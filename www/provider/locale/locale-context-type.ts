@@ -1,7 +1,3 @@
-import {LangKeyType} from './translation/type';
-
-export type LocaleContextValueMapType = Record<string, JSX.Element | number | string>;
-
 export enum LocaleNameEnum {
     enUs = 'en-US',
     ruRu = 'ru-RU',
@@ -15,14 +11,7 @@ export enum ShortLocaleNameEnum {
     zh = 'zh',
 }
 
-export type LocaleContextType = {
-    getLocalizedString: (stringKey: LangKeyType, valueMap?: LocaleContextValueMapType) => string;
-    localeName: LocaleNameEnum;
-    setLocaleName: (localeName: LocaleNameEnum) => void;
-    shortLocaleName: ShortLocaleNameEnum;
-};
-
-export type LocaleConstType = {
+export type LocaleConstType = Readonly<{
     defaults: {
         localeName: LocaleNameEnum;
         shortLocaleName: ShortLocaleNameEnum;
@@ -32,4 +21,4 @@ export type LocaleConstType = {
             localeName: string;
         };
     };
-};
+}>;

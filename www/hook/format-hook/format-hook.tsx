@@ -1,6 +1,6 @@
 import {useCallback} from 'react';
 
-import {useLocale} from '../../provider/locale/locale-hook';
+import {useLocale} from '../../provider/locale/locale-context';
 import {
     DateTimeFormatOptionsType,
     getFormattedDateTime,
