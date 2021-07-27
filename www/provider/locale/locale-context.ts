@@ -8,7 +8,7 @@ import {LocalizationStateType} from './localization/localization-type';
 const {LocalizationProvider, Locale, useLocale} = createLocalization<LangKeyType, LocaleNameEnum>({
     defaultLocaleName: getSavedLocaleName<LocaleNameEnum>(Object.values(LocaleNameEnum)),
     localization: allLocalesData,
-    onUpdate: (localizationProviderState: LocalizationStateType<LocaleNameEnum>) => {
+    onUseEffect: (localizationProviderState: LocalizationStateType<LocaleNameEnum>) => {
         const {localeName} = localizationProviderState;
 
         saveLocaleName<LocaleNameEnum>(localeName);

@@ -7,7 +7,7 @@ import {useEffect} from 'react';
 import {render} from '@testing-library/react';
 
 import {createLocalization} from './localization';
-import {LocalizationConfigType} from './localization-type';
+import {LocalizationConfigType, LocalizationStateType} from './localization-type';
 
 const enUS = {
     FRIEND: 'friend',
@@ -116,6 +116,41 @@ describe('Localization', () => {
         expect(helloNode?.innerHTML).toEqual('Привет');
         expect(helloSmthNode?.innerHTML).toEqual('Привет, друг!');
         expect(helloWorldNode?.innerHTML).toEqual('Привет, Мир!');
+
+        unmount();
+    });
+
+    it('localization provider - on useEffect', () => {
+        let testingLocaleName: LocaleNameType = 'en-US';
+
+        const {LocalizationProvider, useLocale} = createLocalization<keyof typeof enUS, LocaleNameType>({
+            ...localizationConfig,
+            defaultLocaleName: testingLocaleName,
+            onUseEffect: (data: LocalizationStateType<LocaleNameType>) => {
+                const {localeName: newLocaleName} = data;
+
+                testingLocaleName = newLocaleName;
+            },
+        });
+
+        // eslint-disable-next-line react/no-multi-comp
+        function InnerComponent(): JSX.Element {
+            const {setLocaleName} = useLocale();
+
+            useEffect(() => {
+                setLocaleName('ru-RU');
+            }, [setLocaleName]);
+
+            return <div />;
+        }
+
+        const {unmount} = render(
+            <LocalizationProvider>
+                <InnerComponent />
+            </LocalizationProvider>
+        );
+
+        expect(testingLocaleName).toEqual('ru-RU');
 
         unmount();
     });

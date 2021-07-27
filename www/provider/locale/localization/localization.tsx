@@ -15,7 +15,7 @@ import {splitValueStringRegExp} from './localization-const';
 export function createLocalization<TranslationKeys extends string, LocaleName extends string>(
     localizationConfig: LocalizationConfigType<TranslationKeys, LocaleName>
 ): LocalizationLibraryType<TranslationKeys, LocaleName> {
-    const {defaultLocaleName, localization, onUpdate = () => null} = localizationConfig;
+    const {defaultLocaleName, localization, onUseEffect = () => null} = localizationConfig;
 
     const defaultLocalizationData: LocaleContextType<TranslationKeys, LocaleName> = {
         getLocalizedString: String.toString,
@@ -31,7 +31,7 @@ export function createLocalization<TranslationKeys extends string, LocaleName ex
 
         const [localeName, setLocaleName] = useState<LocaleName>(defaultLocaleName);
 
-        useEffect(() => onUpdate({localeName}), [localeName]);
+        useEffect(() => onUseEffect({localeName}), [localeName]);
 
         const memoizedSetLocaleName = useCallback((newLocaleName: LocaleName) => setLocaleName(newLocaleName), []);
 

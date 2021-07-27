@@ -25,7 +25,7 @@ export type LocalizationStateType<LocaleName extends string> = {
 export type LocalizationConfigType<TranslationKeys extends string, LocaleName extends string> = {
     defaultLocaleName: LocaleName;
     localization: Record<LocaleName, Record<TranslationKeys, string>>;
-    onUpdate?: (localizationProviderState: LocalizationStateType<LocaleName>) => void;
+    onUseEffect?: (localizationProviderState: LocalizationStateType<LocaleName>) => void;
 };
 
 export type LocalizationLibraryType<TranslationKeys extends string, LocaleName extends string> = {
