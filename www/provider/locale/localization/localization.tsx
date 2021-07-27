@@ -18,9 +18,9 @@ export function createLocalization<TranslationKeys extends string, LocaleName ex
     const {defaultLocaleName, localization, onUpdate = () => null} = localizationConfig;
 
     const defaultLocalizationData: LocaleContextType<TranslationKeys, LocaleName> = {
-        getLocalizedString: (): string => '',
+        getLocalizedString: String.toString,
         localeName: defaultLocaleName,
-        setLocaleName: () => null,
+        setLocaleName: String.toString,
     };
 
     const LocaleContext: Context<LocaleContextType<TranslationKeys, LocaleName>> =
