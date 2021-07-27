@@ -19,7 +19,7 @@ const enUS = {
 
 const ruRu: typeof enUS = {
     FRIEND: 'друг',
-    HARD_STRING: 'это {value1} данные {value2} это {value2} здесь',
+    HARD_STRING: 'эти {value1} данные {value2} есть {value2} здесь',
     HELLO: 'Привет',
     HELLO_SMTH: 'Привет, {smth}!',
     HELLO_WORLD: 'Привет, Мир!',
@@ -169,7 +169,7 @@ describe('Localization', () => {
 
         expect(helloNode?.innerHTML).toEqual('Привет');
         expect(helloSmthNode?.innerHTML).toEqual('Привет, <span>друг</span>!');
-        expect(helloHardNode?.innerHTML).toEqual('это value-1 данные value-2 это value-2 здесь');
+        expect(helloHardNode?.innerHTML).toEqual('эти value-1 данные value-2 есть value-2 здесь');
 
         unmount();
     });
