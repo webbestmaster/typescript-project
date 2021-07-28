@@ -1,6 +1,4 @@
-import {LangDataType} from '../type';
-
-export const enUs: LangDataType = {
+export const enUs = {
     /* eslint-disable id-match, id-length, max-len, sonarjs/no-duplicate-string, sort-keys */
     META__LANGUAGE_NAME: 'English',
 
