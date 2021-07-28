@@ -1,9 +1,9 @@
-import {StrictMode} from 'react';
+import {ReactNode, StrictMode} from 'react';
 
 import {LocalizationProvider} from '../../provider/locale/locale-context';
 
 type PropsType = {
-    children: Array<JSX.Element> | JSX.Element;
+    children: ReactNode;
 };
 
 export function AppProvider(props: PropsType): JSX.Element {

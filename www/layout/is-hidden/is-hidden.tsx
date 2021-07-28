@@ -1,9 +1,11 @@
+import {ReactNode} from 'react';
+
 import {classNames} from '../../util/css';
 
 import isHiddenStyle from './is-hidden.scss';
 
 type PropsType = {
-    children?: Array<JSX.Element | string> | JSX.Element | string;
+    children?: ReactNode;
     className?: string;
     isHidden: boolean;
 };

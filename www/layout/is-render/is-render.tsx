@@ -1,5 +1,7 @@
+import {ReactNode} from 'react';
+
 type PropsType = {
-    children?: Array<JSX.Element | string> | JSX.Element | string;
+    children?: ReactNode;
     isRender: boolean;
 };
 

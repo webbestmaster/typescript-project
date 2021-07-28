@@ -1,8 +1,8 @@
-import {Component} from 'react';
+import {Component, ReactNode} from 'react';
 
 type PropsType = {
-    children: Array<JSX.Element> | JSX.Element;
-    errorFallBack: JSX.Element;
+    children: ReactNode;
+    errorFallBack: ReactNode;
 };
 
 type StateType = {
@@ -23,7 +23,7 @@ export class ErrorBoundary extends Component<PropsType, StateType> {
         this.setState({hasError: true});
     }
 
-    render(): Array<JSX.Element> | JSX.Element {
+    render(): ReactNode {
         const {state, props} = this;
         const {hasError} = state;
         const {children, errorFallBack} = props;

@@ -1,3 +1,4 @@
+import {ReactNode} from 'react';
 import {Link as RouterLink} from 'react-router-dom';
 
 import {ObjectToUrlParametersType} from './url-hook-type';
@@ -9,7 +10,7 @@ import {objectToUrlParameters} from './url-hook-helper';
 // import linkStyle from './navigation-link.scss';
 
 type PropsType<QueryMap> = {
-    children?: Array<JSX.Element> | JSX.Element | number | string;
+    children?: ReactNode;
     className?: string;
     isSaveQueries?: boolean;
     queries?: QueryMap;
