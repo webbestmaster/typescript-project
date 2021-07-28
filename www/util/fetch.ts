@@ -28,7 +28,7 @@ type FetchCacheType = Record<string, Promise<unknown> | null>;
 
 const fetchCache: FetchCacheType = {};
 
-function validateCache(options?: OptionsType) {
+function invalidateCache(options?: OptionsType) {
     const {method} = options || {};
 
     if (!method || method === FetchMethodEnum.get) {
@@ -55,7 +55,7 @@ async function throwErrorByResponse(response: Response) {
 }
 
 export function fetchX<ExpectedResponseType>(url: string, options?: OptionsType): Promise<ExpectedResponseType> {
-    validateCache(options);
+    invalidateCache(options);
 
     const cacheProperty = `${url} - ${JSON.stringify(options || '[empty]')}`;
 
