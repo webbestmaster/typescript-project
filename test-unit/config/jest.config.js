@@ -7,7 +7,8 @@ module.exports = {
     },
     modulePathIgnorePatterns: ['<rootDir>/tsc-check/'],
     preset: 'ts-jest',
-    setupFilesAfterEnv: ['./test-unit/setup-jest.ts'],
+    rootDir: '../../',
+    setupFilesAfterEnv: ['./test-unit/config/setup-jest.ts'],
     testEnvironment: 'jsdom', // @testing-library/jest-dom
     testTimeout: 10e3,
 };

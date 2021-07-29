@@ -10,6 +10,7 @@ import {NavigationLink} from '../../hook/url-hook/navigation-link';
 import {appRoute} from '../../component/app/app-route';
 import {LocaleNameEnum} from '../../provider/locale/locale-context-type';
 import {useFormat} from '../../hook/format-hook/format-hook';
+import {getTestNodeData, getTestNodeId} from '../../util/auto-test';
 
 import pngImageSrc from './image/marker-icon-2x.png';
 import svgImageSrc, {ReactComponent as SvgAsReactComponent} from './image/questions-with-an-official-answer.svg';
@@ -50,6 +51,8 @@ export function Home(): JSX.Element {
             <hr />
 
             <button
+                data-test-data={getTestNodeData({data: 'some-string'})}
+                data-test-id={getTestNodeId('language-button')}
                 onClick={() =>
                     setLocaleName(localeName === LocaleNameEnum.enUs ? LocaleNameEnum.ruRu : LocaleNameEnum.enUs)}
                 type="button"
