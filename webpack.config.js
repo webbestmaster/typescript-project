@@ -20,6 +20,9 @@ const webpackConfig = {
         publicPath: isDevelopment ? '/' : pathToStaticFileFolder,
         filename: isDevelopment ? '[name].js' : 'index.js',
         chunkFilename: isDevelopment ? '[name].chunk.js' : '[name].[hash:6].chunk.js',
+        assetModuleFilename: isDevelopment
+            ? 'build-asset/[name]----[hash:6][ext][query]'
+            : 'build-asset/[hash:6][ext][query]',
     },
 
     mode: nodeEnvironment,

@@ -1,6 +1,6 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const {isProduction, isDevelopment, fileRegExp, isTsTranspileOnly} = require('./../../config');
+const {isProduction, isDevelopment, isTsTranspileOnly, fileRegExp} = require('./../../config');
 
 const styleLoader = {
     loader: 'style-loader',
@@ -9,7 +9,7 @@ const styleLoader = {
 
 const cssLoader = isProduction ? MiniCssExtractPlugin.loader : styleLoader;
 const fileNameMask = isProduction ? '[md5:hash:hex:7].[ext]' : '[name]-[md5:hash:hex:7].[ext]';
-const fileLoader = {loader: 'file-loader', options: {name: fileNameMask}};
+const fileLoader = {loader: 'file-loader', options: {name: fileNameMask, limit: 0}};
 
 module.exports.rules = [
     {
@@ -28,7 +28,12 @@ module.exports.rules = [
     },
     {
         test: fileRegExp,
-        use: [fileLoader],
+        type: 'asset',
+        parser: {
+            dataUrlCondition: {
+                maxSize: 0, // 0 byte
+            },
+        },
     },
     {
         test: /\.svg$/,
