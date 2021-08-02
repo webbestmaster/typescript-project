@@ -2,7 +2,9 @@
   "name": "typescript-project",
   "version": "0.0.0",
   "description": "",
-  "main": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["/dist"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/webbestmaster/typescript-project.git"
@@ -23,6 +25,7 @@
     "start:hot-css:transpile-only": "cross-env NODE_ENV=development TS_TRANSPILE_ONLY=true webpack-cli serve --progress --hot",
     "tsc-watch": "tsc -p ./tsconfig.json --watch",
     "build": "cross-env NODE_ENV=production NODE_OPTIONS=--max-old-space-size=1536 webpack --progress",
+    "build-library": "cross-env NODE_ENV=production IS_BUILD_LIBRARY=true NODE_OPTIONS=--max-old-space-size=1536 webpack --progress",
     "check": "npm run ts-coverage && npm run eslint && npm run stylelint && npm run tsc && npm run test:unit",
     "check:all": "npm run prettier; npm run ts-coverage; npm run eslint:fix; npm run stylelint:fix; npm run tsc; npm run test:unit",
     "check:fix": "npm run prettier && npm run ts-coverage && npm run eslint:fix && npm run stylelint:fix && npm run tsc && npm run test:unit",

@@ -10,6 +10,7 @@ const {
     pathToDist,
     cwd,
     nodeEnvironment,
+    isBuildLibrary,
 } = require('./webpack/config');
 
 const webpackConfig = {
@@ -37,6 +38,43 @@ const webpackConfig = {
     devServer: require('./webpack/setting/dev-server').devServer,
 };
 
+const webpackConfigBuildLibrary = {
+    entry: ['./www/test-library/test-library.tsx'],
+    output: {
+        pathinfo: false,
+        path: path.join(cwd, 'dist'),
+        publicPath: '',
+        filename: 'index.js',
+        libraryTarget: 'commonjs2',
+    },
+
+    mode: nodeEnvironment,
+    devtool: false,
+    optimization: require('./webpack/setting/optimization').optimization,
+    module: {rules: require('./webpack/setting/module/rules').rules},
+    resolve: {
+        alias: require('./webpack/setting/resolve/alias').alias,
+        extensions: require('./webpack/setting/resolve/extensions').extensions,
+    },
+    plugins: require('./webpack/setting/plugins').plugins,
+    devServer: require('./webpack/setting/dev-server').devServer,
+    externals: {
+        // Don't bundle react and react-dom
+        react: {
+            commonjs: 'react',
+            commonjs2: 'react',
+            amd: 'React',
+            root: 'React',
+        },
+        'react-dom': {
+            commonjs: 'react-dom',
+            commonjs2: 'react-dom',
+            amd: 'ReactDOM',
+            root: 'ReactDOM',
+        },
+    },
+};
+
 // webpackConfig.plugins.push(new BundleAnalyzerPlugin());
 
-module.exports = webpackConfig;
+module.exports = isBuildLibrary ? webpackConfigBuildLibrary : webpackConfig;

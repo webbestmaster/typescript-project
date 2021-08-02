@@ -12,6 +12,7 @@ module.exports.nodeEnvironment = nodeEnvironment;
 
 module.exports.isDevelopment = nodeEnvironment === modeDevelopmentName;
 module.exports.isProduction = nodeEnvironment === modeProductionName;
+module.exports.isBuildLibrary = process.env.IS_BUILD_LIBRARY === 'true';
 
 module.exports.cwd = process.cwd();
 
