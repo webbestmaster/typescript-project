@@ -7,7 +7,7 @@ export type LibraryPropsType = {
     textContent: string;
 };
 
-export function Library(props: LibraryPropsType): JSX.Element {
+export function LibraryComponent(props: LibraryPropsType): JSX.Element {
     const {children, textContent} = props;
 
     return (

@@ -39,7 +39,7 @@ const webpackConfig = {
 };
 
 const webpackConfigBuildLibrary = {
-    entry: ['./www/library/library.tsx'],
+    entry: ['./www/library/library.ts'],
     output: {
         pathinfo: false,
         path: path.join(cwd, 'dist'),
