@@ -72,8 +72,8 @@ const webpackConfigBuildLibrary = {
         'react-router-dom': {
             commonjs: 'react-router-dom',
             commonjs2: 'react-router-dom',
-            amd: 'ReactDOM',
-            root: 'ReactDOM',
+            amd: 'ReactRouterDOM',
+            root: 'ReactRouterDOM',
         },
     },
 };
