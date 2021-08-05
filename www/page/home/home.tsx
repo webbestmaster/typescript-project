@@ -12,6 +12,7 @@ import {LocaleNameEnum} from '../../provider/locale/locale-context-type';
 import {useFormat} from '../../hook/format-hook/format-hook';
 import {getTestNodeData, getTestNodeId} from '../../util/auto-test';
 import {Library} from '../../library/library';
+import {AsciiSpinner} from '../../layout/spinner/c-ascii-spinner';
 
 import pngImageSrc from './image/marker-icon-2x.png';
 import svgImageSrc, {ReactComponent as SvgAsReactComponent} from './image/questions-with-an-official-answer.svg';
@@ -47,7 +48,9 @@ export function Home(): JSX.Element {
 
     return (
         <div>
-            <h1 className={homeStyle.home_header}>home page</h1>
+            <h1 className={homeStyle.home_header}>
+                home page (<AsciiSpinner />)
+            </h1>
 
             <hr />
 

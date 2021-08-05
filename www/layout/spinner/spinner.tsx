@@ -56,7 +56,11 @@ export function Spinner(props: PropsType): JSX.Element | null {
     };
 
     return (
-        <div className={classNames(spinnerStyle.spinner_wrapper, className)} style={spinnerWrapperStyle}>
+        <div
+            aria-busy="true"
+            className={classNames(spinnerStyle.spinner_wrapper, className)}
+            style={spinnerWrapperStyle}
+        >
             <div className={spinnerStyle.spinner_image} style={spinnerImageStyle} />
         </div>
     );

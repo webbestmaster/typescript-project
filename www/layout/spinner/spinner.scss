@@ -70,3 +70,63 @@ $z-index-wrapper: 5;
     box-sizing: border-box;
     display: block;
 }
+
+@keyframes ascii-spinner-animation {
+    100%,
+    0% {
+        content: '⠋'; // 1
+    }
+
+    10% {
+        content: '⠙'; // 2
+    }
+
+    20% {
+        content: '⠹'; // 3
+    }
+
+    30% {
+        content: '⠸'; // 4
+    }
+
+    40% {
+        content: '⠼'; // 5
+    }
+
+    50% {
+        content: '⠴'; // 6
+    }
+
+    60% {
+        content: '⠦'; // 7
+    }
+
+    70% {
+        content: '⠧'; // 8
+    }
+
+    80% {
+        content: '⠇'; // 9
+    }
+
+    90% {
+        content: '⠏'; // 10
+    }
+}
+
+// inspiration is here - https://jsfiddle.net/sindresorhus/2eLtsbey/embedded/result/
+.ascii_spinner {
+    display: inline;
+
+    &:before {
+        animation-direction: normal;
+        animation-duration: 1s;
+        animation-fill-mode: none;
+        animation-iteration-count: infinite;
+        animation-name: ascii-spinner-animation;
+        animation-play-state: running;
+        animation-timing-function: linear;
+        content: '⠋'; // first element in queue of symbols
+        vertical-align: middle;
+    }
+}
