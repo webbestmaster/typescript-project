@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 $color-border: #444;
 $light-gray: #f0f0f0;
 $z-index-wrapper: 5;
@@ -79,7 +81,7 @@ $ascii-spinner-frame-list: '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧
     @keyframes #{$animation-name} {
         @each $current-frame in $frame-list {
             $i: index($frame-list, $current-frame) - 1;
-            #{$i / $frame-list-length * 100}% {
+            #{math.div($i, $frame-list-length) * 100}% {
                 content: $current-frame;
             }
         }
