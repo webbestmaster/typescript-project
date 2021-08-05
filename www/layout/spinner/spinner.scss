@@ -71,48 +71,26 @@ $z-index-wrapper: 5;
     display: block;
 }
 
-@keyframes ascii-spinner-animation {
-    100%,
-    0% {
-        content: '⠋'; // 1
-    }
+$ascii-spinner-frame-list: '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏';
 
-    10% {
-        content: '⠙'; // 2
-    }
+@mixin spinner-animation-generator($animation-name, $frame-list) {
+    $frame-list-length: length($frame-list);
 
-    20% {
-        content: '⠹'; // 3
-    }
+    @keyframes #{$animation-name} {
+        @each $current-frame in $frame-list {
+            $i: index($frame-list, $current-frame) - 1;
+            #{$i / $frame-list-length * 100}% {
+                content: $current-frame;
+            }
+        }
 
-    30% {
-        content: '⠸'; // 4
-    }
-
-    40% {
-        content: '⠼'; // 5
-    }
-
-    50% {
-        content: '⠴'; // 6
-    }
-
-    60% {
-        content: '⠦'; // 7
-    }
-
-    70% {
-        content: '⠧'; // 8
-    }
-
-    80% {
-        content: '⠇'; // 9
-    }
-
-    90% {
-        content: '⠏'; // 10
+        100% {
+            content: nth($frame-list, 1);
+        }
     }
 }
+
+@include spinner-animation-generator(ascii-spinner-animation, $ascii-spinner-frame-list);
 
 // inspiration is here - https://jsfiddle.net/sindresorhus/2eLtsbey/embedded/result/
 .ascii_spinner {
@@ -126,7 +104,7 @@ $z-index-wrapper: 5;
         animation-name: ascii-spinner-animation;
         animation-play-state: running;
         animation-timing-function: linear;
-        content: '⠋'; // first element in queue of symbols
+        content: nth($ascii-spinner-frame-list, 1);
         vertical-align: middle;
     }
 }
