@@ -80,8 +80,8 @@ $ascii-spinner-frame-list: '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧
 
     @keyframes #{$animation-name} {
         @each $current-frame in $frame-list {
-            $i: index($frame-list, $current-frame) - 1;
-            #{math.div($i, $frame-list-length) * 100}% {
+            $frame-index: index($frame-list, $current-frame) - 1;
+            #{math.div($frame-index, $frame-list-length) * 100}% {
                 content: $current-frame;
             }
         }
