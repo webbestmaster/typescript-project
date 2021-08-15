@@ -1,11 +1,11 @@
+import {createLocalization, LocalizationConfigType, LocalizationStateType} from 'react-localization-library';
+
 import {getSavedLocaleName, saveLocaleName} from './locale-context-helper';
 import {LocaleNameEnum} from './locale-context-type';
-import {createLocalization} from './localization/localization';
-import {LangKeyType} from './translation/type';
+import {LangKeyType, ValuesMapType} from './translation/type';
 import {allLocalesData} from './locale-context-const';
-import {LocalizationStateType} from './localization/localization-type';
 
-const {LocalizationProvider, Locale, useLocale} = createLocalization<LangKeyType, LocaleNameEnum>({
+const localizationConfig: LocalizationConfigType<LangKeyType, LocaleNameEnum> = {
     defaultLocaleName: getSavedLocaleName<LocaleNameEnum>(Object.values(LocaleNameEnum)),
     localization: allLocalesData,
     onUseEffect: (localizationProviderState: LocalizationStateType<LocaleNameEnum>) => {
@@ -13,6 +13,10 @@ const {LocalizationProvider, Locale, useLocale} = createLocalization<LangKeyType
 
         saveLocaleName<LocaleNameEnum>(localeName);
     },
-});
+};
 
-export {Locale, useLocale, LocalizationProvider};
+const {LocalizationProvider, Locale, useLocale} = createLocalization<LangKeyType, LocaleNameEnum, ValuesMapType>(
+    localizationConfig
+);
+
+export {LocalizationProvider, Locale, useLocale};

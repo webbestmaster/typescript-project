@@ -23,7 +23,7 @@ export function Empty(props: PropsType): JSX.Element {
 
         return (
             <h4 className={emptyStyle.empty__header}>
-                <Locale stringKey={mainText} />
+                <Locale<void> stringKey={mainText} />
             </h4>
         );
     }, [mainText]);
@@ -35,7 +35,7 @@ export function Empty(props: PropsType): JSX.Element {
 
         return (
             <p className={emptyStyle.empty__text}>
-                <Locale stringKey={secondaryText} />
+                <Locale<void> stringKey={secondaryText} />
             </p>
         );
     }, [secondaryText]);

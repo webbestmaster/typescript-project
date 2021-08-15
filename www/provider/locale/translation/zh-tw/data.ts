@@ -1,8 +1,6 @@
 import {enUs} from '../en-us/data';
 
-import type {LangDataType} from '../type';
-
-export const zhTw: LangDataType = {
+export const zhTw = {
     ...enUs,
 
     /* eslint-disable id-match, id-length, max-len, sonarjs/no-duplicate-string, sort-keys */

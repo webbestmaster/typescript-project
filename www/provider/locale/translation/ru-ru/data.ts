@@ -1,6 +1,4 @@
-import type {LangDataType} from '../type';
-
-export const ruRu: LangDataType = {
+export const ruRu = {
     /* eslint-disable id-match, id-length, max-len, sonarjs/no-duplicate-string, sort-keys */
     META__LANGUAGE_NAME: 'Русский',
 
