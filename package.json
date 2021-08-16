@@ -50,7 +50,7 @@
     "@types/react-router-dom": "^5.1.8",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-localization-library": "^0.0.10",
+    "react-localization-library": "^0.0.12",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0"
   },
@@ -111,7 +111,7 @@
     "typescript-coverage-report": "^0.6.0",
     "webpack": "^5.50.0",
     "webpack-bundle-analyzer": "^4.4.2",
-    "webpack-cli": "^4.7.2",
+    "webpack-cli": "^4.8.0",
     "webpack-dev-server": "^3.11.2"
   }
 }
