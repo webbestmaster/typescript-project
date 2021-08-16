@@ -14,7 +14,7 @@ const defaultBrowserOptions: PuppeteerLaunchOptionsType = {
         // '--disable-infobars',
         // '--allow-insecure-localhost',
         // '--disable-gpu',
-        '--app=' + domain,
+        '--app=' + domain, // hide blank tab and hide top info bar
         // '--enable-automation',
         // '--start-maximized',
         // '--disable-infobars',
