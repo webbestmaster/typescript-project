@@ -15,7 +15,7 @@ const mainProxyUrlSetting = {
 module.exports.devServer = {
     host,
     port: webpackDevServerPort,
-    contentBase: pathToDist,
+    // contentBase: pathToDist,
     historyApiFallback: {
         disableDotRule: true,
     },
@@ -23,7 +23,7 @@ module.exports.devServer = {
     // inline: false,
     // hot: true,
     // hotOnly: false,
-    disableHostCheck: true,
+    // disableHostCheck: true,
     // proxy: {
     //     '/reports/': mainProxyUrlSetting,
     // },
