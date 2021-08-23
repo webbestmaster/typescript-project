@@ -21,7 +21,7 @@ module.exports.devServer = {
     },
     // writeToDisk: isBuildServer,
     // inline: false,
-    // hot: true,
+    hot: true,
     // hotOnly: false,
     // disableHostCheck: true,
     // proxy: {
