@@ -9,11 +9,14 @@ export function arrayMove<ItemType>(list: Array<ItemType>, fromIndex: number, to
     return list;
 }
 
-export function findInArray<ItemType>(list: Array<ItemType>, query: Partial<ItemType>): ItemType | null {
-    return list.find((item: ItemType): boolean => isObjectInclude<ItemType>(item, query)) || null;
+export function findInArray<ItemType extends Record<string, unknown>>(
+    list: Array<ItemType>,
+    query: Partial<ItemType>
+): ItemType | null {
+    return list.find((item: ItemType): boolean => isObjectInclude(item, query)) || null;
 }
 
-export function findInArrayEnsure<ItemType>(
+export function findInArrayEnsure<ItemType extends Record<string, unknown>>(
     list: Array<ItemType>,
     query: Partial<ItemType>,
     defaultValue: ItemType
