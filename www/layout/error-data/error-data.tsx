@@ -16,7 +16,7 @@ export function ErrorData(props: PropsType): JSX.Element {
     return (
         <div className={classNames(errorDataStyle.error_data, className)}>
             <p className={errorDataStyle.error_data__text}>
-                <Locale<void> stringKey={langKey} />
+                <Locale stringKey={langKey} />
             </p>
         </div>
     );
