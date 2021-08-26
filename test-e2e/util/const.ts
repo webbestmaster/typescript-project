@@ -1,6 +1,6 @@
 import {WaitForOptions} from 'puppeteer';
 
-export const domain = 'https://mvp0.mememe.io';
+const domain = 'https://mvp0.mememe.io';
 // const domain = 'http://localhost:9090';
 
 export const user = {

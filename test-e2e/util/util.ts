@@ -1,6 +1,6 @@
 import puppeteer, {Browser, BrowserConnectOptions, BrowserLaunchArgumentOptions, LaunchOptions, Page} from 'puppeteer';
 
-import {defaultPageGoToOption, domain, pageFullUrl, user} from './const';
+import {defaultPageGoToOption, pageFullUrl, user} from './const';
 
 type PuppeteerLaunchOptionsType = BrowserConnectOptions & BrowserLaunchArgumentOptions & LaunchOptions;
 
@@ -14,11 +14,12 @@ const defaultBrowserOptions: PuppeteerLaunchOptionsType = {
         // '--disable-infobars',
         // '--allow-insecure-localhost',
         // '--disable-gpu',
-        '--app=' + domain, // hide blank tab and hide top info bar
+        // '--app=' + domain,
         // '--enable-automation',
-        // '--start-maximized',
+        '--start-maximized',
         // '--disable-infobars',
-        `--window-size=${1200},${800}`,
+        // '--hide-scrollbars',
+        // `--window-size=${1200},${800}`,
     ],
     defaultViewport: null,
     headless: false,
