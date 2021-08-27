@@ -22,6 +22,11 @@ $ [sudo] npm i -g npm-check-updates
 $ ncu [-u]
 ```
 
+npm check updates
+```bash
+$ npm outdated
+```
+
 depcheck
 ```bash
 $ [sudo] npm i -g depcheck

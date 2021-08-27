@@ -70,7 +70,7 @@ export function getIsIOS(): boolean {
         return false;
     }
 
-    return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    return /iPad|iPhone|iPod/.test(navigator.userAgent);
 }
 
 export function getIsAndroid(): boolean {
