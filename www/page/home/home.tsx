@@ -1,11 +1,11 @@
 /* global setTimeout */
 
 import {lazy, Suspense, useEffect, useState} from 'react';
+import {useSystem} from 'react-system-hook';
 
 import {Locale, useLocale} from '../../provider/locale/locale-context';
 import {Spinner} from '../../layout/spinner/spinner';
 import {ErrorData} from '../../layout/error-data/error-data';
-import {useSystem} from '../../hook/system-hook/system-hook';
 import {NavigationLink} from '../../hook/url-hook/navigation-link';
 import {appRoute} from '../../component/app/app-route';
 import {LocaleNameEnum} from '../../provider/locale/locale-context-type';
@@ -31,7 +31,7 @@ const LoadMeAsyncLazy = lazy(
 export function Home(): JSX.Element {
     const {getLocalizedString, setLocaleName, localeName} = useLocale();
     const {getFormattedNumber} = useFormat();
-    const {screen} = useSystem();
+    const {screenInfo} = useSystem();
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -72,7 +72,7 @@ export function Home(): JSX.Element {
 
             <code>{getFormattedNumber(321, {style: 'unit', unit: 'liter', unitDisplay: 'long'})}</code>
 
-            <pre>{JSON.stringify(screen, null, 4)}</pre>
+            <pre>{JSON.stringify(screenInfo, null, 4)}</pre>
 
             <Locale stringKey="BUTTON__APPLY" />
 
