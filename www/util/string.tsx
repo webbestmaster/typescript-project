@@ -1,4 +1,4 @@
-import {ShortLocaleNameEnum} from '../provider/locale/locale-context-type';
+import {LocaleNameEnum} from '../provider/locale/locale-context-type';
 
 export function getHash(data: Array<unknown> | Record<string, unknown> | string): string {
     let result = 0;
@@ -38,7 +38,7 @@ export function findString(input: string, searchQuery: string, flags: '' | 'g' |
     return result;
 }
 
-export function sortCompare(shortLocaleName: ShortLocaleNameEnum, stringA: string, stringB: string): number {
+export function sortCompare(shortLocaleName: LocaleNameEnum, stringA: string, stringB: string): number {
     return new Intl.Collator(shortLocaleName).compare(stringA, stringB);
 }
 

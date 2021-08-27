@@ -51,7 +51,7 @@ export const enUs = {
     EMPTY__TRY_CHANGING_FILTERS: 'Try changing filters.',
     EMPTY__EMPTY: 'Empty.',
 
-    ERROR__CAN_NOT_LOAD_THE_COMPONENT: 'Can not load the component',
+    ERROR__CAN_NOT_LOAD_THE_COMPONENT: 'Can not load the component.',
 
     /* eslint-enable id-match, id-length, max-len,sonarjs/no-duplicate-string, sort-keys */
 };

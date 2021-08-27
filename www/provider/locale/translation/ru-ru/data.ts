@@ -1,4 +1,6 @@
-export const ruRu = {
+import {LocaleDictionaryType} from '../type';
+
+export const ruRu: LocaleDictionaryType = {
     /* eslint-disable id-match, id-length, max-len, sonarjs/no-duplicate-string, sort-keys */
     META__LANGUAGE_NAME: 'Русский',
 
@@ -51,7 +53,7 @@ export const ruRu = {
     EMPTY__TRY_CHANGING_FILTERS: 'Попробуйте изменить фильтры.',
     EMPTY__EMPTY: 'Пусто.',
 
-    ERROR__CAN_NOT_LOAD_THE_COMPONENT: 'Не получилось загрузить компонент',
+    ERROR__CAN_NOT_LOAD_THE_COMPONENT: 'Не получилось загрузить компонент.',
 
     /* eslint-enable id-match, id-length, max-len,sonarjs/no-duplicate-string, sort-keys */
 };

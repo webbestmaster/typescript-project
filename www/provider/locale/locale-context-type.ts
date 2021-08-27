@@ -5,16 +5,17 @@ export enum LocaleNameEnum {
     zhTw = 'zh-TW',
 }
 
+/*
 export enum ShortLocaleNameEnum {
     en = 'en',
     ru = 'ru',
     zh = 'zh',
 }
+*/
 
 export type LocaleConstType = Readonly<{
     defaults: {
         localeName: LocaleNameEnum;
-        shortLocaleName: ShortLocaleNameEnum;
     };
     key: {
         localStorage: {

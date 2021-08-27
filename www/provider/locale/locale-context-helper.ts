@@ -1,9 +1,9 @@
 /* global localStorage, navigator */
 
-import {getEnumValueEnsure} from '../../util/enum';
+// import {getEnumValueEnsure} from '../../util/enum';
 
 import {localeConst} from './locale-context-const';
-import {LocaleNameEnum, ShortLocaleNameEnum} from './locale-context-type';
+// import {LocaleNameEnum, ShortLocaleNameEnum} from './locale-context-type';
 
 // eslint-disable-next-line complexity
 export function getSavedLocaleName<LocaleName extends string>(localeNameList: Array<LocaleName>): LocaleName {
@@ -44,6 +44,7 @@ export function saveLocaleName<LocaleName extends string>(localeName: LocaleName
     return localeName;
 }
 
+/*
 export function getShortLocaleName(localeName: LocaleNameEnum): ShortLocaleNameEnum {
     const [mayBeShortLocaleName] = localeName.split('-');
 
@@ -53,3 +54,4 @@ export function getShortLocaleName(localeName: LocaleNameEnum): ShortLocaleNameE
         localeConst.defaults.shortLocaleName
     );
 }
+*/

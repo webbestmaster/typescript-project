@@ -2,9 +2,10 @@ import {enUs} from './translation/en-us/data';
 import {ruRu} from './translation/ru-ru/data';
 import {zhCn} from './translation/zh-cn/data';
 import {zhTw} from './translation/zh-tw/data';
-import {LocaleConstType, LocaleNameEnum, ShortLocaleNameEnum} from './locale-context-type';
+import {LocaleDictionaryType} from './translation/type';
+import {LocaleConstType, LocaleNameEnum} from './locale-context-type';
 
-export const allLocalesData = {
+export const allLocalesData: Record<LocaleNameEnum, LocaleDictionaryType> = {
     [LocaleNameEnum.enUs]: enUs,
     [LocaleNameEnum.ruRu]: ruRu,
     [LocaleNameEnum.zhCn]: zhCn,
@@ -14,7 +15,6 @@ export const allLocalesData = {
 export const localeConst: LocaleConstType = {
     defaults: {
         localeName: LocaleNameEnum.enUs,
-        shortLocaleName: ShortLocaleNameEnum.en,
     },
     key: {
         localStorage: {
