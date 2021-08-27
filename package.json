@@ -52,6 +52,7 @@
     "react-localization-library": "^0.0.15",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
+    "react-router-dom-hook": "0.0.8",
     "react-system-hook": "0.0.12"
   },
   "devDependencies": {

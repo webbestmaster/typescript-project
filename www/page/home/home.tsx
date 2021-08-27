@@ -2,11 +2,11 @@
 
 import {lazy, Suspense, useEffect, useState} from 'react';
 import {useSystem} from 'react-system-hook';
+import {NavigationLink} from 'react-router-dom-hook';
 
 import {Locale, useLocale} from '../../provider/locale/locale-context';
 import {Spinner} from '../../layout/spinner/spinner';
 import {ErrorData} from '../../layout/error-data/error-data';
-import {NavigationLink} from '../../hook/url-hook/navigation-link';
 import {appRoute} from '../../component/app/app-route';
 import {LocaleNameEnum} from '../../provider/locale/locale-context-type';
 import {useFormat} from '../../hook/format-hook/format-hook';

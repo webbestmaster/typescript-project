@@ -2,11 +2,11 @@
 
 import {lazy, Suspense, useEffect, useState} from 'react';
 import {useSystem, useScreenHeight, useScreenWidth, useScreenSize} from 'react-system-hook';
+import {NavigationLink} from 'react-router-dom-hook';
 
 import {Locale, useLocale} from '../../provider/locale/locale-context';
 import {Spinner} from '../../layout/spinner/spinner';
 import {ErrorData} from '../../layout/error-data/error-data';
-import {NavigationLink} from '../../hook/url-hook/navigation-link';
 import {appRoute} from '../../component/app/app-route';
 import pngImageSrc from '../home/image/marker-icon-2x.png';
 import svgImageSrc, {ReactComponent as SvgAsReactComponent} from '../home/image/questions-with-an-official-answer.svg';
