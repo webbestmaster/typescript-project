@@ -20,6 +20,8 @@ npm-check-updates
 ```bash
 $ [sudo] npm i -g npm-check-updates
 $ ncu [-u]
+// OR
+$ npx npm-check-updates [-u]
 ```
 
 npm check updates
