@@ -4,7 +4,6 @@ type NavigationProviderPropsType = {
     component: () => JSX.Element;
 };
 
-// eslint-disable-next-line react/no-multi-comp
 export function NavigationProvider(props: NavigationProviderPropsType): JSX.Element {
     const {component} = props;
 
