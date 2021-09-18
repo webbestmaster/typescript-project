@@ -1,14 +1,5 @@
 {
   "name": "typescript-project",
-  "version": "0.0.0",
-  "description": "",
-  "main": "dist/index.js",
-  "types": "dist/library.d.ts",
-  "files": [
-    "/dist"
-  ],
-  "license": "MIT",
-  "author": "",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/webbestmaster/typescript-project.git"
@@ -17,6 +8,19 @@
     "url": "https://github.com/webbestmaster/typescript-project/issues"
   },
   "homepage": "https://github.com/webbestmaster/typescript-project#readme",
+  "license": "MIT",
+  "author": "",
+  "version": "0.0.0",
+  "description": "",
+  "keywords": [
+    "typescript-project",
+    "empty"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/library.d.ts",
+  "files": [
+    "/dist"
+  ],
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-cli serve --progress",
     "start:transpile-only": "cross-env NODE_ENV=development TS_TRANSPILE_ONLY=true webpack-cli serve --progress",
