@@ -1,3 +1,4 @@
+COPY .\..\typescript-project\update-environment.bat .\
 COPY .\..\typescript-project\.babelrc .\
 COPY .\..\typescript-project\.dockerignore .\
 COPY .\..\typescript-project\.editorconfig .\
@@ -17,4 +18,4 @@ COPY .\..\typescript-project\tsconfig.json .\
 COPY .\..\typescript-project\tsconfig.library.json .\
 COPY .\..\typescript-project\tsconfig.test.json .\
 COPY .\..\typescript-project\webpack.config.js .\
-XCOPY .\..\typescript-project\webpack .\webpack\ /e
+XCOPY .\..\typescript-project\webpack .\webpack\ /e /y
