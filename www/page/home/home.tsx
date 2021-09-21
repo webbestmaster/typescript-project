@@ -3,6 +3,8 @@
 import {lazy, Suspense, useEffect, useState} from 'react';
 import {useSystem} from 'react-system-hook';
 import {NavigationLink} from 'react-router-dom-hook';
+import markdownPro, {MarkdownConfigShallowType} from 'markdown-pro';
+import 'markdown-pro/dist/style.css';
 
 import {Locale, useLocale} from '../../provider/locale/locale-context';
 import {Spinner} from '../../layout/spinner/spinner';
@@ -27,6 +29,19 @@ const LoadMeAsyncLazy = lazy(
             '../../component/load-me-async-lazy/load-me-async-lazy'
         )
 );
+
+const htmlCode = markdownPro('# Markdown Pro'); // <h1>Markdown Pro</h1>
+
+const config: MarkdownConfigShallowType = {
+    parseLink: true,
+    useLineBreak: true,
+    useWrapper: true,
+    wrapperClassName: 'my-markdown-pro',
+};
+
+const htmlCodeConfigured = markdownPro('# Markdown Pro', config);
+
+console.log(htmlCode, htmlCodeConfigured);
 
 export function Home(): JSX.Element {
     const {getLocalizedString, setLocaleName, localeName} = useLocale();
