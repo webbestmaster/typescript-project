@@ -26,7 +26,7 @@
     "start:transpile-only": "cross-env NODE_ENV=development TS_TRANSPILE_ONLY=true webpack-cli serve --progress",
     "tsc-watch": "tsc -p ./tsconfig.json --watch",
     "build": "cross-env NODE_ENV=production NODE_OPTIONS=--max-old-space-size=1536 webpack --progress",
-    "build-library": "cross-env NODE_ENV=production IS_BUILD_LIBRARY=true NODE_OPTIONS=--max-old-space-size=1536 webpack --progress && npm run tsc-library",
+    "build-library": "cross-env NODE_ENV=production IS_BUILD_LIBRARY=true NODE_OPTIONS=--max-old-space-size=1536 webpack --progress && npm run tsc-library && node webpack/util/library/css.js",
     "check": "npm run ts-coverage && npm run tsc && npm run test:unit && npm run eslint && npm run stylelint",
     "check:fix": "npm run prettier && npm run ts-coverage && npm run tsc && npm run test:unit && npm run eslint:fix && npm run stylelint:fix",
     "eslint": "eslint .",
