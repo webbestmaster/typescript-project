@@ -25,6 +25,31 @@
     }
 }
 
+%scrolling-performance-issue {
+    transform: translate3d(0, 0, 0);
+}
+
+%scrollable,
+.scrollable {
+    @extend %scrolling-performance-issue;
+
+    display: block;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    scrollbar-color: #c1c1c1 #f1f1f1;
+    scrollbar-width: thin;
+
+    &::-webkit-scrollbar {
+        background-color: #f1f1f1;
+        width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #c1c1c1;
+        border-radius: 2px;
+    }
+}
+
 .disable_user_event {
     pointer-events: none;
 }
