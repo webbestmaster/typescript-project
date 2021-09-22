@@ -15,6 +15,8 @@ import {useFormat} from '../../hook/format-hook/format-hook';
 import {getTestNodeData, getTestNodeId} from '../../util/auto-test';
 import {Library} from '../../library/library';
 import {AsciiSpinner} from '../../layout/spinner/c-ascii-spinner';
+import {ExampleAudio} from '../../component/example-audio/c-example-audio';
+import {ExamplePlayer} from '../../component/example-audio-player/c-example-audio-player';
 
 import pngImageSrc from './image/marker-icon-2x.png';
 import svgImageSrc, {ReactComponent as SvgAsReactComponent} from './image/questions-with-an-official-answer.svg';
@@ -106,6 +108,12 @@ export function Home(): JSX.Element {
             <Library textContent="Hello, World">
                 <p>inner text</p>
             </Library>
+
+            <hr />
+
+            <ExampleAudio />
+
+            <ExamplePlayer />
         </div>
     );
 }
