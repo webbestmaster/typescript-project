@@ -93,14 +93,14 @@
     "eslint-plugin-unicorn": "^36.0.0",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.2",
-    "jest": "^27.2.1",
+    "jest": "^27.2.2",
     "jest-transform-stub": "^2.0.0",
     "mini-css-extract-plugin": "^2.3.0",
     "optimize-css-assets-webpack-plugin": "^6.0.1",
     "prettier": "^2.4.1",
     "puppeteer": "^10.4.0",
     "raw-loader": "^4.0.2",
-    "sass": "^1.42.0",
+    "sass": "^1.42.1",
     "sass-loader": "^12.1.0",
     "script-ext-html-webpack-plugin": "^2.1.5",
     "style-loader": "^3.3.0",
@@ -113,9 +113,9 @@
     "ts-loader": "^9.2.6",
     "typescript": "^4.4.3",
     "typescript-coverage-report": "^0.6.0",
-    "webpack": "^5.53.0",
+    "webpack": "^5.54.0",
     "webpack-bundle-analyzer": "^4.4.2",
     "webpack-cli": "^4.8.0",
-    "webpack-dev-server": "^4.2.1"
+    "webpack-dev-server": "^4.3.0"
   }
 }
