@@ -1,8 +1,24 @@
-import puppeteer, {Browser, BrowserConnectOptions, BrowserLaunchArgumentOptions, LaunchOptions, Page} from 'puppeteer';
+import puppeteer, {
+    Browser,
+    BrowserConnectOptions,
+    BrowserLaunchArgumentOptions,
+    LaunchOptions,
+    Page,
+    Product,
+} from 'puppeteer';
 
 import {defaultPageGoToOption, pageFullUrl, user} from './const';
 
-type PuppeteerLaunchOptionsType = BrowserConnectOptions & BrowserLaunchArgumentOptions & LaunchOptions;
+type AdditionalBrowserOptionsType = {
+    extraPrefsFirefox?: Record<string, unknown>;
+    product?: Product;
+};
+
+// eslint-disable-next-line max-len
+type PuppeteerLaunchOptionsType = AdditionalBrowserOptionsType &
+    BrowserConnectOptions &
+    BrowserLaunchArgumentOptions &
+    LaunchOptions;
 
 const defaultBrowserOptions: PuppeteerLaunchOptionsType = {
     args: [
@@ -39,17 +55,20 @@ export function createBrowser(
 }
 
 export async function makeLogin(page: Page | null): Promise<void> {
-    await page?.goto(pageFullUrl.login, defaultPageGoToOption);
+    if (!page) {
+        throw new Error('[makeLogin]: ERROR: page in not define');
+    }
+    await page.goto(pageFullUrl.login, defaultPageGoToOption);
 
-    await page?.focus('input[type=email]');
-    await page?.keyboard.type(user.login);
-    await page?.focus('input[type=password]');
-    await page?.keyboard.type(user.password);
-    await page?.click('button[type=submit]');
+    await page.focus('input[type=email]');
+    await page.keyboard.type(user.login);
+    await page.focus('input[type=password]');
+    await page.keyboard.type(user.password);
+    await page.click('button[type=submit]');
 
     // after success login should navigate to company
-    await page?.waitForNavigation({timeout: 5e3});
+    await page.waitForNavigation({timeout: 5e3});
 
     // footer exists only on logged required pages
-    await page?.waitForSelector('footer');
+    await page.waitForSelector('footer');
 }
