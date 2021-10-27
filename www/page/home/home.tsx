@@ -5,6 +5,7 @@ import {useSystem} from 'react-system-hook';
 import {NavigationLink} from 'react-router-dom-hook';
 import markdownPro, {MarkdownConfigShallowType} from 'markdown-pro';
 import 'markdown-pro/dist/style.css';
+import {JSONSchemaType} from 'ajv';
 
 import {Locale, useLocale} from '../../provider/locale/locale-context';
 import {Spinner} from '../../layout/spinner/spinner';
@@ -17,12 +18,27 @@ import {Library} from '../../library/library';
 import {AsciiSpinner} from '../../layout/spinner/c-ascii-spinner';
 import {ExampleAudio} from '../../component/example-audio/c-example-audio';
 import {ExamplePlayer} from '../../component/example-audio-player/c-example-audio-player';
+import {fetchX} from '../../util/fetch';
 
 import pngImageSrc from './image/marker-icon-2x.png';
 import svgImageSrc, {ReactComponent as SvgAsReactComponent} from './image/questions-with-an-official-answer.svg';
 import homeStyle from './home.scss';
 
 console.log(ErrorData);
+
+type MyIpType = {
+    ip: string;
+};
+
+const myIpSchema: JSONSchemaType<MyIpType> = {
+    additionalProperties: false,
+    properties: {
+        // eslint-disable-next-line id-length
+        ip: {type: 'string'},
+    },
+    required: ['ip'],
+    type: 'object',
+};
 
 const LoadMeAsyncLazy = lazy(
     () =>
@@ -51,11 +67,20 @@ export function Home(): JSX.Element {
     const {screenInfo} = useSystem();
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [myIp, setMyIp] = useState<MyIpType | null>(null);
 
     setTimeout(() => {
         console.log(isOpen);
         setIsOpen(false);
     }, 1e3);
+
+    useEffect(() => {
+        (async () => {
+            const myPpData: MyIpType = await fetchX<MyIpType>('https://api.ipify.org?format=json', myIpSchema);
+
+            setMyIp(myPpData);
+        })();
+    }, []);
 
     useEffect(() => {
         console.log('home');
@@ -68,6 +93,8 @@ export function Home(): JSX.Element {
             <h1 className={homeStyle.home_header}>
                 home page (<AsciiSpinner />)
             </h1>
+
+            <h4>your ip is: {myIp ? myIp.ip : <AsciiSpinner />}</h4>
 
             <hr />
 

@@ -1,5 +1,9 @@
 /* global fetch, Headers, FormData, Response, File */
 
+import {JSONSchemaType} from 'ajv';
+
+import {getExpectedStructure} from './object';
+
 export enum FetchMethodEnum {
     delete = 'DELETE',
     get = 'GET',
@@ -24,7 +28,7 @@ type OptionsType = {
     // referrer?: 'no-referrer'; // no-referrer, client (default: client)
 };
 
-type FetchCacheType = Record<string, Promise<unknown> | null>;
+type FetchCacheType = Record<string, unknown>;
 
 const fetchCache: FetchCacheType = {};
 
@@ -54,7 +58,11 @@ async function throwErrorByResponse(response: Response) {
     throw new Error(await response.text());
 }
 
-export function fetchX<ExpectedResponseType>(url: string, options?: OptionsType): Promise<ExpectedResponseType> {
+export async function fetchX<ExpectedResponseType>(
+    url: string,
+    jsonSchema: JSONSchemaType<ExpectedResponseType>,
+    options?: OptionsType
+): Promise<ExpectedResponseType> {
     invalidateCache(options);
 
     const cacheProperty = `${url} - ${JSON.stringify(options || '[empty]')}`;
@@ -62,13 +70,14 @@ export function fetchX<ExpectedResponseType>(url: string, options?: OptionsType)
     const savedPromiseResult = fetchCache[cacheProperty];
 
     if (savedPromiseResult) {
-        // console.log(`[CACHE]: [fetchX]\n> url: ${url},\n> options: ${JSON.stringify(options || '[empty]')}`);
-        return savedPromiseResult as Promise<ExpectedResponseType>;
+        // console.log(`[fetchX]: [CACHE]\n> url: ${url},\n> options: ${JSON.stringify(options || '[empty]')}`);
+        // return savedPromiseResult as Promise<ExpectedResponseType>;
+        return getExpectedStructure<ExpectedResponseType>(savedPromiseResult, jsonSchema);
     }
 
     const fetchBeginTimeStamp = Date.now();
 
-    const fetchResult: Promise<ExpectedResponseType> = fetch(url, options)
+    const fetchResult: ExpectedResponseType = await fetch(url, options)
         .then((response: Response): Promise<ExpectedResponseType> => {
             return response.ok ? response.json() : throwErrorByResponse(response);
         })
@@ -83,5 +92,5 @@ export function fetchX<ExpectedResponseType>(url: string, options?: OptionsType)
 
     fetchCache[cacheProperty] = fetchResult;
 
-    return fetchResult;
+    return getExpectedStructure<ExpectedResponseType>(fetchResult, jsonSchema);
 }
