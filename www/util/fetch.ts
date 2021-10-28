@@ -54,10 +54,6 @@ function fetchEndCallBack(fetchBeginTimeStamp: number, url: string) {
     }
 }
 
-async function throwErrorByResponse(response: Response) {
-    throw new Error(await response.text());
-}
-
 export async function fetchX<ExpectedResponseType>(
     url: string,
     jsonSchema: JSONSchemaType<ExpectedResponseType>,
@@ -77,20 +73,26 @@ export async function fetchX<ExpectedResponseType>(
 
     const fetchBeginTimeStamp = Date.now();
 
-    const fetchResult: ExpectedResponseType = await fetch(url, options)
-        .then((response: Response): Promise<ExpectedResponseType> => {
-            return response.ok ? response.json() : throwErrorByResponse(response);
-        })
-        .finally(() => {
-            fetchEndCallBack(fetchBeginTimeStamp, url);
-        })
-        .catch((error: Error) => {
-            fetchCache[cacheProperty] = null;
-            console.error(error);
-            throw error;
-        });
+    try {
+        const response: Response = await fetch(url, options);
 
-    fetchCache[cacheProperty] = fetchResult;
+        if (!response.ok) {
+            throw new Error(await response.text());
+        }
 
-    return getExpectedStructure<ExpectedResponseType>(fetchResult, jsonSchema);
+        const fetchResult: ExpectedResponseType = getExpectedStructure<ExpectedResponseType>(
+            await response.json(),
+            jsonSchema
+        );
+
+        fetchCache[cacheProperty] = fetchResult;
+
+        return fetchResult;
+    } catch (error: unknown) {
+        fetchCache[cacheProperty] = null;
+        console.error(error);
+        throw error;
+    } finally {
+        fetchEndCallBack(fetchBeginTimeStamp, url);
+    }
 }
