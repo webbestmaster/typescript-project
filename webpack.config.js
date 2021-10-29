@@ -20,7 +20,9 @@ const webpackConfigFront = {
         publicPath: isDevelopment ? '/' : pathToStaticFileFolder,
         filename: isDevelopment ? '[name].js' : 'index.js',
         chunkFilename: isDevelopment ? '[name].chunk.js' : '[name].[hash:6].chunk.js',
-        assetModuleFilename: isDevelopment ? 'build-asset/[name]----[hash:6][ext][query]' : 'build-asset/[hash:6][ext][query]',
+        assetModuleFilename: isDevelopment
+            ? 'build-asset/[name]----[hash:6][ext][query]'
+            : 'build-asset/[hash:6][ext][query]',
     },
 
     mode: nodeEnvironment,
@@ -43,7 +45,9 @@ const webpackConfigBack = {
         publicPath: isDevelopment ? '/' : pathToStaticFileFolder,
         filename: isDevelopment ? '[name].js' : 'index.js',
         chunkFilename: isDevelopment ? '[name].chunk.js' : '[name].[hash:6].chunk.js',
-        assetModuleFilename: isDevelopment ? 'build-asset/[name]----[hash:6][ext][query]' : 'build-asset/[hash:6][ext][query]',
+        assetModuleFilename: isDevelopment
+            ? 'build-asset/[name]----[hash:6][ext][query]'
+            : 'build-asset/[hash:6][ext][query]',
     },
 
     mode: nodeEnvironment,
@@ -61,7 +65,11 @@ const webpackConfigBack = {
 const webpackConfigBuildLibraryFront = {
     entry: ['./www/library/library.ts'],
     output: {
-        pathinfo: false, path: path.join(cwd, 'dist'), publicPath: '', filename: 'index.js', libraryTarget: 'commonjs2',
+        pathinfo: false,
+        path: path.join(cwd, 'dist'),
+        publicPath: '',
+        filename: 'index.js',
+        libraryTarget: 'commonjs2',
     },
 
     mode: nodeEnvironment,
@@ -77,11 +85,22 @@ const webpackConfigBuildLibraryFront = {
     externals: {
         // Don't bundle react and react-dom
         react: {
-            commonjs: 'react', commonjs2: 'react', amd: 'React', root: 'React',
-        }, 'react-dom': {
-            commonjs: 'react-dom', commonjs2: 'react-dom', amd: 'ReactDOM', root: 'ReactDOM',
-        }, 'react-router-dom': {
-            commonjs: 'react-router-dom', commonjs2: 'react-router-dom', amd: 'ReactRouterDOM', root: 'ReactRouterDOM',
+            commonjs: 'react',
+            commonjs2: 'react',
+            amd: 'React',
+            root: 'React',
+        },
+        'react-dom': {
+            commonjs: 'react-dom',
+            commonjs2: 'react-dom',
+            amd: 'ReactDOM',
+            root: 'ReactDOM',
+        },
+        'react-router-dom': {
+            commonjs: 'react-router-dom',
+            commonjs2: 'react-router-dom',
+            amd: 'ReactRouterDOM',
+            root: 'ReactRouterDOM',
         },
     },
 };
