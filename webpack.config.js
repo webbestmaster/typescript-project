@@ -1,4 +1,5 @@
 const path = require('path');
+const nodeExternals = require('webpack-node-externals');
 
 const {
     pathToStaticFileFolder,
@@ -38,28 +39,11 @@ const webpackConfigFront = {
 };
 
 const webpackConfigBack = {
+    ...webpackConfigFront,
     entry: ['./www/css/root.scss', './www/server/server.tsx'],
-    output: {
-        pathinfo: false,
-        path: path.join(cwd, pathToDist),
-        publicPath: isDevelopment ? '/' : pathToStaticFileFolder,
-        filename: isDevelopment ? '[name].js' : 'index.js',
-        chunkFilename: isDevelopment ? '[name].chunk.js' : '[name].[hash:6].chunk.js',
-        assetModuleFilename: isDevelopment
-            ? 'build-asset/[name]----[hash:6][ext][query]'
-            : 'build-asset/[hash:6][ext][query]',
-    },
-
-    mode: nodeEnvironment,
-    devtool: isDevelopment ? 'source-map' : false,
-    optimization: require('./webpack/setting/optimization').optimization,
-    module: {rules: require('./webpack/setting/module/rules').rules},
-    resolve: {
-        alias: require('./webpack/setting/resolve/alias').alias,
-        extensions: require('./webpack/setting/resolve/extensions').extensions,
-    },
-    plugins: require('./webpack/setting/plugins').plugins,
-    devServer: require('./webpack/setting/dev-server').devServer,
+    target: 'node',
+    externalsPresets: {node: true}, // in order to ignore built-in modules like path, fs, etc.
+    externals: [nodeExternals()], // in order to ignore all modules in node_modules folder
 };
 
 const webpackConfigBuildLibraryFront = {

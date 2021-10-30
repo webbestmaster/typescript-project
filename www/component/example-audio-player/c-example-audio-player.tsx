@@ -1,5 +1,5 @@
 import {AudioPlayer, AudioPlayerControlSprite, TrackType} from 'react-audio-player-pro';
-import 'react-audio-player-pro/dist/style.css';
+// import 'react-audio-player-pro/dist/style.css';
 
 import {Markdown} from '../../layout/markdown';
 import {demoUrl} from '../../const';

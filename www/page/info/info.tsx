@@ -1,6 +1,10 @@
 /* global setTimeout */
 
-import {lazy, Suspense, useEffect, useState} from 'react';
+import {
+    // lazy,
+    useEffect,
+    useState,
+} from 'react';
 import {useSystem, useScreenHeight, useScreenWidth, useScreenSize} from 'react-system-hook';
 import {NavigationLink} from 'react-router-dom-hook';
 
@@ -14,13 +18,15 @@ import homeStyle from '../home/home.scss';
 
 console.log(ErrorData);
 
+/*
 const LoadMeAsyncLazy = lazy(
     () =>
         import(
-            /* webpackChunkName: 'load-me-async-lazy' */
+            /!* webpackChunkName: 'load-me-async-lazy' *!/
             '../../component/load-me-async-lazy/load-me-async-lazy'
         )
 );
+*/
 
 export function Info(): JSX.Element {
     const {getLocalizedString} = useLocale();
@@ -81,9 +87,14 @@ export function Info(): JSX.Element {
 
             <SvgAsReactComponent />
 
+            <Spinner position="absolute" />
+            {/* <LoadMeAsyncLazy smth="info" />*/}
+
+            {/*
             <Suspense fallback={<Spinner position="absolute" />}>
                 <LoadMeAsyncLazy smth="info" />
             </Suspense>
+*/}
         </div>
     );
 }

@@ -1,6 +1,8 @@
-console.log('server');
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
 
 import {App} from '../component/app/app';
 
-console.log(App);
-console.log(<App />);
+console.warn('server');
+
+console.warn(ReactDOMServer.renderToStaticMarkup(<App />));

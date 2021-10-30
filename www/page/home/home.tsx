@@ -1,10 +1,14 @@
 /* global setTimeout */
 
-import {lazy, Suspense, useEffect, useState} from 'react';
+import {
+    // lazy,
+    useEffect,
+    useState,
+} from 'react';
 import {useSystem} from 'react-system-hook';
 import {NavigationLink} from 'react-router-dom-hook';
 import markdownPro, {MarkdownConfigShallowType} from 'markdown-pro';
-import 'markdown-pro/dist/style.css';
+// import 'markdown-pro/dist/style.css';
 import {JSONSchemaType} from 'ajv';
 
 import {Locale, useLocale} from '../../provider/locale/locale-context';
@@ -40,13 +44,15 @@ const myIpSchema: JSONSchemaType<MyIpType> = {
     type: 'object',
 };
 
+/*
 const LoadMeAsyncLazy = lazy(
     () =>
         import(
-            /* webpackChunkName: 'load-me-async-lazy' */
+            /!* webpackChunkName: 'load-me-async-lazy' *!/
             '../../component/load-me-async-lazy/load-me-async-lazy'
         )
 );
+*/
 
 const htmlCode = markdownPro('# Markdown Pro'); // <h1>Markdown Pro</h1>
 
@@ -128,9 +134,12 @@ export function Home(): JSX.Element {
 
             <SvgAsReactComponent />
 
+            {/* <LoadMeAsyncLazy smth="home" />*/}
+            <Spinner position="absolute" />
+            {/*
             <Suspense fallback={<Spinner position="absolute" />}>
-                <LoadMeAsyncLazy smth="home" />
             </Suspense>
+*/}
 
             <Library textContent="Hello, World">
                 <p>inner text</p>

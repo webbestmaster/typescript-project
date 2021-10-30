@@ -25,8 +25,8 @@
     "start": "cross-env NODE_ENV=development SIDE=front webpack-cli serve --progress",
     "start:transpile-only": "cross-env NODE_ENV=development SIDE=front TS_TRANSPILE_ONLY=true webpack-cli serve --progress",
     "tsc-watch": "tsc -p ./tsconfig.json --watch",
-    "start:server-webpack": "cross-env NODE_ENV=development SIDE=back webpack-cli serve --progress",
-    "start:server": "node ./tsc-check/www/server/server.js",
+    "build:server": "cross-env NODE_ENV=production SIDE=back NODE_OPTIONS=--max-old-space-size=1536 webpack --progress",
+    "start:server": "node ./server/dist/index.js",
     "build": "cross-env NODE_ENV=production SIDE=front NODE_OPTIONS=--max-old-space-size=1536 webpack --progress",
     "build-library": "cross-env NODE_ENV=production SIDE=front IS_BUILD_LIBRARY=true NODE_OPTIONS=--max-old-space-size=1536 webpack --progress && npm run tsc-library && node webpack/util/library/css.js",
     "check": "npm run ts-coverage && npm run tsc && npm run test:unit && npm run eslint && npm run stylelint",
@@ -121,6 +121,7 @@
     "webpack": "^5.60.0",
     "webpack-bundle-analyzer": "^4.5.0",
     "webpack-cli": "^4.9.1",
-    "webpack-dev-server": "^4.4.0"
+    "webpack-dev-server": "^4.4.0",
+    "webpack-node-externals": "^3.0.0"
   }
 }

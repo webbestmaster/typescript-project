@@ -19,7 +19,10 @@ module.exports.fileRegExp = /\.(webp|png|jpg|jpeg|gif|otf|ttf|woff|woff2|eot|mp3
 
 module.exports.pathToStaticFileFolder = pathToStaticFileFolder;
 
-module.exports.pathToDist = '/dist' + pathToStaticFileFolder;
+const pathToDistFront = isFront ? '/dist' + pathToStaticFileFolder : null;
+const pathToDistBack = isBack ? '/server/dist/' : null;
+
+module.exports.pathToDist = pathToDistFront || pathToDistBack;
 
 module.exports.webpackDevServerPort = 9090;
 
