@@ -14,7 +14,12 @@ const {
 } = require('./webpack/config');
 
 const webpackConfigFront = {
-    entry: ['./www/css/root.scss', './www/root.tsx'],
+    entry: [
+        './www/css/root.scss',
+        'markdown-pro/dist/style.css',
+        'react-audio-player-pro/dist/style.css',
+        './www/root.tsx',
+    ],
     output: {
         pathinfo: false,
         path: path.join(cwd, pathToDist),
@@ -41,6 +46,7 @@ const webpackConfigFront = {
 const webpackConfigBack = {
     ...webpackConfigFront,
     entry: ['./www/css/root.scss', './www/server/server.tsx'],
+    optimization: {},
     target: 'node',
     externalsPresets: {node: true}, // in order to ignore built-in modules like path, fs, etc.
     externals: [nodeExternals()], // in order to ignore all modules in node_modules folder

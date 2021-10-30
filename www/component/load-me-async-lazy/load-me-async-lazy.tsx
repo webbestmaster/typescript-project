@@ -7,5 +7,7 @@ type PropsType = {
 
 // eslint-disable-next-line import/no-default-export, no-unused-vars, @typescript-eslint/no-unused-vars
 export default function LoadMeAsyncLazy(props: PropsType): JSX.Element {
-    return <h4>I Loaded Async Lazy</h4>;
+    const {smth} = props;
+
+    return <h4>I Loaded Async Lazy + {smth}</h4>;
 }

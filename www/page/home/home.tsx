@@ -1,10 +1,6 @@
 /* global setTimeout */
 
-import {
-    // lazy,
-    useEffect,
-    useState,
-} from 'react';
+import {lazy, useEffect, useState} from 'react';
 import {useSystem} from 'react-system-hook';
 import {NavigationLink} from 'react-router-dom-hook';
 import markdownPro, {MarkdownConfigShallowType} from 'markdown-pro';
@@ -23,6 +19,7 @@ import {AsciiSpinner} from '../../layout/spinner/c-ascii-spinner';
 import {ExampleAudio} from '../../component/example-audio/c-example-audio';
 import {ExamplePlayer} from '../../component/example-audio-player/c-example-audio-player';
 import {fetchX} from '../../util/fetch';
+import {GuardSuspense} from '../../layout/guard-suspense';
 
 import pngImageSrc from './image/marker-icon-2x.png';
 import svgImageSrc, {ReactComponent as SvgAsReactComponent} from './image/questions-with-an-official-answer.svg';
@@ -44,15 +41,13 @@ const myIpSchema: JSONSchemaType<MyIpType> = {
     type: 'object',
 };
 
-/*
 const LoadMeAsyncLazy = lazy(
     () =>
         import(
-            /!* webpackChunkName: 'load-me-async-lazy' *!/
+            /* webpackChunkName: 'load-me-async-lazy' */
             '../../component/load-me-async-lazy/load-me-async-lazy'
         )
 );
-*/
 
 const htmlCode = markdownPro('# Markdown Pro'); // <h1>Markdown Pro</h1>
 
@@ -134,12 +129,9 @@ export function Home(): JSX.Element {
 
             <SvgAsReactComponent />
 
-            {/* <LoadMeAsyncLazy smth="home" />*/}
-            <Spinner position="absolute" />
-            {/*
-            <Suspense fallback={<Spinner position="absolute" />}>
-            </Suspense>
-*/}
+            <GuardSuspense fallback={<Spinner position="absolute" />}>
+                <LoadMeAsyncLazy smth="smth" />
+            </GuardSuspense>
 
             <Library textContent="Hello, World">
                 <p>inner text</p>

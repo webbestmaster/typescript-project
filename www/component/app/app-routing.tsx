@@ -3,6 +3,7 @@ import {BrowserRouter, Route, Switch, StaticRouter} from 'react-router-dom';
 import {Home} from '../../page/home/home';
 import {Info} from '../../page/info/info';
 import {Error404} from '../../page/error-404/error-404';
+import {isBrowser} from '../../util/system';
 
 import {appRoute} from './app-route';
 
@@ -16,9 +17,5 @@ export function AppRouting(): JSX.Element {
         </Switch>
     );
 
-    if (typeof window === 'undefined') {
-        return <StaticRouter>{switchNode}</StaticRouter>;
-    }
-
-    return <BrowserRouter>{switchNode}</BrowserRouter>;
+    return isBrowser ? <BrowserRouter>{switchNode}</BrowserRouter> : <StaticRouter>{switchNode}</StaticRouter>;
 }
