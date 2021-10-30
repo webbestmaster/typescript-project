@@ -1,6 +1,6 @@
 # dist
 /dist/
-/server/dist/
+/dist-server/
 
 # npm
 /node_modules/

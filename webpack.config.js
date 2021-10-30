@@ -45,8 +45,8 @@ const webpackConfigFront = {
 
 const webpackConfigBack = {
     ...webpackConfigFront,
-    entry: ['./www/css/root.scss', './www/server/server.tsx'],
-    optimization: {},
+    entry: ['./server/server.tsx'],
+    // optimization: {},
     target: 'node',
     externalsPresets: {node: true}, // in order to ignore built-in modules like path, fs, etc.
     externals: [nodeExternals()], // in order to ignore all modules in node_modules folder
