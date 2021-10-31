@@ -27,6 +27,7 @@
     "tsc-watch": "tsc -p ./tsconfig.json --watch",
     "start:server": "node ./dist-server/dist/index.js",
     "build-server": "cross-env NODE_ENV=production SIDE=back NODE_OPTIONS=--max-old-space-size=1536 webpack --progress",
+    "build-n-start:server": "npm run build-server && npm run start:server",
     "build": "cross-env NODE_ENV=production SIDE=front NODE_OPTIONS=--max-old-space-size=1536 webpack --progress",
     "build-library": "cross-env NODE_ENV=production SIDE=front IS_BUILD_LIBRARY=true NODE_OPTIONS=--max-old-space-size=1536 webpack --progress && npm run tsc-library && node webpack/util/library/css.js",
     "check": "npm run ts-coverage && npm run tsc && npm run test:unit && npm run eslint && npm run stylelint",
