@@ -1,5 +1,13 @@
-import loadMeAsyncStyle from './load-me-async.scss';
+// just example module/component
 
-export function LoadMeAsync(): JSX.Element {
-    return <h4 className={loadMeAsyncStyle.color}>I Loaded Async</h4>;
+type PropsType = {
+    // eslint-disable-next-line react/no-unused-prop-types
+    smth: string;
+};
+
+// eslint-disable-next-line import/no-default-export, no-unused-vars, @typescript-eslint/no-unused-vars
+export default function LoadMeAsync(props: PropsType): JSX.Element {
+    const {smth} = props;
+
+    return <h4>I Loaded Async smth === {smth}</h4>;
 }

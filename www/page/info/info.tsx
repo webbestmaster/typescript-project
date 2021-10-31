@@ -9,7 +9,6 @@ import {useSystem, useScreenHeight, useScreenWidth, useScreenSize} from 'react-s
 import {NavigationLink} from 'react-router-dom-hook';
 
 import {Locale, useLocale} from '../../provider/locale/locale-context';
-import {Spinner} from '../../layout/spinner/spinner';
 import {ErrorData} from '../../layout/error-data/error-data';
 import {appRoute} from '../../component/app/app-route';
 import pngImageSrc from '../home/image/marker-icon-2x.png';
@@ -28,7 +27,8 @@ const LoadMeAsyncLazy = lazy(
 );
 */
 
-export function Info(): JSX.Element {
+// eslint-disable-next-line import/no-default-export
+export default function Info(): JSX.Element {
     const {getLocalizedString} = useLocale();
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -87,7 +87,7 @@ export function Info(): JSX.Element {
 
             <SvgAsReactComponent />
 
-            <Spinner position="absolute" />
+            {/* <Spinner position="absolute" />*/}
             {/* <LoadMeAsyncLazy smth="info" />*/}
 
             {/*

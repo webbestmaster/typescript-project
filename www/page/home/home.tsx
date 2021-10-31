@@ -41,11 +41,11 @@ const myIpSchema: JSONSchemaType<MyIpType> = {
     type: 'object',
 };
 
-const LoadMeAsyncLazy = lazy(
+const LoadMeAsync = lazy(
     () =>
         import(
-            /* webpackChunkName: 'load-me-async-lazy' */
-            '../../component/load-me-async-lazy/load-me-async-lazy'
+            /* webpackChunkName: 'load-me-async' */
+            '../../component/load-me-async/load-me-async'
         )
 );
 
@@ -130,7 +130,7 @@ export function Home(): JSX.Element {
             <SvgAsReactComponent />
 
             <GuardSuspense fallback={<Spinner position="absolute" />}>
-                <LoadMeAsyncLazy smth="smth" />
+                <LoadMeAsync smth="smth" />
             </GuardSuspense>
 
             <Library textContent="Hello, World">

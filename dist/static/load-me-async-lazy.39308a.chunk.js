@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunktypescript_project=self.webpackChunktypescript_project||[]).push([[704],{7832:(e,t,s)=>{s.r(t),s.d(t,{default:()=>r});var c=s(5893);function r(e){const{smth:t}=e;return(0,c.jsxs)("h4",{children:["I Loaded Async Lazy + ",t]},void 0)}}}]);
