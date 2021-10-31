@@ -14,6 +14,12 @@
             /***/
         },
 
+        /***/ 685: /***/ module => {
+            module.exports = require('http');
+
+            /***/
+        },
+
         /******/
     };
     /************************************************************************/
@@ -119,7 +125,7 @@
     /******/
     /******/ /* webpack/runtime/getFullHash */
     /******/ (() => {
-        /******/ __webpack_require__.h = () => 'e81b7d376d91c51b4b7c';
+        /******/ __webpack_require__.h = () => 'f1209a71a36f4d31298c';
         /******/
     })();
     /******/
@@ -700,7 +706,7 @@ export function getShortLocaleName(localeName: LocaleNameEnum): ShortLocaleNameE
 
 `;
             log(hiString);
-            log('Build date:', '2021-10-31T13:43:15.798Z');
+            log('Build date:', '2021-10-31T15:12:02.693Z');
             log('Is production:', true);
         }
         sayHi(); // CONCATENATED MODULE: ./www/layout/markdown.tsx
@@ -1443,8 +1449,24 @@ const LoadMeAsyncLazy = lazy(
             );
         } // CONCATENATED MODULE: ./server/server.tsx
 
+        const http = __webpack_require__(685);
+
         console.warn('server');
+        const htmlString = server_default().renderToStaticMarkup((0, jsx_runtime_.jsx)(App, {}, void 0));
         console.warn(server_default().renderToStaticMarkup((0, jsx_runtime_.jsx)(App, {}, void 0)));
+        const hostname = '127.0.0.1';
+        const port = 3000;
+        const html =
+            '<!DOCTYPE html><html lang="en"><head><meta name="format-detection" content="telephone=no"/><title>typescript app</title><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1"/><meta http-equiv="X-UA-Compatible" content="ie=edge"/><script defer="defer" src="/static/index.js?7d8a2acb280051c9b565"></script><link href="/static/style.css?7d8a2acb280051c9b565" rel="stylesheet"></head><body><div class="js-app-wrapper">{data}</div></body></html>';
+        const server = http.createServer((req, res) => {
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'text/html');
+            // res.end('Hello World');
+            res.end(html.replace('{data}', htmlString));
+        });
+        server.listen(port, hostname, () => {
+            console.log(`Server running at http://${hostname}:${port}/`);
+        });
     })();
 
     /******/
