@@ -1,5 +1,14 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
+const externals = [nodeExternals()]; // in order to ignore all modules in node_modules folder
+const externalsPresets = {node: true}; // in order to ignore built-in modules like path, fs, etc.
+
+const {optimization} = require('./webpack/setting/optimization');
+const {rules} = require('./webpack/setting/module/rules');
+const {alias} = require('./webpack/setting/resolve/alias');
+const {extensions} = require('./webpack/setting/resolve/extensions');
+const {plugins} = require('./webpack/setting/plugins');
+const {devServer} = require('./webpack/setting/dev-server');
 
 const {
     pathToStaticFileFolder,
@@ -11,9 +20,10 @@ const {
     isBuildLibrary,
     isFront,
     isBack,
+    isServerProdBuild,
 } = require('./webpack/config');
 
-const webpackConfigFront = {
+const configFront = {
     entry: [
         './www/css/root.scss',
         'markdown-pro/dist/style.css',
@@ -33,27 +43,24 @@ const webpackConfigFront = {
 
     mode: nodeEnvironment,
     devtool: isDevelopment ? 'source-map' : false,
-    optimization: require('./webpack/setting/optimization').optimization,
-    module: {rules: require('./webpack/setting/module/rules').rules},
-    resolve: {
-        alias: require('./webpack/setting/resolve/alias').alias,
-        extensions: require('./webpack/setting/resolve/extensions').extensions,
-    },
-    plugins: require('./webpack/setting/plugins').plugins,
-    devServer: require('./webpack/setting/dev-server').devServer,
+    optimization,
+    module: {rules},
+    resolve: {alias, extensions},
+    plugins,
+    devServer,
 };
 
-const webpackConfigBack = {
-    ...webpackConfigFront,
+const configBack = {
+    ...configFront,
     entry: ['./server/server.tsx'],
-    optimization: {minimize: false},
+    optimization: isServerProdBuild ? optimization : {minimize: false},
     target: 'node',
-    // devtool: 'source-map',
-    externalsPresets: {node: true}, // in order to ignore built-in modules like path, fs, etc.
-    externals: [nodeExternals()], // in order to ignore all modules in node_modules folder
+    devtool: isServerProdBuild ? false : 'source-map',
+    externalsPresets,
+    externals,
 };
 
-const webpackConfigBuildLibraryFront = {
+const configLibraryFront = {
     entry: ['./www/library/library.ts'],
     output: {
         pathinfo: false,
@@ -65,14 +72,15 @@ const webpackConfigBuildLibraryFront = {
 
     mode: nodeEnvironment,
     devtool: false,
-    optimization: require('./webpack/setting/optimization').optimization,
-    module: {rules: require('./webpack/setting/module/rules').rules},
-    resolve: {
-        alias: require('./webpack/setting/resolve/alias').alias,
-        extensions: require('./webpack/setting/resolve/extensions').extensions,
-    },
-    plugins: require('./webpack/setting/plugins').plugins,
-    devServer: require('./webpack/setting/dev-server').devServer,
+    optimization,
+    module: {rules},
+    resolve: {alias, extensions},
+    plugins,
+    devServer,
+    externalsPresets,
+    externals,
+
+    /*
     externals: {
         // Don't bundle react and react-dom
         react: {
@@ -94,17 +102,18 @@ const webpackConfigBuildLibraryFront = {
             root: 'ReactRouterDOM',
         },
     },
+*/
 };
 
-const webpackConfigBuildLibraryBack = {...webpackConfigBuildLibraryFront};
+const configLibraryBack = {...configLibraryFront};
 
 let webpackConfigBySide = null;
-webpackConfigBySide = isFront ? webpackConfigFront : webpackConfigBySide;
-webpackConfigBySide = isBack ? webpackConfigBack : webpackConfigBySide;
+webpackConfigBySide = isFront ? configFront : webpackConfigBySide;
+webpackConfigBySide = isBack ? configBack : webpackConfigBySide;
 
 let webpackConfigBuildLibraryBySide = null;
-webpackConfigBuildLibraryBySide = isFront ? webpackConfigBuildLibraryFront : webpackConfigBuildLibraryBySide;
-webpackConfigBuildLibraryBySide = isBack ? webpackConfigBuildLibraryBack : webpackConfigBuildLibraryBySide;
+webpackConfigBuildLibraryBySide = isFront ? configLibraryFront : webpackConfigBuildLibraryBySide;
+webpackConfigBuildLibraryBySide = isBack ? configLibraryBack : webpackConfigBuildLibraryBySide;
 
 // const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 // webpackConfig.plugins.push(new BundleAnalyzerPlugin());

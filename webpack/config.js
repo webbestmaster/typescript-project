@@ -13,6 +13,7 @@ const isProduction = nodeEnvironment === modeProductionName;
 const isBuildLibrary = process.env.IS_BUILD_LIBRARY === 'true';
 const isFront = process.env.SIDE === 'front';
 const isBack = process.env.SIDE === 'back';
+const isServerProdBuild = process.env.IS_SERVER_PROD_BUILD === 'true';
 const isTsTranspileOnly = process.env.TS_TRANSPILE_ONLY === 'true';
 
 module.exports.fileRegExp = /\.(webp|png|jpg|jpeg|gif|otf|ttf|woff|woff2|eot|mp3)$/;
@@ -34,3 +35,4 @@ module.exports.isBuildLibrary = isBuildLibrary;
 module.exports.isFront = isFront;
 module.exports.isBack = isBack;
 module.exports.isTsTranspileOnly = isTsTranspileOnly;
+module.exports.isServerProdBuild = isServerProdBuild;
