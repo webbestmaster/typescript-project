@@ -1,3 +1,4 @@
+/*
 import {ReactNode} from 'react';
 import {Link as RouterLink} from 'react-router-dom';
 
@@ -41,3 +42,4 @@ export function NavigationLink<QueryMap extends ObjectToUrlParametersType = Obje
         </RouterLink>
     );
 }
+*/

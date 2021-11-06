@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunktypescript_project=self.webpackChunktypescript_project||[]).push([[443],{389:(t,e,s)=>{s.r(e),s.d(e,{default:()=>r});var c=s(5893);function r(t){const{smth:e}=t;return(0,c.jsxs)("h4",{children:["I Loaded Async smth === ",e]},void 0)}}}]);

@@ -1,17 +1,17 @@
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
 
 type NavigationProviderPropsType = {
     component: () => JSX.Element;
 };
 
 export function NavigationProvider(props: NavigationProviderPropsType): JSX.Element {
-    const {component} = props;
+    const {component: Page} = props;
 
     return (
         <BrowserRouter>
-            <Switch>
-                <Route component={component} />
-            </Switch>
+            <Routes>
+                <Route element={<Page />} path="/" />
+            </Routes>
         </BrowserRouter>
     );
 }

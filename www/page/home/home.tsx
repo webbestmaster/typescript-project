@@ -2,7 +2,7 @@
 
 import {lazy, useEffect, useState} from 'react';
 import {useSystem} from 'react-system-hook';
-import {NavigationLink} from 'react-router-dom-hook';
+// import {NavigationLink} from 'react-router-dom-hook';
 import markdownPro, {MarkdownConfigShallowType} from 'markdown-pro';
 // import 'markdown-pro/dist/style.css';
 import {JSONSchemaType} from 'ajv';
@@ -10,7 +10,7 @@ import {JSONSchemaType} from 'ajv';
 import {Locale, useLocale} from '../../provider/locale/locale-context';
 import {Spinner} from '../../layout/spinner/spinner';
 import {ErrorData} from '../../layout/error-data/error-data';
-import {appRoute} from '../../component/app/app-route';
+// import {appRoute} from '../../component/app/app-route';
 import {LocaleNameEnum} from '../../provider/locale/locale-context-type';
 import {useFormat} from '../../hook/format-hook/format-hook';
 import {getTestNodeData, getTestNodeId} from '../../util/auto-test';
@@ -111,7 +111,7 @@ export function Home(): JSX.Element {
 
             <hr />
 
-            <NavigationLink to={appRoute.info.path}>to info</NavigationLink>
+            {/* <NavigationLink to={appRoute.info.path}>to info</NavigationLink>*/}
 
             <hr />
 

@@ -1,4 +1,5 @@
-/* global describe, it, expect, location */
+/* __global__ describe, it, expect, location */
+/*
 import {useEffect} from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {render, screen} from '@testing-library/react';
@@ -400,3 +401,4 @@ describe('useUrl', () => {
         unmount();
     });
 });
+*/

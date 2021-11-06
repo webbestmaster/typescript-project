@@ -1,5 +1,6 @@
-/* global Location */
+/* __global Location */
 
+/*
 import {useCallback, useMemo} from 'react';
 import {useHistory} from 'react-router-dom';
 
@@ -82,3 +83,4 @@ export function useUrl<
         };
     }, [setQuery, getQuery, deleteQuery, pushUrl, pushState, queries, pathname]);
 }
+*/

@@ -6,11 +6,11 @@ import {
     useState,
 } from 'react';
 import {useSystem, useScreenHeight, useScreenWidth, useScreenSize} from 'react-system-hook';
-import {NavigationLink} from 'react-router-dom-hook';
+// import {NavigationLink} from 'react-router-dom-hook';
 
 import {Locale, useLocale} from '../../provider/locale/locale-context';
 import {ErrorData} from '../../layout/error-data/error-data';
-import {appRoute} from '../../component/app/app-route';
+// import {appRoute} from '../../component/app/app-route';
 import pngImageSrc from '../home/image/marker-icon-2x.png';
 import svgImageSrc, {ReactComponent as SvgAsReactComponent} from '../home/image/questions-with-an-official-answer.svg';
 import homeStyle from '../home/home.scss';
@@ -72,7 +72,7 @@ export default function Info(): JSX.Element {
         <div>
             <h1 className={homeStyle.home_header}>info page</h1>
 
-            <NavigationLink to={appRoute.root.path}>to home</NavigationLink>
+            {/* <NavigationLink to={appRoute.root.path}>to home</NavigationLink>*/}
 
             <pre>{JSON.stringify(screenInfo, null, 4)}</pre>
             <pre>{JSON.stringify({height, screenHeight, screenWidth, width}, null, 4)}</pre>

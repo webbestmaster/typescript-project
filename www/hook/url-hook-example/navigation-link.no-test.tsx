@@ -1,4 +1,5 @@
-/* global describe, it, expect */
+/* __global describe, it, expect */
+/*
 import {useEffect} from 'react';
 import {render, screen} from '@testing-library/react';
 
@@ -150,3 +151,4 @@ describe('NavigationLink', () => {
         unmount();
     });
 });
+*/
