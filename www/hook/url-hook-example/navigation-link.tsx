@@ -1,14 +1,15 @@
-/*
 import {ReactNode} from 'react';
 import {Link as RouterLink} from 'react-router-dom';
 
 import {ObjectToUrlParametersType} from './url-hook-type';
-import {useUrl} from './url-hook';
+// import {useUrl} from './url-hook';
 import {objectToUrlParameters} from './url-hook-helper';
 
 // import {classNames} from '../../util/css';
 
 // import linkStyle from './navigation-link.scss';
+
+const rrr = 1;
 
 type PropsType<QueryMap> = {
     children?: ReactNode;
@@ -26,10 +27,10 @@ export function NavigationLink<QueryMap extends ObjectToUrlParametersType = Obje
     // eslint-disable-next-line react/prop-types
     const {className, to, children, isSaveQueries = true, title, queries: passedQueries = {}} = props;
 
-    const {queries: currentQueries} = useUrl<QueryMap>();
+    // const {queries: currentQueries} = useUrl<QueryMap>();
 
     const resultQueries: ObjectToUrlParametersType = isSaveQueries
-        ? {...currentQueries, ...passedQueries}
+        ? '' // {...currentQueries, ...passedQueries}
         : passedQueries;
 
     const queriesAsString: string = objectToUrlParameters(resultQueries);
@@ -42,4 +43,3 @@ export function NavigationLink<QueryMap extends ObjectToUrlParametersType = Obje
         </RouterLink>
     );
 }
-*/

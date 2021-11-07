@@ -1,4 +1,5 @@
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import {Routes} from 'react-router';
+import {BrowserRouter, Route, MemoryRouter} from 'react-router-dom';
 
 import {Home} from '../../page/home/home';
 import {AsyncInfo} from '../../page/info/info-async';

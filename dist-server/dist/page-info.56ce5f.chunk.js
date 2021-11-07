@@ -18,21 +18,21 @@ exports.modules = {
         /* harmony import */ var react_system_hook__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(882);
         /* harmony import */ var react_system_hook__WEBPACK_IMPORTED_MODULE_2___default =
             /*#__PURE__*/ __webpack_require__.n(react_system_hook__WEBPACK_IMPORTED_MODULE_2__);
-        /* harmony import */ var react_router_dom_hook__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(59);
-        /* harmony import */ var react_router_dom_hook__WEBPACK_IMPORTED_MODULE_3___default =
-            /*#__PURE__*/ __webpack_require__.n(react_router_dom_hook__WEBPACK_IMPORTED_MODULE_3__);
-        /* harmony import */ var _provider_locale_locale_context__WEBPACK_IMPORTED_MODULE_4__ =
+        /* harmony import */ var _provider_locale_locale_context__WEBPACK_IMPORTED_MODULE_3__ =
             __webpack_require__(935);
-        /* harmony import */ var _layout_error_data_error_data__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(253);
-        /* harmony import */ var _component_app_app_route__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(57);
-        /* harmony import */ var _home_image_marker_icon_2x_png__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(436);
-        /* harmony import */ var _home_image_questions_with_an_official_answer_svg__WEBPACK_IMPORTED_MODULE_8__ =
+        /* harmony import */ var _layout_error_data_error_data__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(253);
+        /* harmony import */ var _home_image_marker_icon_2x_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(436);
+        /* harmony import */ var _home_image_questions_with_an_official_answer_svg__WEBPACK_IMPORTED_MODULE_6__ =
             __webpack_require__(103);
-        /* harmony import */ var _home_home_scss__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(695);
+        /* harmony import */ var _home_home_scss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(695);
 
         /* global setTimeout */
 
-        console.log(_layout_error_data_error_data__WEBPACK_IMPORTED_MODULE_5__ /* .ErrorData */.K);
+        // import {NavigationLink} from 'react-router-dom-hook';
+
+        // import {appRoute} from '../../component/app/app-route';
+
+        console.log(_layout_error_data_error_data__WEBPACK_IMPORTED_MODULE_4__ /* .ErrorData */.K);
         /*
 const LoadMeAsyncLazy = lazy(
     () =>
@@ -45,7 +45,7 @@ const LoadMeAsyncLazy = lazy(
         // eslint-disable-next-line import/no-default-export
         function Info() {
             const {getLocalizedString} = (0,
-            _provider_locale_locale_context__WEBPACK_IMPORTED_MODULE_4__ /* .useLocale */.bU)();
+            _provider_locale_locale_context__WEBPACK_IMPORTED_MODULE_3__ /* .useLocale */.bU)();
             const [isOpen, setIsOpen] = (0, react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
             const {
                 screenInfo,
@@ -85,21 +85,10 @@ const LoadMeAsyncLazy = lazy(
                             Object.assign(
                                 {
                                     className:
-                                        _home_home_scss__WEBPACK_IMPORTED_MODULE_9__ /* ["default"].home_header */.Z
+                                        _home_home_scss__WEBPACK_IMPORTED_MODULE_7__ /* ["default"].home_header */.Z
                                             .home_header,
                                 },
                                 {children: 'info page'}
-                            ),
-                            void 0
-                        ),
-                        (0, react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
-                            react_router_dom_hook__WEBPACK_IMPORTED_MODULE_3__.NavigationLink,
-                            Object.assign(
-                                {
-                                    to: _component_app_app_route__WEBPACK_IMPORTED_MODULE_6__ /* .appRoute.root.path */
-                                        .$.root.path,
-                                },
-                                {children: 'to home'}
                             ),
                             void 0
                         ),
@@ -114,7 +103,7 @@ const LoadMeAsyncLazy = lazy(
                             void 0
                         ),
                         (0, react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
-                            _provider_locale_locale_context__WEBPACK_IMPORTED_MODULE_4__ /* .Locale */.go,
+                            _provider_locale_locale_context__WEBPACK_IMPORTED_MODULE_3__ /* .Locale */.go,
                             {stringKey: 'BUTTON__APPLY'},
                             void 0
                         ),
@@ -125,19 +114,19 @@ const LoadMeAsyncLazy = lazy(
                         ),
                         (0, react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
                             'img',
-                            {alt: '', src: _home_image_marker_icon_2x_png__WEBPACK_IMPORTED_MODULE_7__},
+                            {alt: '', src: _home_image_marker_icon_2x_png__WEBPACK_IMPORTED_MODULE_5__},
                             void 0
                         ),
                         (0, react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
                             'img',
                             {
                                 alt: '',
-                                src: _home_image_questions_with_an_official_answer_svg__WEBPACK_IMPORTED_MODULE_8__ /* ["default"] */.Z,
+                                src: _home_image_questions_with_an_official_answer_svg__WEBPACK_IMPORTED_MODULE_6__ /* ["default"] */.Z,
                             },
                             void 0
                         ),
                         (0, react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
-                            _home_image_questions_with_an_official_answer_svg__WEBPACK_IMPORTED_MODULE_8__ /* .ReactComponent */.r,
+                            _home_image_questions_with_an_official_answer_svg__WEBPACK_IMPORTED_MODULE_6__ /* .ReactComponent */.r,
                             {},
                             void 0
                         ),
@@ -150,4 +139,4 @@ const LoadMeAsyncLazy = lazy(
         /***/
     },
 };
-//# sourceMappingURL=page-info.3c3146.chunk.js.map
+//# sourceMappingURL=page-info.56ce5f.chunk.js.map

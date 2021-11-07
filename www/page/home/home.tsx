@@ -20,6 +20,9 @@ import {ExampleAudio} from '../../component/example-audio/c-example-audio';
 import {ExamplePlayer} from '../../component/example-audio-player/c-example-audio-player';
 import {fetchX} from '../../util/fetch';
 import {GuardSuspense} from '../../layout/guard-suspense';
+import {appRoute} from '../../component/app/app-route';
+
+import {NavigationLink} from '../../hook/url-hook-example/navigation-link';
 
 import pngImageSrc from './image/marker-icon-2x.png';
 import svgImageSrc, {ReactComponent as SvgAsReactComponent} from './image/questions-with-an-official-answer.svg';
@@ -111,7 +114,7 @@ export function Home(): JSX.Element {
 
             <hr />
 
-            {/* <NavigationLink to={appRoute.info.path}>to info</NavigationLink>*/}
+            <NavigationLink to={appRoute.info.path}>to info</NavigationLink>
 
             <hr />
 
