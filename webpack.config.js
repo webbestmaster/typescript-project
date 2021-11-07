@@ -115,7 +115,9 @@ let webpackConfigBuildLibraryBySide = null;
 webpackConfigBuildLibraryBySide = isFront ? configLibraryFront : webpackConfigBuildLibraryBySide;
 webpackConfigBuildLibraryBySide = isBack ? configLibraryBack : webpackConfigBuildLibraryBySide;
 
+const webpackConfig = isBuildLibrary ? webpackConfigBuildLibraryBySide : webpackConfigBySide;
+
 // const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 // webpackConfig.plugins.push(new BundleAnalyzerPlugin());
 
-module.exports = isBuildLibrary ? webpackConfigBuildLibraryBySide : webpackConfigBySide;
+module.exports = webpackConfig;
