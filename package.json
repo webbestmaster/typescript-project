@@ -53,14 +53,14 @@
     "@types/react": "^17.0.34",
     "@types/react-dom": "^17.0.11",
     "ajv": "^8.6.3",
-    "markdown-pro": "^1.0.21",
+    "markdown-pro": "^1.0.22",
     "react": "^17.0.2",
-    "react-audio-player-pro": "^1.1.17",
+    "react-audio-player-pro": "^1.1.18",
     "react-dom": "^17.0.2",
-    "react-localization-library": "^0.0.17",
+    "react-localization-library": "^0.0.18",
     "react-router": "^6.0.1",
     "react-router-dom": "^6.0.1",
-    "react-system-hook": "^0.0.13"
+    "react-system-hook": "^0.0.14"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
