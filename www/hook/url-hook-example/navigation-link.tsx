@@ -9,8 +9,6 @@ import {objectToUrlParameters} from './url-hook-helper';
 
 // import linkStyle from './navigation-link.scss';
 
-const rrr = 1;
-
 type PropsType<QueryMap> = {
     children?: ReactNode;
     className?: string;

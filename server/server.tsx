@@ -9,7 +9,7 @@ console.warn('server');
 
 // const htmlString = ReactDOMServer.renderToStaticMarkup(<App/>);
 
-console.warn(ReactDOMServer.renderToStaticMarkup(<App />));
+console.warn(ReactDOMServer.renderToString(<App />));
 
 /*
 const hostname = '127.0.0.1';

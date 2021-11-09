@@ -1,14 +1,25 @@
 /* global document */
 
-import {render} from 'react-dom';
+import {hydrate, render} from 'react-dom';
 
 import {selector} from './const';
 import {App} from './component/app/app';
 
-const nodeWrapper = document.querySelector(selector.appWrapper);
+(function main() {
+    const nodeWrapper = document.querySelector(selector.appWrapper);
 
-if (nodeWrapper !== null) {
-    render(<App />, nodeWrapper);
-} else {
-    console.error('Can not find nodeWrapper');
-}
+    if (!nodeWrapper) {
+        throw new Error('[main]: Can not find appWrapper');
+    }
+
+    const {innerHTML} = nodeWrapper;
+
+    if (innerHTML.trim() === '') {
+        console.log('[main]: Render App as SPA');
+        render(<App />, nodeWrapper);
+        return;
+    }
+
+    console.log('[main]: Render App as SSR');
+    hydrate(<App />, nodeWrapper);
+})();
