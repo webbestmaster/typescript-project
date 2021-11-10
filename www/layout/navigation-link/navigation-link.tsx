@@ -1,7 +1,7 @@
 /* global URLSearchParams */
 
 import {ReactNode} from 'react';
-import {Link as RouterLink, useLocation} from 'react-router-dom';
+import {Link as RouterLink, useSearchParams} from 'react-router-dom';
 
 export type NavigationLinkPropsType = {
     children?: ReactNode;
@@ -15,8 +15,8 @@ export type NavigationLinkPropsType = {
 export function NavigationLink(props: NavigationLinkPropsType): JSX.Element {
     const {className, to, children, isSaveQueries = true, title, queries: passedQueries = {}} = props;
 
-    const {search} = useLocation();
-    const currentQueries: Record<string, string> = Object.fromEntries<string>(new URLSearchParams(search).entries());
+    const [search] = useSearchParams();
+    const currentQueries: Record<string, string> = Object.fromEntries<string>(search.entries());
 
     const resultQueries: Record<string, string> = isSaveQueries ? {...currentQueries, ...passedQueries} : passedQueries;
 
