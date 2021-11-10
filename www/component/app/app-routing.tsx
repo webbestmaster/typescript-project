@@ -1,5 +1,4 @@
-import {Routes} from 'react-router';
-import {BrowserRouter, Route} from 'react-router-dom';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {StaticRouter} from 'react-router-dom/server';
 
 import {Home} from '../../page/home/home';

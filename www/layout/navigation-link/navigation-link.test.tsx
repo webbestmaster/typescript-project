@@ -1,11 +1,10 @@
-/* __global describe, it, expect */
-/*
+/* global URLSearchParams, describe, it, expect */
+import {useNavigate, useLocation} from 'react-router-dom';
 import {useEffect} from 'react';
 import {render, screen} from '@testing-library/react';
 
 import {NavigationProvider} from '../../../test-unit/util/navigation-provider';
 
-import {useUrl} from './url-hook';
 import {NavigationLink} from './navigation-link';
 
 describe('NavigationLink', () => {
@@ -49,11 +48,12 @@ describe('NavigationLink', () => {
     it('use query by default', () => {
         // eslint-disable-next-line react/no-multi-comp
         function UseQuery(): JSX.Element {
-            const {setQuery} = useUrl();
+            const {pathname} = useLocation();
+            const navigate = useNavigate();
 
             useEffect(() => {
-                setQuery({nick: 'mike'});
-            }, [setQuery]);
+                navigate(pathname + '?' + new URLSearchParams({nick: 'mike'}).toString());
+            }, [navigate, pathname]);
 
             return <NavigationLink to="/use-query-by-default" />;
         }
@@ -70,11 +70,12 @@ describe('NavigationLink', () => {
     it('use query by props', () => {
         // eslint-disable-next-line react/no-multi-comp
         function UseQuery(): JSX.Element {
-            const {setQuery} = useUrl();
+            const {pathname} = useLocation();
+            const navigate = useNavigate();
 
             useEffect(() => {
-                setQuery({nick: 'mike'});
-            }, [setQuery]);
+                navigate(pathname + '?' + new URLSearchParams({nick: 'mike'}).toString());
+            }, [navigate, pathname]);
 
             return <NavigationLink isSaveQueries to="/use-query-by-props" />;
         }
@@ -91,11 +92,12 @@ describe('NavigationLink', () => {
     it('do not use query', () => {
         // eslint-disable-next-line react/no-multi-comp
         function DoNotUseQuery(): JSX.Element {
-            const {setQuery} = useUrl();
+            const {pathname} = useLocation();
+            const navigate = useNavigate();
 
             useEffect(() => {
-                setQuery({nick: 'mike'});
-            }, [setQuery]);
+                navigate(pathname + '?' + new URLSearchParams({nick: 'mike'}).toString());
+            }, [navigate, pathname]);
 
             return <NavigationLink isSaveQueries={false} to="/do-not-use-query" />;
         }
@@ -112,11 +114,12 @@ describe('NavigationLink', () => {
     it('use own queries', () => {
         // eslint-disable-next-line react/no-multi-comp
         function UseOwnQueries(): JSX.Element {
-            const {setQuery} = useUrl();
+            const {pathname} = useLocation();
+            const navigate = useNavigate();
 
             useEffect(() => {
-                setQuery({nick: 'mike'});
-            }, [setQuery]);
+                navigate(pathname + '?' + new URLSearchParams({nick: 'mike'}).toString());
+            }, [navigate, pathname]);
 
             return <NavigationLink queries={{foo: 'bar'}} to="/use-own-queries" />;
         }
@@ -133,11 +136,12 @@ describe('NavigationLink', () => {
     it('use own queries only', () => {
         // eslint-disable-next-line react/no-multi-comp
         function UseOwnQueriesOnly(): JSX.Element {
-            const {setQuery} = useUrl();
+            const {pathname} = useLocation();
+            const navigate = useNavigate();
 
             useEffect(() => {
-                setQuery({nick: 'mike'});
-            }, [setQuery]);
+                navigate(pathname + '?' + new URLSearchParams({nick: 'mike'}).toString());
+            }, [navigate, pathname]);
 
             return <NavigationLink isSaveQueries={false} queries={{foo: 'bar'}} to="/use-own-queries-only" />;
         }
@@ -151,4 +155,3 @@ describe('NavigationLink', () => {
         unmount();
     });
 });
-*/

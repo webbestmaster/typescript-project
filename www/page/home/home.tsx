@@ -21,8 +21,7 @@ import {ExamplePlayer} from '../../component/example-audio-player/c-example-audi
 import {fetchX} from '../../util/fetch';
 import {GuardSuspense} from '../../layout/guard-suspense';
 import {appRoute} from '../../component/app/app-route';
-
-import {NavigationLink} from '../../hook/url-hook-example/navigation-link';
+import {NavigationLink} from '../../layout/navigation-link/navigation-link';
 
 import pngImageSrc from './image/marker-icon-2x.png';
 import svgImageSrc, {ReactComponent as SvgAsReactComponent} from './image/questions-with-an-official-answer.svg';
