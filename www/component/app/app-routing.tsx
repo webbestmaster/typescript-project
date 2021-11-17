@@ -8,7 +8,15 @@ import {isBrowser} from '../../util/system';
 
 import {appRoute} from './app-route';
 
-export function AppRouting(): JSX.Element {
+type PropsType = {
+    server: {
+        defaultRoutingPathname: string;
+    };
+};
+
+export function AppRouting(props: PropsType): JSX.Element {
+    const {server} = props;
+
     const switchNode = (
         <Routes>
             <Route element={<Home />} path={appRoute.root.path} />
@@ -18,9 +26,9 @@ export function AppRouting(): JSX.Element {
         </Routes>
     );
 
-    return isBrowser ? (
-        <BrowserRouter>{switchNode}</BrowserRouter>
-    ) : (
-        <StaticRouter location="/">{switchNode}</StaticRouter>
-    );
+    if (isBrowser) {
+        return <BrowserRouter>{switchNode}</BrowserRouter>;
+    }
+
+    return <StaticRouter location={server.defaultRoutingPathname}>{switchNode}</StaticRouter>;
 }

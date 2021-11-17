@@ -23,6 +23,8 @@ import {GuardSuspense} from '../../layout/guard-suspense';
 import {appRoute} from '../../component/app/app-route';
 import {NavigationLink} from '../../layout/navigation-link/navigation-link';
 
+import {isBrowser} from '../../util/system';
+
 import pngImageSrc from './image/marker-icon-2x.png';
 import svgImageSrc, {ReactComponent as SvgAsReactComponent} from './image/questions-with-an-official-answer.svg';
 import homeStyle from './home.scss';
@@ -131,12 +133,12 @@ export function Home(): JSX.Element {
 
             <SvgAsReactComponent />
 
-            <GuardSuspense fallback={<Spinner position="absolute" />}>
+            <GuardSuspense fallback={<Spinner isShow={isBrowser} position="absolute" />}>
                 <LoadMeAsync smth="smth" />
             </GuardSuspense>
 
             <Library textContent="Hello, World">
-                <p>inner text</p>
+                <p>inner !! text</p>
             </Library>
 
             <hr />

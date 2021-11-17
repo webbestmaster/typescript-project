@@ -10,8 +10,9 @@ npm-debug.log*
 # npm
 node_modules
 
-# dist
-# /dist/
+# dists
+/dist/
+/dist-server/
 
 # report
 /coverage-ts/
