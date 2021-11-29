@@ -1,6 +1,6 @@
 /* global setTimeout */
 
-import {lazy, useEffect, useState} from 'react';
+import {lazy, useEffect, useState, useContext} from 'react';
 import {useSystem} from 'react-system-hook';
 // import {NavigationLink} from 'react-router-dom-hook';
 import markdownPro, {MarkdownConfigShallowType} from 'markdown-pro';
@@ -24,6 +24,10 @@ import {appRoute} from '../../component/app/app-route';
 import {NavigationLink} from '../../layout/navigation-link/navigation-link';
 
 import {isBrowser} from '../../util/system';
+
+import {ServerDataContextType} from '../../provider/server-data/server-data-context-type';
+
+import {ServerDataContext} from '../../provider/server-data/server-data-context';
 
 import pngImageSrc from './image/marker-icon-2x.png';
 import svgImageSrc, {ReactComponent as SvgAsReactComponent} from './image/questions-with-an-official-answer.svg';
@@ -68,6 +72,7 @@ console.log(htmlCode, htmlCodeConfigured);
 
 export function Home(): JSX.Element {
     const {getLocalizedString, setLocaleName, localeName} = useLocale();
+    const serverDataContext = useContext<ServerDataContextType>(ServerDataContext);
     const {getFormattedNumber} = useFormat();
     const {screenInfo} = useSystem();
 
@@ -78,6 +83,10 @@ export function Home(): JSX.Element {
         console.log(isOpen);
         setIsOpen(false);
     }, 1e3);
+
+    // useEffect(() => {
+    //     fetchX<unknown>('/set-cookie');
+    // }, []);
 
     useEffect(() => {
         (async () => {
@@ -98,6 +107,8 @@ export function Home(): JSX.Element {
             <h1 className={homeStyle.home_header}>
                 home page (<AsciiSpinner />)
             </h1>
+
+            <h3>{JSON.stringify(serverDataContext)}</h3>
 
             <h4>your ip is: {myIp ? myIp.ip : <AsciiSpinner />}</h4>
 

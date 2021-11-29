@@ -4,6 +4,7 @@ import {hydrate, render} from 'react-dom';
 
 import {selector} from './const';
 import {App, AppPropsType} from './component/app/app';
+import {defaultServerDataContextConst} from './provider/server-data/server-data-context-const';
 
 (function main() {
     const nodeWrapper = document.querySelector(selector.appWrapper);
@@ -11,6 +12,7 @@ import {App, AppPropsType} from './component/app/app';
         server: {
             defaultRoutingPathname: '',
         },
+        serverData: defaultServerDataContextConst,
     };
 
     if (!nodeWrapper) {
@@ -19,7 +21,7 @@ import {App, AppPropsType} from './component/app/app';
 
     const {innerHTML} = nodeWrapper;
 
-    const appNode = <App server={appProps.server} />;
+    const appNode = <App server={appProps.server} serverData={appProps.serverData} />;
 
     if (innerHTML.trim() === '') {
         console.log('[main]: Render App as SPA');

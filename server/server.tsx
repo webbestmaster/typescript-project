@@ -4,6 +4,7 @@ import {promises as fileSystem} from 'fs';
 import path from 'path';
 
 import fastifyStatic from 'fastify-static';
+import fastifySecureSession from 'fastify-secure-session';
 import fastifyConstructor, {FastifyRequest, FastifyReply} from 'fastify';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
@@ -11,6 +12,7 @@ import ReactDOMServer from 'react-dom/server';
 import {FastifyError} from 'fastify-error';
 
 import {App, AppPropsType} from '../www/component/app/app';
+import {defaultServerDataContextConst} from '../www/provider/server-data/server-data-context-const';
 
 const cwd = process.cwd();
 
@@ -18,6 +20,7 @@ console.warn('server');
 
 const appProps: AppPropsType = {
     server: {defaultRoutingPathname: '/'},
+    serverData: defaultServerDataContextConst,
 };
 
 const serverPort = 3000;
@@ -32,7 +35,9 @@ const contentStringFull = contentStringBegin + contentStringEnd;
     const indexHtml: string = await fileSystem.readFile('./dist/index.html', 'utf-8');
 
     function getHtmlStringByRequest(request: FastifyRequest): string {
-        const htmlString = ReactDOMServer.renderToStaticMarkup(<App server={appProps.server} />);
+        const htmlString = ReactDOMServer.renderToStaticMarkup(
+            <App server={appProps.server} serverData={defaultServerDataContextConst} />
+        );
 
         return indexHtml.replace(contentStringFull, [contentStringBegin, htmlString, contentStringEnd].join(''));
     }
@@ -43,6 +48,25 @@ const contentStringFull = contentStringBegin + contentStringEnd;
         prefix: '/', // optional: default '/'
         root: path.join(cwd, 'dist'),
     });
+
+    fastify.register(fastifySecureSession, {
+        // the name of the session cookie, defaults to 'session'
+        cookie: {
+            httpOnly: true, // Use httpOnly for all production purposes
+            path: '/',
+            // options for setCookie, see https://github.com/fastify/fastify-cookie
+        },
+        cookieName: 'my-session-cookie',
+        // adapt this to point to the directory where secret-key is located
+        key: await fileSystem.readFile(path.join(cwd, 'secret-key')),
+    });
+
+    /*
+    fastify.register(fastifyCookie, {
+        secret: "my-secret", // for cookies signature
+        parseOptions: {}     // options for parsing cookies
+    })
+*/
 
     fastify.get('/', async (request: FastifyRequest, reply: FastifyReply): Promise<string> => {
         reply.type('text/html');
@@ -67,6 +91,25 @@ const contentStringFull = contentStringBegin + contentStringEnd;
 
     fastify.setNotFoundHandler((request: FastifyRequest, reply: FastifyReply) => {
         reply.code(404).type('text/plain').send('a custom not found');
+    });
+
+    fastify.post('/', (request, reply) => {
+        request.session.set('data', request.body);
+        reply.send('hello world');
+    });
+
+    fastify.get('/set-cookie', (request: FastifyRequest, reply: FastifyReply) => {
+        console.log('/////////');
+        console.log('set cookie 1');
+        console.log(request.session.get('data'));
+
+        // reply.setCookie('session', 'value', { secure: false }) // this will not be used
+
+        request.session.set('data', '12312312312321313');
+        request.session.options({maxAge: 1000 * 60 * 60});
+        console.log('set cookie 2');
+
+        reply.send('hello world');
     });
 
     await fastify.listen(serverPort);
