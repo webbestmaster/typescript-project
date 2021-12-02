@@ -12,7 +12,7 @@ import {Locale, useLocale} from '../../provider/locale/locale-context';
 import {ErrorData} from '../../layout/error-data/error-data';
 // import {appRoute} from '../../component/app/app-route';
 import pngImageSrc from '../home/image/marker-icon-2x.png';
-import svgImageSrc, {ReactComponent as SvgAsReactComponent} from '../home/image/questions-with-an-official-answer.svg';
+import svgImageSrc from '../home/image/questions-with-an-official-answer.svg';
 import homeStyle from '../home/home.scss';
 
 console.log(ErrorData);
@@ -84,8 +84,6 @@ export default function Info(): JSX.Element {
             <img alt="" src={pngImageSrc} />
 
             <img alt="" src={svgImageSrc} />
-
-            <SvgAsReactComponent />
 
             {/* <Spinner position="absolute" />*/}
             {/* <LoadMeAsyncLazy smth="info" />*/}

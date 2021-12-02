@@ -30,7 +30,7 @@ import {ServerDataContextType} from '../../provider/server-data/server-data-cont
 import {ServerDataContext} from '../../provider/server-data/server-data-context';
 
 import pngImageSrc from './image/marker-icon-2x.png';
-import svgImageSrc, {ReactComponent as SvgAsReactComponent} from './image/questions-with-an-official-answer.svg';
+import svgImageSrc from './image/questions-with-an-official-answer.svg';
 import homeStyle from './home.scss';
 
 console.log(ErrorData);
@@ -142,7 +142,7 @@ export function Home(): JSX.Element {
 
             <img alt="" src={svgImageSrc} />
 
-            <SvgAsReactComponent />
+            {/* <SvgImageComponent />*/}
 
             <GuardSuspense fallback={<Spinner isShow={isBrowser} position="absolute" />}>
                 <LoadMeAsync smth="smth" />

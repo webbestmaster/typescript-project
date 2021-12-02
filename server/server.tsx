@@ -93,7 +93,7 @@ const contentStringFull = contentStringBegin + contentStringEnd;
         reply.code(404).type('text/plain').send('a custom not found');
     });
 
-    fastify.post('/', (request, reply) => {
+    fastify.post('/', (request: FastifyRequest, reply: FastifyReply) => {
         request.session.set('data', request.body);
         reply.send('hello world');
     });
