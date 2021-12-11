@@ -2,6 +2,27 @@
 
 1. Install or download mongodb
 
+1.1 Install, mongodb 4.2
+
+```bash
+$ [sudo] apt update && sudo apt install gnupg -y
+$ wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
+$ echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
+$ [sudo] apt update
+$ [sudo] apt install mongodb-org
+```
+
+1.2 Remove
+```bash
+$ [sudo] apt-get remove --purge mongodb
+$ [sudo] apt-get autoremove --purge mongodb
+
+$ [sudo] service mongod stop
+$ [sudo] apt-get purge mongodb-org*
+$ [sudo] rm -r /var/log/mongodb
+$ [sudo] rm -r /var/lib/mongodb
+```
+
 2. Mongodb \
 2.1. Run
 
