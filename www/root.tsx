@@ -1,5 +1,6 @@
 /* global document */
 
+import {StrictMode} from 'react';
 import {hydrate, render} from 'react-dom';
 
 import {selector} from './const';
@@ -21,7 +22,11 @@ import {defaultServerDataContextConst} from './provider/server-data/server-data-
 
     const {innerHTML} = nodeWrapper;
 
-    const appNode = <App server={appProps.server} serverData={appProps.serverData} />;
+    const appNode = (
+        <StrictMode>
+            <App server={appProps.server} serverData={appProps.serverData} />
+        </StrictMode>
+    );
 
     if (innerHTML.trim() === '') {
         console.log('[main]: Render App as SPA');
