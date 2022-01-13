@@ -4,3 +4,15 @@ export class NeverError extends Error {
         super(`Unreachable statement: ${value}`);
     }
 }
+
+export function convertToError(mayBeError: unknown): Error {
+    if (mayBeError instanceof Error) {
+        return mayBeError;
+    }
+
+    if (mayBeError instanceof String || typeof mayBeError === 'string') {
+        return new Error(String(mayBeError));
+    }
+
+    return new Error('[convertToError]: unknown error');
+}

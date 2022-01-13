@@ -8,4 +8,8 @@ export const appRoute = {
     info: {
         path: '/info',
     },
-};
+
+    login: {
+        path: '/login',
+    },
+} as const;

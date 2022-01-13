@@ -2,15 +2,12 @@
 
 import {lazy, useEffect, useState, useContext} from 'react';
 import {useSystem} from 'react-system-hook';
-// import {NavigationLink} from 'react-router-dom-hook';
 import markdownPro, {MarkdownConfigShallowType} from 'markdown-pro';
-// import 'markdown-pro/dist/style.css';
 import {JSONSchemaType} from 'ajv';
 
 import {Locale, useLocale} from '../../provider/locale/locale-context';
 import {Spinner} from '../../layout/spinner/spinner';
 import {ErrorData} from '../../layout/error-data/error-data';
-// import {appRoute} from '../../component/app/app-route';
 import {LocaleNameEnum} from '../../provider/locale/locale-context-type';
 import {useFormat} from '../../hook/format-hook/format-hook';
 import {getTestNodeData, getTestNodeId} from '../../util/auto-test';
@@ -22,12 +19,10 @@ import {fetchX} from '../../util/fetch';
 import {GuardSuspense} from '../../layout/guard-suspense';
 import {appRoute} from '../../component/app/app-route';
 import {NavigationLink} from '../../layout/navigation-link/navigation-link';
-
 import {isBrowser} from '../../util/system';
-
 import {ServerDataContextType} from '../../provider/server-data/server-data-context-type';
-
 import {ServerDataContext} from '../../provider/server-data/server-data-context';
+import {useMakeExecutableState} from '../../util/function';
 
 import pngImageSrc from './image/marker-icon-2x.png';
 import svgImageSrc from './image/questions-with-an-official-answer.svg';
@@ -75,6 +70,9 @@ export function Home(): JSX.Element {
     const serverDataContext = useContext<ServerDataContextType>(ServerDataContext);
     const {getFormattedNumber} = useFormat();
     const {screenInfo} = useSystem();
+    const {execute, isInProgress, result, error} = useMakeExecutableState<[string, JSONSchemaType<MyIpType>], MyIpType>(
+        fetchX
+    );
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [myIp, setMyIp] = useState<MyIpType | null>(null);
@@ -84,9 +82,9 @@ export function Home(): JSX.Element {
         setIsOpen(false);
     }, 1e3);
 
-    // useEffect(() => {
-    //     fetchX<unknown>('/set-cookie');
-    // }, []);
+    useEffect(() => {
+        execute('https://api.ipify.org?format=json', myIpSchema);
+    }, [execute]);
 
     useEffect(() => {
         (async () => {
@@ -111,6 +109,9 @@ export function Home(): JSX.Element {
             <h3>{JSON.stringify(serverDataContext)}</h3>
 
             <h4>your ip is: {myIp ? myIp.ip : <AsciiSpinner />}</h4>
+            <h4>
+                <pre>{JSON.stringify({error, isInProgress, result}, null, 4)}</pre>
+            </h4>
 
             <hr />
 

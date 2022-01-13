@@ -1,19 +1,19 @@
 import {useCallback, useMemo, useState} from 'react';
 
-type StateHooksType<DateType> = {
+type StateHooksType<DataType> = {
     isInProgress: boolean;
     processError: Error | null;
     reset: () => void;
-    result: DateType | null;
+    result: DataType | null;
     setIsInProgress: (isInProgress: boolean) => void;
     setProcessError: (processError: Error | null) => void;
-    setResult: (result: DateType | null) => void;
+    setResult: (result: DataType | null) => void;
 };
 
-export function useApiHooks<DateType>(): StateHooksType<DateType> {
+export function useApiHooks<DataType>(): StateHooksType<DataType> {
     const [isInProgress, setIsInProgress] = useState<boolean>(false);
     const [processError, setProcessError] = useState<Error | null>(null);
-    const [result, setResult] = useState<DateType | null>(null);
+    const [result, setResult] = useState<DataType | null>(null);
 
     const reset = useCallback(() => {
         setProcessError(null);

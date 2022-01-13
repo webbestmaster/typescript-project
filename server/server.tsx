@@ -34,6 +34,7 @@ const contentStringFull = contentStringBegin + contentStringEnd;
 (async () => {
     const indexHtml: string = await fileSystem.readFile('./dist/index.html', 'utf-8');
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
     function getHtmlStringByRequest(request: FastifyRequest): string {
         const htmlString = ReactDOMServer.renderToStaticMarkup(
             <App server={appProps.server} serverData={defaultServerDataContextConst} />

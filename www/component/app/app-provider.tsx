@@ -3,6 +3,7 @@ import {ReactNode, StrictMode} from 'react';
 import {LocalizationProvider} from '../../provider/locale/locale-context';
 import {ServerData} from '../../provider/server-data/server-data-context';
 import {ServerDataContextType} from '../../provider/server-data/server-data-context-type';
+import {User} from '../../provider/user/user-context';
 
 type PropsType = {
     children: ReactNode;
@@ -15,7 +16,9 @@ export function AppProvider(props: PropsType): JSX.Element {
     return (
         <StrictMode>
             <ServerData defaultServerData={serverData}>
-                <LocalizationProvider>{children}</LocalizationProvider>
+                <User>
+                    <LocalizationProvider>{children}</LocalizationProvider>
+                </User>
             </ServerData>
         </StrictMode>
     );
