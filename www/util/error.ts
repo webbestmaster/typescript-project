@@ -4,6 +4,11 @@ export class NeverError extends Error {
         super(`Unreachable statement: ${value}`);
     }
 }
+export function throwError(error: Error): void {
+    console.warn('Throw a error!');
+    console.error(error);
+    throw error;
+}
 
 export function convertToError(mayBeError: unknown): Error {
     if (mayBeError instanceof Error) {

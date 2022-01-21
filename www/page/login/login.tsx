@@ -6,7 +6,7 @@ import {useUserContext} from '../../provider/user/user-context';
 import {useMakeExecutableState} from '../../util/function';
 import {LoginResponseType} from '../../service/auth/auth-type';
 import {loginUser} from '../../service/auth/auth-api';
-import {throwError} from '../../util/promise';
+import {throwError} from '../../util/error';
 
 export function Login(): JSX.Element {
     const userContext = useUserContext();
@@ -29,7 +29,7 @@ export function Login(): JSX.Element {
                 .finally(() => {
                     userContext.setUser({
                         id: '123',
-                        role: UserRoleEnum.guest,
+                        role: UserRoleEnum.admin,
                     });
                 })
                 .catch(throwError);
