@@ -43,7 +43,7 @@ const contentStringFull = contentStringBegin + contentStringEnd;
         return indexHtml.replace(contentStringFull, [contentStringBegin, htmlString, contentStringEnd].join(''));
     }
 
-    const fastify = fastifyConstructor({logger: true});
+    const fastify = fastifyConstructor({logger: false});
 
     fastify.register(fastifyStatic, {
         prefix: '/', // optional: default '/'
@@ -114,6 +114,54 @@ const contentStringFull = contentStringBegin + contentStringEnd;
     });
 
     await fastify.listen(serverPort);
+
+    /*
+    var sqlite3 = require('sqlite3').verbose();
+    var db = new sqlite3.Database(path.join(cwd, 'my_db_1'));
+
+    db.serialize(function () {
+        db.run('DROP TABLE IF EXISTS user');
+        db.run('CREATE TABLE IF NOT EXISTS user (name TEXT NOT NULL UNIQUE, login TEXT NOT NULL, age INT NOT NULL)');
+
+        db.run('INSERT INTO user (name, login, age) VALUES (?, ?, ?)', ['my_name', 'my_login', 16]);
+        db.run("INSERT INTO user (name, login, age) VALUES ('my_name_1', 'my_login', 16)");
+
+        // var stmt = db.prepare("INSERT INTO user VALUES (?, ?, ?)");
+        // for (var i = 0; i < 10; i++) {
+        //     stmt.run("Ipsum " + i);
+        // }
+        // stmt.finalize();
+
+        /!*
+                db.each("SELECT rowid AS id, info FROM lorem", function(err, row) {
+                    console.info(row.id + ": " + row.info);
+                });
+        *!/
+
+        /!*
+                db.each("SELECT * FROM user WHERE name = 'my_name_1'", function(err, row) {
+                    console.info(row);
+                });
+        *!/
+
+        db.run('INSERT INTO user (name, login, age) VALUES (?, ?, ?)', [
+            'my_name; DROP TABLE IF EXISTS user;',
+            'my_login',
+            16,
+        ]);
+
+        db.each("SELECT * FROM user WHERE name LIKE '%name%'", function (err, row) {
+            console.info(row);
+        });
+        /!*
+                db.each("SELECT rowid AS id, name FROM user", function(err, row) {
+                    console.info(row.id + ": " + row.info);
+                });
+        *!/
+    });
+
+    db.close();
+*/
 
     // console.log(htmlString);
 })();

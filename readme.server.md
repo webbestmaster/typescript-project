@@ -5,6 +5,12 @@
 > $ pm2 kill // kill 'em all!
 
 
+#### ./run-server.sh
+> $ npm run front:build
+> $ npm run back:build
+> $ npm run back:start
+
+
 ### Nginx
 
 Run
