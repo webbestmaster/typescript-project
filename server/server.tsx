@@ -2,6 +2,7 @@
 
 import {promises as fileSystem} from 'fs';
 import path from 'path';
+import sqlite3Import from 'sqlite3';
 
 import fastifyStatic from 'fastify-static';
 import fastifySecureSession from 'fastify-secure-session';
@@ -115,16 +116,17 @@ const contentStringFull = contentStringBegin + contentStringEnd;
 
     await fastify.listen(serverPort);
 
-    /*
-    var sqlite3 = require('sqlite3').verbose();
-    var db = new sqlite3.Database(path.join(cwd, 'my_db_1'));
+    const sqlite3 = sqlite3Import.verbose();
+    const database = new sqlite3.Database(path.join(cwd, 'my_db_1'));
 
-    db.serialize(function () {
-        db.run('DROP TABLE IF EXISTS user');
-        db.run('CREATE TABLE IF NOT EXISTS user (name TEXT NOT NULL UNIQUE, login TEXT NOT NULL, age INT NOT NULL)');
+    database.serialize(() => {
+        database.run('DROP TABLE IF EXISTS user');
+        database.run(
+            'CREATE TABLE IF NOT EXISTS user (name TEXT NOT NULL UNIQUE, login TEXT NOT NULL, age INT NOT NULL)'
+        );
 
-        db.run('INSERT INTO user (name, login, age) VALUES (?, ?, ?)', ['my_name', 'my_login', 16]);
-        db.run("INSERT INTO user (name, login, age) VALUES ('my_name_1', 'my_login', 16)");
+        database.run('INSERT INTO user (name, login, age) VALUES (?, ?, ?)', ['my_name', 'my_login', 16]);
+        database.run("INSERT INTO user (name, login, age) VALUES ('my_name_1', 'my_login', 16)");
 
         // var stmt = db.prepare("INSERT INTO user VALUES (?, ?, ?)");
         // for (var i = 0; i < 10; i++) {
@@ -132,36 +134,41 @@ const contentStringFull = contentStringBegin + contentStringEnd;
         // }
         // stmt.finalize();
 
-        /!*
+        /*
                 db.each("SELECT rowid AS id, info FROM lorem", function(err, row) {
                     console.info(row.id + ": " + row.info);
                 });
-        *!/
+        */
 
-        /!*
+        /*
                 db.each("SELECT * FROM user WHERE name = 'my_name_1'", function(err, row) {
                     console.info(row);
                 });
-        *!/
+        */
 
-        db.run('INSERT INTO user (name, login, age) VALUES (?, ?, ?)', [
+        database.run('INSERT INTO user (name, login, age) VALUES (?, ?, ?)', [
             'my_name; DROP TABLE IF EXISTS user;',
             'my_login',
             16,
         ]);
 
-        db.each("SELECT * FROM user WHERE name LIKE '%name%'", function (err, row) {
+        type RowType = {
+            age: number;
+            login: string;
+            name: string;
+        };
+
+        database.each("SELECT * FROM user WHERE name LIKE '%name%'", (error: Error | null, row: RowType) => {
             console.info(row);
         });
-        /!*
+        /*
                 db.each("SELECT rowid AS id, name FROM user", function(err, row) {
                     console.info(row.id + ": " + row.info);
                 });
-        *!/
+        */
     });
 
-    db.close();
-*/
+    database.close();
 
     // console.log(htmlString);
 })();
