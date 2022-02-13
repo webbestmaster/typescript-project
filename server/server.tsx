@@ -2,6 +2,7 @@
 
 import {promises as fileSystem} from 'fs';
 import path from 'path';
+
 import sqlite3Import from 'sqlite3';
 
 import fastifyStatic from 'fastify-static';

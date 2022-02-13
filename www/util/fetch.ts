@@ -4,7 +4,7 @@ import {JSONSchemaType} from 'ajv';
 
 import {getExpectedStructure} from './object';
 
-export enum FetchMethodEnum {
+export const enum FetchMethodEnum {
     delete = 'DELETE',
     get = 'GET',
     patch = 'PATCH',

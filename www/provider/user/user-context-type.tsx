@@ -1,4 +1,4 @@
-export enum UserRoleEnum {
+export const enum UserRoleEnum {
     admin = 'admin',
     guest = 'guest',
 }

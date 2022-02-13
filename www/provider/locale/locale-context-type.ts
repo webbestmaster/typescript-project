@@ -6,7 +6,7 @@ export enum LocaleNameEnum {
 }
 
 /*
-export enum ShortLocaleNameEnum {
+export const enum ShortLocaleNameEnum {
     en = 'en',
     ru = 'ru',
     zh = 'zh',

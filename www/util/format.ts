@@ -2,7 +2,7 @@
 
 import {LocaleNameEnum} from '../provider/locale/locale-context-type';
 
-export enum TimeSizeEnum {
+export const enum TimeSizeEnum {
     day = 'day',
     hour = 'hour',
     minute = 'minute',
