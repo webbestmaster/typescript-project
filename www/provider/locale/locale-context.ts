@@ -6,7 +6,7 @@ import {LangKeyType} from './translation/type';
 import {allLocalesData} from './locale-context-const';
 
 const localizationConfig: LocalizationConfigType<LangKeyType, LocaleNameEnum> = {
-    defaultLocaleName: getSavedLocaleName<LocaleNameEnum>(Object.values(LocaleNameEnum)),
+    defaultLocaleName: getSavedLocaleName(),
     localization: allLocalesData,
     onUseEffect: (localizationProviderState: LocalizationStateType<LocaleNameEnum>) => {
         const {localeName} = localizationProviderState;

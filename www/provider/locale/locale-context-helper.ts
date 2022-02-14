@@ -1,13 +1,12 @@
 /* global localStorage, navigator */
 
-// import {getEnumValueEnsure} from '../../util/enum';
-
 import {localeConst} from './locale-context-const';
-// import {LocaleNameEnum, ShortLocaleNameEnum} from './locale-context-type';
+import {LocaleNameEnum} from './locale-context-type';
 
 // eslint-disable-next-line complexity
-export function getSavedLocaleName<LocaleName extends string>(localeNameList: Array<LocaleName>): LocaleName {
-    const [defaultLocaleName] = localeNameList;
+export function getSavedLocaleName(): LocaleNameEnum {
+    const localeNameList = Object.values(LocaleNameEnum);
+    const defaultLocaleName = localeConst.defaults.localeName;
 
     if (typeof localStorage === 'undefined' || typeof navigator === 'undefined') {
         return defaultLocaleName;
