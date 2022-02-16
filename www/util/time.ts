@@ -1,5 +1,3 @@
-/* global setTimeout */
-
 import {LocaleNameEnum} from '../provider/locale/locale-context-type';
 
 import {getFormattedNumber, NumberFormatOptionsType, TimeSizeEnum} from './format';
@@ -12,14 +10,6 @@ export type GetDateTimeDifferenceOptionType = {
     milliseconds: number;
     sliceSize: number;
 };
-
-export function waitForTime(timeInMs: number): Promise<void> {
-    return new Promise<void>((resolve: () => void) => {
-        setTimeout(() => {
-            resolve();
-        }, timeInMs);
-    });
-}
 
 export function getDateTimeHumanSize(option: GetDateTimeDifferenceOptionType): string {
     const {milliseconds, sliceSize, localeName, formatOption} = option;
