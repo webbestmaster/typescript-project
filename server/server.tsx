@@ -3,8 +3,6 @@
 import {promises as fileSystem} from 'fs';
 import path from 'path';
 
-import sqlite3Import from 'sqlite3';
-
 import fastifyStatic from 'fastify-static';
 import fastifySecureSession from 'fastify-secure-session';
 import fastifyConstructor, {FastifyRequest, FastifyReply} from 'fastify';
@@ -15,6 +13,8 @@ import {FastifyError} from 'fastify-error';
 
 import {App, AppPropsType} from '../www/component/app/app';
 import {defaultServerDataContextConst} from '../www/provider/server-data/server-data-context-const';
+
+import {initializeUserDataBase} from './auth/auth-user-data-base';
 
 const cwd = process.cwd();
 
@@ -34,6 +34,8 @@ const contentStringFull = contentStringBegin + contentStringEnd;
 // console.warn(ReactDOMServer.renderToString(<App server={appProps.server}/>));
 
 (async () => {
+    initializeUserDataBase();
+
     const indexHtml: string = await fileSystem.readFile('./dist/index.html', 'utf8');
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
@@ -117,6 +119,7 @@ const contentStringFull = contentStringBegin + contentStringEnd;
 
     await fastify.listen(serverPort);
 
+    /*
     const sqlite3 = sqlite3Import.verbose();
     const database = new sqlite3.Database(path.join(cwd, 'my_db_1'));
 
@@ -135,17 +138,17 @@ const contentStringFull = contentStringBegin + contentStringEnd;
         // }
         // stmt.finalize();
 
-        /*
+        /!*
                 db.each("SELECT rowid AS id, info FROM lorem", function(err, row) {
                     console.info(row.id + ": " + row.info);
                 });
-        */
+        *!/
 
-        /*
+        /!*
                 db.each("SELECT * FROM user WHERE name = 'my_name_1'", function(err, row) {
                     console.info(row);
                 });
-        */
+        *!/
 
         database.run('INSERT INTO user (name, login, age) VALUES (?, ?, ?)', [
             'my_name; DROP TABLE IF EXISTS user;',
@@ -162,15 +165,15 @@ const contentStringFull = contentStringBegin + contentStringEnd;
         database.each("SELECT * FROM user WHERE name LIKE '%name%'", (error: Error | null, row: RowType) => {
             console.info(row);
         });
-        /*
+        /!*
                 db.each("SELECT rowid AS id, name FROM user", function(err, row) {
                     console.info(row.id + ": " + row.info);
                 });
-        */
+        *!/
     });
 
     database.close();
-
+    */
     // console.log(htmlString);
 })();
 
