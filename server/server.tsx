@@ -1,10 +1,11 @@
 /* global process */
 
-import {promises as fileSystem} from 'fs';
+// import {promises as fileSystem} from 'fs';
 import path from 'path';
 
 import fastifyStatic from 'fastify-static';
-import fastifySecureSession from 'fastify-secure-session';
+import fastifyCors from 'fastify-cors';
+// import fastifySecureSession from 'fastify-secure-session';
 import fastifyConstructor, {FastifyRequest, FastifyReply} from 'fastify';
 import {FastifyError} from 'fastify-error';
 
@@ -21,12 +22,15 @@ const serverPort = 3000;
 
     const fastify = fastifyConstructor({logger: false});
 
+    fastify.register(fastifyCors);
+
     fastify.register(fastifyStatic, {
         prefix: '/', // optional: default '/'
         root: path.join(cwd, 'dist'),
     });
 
     // options for setCookie, see https://github.com/fastify/fastify-cookie
+    /*
     fastify.register(fastifySecureSession, {
         // the name of the session cookie, defaults to 'session'
         cookie: {
@@ -37,6 +41,7 @@ const serverPort = 3000;
         // adapt this to point to the directory where secret-key is located
         key: await fileSystem.readFile(path.join(cwd, 'secret-key')),
     });
+*/
 
     fastify.get('/', getHtmlCallBack);
     fastify.get('/login', getHtmlCallBack);

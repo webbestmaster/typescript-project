@@ -1,16 +1,34 @@
 import {FastifyRequest, FastifyReply} from 'fastify';
 
-export function postLogin(request: FastifyRequest<{Body: Record<string, string>}>, reply: FastifyReply) {
-    console.log(request.session.get('data'));
+import {findUserByCredentials} from '../auth/auth-data-base';
+import {LoginResponseType} from '../../www/service/auth/auth-type';
 
-    const {body = {}} = request;
+export async function postLogin(request: FastifyRequest<{Body: string}>, reply: FastifyReply): Promise<void> {
+    const {body} = request;
 
-    const {login, password} = body;
+    const parsedData: Record<string, unknown> = JSON.parse(body);
+
+    const {login, password} = parsedData;
 
     if (typeof login !== 'string' || typeof password !== 'string') {
         reply.code(400).send(null);
         return;
     }
 
-    reply.send('hello world');
+    const user = await findUserByCredentials(login, password);
+
+    if (!user) {
+        reply.code(404).send(null);
+        return;
+    }
+
+    const userForFront: LoginResponseType = {
+        user: {
+            id: user.id,
+            login: user.login,
+            role: user.role,
+        },
+    };
+
+    reply.code(200).header('Content-Type', 'application/json; charset=utf-8').send(userForFront);
 }

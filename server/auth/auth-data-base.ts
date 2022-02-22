@@ -5,7 +5,6 @@ import path from 'path';
 import sqlite3Import, {Database} from 'sqlite3';
 
 import {PromiseResolveType} from '../../www/util/promise';
-
 import {UserRoleEnum} from '../../www/provider/user/user-context-type';
 
 import {AuthUserFullType} from './auth-type';
@@ -77,10 +76,10 @@ export function findUserById(authUserId: string): Promise<AuthUserFullType | nul
 export function createUser(newUserLogin: string, newUserPassword: string): Promise<void> {
     return new Promise<void>((resolve: PromiseResolveType<void>, reject: PromiseResolveType<Error>) => {
         const dataBase = getDataBase();
-        const id = getRandomStringHash();
+        const id = getRandomStringHash().slice(0, 16);
 
         dataBase.run(
-            'INSERT INTO user (id, login, password) VALUES (?, ?, ?)',
+            'INSERT INTO user (id, login, password, role) VALUES (?, ?, ?, ?)',
             [id, newUserLogin, getSha256Hash(newUserPassword), UserRoleEnum.user],
             createRunCallBack(resolve, reject)
         );
