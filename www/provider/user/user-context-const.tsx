@@ -6,6 +6,7 @@ export const defaultUserContext: UserContextType = {
     setUser: noop,
     user: {
         id: '',
-        role: UserRoleEnum.guest,
+        login: '',
+        role: UserRoleEnum.user,
     },
 };

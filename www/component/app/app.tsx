@@ -3,10 +3,12 @@ import {ServerDataContextType} from '../../provider/server-data/server-data-cont
 import {AppProvider} from './app-provider';
 import {AppRouting} from './app-routing';
 
+export type AppPropsServerType = {
+    defaultRoutingPathname: string;
+};
+
 export type AppPropsType = {
-    server: {
-        defaultRoutingPathname: string;
-    };
+    server: AppPropsServerType;
     serverData: ServerDataContextType;
 };
 

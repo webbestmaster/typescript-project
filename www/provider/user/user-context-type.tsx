@@ -1,10 +1,11 @@
 export const enum UserRoleEnum {
     admin = 'admin',
-    guest = 'guest',
+    user = 'user',
 }
 
 export type UserType = {
     id: string;
+    login: string;
     role: UserRoleEnum;
 };
 

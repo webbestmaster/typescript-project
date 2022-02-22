@@ -8,9 +8,10 @@ export const loginResponseSchema: JSONSchemaType<LoginResponseType> = {
         user: {
             properties: {
                 id: {type: 'string'},
+                login: {type: 'string'},
                 role: {type: 'string'},
             },
-            required: ['id', 'role'],
+            required: ['id', 'login', 'role'],
             type: 'object',
         },
     },

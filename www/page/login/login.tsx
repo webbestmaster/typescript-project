@@ -1,7 +1,6 @@
 /* global HTMLFormElement, HTMLInputElement */
 import {SyntheticEvent, useCallback, useState} from 'react';
 
-import {UserRoleEnum} from '../../provider/user/user-context-type';
 import {useUserContext} from '../../provider/user/user-context';
 import {useMakeExecutableState} from '../../util/function';
 import {LoginResponseType} from '../../service/auth/auth-type';
@@ -25,23 +24,13 @@ export function Login(): JSX.Element {
 
                     userContext.setUser(user);
                 })
-                // `userContext.setUser({` added as mock data only
-                .finally(() => {
-                    userContext.setUser({
-                        id: '123',
-                        role: UserRoleEnum.admin,
-                    });
-                })
                 .catch(throwError);
-            // console.log({login, password});
-            //
-            // console.log('//');
         },
         [login, password, loginHook, userContext]
     );
 
     return (
-        <form action="/login" onSubmit={onSubmit}>
+        <form action="/api/login" onSubmit={onSubmit}>
             <pre>{JSON.stringify(userContext, null, 4)}</pre>
             <pre>{JSON.stringify(loginHook, null, 4)}</pre>
 
@@ -65,6 +54,7 @@ export function Login(): JSX.Element {
                     type="text"
                 />
             </label>
+            {loginHook.error ? <h3>ERROR login</h3> : '???'}
             <br />
             <button type="submit">submit</button>
         </form>

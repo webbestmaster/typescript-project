@@ -28,8 +28,6 @@ import pngImageSrc from './image/marker-icon-2x.png';
 import svgImageSrc from './image/questions-with-an-official-answer.svg';
 import homeStyle from './home.scss';
 
-console.log(ErrorData);
-
 type MyIpType = {
     ip: string;
 };
@@ -63,9 +61,10 @@ const config: MarkdownConfigShallowType = {
 
 const htmlCodeConfigured = markdownPro('# Markdown Pro', config);
 
-console.log(htmlCode, htmlCodeConfigured);
-
 export function Home(): JSX.Element {
+    console.log(htmlCode, htmlCodeConfigured);
+    console.log(ErrorData);
+
     const {getLocalizedString, setLocaleName, localeName} = useLocale();
     const serverDataContext = useContext<ServerDataContextType>(ServerDataContext);
     const {getFormattedNumber} = useFormat();
