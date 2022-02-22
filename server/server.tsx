@@ -1,17 +1,17 @@
-/* global process */
+/* global process, Buffer */
 
-// import {promises as fileSystem} from 'fs';
 import path from 'path';
 
 import fastifyStatic from 'fastify-static';
 import fastifyCors from 'fastify-cors';
-// import fastifySecureSession from 'fastify-secure-session';
+import fastifySecureSession from 'fastify-secure-session';
 import fastifyConstructor, {FastifyRequest, FastifyReply} from 'fastify';
 import {FastifyError} from 'fastify-error';
 
 import {initializeUserDataBase} from './auth/auth-data-base';
 import {postLogin} from './api/login';
 import {getHtmlCallBack} from './ssr/ssr';
+import {secretKey} from './auth/auth-key';
 
 const cwd = process.cwd();
 
@@ -30,18 +30,16 @@ const serverPort = 3000;
     });
 
     // options for setCookie, see https://github.com/fastify/fastify-cookie
-    /*
     fastify.register(fastifySecureSession, {
         // the name of the session cookie, defaults to 'session'
         cookie: {
             httpOnly: true, // Use httpOnly for all production purposes
             path: '/',
         },
-        cookieName: 'my-session-cookie',
+        cookieName: 'site-cookie',
         // adapt this to point to the directory where secret-key is located
-        key: await fileSystem.readFile(path.join(cwd, 'secret-key')),
+        key: Buffer.from(secretKey, 'base64').slice(0, 32),
     });
-*/
 
     fastify.get('/', getHtmlCallBack);
     fastify.get('/login', getHtmlCallBack);

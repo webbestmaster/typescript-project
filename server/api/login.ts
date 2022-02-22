@@ -4,11 +4,19 @@ import {findUserByCredentials} from '../auth/auth-data-base';
 import {LoginResponseType} from '../../www/service/auth/auth-type';
 
 export async function postLogin(request: FastifyRequest<{Body: string}>, reply: FastifyReply): Promise<void> {
-    const {body} = request;
+    const {
+        body,
+        // session
+    } = request;
 
     const parsedData: Record<string, unknown> = JSON.parse(body);
 
     const {login, password} = parsedData;
+
+    // console.log(session.get('data'))
+    //
+    // session.set('data', '12312312312321313');
+    // session.options({maxAge: 1000 * 60 * 60});
 
     if (typeof login !== 'string' || typeof password !== 'string') {
         reply.code(400).send(null);
