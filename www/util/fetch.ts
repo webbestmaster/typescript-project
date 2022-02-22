@@ -73,8 +73,10 @@ export async function fetchX<ExpectedResponseType>(
 
     const fetchBeginTimeStamp = Date.now();
 
+    const urlPrefix = 'http://localhost:3000';
+
     try {
-        const response: Response = await fetch(url, options);
+        const response: Response = await fetch(urlPrefix + url, options);
 
         if (!response.ok) {
             throw new Error(await response.text());
