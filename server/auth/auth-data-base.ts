@@ -76,7 +76,7 @@ export function findUserById(authUserId: string): Promise<AuthUserFullType | nul
 export function createUser(newUserLogin: string, newUserPassword: string): Promise<void> {
     return new Promise<void>((resolve: PromiseResolveType<void>, reject: PromiseResolveType<Error>) => {
         const dataBase = getDataBase();
-        const id = getRandomStringHash().slice(0, 16);
+        const id = getRandomStringHash(16);
 
         dataBase.run(
             'INSERT INTO user (id, login, password, role) VALUES (?, ?, ?, ?)',
