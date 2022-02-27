@@ -24,7 +24,7 @@ export const getDataBase: () => Database = (() => {
 export function initializeUserDataBase() {
     const dataBase = getDataBase();
 
-    // dataBase.run('DROP TABLE IF EXISTS user');
+    dataBase.run('DROP TABLE IF EXISTS user');
 
     // createUser('login_1', 'password_2');
     // createUser('login_2', 'password_2');
@@ -32,10 +32,14 @@ export function initializeUserDataBase() {
     // createUser('login_4', 'password_2');
     // createUser('login_5', 'password_2');
 
-    dataBase.run(
-        'CREATE TABLE IF NOT EXISTS user ' +
-            '(id TEXT NOT NULL UNIQUE, login TEXT NOT NULL UNIQUE, password TEXT NOT NULL, role TEXT NOT NULL)'
-    );
+    const fieldsInitialization = [
+        'id TEXT NOT NULL UNIQUE',
+        'login TEXT NOT NULL UNIQUE',
+        'password TEXT NOT NULL',
+        'role TEXT NOT NULL',
+    ].join(', ');
+
+    dataBase.run(`CREATE TABLE IF NOT EXISTS user (${fieldsInitialization})`);
 }
 
 // return user's data or null
@@ -43,7 +47,11 @@ export function findUserByLogin(authUserLogin: string): Promise<AuthUserFullType
     return new Promise<AuthUserFullType | null>((resolve: PromiseResolveType<AuthUserFullType | null>) => {
         const dataBase = getDataBase();
 
-        dataBase.get('SELECT * FROM user WHERE login = ?', [authUserLogin], createFindUserCallback(resolve));
+        dataBase.get(
+            'SELECT * FROM user WHERE login = $login',
+            {$login: authUserLogin},
+            createFindUserCallback(resolve)
+        );
     });
 }
 
@@ -56,8 +64,8 @@ export function findUserByCredentials(
         const dataBase = getDataBase();
 
         dataBase.get(
-            'SELECT * FROM user WHERE login = ? AND password = ?',
-            [authUserLogin, getSha256Hash(authUserPassword)],
+            'SELECT * FROM user WHERE login = $login AND password = $password',
+            {$login: authUserLogin, $password: getSha256Hash(authUserPassword)},
             createFindUserCallback(resolve)
         );
     });
@@ -68,7 +76,7 @@ export function findUserById(authUserId: string): Promise<AuthUserFullType | nul
     return new Promise<AuthUserFullType | null>((resolve: PromiseResolveType<AuthUserFullType | null>) => {
         const dataBase = getDataBase();
 
-        dataBase.get('SELECT * FROM user WHERE id = ?', [authUserId], createFindUserCallback(resolve));
+        dataBase.get('SELECT * FROM user WHERE id = $id', {$id: authUserId}, createFindUserCallback(resolve));
     });
 }
 
