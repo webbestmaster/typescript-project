@@ -11,21 +11,19 @@ import {getRandomStringHash, getSha256Hash} from '../util/string';
 
 import {AuthUserFullType} from './auth-type';
 
-const cwd = process.cwd();
-
-const pathToUserDataBase: string = path.join(cwd, 'server', 'auth', 'user-db');
-
-export const getDataBase: () => Database = (() => {
+const getDataBase: () => Database = (() => {
+    const cwd = process.cwd();
+    const pathToDataBase: string = path.join(cwd, 'server', 'auth', 'user.sqlite3');
     const sqlite3 = sqlite3Import.verbose();
-    const sqlite3Database: Database = new sqlite3.Database(pathToUserDataBase);
+    const sqlite3Database: Database = new sqlite3.Database(pathToDataBase);
 
     return (): Database => sqlite3Database;
 })();
 
-export function initializeUserDataBase() {
+export function initializeDataBase() {
     const dataBase = getDataBase();
 
-    dataBase.run('DROP TABLE IF EXISTS user');
+    // dataBase.run('DROP TABLE IF EXISTS user');
 
     // createUser('login_1', 'password_2');
     // createUser('login_2', 'password_2');

@@ -8,7 +8,8 @@ import fastifySecureSession from 'fastify-secure-session';
 import fastifyConstructor, {FastifyRequest, FastifyReply} from 'fastify';
 import {FastifyError} from 'fastify-error';
 
-import {initializeUserDataBase} from './auth/auth-data-base';
+import {initializeDataBase as initializeUserDataBase} from './auth/auth-data-base';
+import {initializeDataBase as initializeArticleDataBase} from './article/article-data-base';
 import {postLogin} from './api/login';
 import {getHtmlCallBack} from './ssr/ssr';
 import {secretKey} from './auth/auth-key';
@@ -19,6 +20,7 @@ const serverPort = 3000;
 
 (async () => {
     initializeUserDataBase();
+    initializeArticleDataBase();
 
     const fastify = fastifyConstructor({logger: false});
 

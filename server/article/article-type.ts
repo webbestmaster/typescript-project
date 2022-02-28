@@ -1,10 +1,10 @@
-export const enum ArticleTypeEnum {
+const enum ArticleTypeEnum {
     article = 'article',
     container = 'container',
     root = 'root',
 }
 
-export const enum SubDocumentListViewTypeEnum {
+const enum SubDocumentListViewTypeEnum {
     header = 'header', // just header
     headerAudio = 'header-audio', // header + audio
     headerImage = 'header-image', // header + image
@@ -15,7 +15,7 @@ export type ArticleType = {
     authorList: Array<string>;
     compositorList: Array<string>;
     content: string;
-    createDate: string;
+    createdDate: string;
     description: string;
     directorList: Array<string>;
     fileList: Array<string>;
@@ -38,5 +38,5 @@ export type ArticleType = {
     title: string;
     titleImage: string;
     type: ArticleTypeEnum;
-    updateDate: string;
+    updatedDate: string;
 };
