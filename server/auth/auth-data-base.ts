@@ -6,9 +6,10 @@ import sqlite3Import, {Database} from 'sqlite3';
 
 import {PromiseResolveType} from '../../www/util/promise';
 import {UserRoleEnum} from '../../www/provider/user/user-context-type';
+import {createFindCallback, createRunCallBack} from '../util/data-base';
+import {getRandomStringHash, getSha256Hash} from '../util/string';
 
 import {AuthUserFullType} from './auth-type';
-import {createFindUserCallback, createRunCallBack, getRandomStringHash, getSha256Hash} from './auth-helper';
 
 const cwd = process.cwd();
 
@@ -50,7 +51,7 @@ export function findUserByLogin(authUserLogin: string): Promise<AuthUserFullType
         dataBase.get(
             'SELECT * FROM user WHERE login = $login',
             {$login: authUserLogin},
-            createFindUserCallback(resolve)
+            createFindCallback<AuthUserFullType>(resolve)
         );
     });
 }
@@ -66,7 +67,7 @@ export function findUserByCredentials(
         dataBase.get(
             'SELECT * FROM user WHERE login = $login AND password = $password',
             {$login: authUserLogin, $password: getSha256Hash(authUserPassword)},
-            createFindUserCallback(resolve)
+            createFindCallback<AuthUserFullType>(resolve)
         );
     });
 }
@@ -76,7 +77,11 @@ export function findUserById(authUserId: string): Promise<AuthUserFullType | nul
     return new Promise<AuthUserFullType | null>((resolve: PromiseResolveType<AuthUserFullType | null>) => {
         const dataBase = getDataBase();
 
-        dataBase.get('SELECT * FROM user WHERE id = $id', {$id: authUserId}, createFindUserCallback(resolve));
+        dataBase.get(
+            'SELECT * FROM user WHERE id = $id',
+            {$id: authUserId},
+            createFindCallback<AuthUserFullType>(resolve)
+        );
     });
 }
 
