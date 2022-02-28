@@ -86,6 +86,7 @@ export function findArticleBySlug(articleSlug: string): Promise<ArticleType | nu
     });
 }
 
+// throw error is failed
 export function createArticleBySlug(slug: string): Promise<void> {
     return new Promise<void>((resolve: PromiseResolveType<void>, reject: PromiseResolveType<Error>) => {
         const dataBase = getDataBase();
