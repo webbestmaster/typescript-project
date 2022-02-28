@@ -8,7 +8,10 @@ import {PromiseResolveType} from '../../www/util/promise';
 import {createFindCallback, createRunCallBack} from '../util/data-base';
 import {getRandomStringHash} from '../util/string';
 
-import {ArticleType} from './article-type';
+import {
+    ArticleType,
+    // ArticleFullDefinedType
+} from './article-type';
 
 const getDataBase: () => Database = (() => {
     const cwd = process.cwd();
@@ -27,6 +30,10 @@ export function initializeDataBase() {
     // createArticleBySlug('slug-1');
     // createArticleBySlug('slug-2');
     // createArticleBySlug('slug-3');
+
+    // (async () => {
+    //     console.log(await findArticleBySlug('slug-1'))
+    // })();
 
     const fieldsInitialization = [
         'id TEXT NOT NULL UNIQUE', // id: string;
@@ -94,6 +101,35 @@ export function createArticleBySlug(slug: string): Promise<void> {
 
         dataBase.run('INSERT INTO article (id, slug) VALUES (?, ?)', [id, slug], createRunCallBack(resolve, reject));
     });
+}
+
+// throw error is failed
+export async function updateArticleById(
+    articleId: string
+    // articleNewData: ArticleType
+): Promise<void> {
+    const existedArticle = await findArticleById(articleId);
+
+    if (!existedArticle) {
+        throw new Error(`[updateArticleById]: Can not update article by id: ${articleId}`);
+    }
+
+    /*
+    return new Promise<void>((resolve: PromiseResolveType<void>, reject: PromiseResolveType<Error>) => {
+        const dataBase = getDataBase();
+        const id = getRandomStringHash(16);
+
+        dataBase.run('UPDATE article (id, slug) VALUES (?, ?)', [id, slug], createRunCallBack(resolve, reject));
+    });
+
+
+    return new Promise<void>((resolve: PromiseResolveType<void>, reject: PromiseResolveType<Error>) => {
+        const dataBase = getDataBase();
+        const id = getRandomStringHash(16);
+
+        dataBase.run('INSERT INTO article (id, slug) VALUES (?, ?)', [id, slug], createRunCallBack(resolve, reject));
+    });
+*/
 }
 
 /*

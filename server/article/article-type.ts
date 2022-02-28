@@ -1,16 +1,18 @@
-const enum ArticleTypeEnum {
+import {NullablePropertyType} from '../../www/util/type';
+
+export const enum ArticleTypeEnum {
     article = 'article',
     container = 'container',
     root = 'root',
 }
 
-const enum SubDocumentListViewTypeEnum {
+export const enum SubDocumentListViewTypeEnum {
     header = 'header', // just header
     headerAudio = 'header-audio', // header + audio
     headerImage = 'header-image', // header + image
 }
 
-export type ArticleType = {
+export type ArticleFullDefinedType = {
     artistList: Array<string>;
     authorList: Array<string>;
     compositorList: Array<string>;
@@ -40,3 +42,5 @@ export type ArticleType = {
     type: ArticleTypeEnum;
     updatedDate: string;
 };
+
+export type ArticleType = Partial<NullablePropertyType<ArticleFullDefinedType>> & {id: string; slug: string};
