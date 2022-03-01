@@ -30,16 +30,30 @@ export function initializeDataBase() {
     // createArticleBySlug('slug-3');
 
     /*
+    (async () => {
+        console.log(
+            await updateArticleById(
+                'a4a9732fa4ee77b4',
+                {
+                    content: 'aaddasasd',
+                    artistList: ['asdsa', 'фывыфвф'],
+                }
+            )
+        );
+    })();
+*/
+
+    /*
         (async () => {
             console.log(await findArticleBySlug('slug-1'))
         })();
         (async () => {
-            console.log(await findArticleById('1b016ed61369b6ec'))
+            console.log(dataBaseToFullDefinedArticle(await findArticleById('a4a9732fa4ee77b4')))
         })();
-    */
+*/
 
     const fieldsInitialization = [
-        'id TEXT NOT NULL UNIQUE', // id: string;
+        'articleType TEXT', // type: ArticleTypeEnum;
         'artistList TEXT', // artistList: Array<string>;
         'authorList TEXT', // authorList: Array<string>;
         'compositorList TEXT', // compositorList: Array<string>;
@@ -50,6 +64,7 @@ export function initializeDataBase() {
         'fileList TEXT', // fileList: Array<string>;
         'hasMetaRobotsFollowSeo INTEGER', // hasMetaRobotsFollowSeo: boolean; // Add/combine <meta name="robots" content="nofollow"/>
         'hasMetaRobotsNoIndexSeo INTEGER', // hasMetaRobotsNoIndexSeo: boolean; // Add/combine <meta name="robots" content="noindex"/> and add X-Robots-Tag: noindex
+        'id TEXT NOT NULL UNIQUE', // id: string;
         'illustratorList TEXT', // illustratorList: Array<string>;
         'isActive INTEGER', // isActive: boolean; // actually temporary "removed"
         'isInSiteMapXmlSeo INTEGER', // isInSiteMapXmlSeo: boolean; // has sitemap.xml link to article on not
@@ -61,11 +76,10 @@ export function initializeDataBase() {
         'slug TEXT NOT NULL UNIQUE', // slug: string;
         'subDocumentIdList TEXT', // subDocumentIdList: Array<string>;
         'subDocumentListViewType TEXT', // subDocumentListViewType: SubDocumentListViewTypeEnum;
+        'tagList TEXT', // tags: Array<string>;
         'tagTitleSeo TEXT', // tagTitleSeo: string; // tag <title>....</title>
-        'tags TEXT', // tags: Array<string>;
         'title TEXT', // title: string;
         'titleImage TEXT', // titleImage: string;
-        'type TEXT', // type: ArticleTypeEnum;
         'updatedDate TEXT', // updatedDate: string;
     ].join(', ');
 

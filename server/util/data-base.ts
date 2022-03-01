@@ -8,6 +8,7 @@ export type DataBaseValueType = number | string | null;
 export function createRunCallBack(resolve: PromiseResolveType<void>, reject: PromiseResolveType<Error>) {
     return (runResult?: RunResult) => {
         if (runResult) {
+            console.log(runResult);
             reject(new Error('[createRunCallBack]: can not run'));
             return;
         }
