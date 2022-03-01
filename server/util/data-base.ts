@@ -31,12 +31,20 @@ export function createFindCallback<DataType>(resolve: PromiseResolveType<DataTyp
     };
 }
 
-export function stringToArray(dataBaseText: string): Array<string> {
+export function stringToArray(dataBaseText: string | null): Array<string> {
+    if (!dataBaseText || dataBaseText.trim() === '') {
+        return [];
+    }
+
     return dataBaseText.split('|').map(toTrimmedString).filter(Boolean).map(decodeURIComponent);
 }
 
 export function arrayToString(arrayOfStringForDataBase: Array<string>): string {
     return arrayOfStringForDataBase.map(toTrimmedString).filter(Boolean).map(encodeURIComponent).join('|');
+}
+
+export function defineAsString(value: unknown): string {
+    return typeof value === 'string' ? value.trim() : '';
 }
 
 // console.log(arrayToString(stringToArray('sadasda|asdadadsa|sadasdsadsa')));

@@ -1,13 +1,13 @@
 import {NullableType} from '../../www/util/type';
 import {DataBaseType} from '../util/type';
 
-export const enum ArticleTypeEnum {
+export enum ArticleTypeEnum {
     article = 'article',
     container = 'container',
     root = 'root',
 }
 
-export const enum SubDocumentListViewTypeEnum {
+export enum SubDocumentListViewTypeEnum {
     header = 'header', // just header
     headerAudio = 'header-audio', // header + audio
     headerImage = 'header-image', // header + image
