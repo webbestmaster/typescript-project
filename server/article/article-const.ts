@@ -1,6 +1,10 @@
-import {ArticleFullDefinedType, ArticleTypeEnum, SubDocumentListViewTypeEnum} from './article-type';
+console.log(1);
 
+// import {ArticleFullDefinedType, ArticleTypeEnum, SubDocumentListViewTypeEnum} from './article-type';
+
+/*
 export const emptyArticle: ArticleFullDefinedType = {
+    articleType: ArticleTypeEnum.article,
     artistList: [],
     authorList: [],
     compositorList: [],
@@ -23,10 +27,10 @@ export const emptyArticle: ArticleFullDefinedType = {
     slug: '',
     subDocumentIdList: [],
     subDocumentListViewType: SubDocumentListViewTypeEnum.header,
+    tagList: [],
     tagTitleSeo: '', // tag <title>....</title>
-    tags: [],
     title: '',
     titleImage: '',
-    type: ArticleTypeEnum.article,
     updatedDate: '',
 };
+*/

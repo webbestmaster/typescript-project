@@ -1,6 +1,7 @@
 import {RunResult} from 'sqlite3';
 
 import {PromiseResolveType} from '../../www/util/promise';
+import {toTrimmedString} from '../../www/util/string';
 
 export function createRunCallBack(resolve: PromiseResolveType<void>, reject: PromiseResolveType<Error>) {
     return (runResult?: RunResult) => {
@@ -29,3 +30,13 @@ export function createFindCallback<DataType>(resolve: PromiseResolveType<DataTyp
         resolve(row);
     };
 }
+
+export function stringToArray(dataBaseText: string): Array<string> {
+    return dataBaseText.split('|').map(toTrimmedString).filter(Boolean).map(decodeURIComponent);
+}
+
+export function arrayToString(arrayOfStringForDataBase: Array<string>): string {
+    return arrayOfStringForDataBase.map(toTrimmedString).filter(Boolean).map(encodeURIComponent).join('|');
+}
+
+// console.log(arrayToString(stringToArray('sadasda|asdadadsa|sadasdsadsa')));

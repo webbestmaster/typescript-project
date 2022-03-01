@@ -1,4 +1,5 @@
-import {NullablePropertyType} from '../../www/util/type';
+import {NullableType} from '../../www/util/type';
+import {DataBaseType} from '../util/type';
 
 export const enum ArticleTypeEnum {
     article = 'article',
@@ -13,6 +14,7 @@ export const enum SubDocumentListViewTypeEnum {
 }
 
 export type ArticleFullDefinedType = {
+    articleType: ArticleTypeEnum;
     artistList: Array<string>;
     authorList: Array<string>;
     compositorList: Array<string>;
@@ -35,12 +37,11 @@ export type ArticleFullDefinedType = {
     slug: string;
     subDocumentIdList: Array<string>;
     subDocumentListViewType: SubDocumentListViewTypeEnum;
+    tagList: Array<string>;
     tagTitleSeo: string; // tag <title>....</title>
-    tags: Array<string>;
     title: string;
     titleImage: string;
-    type: ArticleTypeEnum;
     updatedDate: string;
 };
 
-export type ArticleType = Partial<NullablePropertyType<ArticleFullDefinedType>> & {id: string; slug: string};
+export type ArticleDataBaseType = NullableType<DataBaseType<ArticleFullDefinedType>> & {id: string; slug: string};

@@ -9,7 +9,8 @@ import {createFindCallback, createRunCallBack} from '../util/data-base';
 import {getRandomStringHash} from '../util/string';
 
 import {
-    ArticleType,
+    ArticleDataBaseType,
+    // ArticleFullDefinedType,
     // ArticleFullDefinedType
 } from './article-type';
 
@@ -25,7 +26,7 @@ const getDataBase: () => Database = (() => {
 export function initializeDataBase() {
     const dataBase = getDataBase();
 
-    // dataBase.run('DROP TABLE IF EXISTS article');
+    dataBase.run('DROP TABLE IF EXISTS article');
 
     // createArticleBySlug('slug-1');
     // createArticleBySlug('slug-2');
@@ -45,11 +46,11 @@ export function initializeDataBase() {
         'description TEXT', // description: string;
         'directorList TEXT', // directorList: Array<string>;
         'fileList TEXT', // fileList: Array<string>;
-        'hasMetaRobotsFollowSeo BOOLEAN', // hasMetaRobotsFollowSeo: boolean; // Add/combine <meta name="robots" content="nofollow"/>
-        'hasMetaRobotsNoIndexSeo BOOLEAN', // hasMetaRobotsNoIndexSeo: boolean; // Add/combine <meta name="robots" content="noindex"/> and add X-Robots-Tag: noindex
+        'hasMetaRobotsFollowSeo INTEGER', // hasMetaRobotsFollowSeo: boolean; // Add/combine <meta name="robots" content="nofollow"/>
+        'hasMetaRobotsNoIndexSeo INTEGER', // hasMetaRobotsNoIndexSeo: boolean; // Add/combine <meta name="robots" content="noindex"/> and add X-Robots-Tag: noindex
         'illustratorList TEXT', // illustratorList: Array<string>;
-        'isActive BOOLEAN', // isActive: boolean; // actually temporary "removed"
-        'isInSiteMapXmlSeo BOOLEAN', // isInSiteMapXmlSeo: boolean; // has sitemap.xml link to article on not
+        'isActive INTEGER', // isActive: boolean; // actually temporary "removed"
+        'isInSiteMapXmlSeo INTEGER', // isInSiteMapXmlSeo: boolean; // has sitemap.xml link to article on not
         'metaDescriptionSeo TEXT', // metaDescriptionSeo: string; // tag <meta type="description" content="....." />
         'metaSeo TEXT', // metaSeo: string; // actually any html code
         'publishDate TEXT', // publishDate: string;
@@ -69,26 +70,26 @@ export function initializeDataBase() {
     dataBase.run(`CREATE TABLE IF NOT EXISTS article (${fieldsInitialization})`);
 }
 
-export function findArticleById(articleId: string): Promise<ArticleType | null> {
-    return new Promise<ArticleType | null>((resolve: PromiseResolveType<ArticleType | null>) => {
+export function findArticleById(articleId: string): Promise<ArticleDataBaseType | null> {
+    return new Promise<ArticleDataBaseType | null>((resolve: PromiseResolveType<ArticleDataBaseType | null>) => {
         const dataBase = getDataBase();
 
         dataBase.get(
             'SELECT * FROM article WHERE id = $id',
             {$id: articleId},
-            createFindCallback<ArticleType>(resolve)
+            createFindCallback<ArticleDataBaseType>(resolve)
         );
     });
 }
 
-export function findArticleBySlug(articleSlug: string): Promise<ArticleType | null> {
-    return new Promise<ArticleType | null>((resolve: PromiseResolveType<ArticleType | null>) => {
+export function findArticleBySlug(articleSlug: string): Promise<ArticleDataBaseType | null> {
+    return new Promise<ArticleDataBaseType | null>((resolve: PromiseResolveType<ArticleDataBaseType | null>) => {
         const dataBase = getDataBase();
 
         dataBase.get(
             'SELECT * FROM article WHERE slug = $slug',
             {$slug: articleSlug},
-            createFindCallback<ArticleType>(resolve)
+            createFindCallback<ArticleDataBaseType>(resolve)
         );
     });
 }
