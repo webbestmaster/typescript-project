@@ -3,6 +3,8 @@ import {RunResult} from 'sqlite3';
 import {PromiseResolveType} from '../../www/util/promise';
 import {toTrimmedString} from '../../www/util/string';
 
+export type DataBaseValueType = number | string | null;
+
 export function createRunCallBack(resolve: PromiseResolveType<void>, reject: PromiseResolveType<Error>) {
     return (runResult?: RunResult) => {
         if (runResult) {
@@ -46,5 +48,3 @@ export function arrayToString(arrayOfStringForDataBase: Array<string>): string {
 export function defineAsString(value: unknown): string {
     return typeof value === 'string' ? value.trim() : '';
 }
-
-// console.log(arrayToString(stringToArray('sadasda|asdadadsa|sadasdsadsa')));

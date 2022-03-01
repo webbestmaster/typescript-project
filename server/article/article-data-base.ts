@@ -5,14 +5,11 @@ import path from 'path';
 import sqlite3Import, {Database} from 'sqlite3';
 
 import {PromiseResolveType} from '../../www/util/promise';
-import {createFindCallback, createRunCallBack} from '../util/data-base';
+import {createFindCallback, createRunCallBack, DataBaseValueType} from '../util/data-base';
 import {getRandomStringHash} from '../util/string';
 
-import {
-    ArticleDataBaseType,
-    // ArticleFullDefinedType,
-    // ArticleFullDefinedType
-} from './article-type';
+import {ArticleDataBaseType, ArticleFullDefinedType} from './article-type';
+import {dataBaseToFullDefinedArticle, fullDefinedToDataBaseArticle} from './article-helper';
 
 const getDataBase: () => Database = (() => {
     const cwd = process.cwd();
@@ -26,15 +23,20 @@ const getDataBase: () => Database = (() => {
 export function initializeDataBase() {
     const dataBase = getDataBase();
 
-    dataBase.run('DROP TABLE IF EXISTS article');
+    // dataBase.run('DROP TABLE IF EXISTS article');
 
     // createArticleBySlug('slug-1');
     // createArticleBySlug('slug-2');
     // createArticleBySlug('slug-3');
 
-    // (async () => {
-    //     console.log(await findArticleBySlug('slug-1'))
-    // })();
+    /*
+        (async () => {
+            console.log(await findArticleBySlug('slug-1'))
+        })();
+        (async () => {
+            console.log(await findArticleById('1b016ed61369b6ec'))
+        })();
+    */
 
     const fieldsInitialization = [
         'id TEXT NOT NULL UNIQUE', // id: string;
@@ -106,31 +108,45 @@ export function createArticleBySlug(slug: string): Promise<void> {
 
 // throw error is failed
 export async function updateArticleById(
-    articleId: string
-    // articleNewData: ArticleType
+    articleId: string,
+    partialDefinedArticle: Partial<ArticleFullDefinedType>
 ): Promise<void> {
-    const existedArticle = await findArticleById(articleId);
+    const existedDataBaseArticle: ArticleDataBaseType | null = await findArticleById(articleId);
 
-    if (!existedArticle) {
+    if (!existedDataBaseArticle) {
         throw new Error(`[updateArticleById]: Can not update article by id: ${articleId}`);
     }
 
-    /*
+    const existedFullDefinedArticle: ArticleFullDefinedType = dataBaseToFullDefinedArticle(existedDataBaseArticle);
+
+    const newFullDefinedArticle: ArticleFullDefinedType = {
+        ...existedFullDefinedArticle,
+        ...partialDefinedArticle,
+    };
+
+    const newDataBaseArticle: ArticleDataBaseType = fullDefinedToDataBaseArticle(newFullDefinedArticle);
+
+    const keyValueDataList = Object.entries<DataBaseValueType>(newDataBaseArticle).filter(
+        (data: [string, unknown]): boolean => data[0] !== 'id'
+    );
+
+    const sqlKeyString: string = keyValueDataList
+        .map((data: [string, DataBaseValueType]): string => `${data[0]} = ?`)
+        .join(', ');
+
+    const valueList: Array<unknown> = keyValueDataList.map(
+        (data: [string, DataBaseValueType]): DataBaseValueType => data[1]
+    );
+
     return new Promise<void>((resolve: PromiseResolveType<void>, reject: PromiseResolveType<Error>) => {
         const dataBase = getDataBase();
-        const id = getRandomStringHash(16);
 
-        dataBase.run('UPDATE article (id, slug) VALUES (?, ?)', [id, slug], createRunCallBack(resolve, reject));
+        dataBase.run(
+            `UPDATE article SET ${sqlKeyString} WHERE id = ?`,
+            [...valueList, articleId],
+            createRunCallBack(resolve, reject)
+        );
     });
-
-
-    return new Promise<void>((resolve: PromiseResolveType<void>, reject: PromiseResolveType<Error>) => {
-        const dataBase = getDataBase();
-        const id = getRandomStringHash(16);
-
-        dataBase.run('INSERT INTO article (id, slug) VALUES (?, ?)', [id, slug], createRunCallBack(resolve, reject));
-    });
-*/
 }
 
 /*

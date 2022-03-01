@@ -44,4 +44,4 @@ export type ArticleFullDefinedType = {
     updatedDate: string;
 };
 
-export type ArticleDataBaseType = NullableType<DataBaseType<ArticleFullDefinedType>> & {id: string; slug: string};
+export type ArticleDataBaseType = NullableType<DataBaseType<ArticleFullDefinedType>>;
