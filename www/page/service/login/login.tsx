@@ -1,13 +1,14 @@
 /* global HTMLFormElement, HTMLInputElement */
 import {SyntheticEvent, useCallback, useState} from 'react';
 
-import {useUserContext} from '../../provider/user/user-context';
-import {useMakeExecutableState} from '../../util/function';
-import {LoginResponseType} from '../../service/auth/auth-type';
-import {loginUser} from '../../service/auth/auth-api';
-import {throwError} from '../../util/error';
+import {useUserContext} from '../../../provider/user/user-context';
+import {useMakeExecutableState} from '../../../util/function';
+import {LoginResponseType} from '../../../service/auth/auth-type';
+import {loginUser} from '../../../service/auth/auth-api';
+import {throwError} from '../../../util/error';
 
-export function Login(): JSX.Element {
+// eslint-disable-next-line import/no-default-export
+export default function Login(): JSX.Element {
     const userContext = useUserContext();
     const [login, setLogin] = useState<string>('');
     const [password, setPassword] = useState<string>('');

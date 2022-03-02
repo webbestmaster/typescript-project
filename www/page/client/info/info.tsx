@@ -8,8 +8,8 @@ import {
 import {useSystem, useScreenHeight, useScreenWidth, useScreenSize} from 'react-system-hook';
 // import {NavigationLink} from 'react-router-dom-hook';
 
-import {Locale, useLocale} from '../../provider/locale/locale-context';
-import {ErrorData} from '../../layout/error-data/error-data';
+import {Locale, useLocale} from '../../../provider/locale/locale-context';
+import {ErrorData} from '../../../layout/error-data/error-data';
 // import {appRoute} from '../../component/app/app-route';
 import pngImageSrc from '../home/image/marker-icon-2x.png';
 import svgImageSrc from '../home/image/questions-with-an-official-answer.svg';

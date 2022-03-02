@@ -1,7 +1,7 @@
-import {Spinner} from '../../layout/spinner/spinner';
-import {IsRender} from '../../layout/is-render/is-render';
-import {IsHidden} from '../../layout/is-hidden/is-hidden';
-import {Empty} from '../../layout/empty/empty';
+import {Spinner} from '../../../layout/spinner/spinner';
+import {IsRender} from '../../../layout/is-render/is-render';
+import {IsHidden} from '../../../layout/is-hidden/is-hidden';
+import {Empty} from '../../../layout/empty/empty';
 
 import page404Style from './page-404.scss';
 

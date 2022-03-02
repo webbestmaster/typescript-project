@@ -5,24 +5,24 @@ import {useSystem} from 'react-system-hook';
 import markdownPro, {MarkdownConfigShallowType} from 'markdown-pro';
 import {JSONSchemaType} from 'ajv';
 
-import {Locale, useLocale} from '../../provider/locale/locale-context';
-import {Spinner} from '../../layout/spinner/spinner';
-import {ErrorData} from '../../layout/error-data/error-data';
-import {LocaleNameEnum} from '../../provider/locale/locale-context-type';
-import {useFormat} from '../../hook/format-hook/format-hook';
-import {getTestNodeData, getTestNodeId} from '../../util/auto-test';
-import {Library} from '../../library/library';
-import {AsciiSpinner} from '../../layout/spinner/c-ascii-spinner';
-import {ExampleAudio} from '../../component/example-audio/c-example-audio';
-import {ExamplePlayer} from '../../component/example-audio-player/c-example-audio-player';
-import {fetchX} from '../../util/fetch';
-import {GuardSuspense} from '../../layout/guard-suspense';
-import {appRoute} from '../../component/app/app-route';
-import {NavigationLink} from '../../layout/navigation-link/navigation-link';
-import {isBrowser} from '../../util/system';
-import {ServerDataContextType} from '../../provider/server-data/server-data-context-type';
-import {ServerDataContext} from '../../provider/server-data/server-data-context';
-import {useMakeExecutableState} from '../../util/function';
+import {Locale, useLocale} from '../../../provider/locale/locale-context';
+import {Spinner} from '../../../layout/spinner/spinner';
+import {ErrorData} from '../../../layout/error-data/error-data';
+import {LocaleNameEnum} from '../../../provider/locale/locale-context-type';
+import {useFormat} from '../../../hook/format-hook/format-hook';
+import {getTestNodeData, getTestNodeId} from '../../../util/auto-test';
+import {Library} from '../../../library/library';
+import {AsciiSpinner} from '../../../layout/spinner/c-ascii-spinner';
+import {ExampleAudio} from '../../../component/example-audio/c-example-audio';
+import {ExamplePlayer} from '../../../component/example-audio-player/c-example-audio-player';
+import {fetchX} from '../../../util/fetch';
+import {GuardSuspense} from '../../../layout/guard-suspense';
+import {appRoute} from '../../../component/app/app-route';
+import {NavigationLink} from '../../../layout/navigation-link/navigation-link';
+import {isBrowser} from '../../../util/system';
+import {ServerDataContextType} from '../../../provider/server-data/server-data-context-type';
+import {ServerDataContext} from '../../../provider/server-data/server-data-context';
+import {useMakeExecutableState} from '../../../util/function';
 
 import pngImageSrc from './image/marker-icon-2x.png';
 import svgImageSrc from './image/questions-with-an-official-answer.svg';
@@ -46,7 +46,7 @@ const LoadMeAsync = lazy(
     () =>
         import(
             /* webpackChunkName: 'load-me-async' */
-            '../../component/load-me-async/load-me-async'
+            '../../../component/load-me-async/load-me-async'
         )
 );
 

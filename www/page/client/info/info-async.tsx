@@ -1,9 +1,9 @@
 import {lazy} from 'react';
 
-import {GuardSuspense} from '../../layout/guard-suspense';
-import {Spinner} from '../../layout/spinner/spinner';
+import {GuardSuspense} from '../../../layout/guard-suspense';
+import {Spinner} from '../../../layout/spinner/spinner';
 
-const AsyncInfoLazy = lazy(
+const AsyncLazy = lazy(
     () =>
         import(
             /* webpackChunkName: 'page-info' */
@@ -14,7 +14,7 @@ const AsyncInfoLazy = lazy(
 export function InfoAsync() {
     return (
         <GuardSuspense fallback={<Spinner position="absolute" />}>
-            <AsyncInfoLazy />
+            <AsyncLazy />
         </GuardSuspense>
     );
 }

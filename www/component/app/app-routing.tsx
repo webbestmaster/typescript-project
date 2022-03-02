@@ -1,11 +1,11 @@
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {StaticRouter} from 'react-router-dom/server';
 
-import {Home} from '../../page/home/home';
-import {InfoAsync} from '../../page/info/info-async';
-import {Error404} from '../../page/error-404/error-404';
+import {Home} from '../../page/client/home/home';
+import {InfoAsync} from '../../page/client/info/info-async';
+import {Error404} from '../../page/service/error-404/error-404';
 import {isBrowser} from '../../util/system';
-import {Login} from '../../page/login/login';
+import {LoginAsync} from '../../page/service/login/login-async';
 import {LoginRequired} from '../../layout/login-required/login-required';
 
 import {appRoute} from './app-route';
@@ -31,7 +31,7 @@ export function AppRouting(props: PropsType): JSX.Element {
                 path={appRoute.info.path}
             />
 
-            <Route element={<Login />} path={appRoute.login.path} />
+            <Route element={<LoginAsync />} path={appRoute.login.path} />
 
             <Route element={<Error404 />} path="*" />
         </Routes>
