@@ -6,7 +6,8 @@ import {InfoAsync} from '../../page/client/info/info-async';
 import {Error404} from '../../page/service/error-404/error-404';
 import {isBrowser} from '../../util/system';
 import {LoginAsync} from '../../page/service/login/login-async';
-import {LoginRequired} from '../../layout/login-required/login-required';
+
+import {ArticleListAsync} from '../../page/cms/article-list/article-list-async';
 
 import {appRoute} from './app-route';
 
@@ -22,16 +23,11 @@ export function AppRouting(props: PropsType): JSX.Element {
     const switchNode = (
         <Routes>
             <Route element={<Home />} path={appRoute.root.path} />
-            <Route
-                element={
-                    <LoginRequired>
-                        <InfoAsync />
-                    </LoginRequired>
-                }
-                path={appRoute.info.path}
-            />
+            <Route element={<InfoAsync />} path={appRoute.info.path} />
 
             <Route element={<LoginAsync />} path={appRoute.login.path} />
+
+            <Route element={<ArticleListAsync />} path={appRoute.articleList.path} />
 
             <Route element={<Error404 />} path="*" />
         </Routes>

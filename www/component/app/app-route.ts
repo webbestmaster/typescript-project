@@ -1,6 +1,7 @@
 /* eslint-disable sort-keys */
 
 export const appRoute = {
+    // client
     root: {
         path: '/',
     },
@@ -9,6 +10,12 @@ export const appRoute = {
         path: '/info',
     },
 
+    // cms
+    articleList: {
+        path: '/cms/article-list',
+    },
+
+    // service
     login: {
         path: '/login',
     },

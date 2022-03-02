@@ -7,12 +7,12 @@ import {LoginRequired} from '../../../layout/login-required/login-required';
 const AsyncLazy = lazy(
     () =>
         import(
-            /* webpackChunkName: 'page-info' */
-            './info'
+            /* webpackChunkName: 'page-cms-article-list' */
+            './article-list'
         )
 );
 
-export function InfoAsync() {
+export function ArticleListAsync() {
     return (
         <LoginRequired>
             <GuardSuspense fallback={<Spinner position="absolute" />}>
