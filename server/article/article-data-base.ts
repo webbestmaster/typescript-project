@@ -166,13 +166,51 @@ export async function updateArticleById(
 
 export function getArticleList(
     pagination: GetListPaginationArgumentType
-): Promise<GetListPaginationResultType<ArticleDataBaseType>> {
+): Promise<GetListPaginationResultType<ArticleDataBaseType> | null> {
+    const {
+        // needShowInactive,
+        pageSize,
+        sortBy,
+        // sortDirection,
+        pageIndex,
+    } = pagination;
+
+    const skippedPageCount = pageSize * pageIndex;
+
     return new Promise<GetListPaginationResultType<ArticleDataBaseType>>(
         (
             resolve: PromiseResolveType<GetListPaginationResultType<ArticleDataBaseType>>,
             reject: PromiseResolveType<Error>
         ) => {
-            // const dataBase = getDataBase();
+            const dataBase = getDataBase();
+
+            dataBase.get(
+                'SELECT * FROM article LIMIT $pageSize OFFSET $skippedPageCount ORDER BY $sortBy',
+                {
+                    $pageSize: pageSize,
+                    $skippedPageCount: skippedPageCount,
+                    $sortBy: sortBy,
+                },
+                (
+                    error: Error | null
+                    // rowList?: Array<ArticleDataBaseType>
+                ) => {
+                    if (error) {
+                        console.log('[createFindCallback]: error');
+                        resolve({
+                            ...pagination,
+                            allItemCount: 0,
+                            itemList: [],
+                        });
+                        return;
+                    }
+                    resolve({
+                        ...pagination,
+                        allItemCount: 0,
+                        itemList: [],
+                    });
+                }
+            );
 
             console.log(reject);
 
