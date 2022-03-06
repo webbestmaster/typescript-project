@@ -7,6 +7,7 @@ import sqlite3Import, {Database} from 'sqlite3';
 import {PromiseResolveType} from '../../www/util/promise';
 import {createFindCallback, createRunCallBack, DataBaseValueType} from '../util/data-base';
 import {getRandomStringHash} from '../util/string';
+import {GetListPaginationArgumentType, GetListPaginationResultType} from '../util/type';
 
 import {ArticleDataBaseType, ArticleFullDefinedType} from './article-type';
 import {dataBaseToFullDefinedArticle, fullDefinedToDataBaseArticle} from './article-helper';
@@ -163,47 +164,23 @@ export async function updateArticleById(
     });
 }
 
-/*
-// return user's data or null
-export function findUserByCredentials(
-    authUserLogin: string,
-    authUserPassword: string
-): Promise<AuthUserFullType | null> {
-    return new Promise<AuthUserFullType | null>((resolve: PromiseResolveType<AuthUserFullType | null>) => {
-        const dataBase = getDataBase();
+export function getArticleList(
+    pagination: GetListPaginationArgumentType
+): Promise<GetListPaginationResultType<ArticleDataBaseType>> {
+    return new Promise<GetListPaginationResultType<ArticleDataBaseType>>(
+        (
+            resolve: PromiseResolveType<GetListPaginationResultType<ArticleDataBaseType>>,
+            reject: PromiseResolveType<Error>
+        ) => {
+            // const dataBase = getDataBase();
 
-        dataBase.get(
-            'SELECT * FROM user WHERE login = $login AND password = $password',
-            {$login: authUserLogin, $password: getSha256Hash(authUserPassword)},
-            createFindCallback<AuthUserFullType>(resolve)
-        );
-    });
+            console.log(reject);
+
+            resolve({
+                ...pagination,
+                allItemCount: 0,
+                itemList: [],
+            });
+        }
+    );
 }
-
-// return user's data or null
-export function findUserById(authUserId: string): Promise<AuthUserFullType | null> {
-    return new Promise<AuthUserFullType | null>((resolve: PromiseResolveType<AuthUserFullType | null>) => {
-        const dataBase = getDataBase();
-
-        dataBase.get(
-            'SELECT * FROM user WHERE id = $id',
-            {$id: authUserId},
-            createFindCallback<AuthUserFullType>(resolve)
-        );
-    });
-}
-
-// throw error is failed
-export function createUser(newUserLogin: string, newUserPassword: string): Promise<void> {
-    return new Promise<void>((resolve: PromiseResolveType<void>, reject: PromiseResolveType<Error>) => {
-        const dataBase = getDataBase();
-        const id = getRandomStringHash(16);
-
-        dataBase.run(
-            'INSERT INTO user (id, login, password, role) VALUES (?, ?, ?, ?)',
-            [id, newUserLogin, getSha256Hash(newUserPassword), UserRoleEnum.user],
-            createRunCallBack(resolve, reject)
-        );
-    });
-}
-*/

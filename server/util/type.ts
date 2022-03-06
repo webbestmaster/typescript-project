@@ -9,3 +9,14 @@ export type DataBaseType<FullDefinedType extends UnknownObjectType> = {
         ? number
         : string;
 };
+
+export type GetListPaginationArgumentType = {
+    needShowInactive: boolean;
+    pageIndex: number; // start with 0
+    pageSize: number;
+};
+
+export type GetListPaginationResultType<ItemType> = GetListPaginationArgumentType & {
+    allItemCount: number;
+    itemList: Array<ItemType>;
+};
