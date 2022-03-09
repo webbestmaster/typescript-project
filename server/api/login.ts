@@ -1,7 +1,7 @@
 import {FastifyRequest, FastifyReply} from 'fastify';
 
-import {findUserByCredentials} from '../auth/auth-data-base';
 import {LoginResponseType} from '../../www/service/auth/auth-type';
+import {UserRoleEnum, UserType} from '../../www/provider/user/user-context-type';
 
 export async function postLogin(request: FastifyRequest<{Body: string}>, reply: FastifyReply): Promise<void> {
     const {
@@ -23,12 +23,20 @@ export async function postLogin(request: FastifyRequest<{Body: string}>, reply: 
         return;
     }
 
-    const user = await findUserByCredentials(login, password);
+    const user: UserType = {
+        id: 'user.id',
+        login: 'user.login',
+        role: UserRoleEnum.user,
+    };
 
+    // const user = await findUserByCredentials(login, password);
+
+    /*
     if (!user) {
         reply.code(404).send(null);
         return;
     }
+*/
 
     const userForFront: LoginResponseType = {
         user: {
