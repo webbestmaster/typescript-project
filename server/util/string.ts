@@ -1,6 +1,6 @@
 import {createHmac} from 'crypto';
 
-import {sha256key} from '../auth/auth-key';
+import {sha256key} from '../key';
 
 export function getSha256Hash(text: string): string {
     return createHmac('sha256', sha256key).update(text).digest('hex');

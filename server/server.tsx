@@ -10,7 +10,7 @@ import {FastifyError} from 'fastify-error';
 
 import {postLogin} from './api/login';
 import {getHtmlCallBack} from './ssr/ssr';
-import {secretKey} from './auth/auth-key';
+import {secretKey} from './key';
 
 const cwd = process.cwd();
 
