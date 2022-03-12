@@ -1,15 +1,13 @@
 #!/bin/bash
 
-cd ~ || return
+apt update
 
-sudo apt update
+curl -sL https://deb.nodesource.com/setup_17.x -o ./nodesource_setup.sh
 
-curl -sL https://deb.nodesource.com/setup_17.x -o ~/nodesource_setup.sh
+bash ./nodesource_setup.sh
 
-sudo bash ~/nodesource_setup.sh
+apt-get install -y nodejs
 
-sudo apt-get install -y nodejs
+apt update
 
-sudo apt update
-
-sudo npm install -g npm
+npm install -g npm

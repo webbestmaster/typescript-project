@@ -1,7 +1,7 @@
 ### Fix IDEA file watching
 
 1. Add the following line to either /etc/sysctl.conf file or a new *.conf file (e.g. idea.conf) under /etc/sysctl.d/ directory:
-```
+```bash
 fs.inotify.max_user_watches = 524288
 ```
 

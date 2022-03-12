@@ -3,6 +3,11 @@ FROM ubuntu:20.04
 WORKDIR /usr/app/
 COPY ./ ./
 
+RUN chmod 777 ./script/install-all.sh
+RUN ./script/install-all.sh
+
+#RUN npm install && npm run build
+
 # RUN rm -rf ./node_modules
 # RUN npm install && npm run build
 
