@@ -11,7 +11,7 @@ Required libraries:
 5. @types/puppeteer
 
 Running example:
-```
+```bash
 $ jest ./test-e2e/ [--runInBand]
 ```
 
@@ -50,6 +50,6 @@ module.exports = {
 ```
 
 Running example:
-```
+```bash
 $ jest ./test-unit/ --coverage
 ```

@@ -1,15 +1,13 @@
 #!/bin/bash
 
-cd ~ || return
+apt update
 
-sudo apt update
+curl -fsSL https://www.mongodb.org/static/pgp/server-4.4.asc | apt-key add -
 
-curl -fsSL https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-4.4.list
 
-echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+apt update
 
-sudo apt update
-
-sudo apt install -y mongodb-org
+apt install -y mongodb-org
 
 

@@ -1,11 +1,11 @@
 #!/bin/bash
 
-sudo apt update
+apt update
 
-sudo apt install curl
+apt install -y curl
 
-bash ./install-node-js.sh
+bash ./script/install-node-js.sh
 
-bash ./install-mongo-db.sh
+bash ./script/install-mongo-db.sh
 
-bash ./install-nginx.sh
+bash ./script/install-nginx.sh

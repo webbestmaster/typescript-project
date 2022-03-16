@@ -1,7 +1,5 @@
 #!/bin/bash
 
-cd ~ || return
+apt update
 
-sudo apt update
-
-sudo apt install -y --no-install-recommends nginx
+apt install -y --no-install-recommends nginx
