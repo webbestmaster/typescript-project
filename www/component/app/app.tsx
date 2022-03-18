@@ -1,4 +1,5 @@
 import {ServerDataContextType} from '../../provider/server-data/server-data-context-type';
+import {ErrorBoundary} from '../error-boundary/error-boundary';
 
 import {AppProvider} from './app-provider';
 import {AppRouting} from './app-routing';
@@ -16,8 +17,10 @@ export function App(props: AppPropsType): JSX.Element {
     const {server, serverData} = props;
 
     return (
-        <AppProvider serverData={serverData}>
-            <AppRouting server={server} />
-        </AppProvider>
+        <ErrorBoundary errorFallBack={<h1>Front-end error</h1>}>
+            <AppProvider serverData={serverData}>
+                <AppRouting server={server} />
+            </AppProvider>
+        </ErrorBoundary>
     );
 }

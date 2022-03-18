@@ -5,9 +5,10 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 // eslint-disable-next-line no-process-env
-export const sha256key: string = String(process.env.SHA_256_KEY || '').trim();
-// eslint-disable-next-line no-process-env
-export const secretKey: string = String(process.env.SECRET_KEY || '').trim();
+const {SHA_256_KEY, SECRET_KEY} = process.env;
+
+export const sha256key: string = String(SHA_256_KEY || '').trim();
+export const secretKey: string = String(SECRET_KEY || '').trim();
 
 (() => {
     if (sha256key === '') {

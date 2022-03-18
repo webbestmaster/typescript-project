@@ -11,6 +11,9 @@ import {FastifyError} from 'fastify-error';
 import {postLogin} from './api/login';
 import {getHtmlCallBack} from './ssr/ssr';
 import {secretKey} from './key';
+import {findUser} from './auth/auth';
+
+console.log(findUser);
 
 const cwd = process.cwd();
 
@@ -19,6 +22,9 @@ const serverPort = 3000;
 (async () => {
     const fastify = fastifyConstructor({logger: false});
 
+    // //////////////
+    // Services
+    // //////////////
     fastify.register(fastifyCors);
 
     fastify.register(fastifyStatic, {
@@ -38,15 +44,24 @@ const serverPort = 3000;
         key: Buffer.from(secretKey, 'base64').slice(0, 32),
     });
 
+    // //////////////
+    // Pages
+    // //////////////
     fastify.get('/', getHtmlCallBack);
     fastify.get('/login', getHtmlCallBack);
 
+    // //////////////
+    // API
+    // //////////////
+    fastify.post('/api/login', postLogin);
+
+    // //////////////
+    // 4xx & 5xx
+    // //////////////
     fastify.setErrorHandler((error: FastifyError, request: FastifyRequest, reply: FastifyReply) => {
         request.log.warn(error);
 
         const {statusCode = 500, message} = error;
-
-        // const endStatusCode = statusCode >= 400 ? statusCode : 500
 
         reply
             .code(statusCode)
@@ -55,8 +70,12 @@ const serverPort = 3000;
     });
 
     fastify.setNotFoundHandler((request: FastifyRequest, reply: FastifyReply) => {
-        reply.code(404).type('text/plain').send('a custom not found');
+        request.log.warn(request);
+
+        reply.code(404).type('text/plain').send('Page not found');
     });
+
+    await fastify.listen(serverPort);
 
     // fastify.post('/', (request: FastifyRequest, reply: FastifyReply) => {
     //     request.session.set('data', request.body);
@@ -76,8 +95,4 @@ const serverPort = 3000;
     //
     //     reply.send('hello world');
     // });
-
-    fastify.post('/api/login', postLogin);
-
-    await fastify.listen(serverPort);
 })();

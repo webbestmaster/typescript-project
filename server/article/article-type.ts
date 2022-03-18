@@ -1,6 +1,3 @@
-import {NullableType} from '../../www/util/type';
-import {DataBaseType} from '../util/type';
-
 export enum ArticleTypeEnum {
     article = 'article',
     container = 'container',
@@ -13,7 +10,7 @@ export enum SubDocumentListViewTypeEnum {
     headerImage = 'header-image', // header + image
 }
 
-export type ArticleFullDefinedType = {
+export type ArticleType = {
     articleType: ArticleTypeEnum;
     artistList: Array<string>;
     authorList: Array<string>;
@@ -43,5 +40,3 @@ export type ArticleFullDefinedType = {
     titleImage: string;
     updatedDate: string;
 };
-
-export type ArticleDataBaseType = NullableType<DataBaseType<ArticleFullDefinedType>>;
