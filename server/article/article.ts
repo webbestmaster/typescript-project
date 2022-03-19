@@ -1,3 +1,5 @@
 import {makeCrud} from '../data-base/data-base';
 
-export const articleCrud = makeCrud('article');
+import {ArticleType} from './article-type';
+
+export const articleCrud = makeCrud<ArticleType>('article');
