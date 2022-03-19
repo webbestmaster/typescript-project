@@ -29,6 +29,7 @@ function makeSimpleCallBack(
     resolve(null);
 }
 
+// add jsonScheme as required parameter
 export function makeCrud<ModelType>(dataBaseId: string): CrudType<ModelType> {
     const dataBase = new Datastore<ModelType>({
         autoload: true,
