@@ -1,6 +1,4 @@
-import Ajv, {JSONSchemaType} from 'ajv';
-
-const ajv = new Ajv();
+import {JSONSchemaType} from 'ajv';
 
 import {ArticleType, ArticleTypeEnum, SubDocumentListViewTypeEnum} from './article-type';
 
@@ -72,5 +70,3 @@ export const articleSchema: JSONSchemaType<ArticleType> = {
     required: requiredFieldList,
     type: 'object',
 } as const;
-
-export const authUserSchemaValidate = ajv.compile<ArticleType>(articleSchema);

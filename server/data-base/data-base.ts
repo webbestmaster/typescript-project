@@ -2,11 +2,13 @@
 
 import path from 'path';
 
+import Ajv, {JSONSchemaType} from 'ajv';
 import Datastore from 'nedb';
 
 import {PromiseResolveType} from '../../www/util/promise';
 
 const cwd = process.cwd();
+const ajv = new Ajv();
 
 type CrudType<ModelType> = {
     createOne: (model: ModelType) => Promise<null>; // throw error if smth wrong
@@ -30,15 +32,18 @@ function makeSimpleCallBack(
 }
 
 // add jsonScheme as required parameter
-export function makeCrud<ModelType>(dataBaseId: string): CrudType<ModelType> {
+export function makeCrud<ModelType>(
+    dataBaseId: string,
+    modelJsonSchema: JSONSchemaType<ModelType>
+): CrudType<ModelType> {
     const dataBase = new Datastore<ModelType>({
         autoload: true,
         filename: path.join(cwd, 'db', `data-base.${dataBaseId}.db`),
     });
 
-    function findOne(partialUserData: Partial<ModelType>): Promise<ModelType | null> {
+    function findOne(partialModelData: Partial<ModelType>): Promise<ModelType | null> {
         return new Promise<ModelType | null>((resolve: PromiseResolveType<ModelType | null>) => {
-            dataBase.findOne<ModelType>(partialUserData, (maybeError: Error | null, data: ModelType | null) => {
+            dataBase.findOne<ModelType>(partialModelData, (maybeError: Error | null, data: ModelType | null) => {
                 if (maybeError) {
                     resolve(null);
                     return;
@@ -54,10 +59,10 @@ export function makeCrud<ModelType>(dataBaseId: string): CrudType<ModelType> {
         });
     }
 
-    function findMany(partialUserData: Partial<ModelType>): Promise<Array<ModelType>> {
+    function findMany(partialModelData: Partial<ModelType>): Promise<Array<ModelType>> {
         return new Promise<Array<ModelType>>((resolve: PromiseResolveType<Array<ModelType>>) => {
             // eslint-disable-next-line unicorn/no-array-method-this-argument
-            dataBase.find<ModelType>(partialUserData, (maybeError: Error | null, data: Array<ModelType> | null) => {
+            dataBase.find<ModelType>(partialModelData, (maybeError: Error | null, data: Array<ModelType> | null) => {
                 if (maybeError) {
                     resolve([]);
                     return;
@@ -74,27 +79,43 @@ export function makeCrud<ModelType>(dataBaseId: string): CrudType<ModelType> {
     }
 
     // throw error if smth wrong
-    function createOne(userData: ModelType): Promise<null> {
+    function createOne(modelData: ModelType): Promise<null> {
         return new Promise<null>((resolve: PromiseResolveType<null>, reject: PromiseResolveType<Error>) => {
-            dataBase.insert<ModelType>(userData, (maybeError: Error | null): void =>
+            const modelJsonSchemaValidate = ajv.compile<ModelType>(modelJsonSchema);
+            const isValid = modelJsonSchemaValidate(modelData);
+
+            if (isValid !== true) {
+                reject(new Error(JSON.stringify(modelJsonSchemaValidate.errors || '')));
+                return;
+            }
+
+            dataBase.insert<ModelType>(modelData, (maybeError: Error | null): void =>
                 makeSimpleCallBack(maybeError, resolve, reject)
             );
         });
     }
 
     // throw error if smth wrong
-    function updateOne(searchUserData: Partial<ModelType>, userData: ModelType): Promise<null> {
+    function updateOne(searchModelData: Partial<ModelType>, modelData: ModelType): Promise<null> {
         return new Promise<null>((resolve: PromiseResolveType<null>, reject: PromiseResolveType<Error>) => {
-            dataBase.update<ModelType>(searchUserData, userData, {}, (maybeError: Error | null): void =>
+            const modelJsonSchemaValidate = ajv.compile<ModelType>(modelJsonSchema);
+            const isValid = modelJsonSchemaValidate(modelData);
+
+            if (isValid !== true) {
+                reject(new Error(JSON.stringify(modelJsonSchemaValidate.errors || '')));
+                return;
+            }
+
+            dataBase.update<ModelType>(searchModelData, modelData, {}, (maybeError: Error | null): void =>
                 makeSimpleCallBack(maybeError, resolve, reject)
             );
         });
     }
 
     // throw error if smth wrong
-    function deleteOne(searchUserData: Partial<ModelType>): Promise<null> {
+    function deleteOne(searchModelData: Partial<ModelType>): Promise<null> {
         return new Promise<null>((resolve: PromiseResolveType<null>, reject: PromiseResolveType<Error>) => {
-            dataBase.remove(searchUserData, {}, (maybeError: Error | null): void =>
+            dataBase.remove(searchModelData, {}, (maybeError: Error | null): void =>
                 makeSimpleCallBack(maybeError, resolve, reject)
             );
         });

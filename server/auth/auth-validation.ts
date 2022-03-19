@@ -1,6 +1,4 @@
-import Ajv, {JSONSchemaType} from 'ajv';
-
-const ajv = new Ajv();
+import {JSONSchemaType} from 'ajv';
 
 import {UserRoleEnum} from '../../www/provider/user/user-context-type';
 
@@ -17,5 +15,3 @@ export const authUserSchema: JSONSchemaType<AuthUserType> = {
     required: ['id', 'login', 'password', 'role'],
     type: 'object',
 } as const;
-
-export const authUserSchemaValidate = ajv.compile<AuthUserType>(authUserSchema);
