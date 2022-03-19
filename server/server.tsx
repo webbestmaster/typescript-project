@@ -11,9 +11,6 @@ import {FastifyError} from 'fastify-error';
 import {postLogin} from './api/login';
 import {getHtmlCallBack} from './ssr/ssr';
 import {secretKey} from './key';
-import {findUser} from './auth/auth';
-
-console.log(findUser);
 
 const cwd = process.cwd();
 
