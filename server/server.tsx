@@ -51,7 +51,6 @@ const serverPort = 3000;
     // API
     // //////////////
     fastify.post('/api/auth/login', postAuthLogin);
-    // fastify.post('/api/auth/create-user', postAuthLogin);
 
     // //////////////
     // 4xx & 5xx

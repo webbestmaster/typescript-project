@@ -4,12 +4,10 @@ import {LoginResponseType} from '../../www/service/auth/auth-type';
 import {getSha256Hash} from '../util/string';
 
 import {authCrud} from './auth';
+import {cookieFieldUserId} from './auth-const';
 
 export async function postAuthLogin(request: FastifyRequest<{Body: string}>, reply: FastifyReply): Promise<void> {
-    const {
-        body,
-        // session
-    } = request;
+    const {body, session} = request;
 
     const parsedData: Record<string, unknown> = JSON.parse(body);
 
@@ -39,6 +37,9 @@ export async function postAuthLogin(request: FastifyRequest<{Body: string}>, rep
             role: user.role,
         },
     };
+
+    session.set(cookieFieldUserId, user.id);
+    session.options({maxAge: 1000 * 60 * 60});
 
     reply.code(200).header('Content-Type', 'application/json; charset=utf-8').send(loginResponse);
 }

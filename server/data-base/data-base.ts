@@ -37,6 +37,7 @@ export function makeCrud<ModelType>(
 ): CrudType<ModelType> {
     const dataBase = new Datastore<ModelType>({
         autoload: true,
+        corruptAlertThreshold: 0,
         filename: path.join(cwd, 'db', `data-base.${dataBaseId}.db`),
     });
 
