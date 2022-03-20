@@ -31,7 +31,6 @@ function makeSimpleCallBack(
     resolve(null);
 }
 
-// add jsonScheme as required parameter
 export function makeCrud<ModelType>(
     dataBaseId: string,
     modelJsonSchema: JSONSchemaType<ModelType>

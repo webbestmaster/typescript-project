@@ -7,6 +7,7 @@ const articleSchemaProperties = {
     content: {type: 'string'},
     createdDate: {type: 'string'},
     description: {type: 'string'},
+    descriptionShort: {type: 'string'},
     fileList: {items: {type: 'string'}, type: 'array'},
     hasMetaRobotsFollowSeo: {type: 'boolean'},
     hasMetaRobotsNoIndexSeo: {type: 'boolean'},
@@ -14,9 +15,9 @@ const articleSchemaProperties = {
     isActive: {type: 'boolean'}, // actually temporary "removed"
     isInSiteMapXmlSeo: {type: 'boolean'}, // has sitemap.xml link to article on not
     metaDescriptionSeo: {type: 'string'}, // tag <meta type="description" content="....." />
+    metaKeyWordsSeo: {type: 'string'}, // tag <meta type="keywords" content="....." />
     metaSeo: {type: 'string'}, // actually any html code
     publishDate: {type: 'string'},
-    shortDescription: {type: 'string'},
     slug: {type: 'string'},
     stuffArtistList: {items: {type: 'string'}, type: 'array'},
     stuffAuthorList: {items: {type: 'string'}, type: 'array'},
@@ -38,6 +39,7 @@ const requiredFieldList: Array<keyof ArticleType> = [
     'content',
     'createdDate',
     'description',
+    'descriptionShort',
     'fileList',
     'hasMetaRobotsFollowSeo',
     'hasMetaRobotsNoIndexSeo',
@@ -45,9 +47,9 @@ const requiredFieldList: Array<keyof ArticleType> = [
     'isActive',
     'isInSiteMapXmlSeo',
     'metaDescriptionSeo',
+    'metaKeyWordsSeo',
     'metaSeo',
     'publishDate',
-    'shortDescription',
     'slug',
     'stuffArtistList',
     'stuffAuthorList',

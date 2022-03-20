@@ -8,7 +8,7 @@ import fastifySecureSession from 'fastify-secure-session';
 import fastifyConstructor, {FastifyRequest, FastifyReply} from 'fastify';
 import {FastifyError} from 'fastify-error';
 
-import {postLogin} from './api/login';
+import {postAuthLogin} from './api/login';
 import {getHtmlCallBack} from './ssr/ssr';
 import {secretKey} from './key';
 
@@ -50,7 +50,8 @@ const serverPort = 3000;
     // //////////////
     // API
     // //////////////
-    fastify.post('/api/login', postLogin);
+    fastify.post('/api/auth/login', postAuthLogin);
+    // fastify.post('/api/auth/create-user', postAuthLogin);
 
     // //////////////
     // 4xx & 5xx

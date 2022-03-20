@@ -3,7 +3,7 @@ import {FastifyRequest, FastifyReply} from 'fastify';
 import {LoginResponseType} from '../../www/service/auth/auth-type';
 import {UserRoleEnum, UserType} from '../../www/provider/user/user-context-type';
 
-export async function postLogin(request: FastifyRequest<{Body: string}>, reply: FastifyReply): Promise<void> {
+export async function postAuthLogin(request: FastifyRequest<{Body: string}>, reply: FastifyReply): Promise<void> {
     const {
         body,
         // session

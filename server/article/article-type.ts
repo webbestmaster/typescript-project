@@ -15,6 +15,7 @@ export type ArticleType = {
     content: string;
     createdDate: string;
     description: string;
+    descriptionShort: string;
     fileList: Array<string>;
     hasMetaRobotsFollowSeo: boolean; // Add/combine <meta name="robots" content="nofollow"/>
     hasMetaRobotsNoIndexSeo: boolean; // Add/combine <meta name="robots" content="noindex"/> and add X-Robots-Tag: noindex
@@ -22,9 +23,9 @@ export type ArticleType = {
     isActive: boolean; // actually temporary "removed"
     isInSiteMapXmlSeo: boolean; // has sitemap.xml link to article on not
     metaDescriptionSeo: string; // tag <meta type="description" content="....." />
+    metaKeyWordsSeo: string; // tag <meta type="keywords" content="....." />
     metaSeo: string; // actually any html code
     publishDate: string;
-    shortDescription: string;
     slug: string;
     stuffArtistList: Array<string>;
     stuffAuthorList: Array<string>;
