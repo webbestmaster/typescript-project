@@ -18,7 +18,7 @@ If you make key with your own name f.e. id_rsa_digital_ocean, you should add thi
 $ ssh-add ~/.ssh/id_rsa_digital_ocean
 ```
 
-Also you should add your ssh key on digital ocean website
+Also, you should add your ssh key on digital ocean website
 
 How to Set Up SSH Keys on Ubuntu 18.04
 Public key goes into server "authorized_keys" file
@@ -45,7 +45,7 @@ $ touch authorized_keys
 ```
 
 after that copy id_rsa_digital_ocean.pub into authorized_keys in /home/user_name/.ssh/authorized_keys
-after that your should be able to shh user_name@123.123.123.123 without enter a password
+after that you should be able to shh user_name@123.123.123.123 without enter a password
 
 #### disable root user
 

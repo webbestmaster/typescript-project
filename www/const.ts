@@ -7,6 +7,8 @@ export const selector = {
 
 export const demoUrl = 'http://webbestmaster.github.io/react-audio-player-pro';
 
+export const fetchXUrlPrefix = IS_PRODUCTION ? '' : 'http://localhost:3000';
+
 function sayHi() {
     const {log} = console;
 
