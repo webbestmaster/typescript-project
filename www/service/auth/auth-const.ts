@@ -3,7 +3,7 @@ import {JSONSchemaType} from 'ajv';
 import {LoginResponseType} from './auth-type';
 
 export const loginResponseSchema: JSONSchemaType<LoginResponseType> = {
-    // additionalProperties: false,
+    additionalProperties: false,
     properties: {
         user: {
             properties: {

@@ -8,9 +8,10 @@ import fastifySecureSession from 'fastify-secure-session';
 import fastifyConstructor, {FastifyRequest, FastifyReply} from 'fastify';
 import {FastifyError} from 'fastify-error';
 
-import {postAuthLogin} from './auth/auth-api';
+import {getAutoAuthLogin, postAuthLogin} from './auth/auth-api';
 import {getHtmlCallBack} from './ssr/ssr';
 import {secretKey} from './key';
+import {siteCookieKey} from './const';
 
 const cwd = process.cwd();
 
@@ -36,7 +37,7 @@ const serverPort = 3000;
             httpOnly: true, // Use httpOnly for all production purposes
             path: '/',
         },
-        cookieName: 'site-cookie',
+        cookieName: siteCookieKey,
         // adapt this to point to the directory where secret-key is located
         key: Buffer.from(secretKey, 'base64').slice(0, 32),
     });
@@ -51,6 +52,7 @@ const serverPort = 3000;
     // API
     // //////////////
     fastify.post('/api/auth/login', postAuthLogin);
+    fastify.get('/api/auth/get-user', getAutoAuthLogin);
 
     // //////////////
     // 4xx & 5xx

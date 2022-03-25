@@ -10,6 +10,7 @@ export type UserType = {
 };
 
 export type UserContextType = {
+    isInProgressAutoLogin: boolean;
     setUser: (user: UserType) => void;
     user: UserType;
 };

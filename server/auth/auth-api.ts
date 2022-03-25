@@ -43,3 +43,34 @@ export async function postAuthLogin(request: FastifyRequest<{Body: string}>, rep
 
     reply.code(200).header('Content-Type', 'application/json; charset=utf-8').send(loginResponse);
 }
+
+export async function getAutoAuthLogin(request: FastifyRequest<{Body: string}>, reply: FastifyReply): Promise<void> {
+    const {session} = request;
+
+    const userId = String(session.get(cookieFieldUserId) || '');
+
+    if (!userId) {
+        reply.code(400).send(null);
+        return;
+    }
+
+    const user = await authCrud.findOne({id: userId});
+
+    if (!user) {
+        reply.code(400).send(null);
+        return;
+    }
+
+    const loginResponse: LoginResponseType = {
+        user: {
+            id: user.id,
+            login: user.login,
+            role: user.role,
+        },
+    };
+
+    session.set(cookieFieldUserId, user.id);
+    session.options({maxAge: 1000 * 60 * 60});
+
+    reply.code(200).header('Content-Type', 'application/json; charset=utf-8').send(loginResponse);
+}

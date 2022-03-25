@@ -31,7 +31,7 @@ export default function Login(): JSX.Element {
     );
 
     return (
-        <form action="/api/login" onSubmit={onSubmit}>
+        <form action="/api/auth/login" onSubmit={onSubmit}>
             <pre>{JSON.stringify(userContext, null, 4)}</pre>
             <pre>{JSON.stringify(loginHook, null, 4)}</pre>
 
