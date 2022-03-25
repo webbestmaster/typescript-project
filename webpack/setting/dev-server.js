@@ -23,6 +23,11 @@ module.exports.devServer = {
     // writeToDisk: isBack,
     // inline: false,
     hot: true,
+    proxy: {
+        '/api/': {
+            target: 'http://localhost:3000/',
+        },
+    },
     // hotOnly: false,
     // disableHostCheck: true,
     // proxy: {

@@ -2,8 +2,6 @@
 
 import {JSONSchemaType} from 'ajv';
 
-import {fetchXUrlPrefix} from '../const';
-
 import {getExpectedStructure} from './object';
 
 export const enum FetchMethodEnum {
@@ -76,7 +74,7 @@ export async function fetchX<ExpectedResponseType>(
     const fetchBeginTimeStamp = Date.now();
 
     try {
-        const response: Response = await fetch(fetchXUrlPrefix + url, options);
+        const response: Response = await fetch(url, options);
 
         if (!response.ok) {
             throw new Error(await response.text());
