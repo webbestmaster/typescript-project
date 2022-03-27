@@ -55,7 +55,7 @@ export function makeCrud<ModelType>(
                     return;
                 }
 
-                reject(new Error(`[ERROR count]:Can not count objects in ${dataBaseId}`));
+                reject(new Error(`[ERROR count]: Can not count objects in: ${dataBaseId}`));
             });
         });
     }
