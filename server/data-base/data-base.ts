@@ -7,17 +7,10 @@ import Datastore from 'nedb';
 
 import {PromiseResolveType} from '../../www/util/promise';
 
+import {CrudType, PaginationQueryType, PaginationResultType} from './data-base-type';
+
 const cwd = process.cwd();
 const ajv = new Ajv();
-
-type CrudType<ModelType> = {
-    count: (partialModel: Partial<ModelType>) => Promise<number>; // throw error if smth wrong
-    createOne: (model: ModelType) => Promise<null>; // throw error if smth wrong
-    deleteOne: (model: Partial<ModelType>) => Promise<null>; // throw error if smth wrong
-    findMany: (partialModel: Partial<ModelType>) => Promise<Array<ModelType>>;
-    findOne: (partialModel: Partial<ModelType>) => Promise<ModelType | null>;
-    updateOne: (partialModel: Partial<ModelType>, model: ModelType) => Promise<null>; // throw error if smth wrong
-};
 
 function makeSimpleCallBack(
     maybeError: Error | null,
@@ -97,6 +90,37 @@ export function makeCrud<ModelType>(
         });
     }
 
+    function findManyPagination(
+        paginationQuery: PaginationQueryType<ModelType>
+    ): Promise<PaginationResultType<ModelType>> {
+        return new Promise<PaginationResultType<ModelType>>(
+            (resolve: PromiseResolveType<PaginationResultType<ModelType>>) => {
+                const {query, pageSize, pageIndex, sort} = paginationQuery;
+
+                dataBase
+                    .find<ModelType>(query)
+                    .sort(sort)
+                    .skip(pageIndex * pageSize)
+                    .limit(pageSize)
+                    .exec((maybeError: Error | null, dataList: Array<ModelType> | null) => {
+                        const noFound: PaginationResultType<ModelType> = {pageIndex, pageSize, result: []};
+
+                        if (maybeError) {
+                            resolve(noFound);
+                            return;
+                        }
+
+                        if (Array.isArray(dataList)) {
+                            resolve({...noFound, result: dataList});
+                            return;
+                        }
+
+                        resolve(noFound);
+                    });
+            }
+        );
+    }
+
     // throw error if smth wrong
     function createOne(modelData: ModelType): Promise<null> {
         return new Promise<null>((resolve: PromiseResolveType<null>, reject: PromiseResolveType<Error>) => {
@@ -140,5 +164,5 @@ export function makeCrud<ModelType>(
         });
     }
 
-    return {count, createOne, deleteOne, findMany, findOne, updateOne};
+    return {count, createOne, deleteOne, findMany, findManyPagination, findOne, updateOne};
 }
