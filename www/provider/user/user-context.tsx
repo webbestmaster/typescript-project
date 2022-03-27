@@ -6,7 +6,7 @@ import {LoginResponseType} from '../../service/auth/auth-type';
 import {throwError} from '../../util/error';
 
 import {defaultUserContext} from './user-context-const';
-import {UserContextType, UserRoleEnum, UserType} from './user-context-type';
+import {UserContextType, UserType} from './user-context-type';
 
 export const UserContext = createContext<UserContextType>(defaultUserContext);
 

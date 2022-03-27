@@ -11,6 +11,7 @@ const cwd = process.cwd();
 const ajv = new Ajv();
 
 type CrudType<ModelType> = {
+    count: (partialModel: Partial<ModelType>) => Promise<number>; // throw error if smth wrong
     createOne: (model: ModelType) => Promise<null>; // throw error if smth wrong
     deleteOne: (model: Partial<ModelType>) => Promise<null>; // throw error if smth wrong
     findMany: (partialModel: Partial<ModelType>) => Promise<Array<ModelType>>;
@@ -40,6 +41,24 @@ export function makeCrud<ModelType>(
         corruptAlertThreshold: 0,
         filename: path.join(cwd, 'db', `data-base.${dataBaseId}.db`),
     });
+
+    function count(partialModel: Partial<ModelType>): Promise<number> {
+        return new Promise<number>((resolve: PromiseResolveType<number>, reject: PromiseResolveType<Error>) => {
+            dataBase.count(partialModel, (maybeError: Error | null, objectCount: number | null): void => {
+                if (maybeError) {
+                    reject(maybeError);
+                    return;
+                }
+
+                if (typeof objectCount === 'number') {
+                    resolve(objectCount);
+                    return;
+                }
+
+                reject(new Error(`[ERROR count]:Can not count objects in ${dataBaseId}`));
+            });
+        });
+    }
 
     function findOne(partialModelData: Partial<ModelType>): Promise<ModelType | null> {
         return new Promise<ModelType | null>((resolve: PromiseResolveType<ModelType | null>) => {
@@ -121,5 +140,5 @@ export function makeCrud<ModelType>(
         });
     }
 
-    return {createOne, deleteOne, findMany, findOne, updateOne};
+    return {count, createOne, deleteOne, findMany, findOne, updateOne};
 }
