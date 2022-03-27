@@ -6,7 +6,7 @@ import {LoginResponseType} from '../../service/auth/auth-type';
 import {throwError} from '../../util/error';
 
 import {defaultUserContext} from './user-context-const';
-import {UserContextType, UserType} from './user-context-type';
+import {UserContextType, UserRoleEnum, UserType} from './user-context-type';
 
 export const UserContext = createContext<UserContextType>(defaultUserContext);
 
@@ -35,6 +35,16 @@ export function User(props: PropsType): JSX.Element {
         executeAutoLogin()
             .then((loginResponse: LoginResponseType) => {
                 setUser(loginResponse.user);
+            })
+            .catch(throwError)
+            // TODO: remove before deploy
+            .then(() => {
+                console.log('TODO: remove before deploy');
+                setUser({
+                    id: 'some-user-id',
+                    login: 'the-admin',
+                    role: UserRoleEnum.admin,
+                });
             })
             .catch(throwError);
     }, [executeAutoLogin]);
