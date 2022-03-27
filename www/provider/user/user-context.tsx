@@ -40,11 +40,13 @@ export function User(props: PropsType): JSX.Element {
             // TODO: remove before deploy
             .then(() => {
                 console.log('TODO: remove before deploy');
+                /*
                 setUser({
                     id: 'some-user-id',
                     login: 'the-admin',
                     role: UserRoleEnum.admin,
                 });
+*/
             })
             .catch(throwError);
     }, [executeAutoLogin]);
