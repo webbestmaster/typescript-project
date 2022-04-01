@@ -121,7 +121,8 @@ export function Home(): JSX.Element {
                     setLocaleName(localeName === LocaleNameEnum.enUs ? LocaleNameEnum.ruRu : LocaleNameEnum.enUs)}
                 type="button"
             >
-                {localeName}
+                {/* TODO: fix bug with SSR locale */}
+                localeName, add brackets
             </button>
 
             <hr />
@@ -134,9 +135,15 @@ export function Home(): JSX.Element {
 
             <pre>{JSON.stringify(screenInfo, null, 4)}</pre>
 
+            {/*
+            // TODO: fix bug with SSR locale
             <Locale stringKey="BUTTON__APPLY" />
+            */}
 
+            {/*
+            // TODO: fix bug with SSR locale
             <h4>{getLocalizedString('BUTTON__APPLY')}</h4>
+            */}
 
             <img alt="" src={pngImageSrc} />
 
@@ -144,9 +151,12 @@ export function Home(): JSX.Element {
 
             {/* <SvgImageComponent />*/}
 
+            {/*
+            // TODO: fix bug with SSR
             <GuardSuspense fallback={<Spinner isShow={isBrowser} position="absolute" />}>
                 <LoadMeAsync smth="smth" />
             </GuardSuspense>
+*/}
 
             <Library textContent="Hello, World">
                 <p>inner !! text</p>

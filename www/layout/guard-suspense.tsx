@@ -10,5 +10,5 @@ type PropsType = {
 export function GuardSuspense(props: PropsType): JSX.Element {
     const {children, fallback} = props;
 
-    return isBrowser ? <Suspense fallback={fallback}>{children}</Suspense> : fallback;
+    return <Suspense fallback={fallback}>{children}</Suspense>;
 }
