@@ -50,14 +50,14 @@ export async function getAutoAuthLogin(request: FastifyRequest<{Body: string}>, 
     const userId = String(session.get(cookieFieldUserId) || '');
 
     if (!userId) {
-        reply.code(400).send(null);
+        reply.code(404).send(null);
         return;
     }
 
     const user = await authCrud.findOne({id: userId});
 
     if (!user) {
-        reply.code(400).send(null);
+        reply.code(404).send(null);
         return;
     }
 

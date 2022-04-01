@@ -1,7 +1,6 @@
 /* global document */
 
-import {StrictMode} from 'react';
-import {hydrate, render} from 'react-dom';
+import {hydrateRoot, createRoot} from 'react-dom/client';
 
 import {selector} from './const';
 import {App, AppPropsType} from './component/app/app';
@@ -22,18 +21,14 @@ import {defaultServerDataContextConst} from './provider/server-data/server-data-
 
     const {innerHTML} = nodeWrapper;
 
-    const appNode = (
-        <StrictMode>
-            <App server={appProps.server} serverData={appProps.serverData} />
-        </StrictMode>
-    );
+    const appNode = <App server={appProps.server} serverData={appProps.serverData} />;
 
     if (innerHTML.trim() === '') {
         console.log('[main]: Render App as SPA');
-        render(appNode, nodeWrapper);
+        createRoot(nodeWrapper).render(appNode);
         return;
     }
 
     console.log('[main]: Render App as SSR');
-    hydrate(appNode, nodeWrapper);
+    hydrateRoot(nodeWrapper, appNode);
 })();

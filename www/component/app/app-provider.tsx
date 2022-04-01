@@ -1,4 +1,4 @@
-import {ReactNode, StrictMode} from 'react';
+import {ReactNode} from 'react';
 
 import {LocalizationProvider} from '../../provider/locale/locale-context';
 import {ServerData} from '../../provider/server-data/server-data-context';
@@ -14,12 +14,10 @@ export function AppProvider(props: PropsType): JSX.Element {
     const {children, serverData} = props;
 
     return (
-        <StrictMode>
-            <ServerData defaultServerData={serverData}>
-                <User>
-                    <LocalizationProvider>{children}</LocalizationProvider>
-                </User>
-            </ServerData>
-        </StrictMode>
+        <ServerData defaultServerData={serverData}>
+            <User>
+                <LocalizationProvider>{children}</LocalizationProvider>
+            </User>
+        </ServerData>
     );
 }

@@ -1,3 +1,5 @@
+import {StrictMode} from 'react';
+
 import {ServerDataContextType} from '../../provider/server-data/server-data-context-type';
 import {ErrorBoundary} from '../error-boundary/error-boundary';
 
@@ -17,10 +19,12 @@ export function App(props: AppPropsType): JSX.Element {
     const {server, serverData} = props;
 
     return (
-        <ErrorBoundary errorFallBack={<h1>Front-end error</h1>}>
-            <AppProvider serverData={serverData}>
-                <AppRouting server={server} />
-            </AppProvider>
-        </ErrorBoundary>
+        <StrictMode>
+            <ErrorBoundary errorFallBack={<h1>Front-end error</h1>}>
+                <AppProvider serverData={serverData}>
+                    <AppRouting server={server} />
+                </AppProvider>
+            </ErrorBoundary>
+        </StrictMode>
     );
 }
