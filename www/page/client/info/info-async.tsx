@@ -1,6 +1,5 @@
-import {lazy} from 'react';
+import {lazy, Suspense} from 'react';
 
-import {GuardSuspense} from '../../../layout/guard-suspense';
 import {Spinner} from '../../../layout/spinner/spinner';
 import {LoginAdminRequired} from '../../../layout/login-admin-required/login-admin-required';
 
@@ -15,9 +14,9 @@ const AsyncLazy = lazy(
 export function InfoAsync() {
     return (
         <LoginAdminRequired>
-            <GuardSuspense fallback={<Spinner position="absolute" />}>
+            <Suspense fallback={<Spinner position="absolute" />}>
                 <AsyncLazy />
-            </GuardSuspense>
+            </Suspense>
         </LoginAdminRequired>
     );
 }

@@ -1,7 +1,7 @@
 /* global setTimeout */
 
-import {lazy, useEffect, useState, useContext} from 'react';
-import {useSystem} from 'react-system-hook';
+// import {useSystem} from 'react-system-hook';
+import {Suspense, lazy, useEffect, useState, useContext} from 'react';
 import markdownPro, {MarkdownConfigShallowType} from 'markdown-pro';
 import {JSONSchemaType} from 'ajv';
 
@@ -16,10 +16,8 @@ import {AsciiSpinner} from '../../../layout/spinner/c-ascii-spinner';
 import {ExampleAudio} from '../../../component/example-audio/c-example-audio';
 import {ExamplePlayer} from '../../../component/example-audio-player/c-example-audio-player';
 import {fetchX} from '../../../util/fetch';
-import {GuardSuspense} from '../../../layout/guard-suspense';
 import {appRoute} from '../../../component/app/app-route';
 import {NavigationLink} from '../../../layout/navigation-link/navigation-link';
-import {isBrowser} from '../../../util/system';
 import {ServerDataContextType} from '../../../provider/server-data/server-data-context-type';
 import {ServerDataContext} from '../../../provider/server-data/server-data-context';
 import {useMakeExecutableState} from '../../../util/function';
@@ -68,7 +66,7 @@ export function Home(): JSX.Element {
     const {getLocalizedString, setLocaleName, localeName} = useLocale();
     const serverDataContext = useContext<ServerDataContextType>(ServerDataContext);
     const {getFormattedNumber} = useFormat();
-    const {screenInfo} = useSystem();
+    // const {screenInfo} = useSystem();
     const {execute, isInProgress, result, error} = useMakeExecutableState<[string, JSONSchemaType<MyIpType>], MyIpType>(
         fetchX
     );
@@ -132,7 +130,7 @@ export function Home(): JSX.Element {
 
             <code>{getFormattedNumber(321, {style: 'unit', unit: 'liter', unitDisplay: 'long'})}</code>
 
-            <pre>{JSON.stringify(screenInfo, null, 4)}</pre>
+            {/* <pre>{JSON.stringify(screenInfo, null, 4)}</pre>*/}
 
             <Locale stringKey="BUTTON__APPLY" />
 
@@ -144,12 +142,9 @@ export function Home(): JSX.Element {
 
             {/* <SvgImageComponent />*/}
 
-            {/*
-            // TODO: fix bug with SSR
-            <GuardSuspense fallback={<Spinner isShow={isBrowser} position="absolute" />}>
+            <Suspense fallback={<Spinner position="absolute" />}>
                 <LoadMeAsync smth="smth" />
-            </GuardSuspense>
-*/}
+            </Suspense>
 
             <Library textContent="Hello, World">
                 <p>inner !! text</p>
