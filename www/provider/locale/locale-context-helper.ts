@@ -21,6 +21,9 @@ export function getSavedLocaleName(): LocaleNameEnum {
         }
     }
 
+    return defaultLocaleName;
+
+    /*
     const navigatorLanguages = navigator.languages;
 
     // eslint-disable-next-line no-loops/no-loops
@@ -34,6 +37,7 @@ export function getSavedLocaleName(): LocaleNameEnum {
     }
 
     return defaultLocaleName;
+*/
 }
 
 export function saveLocaleName<LocaleName extends string>(localeName: LocaleName): LocaleName {

@@ -121,8 +121,7 @@ export function Home(): JSX.Element {
                     setLocaleName(localeName === LocaleNameEnum.enUs ? LocaleNameEnum.ruRu : LocaleNameEnum.enUs)}
                 type="button"
             >
-                {/* TODO: fix bug with SSR locale */}
-                localeName, add brackets
+                {localeName}
             </button>
 
             <hr />
@@ -135,15 +134,9 @@ export function Home(): JSX.Element {
 
             <pre>{JSON.stringify(screenInfo, null, 4)}</pre>
 
-            {/*
-            // TODO: fix bug with SSR locale
             <Locale stringKey="BUTTON__APPLY" />
-            */}
 
-            {/*
-            // TODO: fix bug with SSR locale
             <h4>{getLocalizedString('BUTTON__APPLY')}</h4>
-            */}
 
             <img alt="" src={pngImageSrc} />
 
