@@ -1,5 +1,10 @@
 {
     "compilerOptions": {
+        // TODO: try to remove "types" when "@types/react" and "@types/react-dom" has been updated
+        "types": [
+            "react/next",
+            "react-dom/next"
+        ],
         "outDir": "./tsc-check/",
 
         "target": "es2019",
@@ -39,7 +44,7 @@
         // TODO: exactOptionalPropertyTypes turn to true after React typing has been changed\fixed
         "exactOptionalPropertyTypes": false,
         "emitDecoratorMetadata": false,
-        "sourceMap": true,
+        "sourceMap": true
     },
     "exclude": [
         "./dist/",
