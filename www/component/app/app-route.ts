@@ -10,6 +10,10 @@ export const appRoute = {
         path: '/info',
     },
 
+    test: {
+        path: '/test/use-deferred-value',
+    },
+
     // cms
     articleList: {
         path: '/cms/article-list',
