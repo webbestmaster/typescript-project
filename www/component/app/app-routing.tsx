@@ -8,6 +8,7 @@ import {isBrowser} from '../../util/system';
 import {LoginAsync} from '../../page/service/login/login-async';
 import {TestUseDeferredValue} from '../../page/client/test/use-deferred-value';
 import {ArticleListAsync} from '../../page/cms/article-list/article-list-async';
+import {TestUseDeferredValueSecond} from '../../page/client/test/use-deferred-value-second';
 
 import {appRoute} from './app-route';
 
@@ -24,7 +25,8 @@ export function AppRouting(props: PropsType): JSX.Element {
         <Routes>
             <Route element={<Home />} path={appRoute.root.path} />
             <Route element={<InfoAsync />} path={appRoute.info.path} />
-            <Route element={<TestUseDeferredValue />} path={appRoute.test.path} />
+            <Route element={<TestUseDeferredValue />} path={appRoute.testUseDeferredValue.path} />
+            <Route element={<TestUseDeferredValueSecond />} path={appRoute.testUseDeferredValueSecond.path} />
 
             <Route element={<LoginAsync />} path={appRoute.login.path} />
 

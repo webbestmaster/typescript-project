@@ -1,5 +1,6 @@
 import {LocaleNameEnum} from '../provider/locale/locale-context-type';
 
+/*
 export function getHash(data: Array<unknown> | Record<string, unknown> | string): string {
     let result = 0;
     const fullString: string = typeof data === 'string' ? data : JSON.stringify(data, null, 0);
@@ -12,9 +13,10 @@ export function getHash(data: Array<unknown> | Record<string, unknown> | string)
 
     return result.toString(32);
 }
+*/
 
 export function getRandomString(): string {
-    return getHash(String(Date.now() + Math.random()).replace('.', ''));
+    return Math.random().toString(32).replace('0.', '');
 }
 
 export function findString(input: string, searchQuery: string, flags: '' | 'g' | 'gi' = 'gi'): Array<string> {

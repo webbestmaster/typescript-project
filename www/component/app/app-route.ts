@@ -10,8 +10,12 @@ export const appRoute = {
         path: '/info',
     },
 
-    test: {
+    testUseDeferredValue: {
         path: '/test/use-deferred-value',
+    },
+
+    testUseDeferredValueSecond: {
+        path: '/test/use-deferred-value-second',
     },
 
     // cms
