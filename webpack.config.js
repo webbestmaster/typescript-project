@@ -9,6 +9,7 @@ const {alias} = require('./webpack/setting/resolve/alias');
 const {extensions} = require('./webpack/setting/resolve/extensions');
 const {plugins} = require('./webpack/setting/plugins');
 const {devServer} = require('./webpack/setting/dev-server');
+const {watchOptions} = require('./webpack/setting/watch-options');
 
 const {
     pathToStaticFileFolder,
@@ -48,6 +49,7 @@ const configFront = {
     resolve: {alias, extensions},
     plugins,
     devServer,
+    watchOptions,
 };
 
 const configBack = {
@@ -79,6 +81,7 @@ const configLibraryFront = {
     devServer,
     externalsPresets,
     externals,
+    watchOptions,
 
     /*
     externals: {
