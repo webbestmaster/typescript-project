@@ -48,12 +48,14 @@
     "test:unit": "jest --config='test-unit/config/jest.config.js' ./www/ --coverage --silent --passWithNoTests",
     "pre-commit-hook": "npm run check",
     "_postinstall": "cp ./git-hooks/pre-commit ./.git/hooks",
-    "__start-site": "sudo nginx -c ~/user/master-git/db-cms/site/nginx/nginx.site.conf -g 'daemon off;'"
+    "__start-site": "sudo nginx -c ~/user/master-git/db-cms/site/nginx/nginx.site.conf -g 'daemon off;'",
+    "__storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider start-storybook -p 6006",
+    "__build-storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider NODE_ENV=development SIDE=front build-storybook"
   },
   "dependencies": {
     "@types/nedb": "^1.8.12",
-    "@types/react": "^18.0.5",
-    "@types/react-dom": "^18.0.1",
+    "@types/react": "^18.0.6",
+    "@types/react-dom": "^18.0.2",
     "ajv": "^8.11.0",
     "dotenv": "^16.0.0",
     "fastify": "^3.28.0",
@@ -89,7 +91,7 @@
     "css-loader": "^6.7.1",
     "css-modules-typescript-loader": "^4.0.1",
     "duplicate-package-checker-webpack-plugin": "^3.0.0",
-    "eslint": "^8.13.0",
+    "eslint": "^8.14.0",
     "eslint-import-resolver-typescript": "^2.7.1",
     "eslint-plugin-babel": "^5.3.1",
     "eslint-plugin-filenames": "^1.3.2",
