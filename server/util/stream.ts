@@ -1,13 +1,13 @@
-/* global Buffer, NodeJS */
+/* global NodeJS */
 
 import {PromiseResolveType} from '../../www/util/promise';
 
 export function streamToString(stream: NodeJS.ReadableStream): Promise<string> {
-    const chunks: Array<Buffer> = [];
+    const chunks: Array<string> = [];
 
     return new Promise((resolve: PromiseResolveType<string>, reject: PromiseResolveType<Error>) => {
-        stream.on('data', (chunk: string): unknown => chunks.push(Buffer.from(chunk)));
+        stream.on('data', (chunk: string): unknown => chunks.push(chunk));
         stream.on('error', (error: Error): unknown => reject(error));
-        stream.on('end', (): unknown => resolve(Buffer.concat(chunks).toString('utf8')));
+        stream.on('end', (): unknown => resolve(chunks.join('')));
     });
 }
