@@ -2,11 +2,11 @@
 
 import path from 'path';
 
-import fastifyStatic from 'fastify-static';
-import fastifyCors from 'fastify-cors';
-import fastifySecureSession from 'fastify-secure-session';
+import fastifyStatic from '@fastify/static';
+import fastifyCors from '@fastify/cors';
+import fastifySecureSession from '@fastify/secure-session';
+import {FastifyError} from '@fastify/error';
 import fastifyConstructor, {FastifyRequest, FastifyReply} from 'fastify';
-import {FastifyError} from 'fastify-error';
 
 import {getAutoAuthLogin, postAuthLogin} from './auth/auth-api';
 import {getHtmlCallBack} from './ssr/ssr';
