@@ -1,5 +1,7 @@
 import {JSONSchemaType} from 'ajv';
 
+import {PaginationResultType} from '../data-base/data-base-type';
+
 import {ArticleType, ArticleTypeEnum, SubDocumentListViewTypeEnum} from './article-type';
 
 const articleSchemaProperties = {
@@ -70,5 +72,16 @@ export const articleSchema: JSONSchemaType<ArticleType> = {
     additionalProperties: false,
     properties: articleSchemaProperties,
     required: requiredFieldList,
+    type: 'object',
+} as const;
+
+export const articlePaginationSchema: JSONSchemaType<PaginationResultType<ArticleType>> = {
+    additionalProperties: false,
+    properties: {
+        pageIndex: {type: 'number'},
+        pageSize: {type: 'number'},
+        result: {items: articleSchema, type: 'array'},
+    },
+    required: [],
     type: 'object',
 } as const;

@@ -1,10 +1,11 @@
-import {FastifyRequest, FastifyReply} from 'fastify';
+import {FastifyReply, FastifyRequest} from 'fastify';
 
 import {LoginResponseType} from '../../www/service/auth/auth-type';
 import {getSha256Hash} from '../util/string';
+import {UserRoleEnum} from '../../www/provider/user/user-context-type';
 
 import {authCrud} from './auth';
-import {cookieFieldUserId} from './auth-const';
+import {authHeader, cookieFieldUserId} from './auth-const';
 
 export async function postAuthLogin(request: FastifyRequest<{Body: string}>, reply: FastifyReply): Promise<void> {
     const {body, session} = request;
@@ -12,11 +13,6 @@ export async function postAuthLogin(request: FastifyRequest<{Body: string}>, rep
     const parsedData: Record<string, unknown> = JSON.parse(body);
 
     const {login, password} = parsedData;
-
-    // console.log(session.get('data'))
-    //
-    // session.set('data', '12312312312321313');
-    // session.options({maxAge: 1000 * 60 * 60});
 
     if (typeof login !== 'string' || typeof password !== 'string') {
         reply.code(400).send(null);
@@ -41,23 +37,32 @@ export async function postAuthLogin(request: FastifyRequest<{Body: string}>, rep
     session.set(cookieFieldUserId, user.id);
     session.options({maxAge: 1000 * 60 * 60});
 
-    reply.code(200).header('Content-Type', 'application/json; charset=utf-8').send(loginResponse);
+    reply
+        .code(200)
+        .header(...authHeader)
+        .send(loginResponse);
 }
 
 export async function getAutoAuthLogin(request: FastifyRequest<{Body: string}>, reply: FastifyReply): Promise<void> {
+    const defaultLoginResponse: LoginResponseType = {user: {id: '', login: '', role: UserRoleEnum.user}};
     const {session} = request;
-
     const userId = String(session.get(cookieFieldUserId) || '');
 
     if (!userId) {
-        reply.code(404).send(null);
+        reply
+            .code(200)
+            .header(...authHeader)
+            .send(defaultLoginResponse);
         return;
     }
 
     const user = await authCrud.findOne({id: userId});
 
     if (!user) {
-        reply.code(404).send(null);
+        reply
+            .code(200)
+            .header(...authHeader)
+            .send(defaultLoginResponse);
         return;
     }
 
@@ -72,5 +77,8 @@ export async function getAutoAuthLogin(request: FastifyRequest<{Body: string}>, 
     session.set(cookieFieldUserId, user.id);
     session.options({maxAge: 1000 * 60 * 60});
 
-    reply.code(200).header('Content-Type', 'application/json; charset=utf-8').send(loginResponse);
+    reply
+        .code(200)
+        .header(...authHeader)
+        .send(loginResponse);
 }

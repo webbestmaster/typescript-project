@@ -10,6 +10,9 @@ import {TestUseDeferredValue} from '../../page/client/test/use-deferred-value';
 import {ArticleListAsync} from '../../page/cms/article-list/article-list-async';
 import {TestUseDeferredValueSecond} from '../../page/client/test/use-deferred-value-second';
 
+import {ArticleAsync} from '../../page/cms/article/article-async';
+import {ArticleModeEnum} from '../../page/cms/article/article-type';
+
 import {appRoute} from './app-route';
 
 type PropsType = {
@@ -31,6 +34,9 @@ export function AppRouting(props: PropsType): JSX.Element {
             <Route element={<LoginAsync />} path={appRoute.login.path} />
 
             <Route element={<ArticleListAsync />} path={appRoute.articleList.path} />
+
+            <Route element={<ArticleAsync mode={ArticleModeEnum.create} />} path={appRoute.articleCreate.path} />
+            <Route element={<ArticleAsync mode={ArticleModeEnum.edit} />} path={appRoute.articleEdit.path} />
 
             <Route element={<Error404 />} path="*" />
         </Routes>

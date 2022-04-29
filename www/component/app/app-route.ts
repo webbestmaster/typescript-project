@@ -23,6 +23,16 @@ export const appRoute = {
         path: '/cms/article-list',
     },
 
+    // cms
+    articleCreate: {
+        path: '/cms/article-create',
+    },
+
+    // cms
+    articleEdit: {
+        path: '/cms/article-edit/:articleId' as const, // TODO: see in RocketData how check articleId
+    },
+
     // service
     login: {
         path: '/login',

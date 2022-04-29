@@ -12,6 +12,7 @@ import {getAutoAuthLogin, postAuthLogin} from './auth/auth-api';
 import {getHtmlCallBack} from './ssr/ssr';
 import {secretKey} from './key';
 import {siteCookieKey} from './const';
+import {getArticleListPagination} from './article/article-api';
 
 const cwd = process.cwd();
 
@@ -53,6 +54,7 @@ const serverPort = 3000;
     // //////////////
     fastify.post('/api/auth/login', postAuthLogin);
     fastify.get('/api/auth/get-user', getAutoAuthLogin);
+    fastify.get('/api/article/list-pagination', getArticleListPagination);
 
     // //////////////
     // 4xx & 5xx
