@@ -30,7 +30,7 @@ export const appRoute = {
 
     // cms
     articleEdit: {
-        path: '/cms/article-edit/:articleId' as const, // TODO: see in RocketData how check articleId
+        path: '/cms/article-edit/:articleId' as const, // `as const` is required for TS validation of useParams and generatePath of react-router-dom
     },
 
     // service
