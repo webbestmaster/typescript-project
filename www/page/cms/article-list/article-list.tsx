@@ -6,10 +6,9 @@ import {PaginationResultType} from '../../../../server/data-base/data-base-type'
 import {ArticleType} from '../../../../server/article/article-type';
 import {getArticleListPagination} from '../../../service/article/article-api';
 
+// eslint-disable-next-line import/no-default-export
 export default function ArticleList(): JSX.Element {
-    const {execute, isInProgress, result, error} = useMakeExecutableState<[], PaginationResultType<ArticleType>>(
-        getArticleListPagination
-    );
+    const {execute, result} = useMakeExecutableState<[], PaginationResultType<ArticleType>>(getArticleListPagination);
 
     useEffect(() => {
         execute();

@@ -13,6 +13,7 @@ export async function getArticleListPagination(
     request: FastifyRequest<{Body: string}>,
     reply: FastifyReply
 ): Promise<void> {
+    // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
     const {session, query} = request;
 
     const user = await authCrud.findOne({id: String(session.get(cookieFieldUserId) || '')});

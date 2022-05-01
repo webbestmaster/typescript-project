@@ -2,7 +2,7 @@
 
 import path from 'path';
 
-import fastifyStatic from '@fastify/static';
+import fastifyStaticServer from '@fastify/static';
 import fastifyCors from '@fastify/cors';
 import fastifySecureSession from '@fastify/secure-session';
 import {FastifyError} from '@fastify/error';
@@ -26,7 +26,7 @@ const serverPort = 3000;
     // //////////////
     fastify.register(fastifyCors);
 
-    fastify.register(fastifyStatic, {
+    fastify.register(fastifyStaticServer, {
         prefix: '/', // optional: default '/'
         root: path.join(cwd, 'dist'),
     });
