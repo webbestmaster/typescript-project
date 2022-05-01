@@ -7,7 +7,7 @@ import {ArticleType} from '../../../../server/article/article-type';
 import {getArticleListPagination} from '../../../service/article/article-api';
 
 // eslint-disable-next-line import/no-default-export
-export default function ArticleList(): JSX.Element {
+export default function CmsArticleList(): JSX.Element {
     const {execute, result} = useMakeExecutableState<[], PaginationResultType<ArticleType>>(getArticleListPagination);
 
     useEffect(() => {

@@ -3,23 +3,19 @@ import {lazy, Suspense} from 'react';
 import {Spinner} from '../../../layout/spinner/spinner';
 import {LoginAdminRequired} from '../../../layout/login-admin-required/login-admin-required';
 
-import {ArticlePropsType} from './article';
-
 const AsyncLazy = lazy(
     () =>
         import(
-            /* webpackChunkName: 'page-cms-article' */
-            './article'
+            /* webpackChunkName: 'page-cms-article-list' */
+            './cms-article-list'
         )
 );
 
-export function ArticleAsync(props: ArticlePropsType) {
-    const {mode} = props;
-
+export function CmsArticleListAsync() {
     return (
         <LoginAdminRequired>
             <Suspense fallback={<Spinner position="absolute" />}>
-                <AsyncLazy mode={mode} />
+                <AsyncLazy />
             </Suspense>
         </LoginAdminRequired>
     );

@@ -1,4 +1,4 @@
-export enum ArticleModeEnum {
+export enum CmsArticleModeEnum {
     create = 'create',
     edit = 'edit',
 }
