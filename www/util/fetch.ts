@@ -28,7 +28,7 @@ type OptionsType = {
     // referrer?: 'no-referrer'; // no-referrer, client (default: client)
 };
 
-type FetchCacheType = Record<string, unknown>;
+type FetchCacheType = Record<string, Promise<unknown> | null>;
 
 const fetchCache: FetchCacheType = {};
 
@@ -54,7 +54,7 @@ function fetchEndCallBack(fetchBeginTimeStamp: number, url: string) {
     }
 }
 
-export async function fetchX<ExpectedResponseType>(
+export function fetchX<ExpectedResponseType>(
     url: string,
     jsonSchema: JSONSchemaType<ExpectedResponseType>,
     options?: OptionsType
@@ -63,36 +63,45 @@ export async function fetchX<ExpectedResponseType>(
 
     const cacheProperty = `${url} - ${JSON.stringify(options || '[empty]')}`;
 
-    const savedPromiseResult = fetchCache[cacheProperty];
+    const savedPromiseResult: Promise<unknown> | null = fetchCache[cacheProperty];
 
     if (savedPromiseResult) {
-        // console.log(`[fetchX]: [CACHE]\n> url: ${url},\n> options: ${JSON.stringify(options || '[empty]')}`);
-        // return savedPromiseResult as Promise<ExpectedResponseType>;
-        return getExpectedStructure<ExpectedResponseType>(savedPromiseResult, jsonSchema);
+        console.log(
+            `%c[fetchX]: [CACHE]\n> url: ${url},\n> options: ${JSON.stringify(options || '[empty]')}`,
+            'color: #0a0'
+        );
+
+        return savedPromiseResult
+            .then((data: unknown): ExpectedResponseType => getExpectedStructure<ExpectedResponseType>(data, jsonSchema))
+            .catch((error: Error) => {
+                fetchCache[cacheProperty] = null;
+                console.error(error);
+
+                throw error;
+            });
     }
 
     const fetchBeginTimeStamp = Date.now();
 
-    try {
-        const response: Response = await fetch(url, options);
+    const fetchResult: Promise<ExpectedResponseType> = fetch(url, options)
+        .then((response: Response): Promise<unknown> => response.json())
+        .then((data: unknown): ExpectedResponseType => {
+            const checkedData: ExpectedResponseType = getExpectedStructure<ExpectedResponseType>(data, jsonSchema);
 
-        if (!response.ok) {
-            throw new Error(await response.text());
-        }
+            fetchEndCallBack(fetchBeginTimeStamp, url);
 
-        const fetchResult: ExpectedResponseType = getExpectedStructure<ExpectedResponseType>(
-            await response.json(),
-            jsonSchema
-        );
+            return checkedData;
+        })
+        .catch((error: Error) => {
+            fetchEndCallBack(fetchBeginTimeStamp, url);
 
-        fetchCache[cacheProperty] = fetchResult;
+            fetchCache[cacheProperty] = null;
+            console.error(error);
 
-        return fetchResult;
-    } catch (error: unknown) {
-        fetchCache[cacheProperty] = null;
-        console.error(error);
-        throw error;
-    } finally {
-        fetchEndCallBack(fetchBeginTimeStamp, url);
-    }
+            throw error;
+        });
+
+    fetchCache[cacheProperty] = fetchResult;
+
+    return fetchResult;
 }

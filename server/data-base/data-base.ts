@@ -111,7 +111,7 @@ export function makeCrud<ModelType>(
                         }
 
                         if (Array.isArray(dataList)) {
-                            resolve({...noFound, result: dataList});
+                            resolve({pageIndex, pageSize, result: dataList});
                             return;
                         }
 

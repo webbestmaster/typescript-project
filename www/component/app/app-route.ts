@@ -1,6 +1,10 @@
 /* eslint-disable sort-keys */
 
-export const appRoute = {
+export type AppRoutType = {
+    path: string;
+};
+
+export const appRoute: Record<string, AppRoutType> = {
     // client
     root: {
         path: '/',

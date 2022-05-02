@@ -6,6 +6,17 @@ export function isObjectInclude(object: Record<string, unknown>, query: Record<s
 
 const ajv = new Ajv();
 
+/*
+export function getIsExpectedStructure<ExpectedResponseType>(
+    data: unknown,
+    jsonSchema: JSONSchemaType<ExpectedResponseType>
+): data is ExpectedResponseType {
+    const validate = ajv.compile<ExpectedResponseType>(jsonSchema);
+
+    return validate(data);
+}
+*/
+
 export function getExpectedStructure<ExpectedResponseType>(
     data: unknown,
     jsonSchema: JSONSchemaType<ExpectedResponseType>

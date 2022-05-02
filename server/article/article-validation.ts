@@ -11,11 +11,11 @@ const articleSchemaProperties = {
     description: {type: 'string'},
     descriptionShort: {type: 'string'},
     fileList: {items: {type: 'string'}, type: 'array'},
-    hasMetaRobotsFollowSeo: {type: 'boolean'},
+    hasMetaRobotsNoFollowSeo: {type: 'boolean'},
     hasMetaRobotsNoIndexSeo: {type: 'boolean'},
     id: {type: 'string'},
     isActive: {type: 'boolean'}, // actually temporary "removed"
-    isInSiteMapXmlSeo: {type: 'boolean'}, // has sitemap.xml link to article on not
+    isInSiteMapXmlSeo: {type: 'boolean'}, // has sitemap.xml link to article or not
     metaDescriptionSeo: {type: 'string'}, // tag <meta type="description" content="....." />
     metaKeyWordsSeo: {type: 'string'}, // tag <meta type="keywords" content="....." />
     metaSeo: {type: 'string'}, // actually any html code
@@ -43,7 +43,7 @@ const requiredFieldList: Array<keyof ArticleType> = [
     'description',
     'descriptionShort',
     'fileList',
-    'hasMetaRobotsFollowSeo',
+    'hasMetaRobotsNoFollowSeo',
     'hasMetaRobotsNoIndexSeo',
     'id',
     'isActive',

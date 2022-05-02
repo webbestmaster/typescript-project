@@ -8,6 +8,8 @@ import fastifySecureSession from '@fastify/secure-session';
 import {FastifyError} from '@fastify/error';
 import fastifyConstructor, {FastifyRequest, FastifyReply} from 'fastify';
 
+import {appRoute, AppRoutType} from '../www/component/app/app-route';
+
 import {getAutoAuthLogin, postAuthLogin} from './auth/auth-api';
 import {getHtmlCallBack} from './ssr/ssr';
 import {secretKey} from './key';
@@ -44,12 +46,6 @@ const serverPort = 3000;
     });
 
     // //////////////
-    // Pages
-    // //////////////
-    fastify.get('/', getHtmlCallBack);
-    fastify.get('/login', getHtmlCallBack);
-
-    // //////////////
     // API
     // //////////////
     fastify.post('/api/auth/login', postAuthLogin);
@@ -57,9 +53,17 @@ const serverPort = 3000;
     fastify.get('/api/article/list-pagination', getArticleListPagination);
 
     // //////////////
+    // Pages
+    // //////////////
+    Object.values(appRoute).forEach((rout: AppRoutType) => {
+        fastify.get(rout.path, getHtmlCallBack);
+    });
+
+    // //////////////
     // 4xx & 5xx
     // //////////////
     fastify.setErrorHandler((error: FastifyError, request: FastifyRequest, reply: FastifyReply) => {
+        // TODO: maybe use here getHtmlCallBack to show error
         request.log.warn(error);
 
         const {statusCode = 500, message} = error;
