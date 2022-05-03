@@ -35,16 +35,22 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             autoComplete="off"
             form={form}
             initialValues={{remember: true}}
-            labelCol={{
-                span: 8,
-            }}
-            layout="horizontal"
+            labelCol={
+                {
+                    // span: 9,
+                    // offset: 1,
+                }
+            }
+            layout="vertical"
             name="basic"
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
-            wrapperCol={{
-                span: 16,
-            }}
+            wrapperCol={
+                {
+                    // span: 9,
+                    // offset: 0,
+                }
+            }
         >
             <Form.Item
                 label="content"
@@ -96,20 +102,17 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             <Form.Item
                 name="remember"
                 valuePropName="checked"
+                /*
                 wrapperCol={{
                     offset: 8,
                     span: 16,
                 }}
+*/
             >
                 <Checkbox>Remember me</Checkbox>
             </Form.Item>
 
-            <Form.Item
-                wrapperCol={{
-                    offset: 8,
-                    span: 16,
-                }}
-            >
+            <Form.Item>
                 <Button htmlType="submit" type="primary">
                     Submit
                 </Button>
