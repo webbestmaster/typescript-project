@@ -1,4 +1,4 @@
-import {JSONSchemaType} from 'ajv';
+import Ajv, {JSONSchemaType} from 'ajv';
 
 import {PaginationResultType} from '../data-base/data-base-type';
 
@@ -85,3 +85,16 @@ export const articlePaginationSchema: JSONSchemaType<PaginationResultType<Articl
     required: [],
     type: 'object',
 } as const;
+
+export function getIsValidArticle(data: unknown): data is ArticleType {
+    const ajv = new Ajv();
+    const modelJsonSchemaValidate = ajv.compile<ArticleType>(articleSchema);
+
+    const isValidArticle = modelJsonSchemaValidate(data);
+
+    if (modelJsonSchemaValidate.errors?.length) {
+        console.log(modelJsonSchemaValidate.errors);
+    }
+
+    return isValidArticle;
+}

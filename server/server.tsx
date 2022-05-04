@@ -13,7 +13,7 @@ import {appRoute, AppRoutType} from '../www/component/app/app-route';
 import {getAutoAuthLogin, postAuthLogin} from './auth/auth-api';
 import {getHtmlCallBack} from './ssr/ssr';
 import {secretKey} from './key';
-import {siteCookieKey} from './const';
+import {apiUrl, siteCookieKey} from './const';
 import {getArticleListPagination} from './article/article-api';
 
 const cwd = process.cwd();
@@ -48,9 +48,9 @@ const serverPort = 3000;
     // //////////////
     // API
     // //////////////
-    fastify.post('/api/auth/login', postAuthLogin);
-    fastify.get('/api/auth/get-user', getAutoAuthLogin);
-    fastify.get('/api/article/list-pagination', getArticleListPagination);
+    fastify.post(apiUrl.login, postAuthLogin);
+    fastify.get(apiUrl.getUser, getAutoAuthLogin);
+    fastify.get(apiUrl.articleListPagination, getArticleListPagination);
 
     // //////////////
     // Pages

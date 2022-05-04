@@ -1,14 +1,16 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
-import {Layout, Menu, Breadcrumb, Row, Col, Slider} from 'antd';
-import {ItemType} from 'antd/lib/menu/hooks/useItems';
+import {Layout, Menu, Typography} from 'antd';
+// import {ItemType} from 'antd/lib/menu/hooks/useItems';
 
+const {Title} = Typography;
 const {Header, Content, Footer} = Layout;
 
 import {CmsArticle} from '../cms-article';
 import {makeDefaultArticle} from '../cms-article-helper';
+import {Box} from '../../../../layout/box/box';
 
-function handleOnUpdate() {
-    console.log('handleOnUpdate');
+function handleOnSubmit() {
+    console.log('handleOnSubmit');
 }
 
 // https://ant.design/components/grid/#Row
@@ -21,28 +23,30 @@ export default function CmsArticleCreate(): JSX.Element {
             <Header>
                 {/* <div className="logo"/>*/}
                 <Menu
-                    defaultSelectedKeys={['2']}
-                    items={Array.from({length: 15})
-                        .fill(null)
-                        .map((value: unknown, index: number): ItemType => {
-                            return {key: String(index + 1), label: String(index + 1)};
-                        })}
+                    // TODO: check for change in doc API
+                    defaultSelectedKeys={['1']}
+                    items={[
+                        {
+                            key: '1',
+                            label: 'article list',
+                        },
+                        {
+                            key: '2',
+                            label: 'article create',
+                        },
+                    ]}
                     mode="horizontal"
                     theme="dark"
                 />
             </Header>
 
-            <Content>
-                <Breadcrumb>
-                    <Breadcrumb.Item>Home</Breadcrumb.Item>
-                    <Breadcrumb.Item>List</Breadcrumb.Item>
-                    <Breadcrumb.Item>App</Breadcrumb.Item>
-                </Breadcrumb>
+            <Box padding={16}>
+                <Content>
+                    <Title level={2}>Create new article</Title>
 
-                <Row gutter={16}>
-                    <CmsArticle article={makeDefaultArticle()} onUpdate={handleOnUpdate} />
-                </Row>
-            </Content>
+                    <CmsArticle article={makeDefaultArticle()} onSubmit={handleOnSubmit} />
+                </Content>
+            </Box>
 
             <Footer>Ant Design ©2018 Created by Ant UED</Footer>
         </Layout>

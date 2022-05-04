@@ -6,6 +6,7 @@ import {useMakeExecutableState} from '../../../util/function';
 import {LoginResponseType} from '../../../service/auth/auth-type';
 import {loginUser} from '../../../service/auth/auth-api';
 import {throwError} from '../../../util/error';
+import {apiUrl} from '../../../../server/const';
 
 // eslint-disable-next-line import/no-default-export
 export default function Login(): JSX.Element {
@@ -31,7 +32,7 @@ export default function Login(): JSX.Element {
     );
 
     return (
-        <form action="/api/auth/login" onSubmit={onSubmit}>
+        <form action={apiUrl.login} onSubmit={onSubmit}>
             <pre>{JSON.stringify(userContext, null, 4)}</pre>
             <pre>{JSON.stringify(loginHook, null, 4)}</pre>
 
