@@ -4,17 +4,14 @@ export type CrudType<ModelType> = {
     deleteOne: (model: Partial<ModelType>) => Promise<null>; // throw error if smth wrong
     findMany: (partialModel: Partial<ModelType>) => Promise<Array<ModelType>>;
     findManyPagination: (paginationQuery: PaginationQueryType<ModelType>) => Promise<PaginationResultType<ModelType>>;
-    findManyPartial: (
-        partialModel: Partial<ModelType>,
-        requiredPropertyList: Array<keyof ModelType>
-    ) => Promise<Array<ModelType>>;
-    // TODO: implement this
-    /*
     findManyPaginationPartial: (
         paginationQuery: PaginationQueryType<ModelType>,
         requiredPropertyList: Array<keyof ModelType>
     ) => Promise<PaginationResultType<ModelType>>;
-*/
+    findManyPartial: (
+        partialModel: Partial<ModelType>,
+        requiredPropertyList: Array<keyof ModelType>
+    ) => Promise<Array<ModelType>>;
     findOne: (partialModel: Partial<ModelType>) => Promise<ModelType | null>;
     updateOne: (partialModel: Partial<ModelType>, model: ModelType) => Promise<null>; // throw error if smth wrong
 };

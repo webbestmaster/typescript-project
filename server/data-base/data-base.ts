@@ -143,6 +143,22 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
         );
     }
 
+    function findManyPaginationPartial(
+        paginationQuery: PaginationQueryType<ModelType>,
+        requiredPropertyList: Array<keyof ModelType>
+    ): Promise<PaginationResultType<ModelType>> {
+        return findManyPagination(paginationQuery).then(
+            (paginationData: PaginationResultType<ModelType>): PaginationResultType<ModelType> => {
+                return {
+                    ...paginationData,
+                    result: paginationData.result.map<ModelType>((data: ModelType): ModelType => {
+                        return decreaseData(data, requiredPropertyList);
+                    }),
+                };
+            }
+        );
+    }
+
     // throw error if smth wrong
     function createOne(modelData: ModelType): Promise<null> {
         return new Promise<null>((resolve: PromiseResolveType<null>, reject: PromiseResolveType<Error>) => {
@@ -186,5 +202,15 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
         });
     }
 
-    return {count, createOne, deleteOne, findMany, findManyPagination, findManyPartial, findOne, updateOne};
+    return {
+        count,
+        createOne,
+        deleteOne,
+        findMany,
+        findManyPagination,
+        findManyPaginationPartial,
+        findManyPartial,
+        findOne,
+        updateOne,
+    };
 }
