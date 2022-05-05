@@ -25,9 +25,10 @@ function makeSimpleCallBack(
     resolve(null);
 }
 
-export function makeCrud<ModelType>(
+export function makeCrud<ModelType extends Record<string, unknown>>(
     dataBaseId: string,
-    modelJsonSchema: JSONSchemaType<ModelType>
+    modelJsonSchema: JSONSchemaType<ModelType>,
+    makeDefaultModel: () => ModelType
 ): CrudType<ModelType> {
     const dataBase = new Datastore<ModelType>({
         autoload: true,
@@ -86,6 +87,27 @@ export function makeCrud<ModelType>(
                 }
 
                 resolve(data);
+            });
+        });
+    }
+
+    function decreaseData(data: ModelType, requiredPropertyList: Array<keyof ModelType>): ModelType {
+        let partial: Partial<ModelType> = {};
+
+        requiredPropertyList.forEach((key: keyof ModelType) => {
+            partial = {...partial, [key]: data[key]};
+        });
+
+        return Object.assign<ModelType, Partial<ModelType>>(makeDefaultModel(), partial);
+    }
+
+    function findManyPartial(
+        partialModelData: Partial<ModelType>,
+        requiredPropertyList: Array<keyof ModelType>
+    ): Promise<Array<ModelType>> {
+        return findMany(partialModelData).then((dataList: Array<ModelType>): Array<ModelType> => {
+            return dataList.map<ModelType>((data: ModelType): ModelType => {
+                return decreaseData(data, requiredPropertyList);
             });
         });
     }
@@ -164,5 +186,5 @@ export function makeCrud<ModelType>(
         });
     }
 
-    return {count, createOne, deleteOne, findMany, findManyPagination, findOne, updateOne};
+    return {count, createOne, deleteOne, findMany, findManyPagination, findManyPartial, findOne, updateOne};
 }

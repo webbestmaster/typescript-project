@@ -1,11 +1,11 @@
 import {Form, Input, Button, Checkbox, Typography, Select} from 'antd';
-import {ValidateErrorEntity, RuleObject} from 'rc-field-form/lib/interface';
+import {ValidateErrorEntity, RuleObject, FieldData} from 'rc-field-form/lib/interface';
 
 import 'antd/dist/antd.css';
 
 import {ArticleType, ArticleTypeEnum, SubDocumentListViewTypeEnum} from '../../../../server/article/article-type';
 import {waitForTime} from '../../../util/timeout';
-import {getIsValidArticle} from '../../../../server/article/article-validation';
+import {validateArticle} from '../../../../server/article/article-validation';
 
 const {Text, Link} = Typography;
 const {Option} = Select;
@@ -53,8 +53,10 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
     const [form] = Form.useForm<ArticleType>();
 
     function onFinish(values: ArticleType) {
+        console.log('onFinish:', values);
+        console.log('onFinish:', article);
         // validate form
-        const isValidArticle = getIsValidArticle(values);
+        const [isValidArticle, validateFunction] = validateArticle(values);
 
         console.log('onFinish, is valid -', isValidArticle);
         console.log('onFinish, values -', values);
@@ -65,11 +67,21 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
         //     console.log(data);
         //     console.log(data);
         // });
-        console.log('Success:', values);
     }
 
     function onFinishFailed(errorInfo: ValidateErrorEntity<ArticleType>) {
-        console.log('Failed:', errorInfo);
+        console.log('onFinishFailed:', errorInfo);
+        console.log('onFinishFailed:', article);
+    }
+
+    function onValuesChange(changedValues: unknown, values: ArticleType) {
+        console.log('onValuesChange:', changedValues, values);
+        console.log('onValuesChange:', article);
+    }
+
+    function onFieldsChange(changedFields: Array<FieldData>, allFields: Array<FieldData>) {
+        console.log('onFieldsChange:', changedFields, allFields);
+        console.log('onFieldsChange:', article);
     }
 
     return (
@@ -85,9 +97,10 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             }
             layout="vertical"
             name="basic"
+            onFieldsChange={onFieldsChange}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
-            onValuesChange={onFinish}
+            onValuesChange={onValuesChange}
             wrapperCol={
                 {
                     // span: 9,

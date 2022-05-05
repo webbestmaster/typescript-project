@@ -6,7 +6,7 @@ const {Title} = Typography;
 const {Header, Content, Footer} = Layout;
 
 import {CmsArticle} from '../cms-article';
-import {makeDefaultArticle} from '../cms-article-helper';
+import {makeDefaultArticle} from '../../../../../server/article/article-helper';
 import {Box} from '../../../../layout/box/box';
 
 function handleOnSubmit() {

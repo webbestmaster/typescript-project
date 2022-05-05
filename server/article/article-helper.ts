@@ -1,4 +1,4 @@
-import {ArticleType, ArticleTypeEnum, SubDocumentListViewTypeEnum} from '../../../../server/article/article-type';
+import {ArticleType, ArticleTypeEnum, SubDocumentListViewTypeEnum} from './article-type';
 
 export function makeDefaultArticle(): ArticleType {
     const defaultArticleData: ArticleType = {
