@@ -10,7 +10,6 @@ type BoxPropsType = {
     width?: string;
 };
 
-// TODO: test this component
 export function Box(props: BoxPropsType): JSX.Element {
     const {children, isInline = false, margin, padding, width = 'auto', height = 'auto', boxSizing = 'initial'} = props;
 
