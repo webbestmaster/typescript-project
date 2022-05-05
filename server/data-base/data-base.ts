@@ -1,7 +1,6 @@
 /* global process */
 
 import path from 'path';
-
 import Ajv, {JSONSchemaType} from 'ajv';
 import Datastore from 'nedb';
 
