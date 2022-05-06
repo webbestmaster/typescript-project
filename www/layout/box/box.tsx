@@ -3,11 +3,11 @@ import {makeCssArray} from './box-helper';
 type BoxPropsType = {
     boxSizing?: 'border-box' | 'content-box' | 'initial';
     children: Array<JSX.Element> | JSX.Element;
-    height?: string;
+    height?: number | string;
     isInline?: boolean;
     margin?: Array<number> | number;
     padding?: Array<number> | number;
-    width?: string;
+    width?: number | string;
 };
 
 export function Box(props: BoxPropsType): JSX.Element {

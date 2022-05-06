@@ -41,7 +41,7 @@
     "tsc:watch": "tsc -p ./tsconfig.json --watch",
     "front:tsc-library": "tsc -p ./tsconfig.library.json && npm run front:tsc-library-css",
     "front:tsc-library-css": "cross-env NODE_ENV=production SIDE=front IS_BUILD_LIBRARY=true node ./webpack/util/library/css.js",
-    "front:ts-coverage": "typescript-coverage-report --threshold=99.95 --strict=true --project ./www/",
+    "front:ts-coverage": "typescript-coverage-report --threshold=100 --strict=true --project ./www/",
     "back:ts-coverage": "typescript-coverage-report --threshold=100 --strict=true --project ./server/",
     "ts-coverage": "npm run front:ts-coverage && npm run back:ts-coverage",
     "test:e2e": "jest --config='test-e2e/config/jest.config.js' ./test-e2e/ --runInBand --silent --passWithNoTests",

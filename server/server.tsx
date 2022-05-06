@@ -31,10 +31,30 @@ const serverPort = 3000;
     fastify.register(fastifyCors);
     fastify.register(fastifyMultipart);
 
+    /*
+        fastify.register(fastifyStaticServer, {
+            prefix: '/upload-file', // optional: default '/'
+            root: path.join(cwd, 'upload-file'),
+        });
+    */
+
     fastify.register(fastifyStaticServer, {
         prefix: '/', // optional: default '/'
         root: path.join(cwd, 'dist'),
+        /*
+        allowedPath: (pathName: string, root?: string | undefined): boolean => {
+            console.log(pathName)
+            return true;
+        }
+*/
     });
+
+    /*
+        fastify.register(fastifyStaticServer, {
+            prefix: '/upload-file/', // optional: default '/'
+            root: path.join(cwd, 'upload-file'),
+        });
+    */
 
     // options for setCookie, see https://github.com/fastify/fastify-cookie
     fastify.register(fastifySecureSession, {

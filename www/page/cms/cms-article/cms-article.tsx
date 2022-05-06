@@ -1,4 +1,9 @@
-import {Upload, Form, Input, Button, Typography, Select} from 'antd';
+/* global fetch, FormData, Response */
+// node_modules/antd/lib/upload/index.d.ts
+// TODO: set declare const Upload: UploadInterface<any>; TO declare const Upload: UploadInterface<unknown>;
+// node_modules/antd/lib/upload/index.d.ts
+// WARNING: set declare const Upload: UploadInterface<any>; TO declare const Upload: UploadInterface<unknown>;
+import {Upload, Form, Input, Button, Typography, Select, Checkbox} from 'antd';
 import {ValidateErrorEntity, RuleObject, FieldData} from 'rc-field-form/lib/interface';
 import {UploadChangeParam, UploadFile} from 'antd/lib/upload/interface';
 import {PlusOutlined} from '@ant-design/icons';
@@ -92,18 +97,25 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
         console.log('onFieldsChangeForm:', article);
     }
 
+    function renderItem(
+        originNode: JSX.Element,
+        file: UploadFile<unknown>,
+        uploadedFileList: Array<UploadFile<unknown>>,
+        actions: {download: () => void; preview: () => void; remove: () => void}
+    ): JSX.Element {
+        return (
+            <Box height={100} padding={16}>
+                {originNode}
+                <div>{fileList.length}</div>
+            </Box>
+        );
+    }
+
     function handleChangeFileList(info: UploadChangeParam<UploadFile<unknown>>) {
         const {file, fileList: newFileList} = info;
 
         console.log('handleChangeFileList:', info);
         console.log('handleChangeFileList:', article);
-
-        /*
-        if (size > 75e6) {
-            alert('Too big file, try to use file less than 75MB');
-            return;
-        }
-*/
     }
 
     return (
@@ -214,26 +226,41 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             </Form.Item>
 
             <Box>
-                <Upload
-                    action={apiUrl.uploadFile}
-                    fileList={fileList.map((fileName: string) => {
+                <Upload<unknown>
+                    action={async (file): Promise<string> => {
+                        const data = new FormData();
+
+                        data.append('file', file);
+
+                        const url = await fetch(apiUrl.uploadFile, {
+                            body: data,
+                            credentials: 'include',
+                            method: 'POST',
+                        }).then((response: Response): Promise<string> => response.text());
+
+                        setFileList((currentFileList: Array<string>): Array<string> => {
+                            return [...currentFileList, url];
+                        });
+
+                        // this url will used for preview
+                        return 'dddddd0' + url;
+                    }}
+                    fileList={fileList.map((fileName: string): UploadFile<unknown> => {
                         return {
                             name: fileName,
                             status: 'done',
                             uid: fileName,
-                            url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+                            url: '/upload-file/' + fileName,
                         };
                     })}
+                    itemRender={renderItem}
                     listType="picture-card"
-                    // onPreview={handlePreview}
                     onChange={handleChangeFileList}
                 >
-                    {fileList.length >= 8 ? null : (
-                        <div>
-                            <PlusOutlined />
-                            <div style={{marginTop: 8}}>Upload</div>
-                        </div>
-                    )}
+                    <div>
+                        <PlusOutlined />
+                        <div style={{marginTop: 8}}>Upload</div>
+                    </div>
                 </Upload>
             </Box>
 
@@ -245,7 +272,6 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             <br />
             <br />
 
-            {/*
             <Form.Item
                 label="content"
                 name="conte"
@@ -267,8 +293,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             >
                 <Input />
             </Form.Item>
-*/}
-            {/*
+
             <Form.Item
                 label="Username"
                 name="username"
@@ -279,11 +304,9 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                     },
                 ]}
             >
-                <Input/>
+                <Input />
             </Form.Item>
-*/}
 
-            {/*
             <Form.Item
                 label="Password"
                 name="password"
@@ -294,21 +317,16 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                     },
                 ]}
             >
-                <Input.Password/>
+                <Input.Password />
             </Form.Item>
-*/}
 
-            {/*
             <Form.Item
                 name="remember"
                 valuePropName="checked"
                 // wrapperCol={{ offset: 8, span: 16, }}
             >
-                <Checkbox>
-                    Remember me
-                </Checkbox>
+                <Checkbox>Remember me</Checkbox>
             </Form.Item>
-*/}
 
             <Form.Item>
                 <Button htmlType="submit" type="primary">

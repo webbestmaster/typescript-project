@@ -23,11 +23,12 @@ export async function uploadFile(request: FastifyRequest<{Body: string}>, reply:
 
     const uploadFileLimit = 75e6; // 50MR
 
-    const {filename, file, fields} = await request.file({
+    const {filename, file} = await request.file({
         limits: {fileSize: uploadFileLimit, files: 1},
     });
 
-    const fullFilePath = path.join(uploadFolder, Date.now() + '---' + filename);
+    const uniqueFileName = Date.now() + '---' + filename;
+    const fullFilePath = path.join(uploadFolder, uniqueFileName);
 
     await new Promise((resolve: PromiseResolveType<void>, reject: PromiseResolveType<string>) => {
         const writeStream = fileSystem.createWriteStream(fullFilePath);
@@ -46,5 +47,5 @@ export async function uploadFile(request: FastifyRequest<{Body: string}>, reply:
             .on('error', reject);
     });
 
-    reply.code(200).send(null);
+    reply.code(200).send(uniqueFileName);
 }
