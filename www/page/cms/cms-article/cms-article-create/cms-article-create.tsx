@@ -9,8 +9,8 @@ import {CmsArticle} from '../cms-article';
 import {makeDefaultArticle} from '../../../../../server/article/article-helper';
 import {Box} from '../../../../layout/box/box';
 
-function handleOnSubmit() {
-    console.log('handleOnSubmit');
+function handleOnFinish() {
+    console.log('handleOnFinish');
 }
 
 // https://ant.design/components/grid/#Row
@@ -44,7 +44,7 @@ export default function CmsArticleCreate(): JSX.Element {
                 <Content>
                     <Title level={2}>Create new article</Title>
 
-                    <CmsArticle article={makeDefaultArticle()} onSubmit={handleOnSubmit} />
+                    <CmsArticle article={makeDefaultArticle()} onFinish={handleOnFinish} />
                 </Content>
             </Box>
 

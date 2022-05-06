@@ -2,10 +2,10 @@ import {FastifyReply, FastifyRequest} from 'fastify';
 
 import {PaginationQueryType} from '../data-base/data-base-type';
 import {getIsNotAdmin} from '../auth/auth-helper';
+import {mainResponseHeader} from '../const';
 
 import {articleCrud} from './article';
 import {ArticleType} from './article-type';
-import {articleHeader} from './article-const';
 
 export async function getArticleListPagination(
     request: FastifyRequest<{Body: string}>,
@@ -17,7 +17,7 @@ export async function getArticleListPagination(
     if (await getIsNotAdmin(request)) {
         reply
             .code(403)
-            .header(...articleHeader)
+            .header(...mainResponseHeader)
             .send(null);
         return;
     }
@@ -33,6 +33,6 @@ export async function getArticleListPagination(
 
     reply
         .code(200)
-        .header(...articleHeader)
+        .header(...mainResponseHeader)
         .send(articleListPagination);
 }

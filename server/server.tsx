@@ -4,6 +4,7 @@ import path from 'path';
 
 import fastifyStaticServer from '@fastify/static';
 import fastifyCors from '@fastify/cors';
+import fastifyMultipart from '@fastify/multipart';
 import fastifySecureSession from '@fastify/secure-session';
 import {FastifyError} from '@fastify/error';
 import fastifyConstructor, {FastifyRequest, FastifyReply} from 'fastify';
@@ -15,6 +16,7 @@ import {getHtmlCallBack} from './ssr/ssr';
 import {secretKey} from './key';
 import {apiUrl, siteCookieKey} from './const';
 import {getArticleListPagination} from './article/article-api';
+import {uploadFile} from './file/file';
 
 const cwd = process.cwd();
 
@@ -27,6 +29,7 @@ const serverPort = 3000;
     // Services
     // //////////////
     fastify.register(fastifyCors);
+    fastify.register(fastifyMultipart);
 
     fastify.register(fastifyStaticServer, {
         prefix: '/', // optional: default '/'
@@ -51,6 +54,7 @@ const serverPort = 3000;
     fastify.post(apiUrl.login, postAuthLogin);
     fastify.get(apiUrl.getUser, getAutoAuthLogin);
     fastify.get(apiUrl.articleListPagination, getArticleListPagination);
+    fastify.post(apiUrl.uploadFile, uploadFile);
 
     // //////////////
     // Pages
