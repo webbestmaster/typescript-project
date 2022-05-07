@@ -91,22 +91,22 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
         });
     }
 
-    function decreaseData(data: ModelType, requiredPropertyList: Array<keyof ModelType>): ModelType {
+    function decreaseData(data: ModelType, requiredPropertyList: Array<keyof ModelType>): Partial<ModelType> {
         let partial: Partial<ModelType> = {};
 
         requiredPropertyList.forEach((key: keyof ModelType) => {
             partial = {...partial, [key]: data[key]};
         });
 
-        return Object.assign<ModelType, Partial<ModelType>>(makeDefaultModel(), partial);
+        return partial;
     }
 
     function findManyPartial(
         partialModelData: Partial<ModelType>,
         requiredPropertyList: Array<keyof ModelType>
-    ): Promise<Array<ModelType>> {
-        return findMany(partialModelData).then((dataList: Array<ModelType>): Array<ModelType> => {
-            return dataList.map<ModelType>((data: ModelType): ModelType => {
+    ): Promise<Array<Partial<ModelType>>> {
+        return findMany(partialModelData).then((dataList: Array<ModelType>): Array<Partial<ModelType>> => {
+            return dataList.map<Partial<ModelType>>((data: ModelType): Partial<Partial<ModelType>> => {
                 return decreaseData(data, requiredPropertyList);
             });
         });
@@ -146,12 +146,12 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
     function findManyPaginationPartial(
         paginationQuery: PaginationQueryType<ModelType>,
         requiredPropertyList: Array<keyof ModelType>
-    ): Promise<PaginationResultType<ModelType>> {
+    ): Promise<PaginationResultType<Partial<ModelType>>> {
         return findManyPagination(paginationQuery).then(
-            (paginationData: PaginationResultType<ModelType>): PaginationResultType<ModelType> => {
+            (paginationData: PaginationResultType<ModelType>): PaginationResultType<Partial<ModelType>> => {
                 return {
                     ...paginationData,
-                    result: paginationData.result.map<ModelType>((data: ModelType): ModelType => {
+                    result: paginationData.result.map<Partial<ModelType>>((data: ModelType): Partial<ModelType> => {
                         return decreaseData(data, requiredPropertyList);
                     }),
                 };

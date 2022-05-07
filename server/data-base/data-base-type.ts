@@ -7,11 +7,11 @@ export type CrudType<ModelType> = {
     findManyPaginationPartial: (
         paginationQuery: PaginationQueryType<ModelType>,
         requiredPropertyList: Array<keyof ModelType>
-    ) => Promise<PaginationResultType<ModelType>>;
+    ) => Promise<PaginationResultType<Partial<ModelType>>>;
     findManyPartial: (
         partialModel: Partial<ModelType>,
         requiredPropertyList: Array<keyof ModelType>
-    ) => Promise<Array<ModelType>>;
+    ) => Promise<Array<Partial<ModelType>>>;
     findOne: (partialModel: Partial<ModelType>) => Promise<ModelType | null>;
     updateOne: (partialModel: Partial<ModelType>, model: ModelType) => Promise<null>; // throw error if smth wrong
 };
