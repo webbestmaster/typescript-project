@@ -1,4 +1,5 @@
-/* global fetch, FormData, Response */
+/* global fetch, FormData, Response, File */
+import {useState} from 'react';
 // node_modules/antd/lib/upload/index.d.ts
 // TODO: set declare const Upload: UploadInterface<any>; TO declare const Upload: UploadInterface<unknown>;
 // node_modules/antd/lib/upload/index.d.ts
@@ -9,14 +10,11 @@ import {UploadChangeParam, UploadFile} from 'antd/lib/upload/interface';
 import {PlusOutlined} from '@ant-design/icons';
 import 'antd/dist/antd.css';
 
-import {useState} from 'react';
-
 import {ArticleType, ArticleTypeEnum, SubDocumentListViewTypeEnum} from '../../../../server/article/article-type';
 import {waitForTime} from '../../../util/timeout';
 import {validateArticle} from '../../../../server/article/article-validation';
-import {makeDefaultArticle} from '../../../../server/article/article-helper';
 import {Box} from '../../../layout/box/box';
-import {apiUrl} from '../../../../server/const';
+import {getPathToImage, uploadFile} from '../../../service/file/file';
 
 const {Text, Link} = Typography;
 const {Option} = Select;
@@ -227,30 +225,21 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
             <Box>
                 <Upload<unknown>
-                    action={async (file): Promise<string> => {
-                        const data = new FormData();
-
-                        data.append('file', file);
-
-                        const url = await fetch(apiUrl.uploadFile, {
-                            body: data,
-                            credentials: 'include',
-                            method: 'POST',
-                        }).then((response: Response): Promise<string> => response.text());
+                    action={async (file: File): Promise<string> => {
+                        const {uniqueFileName} = await uploadFile(file);
 
                         setFileList((currentFileList: Array<string>): Array<string> => {
-                            return [...currentFileList, url];
+                            return [...currentFileList, uniqueFileName];
                         });
 
-                        // this url will used for preview
-                        return 'dddddd0' + url;
+                        return getPathToImage(uniqueFileName);
                     }}
                     fileList={fileList.map((fileName: string): UploadFile<unknown> => {
                         return {
                             name: fileName,
                             status: 'done',
                             uid: fileName,
-                            url: '/upload-file/' + fileName,
+                            url: getPathToImage(fileName),
                         };
                     })}
                     itemRender={renderItem}

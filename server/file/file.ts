@@ -8,6 +8,7 @@ import {getIsNotAdmin} from '../auth/auth-helper';
 import {mainResponseHeader} from '../const';
 
 import {uploadFolder} from './file-const';
+import {UploadFileResponseType} from './file-type';
 
 export async function uploadFile(request: FastifyRequest<{Body: string}>, reply: FastifyReply): Promise<void> {
     // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
@@ -21,7 +22,7 @@ export async function uploadFile(request: FastifyRequest<{Body: string}>, reply:
         return;
     }
 
-    const uploadFileLimit = 75e6; // 50MR
+    const uploadFileLimit = 75e6; // 75MB
 
     const {filename, file} = await request.file({
         limits: {fileSize: uploadFileLimit, files: 1},
@@ -47,5 +48,7 @@ export async function uploadFile(request: FastifyRequest<{Body: string}>, reply:
             .on('error', reject);
     });
 
-    reply.code(200).send(uniqueFileName);
+    const uploadResponse: UploadFileResponseType = {uniqueFileName};
+
+    reply.code(200).send(uploadResponse);
 }

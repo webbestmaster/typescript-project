@@ -74,7 +74,7 @@ const serverPort = 3000;
     fastify.post(apiUrl.login, postAuthLogin);
     fastify.get(apiUrl.getUser, getAutoAuthLogin);
     fastify.get(apiUrl.articleListPagination, getArticleListPagination);
-    fastify.post(apiUrl.uploadFile, uploadFile);
+    fastify.post(apiUrl.fileUpload, uploadFile);
 
     // //////////////
     // Pages
