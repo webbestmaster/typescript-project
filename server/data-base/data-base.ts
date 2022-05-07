@@ -6,6 +6,7 @@ import Ajv, {JSONSchemaType} from 'ajv';
 import Datastore from 'nedb';
 
 import {PromiseResolveType} from '../../www/util/promise';
+import {partialData} from '../../www/util/object';
 
 import {CrudType, PaginationQueryType, PaginationResultType} from './data-base-type';
 
@@ -91,23 +92,13 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
         });
     }
 
-    function decreaseData(data: ModelType, requiredPropertyList: Array<keyof ModelType>): Partial<ModelType> {
-        let partial: Partial<ModelType> = {};
-
-        requiredPropertyList.forEach((key: keyof ModelType) => {
-            partial = {...partial, [key]: data[key]};
-        });
-
-        return partial;
-    }
-
     function findManyPartial(
         partialModelData: Partial<ModelType>,
         requiredPropertyList: Array<keyof ModelType>
     ): Promise<Array<Partial<ModelType>>> {
         return findMany(partialModelData).then((dataList: Array<ModelType>): Array<Partial<ModelType>> => {
             return dataList.map<Partial<ModelType>>((data: ModelType): Partial<ModelType> => {
-                return decreaseData(data, requiredPropertyList);
+                return partialData<ModelType>(data, requiredPropertyList);
             });
         });
     }
@@ -152,7 +143,7 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
                 return {
                     ...paginationData,
                     result: paginationData.result.map<Partial<ModelType>>((data: ModelType): Partial<ModelType> => {
-                        return decreaseData(data, requiredPropertyList);
+                        return partialData<ModelType>(data, requiredPropertyList);
                     }),
                 };
             }

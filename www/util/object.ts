@@ -4,6 +4,25 @@ export function isObjectInclude(object: Record<string, unknown>, query: Record<s
     return Object.keys(query).every((queryKey: string): boolean => query[queryKey] === object[queryKey]);
 }
 
+export function pickData<ModelType, Keys extends keyof ModelType>(
+    data: ModelType,
+    requiredPropertyList: Array<Partial<keyof ModelType>>
+): Pick<ModelType, Keys> {
+    return Object.assign(
+        {},
+        ...requiredPropertyList.map((key: Partial<keyof ModelType>) => {
+            return {key: data[key]};
+        })
+    );
+}
+
+export function partialData<FullModelType>(
+    data: FullModelType,
+    requiredPropertyList: Array<keyof FullModelType>
+): Partial<FullModelType> {
+    return Object.assign({}, ...requiredPropertyList.map((key: Partial<keyof FullModelType>) => ({key: data[key]})));
+}
+
 const ajv = new Ajv();
 
 /*
