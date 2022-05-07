@@ -11,7 +11,7 @@ export function pickData<ModelType, Keys extends keyof ModelType>(
     return Object.assign(
         {},
         ...requiredPropertyList.map((key: Partial<keyof ModelType>) => {
-            return {key: data[key]};
+            return {[key]: data[key]};
         })
     );
 }
@@ -20,7 +20,12 @@ export function partialData<FullModelType>(
     data: FullModelType,
     requiredPropertyList: Array<keyof FullModelType>
 ): Partial<FullModelType> {
-    return Object.assign({}, ...requiredPropertyList.map((key: Partial<keyof FullModelType>) => ({key: data[key]})));
+    return Object.assign(
+        {},
+        ...requiredPropertyList.map((key: Partial<keyof FullModelType>) => {
+            return {[key]: data[key]};
+        })
+    );
 }
 
 const ajv = new Ajv();
