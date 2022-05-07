@@ -106,7 +106,7 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
         requiredPropertyList: Array<keyof ModelType>
     ): Promise<Array<Partial<ModelType>>> {
         return findMany(partialModelData).then((dataList: Array<ModelType>): Array<Partial<ModelType>> => {
-            return dataList.map<Partial<ModelType>>((data: ModelType): Partial<Partial<ModelType>> => {
+            return dataList.map<Partial<ModelType>>((data: ModelType): Partial<ModelType> => {
                 return decreaseData(data, requiredPropertyList);
             });
         });
