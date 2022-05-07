@@ -71,6 +71,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
         console.log('onFinishForm, is valid -', isValidArticle);
         console.log('---> onFinishForm, values -', values);
+        console.log('---> onFinishForm, fileList -', fileList);
 
         // form.validateFields().then(data => {
         //     console.log(data);
