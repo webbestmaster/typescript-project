@@ -52,3 +52,16 @@ export async function uploadFile(request: FastifyRequest<{Body: string}>, reply:
 
     reply.code(200).send(uploadResponse);
 }
+
+export async function getFile(
+    request: FastifyRequest<{Body: string; Params: {fileName: string}}>,
+    reply: FastifyReply
+): Promise<void> {
+    // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
+    const {params} = request;
+    const {fileName} = params;
+
+    const stream = fileSystem.createReadStream(path.join(uploadFolder, fileName));
+
+    reply.code(200).send(stream);
+}

@@ -16,7 +16,7 @@ import {getHtmlCallBack} from './ssr/ssr';
 import {secretKey} from './key';
 import {apiUrl, siteCookieKey} from './const';
 import {getArticleListPagination} from './article/article-api';
-import {uploadFile} from './file/file';
+import {getFile, uploadFile} from './file/file';
 
 const cwd = process.cwd();
 
@@ -75,6 +75,7 @@ const serverPort = 3000;
     fastify.get(apiUrl.getUser, getAutoAuthLogin);
     fastify.get(apiUrl.articleListPagination, getArticleListPagination);
     fastify.post(apiUrl.fileUpload, uploadFile);
+    fastify.get(apiUrl.fileGet, getFile);
 
     // //////////////
     // Pages
