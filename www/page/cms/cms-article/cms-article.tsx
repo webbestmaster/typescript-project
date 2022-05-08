@@ -54,7 +54,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
         stuffDirectorList,
         stuffIllustratorList,
         stuffReaderList,
-        subDocumentIdList,
+        subDocumentIdList: defaultSubDocumentIdList,
         subDocumentListViewType,
         tagList,
         tagTitleSeo, // tag <title>....</title>
@@ -65,6 +65,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
     const [fileList, setFileList] = useState<Array<string>>([...defaultFileList]);
     const [titleImage, setTitleImage] = useState<string>(defaultTitleImage);
+    const [subDocumentIdList, setSubDocumentIdList] = useState<Array<string>>([...defaultSubDocumentIdList]);
     const [publishDate, setPublishDate] = useState<string>(defaultPublishDate || new Date().toISOString());
 
     const [form] = Form.useForm<ArticleType>();
@@ -187,7 +188,6 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             >
                 <Input disabled />
             </Form.Item>
-
             <Form.Item
                 // WARNING: change it to initialValue={slug}
                 // TODO: change it to initialValue={slug}
@@ -214,7 +214,6 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             >
                 <Input placeholder="your-some-slug-here" />
             </Form.Item>
-
             <Form.Item initialValue={articleType} label="Article type:" name="articleType">
                 <Select<ArticleTypeEnum>>
                     <Option value={ArticleTypeEnum.article}>Article</Option>
@@ -222,11 +221,9 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                     <Option value={ArticleTypeEnum.root}>Root</Option>
                 </Select>
             </Form.Item>
-
             <Form.Item initialValue={content} label="Content, use markdown:" name="content">
                 <TextArea placeholder="Some content is here..." rows={10} />
             </Form.Item>
-
             <Form.Item
                 // WARNING: change it to initialValue={title}
                 // TODO: change it to initialValue={title}
@@ -238,7 +235,6 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             >
                 <Input placeholder="Title" />
             </Form.Item>
-
             <Form.Item
                 // set on server
                 initialValue={createdDate || new Date().toISOString()}
@@ -247,7 +243,6 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             >
                 <Input disabled />
             </Form.Item>
-
             <Form.Item
                 // set on server
                 initialValue={updatedDate || new Date().toISOString()}
@@ -256,7 +251,6 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             >
                 <Input disabled />
             </Form.Item>
-
             <Form.Item
                 initialValue={moment(defaultPublishDate || publishDate)}
                 label={`Publish date UTC: ${publishDate}`}
@@ -269,15 +263,12 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                     showTime
                 />
             </Form.Item>
-
             <Form.Item initialValue={description} label="Description, use markdown:" name="description">
                 <TextArea placeholder="Some description is here..." rows={3} />
             </Form.Item>
-
             <Form.Item initialValue={descriptionShort} label="Short description, use markdown:" name="descriptionShort">
                 <TextArea placeholder="Some short description is here..." rows={3} />
             </Form.Item>
-
             <Form.Item label={`Files: ${fileList.length}`}>
                 <Upload<unknown>
                     action={async (file: File): Promise<string> => {
@@ -308,7 +299,6 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                     </div>
                 </Upload>
             </Form.Item>
-
             <Form.Item
                 initialValue={hasMetaRobotsNoFollowSeo}
                 label="Has Meta Robots No Follow:"
@@ -317,7 +307,6 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             >
                 <Checkbox>Add/combine &lt;meta name=&quot;robots&quot; content=&quot;nofollow&quot; /&gt;</Checkbox>
             </Form.Item>
-
             <Form.Item
                 initialValue={hasMetaRobotsNoIndexSeo}
                 label="Has Meta Robots No Index:"
@@ -329,11 +318,9 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                     noindex
                 </Checkbox>
             </Form.Item>
-
             <Form.Item initialValue={isActive} label="Is Active:" name="isActive" valuePropName="checked">
                 <Checkbox>Uncheck to temporary &quot;remove&quot;</Checkbox>
             </Form.Item>
-
             <Form.Item
                 initialValue={isInSiteMapXmlSeo}
                 label="Is In Site Map Xml:"
@@ -342,7 +329,6 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             >
                 <Checkbox>Does sitemap.xml has link to article or not</Checkbox>
             </Form.Item>
-
             <Form.Item
                 initialValue={metaDescriptionSeo}
                 label={'Meta Description, tag <meta type="description" content="..." />:'}
@@ -350,7 +336,6 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             >
                 <Input placeholder="Description..." />
             </Form.Item>
-
             <Form.Item
                 initialValue={metaKeyWordsSeo}
                 label={'Meta KeyWords, tag <meta type="keywords" content="..." />:'}
@@ -358,11 +343,9 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             >
                 <Input placeholder="KeyWords..." />
             </Form.Item>
-
             <Form.Item initialValue={metaSeo} label="Meta, actually any html code:" name="metaSeo">
                 <TextArea placeholder="Additional meta tags..." rows={3} />
             </Form.Item>
-
             <Box padding={16}>
                 <Form.Item
                     initialValue={arrayToStringByComma(stuffArtistList)}
@@ -407,7 +390,6 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                     <Input placeholder="Name1, Name2, Name3..." />
                 </Form.Item>
             </Box>
-
             <Form.Item label={`Title image: ${titleImage}`}>
                 <Upload<unknown>
                     action={async (file: File): Promise<string> => {
@@ -441,81 +423,41 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                     </div>
                 </Upload>
             </Form.Item>
-
             <Form.Item initialValue={tagTitleSeo} label="Meta Title, tag <title>...</title>:" name="tagTitleSeo">
                 <Input placeholder="Title..." />
             </Form.Item>
-
             <Form.Item initialValue={arrayToStringByComma(tagList)} label="Tag List:" name="tagList">
                 <Input placeholder="Tag1, Tag2, Tag3..." />
             </Form.Item>
 
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-
-            {/*
-            <Form.Item
-                label="content"
-                name="conte"
-                rules={[
-                    {
-                        message: 'Please input your username!',
-                        required: true,
-                    },
-                    {
-                        message: ' 999999 Please input your username!',
-                        validator: async (rule: RuleObject, value: unknown) => {
-                            console.log(rule, value);
-                            await waitForTime(300);
-                            // throw error for show validation error
-                            // throw new Error('asdasdsaasd')
-                        },
-                    },
-                ]}
-            >
-                <Input />
+            <Form.Item initialValue={defaultSubDocumentIdList} label="Sub Document Id List:" name="subDocumentIdList">
+                <Select<Array<string>>
+                    allowClear
+                    mode="multiple"
+                    onChange={(valueList: Array<string>) => {
+                        console.log('///////////');
+                        console.log(valueList);
+                        setSubDocumentIdList(valueList);
+                    }}
+                    placeholder="Sub Document Id..."
+                >
+                    {['1', '2', '3'].map((documentId: string, index: number): JSX.Element => {
+                        return (
+                            <Option key={`${documentId}-${String(index)}`} value={documentId}>
+                                {documentId}
+                            </Option>
+                        );
+                    })}
+                </Select>
             </Form.Item>
 
-            <Form.Item
-                label="Username"
-                name="username"
-                rules={[
-                    {
-                        message: 'Please input your username!',
-                        // required: true,
-                    },
-                ]}
-            >
-                <Input />
-            </Form.Item>
-
-            <Form.Item
-                label="Password"
-                name="password"
-                rules={[
-                    {
-                        message: 'Please input your password!',
-                        // required: true,
-                    },
-                ]}
-            >
-                <Input.Password />
-            </Form.Item>
-
-            <Form.Item
-                name="remember"
-                valuePropName="checked"
-                // wrapperCol={{ offset: 8, span: 16, }}
-            >
-                <Checkbox>Remember me</Checkbox>
-            </Form.Item>
-*/}
-
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
             <Form.Item>
                 <Button htmlType="submit" type="primary">
                     Submit
