@@ -343,50 +343,50 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             <Form.Item initialValue={metaSeo} label="Meta, actually any html code:" name="metaSeo">
                 <TextArea placeholder="Additional meta tags..." rows={3} />
             </Form.Item>
-            <Box padding={16}>
-                <Form.Item
-                    initialValue={arrayToStringByComma(stuffArtistList)}
-                    label="Stuff Artists:"
-                    name="stuffArtistList"
-                >
-                    <Input placeholder="Name1, Name2, Name3..." />
-                </Form.Item>
-                <Form.Item
-                    initialValue={arrayToStringByComma(stuffAuthorList)}
-                    label="Stuff Authors:"
-                    name="stuffAuthorList"
-                >
-                    <Input placeholder="Name1, Name2, Name3..." />
-                </Form.Item>
-                <Form.Item
-                    initialValue={arrayToStringByComma(stuffCompositorList)}
-                    label="Stuff Compositors:"
-                    name="stuffCompositorList"
-                >
-                    <Input placeholder="Name1, Name2, Name3..." />
-                </Form.Item>
-                <Form.Item
-                    initialValue={arrayToStringByComma(stuffDirectorList)}
-                    label="Stuff Directors:"
-                    name="stuffDirectorList"
-                >
-                    <Input placeholder="Name1, Name2, Name3..." />
-                </Form.Item>
-                <Form.Item
-                    initialValue={arrayToStringByComma(stuffIllustratorList)}
-                    label="Stuff Illustrators:"
-                    name="stuffIllustratorList"
-                >
-                    <Input placeholder="Name1, Name2, Name3..." />
-                </Form.Item>
-                <Form.Item
-                    initialValue={arrayToStringByComma(stuffReaderList)}
-                    label="Stuff Readers:"
-                    name="stuffReaderList"
-                >
-                    <Input placeholder="Name1, Name2, Name3..." />
-                </Form.Item>
-            </Box>
+
+            <Form.Item
+                initialValue={arrayToStringByComma(stuffArtistList)}
+                label="Stuff Artists:"
+                name="stuffArtistList"
+            >
+                <Input placeholder="Name1, Name2, Name3..." />
+            </Form.Item>
+            <Form.Item
+                initialValue={arrayToStringByComma(stuffAuthorList)}
+                label="Stuff Authors:"
+                name="stuffAuthorList"
+            >
+                <Input placeholder="Name1, Name2, Name3..." />
+            </Form.Item>
+            <Form.Item
+                initialValue={arrayToStringByComma(stuffCompositorList)}
+                label="Stuff Compositors:"
+                name="stuffCompositorList"
+            >
+                <Input placeholder="Name1, Name2, Name3..." />
+            </Form.Item>
+            <Form.Item
+                initialValue={arrayToStringByComma(stuffDirectorList)}
+                label="Stuff Directors:"
+                name="stuffDirectorList"
+            >
+                <Input placeholder="Name1, Name2, Name3..." />
+            </Form.Item>
+            <Form.Item
+                initialValue={arrayToStringByComma(stuffIllustratorList)}
+                label="Stuff Illustrators:"
+                name="stuffIllustratorList"
+            >
+                <Input placeholder="Name1, Name2, Name3..." />
+            </Form.Item>
+            <Form.Item
+                initialValue={arrayToStringByComma(stuffReaderList)}
+                label="Stuff Readers:"
+                name="stuffReaderList"
+            >
+                <Input placeholder="Name1, Name2, Name3..." />
+            </Form.Item>
+
             <Form.Item label={`Title image: ${titleImage}`}>
                 <Upload<unknown>
                     action={async (file: File): Promise<string> => {
