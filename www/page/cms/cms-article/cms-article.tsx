@@ -65,7 +65,11 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
     const [form] = Form.useForm<ArticleType>();
 
-    function onFinishForm(values: ArticleType) {
+    function onFinishForm(rawValues: ArticleType) {
+        const values = {
+            ...rawValues,
+            fileList,
+        };
         // validate form
         const [isValidArticle, validateFunction] = validateArticle(values);
 
@@ -246,7 +250,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 <TextArea placeholder="Some short description is here..." rows={3} />
             </Form.Item>
 
-            <Box>
+            <Form.Item label={`Files: ${fileList.length}`}>
                 <Upload<unknown>
                     action={async (file: File): Promise<string> => {
                         const {uniqueFileName} = await uploadFile(file);
@@ -275,7 +279,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                         <div style={{marginTop: 8}}>Upload</div>
                     </div>
                 </Upload>
-            </Box>
+            </Form.Item>
 
             <br />
             <br />
