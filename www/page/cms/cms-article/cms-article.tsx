@@ -430,13 +430,18 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 </Select>
             </Form.Item>
 
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
+            <Form.Item
+                initialValue={subDocumentListViewType}
+                label="Sub Document List View Type:"
+                name="subDocumentListViewType"
+            >
+                <Select<SubDocumentListViewTypeEnum>>
+                    <Option value={SubDocumentListViewTypeEnum.header}>Header</Option>
+                    <Option value={SubDocumentListViewTypeEnum.headerImage}>Header-Image</Option>
+                    <Option value={SubDocumentListViewTypeEnum.headerAudio}>Header-Audio</Option>
+                </Select>
+            </Form.Item>
+
             <Form.Item>
                 <Button htmlType="submit" type="primary">
                     Submit
