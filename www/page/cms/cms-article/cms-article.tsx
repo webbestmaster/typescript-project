@@ -162,24 +162,13 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             autoComplete="off"
             form={form}
             initialValues={{remember: true}}
-            labelCol={
-                {
-                    // span: 9,
-                    // offset: 1,
-                }
-            }
             layout="vertical"
             name="article"
             onFieldsChange={onFieldsChangeForm}
             onFinish={onFinishForm}
             onFinishFailed={onFinishFailedForm}
             onValuesChange={onValuesChangeForm}
-            wrapperCol={
-                {
-                    // span: 9,
-                    // offset: 0,
-                }
-            }
+            scrollToFirstError
         >
             <Form.Item
                 initialValue={id}
@@ -188,6 +177,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             >
                 <Input disabled />
             </Form.Item>
+
             <Form.Item
                 // WARNING: change it to initialValue={slug}
                 // TODO: change it to initialValue={slug}
@@ -223,6 +213,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             >
                 <Input placeholder="your-some-slug-here" />
             </Form.Item>
+
             <Form.Item initialValue={articleType} label="Article type:" name="articleType">
                 <Select<ArticleTypeEnum>>
                     <Option value={ArticleTypeEnum.article}>Article</Option>
@@ -230,9 +221,11 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                     <Option value={ArticleTypeEnum.root}>Root</Option>
                 </Select>
             </Form.Item>
+
             <Form.Item initialValue={content} label="Content, use markdown:" name="content">
                 <TextArea placeholder="Some content is here..." rows={10} />
             </Form.Item>
+
             <Form.Item
                 // WARNING: change it to initialValue={title}
                 // TODO: change it to initialValue={title}
@@ -244,6 +237,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             >
                 <Input placeholder="Title" />
             </Form.Item>
+
             <Form.Item
                 // set on server
                 initialValue={createdDate || new Date().toISOString()}
@@ -252,6 +246,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             >
                 <Input disabled />
             </Form.Item>
+
             <Form.Item
                 // set on server
                 initialValue={updatedDate || new Date().toISOString()}
@@ -260,6 +255,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             >
                 <Input disabled />
             </Form.Item>
+
             <Form.Item
                 initialValue={moment(defaultPublishDate || publishDate)}
                 label={`Publish date UTC: ${publishDate}`}
@@ -272,12 +268,15 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                     showTime
                 />
             </Form.Item>
+
             <Form.Item initialValue={description} label="Description, use markdown:" name="description">
                 <TextArea placeholder="Some description is here..." rows={3} />
             </Form.Item>
+
             <Form.Item initialValue={descriptionShort} label="Short description, use markdown:" name="descriptionShort">
                 <TextArea placeholder="Some short description is here..." rows={3} />
             </Form.Item>
+
             <Form.Item label={`Files: ${fileList.length}`}>
                 <Upload<unknown>
                     action={async (file: File): Promise<string> => {
@@ -297,12 +296,10 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                     listType="picture-card"
                     onChange={handleChangeFileList}
                 >
-                    <div>
-                        <PlusOutlined />
-                        <div style={{marginTop: 8}}>Upload</div>
-                    </div>
+                    <PlusOutlined />
                 </Upload>
             </Form.Item>
+
             <Form.Item
                 initialValue={hasMetaRobotsNoFollowSeo}
                 label="Has Meta Robots No Follow:"
@@ -311,6 +308,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             >
                 <Checkbox>Add/combine &lt;meta name=&quot;robots&quot; content=&quot;nofollow&quot; /&gt;</Checkbox>
             </Form.Item>
+
             <Form.Item
                 initialValue={hasMetaRobotsNoIndexSeo}
                 label="Has Meta Robots No Index:"
@@ -322,9 +320,11 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                     noindex
                 </Checkbox>
             </Form.Item>
+
             <Form.Item initialValue={isActive} label="Is Active:" name="isActive" valuePropName="checked">
                 <Checkbox>Uncheck to temporary &quot;remove&quot;</Checkbox>
             </Form.Item>
+
             <Form.Item
                 initialValue={isInSiteMapXmlSeo}
                 label="Is In Site Map Xml:"
@@ -333,6 +333,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             >
                 <Checkbox>Does sitemap.xml has link to article or not</Checkbox>
             </Form.Item>
+
             <Form.Item
                 initialValue={metaDescriptionSeo}
                 label={'Meta Description, tag <meta type="description" content="..." />:'}
@@ -340,6 +341,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             >
                 <Input placeholder="Description..." />
             </Form.Item>
+
             <Form.Item
                 initialValue={metaKeyWordsSeo}
                 label={'Meta KeyWords, tag <meta type="keywords" content="..." />:'}
@@ -347,6 +349,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             >
                 <Input placeholder="KeyWords..." />
             </Form.Item>
+
             <Form.Item initialValue={metaSeo} label="Meta, actually any html code:" name="metaSeo">
                 <TextArea placeholder="Additional meta tags..." rows={3} />
             </Form.Item>
@@ -358,6 +361,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             >
                 <Input placeholder="Name1, Name2, Name3..." />
             </Form.Item>
+
             <Form.Item
                 initialValue={arrayToStringByComma(stuffAuthorList)}
                 label="Stuff Authors:"
@@ -365,6 +369,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             >
                 <Input placeholder="Name1, Name2, Name3..." />
             </Form.Item>
+
             <Form.Item
                 initialValue={arrayToStringByComma(stuffCompositorList)}
                 label="Stuff Compositors:"
@@ -372,6 +377,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             >
                 <Input placeholder="Name1, Name2, Name3..." />
             </Form.Item>
+
             <Form.Item
                 initialValue={arrayToStringByComma(stuffDirectorList)}
                 label="Stuff Directors:"
@@ -379,6 +385,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             >
                 <Input placeholder="Name1, Name2, Name3..." />
             </Form.Item>
+
             <Form.Item
                 initialValue={arrayToStringByComma(stuffIllustratorList)}
                 label="Stuff Illustrators:"
@@ -386,6 +393,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             >
                 <Input placeholder="Name1, Name2, Name3..." />
             </Form.Item>
+
             <Form.Item
                 initialValue={arrayToStringByComma(stuffReaderList)}
                 label="Stuff Readers:"
@@ -412,17 +420,15 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                     itemRender={renderUploadedFileListItem}
                     listType="picture-card"
                     maxCount={1}
-                    // onChange={handleChangeFileList}
                 >
-                    <div>
-                        <PlusOutlined />
-                        <div style={{marginTop: 8}}>Upload</div>
-                    </div>
+                    <PlusOutlined />
                 </Upload>
             </Form.Item>
+
             <Form.Item initialValue={tagTitleSeo} label="Meta Title, tag <title>...</title>:" name="tagTitleSeo">
                 <Input placeholder="Title..." />
             </Form.Item>
+
             <Form.Item initialValue={arrayToStringByComma(tagList)} label="Tag List:" name="tagList">
                 <Input placeholder="Tag1, Tag2, Tag3..." />
             </Form.Item>
