@@ -282,12 +282,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                         return 'https://dev.null/dev/null';
                     }}
                     fileList={fileList.map((fileName: string): UploadFile<unknown> => {
-                        return {
-                            name: fileName,
-                            status: 'done',
-                            uid: fileName,
-                            url: getPathToImage(fileName),
-                        };
+                        return {name: fileName, status: 'done', uid: fileName, url: getPathToImage(fileName)};
                     })}
                     itemRender={renderUploadedFileListItem}
                     listType="picture-card"
@@ -402,14 +397,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                     }}
                     fileList={
                         titleImage
-                            ? [
-                                  {
-                                      name: titleImage,
-                                      status: 'done',
-                                      uid: titleImage,
-                                      url: getPathToImage(titleImage),
-                                  },
-                              ]
+                            ? [{name: titleImage, status: 'done', uid: titleImage, url: getPathToImage(titleImage)}]
                             : []
                     }
                     itemRender={renderUploadedFileListItem}
@@ -431,16 +419,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             </Form.Item>
 
             <Form.Item initialValue={defaultSubDocumentIdList} label="Sub Document Id List:" name="subDocumentIdList">
-                <Select<Array<string>>
-                    allowClear
-                    mode="multiple"
-                    onChange={(valueList: Array<string>) => {
-                        console.log('///////////');
-                        console.log(valueList);
-                        setSubDocumentIdList(valueList);
-                    }}
-                    placeholder="Sub Document Id..."
-                >
+                <Select<Array<string>> mode="multiple" placeholder="Sub Document Id...">
                     {['1', '2', '3'].map((documentId: string, index: number): JSX.Element => {
                         return (
                             <Option key={`${documentId}-${String(index)}`} value={documentId}>
