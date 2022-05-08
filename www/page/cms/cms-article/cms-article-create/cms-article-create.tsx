@@ -8,6 +8,7 @@ const {Header, Content, Footer} = Layout;
 import {CmsArticle} from '../cms-article';
 import {makeDefaultArticle} from '../../../../../server/article/article-helper';
 import {Box} from '../../../../layout/box/box';
+import {CmsArticleModeEnum} from '../cms-article-const';
 
 function handleOnFinish() {
     console.log('handleOnFinish');
@@ -44,7 +45,11 @@ export default function CmsArticleCreate(): JSX.Element {
                 <Content>
                     <Title level={2}>Create new article</Title>
 
-                    <CmsArticle article={makeDefaultArticle()} onFinish={handleOnFinish} />
+                    <CmsArticle
+                        article={makeDefaultArticle()}
+                        mode={CmsArticleModeEnum.create}
+                        onFinish={handleOnFinish}
+                    />
                 </Content>
             </Box>
 

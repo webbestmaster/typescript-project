@@ -18,19 +18,22 @@ import {Box} from '../../../layout/box/box';
 import {getPathToImage, uploadFile} from '../../../service/file/file';
 import {arrayToStringByComma, humanNormalizeString, stringToArrayByComma} from '../../../util/human';
 
+import {CmsArticleModeEnum} from './cms-article-const';
+
 const {Text, Link} = Typography;
 const {Option} = Select;
 const {TextArea} = Input;
 
 type CmsArticlePropsType = {
     article: ArticleType;
+    mode: CmsArticleModeEnum;
     onFinish: (article: ArticleType) => void;
 };
 
 // eslint-disable-next-line complexity
 export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
-    const {article, onFinish} = props;
+    const {article, onFinish, mode} = props;
     const {
         articleType,
         content,
