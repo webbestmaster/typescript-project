@@ -110,8 +110,20 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
         );
     }
 
-    function handleChangeFileList(info: UploadChangeParam<UploadFile<unknown>>) {
+    async function handleChangeFileList(info: UploadChangeParam<UploadFile<unknown>>) {
         const {file, fileList: newFileList} = info;
+
+        /*
+        const {originFileObj} = file;
+
+        if (originFileObj instanceof File) {
+            const {uniqueFileName} = await uploadFile(originFileObj);
+
+            setFileList((currentFileList: Array<string>): Array<string> => {
+                return [...currentFileList, uniqueFileName];
+            });
+        }
+*/
 
         console.log('handleChangeFileList:', info);
         console.log('handleChangeFileList:', article);
@@ -233,7 +245,8 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                             return [...currentFileList, uniqueFileName];
                         });
 
-                        return getPathToImage(uniqueFileName);
+                        // just prevent extra request to our server
+                        return 'https://dev.null/dev/null';
                     }}
                     fileList={fileList.map((fileName: string): UploadFile<unknown> => {
                         return {
@@ -262,6 +275,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             <br />
             <br />
 
+            {/*
             <Form.Item
                 label="content"
                 name="conte"
@@ -317,6 +331,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             >
                 <Checkbox>Remember me</Checkbox>
             </Form.Item>
+*/}
 
             <Form.Item>
                 <Button htmlType="submit" type="primary">
