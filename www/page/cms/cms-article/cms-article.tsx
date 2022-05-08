@@ -331,6 +331,10 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 <Input />
             </Form.Item>
 
+            <Form.Item initialValue={metaSeo} label="Meta, actually any html code:" name="metaSeo">
+                <TextArea placeholder="Additional meta tags..." rows={3} />
+            </Form.Item>
+
             <br />
             <br />
             <br />
