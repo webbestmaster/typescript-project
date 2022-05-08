@@ -59,11 +59,12 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
         tagList,
         tagTitleSeo, // tag <title>....</title>
         title,
-        titleImage,
+        titleImage: defaultTitleImage,
         updatedDate,
     } = article;
 
     const [fileList, setFileList] = useState<Array<string>>([...defaultFileList]);
+    const [titleImage, setTitleImage] = useState<string>(defaultTitleImage);
     const [publishDate, setPublishDate] = useState<string>(defaultPublishDate || new Date().toISOString());
 
     const [form] = Form.useForm<ArticleType>();
@@ -110,7 +111,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
         console.log('onFieldsChangeForm:', article);
     }
 
-    function renderUploadedFileItem(
+    function renderUploadedFileListItem(
         originNode: JSX.Element,
         file: UploadFile<unknown>,
         uploadedFileList: Array<UploadFile<unknown>>,
@@ -295,7 +296,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                             url: getPathToImage(fileName),
                         };
                     })}
-                    itemRender={renderUploadedFileItem}
+                    itemRender={renderUploadedFileListItem}
                     listType="picture-card"
                     onChange={handleChangeFileList}
                 >
@@ -404,6 +405,37 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                     <Input placeholder="Name1, Name2, Name3..." />
                 </Form.Item>
             </Box>
+
+            <Form.Item label={`Title image: ${titleImage}`}>
+                <Upload<unknown>
+                    maxCount={1}
+                    action={async (file: File): Promise<string> => {
+                        const {uniqueFileName} = await uploadFile(file);
+
+                        setTitleImage(uniqueFileName);
+
+                        // just prevent extra request to our server
+                        return 'https://dev.null/dev/null';
+                    }}
+                    fileList={[
+                        {
+                            name: titleImage,
+                            status: 'done',
+                            uid: titleImage,
+                            url: getPathToImage(titleImage),
+                        },
+                    ]}
+                    itemRender={renderUploadedFileListItem}
+                    listType="picture-card"
+                    // onChange={handleChangeFileList}
+                >
+                    <div>
+                        <PlusOutlined />
+                        <div style={{marginTop: 8}}>Upload</div>
+                    </div>
+                </Upload>
+            </Form.Item>
+
             <br />
             <br />
             <br />
