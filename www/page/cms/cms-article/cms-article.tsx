@@ -441,6 +441,10 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 </Upload>
             </Form.Item>
 
+            <Form.Item initialValue={tagTitleSeo} label="Meta Title, tag <title>...</title>:" name="tagTitleSeo">
+                <Input />
+            </Form.Item>
+
             <br />
             <br />
             <br />
