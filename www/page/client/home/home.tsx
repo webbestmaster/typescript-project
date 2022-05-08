@@ -116,8 +116,7 @@ export function Home(): JSX.Element {
                 data-test-data={getTestNodeData({data: 'some-string'})}
                 data-test-id={getTestNodeId('language-button')}
                 onClick={() =>
-                    setLocaleName(localeName === LocaleNameEnum.enUs ? LocaleNameEnum.ruRu : LocaleNameEnum.enUs)
-                }
+                    setLocaleName(localeName === LocaleNameEnum.enUs ? LocaleNameEnum.ruRu : LocaleNameEnum.enUs)}
                 type="button"
             >
                 {localeName}

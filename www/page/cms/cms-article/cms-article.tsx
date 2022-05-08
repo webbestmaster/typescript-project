@@ -80,6 +80,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             stuffDirectorList: namesToArray(rawValues.stuffDirectorList),
             stuffIllustratorList: namesToArray(rawValues.stuffIllustratorList),
             stuffReaderList: namesToArray(rawValues.stuffReaderList),
+            titleImage,
         };
         // validate form
         const [isValidArticle, validateFunction] = validateArticle(values);
@@ -408,7 +409,6 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
             <Form.Item label={`Title image: ${titleImage}`}>
                 <Upload<unknown>
-                    maxCount={1}
                     action={async (file: File): Promise<string> => {
                         const {uniqueFileName} = await uploadFile(file);
 
@@ -417,16 +417,21 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                         // just prevent extra request to our server
                         return 'https://dev.null/dev/null';
                     }}
-                    fileList={[
-                        {
-                            name: titleImage,
-                            status: 'done',
-                            uid: titleImage,
-                            url: getPathToImage(titleImage),
-                        },
-                    ]}
+                    fileList={
+                        titleImage
+                            ? [
+                                  {
+                                      name: titleImage,
+                                      status: 'done',
+                                      uid: titleImage,
+                                      url: getPathToImage(titleImage),
+                                  },
+                              ]
+                            : []
+                    }
                     itemRender={renderUploadedFileListItem}
                     listType="picture-card"
+                    maxCount={1}
                     // onChange={handleChangeFileList}
                 >
                     <div>
