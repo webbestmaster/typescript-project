@@ -96,22 +96,32 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
         console.log('onFieldsChangeForm:', article);
     }
 
-    function renderItem(
+    function renderUploadedFileItem(
         originNode: JSX.Element,
         file: UploadFile<unknown>,
         uploadedFileList: Array<UploadFile<unknown>>,
         actions: {download: () => void; preview: () => void; remove: () => void}
     ): JSX.Element {
+        const {name} = file;
+
         return (
-            <Box height={100} padding={16}>
+            <Box padding={[0, 0, 0, 0]}>
                 {originNode}
-                <div>{fileList.length}</div>
+                <div>{name}</div>
+                <div>{uploadedFileList.indexOf(file)}</div>
+                {/* <div>{JSON.stringify(file)}</div>*/}
             </Box>
         );
     }
 
     async function handleChangeFileList(info: UploadChangeParam<UploadFile<unknown>>) {
         const {file, fileList: newFileList} = info;
+
+        if (file.status === 'removed') {
+            setFileList((currentFileList: Array<string>): Array<string> => {
+                return currentFileList.filter((fileName: string): boolean => fileName !== file.name);
+            });
+        }
 
         /*
         const {originFileObj} = file;
@@ -256,7 +266,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                             url: getPathToImage(fileName),
                         };
                     })}
-                    itemRender={renderItem}
+                    itemRender={renderUploadedFileItem}
                     listType="picture-card"
                     onChange={handleChangeFileList}
                 >
