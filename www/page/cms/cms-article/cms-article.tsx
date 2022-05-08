@@ -1,5 +1,5 @@
 /* global fetch, FormData, Response, File */
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 // node_modules/antd/lib/upload/index.d.ts
 // TODO: set declare const Upload: UploadInterface<any>; TO declare const Upload: UploadInterface<unknown>;
 // node_modules/antd/lib/upload/index.d.ts
@@ -16,7 +16,7 @@ import {waitForTime} from '../../../util/timeout';
 import {validateArticle} from '../../../../server/article/article-validation';
 import {Box} from '../../../layout/box/box';
 import {getPathToImage, uploadFile} from '../../../service/file/file';
-import {arrayToStringByComma, stringToArrayByComma} from '../../../util/human';
+import {arrayToStringByComma, humanNormalizeString, stringToArrayByComma} from '../../../util/human';
 
 const {Text, Link} = Typography;
 const {Option} = Select;
@@ -65,10 +65,18 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
     const [fileList, setFileList] = useState<Array<string>>([...defaultFileList]);
     const [titleImage, setTitleImage] = useState<string>(defaultTitleImage);
-    const [subDocumentIdList, setSubDocumentIdList] = useState<Array<string>>([...defaultSubDocumentIdList]);
+    const [subDocumentIdTitleList, setSubDocumentIdTitleList] = useState<Array<Record<'id' | 'title', string>>>([]);
     const [publishDate, setPublishDate] = useState<string>(defaultPublishDate || new Date().toISOString());
-
     const [form] = Form.useForm<ArticleType>();
+
+    useEffect(() => {
+        // TODO: make/use server's API to get data
+        setSubDocumentIdTitleList([
+            {id: 'some-test-id-1', title: 'article 1'},
+            {id: 'some-test-id-2', title: 'article 2'},
+            {id: 'some-test-id-3', title: 'article 3'},
+        ]);
+    }, []);
 
     function onFinishForm(rawValues: ArticleType) {
         const values = {
@@ -82,6 +90,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             stuffIllustratorList: stringToArrayByComma(rawValues.stuffIllustratorList),
             stuffReaderList: stringToArrayByComma(rawValues.stuffReaderList),
             tagList: stringToArrayByComma(rawValues.tagList),
+            title: humanNormalizeString(rawValues.title),
             titleImage,
         };
         // validate form
@@ -90,13 +99,6 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
         console.log('onFinishForm, is valid -', isValidArticle);
         console.log('---> onFinishForm, values -', values);
         console.log('---> onFinishForm, fileList -', fileList);
-
-        // form.validateFields().then(data => {
-        //     console.log(data);
-        //     console.log(data);
-        //     console.log(data);
-        //     console.log(data);
-        // });
     }
 
     function onFinishFailedForm(errorInfo: ValidateErrorEntity<ArticleType>) {
@@ -141,18 +143,6 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             });
         }
 
-        /*
-        const {originFileObj} = file;
-
-        if (originFileObj instanceof File) {
-            const {uniqueFileName} = await uploadFile(originFileObj);
-
-            setFileList((currentFileList: Array<string>): Array<string> => {
-                return [...currentFileList, uniqueFileName];
-            });
-        }
-*/
-
         console.log('handleChangeFileList:', info);
         console.log('handleChangeFileList:', article);
     }
@@ -169,7 +159,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 }
             }
             layout="vertical"
-            name="basic"
+            name="article"
             onFieldsChange={onFieldsChangeForm}
             onFinish={onFinishForm}
             onFinishFailed={onFinishFailedForm}
@@ -201,13 +191,25 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                         required: true,
                     },
                     {
+                        message: 'Please-enter-slug-properly.',
+                        validator: async (rule: RuleObject, value: unknown) => {
+                            if (typeof value !== 'string') {
+                                throw new TypeError('The slug is not a string.');
+                            }
+
+                            if (value.includes(' ')) {
+                                throw new Error('The spaces are not allowed.');
+                            }
+                        },
+                    },
+                    {
                         message: 'Please enter another slug. This slug already exists.',
                         validator: async (rule: RuleObject, value: unknown) => {
+                            // create mode - no slug
+                            // edit mode - slag already exists
                             // TODO: check slug for uniq
                             console.log(rule, value);
                             await waitForTime(300);
-                            // throw error for show validation error
-                            // throw new Error('asdasdsaasd')
                         },
                     },
                 ]}
@@ -419,14 +421,21 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             </Form.Item>
 
             <Form.Item initialValue={defaultSubDocumentIdList} label="Sub Document Id List:" name="subDocumentIdList">
-                <Select<Array<string>> mode="multiple" placeholder="Sub Document Id...">
-                    {['1', '2', '3'].map((documentId: string, index: number): JSX.Element => {
-                        return (
-                            <Option key={`${documentId}-${String(index)}`} value={documentId}>
-                                {documentId}
-                            </Option>
-                        );
-                    })}
+                <Select<Array<string>>
+                    disabled={subDocumentIdTitleList.length === 0}
+                    loading={subDocumentIdTitleList.length === 0}
+                    mode="multiple"
+                    placeholder="Sub Document Id..."
+                >
+                    {subDocumentIdTitleList.map(
+                        (option: Record<'id' | 'title', string>, index: number): JSX.Element => {
+                            return (
+                                <Option key={`${option.id}-${String(index)}`} value={option.id}>
+                                    {option.title}
+                                </Option>
+                            );
+                        }
+                    )}
                 </Select>
             </Form.Item>
 
