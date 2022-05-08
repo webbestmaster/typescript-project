@@ -80,6 +80,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             stuffDirectorList: stringToArrayByComma(rawValues.stuffDirectorList),
             stuffIllustratorList: stringToArrayByComma(rawValues.stuffIllustratorList),
             stuffReaderList: stringToArrayByComma(rawValues.stuffReaderList),
+            tagList: stringToArrayByComma(rawValues.tagList),
             titleImage,
         };
         // validate form
@@ -211,7 +212,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                     },
                 ]}
             >
-                <Input placeholder="enter-some-slug-here" />
+                <Input placeholder="your-some-slug-here" />
             </Form.Item>
 
             <Form.Item initialValue={articleType} label="Article type:" name="articleType">
@@ -330,7 +331,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             </Form.Item>
 
             <Form.Item initialValue={isActive} label="Is Active:" name="isActive" valuePropName="checked">
-                <Checkbox>Actually temporary &quot;removed&quot;</Checkbox>
+                <Checkbox>Uncheck to temporary &quot;remove&quot;</Checkbox>
             </Form.Item>
 
             <Form.Item
@@ -347,7 +348,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 label={'Meta Description, tag <meta type="description" content="..." />:'}
                 name="metaDescriptionSeo"
             >
-                <Input />
+                <Input placeholder="Description..." />
             </Form.Item>
 
             <Form.Item
@@ -355,7 +356,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 label={'Meta KeyWords, tag <meta type="keywords" content="..." />:'}
                 name="metaKeyWordsSeo"
             >
-                <Input />
+                <Input placeholder="KeyWords..." />
             </Form.Item>
 
             <Form.Item initialValue={metaSeo} label="Meta, actually any html code:" name="metaSeo">
@@ -442,7 +443,11 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             </Form.Item>
 
             <Form.Item initialValue={tagTitleSeo} label="Meta Title, tag <title>...</title>:" name="tagTitleSeo">
-                <Input />
+                <Input placeholder="Title..." />
+            </Form.Item>
+
+            <Form.Item initialValue={arrayToStringByComma(tagList)} label="Tag List:" name="tagList">
+                <Input placeholder="Tag1, Tag2, Tag3..." />
             </Form.Item>
 
             <br />
