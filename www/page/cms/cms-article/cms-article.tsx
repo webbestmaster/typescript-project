@@ -302,6 +302,19 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 </Checkbox>
             </Form.Item>
 
+            <Form.Item initialValue={isActive} label="Is Active:" name="isActive" valuePropName="checked">
+                <Checkbox>Actually temporary &quot;removed&quot;</Checkbox>
+            </Form.Item>
+
+            <Form.Item
+                initialValue={isInSiteMapXmlSeo}
+                label="Is In Site Map Xml:"
+                name="isInSiteMapXmlSeo"
+                valuePropName="checked"
+            >
+                <Checkbox>Does sitemap.xml has link to article or not</Checkbox>
+            </Form.Item>
+
             <br />
             <br />
             <br />
