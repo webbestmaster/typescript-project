@@ -16,6 +16,7 @@ import {waitForTime} from '../../../util/timeout';
 import {validateArticle} from '../../../../server/article/article-validation';
 import {Box} from '../../../layout/box/box';
 import {getPathToImage, uploadFile} from '../../../service/file/file';
+import {arrayToNames, namesToArray} from '../../../util/human';
 
 const {Text, Link} = Typography;
 const {Option} = Select;
@@ -72,6 +73,12 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             ...rawValues,
             fileList,
             publishDate,
+            stuffArtistList: namesToArray(String(rawValues.stuffArtistList)),
+            stuffAuthorList: namesToArray(String(rawValues.stuffAuthorList)),
+            stuffCompositorList: namesToArray(String(rawValues.stuffCompositorList)),
+            stuffDirectorList: namesToArray(String(rawValues.stuffDirectorList)),
+            stuffIllustratorList: namesToArray(String(rawValues.stuffIllustratorList)),
+            stuffReaderList: namesToArray(String(rawValues.stuffReaderList)),
         };
         // validate form
         const [isValidArticle, validateFunction] = validateArticle(values);
@@ -353,6 +360,38 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 <TextArea placeholder="Additional meta tags..." rows={3} />
             </Form.Item>
 
+            <Box padding={16}>
+                <Form.Item initialValue={arrayToNames(stuffArtistList)} label="Stuff Artists:" name="stuffArtistList">
+                    <Input placeholder="Name1, Name2, Name3..." />
+                </Form.Item>
+                <Form.Item initialValue={arrayToNames(stuffAuthorList)} label="Stuff Authors:" name="stuffAuthorList">
+                    <Input placeholder="Name1, Name2, Name3..." />
+                </Form.Item>
+                <Form.Item
+                    initialValue={arrayToNames(stuffCompositorList)}
+                    label="Stuff Compositors:"
+                    name="stuffCompositorList"
+                >
+                    <Input placeholder="Name1, Name2, Name3..." />
+                </Form.Item>
+                <Form.Item
+                    initialValue={arrayToNames(stuffDirectorList)}
+                    label="Stuff Directors:"
+                    name="stuffDirectorList"
+                >
+                    <Input placeholder="Name1, Name2, Name3..." />
+                </Form.Item>
+                <Form.Item
+                    initialValue={arrayToNames(stuffIllustratorList)}
+                    label="Stuff Illustrators:"
+                    name="stuffIllustratorList"
+                >
+                    <Input placeholder="Name1, Name2, Name3..." />
+                </Form.Item>
+                <Form.Item initialValue={arrayToNames(stuffReaderList)} label="Stuff Readers:" name="stuffReaderList">
+                    <Input placeholder="Name1, Name2, Name3..." />
+                </Form.Item>
+            </Box>
             <br />
             <br />
             <br />
