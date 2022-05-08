@@ -1,4 +1,4 @@
-/* global fetch, FormData, Response, File */
+/* global fetch, alert, FormData, Response, File */
 import {useState, useEffect} from 'react';
 // node_modules/antd/lib/upload/index.d.ts
 // TODO: set declare const Upload: UploadInterface<any>; TO declare const Upload: UploadInterface<unknown>;
@@ -89,7 +89,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
     }, []);
 
     function onFinishForm(rawValues: ArticleType) {
-        const values = {
+        const values: ArticleType = {
             ...rawValues,
             fileList,
             publishDate,
@@ -105,6 +105,16 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
         };
         // validate form
         const [isValidArticle, validateFunction] = validateArticle(values);
+
+        if (isValidArticle) {
+            onFinish(values);
+            return;
+        }
+
+        console.info('validateFunction.errors');
+        console.info(validateFunction.errors);
+        // eslint-disable-next-line no-alert
+        alert(JSON.stringify(validateFunction.errors));
 
         console.log('onFinishForm, is valid -', isValidArticle);
         console.log('---> onFinishForm, values -', values);

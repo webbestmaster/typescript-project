@@ -9,9 +9,11 @@ import {CmsArticle} from '../cms-article';
 import {makeDefaultArticle} from '../../../../../server/article/article-helper';
 import {Box} from '../../../../layout/box/box';
 import {CmsArticleModeEnum} from '../cms-article-const';
+import {ArticleType} from '../../../../../server/article/article-type';
 
-function handleOnFinish() {
+function handleOnFinish(article: ArticleType) {
     console.log('handleOnFinish');
+    console.log(article);
 }
 
 // https://ant.design/components/grid/#Row
