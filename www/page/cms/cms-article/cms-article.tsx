@@ -218,7 +218,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 // WARNING: change it to initialValue={title}
                 // TODO: change it to initialValue={title}
                 initialValue={title || 'Some title'}
-                label="Title"
+                label="Title:"
                 name="title"
                 // normalize={(value: unknown): string => String(value).replace(/\s+/gi, ' ')}
                 rules={[{message: 'Required!', required: true}]}
@@ -279,6 +279,27 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                         <div style={{marginTop: 8}}>Upload</div>
                     </div>
                 </Upload>
+            </Form.Item>
+
+            <Form.Item
+                initialValue={hasMetaRobotsNoFollowSeo}
+                label="Has Meta Robots No Follow:"
+                name="hasMetaRobotsNoFollowSeo"
+                valuePropName="checked"
+            >
+                <Checkbox>Add/combine &lt;meta name=&quot;robots&quot; content=&quot;nofollow&quot; /&gt;</Checkbox>
+            </Form.Item>
+
+            <Form.Item
+                initialValue={hasMetaRobotsNoIndexSeo}
+                label="Has Meta Robots No Index:"
+                name="hasMetaRobotsNoIndexSeo"
+                valuePropName="checked"
+            >
+                <Checkbox>
+                    Add/combine &lt;meta name=&quot;robots&quot; content=&quot;noindex&quot;/&gt; and add X-Robots-Tag:
+                    noindex
+                </Checkbox>
             </Form.Item>
 
             <br />
