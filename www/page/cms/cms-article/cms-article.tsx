@@ -36,9 +36,12 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
     const {article, onFinish, mode} = props;
     const {
         articleType,
+        // TODO: make/use markdown input
         content,
         createdDate,
+        // TODO: make/use markdown input
         description,
+        // TODO: make/use markdown input
         descriptionShort,
         fileList: defaultFileList,
         hasMetaRobotsNoFollowSeo, // Add/combine <meta name="robots" content="nofollow"/>
@@ -48,8 +51,12 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
         isInSiteMapXmlSeo, // has sitemap.xml link to article or not
         metaDescriptionSeo, // tag <meta type="description" content="....." />
         metaKeyWordsSeo, // tag <meta type="keywords" content="....." />
+        // TODO: html code validator
         metaSeo, // actually any html code
         publishDate: defaultPublishDate,
+        // TODO: check slug for uniq
+        // create mode - no slug
+        // edit mode - slag already exists
         slug,
         stuffArtistList,
         stuffAuthorList,
@@ -57,6 +64,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
         stuffDirectorList,
         stuffIllustratorList,
         stuffReaderList,
+        // TODO: make/use server's API to get data
         subDocumentIdList: defaultSubDocumentIdList,
         subDocumentListViewType,
         tagList,
@@ -73,7 +81,6 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
     const [form] = Form.useForm<ArticleType>();
 
     useEffect(() => {
-        // TODO: make/use server's API to get data
         setSubDocumentIdTitleList([
             {id: 'some-test-id-1', title: 'article 1'},
             {id: 'some-test-id-2', title: 'article 2'},
@@ -184,7 +191,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             <Form.Item
                 // WARNING: change it to initialValue={slug}
                 // TODO: change it to initialValue={slug}
-                initialValue={slug || 'slug just for test'}
+                initialValue={slug || 'slug-just-for-test'}
                 label="Article slug:"
                 name="slug"
                 normalize={(value: unknown): string => String(value).trim()}
@@ -208,9 +215,6 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                     {
                         message: 'Please enter another slug. This slug already exists.',
                         validator: async (rule: RuleObject, value: unknown) => {
-                            // create mode - no slug
-                            // edit mode - slag already exists
-                            // TODO: check slug for uniq
                             console.log(rule, value);
                             await waitForTime(300);
                         },
