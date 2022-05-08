@@ -1,16 +1,19 @@
-export function namesToArray(names: Array<string> | string): Array<string> {
-    if (Array.isArray(names)) {
-        return names;
-    }
-    return names.split(',').map((name: string): string => {
-        return name.trim().replace(/\s+/gi, ' ');
-    });
+function normalizeString(text: string): string {
+    return text.trim().replace(/\s+/gi, ' ');
 }
 
-export function arrayToNamesString(nameList: Array<string> | string): string {
-    if (Array.isArray(nameList)) {
-        return nameList.join(', ');
+export function stringToArrayByComma(texts: Array<string> | string): Array<string> {
+    if (Array.isArray(texts)) {
+        return texts;
     }
 
-    return nameList;
+    return texts.split(',').map(normalizeString);
+}
+
+export function arrayToStringByComma(texts: Array<string> | string): string {
+    if (Array.isArray(texts)) {
+        return texts.join(', ');
+    }
+
+    return texts;
 }

@@ -16,7 +16,7 @@ import {waitForTime} from '../../../util/timeout';
 import {validateArticle} from '../../../../server/article/article-validation';
 import {Box} from '../../../layout/box/box';
 import {getPathToImage, uploadFile} from '../../../service/file/file';
-import {arrayToNamesString, namesToArray} from '../../../util/human';
+import {arrayToStringByComma, stringToArrayByComma} from '../../../util/human';
 
 const {Text, Link} = Typography;
 const {Option} = Select;
@@ -74,12 +74,12 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             ...rawValues,
             fileList,
             publishDate,
-            stuffArtistList: namesToArray(rawValues.stuffArtistList),
-            stuffAuthorList: namesToArray(rawValues.stuffAuthorList),
-            stuffCompositorList: namesToArray(rawValues.stuffCompositorList),
-            stuffDirectorList: namesToArray(rawValues.stuffDirectorList),
-            stuffIllustratorList: namesToArray(rawValues.stuffIllustratorList),
-            stuffReaderList: namesToArray(rawValues.stuffReaderList),
+            stuffArtistList: stringToArrayByComma(rawValues.stuffArtistList),
+            stuffAuthorList: stringToArrayByComma(rawValues.stuffAuthorList),
+            stuffCompositorList: stringToArrayByComma(rawValues.stuffCompositorList),
+            stuffDirectorList: stringToArrayByComma(rawValues.stuffDirectorList),
+            stuffIllustratorList: stringToArrayByComma(rawValues.stuffIllustratorList),
+            stuffReaderList: stringToArrayByComma(rawValues.stuffReaderList),
             titleImage,
         };
         // validate form
@@ -364,42 +364,42 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
             <Box padding={16}>
                 <Form.Item
-                    initialValue={arrayToNamesString(stuffArtistList)}
+                    initialValue={arrayToStringByComma(stuffArtistList)}
                     label="Stuff Artists:"
                     name="stuffArtistList"
                 >
                     <Input placeholder="Name1, Name2, Name3..." />
                 </Form.Item>
                 <Form.Item
-                    initialValue={arrayToNamesString(stuffAuthorList)}
+                    initialValue={arrayToStringByComma(stuffAuthorList)}
                     label="Stuff Authors:"
                     name="stuffAuthorList"
                 >
                     <Input placeholder="Name1, Name2, Name3..." />
                 </Form.Item>
                 <Form.Item
-                    initialValue={arrayToNamesString(stuffCompositorList)}
+                    initialValue={arrayToStringByComma(stuffCompositorList)}
                     label="Stuff Compositors:"
                     name="stuffCompositorList"
                 >
                     <Input placeholder="Name1, Name2, Name3..." />
                 </Form.Item>
                 <Form.Item
-                    initialValue={arrayToNamesString(stuffDirectorList)}
+                    initialValue={arrayToStringByComma(stuffDirectorList)}
                     label="Stuff Directors:"
                     name="stuffDirectorList"
                 >
                     <Input placeholder="Name1, Name2, Name3..." />
                 </Form.Item>
                 <Form.Item
-                    initialValue={arrayToNamesString(stuffIllustratorList)}
+                    initialValue={arrayToStringByComma(stuffIllustratorList)}
                     label="Stuff Illustrators:"
                     name="stuffIllustratorList"
                 >
                     <Input placeholder="Name1, Name2, Name3..." />
                 </Form.Item>
                 <Form.Item
-                    initialValue={arrayToNamesString(stuffReaderList)}
+                    initialValue={arrayToStringByComma(stuffReaderList)}
                     label="Stuff Readers:"
                     name="stuffReaderList"
                 >
