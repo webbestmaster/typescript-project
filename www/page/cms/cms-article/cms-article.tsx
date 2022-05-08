@@ -315,6 +315,22 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 <Checkbox>Does sitemap.xml has link to article or not</Checkbox>
             </Form.Item>
 
+            <Form.Item
+                initialValue={metaDescriptionSeo}
+                label={'Meta Description, tag <meta type="description" content="..." />:'}
+                name="metaDescriptionSeo"
+            >
+                <Input />
+            </Form.Item>
+
+            <Form.Item
+                initialValue={metaKeyWordsSeo}
+                label={'Meta KeyWords, tag <meta type="keywords" content="..." />:'}
+                name="metaKeyWordsSeo"
+            >
+                <Input />
+            </Form.Item>
+
             <br />
             <br />
             <br />
