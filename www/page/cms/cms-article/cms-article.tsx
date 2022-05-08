@@ -4,7 +4,8 @@ import {useState} from 'react';
 // TODO: set declare const Upload: UploadInterface<any>; TO declare const Upload: UploadInterface<unknown>;
 // node_modules/antd/lib/upload/index.d.ts
 // WARNING: set declare const Upload: UploadInterface<any>; TO declare const Upload: UploadInterface<unknown>;
-import {Upload, Form, Input, Button, Typography, Select, Checkbox} from 'antd';
+import {Upload, Form, Input, Button, Typography, Select, Checkbox, DatePicker} from 'antd';
+import moment, {Moment} from 'moment';
 import {ValidateErrorEntity, RuleObject, FieldData} from 'rc-field-form/lib/interface';
 import {UploadChangeParam, UploadFile} from 'antd/lib/upload/interface';
 import {PlusOutlined} from '@ant-design/icons';
@@ -44,7 +45,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
         metaDescriptionSeo, // tag <meta type="description" content="....." />
         metaKeyWordsSeo, // tag <meta type="keywords" content="....." />
         metaSeo, // actually any html code
-        publishDate,
+        publishDate: defaultPublishDate,
         slug,
         stuffArtistList,
         stuffAuthorList,
@@ -62,6 +63,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
     } = article;
 
     const [fileList, setFileList] = useState<Array<string>>([...defaultFileList]);
+    const [publishDate, setPublishDate] = useState<string>(defaultPublishDate || new Date().toISOString());
 
     const [form] = Form.useForm<ArticleType>();
 
@@ -69,6 +71,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
         const values = {
             ...rawValues,
             fileList,
+            publishDate,
         };
         // validate form
         const [isValidArticle, validateFunction] = validateArticle(values);
@@ -227,19 +230,34 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             </Form.Item>
 
             <Form.Item
+                // set on server
                 initialValue={createdDate || new Date().toISOString()}
-                label={`Created date: ${new Date().toISOString()}`}
+                label={`Created date UTC: ${new Date().toISOString()}`}
                 name="createdDate"
             >
                 <Input disabled />
             </Form.Item>
 
             <Form.Item
+                // set on server
                 initialValue={updatedDate || new Date().toISOString()}
-                label={`Updated date: ${new Date().toISOString()}`}
+                label={`Updated date UTC: ${new Date().toISOString()}`}
                 name="updatedDate"
             >
                 <Input disabled />
+            </Form.Item>
+
+            <Form.Item
+                initialValue={moment(defaultPublishDate || publishDate)}
+                label={`Publish date UTC: ${publishDate}`}
+                name="publishDate"
+            >
+                <DatePicker
+                    onOk={(date: Moment) => {
+                        setPublishDate(date.toISOString());
+                    }}
+                    showTime
+                />
             </Form.Item>
 
             <Form.Item initialValue={description} label="Description, use markdown:" name="description">
