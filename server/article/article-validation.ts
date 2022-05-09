@@ -120,24 +120,6 @@ export function makeArticlePaginationSchemaPick<Keys extends keyof ArticleType>(
     return articlePaginationSchemaPick;
 }
 
-/*
-
-export function makeArticlePaginationSchemaPartial(): JSONSchemaType<PaginationResultType<Partial<ArticleType>>> {
-    const articlePaginationSchema: JSONSchemaType<PaginationResultType<ArticleType>> = {
-        additionalProperties: false,
-        properties: {
-            pageIndex: {type: 'number'},
-            pageSize: {type: 'number'},
-            result: {items: makeArticleSchema(), type: 'array'},
-        },
-        required: [],
-        type: 'object',
-    } as const;
-
-    return articlePaginationSchema;
-}
-*/
-
 export function validateArticle(data: unknown): [boolean, ValidateFunction<ArticleType>] {
     const ajv = new Ajv();
     const modelJsonSchemaValidate = ajv.compile<ArticleType>(makeArticleSchema());
