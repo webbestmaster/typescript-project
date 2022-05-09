@@ -2,6 +2,7 @@ import {FastifyReply, FastifyRequest} from 'fastify';
 
 import {PaginationQueryType} from '../data-base/data-base-type';
 import {mainResponseHeader} from '../const';
+import {defaultPaginationQuery} from '../data-base/data-base-const';
 
 import {articleCrud} from './article';
 import {ArticleType} from './article-type';
@@ -11,7 +12,10 @@ export async function getAdminArticleListPagination(
     request: FastifyRequest<{Body: string}>,
     reply: FastifyReply
 ): Promise<void> {
-    const {pagination} = Object.assign({pagination: encodeURIComponent(JSON.stringify({}))}, request.query);
+    const {pagination} = Object.assign(
+        {pagination: encodeURIComponent(JSON.stringify(defaultPaginationQuery))},
+        request.query
+    );
     const paginationQuery: PaginationQueryType<ArticleType> = JSON.parse(decodeURIComponent(pagination));
     const articleListPagination = await articleCrud.findManyPagination(paginationQuery);
 
@@ -28,7 +32,7 @@ export async function getAdminArticleListPaginationPick(
 ): Promise<void> {
     const {pagination, pick} = Object.assign(
         {
-            pagination: encodeURIComponent(JSON.stringify({})),
+            pagination: encodeURIComponent(JSON.stringify(defaultPaginationQuery)),
             pick: encodeURIComponent(JSON.stringify([])),
         },
         request.query
