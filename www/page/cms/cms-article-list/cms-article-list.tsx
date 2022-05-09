@@ -2,27 +2,43 @@
 import {useEffect} from 'react';
 
 import {useMakeExecutableState} from '../../../util/function';
-import {PaginationResultType} from '../../../../server/data-base/data-base-type';
+import {PaginationQueryType, PaginationResultType} from '../../../../server/data-base/data-base-type';
 import {ArticleType} from '../../../../server/article/article-type';
 import {getArticleListPagination, getArticleListPaginationPartial} from '../../../service/article/article-api';
 
 // eslint-disable-next-line import/no-default-export
 export default function CmsArticleList(): JSX.Element {
     /*
-    const {execute, result} = useMakeExecutableState<[], PaginationResultType<ArticleType>>(getArticleListPagination);
+        const {execute, result} = useMakeExecutableState<
+            [PaginationQueryType<ArticleType>],
+            PaginationResultType<ArticleType>
+        >(getArticleListPagination);
 
-    useEffect(() => {
-        execute();
-    }, [execute]);
+        useEffect(() => {
+            execute({
+                pageIndex: 1,
+                pageSize: 2,
+                query: {},
+                sort: {title: 1},
+            });
+        }, [execute]);
 */
 
     const {execute, result} = useMakeExecutableState<
-        [Array<'articleType' | 'slug'>],
-        PaginationResultType<Pick<ArticleType, 'articleType' | 'slug'>>
+        [PaginationQueryType<ArticleType>, Array<'createdDate' | 'slug'>],
+        PaginationResultType<Pick<ArticleType, 'createdDate' | 'slug'>>
     >(getArticleListPaginationPartial);
 
     useEffect(() => {
-        execute(['articleType', 'slug']);
+        execute(
+            {
+                pageIndex: 3,
+                pageSize: 2,
+                query: {},
+                sort: {title: 1},
+            },
+            ['createdDate', 'slug']
+        );
     }, [execute]);
 
     return (

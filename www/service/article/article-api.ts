@@ -1,4 +1,4 @@
-import {PaginationResultType} from '../../../server/data-base/data-base-type';
+import {PaginationQueryType, PaginationResultType} from '../../../server/data-base/data-base-type';
 import {ArticleType} from '../../../server/article/article-type';
 import {FetchMethodEnum, fetchX} from '../../util/fetch';
 import {
@@ -7,19 +7,31 @@ import {
     makeArticleSchema,
 } from '../../../server/article/article-validation';
 import {apiUrl} from '../../../server/const';
+import {paginationQueryToURLSearchParameters as paginationQueryToURLSearchParameters} from '../../util/url';
 
-export async function getArticleListPagination(): Promise<PaginationResultType<ArticleType>> {
-    return fetchX<PaginationResultType<ArticleType>>(apiUrl.adminArticleListPagination, makeArticlePaginationSchema(), {
-        credentials: 'include',
-        method: FetchMethodEnum.get,
-    });
+export async function getArticleListPagination(
+    paginationQuery: PaginationQueryType<ArticleType>
+): Promise<PaginationResultType<ArticleType>> {
+    const urlSearchParameters = paginationQueryToURLSearchParameters<ArticleType>(paginationQuery, []);
+
+    return fetchX<PaginationResultType<ArticleType>>(
+        `${apiUrl.adminArticleListPagination}?${urlSearchParameters.toString()}`,
+        makeArticlePaginationSchema(),
+        {
+            credentials: 'include',
+            method: FetchMethodEnum.get,
+        }
+    );
 }
 
 export async function getArticleListPaginationPartial<Keys extends keyof ArticleType>(
+    paginationQuery: PaginationQueryType<ArticleType>,
     fieldList: Array<Keys>
 ): Promise<PaginationResultType<Pick<ArticleType, Keys>>> {
+    const urlSearchParameters = paginationQueryToURLSearchParameters<ArticleType>(paginationQuery, fieldList);
+
     return fetchX<PaginationResultType<Pick<ArticleType, Keys>>>(
-        `${apiUrl.adminArticleListPaginationPick}?fields=${fieldList.join(',')}`,
+        `${apiUrl.adminArticleListPaginationPick}?${urlSearchParameters.toString()}`,
         makeArticlePaginationSchemaPick<Keys>(fieldList),
         {
             credentials: 'include',

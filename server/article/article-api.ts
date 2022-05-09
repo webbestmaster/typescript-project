@@ -11,13 +11,8 @@ export async function getAdminArticleListPagination(
     request: FastifyRequest<{Body: string}>,
     reply: FastifyReply
 ): Promise<void> {
-    const paginationQuery: PaginationQueryType<ArticleType> = {
-        pageIndex: 0,
-        pageSize: 5,
-        query: {},
-        sort: {title: 1},
-    };
-
+    const {pagination} = Object.assign({pagination: encodeURIComponent(JSON.stringify({}))}, request.query);
+    const paginationQuery: PaginationQueryType<ArticleType> = JSON.parse(decodeURIComponent(pagination));
     const articleListPagination = await articleCrud.findManyPagination(paginationQuery);
 
     reply
@@ -31,14 +26,17 @@ export async function getAdminArticleListPaginationPick(
     request: FastifyRequest<{Body: string}>,
     reply: FastifyReply
 ): Promise<void> {
-    const paginationQuery: PaginationQueryType<ArticleType> = {
-        pageIndex: 0,
-        pageSize: 5,
-        query: {},
-        sort: {title: 1},
-    };
+    const {pagination, pick} = Object.assign(
+        {
+            pagination: encodeURIComponent(JSON.stringify({})),
+            pick: encodeURIComponent(JSON.stringify([])),
+        },
+        request.query
+    );
+    const paginationQuery: PaginationQueryType<ArticleType> = JSON.parse(decodeURIComponent(pagination));
+    const pickQuery: Array<keyof ArticleType> = JSON.parse(decodeURIComponent(pick));
 
-    const articleListPagination = await articleCrud.findManyPaginationPartial(paginationQuery, ['articleType', 'slug']);
+    const articleListPagination = await articleCrud.findManyPaginationPartial(paginationQuery, pickQuery);
 
     reply
         .code(200)
