@@ -17,3 +17,7 @@ export function arrayToStringByComma(texts: Array<string> | string): string {
 
     return texts;
 }
+
+export function textToSlug(test: string): string {
+    return humanNormalizeString(test).toLocaleLowerCase().replace(/\s+/gi, '-');
+}

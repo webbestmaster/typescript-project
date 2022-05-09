@@ -1,6 +1,7 @@
-import {FastifyRequest} from 'fastify';
+import {FastifyReply, FastifyRequest} from 'fastify';
 
 import {UserRoleEnum} from '../../www/provider/user/user-context-type';
+import {mainResponseHeader} from '../const';
 
 import {authCrud} from './auth';
 import {cookieFieldUserId} from './auth-const';
@@ -17,7 +18,7 @@ export function makeDefaultAuthUser(): AuthUserType {
     return defaultUserData;
 }
 
-export async function getIsAdmin(request: FastifyRequest<{Body: string}>): Promise<boolean> {
+async function getIsAdmin(request: FastifyRequest<{Body: string}>): Promise<boolean> {
     const {session} = request;
 
     const user = await authCrud.findOne({id: String(session.get(cookieFieldUserId) || '')});
@@ -25,8 +26,25 @@ export async function getIsAdmin(request: FastifyRequest<{Body: string}>): Promi
     return Boolean(user && user.role === UserRoleEnum.admin);
 }
 
-export async function getIsNotAdmin(request: FastifyRequest<{Body: string}>): Promise<boolean> {
+async function getIsNotAdmin(request: FastifyRequest<{Body: string}>): Promise<boolean> {
     const isAdmin = await getIsAdmin(request);
 
     return !isAdmin;
+}
+
+type AdminOnlyWrapperType = (request: FastifyRequest<{Body: string}>, reply: FastifyReply) => Promise<void>;
+
+export function adminOnly(callBack: AdminOnlyWrapperType): AdminOnlyWrapperType {
+    return async (request: FastifyRequest<{Body: string}>, reply: FastifyReply): Promise<void> => {
+        if (await getIsNotAdmin(request)) {
+            reply
+                .code(403)
+                .header(...mainResponseHeader)
+                .send(null);
+            // eslint-disable-next-line no-undefined
+            return undefined;
+        }
+
+        return callBack(request, reply);
+    };
 }

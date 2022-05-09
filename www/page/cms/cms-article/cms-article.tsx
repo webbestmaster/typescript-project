@@ -16,7 +16,7 @@ import {waitForTime} from '../../../util/timeout';
 import {validateArticle} from '../../../../server/article/article-validation';
 import {Box} from '../../../layout/box/box';
 import {getPathToImage, uploadFile} from '../../../service/file/file';
-import {arrayToStringByComma, humanNormalizeString, stringToArrayByComma} from '../../../util/human';
+import {arrayToStringByComma, humanNormalizeString, stringToArrayByComma, textToSlug} from '../../../util/human';
 
 import {CmsArticleModeEnum} from './cms-article-const';
 
@@ -78,6 +78,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
     const [titleImage, setTitleImage] = useState<string>(defaultTitleImage);
     const [subDocumentIdTitleList, setSubDocumentIdTitleList] = useState<Array<Record<'id' | 'title', string>>>([]);
     const [publishDate, setPublishDate] = useState<string>(defaultPublishDate || new Date().toISOString());
+    const [recommendedSlug, setRecommendedSlug] = useState<string>(textToSlug(title));
     const [form] = Form.useForm<ArticleType>();
 
     useEffect(() => {
@@ -127,6 +128,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
     }
 
     function onValuesChangeForm(changedValues: unknown, values: ArticleType) {
+        setRecommendedSlug(textToSlug(values.title));
         console.log('onValuesChangeForm:', changedValues, values);
         console.log('onValuesChangeForm:', article);
     }
@@ -180,21 +182,24 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             onValuesChange={onValuesChangeForm}
             scrollToFirstError
         >
-            <Form.Item
-                initialValue={id}
-                label={`Article id: ${id || 'N/A. Id generated automatically and can not be changed'}`}
-                name="id"
-            >
+            <Form.Item initialValue={id} label={`Article id: ${id}`} name="id">
                 <Input disabled />
             </Form.Item>
 
             <Form.Item
-                // WARNING: change it to initialValue={slug}
-                // TODO: change it to initialValue={slug}
-                initialValue={slug || 'slug-just-for-test'}
-                label="Article slug:"
+                initialValue={title}
+                label="Title:"
+                name="title"
+                rules={[{message: 'Required!', required: true}]}
+            >
+                <Input placeholder="Title" />
+            </Form.Item>
+
+            <Form.Item
+                initialValue={slug}
+                label={`Slug, avoid spec symbols, slug from title: ${recommendedSlug}`}
                 name="slug"
-                normalize={(value: unknown): string => String(value).trim()}
+                normalize={textToSlug}
                 rules={[
                     {
                         message: 'Required!',
@@ -207,8 +212,8 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                                 throw new TypeError('The slug is not a string.');
                             }
 
-                            if (value.includes(' ')) {
-                                throw new Error('The spaces are not allowed.');
+                            if (textToSlug(value) !== value) {
+                                throw new Error('Slug is not formatted.');
                             }
                         },
                     },
@@ -221,7 +226,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                     },
                 ]}
             >
-                <Input placeholder="your-some-slug-here" />
+                <Input placeholder="slug-is-here" />
             </Form.Item>
 
             <Form.Item initialValue={articleType} label="Article type:" name="articleType">
@@ -234,18 +239,6 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
             <Form.Item initialValue={content} label="Content, use markdown:" name="content">
                 <TextArea placeholder="Some content is here..." rows={10} />
-            </Form.Item>
-
-            <Form.Item
-                // WARNING: change it to initialValue={title}
-                // TODO: change it to initialValue={title}
-                initialValue={title || 'Some title'}
-                label="Title:"
-                name="title"
-                // normalize={(value: unknown): string => String(value).replace(/\s+/gi, ' ')}
-                rules={[{message: 'Required!', required: true}]}
-            >
-                <Input placeholder="Title" />
             </Form.Item>
 
             <Form.Item

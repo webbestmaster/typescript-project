@@ -10,7 +10,7 @@ export function uploadFile(file: File): Promise<UploadFileResponseType> {
 
     formData.append('file', file);
 
-    return fetchX<UploadFileResponseType>(apiUrl.fileUpload, uploadFileResponseSchema, {
+    return fetchX<UploadFileResponseType>(apiUrl.adminFileUpload, uploadFileResponseSchema, {
         body: formData,
         credentials: 'include',
         method: FetchMethodEnum.post,
