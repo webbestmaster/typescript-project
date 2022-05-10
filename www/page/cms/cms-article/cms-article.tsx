@@ -19,13 +19,12 @@ import {arrayToStringByComma, humanNormalizeString, stringToArrayByComma, textTo
 import {useMakeExecutableState} from '../../../util/function';
 import {PaginationQueryType, PaginationResultType} from '../../../../server/data-base/data-base-type';
 import {getArticleListPaginationPartial} from '../../../service/article/article-api';
-import {Markdown} from '../../../layout/markdown';
 
 import {MarkdownInputWrapper} from '../../../layout/markdown-input-wrapper';
 
 import {CmsArticleModeEnum, keyForValidationList} from './cms-article-const';
 import {ArticleForValidationType, KeyForValidationListType} from './cms-article-type';
-import {makeSlugValidator} from './cms-article-helper';
+import {makeSlugValidator, makeSubDocumentOption} from './cms-article-helper';
 
 const {Text, Link} = Typography;
 const {Option} = Select;
@@ -450,17 +449,13 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             <Form.Item initialValue={subDocumentIdList} label="Sub Document Id List:" name="subDocumentIdList">
                 <Select<Array<string>>
                     disabled={savedArticleList.length === 0}
+                    filterOption
                     loading={savedArticleList.length === 0}
                     mode="multiple"
+                    optionFilterProp="title"
                     placeholder="Sub Document Id..."
                 >
-                    {savedArticleList.map((option: ArticleForValidationType, index: number): JSX.Element => {
-                        return (
-                            <Option key={`${option.id}-${String(index)}`} value={option.id}>
-                                {option.title}
-                            </Option>
-                        );
-                    })}
+                    {savedArticleList.map(makeSubDocumentOption)}
                 </Select>
             </Form.Item>
 

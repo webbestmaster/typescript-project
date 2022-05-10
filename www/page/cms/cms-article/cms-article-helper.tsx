@@ -1,9 +1,12 @@
+import {Upload, Form, Input, Button, Typography, Select, Checkbox, DatePicker, Row, Col} from 'antd';
 import {ValidateErrorEntity, RuleObject, FieldData, Rule} from 'rc-field-form/lib/interface';
 
 import {textToSlug} from '../../../util/human';
 
 import {ArticleForValidationType, MakeSlugValidatorArgumentType} from './cms-article-type';
 import {CmsArticleModeEnum} from './cms-article-const';
+
+const {Option} = Select;
 
 export function makeSlugValidator(data: MakeSlugValidatorArgumentType): Array<Rule> {
     const {id, mode, savedArticleList} = data;
@@ -54,4 +57,14 @@ export function makeSlugValidator(data: MakeSlugValidatorArgumentType): Array<Ru
             },
         },
     ];
+}
+
+export function makeSubDocumentOption(articleForValidation: ArticleForValidationType): JSX.Element {
+    const {title, id} = articleForValidation;
+
+    return (
+        <Option key={id} title={title} value={id}>
+            {title}
+        </Option>
+    );
 }
