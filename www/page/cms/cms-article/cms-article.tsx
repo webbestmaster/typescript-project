@@ -15,7 +15,13 @@ import {ArticleType, ArticleTypeEnum, SubDocumentListViewTypeEnum} from '../../.
 import {validateArticle} from '../../../../server/article/article-validation';
 import {Box} from '../../../layout/box/box';
 import {getPathToImage, uploadFile} from '../../../service/file/file';
-import {arrayToStringByComma, humanNormalizeString, stringToArrayByComma, textToSlug} from '../../../util/human';
+import {
+    arrayToStringByComma,
+    humanNormalizeString,
+    makeTagsPreview,
+    stringToArrayByComma,
+    textToSlug,
+} from '../../../util/human';
 import {useMakeExecutableState} from '../../../util/function';
 import {PaginationQueryType, PaginationResultType} from '../../../../server/data-base/data-base-type';
 import {getArticleListPaginationPartial} from '../../../service/article/article-api';
@@ -441,7 +447,11 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 <Input placeholder="Title..." />
             </Form.Item>
 
-            <Form.Item initialValue={arrayToStringByComma(tagList)} label="Tag List:" name="tagList">
+            <Form.Item
+                initialValue={arrayToStringByComma(tagList)}
+                label={`Tag List: ${makeTagsPreview(currentArticleState.tagList)}`}
+                name="tagList"
+            >
                 <Input placeholder="Tag1, Tag2, Tag3..." />
             </Form.Item>
 

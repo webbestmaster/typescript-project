@@ -21,3 +21,9 @@ export function arrayToStringByComma(texts: Array<string> | string): string {
 export function textToSlug(test: string): string {
     return humanNormalizeString(test).toLocaleLowerCase().replace(/\s+/gi, '-');
 }
+
+export function makeTagsPreview(tagList: Array<string> | string): string {
+    return stringToArrayByComma(tagList)
+        .map((tag: string): string => `[${tag}]`)
+        .join(' ');
+}
