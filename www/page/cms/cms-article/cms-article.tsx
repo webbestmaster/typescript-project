@@ -21,6 +21,8 @@ import {PaginationQueryType, PaginationResultType} from '../../../../server/data
 import {getArticleListPaginationPartial} from '../../../service/article/article-api';
 import {Markdown} from '../../../layout/markdown';
 
+import {MarkdownInputWrapper} from '../../../layout/markdown-input-wrapper';
+
 import {CmsArticleModeEnum, keyForValidationList} from './cms-article-const';
 import {ArticleForValidationType, KeyForValidationListType} from './cms-article-type';
 import {makeSlugValidator} from './cms-article-helper';
@@ -241,48 +243,27 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 </Select>
             </Form.Item>
 
-            <Row gutter={[16, 0]}>
-                <Col span={12}>
-                    <Form.Item initialValue={content} label="Content, use markdown:" name="content">
-                        <TextArea placeholder="# Markdown..." rows={10} />
-                    </Form.Item>
-                </Col>
-                <Col span={12}>
-                    <Box backgroundColor="#fff" margin={[32, 0, 16]} padding={[8]}>
-                        <Markdown mdInput={currentArticleState.content} />
-                    </Box>
-                </Col>
-            </Row>
+            <MarkdownInputWrapper mdInput={currentArticleState.content}>
+                <Form.Item initialValue={content} label="Content, use markdown:" name="content">
+                    <TextArea placeholder="# Markdown..." rows={10} />
+                </Form.Item>
+            </MarkdownInputWrapper>
 
-            <Row gutter={[16, 0]}>
-                <Col span={12}>
-                    <Form.Item initialValue={description} label="Description, use markdown:" name="description">
-                        <TextArea placeholder="Some description is here..." rows={3} />
-                    </Form.Item>
-                </Col>
-                <Col span={12}>
-                    <Box backgroundColor="#fff" margin={[32, 0, 16]} padding={[8]}>
-                        <Markdown mdInput={currentArticleState.description} />
-                    </Box>
-                </Col>
-            </Row>
+            <MarkdownInputWrapper mdInput={currentArticleState.description}>
+                <Form.Item initialValue={description} label="Description, use markdown:" name="description">
+                    <TextArea placeholder="Some description is here..." rows={3} />
+                </Form.Item>
+            </MarkdownInputWrapper>
 
-            <Row gutter={[16, 0]}>
-                <Col span={12}>
-                    <Form.Item
-                        initialValue={descriptionShort}
-                        label="Short description, use markdown:"
-                        name="descriptionShort"
-                    >
-                        <TextArea placeholder="Some short description is here..." rows={3} />
-                    </Form.Item>
-                </Col>
-                <Col span={12}>
-                    <Box backgroundColor="#fff" margin={[32, 0, 16]} padding={[8]}>
-                        <Markdown mdInput={currentArticleState.descriptionShort} />
-                    </Box>
-                </Col>
-            </Row>
+            <MarkdownInputWrapper mdInput={currentArticleState.descriptionShort}>
+                <Form.Item
+                    initialValue={descriptionShort}
+                    label="Short description, use markdown:"
+                    name="descriptionShort"
+                >
+                    <TextArea placeholder="Some short description is here..." rows={3} />
+                </Form.Item>
+            </MarkdownInputWrapper>
 
             <Form.Item
                 // set on server
