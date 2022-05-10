@@ -28,7 +28,7 @@ import {getArticleListPaginationPartial} from '../../../service/article/article-
 
 import {MarkdownInputWrapper} from '../../../layout/markdown-input-wrapper';
 
-import {CmsArticleModeEnum, keyForValidationList, noImageFileName} from './cms-article-const';
+import {CmsArticleModeEnum, keyForValidationList, noDateUTC, noImageFileName} from './cms-article-const';
 import {ArticleForValidationType, KeyForValidationListType} from './cms-article-type';
 import {makeSlugValidator, makeSubDocumentOption} from './cms-article-helper';
 
@@ -294,8 +294,8 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
             <Form.Item
                 // set on server
-                initialValue={createdDate || new Date().toISOString()}
-                label={`Created date UTC: ${new Date().toISOString()}`}
+                initialValue={createdDate || noDateUTC}
+                label={`Created date UTC: ${noDateUTC}`}
                 name="createdDate"
             >
                 <Input disabled />
@@ -303,8 +303,8 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
             <Form.Item
                 // set on server
-                initialValue={updatedDate || new Date().toISOString()}
-                label={`Updated date UTC: ${new Date().toISOString()}`}
+                initialValue={updatedDate || noDateUTC}
+                label={`Updated date UTC: ${noDateUTC}`}
                 name="updatedDate"
             >
                 <Input disabled />
@@ -397,7 +397,9 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
             <Form.Item
                 initialValue={arrayToStringByComma(stuffArtistList)}
-                label="Stuff Artists:"
+                label={`Stuff Artists, use comma "," to divide: ${makeTagsPreview(
+                    currentArticleState.stuffArtistList
+                )}`}
                 name="stuffArtistList"
             >
                 <Input placeholder="Name1, Name2, Name3..." />
@@ -405,7 +407,9 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
             <Form.Item
                 initialValue={arrayToStringByComma(stuffAuthorList)}
-                label="Stuff Authors:"
+                label={`Stuff Authors, use comma "," to divide: ${makeTagsPreview(
+                    currentArticleState.stuffAuthorList
+                )}`}
                 name="stuffAuthorList"
             >
                 <Input placeholder="Name1, Name2, Name3..." />
@@ -413,7 +417,9 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
             <Form.Item
                 initialValue={arrayToStringByComma(stuffCompositorList)}
-                label="Stuff Compositors:"
+                label={`Stuff Compositors, use comma "," to divide: ${makeTagsPreview(
+                    currentArticleState.stuffCompositorList
+                )}`}
                 name="stuffCompositorList"
             >
                 <Input placeholder="Name1, Name2, Name3..." />
@@ -421,7 +427,9 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
             <Form.Item
                 initialValue={arrayToStringByComma(stuffDirectorList)}
-                label="Stuff Directors:"
+                label={`Stuff Directors, use comma "," to divide: ${makeTagsPreview(
+                    currentArticleState.stuffDirectorList
+                )}`}
                 name="stuffDirectorList"
             >
                 <Input placeholder="Name1, Name2, Name3..." />
@@ -429,7 +437,9 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
             <Form.Item
                 initialValue={arrayToStringByComma(stuffIllustratorList)}
-                label="Stuff Illustrators:"
+                label={`Stuff Illustrators, use comma "," to divide: ${makeTagsPreview(
+                    currentArticleState.stuffIllustratorList
+                )}`}
                 name="stuffIllustratorList"
             >
                 <Input placeholder="Name1, Name2, Name3..." />
@@ -437,7 +447,9 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
             <Form.Item
                 initialValue={arrayToStringByComma(stuffReaderList)}
-                label="Stuff Readers:"
+                label={`Stuff Readers, use comma "," to divide: ${makeTagsPreview(
+                    currentArticleState.stuffReaderList
+                )}`}
                 name="stuffReaderList"
             >
                 <Input placeholder="Name1, Name2, Name3..." />
@@ -449,7 +461,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
             <Form.Item
                 initialValue={arrayToStringByComma(tagList)}
-                label={`Tag List: ${makeTagsPreview(currentArticleState.tagList)}`}
+                label={`Tag List, use comma "," to divide: ${makeTagsPreview(currentArticleState.tagList)}`}
                 name="tagList"
             >
                 <Input placeholder="Tag1, Tag2, Tag3..." />
