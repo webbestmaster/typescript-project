@@ -24,6 +24,6 @@ export function textToSlug(test: string): string {
 
 export function makeTagsPreview(tagList: Array<string> | string): string {
     return stringToArrayByComma(tagList)
-        .map((tag: string): string => `[${tag}]`)
+        .map((tag: string): string => `[ ${tag} ]`)
         .join(' ');
 }
