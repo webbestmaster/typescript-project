@@ -1,5 +1,5 @@
-import {Upload, Form, Input, Button, Typography, Select, Checkbox, DatePicker, Row, Col} from 'antd';
-import {ValidateErrorEntity, RuleObject, FieldData, Rule} from 'rc-field-form/lib/interface';
+import {Select} from 'antd';
+import {RuleObject, Rule} from 'rc-field-form/lib/interface';
 
 import {textToSlug} from '../../../util/human';
 

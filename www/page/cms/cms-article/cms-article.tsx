@@ -22,7 +22,7 @@ import {getArticleListPaginationPartial} from '../../../service/article/article-
 
 import {MarkdownInputWrapper} from '../../../layout/markdown-input-wrapper';
 
-import {CmsArticleModeEnum, keyForValidationList} from './cms-article-const';
+import {CmsArticleModeEnum, keyForValidationList, noImageFileName} from './cms-article-const';
 import {ArticleForValidationType, KeyForValidationListType} from './cms-article-type';
 import {makeSlugValidator, makeSubDocumentOption} from './cms-article-helper';
 
@@ -74,7 +74,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
     } = article;
 
     const [fileList, setFileList] = useState<Array<string>>([...defaultFileList]);
-    const [titleImage, setTitleImage] = useState<string>(defaultTitleImage);
+    const [titleImage, setTitleImage] = useState<string>(defaultTitleImage || noImageFileName);
     const [publishDate, setPublishDate] = useState<string>(defaultPublishDate || new Date().toISOString());
     const [recommendedSlug, setRecommendedSlug] = useState<string>(textToSlug(title));
     const [form] = Form.useForm<ArticleType>();
@@ -213,6 +213,28 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             </Text>
             <Form.Item initialValue={id} label={`Article id: ${id}`} name="id">
                 <Input disabled />
+            </Form.Item>
+
+            <Form.Item label={`Title image: ${titleImage}`}>
+                <Upload<unknown>
+                    action={async (file: File): Promise<string> => {
+                        const {uniqueFileName} = await uploadFile(file);
+
+                        setTitleImage(uniqueFileName);
+
+                        // just prevent extra request to our server
+                        return 'https://dev.null/dev/null';
+                    }}
+                    // titleImage
+                    //     ? [{name: titleImage, status: 'done', uid: titleImage, url: getPathToImage(titleImage)}]
+                    //     : []
+                    fileList={[{name: titleImage, status: 'done', uid: titleImage, url: getPathToImage(titleImage)}]}
+                    itemRender={renderUploadedFileListItem}
+                    listType="picture-card"
+                    maxCount={1}
+                >
+                    <PlusOutlined />
+                </Upload>
             </Form.Item>
 
             <Form.Item
@@ -413,29 +435,6 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 name="stuffReaderList"
             >
                 <Input placeholder="Name1, Name2, Name3..." />
-            </Form.Item>
-
-            <Form.Item label={`Title image: ${titleImage}`}>
-                <Upload<unknown>
-                    action={async (file: File): Promise<string> => {
-                        const {uniqueFileName} = await uploadFile(file);
-
-                        setTitleImage(uniqueFileName);
-
-                        // just prevent extra request to our server
-                        return 'https://dev.null/dev/null';
-                    }}
-                    fileList={
-                        titleImage
-                            ? [{name: titleImage, status: 'done', uid: titleImage, url: getPathToImage(titleImage)}]
-                            : []
-                    }
-                    itemRender={renderUploadedFileListItem}
-                    listType="picture-card"
-                    maxCount={1}
-                >
-                    <PlusOutlined />
-                </Upload>
             </Form.Item>
 
             <Form.Item initialValue={tagTitleSeo} label="Meta Title, tag <title>...</title>:" name="tagTitleSeo">

@@ -6,3 +6,4 @@ export const enum CmsArticleModeEnum {
 }
 
 export const keyForValidationList: KeyForValidationListType = ['id', 'slug', 'title'];
+export const noImageFileName = 'no-image.jpg';
