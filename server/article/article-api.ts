@@ -103,10 +103,18 @@ export async function postAdminArticleCreate(
         return;
     }
 
-    await articleCrud.createOne(parsedData);
+    const currentDate = new Date().toISOString();
+
+    const actualizedArticle: ArticleType = {
+        ...parsedData,
+        createdDate: currentDate,
+        updatedDate: currentDate,
+    };
+
+    await articleCrud.createOne(actualizedArticle);
 
     reply
         .code(200)
         .header(...mainResponseHeader)
-        .send(parsedData);
+        .send(actualizedArticle);
 }

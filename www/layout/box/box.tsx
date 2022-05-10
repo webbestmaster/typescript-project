@@ -1,6 +1,7 @@
 import {makeCssArray} from './box-helper';
 
 type BoxPropsType = {
+    backgroundColor?: string;
     boxSizing?: 'border-box' | 'content-box' | 'initial';
     children: Array<JSX.Element> | JSX.Element;
     height?: number | string;
@@ -11,7 +12,16 @@ type BoxPropsType = {
 };
 
 export function Box(props: BoxPropsType): JSX.Element {
-    const {children, isInline = false, margin, padding, width = 'auto', height = 'auto', boxSizing = 'initial'} = props;
+    const {
+        children,
+        isInline = false,
+        margin,
+        padding,
+        width = 'auto',
+        height = 'auto',
+        boxSizing = 'initial',
+        backgroundColor = 'transparent',
+    } = props;
 
     const [marginTop, marginRight, marginBottom, marginLeft, paddingTop, paddingRight, paddingBottom, paddingLeft] = [
         ...makeCssArray(margin),
@@ -19,6 +29,7 @@ export function Box(props: BoxPropsType): JSX.Element {
     ].map((value: number): string => `${value}px`);
 
     const style = {
+        backgroundColor,
         boxSizing,
         height,
         marginBottom,

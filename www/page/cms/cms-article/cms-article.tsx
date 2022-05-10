@@ -4,7 +4,7 @@ import {useState, useEffect} from 'react';
 // TODO: set declare const Upload: UploadInterface<any>; TO declare const Upload: UploadInterface<unknown>;
 // node_modules/antd/lib/upload/index.d.ts
 // WARNING: set declare const Upload: UploadInterface<any>; TO declare const Upload: UploadInterface<unknown>;
-import {Upload, Form, Input, Button, Typography, Select, Checkbox, DatePicker} from 'antd';
+import {Upload, Form, Input, Button, Typography, Select, Checkbox, DatePicker, Row, Col} from 'antd';
 import moment, {Moment} from 'moment';
 import {ValidateErrorEntity, RuleObject, FieldData} from 'rc-field-form/lib/interface';
 import {UploadChangeParam, UploadFile} from 'antd/lib/upload/interface';
@@ -12,13 +12,18 @@ import {PlusOutlined} from '@ant-design/icons';
 import 'antd/dist/antd.css';
 
 import {ArticleType, ArticleTypeEnum, SubDocumentListViewTypeEnum} from '../../../../server/article/article-type';
-import {waitForTime} from '../../../util/timeout';
 import {validateArticle} from '../../../../server/article/article-validation';
 import {Box} from '../../../layout/box/box';
 import {getPathToImage, uploadFile} from '../../../service/file/file';
 import {arrayToStringByComma, humanNormalizeString, stringToArrayByComma, textToSlug} from '../../../util/human';
+import {useMakeExecutableState} from '../../../util/function';
+import {PaginationQueryType, PaginationResultType} from '../../../../server/data-base/data-base-type';
+import {getArticleListPaginationPartial} from '../../../service/article/article-api';
+import {Markdown} from '../../../layout/markdown';
 
-import {CmsArticleModeEnum} from './cms-article-const';
+import {CmsArticleModeEnum, keyForValidationList} from './cms-article-const';
+import {ArticleForValidationType, KeyForValidationListType} from './cms-article-type';
+import {makeSlugValidator} from './cms-article-helper';
 
 const {Text, Link} = Typography;
 const {Option} = Select;
@@ -36,12 +41,9 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
     const {article, onFinish, mode} = props;
     const {
         articleType,
-        // TODO: make/use markdown input
         content,
         createdDate,
-        // TODO: make/use markdown input
         description,
-        // TODO: make/use markdown input
         descriptionShort,
         fileList: defaultFileList,
         hasMetaRobotsNoFollowSeo, // Add/combine <meta name="robots" content="nofollow"/>
@@ -51,12 +53,9 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
         isInSiteMapXmlSeo, // has sitemap.xml link to article or not
         metaDescriptionSeo, // tag <meta type="description" content="....." />
         metaKeyWordsSeo, // tag <meta type="keywords" content="....." />
-        // TODO: html code validator
+        // TODO: html code validator - take in from skazki.land
         metaSeo, // actually any html code
         publishDate: defaultPublishDate,
-        // TODO: check slug for uniq
-        // create mode - no slug
-        // edit mode - slag already exists
         slug,
         stuffArtistList,
         stuffAuthorList,
@@ -64,8 +63,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
         stuffDirectorList,
         stuffIllustratorList,
         stuffReaderList,
-        // TODO: make/use server's API to get data
-        subDocumentIdList: defaultSubDocumentIdList,
+        subDocumentIdList,
         subDocumentListViewType,
         tagList,
         tagTitleSeo, // tag <title>....</title>
@@ -76,18 +74,24 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
     const [fileList, setFileList] = useState<Array<string>>([...defaultFileList]);
     const [titleImage, setTitleImage] = useState<string>(defaultTitleImage);
-    const [subDocumentIdTitleList, setSubDocumentIdTitleList] = useState<Array<Record<'id' | 'title', string>>>([]);
     const [publishDate, setPublishDate] = useState<string>(defaultPublishDate || new Date().toISOString());
     const [recommendedSlug, setRecommendedSlug] = useState<string>(textToSlug(title));
     const [form] = Form.useForm<ArticleType>();
+    const [savedArticleList, setSavedArticleList] = useState<Array<ArticleForValidationType>>([]);
+    const {execute} = useMakeExecutableState<
+        [PaginationQueryType<ArticleType>, KeyForValidationListType],
+        PaginationResultType<ArticleForValidationType>
+    >(getArticleListPaginationPartial);
+    const [currentArticleState, setCurrentArticleState] = useState<ArticleType>(article);
 
     useEffect(() => {
-        setSubDocumentIdTitleList([
-            {id: 'some-test-id-1', title: 'article 1'},
-            {id: 'some-test-id-2', title: 'article 2'},
-            {id: 'some-test-id-3', title: 'article 3'},
-        ]);
-    }, []);
+        execute({pageIndex: 0, pageSize: 0, query: {}, sort: {title: 1}}, keyForValidationList)
+            .then((data: PaginationResultType<ArticleForValidationType>) => setSavedArticleList(data.result))
+            .catch(() => {
+                // eslint-disable-next-line no-alert
+                alert('Can not fetch article list.');
+            });
+    }, [execute]);
 
     function onFinishForm(rawValues: ArticleType) {
         const values: ArticleType = {
@@ -107,19 +111,19 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
         // validate form
         const [isValidArticle, validateFunction] = validateArticle(values);
 
+        console.info('validateFunction.errors');
+        console.info(validateFunction.errors);
+        console.log('onFinishForm, is valid -', isValidArticle);
+        console.log('---> onFinishForm, values -', values);
+        console.log('---> onFinishForm, fileList -', fileList);
+
         if (isValidArticle) {
             onFinish(values);
             return;
         }
 
-        console.info('validateFunction.errors');
-        console.info(validateFunction.errors);
         // eslint-disable-next-line no-alert
         alert(JSON.stringify(validateFunction.errors));
-
-        console.log('onFinishForm, is valid -', isValidArticle);
-        console.log('---> onFinishForm, values -', values);
-        console.log('---> onFinishForm, fileList -', fileList);
     }
 
     function onFinishFailedForm(errorInfo: ValidateErrorEntity<ArticleType>) {
@@ -129,6 +133,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
     function onValuesChangeForm(changedValues: unknown, values: ArticleType) {
         setRecommendedSlug(textToSlug(values.title));
+        setCurrentArticleState(values);
         console.log('onValuesChangeForm:', changedValues, values);
         console.log('onValuesChangeForm:', article);
     }
@@ -182,6 +187,29 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             onValuesChange={onValuesChangeForm}
             scrollToFirstError
         >
+            <Text>
+                Parents:
+                <Link>link to parent</Link>
+                <Link>link to parent</Link>
+                <Link>link to parent</Link>
+                <Link>link to parent</Link>
+                <Link>link to parent</Link>
+                <Link>link to parent</Link>
+                <Link>link to parent</Link>
+                <Link>link to parent</Link>
+                <Link>link to parent</Link>
+                <Link>link to parent</Link>
+                <Link>link to parent</Link>
+                <Link>link to parent</Link>
+                <Link>link to parent</Link>
+                <Link>link to parent</Link>
+                <Link>link to parent</Link>
+                <Link>link to parent</Link>
+                <Link>link to parent</Link>
+                <Link>link to parent</Link>
+                <Link>link to parent</Link>
+                <Link>link to parent</Link>
+            </Text>
             <Form.Item initialValue={id} label={`Article id: ${id}`} name="id">
                 <Input disabled />
             </Form.Item>
@@ -200,33 +228,9 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 label={`Slug, avoid spec symbols, slug from title: ${recommendedSlug}`}
                 name="slug"
                 normalize={textToSlug}
-                rules={[
-                    {
-                        message: 'Required!',
-                        required: true,
-                    },
-                    {
-                        message: 'Please-enter-slug-properly.',
-                        validator: async (rule: RuleObject, value: unknown) => {
-                            if (typeof value !== 'string') {
-                                throw new TypeError('The slug is not a string.');
-                            }
-
-                            if (textToSlug(value) !== value) {
-                                throw new Error('Slug is not formatted.');
-                            }
-                        },
-                    },
-                    {
-                        message: 'Please enter another slug. This slug already exists.',
-                        validator: async (rule: RuleObject, value: unknown) => {
-                            console.log(rule, value);
-                            await waitForTime(300);
-                        },
-                    },
-                ]}
+                rules={makeSlugValidator({id, mode, savedArticleList})}
             >
-                <Input placeholder="slug-is-here" />
+                <Input disabled={savedArticleList.length === 0} placeholder="slug-is-here" />
             </Form.Item>
 
             <Form.Item initialValue={articleType} label="Article type:" name="articleType">
@@ -237,9 +241,48 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 </Select>
             </Form.Item>
 
-            <Form.Item initialValue={content} label="Content, use markdown:" name="content">
-                <TextArea placeholder="Some content is here..." rows={10} />
-            </Form.Item>
+            <Row gutter={[16, 0]}>
+                <Col span={12}>
+                    <Form.Item initialValue={content} label="Content, use markdown:" name="content">
+                        <TextArea placeholder="# Markdown..." rows={10} />
+                    </Form.Item>
+                </Col>
+                <Col span={12}>
+                    <Box backgroundColor="#fff" margin={[32, 0, 16]} padding={[8]}>
+                        <Markdown mdInput={currentArticleState.content} />
+                    </Box>
+                </Col>
+            </Row>
+
+            <Row gutter={[16, 0]}>
+                <Col span={12}>
+                    <Form.Item initialValue={description} label="Description, use markdown:" name="description">
+                        <TextArea placeholder="Some description is here..." rows={3} />
+                    </Form.Item>
+                </Col>
+                <Col span={12}>
+                    <Box backgroundColor="#fff" margin={[32, 0, 16]} padding={[8]}>
+                        <Markdown mdInput={currentArticleState.description} />
+                    </Box>
+                </Col>
+            </Row>
+
+            <Row gutter={[16, 0]}>
+                <Col span={12}>
+                    <Form.Item
+                        initialValue={descriptionShort}
+                        label="Short description, use markdown:"
+                        name="descriptionShort"
+                    >
+                        <TextArea placeholder="Some short description is here..." rows={3} />
+                    </Form.Item>
+                </Col>
+                <Col span={12}>
+                    <Box backgroundColor="#fff" margin={[32, 0, 16]} padding={[8]}>
+                        <Markdown mdInput={currentArticleState.descriptionShort} />
+                    </Box>
+                </Col>
+            </Row>
 
             <Form.Item
                 // set on server
@@ -264,20 +307,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 label={`Publish date UTC: ${publishDate}`}
                 name="publishDate"
             >
-                <DatePicker
-                    onOk={(date: Moment) => {
-                        setPublishDate(date.toISOString());
-                    }}
-                    showTime
-                />
-            </Form.Item>
-
-            <Form.Item initialValue={description} label="Description, use markdown:" name="description">
-                <TextArea placeholder="Some description is here..." rows={3} />
-            </Form.Item>
-
-            <Form.Item initialValue={descriptionShort} label="Short description, use markdown:" name="descriptionShort">
-                <TextArea placeholder="Some short description is here..." rows={3} />
+                <DatePicker onOk={(date: Moment): void => setPublishDate(date.toISOString())} showTime />
             </Form.Item>
 
             <Form.Item label={`Files: ${fileList.length}`}>
@@ -436,22 +466,20 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 <Input placeholder="Tag1, Tag2, Tag3..." />
             </Form.Item>
 
-            <Form.Item initialValue={defaultSubDocumentIdList} label="Sub Document Id List:" name="subDocumentIdList">
+            <Form.Item initialValue={subDocumentIdList} label="Sub Document Id List:" name="subDocumentIdList">
                 <Select<Array<string>>
-                    disabled={subDocumentIdTitleList.length === 0}
-                    loading={subDocumentIdTitleList.length === 0}
+                    disabled={savedArticleList.length === 0}
+                    loading={savedArticleList.length === 0}
                     mode="multiple"
                     placeholder="Sub Document Id..."
                 >
-                    {subDocumentIdTitleList.map(
-                        (option: Record<'id' | 'title', string>, index: number): JSX.Element => {
-                            return (
-                                <Option key={`${option.id}-${String(index)}`} value={option.id}>
-                                    {option.title}
-                                </Option>
-                            );
-                        }
-                    )}
+                    {savedArticleList.map((option: ArticleForValidationType, index: number): JSX.Element => {
+                        return (
+                            <Option key={`${option.id}-${String(index)}`} value={option.id}>
+                                {option.title}
+                            </Option>
+                        );
+                    })}
                 </Select>
             </Form.Item>
 
