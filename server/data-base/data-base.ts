@@ -26,6 +26,8 @@ function makeSimpleCallBack(
     resolve(null);
 }
 
+// TODO: detect like regexp string and make from it regexp
+// detect only this /text/i or /text/
 export function makeCrud<ModelType extends Record<string, unknown>>(
     dataBaseId: string,
     modelJsonSchema: JSONSchemaType<ModelType>

@@ -79,14 +79,12 @@ export default function CmsArticleList(): JSX.Element {
             const pageIndex = (pagination.current || 1) - 1;
             const pageSize = pagination.pageSize || defaultPageSize;
 
-            setPaginationArticleList((currentPaginationArticleList: PaginationQueryType<ArticleForTableListType>) => {
+            setPaginationArticleList((): PaginationQueryType<ArticleForTableListType> => {
                 return {
-                    ...currentPaginationArticleList,
                     pageIndex,
                     pageSize,
-                    sort: {
-                        [String(field)]: sortDirection,
-                    },
+                    query: {[searchedColumn]: searchText},
+                    sort: {[String(field)]: sortDirection},
                 };
             });
         }

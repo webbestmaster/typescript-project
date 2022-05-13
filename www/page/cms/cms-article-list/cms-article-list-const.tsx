@@ -68,7 +68,7 @@ export function getArticleTableColumnList(
                         key="slug"
                         onInput={(evt: SyntheticEvent<HTMLInputElement>) => {
                             setSearchedColumn('slug');
-                            setSearchText(evt.currentTarget.value.trim());
+                            setSearchText(evt.currentTarget.value);
                         }}
                         placeholder="Search..."
                     />
