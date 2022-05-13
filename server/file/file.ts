@@ -4,6 +4,7 @@ import path from 'path';
 import {FastifyReply, FastifyRequest} from 'fastify';
 
 import {PromiseResolveType} from '../../www/util/promise';
+import {getRandomString} from '../../www/util/string';
 
 import {uploadFolder} from './file-const';
 import {UploadFileResponseType} from './file-type';
@@ -15,7 +16,11 @@ export async function uploadFile(request: FastifyRequest<{Body: string}>, reply:
         limits: {fileSize: uploadFileLimit, files: 1},
     });
 
-    const uniqueFileName = Date.now() + '---' + filename;
+    const rawFileExtension = filename.split('.').pop();
+    const hasExtension = rawFileExtension !== filename;
+    const fileExtension = hasExtension ? `.${rawFileExtension}` : '';
+
+    const uniqueFileName = `${getRandomString()}${fileExtension}`;
     const fullFilePath = path.join(uploadFolder, uniqueFileName);
 
     await new Promise((resolve: PromiseResolveType<void>, reject: PromiseResolveType<string>) => {

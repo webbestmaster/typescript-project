@@ -8,7 +8,7 @@ import {articleCrud} from './article';
 import {ArticleType} from './article-type';
 import {validateArticle} from './article-validation';
 
-export async function getAdminArticleListPagination(
+export async function getArticleListPagination(
     request: FastifyRequest<{Body: string}>,
     reply: FastifyReply
 ): Promise<void> {
@@ -26,7 +26,7 @@ export async function getAdminArticleListPagination(
 }
 
 // eslint-disable-next-line id-length, sonarjs/no-identical-functions
-export async function getAdminArticleListPaginationPick(
+export async function getArticleListPaginationPick(
     request: FastifyRequest<{Body: string}>,
     reply: FastifyReply
 ): Promise<void> {
@@ -79,7 +79,7 @@ export async function postAdminArticleCreate(
         reply
             .code(400)
             .header(...mainResponseHeader)
-            .send({message: 'Slug Should exists.'});
+            .send({message: 'Slug should exists.'});
         return;
     }
 
@@ -89,7 +89,7 @@ export async function postAdminArticleCreate(
         reply
             .code(400)
             .header(...mainResponseHeader)
-            .send({message: `Article with id=${id} already exists.`});
+            .send({message: `Article with id="${id}" already exists.`});
         return;
     }
 
@@ -99,7 +99,7 @@ export async function postAdminArticleCreate(
         reply
             .code(400)
             .header(...mainResponseHeader)
-            .send({message: `Article with slug=${slug} already exists.`});
+            .send({message: `Article with slug="${slug}" already exists.`});
         return;
     }
 
@@ -112,6 +112,56 @@ export async function postAdminArticleCreate(
     };
 
     await articleCrud.createOne(actualizedArticle);
+
+    reply
+        .code(200)
+        .header(...mainResponseHeader)
+        .send(actualizedArticle);
+}
+
+// eslint-disable-next-line complexity, max-statements
+export async function postAdminArticleUpdate(
+    request: FastifyRequest<{Body: string}>,
+    reply: FastifyReply
+): Promise<void> {
+    const {body} = request;
+    const parsedData: ArticleType = JSON.parse(body);
+    const [isValidArticle, modelJsonSchemaValidate] = validateArticle(parsedData);
+
+    if (!isValidArticle) {
+        reply
+            .code(400)
+            .header(...mainResponseHeader)
+            .send(modelJsonSchemaValidate.errors);
+        return;
+    }
+
+    const {id} = parsedData;
+
+    if (id.trim() === '') {
+        reply
+            .code(400)
+            .header(...mainResponseHeader)
+            .send({message: 'Id Should exists.'});
+        return;
+    }
+
+    const existedArticleById = await articleCrud.findOne({id});
+
+    if (!existedArticleById) {
+        reply
+            .code(400)
+            .header(...mainResponseHeader)
+            .send({message: `Article with id="${id}" does not exists.`});
+        return;
+    }
+
+    const actualizedArticle: ArticleType = {
+        ...parsedData,
+        updatedDate: new Date().toISOString(),
+    };
+
+    await articleCrud.updateOne({id}, actualizedArticle);
 
     reply
         .code(200)

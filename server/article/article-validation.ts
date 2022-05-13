@@ -75,7 +75,7 @@ export function makeArticleSchema(): JSONSchemaType<ArticleType> {
         properties: articleSchemaProperties,
         required: requiredFieldList,
         type: 'object',
-    } as const;
+    };
 
     return articleSchema;
 }
@@ -98,7 +98,7 @@ export function makeArticlePaginationSchema(): JSONSchemaType<PaginationResultTy
         },
         required: [],
         type: 'object',
-    } as const;
+    };
 
     return articlePaginationSchema;
 }
@@ -115,7 +115,7 @@ export function makeArticlePaginationSchemaPick<Keys extends keyof ArticleType>(
         },
         required: [],
         type: 'object',
-    } as const;
+    };
 
     return articlePaginationSchemaPick;
 }

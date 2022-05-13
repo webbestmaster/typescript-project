@@ -61,7 +61,6 @@ export function Spinner(props: PropsType): JSX.Element | null {
             className={classNames(spinnerStyle.spinner_wrapper, className)}
             style={spinnerWrapperStyle}
         >
-            spinner bleat
             <div className={spinnerStyle.spinner_image} style={spinnerImageStyle} />
         </div>
     );

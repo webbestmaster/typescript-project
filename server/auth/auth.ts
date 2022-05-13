@@ -2,9 +2,8 @@ import {makeCrud} from '../data-base/data-base';
 
 import {AuthUserType} from './auth-type';
 import {authUserSchema} from './auth-validation';
-import {makeDefaultAuthUser} from './auth-helper';
 
-export const authCrud = makeCrud<AuthUserType>('auth.user', authUserSchema, makeDefaultAuthUser);
+export const authCrud = makeCrud<AuthUserType>('auth.user', authUserSchema);
 
 /*
 authCrud.createOne({

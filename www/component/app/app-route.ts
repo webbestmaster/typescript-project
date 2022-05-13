@@ -41,4 +41,4 @@ export const appRoute: Record<string, AppRoutType> = {
     login: {
         path: '/login',
     },
-} as const;
+};

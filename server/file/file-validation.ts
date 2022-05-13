@@ -13,7 +13,7 @@ export const uploadFileResponseSchema: JSONSchemaType<UploadFileResponseType> = 
     properties: uploadFileResponseSchemaProperties,
     required: requiredFieldList,
     type: 'object',
-} as const;
+};
 
 export function validateUploadFileResponse(data: unknown): [boolean, ValidateFunction<UploadFileResponseType>] {
     const ajv = new Ajv();

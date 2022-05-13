@@ -16,9 +16,10 @@ import {getHtmlCallBack} from './ssr/ssr';
 import {secretKey} from './key';
 import {apiUrl, siteCookieKey} from './const';
 import {
-    getAdminArticleListPagination,
-    getAdminArticleListPaginationPick,
+    getArticleListPagination,
+    getArticleListPaginationPick,
     postAdminArticleCreate,
+    postAdminArticleUpdate,
 } from './article/article-api';
 import {getFile, uploadFile} from './file/file';
 import {adminOnly} from './auth/auth-helper';
@@ -78,11 +79,12 @@ const serverPort = 3000;
     // //////////////
     fastify.post(apiUrl.login, postAuthLogin);
     fastify.get(apiUrl.getUser, getAutoAuthLogin);
-    fastify.get(apiUrl.adminArticleListPagination, adminOnly(getAdminArticleListPagination));
-    fastify.get(apiUrl.adminArticleListPaginationPick, adminOnly(getAdminArticleListPaginationPick));
+    fastify.get(apiUrl.articleListPagination, getArticleListPagination);
+    fastify.get(apiUrl.articleListPaginationPick, getArticleListPaginationPick);
     fastify.post(apiUrl.adminFileUpload, adminOnly(uploadFile));
     fastify.get(apiUrl.fileGet, getFile);
     fastify.post(apiUrl.adminArticleCreate, adminOnly(postAdminArticleCreate));
+    fastify.post(apiUrl.adminArticleUpdate, adminOnly(postAdminArticleUpdate));
 
     // //////////////
     // Pages

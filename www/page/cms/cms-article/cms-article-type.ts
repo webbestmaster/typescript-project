@@ -2,7 +2,7 @@ import {ArticleType} from '../../../../server/article/article-type';
 
 import {CmsArticleModeEnum} from './cms-article-const';
 
-export type ArticleForValidationKeysType = 'id' | 'slug' | 'title';
+export type ArticleForValidationKeysType = 'id' | 'slug' | 'subDocumentIdList' | 'title';
 export type ArticleForValidationType = Pick<ArticleType, ArticleForValidationKeysType>;
 export type KeyForValidationListType = Array<ArticleForValidationKeysType>;
 export type MakeSlugValidatorArgumentType = {

@@ -28,8 +28,7 @@ function makeSimpleCallBack(
 
 export function makeCrud<ModelType extends Record<string, unknown>>(
     dataBaseId: string,
-    modelJsonSchema: JSONSchemaType<ModelType>,
-    makeDefaultModel: () => ModelType
+    modelJsonSchema: JSONSchemaType<ModelType>
 ): CrudType<ModelType> {
     const dataBase = new Datastore<ModelType>({
         autoload: true,

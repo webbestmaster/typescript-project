@@ -1,19 +1,18 @@
-/* global fetch, alert, FormData, Response, File */
+/* global File */
 import {useState, useEffect} from 'react';
 // node_modules/antd/lib/upload/index.d.ts
 // TODO: set declare const Upload: UploadInterface<any>; TO declare const Upload: UploadInterface<unknown>;
 // node_modules/antd/lib/upload/index.d.ts
 // WARNING: set declare const Upload: UploadInterface<any>; TO declare const Upload: UploadInterface<unknown>;
-import {Upload, Form, Input, Button, Typography, Select, Checkbox, DatePicker, Row, Col} from 'antd';
+import {Upload, Form, Input, Button, Typography, Select, Checkbox, DatePicker, message} from 'antd';
 import moment, {Moment} from 'moment';
-import {ValidateErrorEntity, RuleObject, FieldData} from 'rc-field-form/lib/interface';
+import {ValidateErrorEntity, FieldData} from 'rc-field-form/lib/interface';
 import {UploadChangeParam, UploadFile} from 'antd/lib/upload/interface';
 import {PlusOutlined} from '@ant-design/icons';
 import 'antd/dist/antd.css';
 
 import {ArticleType, ArticleTypeEnum, SubDocumentListViewTypeEnum} from '../../../../server/article/article-type';
 import {validateArticle} from '../../../../server/article/article-validation';
-import {Box} from '../../../layout/box/box';
 import {getPathToImage, uploadFile} from '../../../service/file/file';
 import {
     arrayToStringByComma,
@@ -24,15 +23,20 @@ import {
 } from '../../../util/human';
 import {useMakeExecutableState} from '../../../util/function';
 import {PaginationQueryType, PaginationResultType} from '../../../../server/data-base/data-base-type';
-import {getArticleListPaginationPartial} from '../../../service/article/article-api';
-
+import {getArticleListPaginationPick} from '../../../service/article/article-api';
 import {MarkdownInputWrapper} from '../../../layout/markdown-input-wrapper';
 
-import {CmsArticleModeEnum, keyForValidationList, noDateUTC, noImageFileName} from './cms-article-const';
+import {CmsArticleModeEnum, keyForValidationList, noDateUTC} from './cms-article-const';
 import {ArticleForValidationType, KeyForValidationListType} from './cms-article-type';
-import {makeSlugValidator, makeSubDocumentOption} from './cms-article-helper';
+import {
+    makeHtmlValidator,
+    makeSlugValidator,
+    makeSubDocumentOption,
+    renderParentList,
+    renderUploadedFileListItem,
+} from './cms-article-helper';
 
-const {Text, Link} = Typography;
+const {Text} = Typography;
 const {Option} = Select;
 const {TextArea} = Input;
 
@@ -60,7 +64,6 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
         isInSiteMapXmlSeo, // has sitemap.xml link to article or not
         metaDescriptionSeo, // tag <meta type="description" content="....." />
         metaKeyWordsSeo, // tag <meta type="keywords" content="....." />
-        // TODO: html code validator - take in from skazki.land
         metaSeo, // actually any html code
         publishDate: defaultPublishDate,
         slug,
@@ -79,26 +82,28 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
         updatedDate,
     } = article;
 
+    const [form] = Form.useForm<ArticleType>();
     const [fileList, setFileList] = useState<Array<string>>([...defaultFileList]);
-    const [titleImage, setTitleImage] = useState<string>(defaultTitleImage || noImageFileName);
+    const [titleImage, setTitleImage] = useState<string>(defaultTitleImage);
     const [publishDate, setPublishDate] = useState<string>(defaultPublishDate || new Date().toISOString());
     const [recommendedSlug, setRecommendedSlug] = useState<string>(textToSlug(title));
-    const [form] = Form.useForm<ArticleType>();
-    const [savedArticleList, setSavedArticleList] = useState<Array<ArticleForValidationType>>([]);
-    const {execute} = useMakeExecutableState<
-        [PaginationQueryType<ArticleType>, KeyForValidationListType],
-        PaginationResultType<ArticleForValidationType>
-    >(getArticleListPaginationPartial);
     const [currentArticleState, setCurrentArticleState] = useState<ArticleType>(article);
 
+    const {execute: executeArticleListPaginationPick} = useMakeExecutableState<
+        [PaginationQueryType<ArticleType>, KeyForValidationListType],
+        PaginationResultType<ArticleForValidationType>
+    >(getArticleListPaginationPick);
+
+    const [savedArticleList, setSavedArticleList] = useState<Array<ArticleForValidationType>>([]);
+
     useEffect(() => {
-        execute({pageIndex: 0, pageSize: 0, query: {}, sort: {title: 1}}, keyForValidationList)
+        executeArticleListPaginationPick({pageIndex: 0, pageSize: 0, query: {}, sort: {title: 1}}, keyForValidationList)
             .then((data: PaginationResultType<ArticleForValidationType>) => setSavedArticleList(data.result))
-            .catch(() => {
-                // eslint-disable-next-line no-alert
-                alert('Can not fetch article list.');
+            .catch((error: Error) => {
+                console.log(error);
+                message.error('Can not fetch article list.');
             });
-    }, [execute]);
+    }, [executeArticleListPaginationPick]);
 
     function onFinishForm(rawValues: ArticleType) {
         const values: ArticleType = {
@@ -129,11 +134,11 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             return;
         }
 
-        // eslint-disable-next-line no-alert
-        alert(JSON.stringify(validateFunction.errors));
+        message.error(JSON.stringify(validateFunction.errors));
     }
 
     function onFinishFailedForm(errorInfo: ValidateErrorEntity<ArticleType>) {
+        message.error(JSON.stringify(errorInfo.errorFields));
         console.log('onFinishFailedForm:', errorInfo);
         console.log('onFinishFailedForm:', article);
     }
@@ -150,26 +155,8 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
         console.log('onFieldsChangeForm:', article);
     }
 
-    function renderUploadedFileListItem(
-        originNode: JSX.Element,
-        file: UploadFile<unknown>,
-        uploadedFileList: Array<UploadFile<unknown>>,
-        actions: {download: () => void; preview: () => void; remove: () => void}
-    ): JSX.Element {
-        const {name} = file;
-
-        return (
-            <Box padding={[0, 0, 0, 0]}>
-                {originNode}
-                <div>{name}</div>
-                <div>{uploadedFileList.indexOf(file)}</div>
-                {/* <div>{JSON.stringify(file)}</div>*/}
-            </Box>
-        );
-    }
-
-    async function handleChangeFileList(info: UploadChangeParam<UploadFile<unknown>>) {
-        const {file, fileList: newFileList} = info;
+    function handleChangeFileList(info: UploadChangeParam<UploadFile<unknown>>) {
+        const {file} = info;
 
         if (file.status === 'removed') {
             setFileList((currentFileList: Array<string>): Array<string> => {
@@ -179,6 +166,17 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
         console.log('handleChangeFileList:', info);
         console.log('handleChangeFileList:', article);
+    }
+
+    function handleChangeTitleImage(info: UploadChangeParam<UploadFile<unknown>>) {
+        const {file} = info;
+
+        if (file.status === 'removed') {
+            setTitleImage('');
+        }
+
+        console.log('handleChangeTitleImage:', info);
+        console.log('handleChangeTitleImage:', article);
     }
 
     return (
@@ -194,35 +192,14 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             onValuesChange={onValuesChangeForm}
             scrollToFirstError
         >
-            <Text>
-                Parents:
-                <Link>link to parent</Link>
-                <Link>link to parent</Link>
-                <Link>link to parent</Link>
-                <Link>link to parent</Link>
-                <Link>link to parent</Link>
-                <Link>link to parent</Link>
-                <Link>link to parent</Link>
-                <Link>link to parent</Link>
-                <Link>link to parent</Link>
-                <Link>link to parent</Link>
-                <Link>link to parent</Link>
-                <Link>link to parent</Link>
-                <Link>link to parent</Link>
-                <Link>link to parent</Link>
-                <Link>link to parent</Link>
-                <Link>link to parent</Link>
-                <Link>link to parent</Link>
-                <Link>link to parent</Link>
-                <Link>link to parent</Link>
-                <Link>link to parent</Link>
-            </Text>
-            <Form.Item initialValue={id} label={`Article id: ${id}`} name="id">
+            <Text>Parents:&nbsp;{renderParentList(article, savedArticleList)}</Text>
+            <Form.Item hidden initialValue={id} label={`Article id: ${id}`} name="id">
                 <Input disabled />
             </Form.Item>
 
             <Form.Item label={`Title image: ${titleImage}`}>
                 <Upload<unknown>
+                    accept="image/png, image/jpg, image/jpeg, image/gif"
                     action={async (file: File): Promise<string> => {
                         const {uniqueFileName} = await uploadFile(file);
 
@@ -231,15 +208,17 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                         // just prevent extra request to our server
                         return 'https://dev.null/dev/null';
                     }}
-                    // titleImage
-                    //     ? [{name: titleImage, status: 'done', uid: titleImage, url: getPathToImage(titleImage)}]
-                    //     : []
-                    fileList={[{name: titleImage, status: 'done', uid: titleImage, url: getPathToImage(titleImage)}]}
+                    fileList={
+                        titleImage
+                            ? [{name: titleImage, status: 'done', uid: titleImage, url: getPathToImage(titleImage)}]
+                            : []
+                    }
                     itemRender={renderUploadedFileListItem}
                     listType="picture-card"
                     maxCount={1}
+                    onChange={handleChangeTitleImage}
                 >
-                    <PlusOutlined />
+                    {titleImage ? null : <PlusOutlined />}
                 </Upload>
             </Form.Item>
 
@@ -295,7 +274,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             <Form.Item
                 // set on server
                 initialValue={createdDate || noDateUTC}
-                label={`Created date UTC: ${noDateUTC}`}
+                label="Created date UTC:"
                 name="createdDate"
             >
                 <Input disabled />
@@ -304,22 +283,19 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             <Form.Item
                 // set on server
                 initialValue={updatedDate || noDateUTC}
-                label={`Updated date UTC: ${noDateUTC}`}
+                label="Updated date UTC:"
                 name="updatedDate"
             >
                 <Input disabled />
             </Form.Item>
 
-            <Form.Item
-                initialValue={moment(defaultPublishDate || publishDate)}
-                label={`Publish date UTC: ${publishDate}`}
-                name="publishDate"
-            >
+            <Form.Item initialValue={moment(publishDate)} label="Publish date UTC:" name="publishDate">
                 <DatePicker onOk={(date: Moment): void => setPublishDate(date.toISOString())} showTime />
             </Form.Item>
 
             <Form.Item label={`Files: ${fileList.length}`}>
                 <Upload<unknown>
+                    accept="image/png, image/jpg, image/jpeg, image/gif, audio/mp3"
                     action={async (file: File): Promise<string> => {
                         const {uniqueFileName} = await uploadFile(file);
 
@@ -391,7 +367,12 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 <Input placeholder="KeyWords..." />
             </Form.Item>
 
-            <Form.Item initialValue={metaSeo} label="Meta, actually any html code:" name="metaSeo">
+            <Form.Item
+                initialValue={metaSeo}
+                label="Meta, actually any valid html code:"
+                name="metaSeo"
+                rules={makeHtmlValidator()}
+            >
                 <TextArea placeholder="Additional meta tags..." rows={3} />
             </Form.Item>
 

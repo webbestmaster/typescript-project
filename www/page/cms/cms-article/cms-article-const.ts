@@ -5,6 +5,6 @@ export const enum CmsArticleModeEnum {
     edit = 'edit',
 }
 
-export const keyForValidationList: KeyForValidationListType = ['id', 'slug', 'title'];
+export const keyForValidationList: KeyForValidationListType = ['id', 'slug', 'title', 'subDocumentIdList'];
 export const noImageFileName = 'no-image.jpg';
 export const noDateUTC = '0000-00-00T00:00:00.000Z';

@@ -15,7 +15,7 @@ export async function getArticleListPagination(
     const urlSearchParameters = paginationQueryToURLSearchParameters<ArticleType>(paginationQuery, []);
 
     return fetchX<PaginationResultType<ArticleType>>(
-        `${apiUrl.adminArticleListPagination}?${urlSearchParameters.toString()}`,
+        `${apiUrl.articleListPagination}?${urlSearchParameters.toString()}`,
         makeArticlePaginationSchema(),
         {
             credentials: 'include',
@@ -24,14 +24,14 @@ export async function getArticleListPagination(
     );
 }
 
-export async function getArticleListPaginationPartial<Keys extends keyof ArticleType>(
+export async function getArticleListPaginationPick<Keys extends keyof ArticleType>(
     paginationQuery: PaginationQueryType<ArticleType>,
     fieldList: Array<Keys>
 ): Promise<PaginationResultType<Pick<ArticleType, Keys>>> {
     const urlSearchParameters = paginationQueryToURLSearchParameters<ArticleType>(paginationQuery, fieldList);
 
     return fetchX<PaginationResultType<Pick<ArticleType, Keys>>>(
-        `${apiUrl.adminArticleListPaginationPick}?${urlSearchParameters.toString()}`,
+        `${apiUrl.articleListPaginationPick}?${urlSearchParameters.toString()}`,
         makeArticlePaginationSchemaPick<Keys>(fieldList),
         {
             credentials: 'include',
@@ -42,6 +42,14 @@ export async function getArticleListPaginationPartial<Keys extends keyof Article
 
 export async function postArticleCreate(article: ArticleType): Promise<ArticleType> {
     return fetchX<ArticleType>(apiUrl.adminArticleCreate, makeArticleSchema(), {
+        body: JSON.stringify(article),
+        credentials: 'include',
+        method: FetchMethodEnum.post,
+    });
+}
+
+export async function postArticleUpdate(article: ArticleType): Promise<ArticleType> {
+    return fetchX<ArticleType>(apiUrl.adminArticleUpdate, makeArticleSchema(), {
         body: JSON.stringify(article),
         credentials: 'include',
         method: FetchMethodEnum.post,

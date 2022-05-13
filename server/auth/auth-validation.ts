@@ -14,4 +14,4 @@ export const authUserSchema: JSONSchemaType<AuthUserType> = {
     },
     required: ['id', 'login', 'password', 'role'],
     type: 'object',
-} as const;
+};

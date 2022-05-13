@@ -16,7 +16,10 @@ export function getHash(data: Array<unknown> | Record<string, unknown> | string)
 */
 
 export function getRandomString(): string {
-    return Math.random().toString(32).replace('0.', '');
+    const fromRandom = Math.random().toString(32).replace('0.', '');
+    const fromTime = Date.now().toString(32);
+
+    return `${fromRandom}${fromTime}`;
 }
 
 export function findString(input: string, searchQuery: string, flags: '' | 'g' | 'gi' = 'gi'): Array<string> {

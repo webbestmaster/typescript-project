@@ -1,9 +1,11 @@
+import {ReactNode} from 'react';
+
 import {makeCssArray} from './box-helper';
 
 type BoxPropsType = {
     backgroundColor?: string;
     boxSizing?: 'border-box' | 'content-box' | 'initial';
-    children: Array<JSX.Element> | JSX.Element;
+    children: ReactNode;
     height?: number | string;
     isInline?: boolean;
     margin?: Array<number> | number;
