@@ -1,17 +1,8 @@
-/* global HTMLInputElement */
 import 'antd/dist/antd.css';
 
-import {SyntheticEvent, useEffect, useState} from 'react';
-import {Table, Typography, message, Input} from 'antd';
-import {
-    ColumnType,
-    TablePaginationConfig,
-    FilterValue,
-    SorterResult,
-    TableCurrentDataSource,
-    FilterDropdownProps,
-} from 'antd/lib/table/interface';
-import {SearchOutlined} from '@ant-design/icons';
+import {useEffect, useState} from 'react';
+import {Table, Typography, message} from 'antd';
+import {TablePaginationConfig, FilterValue, SorterResult, TableCurrentDataSource} from 'antd/lib/table/interface';
 
 import {useMakeExecutableState} from '../../../util/function';
 import {PaginationQueryType, PaginationResultType} from '../../../../server/data-base/data-base-type';
@@ -21,7 +12,7 @@ import {CmsPage} from '../layout/cms-page/cms-page';
 import {ArticleForValidationType, KeyForValidationListType} from '../cms-article/cms-article-type';
 import {keyForValidationList} from '../cms-article/cms-article-const';
 
-import {articleTableColumnList, keyForTableListList} from './cms-article-list-const';
+import {getArticleTableColumnList, keyForTableListList} from './cms-article-list-const';
 import {
     ArticleForTableListKeysType,
     ArticleForTableListType,
@@ -88,11 +79,15 @@ export default function CmsArticleList(): JSX.Element {
             const pageIndex = (pagination.current || 1) - 1;
             const pageSize = pagination.pageSize || defaultPageSize;
 
-            setPaginationArticleList({
-                ...paginationArticleList,
-                pageIndex,
-                pageSize,
-                sort: {[String(field)]: sortDirection},
+            setPaginationArticleList((currentPaginationArticleList: PaginationQueryType<ArticleForTableListType>) => {
+                return {
+                    ...currentPaginationArticleList,
+                    pageIndex,
+                    pageSize,
+                    sort: {
+                        [String(field)]: sortDirection,
+                    },
+                };
             });
         }
 
@@ -107,61 +102,12 @@ export default function CmsArticleList(): JSX.Element {
         console.log('///');
     }
 
-    function getColumnSearchProps(dataIndex: ArticleForTableListKeysType): ColumnType<ArticleForTableListType> {
-        return {
-            // @ts-ignore
-            /*
-            onFilter: (value, record) =>
-                record[dataIndex]
-                    // @ts-ignore
-                    ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())
-                    : '',
-*/
-            // eslint-disable-next-line react/no-unstable-nested-components
-            filterDropdown: (filterDropdownData: FilterDropdownProps) => {
-                const {clearFilters, selectedKeys} = filterDropdownData;
-
-                return (
-                    <Input
-                        key={dataIndex}
-                        onPressEnter={(evt: SyntheticEvent<HTMLInputElement>) => {
-                            // if (clearFilters) {
-                            // clearFilters();
-                            // }
-
-                            console.log('//' + evt.currentTarget.value);
-                            setSearchedColumn(dataIndex);
-                            setSearchText(String(evt.currentTarget.value || 'no-text').trim());
-                        }}
-                        placeholder="Search..."
-                    />
-                );
-            },
-            filterIcon: <SearchOutlined />,
-        };
-    }
-
-    const articleTableColumnListExtended: Array<ColumnType<ArticleForTableListType>> = articleTableColumnList.map<
-        ColumnType<ArticleForTableListType>
-    >((articleTableColumn: ColumnType<ArticleForTableListType>): ColumnType<ArticleForTableListType> => {
-        const {dataIndex} = articleTableColumn;
-
-        if (dataIndex === 'title' || dataIndex === 'slug') {
-            return {
-                ...articleTableColumn,
-                ...getColumnSearchProps(dataIndex),
-            };
-        }
-
-        return {...articleTableColumn};
-    });
-
     return (
         <CmsPage>
             <Title level={2}>Article list</Title>
 
             <Table<ArticleForTableListType>
-                columns={articleTableColumnListExtended}
+                columns={getArticleTableColumnList({setSearchText, setSearchedColumn})}
                 dataSource={resultArticleList?.result || []}
                 loading={isInProgressArticleList}
                 onChange={handleTableChange}
