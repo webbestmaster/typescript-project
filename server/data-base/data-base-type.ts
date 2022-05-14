@@ -2,16 +2,18 @@ export type CrudType<ModelType> = {
     count: (partialModel: Partial<ModelType>) => Promise<number>; // throw error if smth wrong
     createOne: (model: ModelType) => Promise<null>; // throw error if smth wrong
     deleteOne: (model: Partial<ModelType>) => Promise<null>; // throw error if smth wrong
-    findMany: (partialModel: Partial<ModelType>) => Promise<Array<ModelType>>;
+    // findMany: (partialModel: Partial<ModelType>) => Promise<Array<ModelType>>;
     findManyPagination: (paginationQuery: PaginationQueryType<ModelType>) => Promise<PaginationResultType<ModelType>>;
     findManyPaginationPartial: (
         paginationQuery: PaginationQueryType<ModelType>,
         requiredPropertyList: Array<keyof ModelType>
     ) => Promise<PaginationResultType<Partial<ModelType>>>;
+    /*
     findManyPartial: (
         partialModel: Partial<ModelType>,
         requiredPropertyList: Array<keyof ModelType>
     ) => Promise<Array<Partial<ModelType>>>;
+*/
     findOne: (partialModel: Partial<ModelType>) => Promise<ModelType | null>;
     updateOne: (partialModel: Partial<ModelType>, model: ModelType) => Promise<null>; // throw error if smth wrong
 };
@@ -42,10 +44,18 @@ export type GetListPaginationResultType<ItemType> = GetListPaginationArgumentTyp
 };
 */
 
+export type PaginationQueryQueryExtendedType<ModelType> = Partial<{
+    [key in keyof ModelType]: {
+        $regex: string; // Operators ($lt, $lte, $gt, $gte, $in, $nin, $ne, $exists, $regex)
+        $regexFlag: 'g' | 'gi' | 'i';
+    };
+}>;
+
 export type PaginationQueryType<ModelType> = {
     pageIndex: number;
     pageSize: number;
     query: Partial<ModelType>;
+    queryExtended: PaginationQueryQueryExtendedType<ModelType>;
     sort: {[key in keyof Partial<ModelType>]: PaginationDirectionType};
 };
 

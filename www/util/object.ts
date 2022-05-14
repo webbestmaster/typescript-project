@@ -16,18 +16,6 @@ export function pickData<ModelType extends Record<string, unknown>, Keys extends
     );
 }
 
-export function partialData<FullModelType extends Record<string, unknown>>(
-    data: FullModelType,
-    requiredPropertyList: Array<keyof FullModelType>
-): Partial<FullModelType> {
-    return Object.assign(
-        {},
-        ...requiredPropertyList.map((key: Partial<keyof FullModelType>) => {
-            return {[key]: data[key]};
-        })
-    );
-}
-
 const ajv = new Ajv();
 
 /*

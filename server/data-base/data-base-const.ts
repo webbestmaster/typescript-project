@@ -4,5 +4,6 @@ export const defaultPaginationQuery: PaginationQueryType<unknown> = {
     pageIndex: 0,
     pageSize: 0,
     query: {},
+    queryExtended: {},
     sort: {},
 };

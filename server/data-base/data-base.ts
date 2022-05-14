@@ -6,8 +6,8 @@ import Ajv, {JSONSchemaType} from 'ajv';
 import Datastore from 'nedb';
 
 import {PromiseResolveType} from '../../www/util/promise';
-import {partialData} from '../../www/util/object';
 
+import {mergeQuery, partialData} from './data-base-util';
 import {CrudType, PaginationQueryType, PaginationResultType} from './data-base-type';
 
 const cwd = process.cwd();
@@ -74,45 +74,49 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
         });
     }
 
-    function findMany(partialModelData: Partial<ModelType>): Promise<Array<ModelType>> {
-        return new Promise<Array<ModelType>>((resolve: PromiseResolveType<Array<ModelType>>) => {
-            // eslint-disable-next-line unicorn/no-array-method-this-argument
-            dataBase.find<ModelType>(partialModelData, (maybeError: Error | null, data: Array<ModelType> | null) => {
-                if (maybeError) {
-                    resolve([]);
-                    return;
-                }
+    /*
+        function findMany(partialModelData: Partial<ModelType>): Promise<Array<ModelType>> {
+            return new Promise<Array<ModelType>>((resolve: PromiseResolveType<Array<ModelType>>) => {
+                // eslint-disable-next-line unicorn/no-array-method-this-argument
+                dataBase.find<ModelType>(partialModelData, (maybeError: Error | null, data: Array<ModelType> | null) => {
+                    if (maybeError) {
+                        resolve([]);
+                        return;
+                    }
 
-                if (!Array.isArray(data)) {
-                    resolve([]);
-                    return;
-                }
+                    if (!Array.isArray(data)) {
+                        resolve([]);
+                        return;
+                    }
 
-                resolve(data);
+                    resolve(data);
+                });
             });
-        });
-    }
+        }
+    */
 
-    function findManyPartial(
-        partialModelData: Partial<ModelType>,
-        requiredPropertyList: Array<keyof ModelType>
-    ): Promise<Array<Partial<ModelType>>> {
-        return findMany(partialModelData).then((dataList: Array<ModelType>): Array<Partial<ModelType>> => {
-            return dataList.map<Partial<ModelType>>((data: ModelType): Partial<ModelType> => {
-                return partialData<ModelType>(data, requiredPropertyList);
+    /*
+        function findManyPartial(
+            partialModelData: Partial<ModelType>,
+            requiredPropertyList: Array<keyof ModelType>
+        ): Promise<Array<Partial<ModelType>>> {
+            return findMany(partialModelData).then((dataList: Array<ModelType>): Array<Partial<ModelType>> => {
+                return dataList.map<Partial<ModelType>>((data: ModelType): Partial<ModelType> => {
+                    return partialData<ModelType>(data, requiredPropertyList);
+                });
             });
-        });
-    }
+        }
+    */
 
     function findManyPagination(
         paginationQuery: PaginationQueryType<ModelType>
     ): Promise<PaginationResultType<ModelType>> {
         return new Promise<PaginationResultType<ModelType>>(
             (resolve: PromiseResolveType<PaginationResultType<ModelType>>) => {
-                const {query, pageSize, pageIndex, sort} = paginationQuery;
+                const {query, queryExtended, pageSize, pageIndex, sort} = paginationQuery;
 
                 dataBase
-                    .find<ModelType>(query)
+                    .find<ModelType>(mergeQuery<ModelType>({query, queryExtended}))
                     .sort(sort)
                     .skip(pageIndex * pageSize)
                     .limit(pageSize)
@@ -198,10 +202,10 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
         count,
         createOne,
         deleteOne,
-        findMany,
+        // findMany,
         findManyPagination,
         findManyPaginationPartial,
-        findManyPartial,
+        // findManyPartial,
         findOne,
         updateOne,
     };

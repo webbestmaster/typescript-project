@@ -97,7 +97,10 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
     const [savedArticleList, setSavedArticleList] = useState<Array<ArticleForValidationType>>([]);
 
     useEffect(() => {
-        executeArticleListPaginationPick({pageIndex: 0, pageSize: 0, query: {}, sort: {title: 1}}, keyForValidationList)
+        executeArticleListPaginationPick(
+            {pageIndex: 0, pageSize: 0, query: {}, queryExtended: {}, sort: {title: 1}},
+            keyForValidationList
+        )
             .then((data: PaginationResultType<ArticleForValidationType>) => setSavedArticleList(data.result))
             .catch((error: Error) => {
                 console.log(error);
