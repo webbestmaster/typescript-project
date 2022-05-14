@@ -1,4 +1,19 @@
+import {PromiseResolveType} from '../../www/util/promise';
+
 import {PaginationQueryQueryExtendedType, RegExQueryType} from './data-base-type';
+
+export function makeSimpleDataBaseCallBack(
+    maybeError: Error | null,
+    resolve: PromiseResolveType<null>,
+    reject: PromiseResolveType<Error>
+) {
+    if (maybeError) {
+        reject(maybeError);
+        return;
+    }
+
+    resolve(null);
+}
 
 export function partialData<FullModelType extends Record<string, unknown>>(
     data: FullModelType,

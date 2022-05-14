@@ -1,7 +1,7 @@
 import 'antd/dist/antd.css';
 
 import {useEffect, useState} from 'react';
-import {Table, Typography, message} from 'antd';
+import {Table, Typography} from 'antd';
 import {TablePaginationConfig, FilterValue, SorterResult, TableCurrentDataSource} from 'antd/lib/table/interface';
 
 import {useMakeExecutableState} from '../../../util/function';
@@ -9,8 +9,6 @@ import {PaginationQueryType, PaginationResultType} from '../../../../server/data
 import {ArticleType} from '../../../../server/article/article-type';
 import {getArticleListPaginationPick} from '../../../service/article/article-api';
 import {CmsPage} from '../layout/cms-page/cms-page';
-import {ArticleForValidationType, KeyForValidationListType} from '../cms-article/cms-article-type';
-import {keyForValidationList} from '../cms-article/cms-article-const';
 
 import {getArticleTableColumnList, keyForTableListList} from './cms-article-list-const';
 import {
@@ -48,23 +46,6 @@ export default function CmsArticleList(): JSX.Element {
     useEffect(() => {
         executeArticleList(paginationArticleList, keyForTableListList);
     }, [executeArticleList, paginationArticleList]);
-
-    // article for pagination
-    const {execute: executeArticleListPaginationPick} = useMakeExecutableState<
-        [PaginationQueryType<ArticleType>, KeyForValidationListType],
-        PaginationResultType<ArticleForValidationType>
-    >(getArticleListPaginationPick);
-
-    const [savedArticleList, setSavedArticleList] = useState<Array<ArticleForValidationType>>([]);
-
-    useEffect(() => {
-        executeArticleListPaginationPick({pageIndex: 0, pageSize: 0, query: {}, sort: {title: 1}}, keyForValidationList)
-            .then((data: PaginationResultType<ArticleForValidationType>) => setSavedArticleList(data.result))
-            .catch((error: Error) => {
-                console.log(error);
-                message.error('Can not fetch article list.');
-            });
-    }, [executeArticleListPaginationPick]);
 
     function handleTableChange(
         pagination: TablePaginationConfig,
@@ -116,7 +97,7 @@ export default function CmsArticleList(): JSX.Element {
                     pageSize: paginationArticleList.pageSize,
                     pageSizeOptions: [defaultPageSize, 50, 100, 500, 1000, 2000, 5000],
                     showSizeChanger: true,
-                    total: savedArticleList.length,
+                    total: resultArticleList?.count || 0,
                 }}
                 rowKey="id"
             />

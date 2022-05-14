@@ -7,24 +7,11 @@ import Datastore from 'nedb';
 
 import {PromiseResolveType} from '../../www/util/promise';
 
-import {prepareQuery, partialData} from './data-base-util';
+import {prepareQuery, partialData, makeSimpleDataBaseCallBack} from './data-base-util';
 import {CrudType, PaginationQueryType, PaginationResultType} from './data-base-type';
 
 const cwd = process.cwd();
 const ajv = new Ajv();
-
-function makeSimpleCallBack(
-    maybeError: Error | null,
-    resolve: PromiseResolveType<null>,
-    reject: PromiseResolveType<Error>
-) {
-    if (maybeError) {
-        reject(maybeError);
-        return;
-    }
-
-    resolve(null);
-}
 
 // TODO: detect like regexp string and make from it regexp
 // detect only this /text/i or /text/
@@ -38,9 +25,9 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
         filename: path.join(cwd, 'db', `data-base.${dataBaseId}.db`),
     });
 
-    function count(partialModel: Partial<ModelType>): Promise<number> {
+    function count(query: Record<string, unknown>): Promise<number> {
         return new Promise<number>((resolve: PromiseResolveType<number>, reject: PromiseResolveType<Error>) => {
-            dataBase.count(partialModel, (maybeError: Error | null, objectCount: number | null): void => {
+            dataBase.count(query, (maybeError: Error | null, objectCount: number | null): void => {
                 if (maybeError) {
                     reject(maybeError);
                     return;
@@ -108,20 +95,22 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
         }
     */
 
-    function findManyPagination(
+    async function findManyPagination(
         paginationQuery: PaginationQueryType<ModelType>
     ): Promise<PaginationResultType<ModelType>> {
+        const {query, pageSize, pageIndex, sort} = paginationQuery;
+        const preparedQuery = prepareQuery<ModelType>(query);
+        const countOfAll = await count(preparedQuery);
+
         return new Promise<PaginationResultType<ModelType>>(
             (resolve: PromiseResolveType<PaginationResultType<ModelType>>) => {
-                const {query, pageSize, pageIndex, sort} = paginationQuery;
-
                 dataBase
-                    .find<ModelType>(prepareQuery<ModelType>(query))
+                    .find<ModelType>(preparedQuery)
                     .sort(sort)
                     .skip(pageIndex * pageSize)
                     .limit(pageSize)
                     .exec((maybeError: Error | null, dataList: Array<ModelType> | null) => {
-                        const noFound: PaginationResultType<ModelType> = {pageIndex, pageSize, result: []};
+                        const noFound: PaginationResultType<ModelType> = {count: 0, pageIndex, pageSize, result: []};
 
                         if (maybeError) {
                             resolve(noFound);
@@ -129,7 +118,7 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
                         }
 
                         if (Array.isArray(dataList)) {
-                            resolve({pageIndex, pageSize, result: dataList});
+                            resolve({count: countOfAll, pageIndex, pageSize, result: dataList});
                             return;
                         }
 
@@ -167,7 +156,7 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
             }
 
             dataBase.insert<ModelType>(modelData, (maybeError: Error | null): void =>
-                makeSimpleCallBack(maybeError, resolve, reject)
+                makeSimpleDataBaseCallBack(maybeError, resolve, reject)
             );
         });
     }
@@ -184,7 +173,7 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
             }
 
             dataBase.update<ModelType>(searchModelData, modelData, {}, (maybeError: Error | null): void =>
-                makeSimpleCallBack(maybeError, resolve, reject)
+                makeSimpleDataBaseCallBack(maybeError, resolve, reject)
             );
         });
     }
@@ -193,13 +182,13 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
     function deleteOne(searchModelData: Partial<ModelType>): Promise<null> {
         return new Promise<null>((resolve: PromiseResolveType<null>, reject: PromiseResolveType<Error>) => {
             dataBase.remove(searchModelData, {}, (maybeError: Error | null): void =>
-                makeSimpleCallBack(maybeError, resolve, reject)
+                makeSimpleDataBaseCallBack(maybeError, resolve, reject)
             );
         });
     }
 
     return {
-        count,
+        // count,
         createOne,
         deleteOne,
         // findMany,

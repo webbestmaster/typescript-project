@@ -92,11 +92,12 @@ export function makeArticlePaginationSchema(): JSONSchemaType<PaginationResultTy
     const articlePaginationSchema: JSONSchemaType<PaginationResultType<ArticleType>> = {
         additionalProperties: false,
         properties: {
+            count: {type: 'number'},
             pageIndex: {type: 'number'},
             pageSize: {type: 'number'},
             result: {items: makeArticleSchema(), type: 'array'},
         },
-        required: [],
+        required: ['count', 'pageIndex', 'pageSize', 'result'],
         type: 'object',
     };
 
@@ -109,11 +110,12 @@ export function makeArticlePaginationSchemaPick<Keys extends keyof ArticleType>(
     const articlePaginationSchemaPick: JSONSchemaType<PaginationResultType<Pick<ArticleType, Keys>>> = {
         additionalProperties: false,
         properties: {
+            count: {type: 'number'},
             pageIndex: {type: 'number'},
             pageSize: {type: 'number'},
             result: {items: makeArticleSchemaPick<Keys>(fieldList), type: 'array'},
         },
-        required: [],
+        required: ['count', 'pageIndex', 'pageSize', 'result'],
         type: 'object',
     };
 

@@ -1,5 +1,14 @@
+export type RegExQueryType = {
+    $regex: string; // Operators ($lt, $lte, $gt, $gte, $in, $nin, $ne, $exists, $regex)
+    $regexFlag: string; // 'g' | 'gi' | 'i';
+};
+
+export type PaginationQueryQueryExtendedType<ModelType> = {
+    [key in keyof ModelType]?: ModelType[key] | RegExQueryType;
+};
+
 export type CrudType<ModelType> = {
-    count: (partialModel: Partial<ModelType>) => Promise<number>; // throw error if smth wrong
+    // count: (query: PaginationQueryQueryExtendedType<ModelType>) => Promise<number>; // throw error if smth wrong
     createOne: (model: ModelType) => Promise<null>; // throw error if smth wrong
     deleteOne: (model: Partial<ModelType>) => Promise<null>; // throw error if smth wrong
     // findMany: (partialModel: Partial<ModelType>) => Promise<Array<ModelType>>;
@@ -44,15 +53,6 @@ export type GetListPaginationResultType<ItemType> = GetListPaginationArgumentTyp
 };
 */
 
-export type RegExQueryType = {
-    $regex: string; // Operators ($lt, $lte, $gt, $gte, $in, $nin, $ne, $exists, $regex)
-    $regexFlag: string; // 'g' | 'gi' | 'i';
-};
-
-export type PaginationQueryQueryExtendedType<ModelType> = {
-    [key in keyof ModelType]?: ModelType[key] | RegExQueryType;
-};
-
 export type PaginationQueryType<ModelType> = {
     pageIndex: number;
     pageSize: number;
@@ -61,6 +61,7 @@ export type PaginationQueryType<ModelType> = {
 };
 
 export type PaginationResultType<ModelType> = {
+    count: number;
     pageIndex: number;
     pageSize: number;
     result: Array<ModelType>;
