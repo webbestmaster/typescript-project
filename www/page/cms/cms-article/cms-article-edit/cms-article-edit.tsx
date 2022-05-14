@@ -33,7 +33,6 @@ export default function CmsArticleEdit(): JSX.Element {
             pageIndex: 0,
             pageSize: 1,
             query: {id: articleId || ''},
-            queryExtended: {},
             sort: {title: 1},
         });
     }, [articleById, articleId]);

@@ -42,7 +42,6 @@ export default function CmsArticleList(): JSX.Element {
         pageIndex: 0,
         pageSize: defaultPageSize,
         query: {},
-        queryExtended: {},
         sort: {title: 1},
     });
 
@@ -59,10 +58,7 @@ export default function CmsArticleList(): JSX.Element {
     const [savedArticleList, setSavedArticleList] = useState<Array<ArticleForValidationType>>([]);
 
     useEffect(() => {
-        executeArticleListPaginationPick(
-            {pageIndex: 0, pageSize: 0, query: {}, queryExtended: {}, sort: {title: 1}},
-            keyForValidationList
-        )
+        executeArticleListPaginationPick({pageIndex: 0, pageSize: 0, query: {}, sort: {title: 1}}, keyForValidationList)
             .then((data: PaginationResultType<ArticleForValidationType>) => setSavedArticleList(data.result))
             .catch((error: Error) => {
                 console.log(error);
@@ -87,8 +83,7 @@ export default function CmsArticleList(): JSX.Element {
                 return {
                     pageIndex,
                     pageSize,
-                    query: {},
-                    queryExtended: {[searchedColumn]: {$regex: searchText, $regexFlag: 'i'}},
+                    query: {[searchedColumn]: {$regex: searchText, $regexFlag: 'i'}},
                     sort: {[String(field)]: sortDirection},
                 };
             });

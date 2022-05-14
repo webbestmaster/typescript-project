@@ -7,7 +7,7 @@ import Datastore from 'nedb';
 
 import {PromiseResolveType} from '../../www/util/promise';
 
-import {mergeQuery, partialData} from './data-base-util';
+import {prepareQuery, partialData} from './data-base-util';
 import {CrudType, PaginationQueryType, PaginationResultType} from './data-base-type';
 
 const cwd = process.cwd();
@@ -113,10 +113,10 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
     ): Promise<PaginationResultType<ModelType>> {
         return new Promise<PaginationResultType<ModelType>>(
             (resolve: PromiseResolveType<PaginationResultType<ModelType>>) => {
-                const {query, queryExtended, pageSize, pageIndex, sort} = paginationQuery;
+                const {query, pageSize, pageIndex, sort} = paginationQuery;
 
                 dataBase
-                    .find<ModelType>(mergeQuery<ModelType>({query, queryExtended}))
+                    .find<ModelType>(prepareQuery<ModelType>(query))
                     .sort(sort)
                     .skip(pageIndex * pageSize)
                     .limit(pageSize)

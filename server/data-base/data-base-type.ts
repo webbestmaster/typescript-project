@@ -44,18 +44,19 @@ export type GetListPaginationResultType<ItemType> = GetListPaginationArgumentTyp
 };
 */
 
-export type PaginationQueryQueryExtendedType<ModelType> = Partial<{
-    [key in keyof ModelType]: {
-        $regex: string; // Operators ($lt, $lte, $gt, $gte, $in, $nin, $ne, $exists, $regex)
-        $regexFlag: 'g' | 'gi' | 'i';
-    };
-}>;
+export type RegExQueryType = {
+    $regex: string; // Operators ($lt, $lte, $gt, $gte, $in, $nin, $ne, $exists, $regex)
+    $regexFlag: string; // 'g' | 'gi' | 'i';
+};
+
+export type PaginationQueryQueryExtendedType<ModelType> = {
+    [key in keyof ModelType]?: ModelType[key] | RegExQueryType;
+};
 
 export type PaginationQueryType<ModelType> = {
     pageIndex: number;
     pageSize: number;
-    query: Partial<ModelType>;
-    queryExtended: PaginationQueryQueryExtendedType<ModelType>;
+    query: PaginationQueryQueryExtendedType<ModelType>;
     sort: {[key in keyof Partial<ModelType>]: PaginationDirectionType};
 };
 
