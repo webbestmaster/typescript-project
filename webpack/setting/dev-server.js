@@ -27,6 +27,12 @@ module.exports.devServer = {
         '/api/': {
             target: 'http://localhost:3000/',
         },
+        '/api-image/': {
+            target: 'http://localhost:3000/',
+        },
+        '/static-file/': {
+            target: 'http://localhost:3000/',
+        },
     },
     // hotOnly: false,
     // disableHostCheck: true,

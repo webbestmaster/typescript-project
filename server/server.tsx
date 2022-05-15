@@ -1,8 +1,9 @@
-/* global process, Buffer */
+/* global Buffer */
 
-import path from 'path';
+// import path from 'path';
 
-import fastifyStaticServer from '@fastify/static';
+// remove '@fastify/static' from package.json
+// import fastifyStaticServer from '@fastify/static';
 import fastifyCors from '@fastify/cors';
 import fastifyMultipart from '@fastify/multipart';
 import fastifySecureSession from '@fastify/secure-session';
@@ -24,7 +25,7 @@ import {
 import {getFile, uploadFile} from './file/file';
 import {adminOnly} from './auth/auth-helper';
 
-const cwd = process.cwd();
+// const cwd = process.cwd();
 
 const serverPort = 3000;
 
@@ -44,7 +45,7 @@ const serverPort = 3000;
         });
     */
 
-/*
+    /*
     fastify.register(fastifyStaticServer, {
         prefix: '/', // optional: default '/'
         root: path.join(cwd, 'dist'),
@@ -84,7 +85,7 @@ const serverPort = 3000;
     fastify.get(apiUrl.articleListPagination, getArticleListPagination);
     fastify.get(apiUrl.articleListPaginationPick, getArticleListPaginationPick);
     fastify.post(apiUrl.adminFileUpload, adminOnly(uploadFile));
-    // fastify.get(apiUrl.fileGet, getFile);
+    fastify.get(apiUrl.fileGet, getFile);
     fastify.post(apiUrl.adminArticleCreate, adminOnly(postAdminArticleCreate));
     fastify.post(apiUrl.adminArticleUpdate, adminOnly(postAdminArticleUpdate));
 
