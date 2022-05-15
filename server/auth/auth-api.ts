@@ -3,9 +3,10 @@ import {FastifyReply, FastifyRequest} from 'fastify';
 import {LoginResponseType} from '../../www/service/auth/auth-type';
 import {getSha256Hash} from '../util/string';
 import {UserRoleEnum} from '../../www/provider/user/user-context-type';
+import {mainResponseHeader} from '../const';
 
 import {authCrud} from './auth';
-import {authHeader, cookieFieldUserId} from './auth-const';
+import {cookieFieldUserId} from './auth-const';
 
 export async function postAuthLogin(request: FastifyRequest<{Body: string}>, reply: FastifyReply): Promise<void> {
     const {body, session} = request;
@@ -39,7 +40,7 @@ export async function postAuthLogin(request: FastifyRequest<{Body: string}>, rep
 
     reply
         .code(200)
-        .header(...authHeader)
+        .header(...mainResponseHeader)
         .send(loginResponse);
 }
 
@@ -51,7 +52,7 @@ export async function getAutoAuthLogin(request: FastifyRequest<{Body: string}>, 
     if (!userId) {
         reply
             .code(200)
-            .header(...authHeader)
+            .header(...mainResponseHeader)
             .send(defaultLoginResponse);
         return;
     }
@@ -61,7 +62,7 @@ export async function getAutoAuthLogin(request: FastifyRequest<{Body: string}>, 
     if (!user) {
         reply
             .code(200)
-            .header(...authHeader)
+            .header(...mainResponseHeader)
             .send(defaultLoginResponse);
         return;
     }
@@ -79,6 +80,6 @@ export async function getAutoAuthLogin(request: FastifyRequest<{Body: string}>, 
 
     reply
         .code(200)
-        .header(...authHeader)
+        .header(...mainResponseHeader)
         .send(loginResponse);
 }

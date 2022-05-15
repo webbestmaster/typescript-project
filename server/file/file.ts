@@ -55,5 +55,5 @@ export async function getFile(
 
     const stream = fileSystem.createReadStream(path.join(uploadFolder, fileName));
 
-    reply.code(200).send(stream);
+    reply.header('x-warning-get-file', 'use-nginx').code(200).send(stream);
 }
