@@ -44,16 +44,18 @@ const serverPort = 3000;
         });
     */
 
+/*
     fastify.register(fastifyStaticServer, {
         prefix: '/', // optional: default '/'
         root: path.join(cwd, 'dist'),
-        /*
+        /!*
         allowedPath: (pathName: string, root?: string | undefined): boolean => {
             console.log(pathName)
             return true;
         }
-*/
+*!/
     });
+*/
 
     /*
         fastify.register(fastifyStaticServer, {
@@ -82,7 +84,7 @@ const serverPort = 3000;
     fastify.get(apiUrl.articleListPagination, getArticleListPagination);
     fastify.get(apiUrl.articleListPaginationPick, getArticleListPaginationPick);
     fastify.post(apiUrl.adminFileUpload, adminOnly(uploadFile));
-    fastify.get(apiUrl.fileGet, getFile);
+    // fastify.get(apiUrl.fileGet, getFile);
     fastify.post(apiUrl.adminArticleCreate, adminOnly(postAdminArticleCreate));
     fastify.post(apiUrl.adminArticleUpdate, adminOnly(postAdminArticleUpdate));
 
@@ -111,7 +113,7 @@ const serverPort = 3000;
     fastify.setNotFoundHandler((request: FastifyRequest, reply: FastifyReply) => {
         request.log.warn(request);
 
-        reply.code(404).type('text/plain').send('Page not found');
+        reply.code(404).type('text/plain').send('The page not found');
     });
 
     await fastify.listen(serverPort);

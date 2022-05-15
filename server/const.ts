@@ -7,7 +7,7 @@ export const apiUrl = {
     adminFileUpload: '/api/admin/file/upload',
     articleListPagination: '/api/article/pagination',
     articleListPaginationPick: '/api/article/pagination-pick',
-    fileGet: '/api/file/get/:fileName' as const,
+    fileGet: '/static-file/:fileName' as const,
     getUser: '/api/auth/get-user',
     login: '/api/auth/login',
 };
