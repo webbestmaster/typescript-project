@@ -1,12 +1,9 @@
 /* global document, Image, HTMLImageElement, File, FormData */
-import {Select, Typography} from 'antd';
 import {RuleObject, Rule} from 'rc-field-form/lib/interface';
 import {generatePath} from 'react-router';
 
 import {textToSlug} from '../../../util/human';
-import {Box} from '../../../layout/box/box';
 import {appRoute} from '../../../component/app/app-route';
-import {ArticleType} from '../../../../server/article/article-type';
 import {PromiseResolveType} from '../../../util/promise';
 import {apiUrl} from '../../../../server/const';
 import {UploadFileResponseType} from '../../../../server/file/file-type';
@@ -15,9 +12,6 @@ import {uploadFileResponseSchema} from '../../../../server/file/file-validation'
 
 import {ArticleForValidationType, MakeSlugValidatorArgumentType} from './cms-article-type';
 import {CmsArticleModeEnum} from './cms-article-const';
-
-const {Option} = Select;
-const {Link, Text} = Typography;
 
 export function uploadFile(file: File): Promise<UploadFileResponseType> {
     const formData = new FormData();
@@ -97,16 +91,6 @@ export function makeSlugValidator(data: MakeSlugValidatorArgumentType): Array<Ru
     ];
 }
 
-export function makeSubDocumentOption(articleForValidation: ArticleForValidationType): JSX.Element {
-    const {title, id} = articleForValidation;
-
-    return (
-        <Option key={id} title={title} value={id}>
-            {title}
-        </Option>
-    );
-}
-
 export function makeHtmlValidator(): Array<Rule> {
     return [
         {
@@ -130,50 +114,8 @@ export function makeHtmlValidator(): Array<Rule> {
     ];
 }
 
-export function renderUploadedFileListItem(
-    originNode: JSX.Element
-    // file: UploadFile<unknown>,
-    // uploadedFileList: Array<UploadFile<unknown>>,
-    // actions: { download: () => void; preview: () => void; remove: () => void }
-): JSX.Element {
-    return (
-        <Box backgroundColor="#c00" height="auto">
-            <div>{originNode}</div>
-            <button type="button">markdown</button>
-        </Box>
-    );
-}
-
 export function getArticleLinkToEdit(articleId: string): string {
     return generatePath(appRoute.articleEdit.path, {articleId});
-}
-
-export function renderParentList(
-    article: ArticleType,
-    savedArticleList: Array<ArticleForValidationType>
-): Array<JSX.Element> {
-    const {id: articleId} = article;
-
-    const parentList: Array<JSX.Element> = savedArticleList
-        .filter((savedArticle: ArticleForValidationType): boolean => savedArticle.subDocumentIdList.includes(articleId))
-        .map((savedArticle: ArticleForValidationType, index: number): JSX.Element => {
-            const {id, title, slug} = savedArticle;
-
-            return (
-                <Text key={id}>
-                    {index > 0 ? ', ' : null}
-                    <Link href={getArticleLinkToEdit(id)} target="_blank">
-                        {title}/{slug}
-                    </Link>
-                </Text>
-            );
-        });
-
-    if (parentList.length > 0) {
-        return parentList;
-    }
-
-    return [<Text key="no-parents">no parents</Text>];
 }
 
 export function getIsImage(fileName: string): boolean {
@@ -217,7 +159,7 @@ export function fetchImage(pathToImage: string): Promise<HTMLImageElement> {
 export async function getFileMarkdown(fileName: string): Promise<string> {
     if (getIsImage(fileName)) {
         const pathToImage = getPathToImage(fileName, {height: 1024, width: 1024});
-        const {naturalHeight, naturalWidth} = await fetchImage(pathToImage);
+        const {naturalHeight, naturalWidth} = await fetchImage(getPathToFile(fileName));
 
         return `![THE ALT](${pathToImage} "THE TITLE" height="${naturalHeight}" width="${naturalWidth}")`;
     }

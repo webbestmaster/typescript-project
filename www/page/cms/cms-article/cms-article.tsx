@@ -25,15 +25,8 @@ import {PaginationQueryType, PaginationResultType} from '../../../../server/data
 import {getArticleListPaginationPick} from '../../../service/article/article-api';
 import {MarkdownInputWrapper} from '../../../layout/markdown-input-wrapper';
 
-import {
-    getPathToImage,
-    uploadFile,
-    makeHtmlValidator,
-    makeSlugValidator,
-    makeSubDocumentOption,
-    renderParentList,
-    renderUploadedFileListItem,
-} from './cms-article-helper';
+import {getPathToImage, uploadFile, makeHtmlValidator, makeSlugValidator} from './cms-article-helper';
+import {renderUploadedFileListItem, makeSubDocumentOption, renderParentList} from './cms-article-layout';
 
 import {CmsArticleModeEnum, fileAccept, imageAccept, keyForValidationList, noDateUTC} from './cms-article-const';
 import {ArticleForValidationType, KeyForValidationListType} from './cms-article-type';
