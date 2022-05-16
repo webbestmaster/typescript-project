@@ -26,7 +26,7 @@ import {PaginationQueryType, PaginationResultType} from '../../../../server/data
 import {getArticleListPaginationPick} from '../../../service/article/article-api';
 import {MarkdownInputWrapper} from '../../../layout/markdown-input-wrapper';
 
-import {CmsArticleModeEnum, keyForValidationList, noDateUTC} from './cms-article-const';
+import {CmsArticleModeEnum, fileAccept, imageAccept, keyForValidationList, noDateUTC} from './cms-article-const';
 import {ArticleForValidationType, KeyForValidationListType} from './cms-article-type';
 import {
     makeHtmlValidator,
@@ -199,7 +199,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
             <Form.Item label={`Title image: ${titleImage}`}>
                 <Upload<unknown>
-                    accept="image/png, image/jpg, image/jpeg, image/gif"
+                    accept={imageAccept}
                     action={async (file: File): Promise<string> => {
                         const {uniqueFileName} = await uploadFile(file);
 
@@ -210,7 +210,14 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                     }}
                     fileList={
                         titleImage
-                            ? [{name: titleImage, status: 'done', uid: titleImage, url: getPathToImage(titleImage)}]
+                            ? [
+                                  {
+                                      name: titleImage,
+                                      status: 'done',
+                                      uid: titleImage,
+                                      url: getPathToImage(titleImage, {height: 100, width: 100}),
+                                  },
+                              ]
                             : []
                     }
                     itemRender={renderUploadedFileListItem}
@@ -295,7 +302,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
             <Form.Item label={`Files: ${fileList.length}`}>
                 <Upload<unknown>
-                    accept="image/png, image/jpg, image/jpeg, image/gif, audio/mp3"
+                    accept={fileAccept}
                     action={async (file: File): Promise<string> => {
                         const {uniqueFileName} = await uploadFile(file);
 
@@ -307,7 +314,12 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                         return 'https://dev.null/dev/null';
                     }}
                     fileList={fileList.map((fileName: string): UploadFile<unknown> => {
-                        return {name: fileName, status: 'done', uid: fileName, url: getPathToImage(fileName)};
+                        return {
+                            name: fileName,
+                            status: 'done',
+                            uid: fileName,
+                            url: getPathToImage(fileName, {height: 100, width: 100}),
+                        };
                     })}
                     itemRender={renderUploadedFileListItem}
                     listType="picture-card"
