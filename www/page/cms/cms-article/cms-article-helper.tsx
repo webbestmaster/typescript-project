@@ -118,28 +118,26 @@ export function getArticleLinkToEdit(articleId: string): string {
     return generatePath(appRoute.articleEdit.path, {articleId});
 }
 
-export function getIsImage(fileName: string): boolean {
+export function getFileExtension(fileName: string): string {
     const hasExtension = fileName.includes('.');
 
     if (!hasExtension) {
-        return false;
+        return '';
     }
 
-    const fileExtension = fileName.split('.').pop();
+    return fileName.split('.').pop() || '';
+}
 
-    return ['jpg', 'jpeg', 'jfif', 'gif', 'png', 'webp'].includes(fileExtension || '');
+export function getIsImage(fileName: string): boolean {
+    const fileExtension = getFileExtension(fileName);
+
+    return ['jpg', 'jpeg', 'jfif', 'gif', 'png', 'webp'].includes(fileExtension);
 }
 
 export function getIsAudio(fileName: string): boolean {
-    const hasExtension = fileName.includes('.');
+    const fileExtension = getFileExtension(fileName);
 
-    if (!hasExtension) {
-        return false;
-    }
-
-    const fileExtension = fileName.split('.').pop();
-
-    return ['mp3'].includes(fileExtension || '');
+    return ['mp3'].includes(fileExtension);
 }
 
 export function fetchImage(pathToImage: string): Promise<HTMLImageElement> {
@@ -165,7 +163,7 @@ export async function getFileMarkdown(fileName: string): Promise<string> {
     }
 
     if (getIsAudio(fileName)) {
-        return `<audio controls src="${getPathToFile(fileName)}"></audio>`;
+        return `<audio controls preload="metadata" src="${getPathToFile(fileName)}"></audio>`;
     }
 
     return `[ ${getPathToFile(fileName)} ]`;

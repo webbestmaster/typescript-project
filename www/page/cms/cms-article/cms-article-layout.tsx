@@ -1,5 +1,5 @@
-/* global alert */
-import {Typography, Select} from 'antd';
+import {useEffect, useState} from 'react';
+import {Typography, Select, Input} from 'antd';
 import {UploadFile} from 'antd/lib/upload/interface';
 
 import {Box} from '../../../layout/box/box';
@@ -18,13 +18,18 @@ export function renderUploadedFileListItem(
     // actions: { download: () => void; preview: () => void; remove: () => void }
 ): JSX.Element {
     const {name} = file;
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [markdown, setMarkdown] = useState<string>('');
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useEffect(() => {
+        getFileMarkdown(name).then(setMarkdown).catch(console.error);
+    }, [name]);
 
     return (
-        <Box height="auto">
-            <div>{originNode}</div>
-            <button onClick={() => getFileMarkdown(name).then(alert)} type="button">
-                get md
-            </button>
+        <Box height={112}>
+            {originNode}
+            <Input value={markdown} />
         </Box>
     );
 }

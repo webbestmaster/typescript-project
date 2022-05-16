@@ -24,6 +24,7 @@ import {useMakeExecutableState} from '../../../util/function';
 import {PaginationQueryType, PaginationResultType} from '../../../../server/data-base/data-base-type';
 import {getArticleListPaginationPick} from '../../../service/article/article-api';
 import {MarkdownInputWrapper} from '../../../layout/markdown-input-wrapper';
+import {Box} from '../../../layout/box/box';
 
 import {getPathToImage, uploadFile, makeHtmlValidator, makeSlugValidator} from './cms-article-helper';
 import {renderUploadedFileListItem, makeSubDocumentOption, renderParentList} from './cms-article-layout';
@@ -210,17 +211,21 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                                       name: titleImage,
                                       status: 'done',
                                       uid: titleImage,
-                                      url: getPathToImage(titleImage, {height: 256, width: 256}),
+                                      url: getPathToImage(titleImage, {height: 96, width: 96}),
                                   },
                               ]
                             : []
                     }
                     itemRender={renderUploadedFileListItem}
-                    listType="picture-card"
+                    listType="picture"
                     maxCount={1}
                     onChange={handleChangeTitleImage}
                 >
-                    {titleImage ? null : <PlusOutlined />}
+                    {titleImage ? null : (
+                        <Box backgroundColor="#fff" padding={25}>
+                            <PlusOutlined />
+                        </Box>
+                    )}
                 </Upload>
             </Form.Item>
 
@@ -313,14 +318,16 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                             name: fileName,
                             status: 'done',
                             uid: fileName,
-                            url: getPathToImage(fileName, {height: 256, width: 256}),
+                            url: getPathToImage(fileName, {height: 96, width: 96}),
                         };
                     })}
                     itemRender={renderUploadedFileListItem}
-                    listType="picture-card"
+                    listType="picture"
                     onChange={handleChangeFileList}
                 >
-                    <PlusOutlined />
+                    <Box backgroundColor="#fff" padding={25}>
+                        <PlusOutlined />
+                    </Box>
                 </Upload>
             </Form.Item>
 
