@@ -1,6 +1,5 @@
-/* global document */
+/* global document, Image, HTMLImageElement */
 import {Select, Typography} from 'antd';
-// import {UploadChangeParam, UploadFile} from 'antd/lib/upload/interface';
 import {RuleObject, Rule} from 'rc-field-form/lib/interface';
 import {generatePath} from 'react-router';
 
@@ -8,6 +7,8 @@ import {textToSlug} from '../../../util/human';
 import {Box} from '../../../layout/box/box';
 import {appRoute} from '../../../component/app/app-route';
 import {ArticleType} from '../../../../server/article/article-type';
+import {getPathToFile, getPathToImage} from '../../../service/file/file';
+import {PromiseResolveType} from '../../../util/promise';
 
 import {ArticleForValidationType, MakeSlugValidatorArgumentType} from './cms-article-type';
 import {CmsArticleModeEnum} from './cms-article-const';
@@ -148,4 +149,57 @@ export function renderParentList(
     }
 
     return [<Text key="no-parents">no parents</Text>];
+}
+
+export function getIsImage(fileName: string): boolean {
+    const hasExtension = fileName.includes('.');
+
+    if (!hasExtension) {
+        return false;
+    }
+
+    const fileExtension = fileName.split('.').pop();
+
+    return ['jpg', 'jpeg', 'jfif', 'gif', 'png', 'webp'].includes(fileExtension || '');
+}
+
+export function getIsAudio(fileName: string): boolean {
+    const hasExtension = fileName.includes('.');
+
+    if (!hasExtension) {
+        return false;
+    }
+
+    const fileExtension = fileName.split('.').pop();
+
+    return ['mp3'].includes(fileExtension || '');
+}
+
+export function fetchImage(pathToImage: string): Promise<HTMLImageElement> {
+    const image = new Image();
+
+    return new Promise<HTMLImageElement>(
+        (resolve: PromiseResolveType<HTMLImageElement>, reject: PromiseResolveType<unknown>) => {
+            image.addEventListener('load', () => resolve(image), false);
+
+            image.addEventListener('error', reject, false);
+
+            image.src = pathToImage;
+        }
+    );
+}
+
+export async function getFileMarkdown(fileName: string): Promise<string> {
+    if (getIsImage(fileName)) {
+        const pathToImage = getPathToImage(fileName, {height: 1024, width: 1024});
+        const {naturalHeight, naturalWidth} = await fetchImage(pathToImage);
+
+        return `![THE ALT](${pathToImage} "THE TITLE" height="${naturalHeight}" width="${naturalWidth}")`;
+    }
+
+    if (getIsAudio(fileName)) {
+        return `<audio controls src="${getPathToFile(fileName)}"></audio>`;
+    }
+
+    return `[ ${getPathToFile(fileName)} ]`;
 }
