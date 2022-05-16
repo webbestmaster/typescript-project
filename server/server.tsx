@@ -86,6 +86,7 @@ const serverPort = 3000;
     fastify.get(apiUrl.articleListPaginationPick, getArticleListPaginationPick);
     fastify.post(apiUrl.adminFileUpload, adminOnly(uploadFile));
     fastify.get(apiUrl.fileGet, getFile);
+    fastify.get(apiUrl.imageGet, getFile);
     fastify.post(apiUrl.adminArticleCreate, adminOnly(postAdminArticleCreate));
     fastify.post(apiUrl.adminArticleUpdate, adminOnly(postAdminArticleUpdate));
 

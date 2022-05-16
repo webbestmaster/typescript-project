@@ -57,7 +57,6 @@
     "@fastify/error": "^2.0.0",
     "@fastify/multipart": "^6.0.0",
     "@fastify/secure-session": "^4.1.1",
-    "@fastify/static": "^5.0.2",
     "@types/nedb": "^1.8.12",
     "@types/react": "^18.0.9",
     "@types/react-dom": "^18.0.4",
