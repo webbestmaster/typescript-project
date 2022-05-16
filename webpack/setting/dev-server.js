@@ -27,9 +27,11 @@ module.exports.devServer = {
         '/api/': {
             target: 'http://localhost:3000/',
         },
+        // TODO: need watch nginx
         '/api-image/': {
             target: 'http://localhost:3000/',
         },
+        // TODO: need watch nginx
         '/static-file/': {
             target: 'http://localhost:3000/',
         },
