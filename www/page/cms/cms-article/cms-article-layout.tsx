@@ -1,24 +1,30 @@
-import {Select, Typography} from 'antd';
+/* global alert */
+import {Typography, Select} from 'antd';
+import {UploadFile} from 'antd/lib/upload/interface';
 
 import {Box} from '../../../layout/box/box';
 import {ArticleType} from '../../../../server/article/article-type';
 
 import {ArticleForValidationType} from './cms-article-type';
-import {getArticleLinkToEdit} from './cms-article-helper';
+import {getArticleLinkToEdit, getFileMarkdown} from './cms-article-helper';
 
 const {Option} = Select;
 const {Link, Text} = Typography;
 
 export function renderUploadedFileListItem(
-    originNode: JSX.Element
-    // file: UploadFile<unknown>,
+    originNode: JSX.Element,
+    file: UploadFile<unknown>
     // uploadedFileList: Array<UploadFile<unknown>>,
     // actions: { download: () => void; preview: () => void; remove: () => void }
 ): JSX.Element {
+    const {name} = file;
+
     return (
-        <Box backgroundColor="#c00" height="auto">
+        <Box height="auto">
             <div>{originNode}</div>
-            <button type="button">markdown</button>
+            <button onClick={() => getFileMarkdown(name).then(alert)} type="button">
+                get md
+            </button>
         </Box>
     );
 }

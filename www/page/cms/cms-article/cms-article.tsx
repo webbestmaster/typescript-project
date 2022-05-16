@@ -210,7 +210,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                                       name: titleImage,
                                       status: 'done',
                                       uid: titleImage,
-                                      url: getPathToImage(titleImage, {height: 100, width: 100}),
+                                      url: getPathToImage(titleImage, {height: 256, width: 256}),
                                   },
                               ]
                             : []
@@ -313,7 +313,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                             name: fileName,
                             status: 'done',
                             uid: fileName,
-                            url: getPathToImage(fileName, {height: 100, width: 100}),
+                            url: getPathToImage(fileName, {height: 256, width: 256}),
                         };
                     })}
                     itemRender={renderUploadedFileListItem}
