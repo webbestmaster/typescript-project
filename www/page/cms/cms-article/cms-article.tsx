@@ -25,7 +25,9 @@ import {PaginationQueryType, PaginationResultType} from '../../../../server/data
 import {getArticleListPaginationPick} from '../../../service/article/article-api';
 import {MarkdownInputWrapper} from '../../../layout/markdown-input-wrapper';
 
-import {getPathToImage, uploadFile,
+import {
+    getPathToImage,
+    uploadFile,
     makeHtmlValidator,
     makeSlugValidator,
     makeSubDocumentOption,
