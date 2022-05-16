@@ -1,4 +1,4 @@
-/* global document, Image, HTMLImageElement */
+/* global document, Image, HTMLImageElement, File, FormData */
 import {Select, Typography} from 'antd';
 import {RuleObject, Rule} from 'rc-field-form/lib/interface';
 import {generatePath} from 'react-router';
@@ -7,14 +7,39 @@ import {textToSlug} from '../../../util/human';
 import {Box} from '../../../layout/box/box';
 import {appRoute} from '../../../component/app/app-route';
 import {ArticleType} from '../../../../server/article/article-type';
-import {getPathToFile, getPathToImage} from '../../../service/file/file';
 import {PromiseResolveType} from '../../../util/promise';
+import {apiUrl} from '../../../../server/const';
+import {UploadFileResponseType} from '../../../../server/file/file-type';
+import {FetchMethodEnum, fetchX} from '../../../util/fetch';
+import {uploadFileResponseSchema} from '../../../../server/file/file-validation';
 
 import {ArticleForValidationType, MakeSlugValidatorArgumentType} from './cms-article-type';
 import {CmsArticleModeEnum} from './cms-article-const';
 
 const {Option} = Select;
 const {Link, Text} = Typography;
+
+export function uploadFile(file: File): Promise<UploadFileResponseType> {
+    const formData = new FormData();
+
+    formData.append('file', file);
+
+    return fetchX<UploadFileResponseType>(apiUrl.adminFileUpload, uploadFileResponseSchema, {
+        body: formData,
+        credentials: 'include',
+        method: FetchMethodEnum.post,
+    });
+}
+
+export function getPathToImage(uniqueFileName: string, imageConfig: Record<'height' | 'width', number | '-'>): string {
+    const {width, height} = imageConfig;
+
+    return apiUrl.imageGet.replace(':size', `${String(width)}x${String(height)}`).replace(':fileName', uniqueFileName);
+}
+
+export function getPathToFile(uniqueFileName: string): string {
+    return apiUrl.fileGet.replace(':fileName', uniqueFileName);
+}
 
 export function makeSlugValidator(data: MakeSlugValidatorArgumentType): Array<Rule> {
     const {id, mode, savedArticleList} = data;

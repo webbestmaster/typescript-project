@@ -4,8 +4,7 @@ import {Typography, Input} from 'antd';
 import {ColumnType} from 'antd/lib/table/interface';
 import {SearchOutlined} from '@ant-design/icons';
 
-import {getArticleLinkToEdit} from '../cms-article/cms-article-helper';
-import {getPathToImage} from '../../../service/file/file';
+import {getPathToImage, getArticleLinkToEdit} from '../cms-article/cms-article-helper';
 
 import {
     ArticleForTableListKeysType,

@@ -13,7 +13,6 @@ import 'antd/dist/antd.css';
 
 import {ArticleType, ArticleTypeEnum, SubDocumentListViewTypeEnum} from '../../../../server/article/article-type';
 import {validateArticle} from '../../../../server/article/article-validation';
-import {getPathToImage, uploadFile} from '../../../service/file/file';
 import {
     arrayToStringByComma,
     humanNormalizeString,
@@ -26,15 +25,16 @@ import {PaginationQueryType, PaginationResultType} from '../../../../server/data
 import {getArticleListPaginationPick} from '../../../service/article/article-api';
 import {MarkdownInputWrapper} from '../../../layout/markdown-input-wrapper';
 
-import {CmsArticleModeEnum, fileAccept, imageAccept, keyForValidationList, noDateUTC} from './cms-article-const';
-import {ArticleForValidationType, KeyForValidationListType} from './cms-article-type';
-import {
+import {getPathToImage, uploadFile,
     makeHtmlValidator,
     makeSlugValidator,
     makeSubDocumentOption,
     renderParentList,
     renderUploadedFileListItem,
 } from './cms-article-helper';
+
+import {CmsArticleModeEnum, fileAccept, imageAccept, keyForValidationList, noDateUTC} from './cms-article-const';
+import {ArticleForValidationType, KeyForValidationListType} from './cms-article-type';
 
 const {Text} = Typography;
 const {Option} = Select;
