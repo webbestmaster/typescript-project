@@ -9,7 +9,7 @@ export const apiUrl = {
     articleListPaginationPick: '/api/article/pagination-pick',
     fileGet: '/static-file/:fileName' as const,
     getUser: '/api/auth/get-user',
-    imageGet: '/api-image/:fileName' as const,
+    imageGet: '/api-image/:size/:fileName' as const,
     login: '/api/auth/login',
 };
 
