@@ -1,6 +1,6 @@
-import {AudioPlayer, AudioPlayerControlSprite, TrackType} from 'react-audio-player-pro';
-// import 'react-audio-player-pro/dist/style.css';
+import {TrackType} from 'react-audio-player-pro';
 
+import {AudioPlayerAsync, AudioPlayerControlSpriteAsync} from '../../layout/audio-player';
 import {Markdown} from '../../layout/markdown';
 import {demoUrl} from '../../const';
 
@@ -82,7 +82,7 @@ export function ExamplePlayer(): JSX.Element {
         <div className="example-wrapper">
             <Markdown config={{useWrapper: false}} mdInput={exampleAudioPlayer} />
 
-            <AudioPlayer
+            <AudioPlayerAsync
                 defaultState={{
                     activeIndex: 0,
                     isMuted: false,
@@ -93,7 +93,7 @@ export function ExamplePlayer(): JSX.Element {
                 trackList={audioDataList}
             />
 
-            <AudioPlayerControlSprite />
+            <AudioPlayerControlSpriteAsync />
         </div>
     );
 }
