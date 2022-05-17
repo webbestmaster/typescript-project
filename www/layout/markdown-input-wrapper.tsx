@@ -16,7 +16,7 @@ export function MarkdownInputWrapper(props: MarkdownInputWrapperPropsType): JSX.
             <Col span={12}>{children}</Col>
             <Col span={12}>
                 <Box backgroundColor="#fff" height="calc(100% - 72px)" margin={[32, 0, 16]} padding={[8]}>
-                    <Markdown mdInput={mdInput} />
+                    <Markdown config={{useWrapper: false}} mdInput={mdInput} />
                 </Box>
             </Col>
         </Row>

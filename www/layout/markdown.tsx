@@ -1,5 +1,4 @@
 import {markdown, MarkdownConfigShallowType} from 'markdown-pro';
-// import 'markdown-pro/dist/style.css';
 
 type PropsType = {
     config?: MarkdownConfigShallowType;

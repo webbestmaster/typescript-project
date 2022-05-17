@@ -1,28 +1,30 @@
-import {ReactNode} from 'react';
+import {ReactNode, ElementType, CSSProperties} from 'react';
 
 import {makeCssArray} from './box-helper';
 
 type BoxPropsType = {
     backgroundColor?: string;
     boxSizing?: 'border-box' | 'content-box' | 'initial';
-    children: ReactNode;
+    children?: ReactNode;
+    display?: 'block' | 'flex' | 'inline';
     height?: number | string;
-    isInline?: boolean;
     margin?: Array<number> | number;
     padding?: Array<number> | number;
+    tagName?: ElementType;
     width?: number | string;
 };
 
 export function Box(props: BoxPropsType): JSX.Element {
     const {
+        tagName: TagName = 'div',
         children,
-        isInline = false,
         margin,
         padding,
-        width = 'auto',
-        height = 'auto',
-        boxSizing = 'initial',
-        backgroundColor = 'transparent',
+        width,
+        height,
+        boxSizing,
+        backgroundColor,
+        display,
     } = props;
 
     const [marginTop, marginRight, marginBottom, marginLeft, paddingTop, paddingRight, paddingBottom, paddingLeft] = [
@@ -30,9 +32,10 @@ export function Box(props: BoxPropsType): JSX.Element {
         ...makeCssArray(padding),
     ].map((value: number): string => `${value}px`);
 
-    const style = {
+    const style: CSSProperties = {
         backgroundColor,
         boxSizing,
+        display,
         height,
         marginBottom,
         marginLeft,
@@ -45,5 +48,5 @@ export function Box(props: BoxPropsType): JSX.Element {
         width,
     };
 
-    return isInline ? <span style={style}>{children}</span> : <div style={style}>{children}</div>;
+    return <TagName style={style}>{children}</TagName>;
 }

@@ -8,7 +8,6 @@ import {Upload, Form, Input, Button, Typography, Select, Checkbox, DatePicker, m
 import moment, {Moment} from 'moment';
 import {ValidateErrorEntity, FieldData} from 'rc-field-form/lib/interface';
 import {UploadChangeParam, UploadFile} from 'antd/lib/upload/interface';
-import {PlusOutlined} from '@ant-design/icons';
 import 'antd/dist/antd.css';
 
 import {ArticleType, ArticleTypeEnum, SubDocumentListViewTypeEnum} from '../../../../server/article/article-type';
@@ -24,10 +23,9 @@ import {useMakeExecutableState} from '../../../util/function';
 import {PaginationQueryType, PaginationResultType} from '../../../../server/data-base/data-base-type';
 import {getArticleListPaginationPick} from '../../../service/article/article-api';
 import {MarkdownInputWrapper} from '../../../layout/markdown-input-wrapper';
-import {Box} from '../../../layout/box/box';
 
 import {getPathToImage, uploadFile, makeHtmlValidator, makeSlugValidator} from './cms-article-helper';
-import {renderUploadedFileListItem, makeSubDocumentOption, renderParentList} from './cms-article-layout';
+import {renderUploadedFileListItem, makeSubDocumentOption, renderParentList, UploadButton} from './cms-article-layout';
 
 import {CmsArticleModeEnum, fileAccept, imageAccept, keyForValidationList, noDateUTC} from './cms-article-const';
 import {ArticleForValidationType, KeyForValidationListType} from './cms-article-type';
@@ -221,11 +219,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                     maxCount={1}
                     onChange={handleChangeTitleImage}
                 >
-                    {titleImage ? null : (
-                        <Box backgroundColor="#fff" padding={25}>
-                            <PlusOutlined />
-                        </Box>
-                    )}
+                    {titleImage ? null : <UploadButton />}
                 </Upload>
             </Form.Item>
 
@@ -325,9 +319,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                     listType="picture"
                     onChange={handleChangeFileList}
                 >
-                    <Box backgroundColor="#fff" padding={25}>
-                        <PlusOutlined />
-                    </Box>
+                    <UploadButton />
                 </Upload>
             </Form.Item>
 

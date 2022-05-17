@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react';
-import {Typography, Select, Input} from 'antd';
+import {Typography, Select, Input, Button} from 'antd';
+import {PlusOutlined} from '@ant-design/icons';
 import {UploadFile} from 'antd/lib/upload/interface';
 
 import {Box} from '../../../layout/box/box';
@@ -70,4 +71,8 @@ export function renderParentList(
     }
 
     return [<Text key="no-parents">no parents</Text>];
+}
+
+export function UploadButton(): JSX.Element {
+    return <Button icon={<PlusOutlined />}>Upload</Button>;
 }
