@@ -14,7 +14,7 @@ export type CrudConfigOnChangeArgumentType = {
 
 export type CrudConfigType = {
     dataBaseId: string;
-    onChange: (data: CrudConfigOnChangeArgumentType) => Promise<void>;
+    onChange: (data: CrudConfigOnChangeArgumentType) => void;
 };
 
 export type CrudType<ModelType> = {

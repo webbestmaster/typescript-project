@@ -1,10 +1,26 @@
-/*
-import {exec} from 'child_process';
+/* global process */
+
 import fileSystem from 'fs';
 import path from 'path';
 
-import {PromiseResolveType} from "../../www/util/promise";
-*/
+import {dataBaseBackUpFolderPath} from './data-base-const';
+import {CrudConfigOnChangeArgumentType} from './data-base-type';
+
+const cwd = process.cwd();
+
+const backUpFolderPath = path.join(cwd, dataBaseBackUpFolderPath);
+
+export async function makeDataBaseBackUp(dataBaseInfo: CrudConfigOnChangeArgumentType): Promise<void> {
+    const {dataBaseFileName, dataBasePath} = dataBaseInfo;
+
+    const fileNamePrefix = new Date().toISOString().replace(/\.\S+/, '').replace(/:+/g, '-');
+
+    const newFileName = path.join(backUpFolderPath, `${fileNamePrefix}-${dataBaseFileName}`);
+
+    fileSystem.createReadStream(dataBasePath).pipe(fileSystem.createWriteStream(newFileName));
+
+    console.log(dataBaseFileName, dataBasePath);
+}
 
 console.log('here data base back up');
 

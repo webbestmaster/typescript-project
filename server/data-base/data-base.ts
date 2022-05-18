@@ -15,6 +15,8 @@ import {
     PaginationQueryType,
     PaginationResultType,
 } from './data-base-type';
+import {makeDataBaseBackUp} from './data-base-back-up';
+import {dataBaseFolderPath} from './data-base-const';
 
 const cwd = process.cwd();
 const ajv = new Ajv();
@@ -27,9 +29,15 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
 ): CrudType<ModelType> {
     const {dataBaseId, onChange} = crudConfig;
     const dataBaseFileName = `data-base.${dataBaseId}.db`;
-    const dataBasePath = path.join(cwd, 'db', dataBaseFileName);
+    const dataBasePath = path.join(cwd, dataBaseFolderPath, dataBaseFileName);
 
-    const onChangeData: CrudConfigOnChangeArgumentType = {dataBaseFileName, dataBasePath};
+    function handleDataBaseUpdate() {
+        const onChangeData: CrudConfigOnChangeArgumentType = {dataBaseFileName, dataBasePath};
+
+        makeDataBaseBackUp(onChangeData).catch(console.error);
+
+        onChange(onChangeData);
+    }
 
     const dataBase = new Datastore<ModelType>({
         autoload: true,
@@ -169,7 +177,7 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
 
             dataBase.insert<ModelType>(modelData, (maybeError: Error | null): void => {
                 makeSimpleDataBaseCallBack(maybeError, resolve, reject);
-                onChange(onChangeData).catch(console.error);
+                handleDataBaseUpdate();
             });
         });
     }
@@ -187,7 +195,7 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
 
             dataBase.update<ModelType>(searchModelData, modelData, {}, (maybeError: Error | null): void => {
                 makeSimpleDataBaseCallBack(maybeError, resolve, reject);
-                onChange(onChangeData).catch(console.error);
+                handleDataBaseUpdate();
             });
         });
     }
@@ -197,7 +205,7 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
         return new Promise<null>((resolve: PromiseResolveType<null>, reject: PromiseResolveType<Error>) => {
             dataBase.remove(searchModelData, {}, (maybeError: Error | null): void => {
                 makeSimpleDataBaseCallBack(maybeError, resolve, reject);
-                onChange(onChangeData).catch(console.error);
+                handleDataBaseUpdate();
             });
         });
     }
