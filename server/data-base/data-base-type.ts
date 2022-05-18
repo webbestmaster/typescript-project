@@ -7,6 +7,16 @@ export type PaginationQueryQueryExtendedType<ModelType> = {
     [key in keyof ModelType]?: ModelType[key] | RegExQueryType;
 };
 
+export type CrudConfigOnChangeArgumentType = {
+    dataBaseFileName: string;
+    dataBasePath: string;
+};
+
+export type CrudConfigType = {
+    dataBaseId: string;
+    onChange: (data: CrudConfigOnChangeArgumentType) => Promise<void>;
+};
+
 export type CrudType<ModelType> = {
     // count: (query: PaginationQueryQueryExtendedType<ModelType>) => Promise<number>; // throw error if smth wrong
     createOne: (model: ModelType) => Promise<null>; // throw error if smth wrong

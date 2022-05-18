@@ -1,7 +1,6 @@
 export enum ArticleTypeEnum {
     article = 'article',
     container = 'container',
-    root = 'root',
 }
 
 export enum SubDocumentListViewTypeEnum {

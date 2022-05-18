@@ -8,7 +8,13 @@ import Datastore from 'nedb';
 import {PromiseResolveType} from '../../www/util/promise';
 
 import {prepareQuery, partialData, makeSimpleDataBaseCallBack} from './data-base-util';
-import {CrudType, PaginationQueryType, PaginationResultType} from './data-base-type';
+import {
+    CrudConfigOnChangeArgumentType,
+    CrudConfigType,
+    CrudType,
+    PaginationQueryType,
+    PaginationResultType,
+} from './data-base-type';
 
 const cwd = process.cwd();
 const ajv = new Ajv();
@@ -16,13 +22,19 @@ const ajv = new Ajv();
 // TODO: detect like regexp string and make from it regexp
 // detect only this /text/i or /text/
 export function makeCrud<ModelType extends Record<string, unknown>>(
-    dataBaseId: string,
+    crudConfig: CrudConfigType,
     modelJsonSchema: JSONSchemaType<ModelType>
 ): CrudType<ModelType> {
+    const {dataBaseId, onChange} = crudConfig;
+    const dataBaseFileName = `data-base.${dataBaseId}.db`;
+    const dataBasePath = path.join(cwd, 'db', dataBaseFileName);
+
+    const onChangeData: CrudConfigOnChangeArgumentType = {dataBaseFileName, dataBasePath};
+
     const dataBase = new Datastore<ModelType>({
         autoload: true,
         corruptAlertThreshold: 0,
-        filename: path.join(cwd, 'db', `data-base.${dataBaseId}.db`),
+        filename: dataBasePath,
     });
 
     function count(query: Record<string, unknown>): Promise<number> {
@@ -155,9 +167,10 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
                 return;
             }
 
-            dataBase.insert<ModelType>(modelData, (maybeError: Error | null): void =>
-                makeSimpleDataBaseCallBack(maybeError, resolve, reject)
-            );
+            dataBase.insert<ModelType>(modelData, (maybeError: Error | null): void => {
+                makeSimpleDataBaseCallBack(maybeError, resolve, reject);
+                onChange(onChangeData).catch(console.error);
+            });
         });
     }
 
@@ -172,18 +185,20 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
                 return;
             }
 
-            dataBase.update<ModelType>(searchModelData, modelData, {}, (maybeError: Error | null): void =>
-                makeSimpleDataBaseCallBack(maybeError, resolve, reject)
-            );
+            dataBase.update<ModelType>(searchModelData, modelData, {}, (maybeError: Error | null): void => {
+                makeSimpleDataBaseCallBack(maybeError, resolve, reject);
+                onChange(onChangeData).catch(console.error);
+            });
         });
     }
 
     // throw error if smth wrong
     function deleteOne(searchModelData: Partial<ModelType>): Promise<null> {
         return new Promise<null>((resolve: PromiseResolveType<null>, reject: PromiseResolveType<Error>) => {
-            dataBase.remove(searchModelData, {}, (maybeError: Error | null): void =>
-                makeSimpleDataBaseCallBack(maybeError, resolve, reject)
-            );
+            dataBase.remove(searchModelData, {}, (maybeError: Error | null): void => {
+                makeSimpleDataBaseCallBack(maybeError, resolve, reject);
+                onChange(onChangeData).catch(console.error);
+            });
         });
     }
 

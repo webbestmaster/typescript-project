@@ -17,18 +17,7 @@ import homeStyle from '../home/home.scss';
 
 console.log(ErrorData);
 
-/*
-const LoadMeAsyncLazy = lazy(
-    () =>
-        import(
-            /!* webpackChunkName: 'load-me-async-lazy' *!/
-            '../../component/load-me-async-lazy/load-me-async-lazy'
-        )
-);
-*/
-
-// eslint-disable-next-line import/no-default-export
-export default function Info(): JSX.Element {
+export function Info(): JSX.Element {
     const {getLocalizedString} = useLocale();
     const [isOpen, setIsOpen] = useState<boolean>(false);
 

@@ -16,8 +16,7 @@ import {Spinner} from '../../../../layout/spinner/spinner';
 import {CmsPage} from '../../layout/cms-page/cms-page';
 import {getArticleLinkToEdit} from '../cms-article-helper';
 
-// eslint-disable-next-line import/no-default-export
-export default function CmsArticleCreate(): JSX.Element {
+export function CmsArticleCreate(): JSX.Element {
     const navigate = useNavigate();
 
     const {execute: createArticle, isInProgress: isInProgressCreateArticle} = useMakeExecutableState<

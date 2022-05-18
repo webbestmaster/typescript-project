@@ -16,8 +16,7 @@ import {IsRender} from '../../../../layout/is-render/is-render';
 
 const {Title} = Typography;
 
-// eslint-disable-next-line import/no-default-export, complexity
-export default function CmsArticleEdit(): JSX.Element {
+export function CmsArticleEdit(): JSX.Element {
     const {articleId} = useParams<'articleId'>();
 
     const {

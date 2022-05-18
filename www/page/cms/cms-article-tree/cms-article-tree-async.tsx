@@ -5,15 +5,15 @@ import {LoginAdminRequired} from '../../../layout/login-admin-required/login-adm
 import {LazyResultType} from '../../../util/type';
 
 const AsyncLazy = lazy<ComponentType<unknown>>(async (): Promise<LazyResultType<unknown>> => {
-    const {Info} = await import(
-        /* webpackChunkName: 'page-login' */
-        './info'
+    const {CmsArticleTree} = await import(
+        /* webpackChunkName: 'page-cms-article-tree' */
+        './cms-article-tree'
     );
 
-    return {'default': Info};
+    return {'default': CmsArticleTree};
 });
 
-export function InfoAsync() {
+export function CmsArticleTreeAsync() {
     return (
         <LoginAdminRequired>
             <Suspense fallback={<Spinner position="absolute" />}>

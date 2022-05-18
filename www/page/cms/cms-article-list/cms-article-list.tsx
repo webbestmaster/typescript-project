@@ -20,8 +20,7 @@ import {
 
 const {Title} = Typography;
 
-// eslint-disable-next-line import/no-default-export
-export default function CmsArticleList(): JSX.Element {
+export function CmsArticleList(): JSX.Element {
     const defaultPageSize = 10;
     const [searchedColumn, setSearchedColumn] = useState<ArticleForTableListKeysType>('title');
     const [searchText, setSearchText] = useState<string>('');

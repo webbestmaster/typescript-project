@@ -28,6 +28,11 @@ export const appRoute: Record<string, AppRoutType> = {
     },
 
     // cms
+    articleTree: {
+        path: '/cms/article-tree',
+    },
+
+    // cms
     articleCreate: {
         path: '/cms/article-create',
     },

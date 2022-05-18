@@ -246,7 +246,6 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 <Select<ArticleTypeEnum>>
                     <Option value={ArticleTypeEnum.article}>Article</Option>
                     <Option value={ArticleTypeEnum.container}>Container</Option>
-                    <Option value={ArticleTypeEnum.root}>Root</Option>
                 </Select>
             </Form.Item>
 

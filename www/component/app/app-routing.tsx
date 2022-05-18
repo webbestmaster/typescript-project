@@ -13,6 +13,7 @@ import {isBrowser} from '../../util/system';
 import {LoginAsync} from '../../page/service/login/login-async';
 import {TestUseDeferredValue} from '../../page/client/test/use-deferred-value';
 import {CmsArticleListAsync} from '../../page/cms/cms-article-list/cms-article-list-async';
+import {CmsArticleTreeAsync} from '../../page/cms/cms-article-tree/cms-article-tree-async';
 import {TestUseDeferredValueSecond} from '../../page/client/test/use-deferred-value-second';
 import {CmsArticleCreateAsync} from '../../page/cms/cms-article/cms-article-create/cms-article-create-async';
 import {CmsArticleEditAsync} from '../../page/cms/cms-article/cms-article-edit/cms-article-edit-async';
@@ -38,6 +39,7 @@ export function AppRouting(props: PropsType): JSX.Element {
             <Route element={<LoginAsync />} path={appRoute.login.path} />
 
             <Route element={<CmsArticleListAsync />} path={appRoute.articleList.path} />
+            <Route element={<CmsArticleTreeAsync />} path={appRoute.articleTree.path} />
 
             <Route element={<CmsArticleCreateAsync />} path={appRoute.articleCreate.path} />
             <Route element={<CmsArticleEditAsync />} path={appRoute.articleEdit.path} />

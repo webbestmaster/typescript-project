@@ -1,7 +1,7 @@
 /* global setTimeout */
 
 // import {useSystem} from 'react-system-hook';
-import {Suspense, lazy, useEffect, useState, useContext} from 'react';
+import {Suspense, lazy, useEffect, useState, useContext, ComponentType} from 'react';
 import markdownPro, {MarkdownConfigShallowType} from 'markdown-pro';
 import {JSONSchemaType} from 'ajv';
 
@@ -21,6 +21,8 @@ import {NavigationLink} from '../../../layout/navigation-link/navigation-link';
 import {ServerDataContextType} from '../../../provider/server-data/server-data-context-type';
 import {ServerDataContext} from '../../../provider/server-data/server-data-context';
 import {useMakeExecutableState} from '../../../util/function';
+import {LazyResultType} from '../../../util/type';
+import {LoadMeAsyncPropsType} from '../../../component/load-me-async/load-me-async';
 
 import pngImageSrc from './image/marker-icon-2x.png';
 import svgImageSrc from './image/questions-with-an-official-answer.svg';
@@ -40,12 +42,15 @@ const myIpSchema: JSONSchemaType<MyIpType> = {
     type: 'object',
 };
 
-const LoadMeAsync = lazy(
-    () =>
-        import(
+const LoadMeAsyncLazy = lazy<ComponentType<LoadMeAsyncPropsType>>(
+    async (): Promise<LazyResultType<LoadMeAsyncPropsType>> => {
+        const {LoadMeAsync} = await import(
             /* webpackChunkName: 'load-me-async' */
             '../../../component/load-me-async/load-me-async'
-        )
+        );
+
+        return {'default': LoadMeAsync};
+    }
 );
 
 const htmlCode = markdownPro('# Markdown Pro'); // <h1>Markdown Pro</h1>
@@ -143,7 +148,7 @@ export function Home(): JSX.Element {
             {/* <SvgImageComponent />*/}
 
             <Suspense fallback={<Spinner position="absolute" />}>
-                <LoadMeAsync smth="smth" />
+                <LoadMeAsyncLazy smth="smth" />
             </Suspense>
 
             <Library textContent="Hello, World">

@@ -1,8 +1,11 @@
 import {Layout, Menu} from 'antd';
+import {MenuInfo} from 'rc-menu/lib/interface';
+import {useLocation, useNavigate} from 'react-router-dom';
 
 import {Box} from '../../../../layout/box/box';
+import {appRoute} from '../../../../component/app/app-route';
 
-const {Header, Content, Footer} = Layout;
+const {Content, Footer} = Layout;
 
 type CmsPagePropsType = {
     children: Array<JSX.Element> | JSX.Element;
@@ -10,28 +13,38 @@ type CmsPagePropsType = {
 
 export function CmsPage(props: CmsPagePropsType): JSX.Element {
     const {children} = props;
+    const routerLocation = useLocation();
+    const navigate = useNavigate();
+
+    function handleMenuOnLick(menuInfo: MenuInfo) {
+        const {key} = menuInfo;
+
+        navigate(key);
+    }
 
     return (
         <Layout>
-            <Header>
-                {/* <div className="logo"/>*/}
+            <Box padding={16}>
                 <Menu
-                    // TODO: check for change in doc API
-                    defaultSelectedKeys={['1']}
+                    defaultSelectedKeys={[routerLocation.pathname]}
                     items={[
                         {
-                            key: '1',
-                            label: 'article list',
+                            key: appRoute.articleList.path,
+                            label: 'List',
                         },
                         {
-                            key: '2',
-                            label: 'article create',
+                            key: appRoute.articleCreate.path,
+                            label: 'Create',
+                        },
+                        {
+                            key: appRoute.articleTree.path,
+                            label: 'Tree',
                         },
                     ]}
                     mode="horizontal"
-                    theme="dark"
+                    onClick={handleMenuOnLick}
                 />
-            </Header>
+            </Box>
 
             <Box padding={16}>
                 <Content>{children}</Content>
