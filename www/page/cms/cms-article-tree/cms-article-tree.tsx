@@ -13,11 +13,21 @@ const {Title} = Typography;
 const initTreeData: Array<DataNode> = [
     {
         key: '0',
-        title: 'Expand to load',
+        title: 'Expand to load 1',
     },
     {
+        children: [
+            {
+                key: '1-0',
+                title: 'Expand to load 2',
+            },
+            {
+                key: '1-1',
+                title: 'Expand to load 3',
+            },
+        ],
         key: '1',
-        title: 'Expand to load',
+        title: 'Expand to load 4',
     },
     {
         isLeaf: true,
@@ -90,7 +100,13 @@ export function CmsArticleTree(): JSX.Element {
             <hr />
             {/* <pre>{JSON.stringify(treeData, null, 4)}</pre>*/}
             <hr />
-            <Tree<DataNode> loadData={onLoadData} showLine switcherIcon={<DownOutlined />} treeData={treeData} />
+            <Tree<DataNode>
+                defaultExpandAll
+                loadData={onLoadData}
+                showLine
+                switcherIcon={<DownOutlined />}
+                treeData={treeData}
+            />
             <hr />
             <Title level={2}>Article without parent:</Title>
             <h2>here should be article without parent</h2>
