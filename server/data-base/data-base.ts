@@ -34,7 +34,7 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
     function handleDataBaseUpdate() {
         const onChangeData: CrudConfigOnChangeArgumentType = {dataBaseFileName, dataBasePath};
 
-        makeDataBaseBackUp(onChangeData).catch(console.error);
+        makeDataBaseBackUp(onChangeData);
 
         onChange(onChangeData);
     }
