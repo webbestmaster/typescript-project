@@ -4,26 +4,28 @@ import React, {useState} from 'react';
 import {Tree, Typography} from 'antd';
 import {DataNode, EventDataNode} from 'rc-tree/lib/interface';
 
-const initTreeData = [
-    {
-        title: 'Expand to load',
-        key: '0',
-    },
-    {
-        title: 'Expand to load',
-        key: '1',
-    },
-    {
-        title: 'Tree Node',
-        key: '2',
-        isLeaf: true,
-    },
-]; // It's just a simple demo. You can use tree map to optimize update perf.
-
 import {CmsPage} from '../layout/cms-page/cms-page';
-import {PromiseResolveType} from "../../../util/promise";
+import {PromiseResolveType} from '../../../util/promise';
 
-function updateTreeData(list: Array<DataNode>, key: string, children?: Array<DataNode>): Array<DataNode> {
+const {Title} = Typography;
+
+const initTreeData: Array<DataNode> = [
+    {
+        key: '0',
+        title: 'Expand to load',
+    },
+    {
+        key: '1',
+        title: 'Expand to load',
+    },
+    {
+        isLeaf: true,
+        key: '2',
+        title: 'Tree Node',
+    },
+];
+
+function updateTreeData(list: Array<DataNode>, key: number | string, children: Array<DataNode>): Array<DataNode> {
     return list.map<DataNode>((node: DataNode): DataNode => {
         if (node.key === key) {
             return {...node, children};
@@ -37,13 +39,10 @@ function updateTreeData(list: Array<DataNode>, key: string, children?: Array<Dat
     });
 }
 
-
-const {Title} = Typography;
-
 export function CmsArticleTree(): JSX.Element {
     const [treeData, setTreeData] = useState<Array<DataNode>>(initTreeData);
 
-    const onLoadData = (treeNode: EventDataNode): Promise<void> => {
+    function onLoadData(treeNode: EventDataNode): Promise<void> {
         const {key, children} = treeNode;
 
         return new Promise((resolve: PromiseResolveType<void>) => {
@@ -53,21 +52,18 @@ export function CmsArticleTree(): JSX.Element {
             }
 
             setTimeout(() => {
-
                 setTreeData((origin: Array<DataNode>): Array<DataNode> => {
-                        updateTreeData(origin, key, [
-                            {
-                                title: 'Child Node',
-                                key: `${String(key)}-0`,
-                            },
-                            {
-                                title: 'Child Node',
-                                key: `${String(key)}-1`,
-                            },
-                        ]);
-                    }
-                );
-
+                    return updateTreeData(origin, key, [
+                        {
+                            key: `${String(key)}-0`,
+                            title: 'Child Node',
+                        },
+                        {
+                            key: `${String(key)}-1`,
+                            title: 'Child Node',
+                        },
+                    ]);
+                });
                 resolve();
             }, 1000);
         });
@@ -76,12 +72,9 @@ export function CmsArticleTree(): JSX.Element {
     return (
         <CmsPage>
             <Title level={2}>Article tree</Title>
-            <hr/>
-            <Tree<DataNode>
-                loadData={onLoadData}
-                treeData={treeData}
-            />
-            <hr/>
+            <hr />
+            <Tree<DataNode> loadData={onLoadData} treeData={treeData} />
+            <hr />
             <Title level={2}>Article without parent:</Title>
             <h2>here should be article without parent</h2>
         </CmsPage>
