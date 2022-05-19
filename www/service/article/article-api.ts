@@ -8,6 +8,7 @@ import {
 } from '../../../server/article/article-validation';
 import {apiUrl} from '../../../server/const';
 import {paginationQueryToURLSearchParameters as paginationQueryToURLSearchParameters} from '../../util/url';
+import {UnknownObjectType} from '../../util/type';
 
 export async function getArticleListPagination(
     paginationQuery: PaginationQueryType<ArticleType>
@@ -54,4 +55,18 @@ export async function postArticleUpdate(article: ArticleType): Promise<ArticleTy
         credentials: 'include',
         method: FetchMethodEnum.post,
     });
+}
+
+export async function deleteArticle(articleId: string): Promise<UnknownObjectType> {
+    return fetchX<UnknownObjectType>(
+        apiUrl.adminArticleDelete.replace(':articleId', articleId),
+        {
+            required: [],
+            type: 'object',
+        },
+        {
+            credentials: 'include',
+            method: FetchMethodEnum.delete,
+        }
+    );
 }

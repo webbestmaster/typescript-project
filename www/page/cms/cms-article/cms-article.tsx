@@ -24,9 +24,23 @@ import {PaginationQueryType, PaginationResultType} from '../../../../server/data
 import {getArticleListPaginationPick} from '../../../service/article/article-api';
 import {MarkdownInputWrapper} from '../../../layout/markdown-input-wrapper';
 import {IsRender} from '../../../layout/is-render/is-render';
+import {rootArticleId} from '../../../../server/article/article-const';
 
-import {getPathToImage, uploadFile, makeHtmlValidator, makeSlugValidator, getAbsentIdList} from './cms-article-helper';
-import {renderUploadedFileListItem, makeSubDocumentOption, renderParentList, UploadButton} from './cms-article-layout';
+import {
+    getPathToImage,
+    uploadFile,
+    makeHtmlValidator,
+    makeSlugValidator,
+    getAbsentIdList,
+    handleDeleteArticle,
+} from './cms-article-helper';
+import {
+    renderUploadedFileListItem,
+    makeSubDocumentOption,
+    renderParentList,
+    UploadButton,
+    getParentLit,
+} from './cms-article-layout';
 import {CmsArticleModeEnum, fileAccept, imageAccept, keyForValidationList, noDateUTC} from './cms-article-const';
 import {ArticleForValidationType, KeyForValidationListType} from './cms-article-type';
 
@@ -40,7 +54,7 @@ type CmsArticlePropsType = {
     onFinish: (article: ArticleType) => void;
 };
 
-// eslint-disable-next-line complexity
+// eslint-disable-next-line complexity, max-statements
 export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
     const {article, onFinish, mode} = props;
@@ -174,6 +188,9 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
     }
 
     const absentIdList = getAbsentIdList(subDocumentIdList, savedArticleList);
+    const parentList = getParentLit(article, savedArticleList);
+    const hasParent = parentList.length > 0;
+    const isDisableToDelete = hasParent || id === rootArticleId;
 
     return (
         <Form<ArticleType>
@@ -489,6 +506,15 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             <Form.Item>
                 <Button htmlType="submit" type="primary">
                     Submit
+                </Button>
+                &nbsp;
+                <Button
+                    disabled={isDisableToDelete}
+                    htmlType="button"
+                    onClick={() => handleDeleteArticle(id)}
+                    type="default"
+                >
+                    {isDisableToDelete ? 'Can NOT delete, article has parent' : 'Delete'}
                 </Button>
             </Form.Item>
         </Form>

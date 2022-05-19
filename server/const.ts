@@ -2,6 +2,7 @@ export const siteCookieKey = 'site-cookie';
 
 export const apiUrl = {
     adminArticleCreate: '/api/admin/article/create',
+    adminArticleDelete: '/api/admin/article/delete/:articleId' as const,
     adminArticleEdit: '/api/admin/article/edit',
     adminArticleUpdate: '/api/admin/article/update',
     adminFileUpload: '/api/admin/file/upload',

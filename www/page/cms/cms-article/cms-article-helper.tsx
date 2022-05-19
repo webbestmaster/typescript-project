@@ -9,6 +9,7 @@ import {apiUrl} from '../../../../server/const';
 import {UploadFileResponseType} from '../../../../server/file/file-type';
 import {FetchMethodEnum, fetchX} from '../../../util/fetch';
 import {uploadFileResponseSchema} from '../../../../server/file/file-validation';
+import {deleteArticle} from '../../../service/article/article-api';
 
 import {ArticleForValidationType, MakeSlugValidatorArgumentType} from './cms-article-type';
 import {CmsArticleModeEnum} from './cms-article-const';
@@ -180,4 +181,8 @@ export function getAbsentIdList(
     return subDocumentIdList.filter((id: string): boolean => {
         return !savedArticleList.some((article: ArticleForValidationType): boolean => article.id === id);
     });
+}
+
+export function handleDeleteArticle(articleId: string) {
+    deleteArticle(articleId).catch(console.error);
 }

@@ -45,15 +45,23 @@ export function makeSubDocumentOption(articleForValidation: ArticleForValidation
     );
 }
 
+export function getParentLit(
+    article: ArticleType,
+    savedArticleList: Array<ArticleForValidationType>
+): Array<ArticleForValidationType> {
+    const {id: articleId} = article;
+
+    return savedArticleList.filter((savedArticle: ArticleForValidationType): boolean =>
+        savedArticle.subDocumentIdList.includes(articleId)
+    );
+}
+
 export function renderParentList(
     article: ArticleType,
     savedArticleList: Array<ArticleForValidationType>
 ): Array<JSX.Element> {
-    const {id: articleId} = article;
-
-    const parentList: Array<JSX.Element> = savedArticleList
-        .filter((savedArticle: ArticleForValidationType): boolean => savedArticle.subDocumentIdList.includes(articleId))
-        .map((savedArticle: ArticleForValidationType, index: number): JSX.Element => {
+    const parentList: Array<JSX.Element> = getParentLit(article, savedArticleList).map(
+        (savedArticle: ArticleForValidationType, index: number): JSX.Element => {
             const {id, title, slug} = savedArticle;
 
             return (
@@ -64,7 +72,8 @@ export function renderParentList(
                     </Link>
                 </Text>
             );
-        });
+        }
+    );
 
     if (parentList.length > 0) {
         return parentList;
