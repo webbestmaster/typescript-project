@@ -55,37 +55,14 @@ export function toTrimmedString(value: unknown): string {
     return String(value).trim();
 }
 
-function trimEqualStart(fullValueA: string, fullValueB: string): [string, string] {
-    let trimIndex = 0;
-
-    const valueA = fullValueA.trim().toLowerCase();
-    const valueB = fullValueB.trim().toLowerCase();
-    const [littleString, biggerString] = fullValueA.length < fullValueB.length ? [valueA, valueB] : [valueB, valueA];
-
-    [...littleString].every((char: string, index: number): boolean => {
-        if (char === biggerString[index]) {
-            trimIndex = index + 1;
-            return true;
-        }
-        return false;
-    });
-
-    return [fullValueA.slice(trimIndex), fullValueB.slice(trimIndex)];
+export function sortStringCallback(stringA: string, stringB: string): number {
+    return stringA.localeCompare(stringB);
 }
 
-export function sortXCallback(fullValueA: string, fullValueB: string): number {
-    const [valueA, valueB] = trimEqualStart(fullValueA, fullValueB);
-
-    const numberA = Number.parseFloat(valueA);
-    const numberB = Number.parseFloat(valueB);
-
-    if (!Number.isNaN(numberA) && !Number.isNaN(numberB)) {
-        return numberA - numberB;
-    }
-
-    return valueA.localeCompare(valueB);
+export function sortStringCallbackReverse(stringA: string, stringB: string): number {
+    return sortStringCallback(stringB, stringA);
 }
 
-export function sortXCallbackReverse(fullValueA: string, fullValueB: string): number {
-    return sortXCallback(fullValueB, fullValueA);
+export function getTickCross(isEnable: boolean): string {
+    return isEnable ? '✔' : '❌';
 }

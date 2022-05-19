@@ -168,3 +168,16 @@ export async function getFileMarkdown(fileName: string): Promise<string> {
 
     return `[ ${getPathToFile(fileName)} ]`;
 }
+
+export function getAbsentIdList(
+    subDocumentIdList: Array<string>,
+    savedArticleList: Array<ArticleForValidationType>
+): Array<string> {
+    if (savedArticleList.length === 0) {
+        return [];
+    }
+
+    return subDocumentIdList.filter((id: string): boolean => {
+        return !savedArticleList.some((article: ArticleForValidationType): boolean => article.id === id);
+    });
+}

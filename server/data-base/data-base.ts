@@ -30,14 +30,14 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
     const {dataBaseId, onChange} = crudConfig;
     const dataBaseFileName = `data-base.${dataBaseId}.db`;
     const dataBasePath = path.join(cwd, dataBaseFolderPath, dataBaseFileName);
+    const onChangeData: CrudConfigOnChangeArgumentType = {dataBaseFileName, dataBasePath};
 
     function handleDataBaseUpdate() {
-        const onChangeData: CrudConfigOnChangeArgumentType = {dataBaseFileName, dataBasePath};
-
         makeDataBaseBackUp(onChangeData);
-
         onChange(onChangeData);
     }
+
+    makeDataBaseBackUp(onChangeData);
 
     const dataBase = new Datastore<ModelType>({
         autoload: true,

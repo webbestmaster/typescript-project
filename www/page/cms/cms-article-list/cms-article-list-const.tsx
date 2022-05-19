@@ -5,6 +5,7 @@ import {ColumnType} from 'antd/lib/table/interface';
 import {SearchOutlined} from '@ant-design/icons';
 
 import {getPathToImage, getArticleLinkToEdit} from '../cms-article/cms-article-helper';
+import {getTickCross} from '../../../util/string';
 
 import {
     ArticleForTableListKeysType,
@@ -101,7 +102,7 @@ export function getArticleTableColumnList(
                 isActive: boolean
                 // article: ArticleForTableListType
             ) {
-                return isActive ? '✔' : '❌';
+                return getTickCross(isActive);
             },
             sorter: () => 0,
             title: 'Is active',
@@ -164,13 +165,13 @@ export function getArticleTableColumnList(
 }
 
 export const keyForTableListList: KeyForTableListListType = [
+    'articleType',
+    'createdDate',
     'id',
+    'isActive',
+    'publishDate',
     'slug',
     'title',
     'titleImage',
-    'articleType',
-    'isActive',
-    'createdDate',
     'updatedDate',
-    'publishDate',
 ];

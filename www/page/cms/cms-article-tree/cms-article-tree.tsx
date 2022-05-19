@@ -1,115 +1,133 @@
-/* global setTimeout */
 import 'antd/dist/antd.css';
-import React, {useState} from 'react';
-import {Tree, Typography} from 'antd';
-import {DataNode, EventDataNode} from 'rc-tree/lib/interface';
+import {useState, useEffect, useCallback} from 'react';
+import {Tree, Typography, List, Divider, message} from 'antd';
+import {DataNode} from 'rc-tree/lib/interface';
 import {DownOutlined} from '@ant-design/icons';
 
 import {CmsPage} from '../layout/cms-page/cms-page';
-import {PromiseResolveType} from '../../../util/promise';
+import {useMakeExecutableState} from '../../../util/function';
+import {PaginationQueryType, PaginationResultType} from '../../../../server/data-base/data-base-type';
+import {ArticleType} from '../../../../server/article/article-type';
+import {getArticleListPaginationPick} from '../../../service/article/article-api';
+import {Spinner} from '../../../layout/spinner/spinner';
+import {Box} from '../../../layout/box/box';
+import {getTickCross} from '../../../util/string';
+import {getArticleLinkToEdit} from '../cms-article/cms-article-helper';
 
-const {Title} = Typography;
+import {ArticleForTreeType, KeyForTreeType} from './cms-article-tree-type';
+import {keyForTreeList} from './cms-article-tree-const';
+import {
+    getArticleForTreeById,
+    getArticleWithLostChildList,
+    getArticleWithoutParentList,
+    makeArticleTree,
+} from './cms-article-tree-helper';
 
-const initTreeData: Array<DataNode> = [
-    {
-        key: '0',
-        title: 'Expand to load 1',
-    },
-    {
-        children: [
-            {
-                key: '1-0',
-                title: 'Expand to load 2',
-            },
-            {
-                key: '1-1',
-                title: 'Expand to load 3',
-            },
-        ],
-        key: '1',
-        title: 'Expand to load 4',
-    },
-    {
-        isLeaf: true,
-        key: '2',
-        title: 'Tree Node',
-    },
-    {
-        key: '3',
-        title: <h1>Expand to load</h1>,
-    },
-];
-
-function updateTreeData(list: Array<DataNode>, key: number | string, children?: Array<DataNode>): Array<DataNode> {
-    return list.map<DataNode>((node: DataNode): DataNode => {
-        if (node.key === key) {
-            console.log('String(node.key) === String(key)');
-            if (children) {
-                return {...node, children};
-            }
-
-            return {
-                key: node.key,
-                title: node.title,
-            };
-        }
-
-        if (node.children) {
-            console.log('node.children');
-            return {...node, children: updateTreeData(node.children, key, children)};
-        }
-
-        console.log('return node');
-        return node;
-    });
-}
+const {Title, Text, Link} = Typography;
+const {Item: ListItem} = List;
 
 export function CmsArticleTree(): JSX.Element {
-    const [treeData, setTreeData] = useState<Array<DataNode>>(initTreeData);
+    const {execute: executeArticleListPaginationPick, isInProgress: isInProgressArticleListPagination} =
+        useMakeExecutableState<
+            [PaginationQueryType<ArticleType>, KeyForTreeType],
+            PaginationResultType<ArticleForTreeType>
+        >(getArticleListPaginationPick);
 
-    function onLoadData(treeNode: EventDataNode): Promise<void> {
-        const {key, children} = treeNode;
+    const [savedArticleList, setSavedArticleList] = useState<Array<ArticleForTreeType>>([]);
 
-        return new Promise((resolve: PromiseResolveType<void>) => {
-            if (children) {
-                resolve();
-                return;
-            }
+    useEffect(() => {
+        executeArticleListPaginationPick({pageIndex: 0, pageSize: 0, query: {}, sort: {title: 1}}, keyForTreeList)
+            .then((data: PaginationResultType<ArticleForTreeType>) => setSavedArticleList(data.result))
+            .catch((error: Error) => {
+                console.log(error);
+                message.error('Can not fetch article list.');
+            });
+    }, [executeArticleListPaginationPick]);
 
-            setTimeout(() => {
-                setTreeData((origin: Array<DataNode>): Array<DataNode> => {
-                    return updateTreeData(origin, key, [
-                        {
-                            key: `${String(key)}-0`,
-                            title: 'Child Node',
-                        },
-                        {
-                            key: `${String(key)}-1`,
-                            title: 'Child Node',
-                        },
-                    ]);
-                });
-                resolve();
-            }, 1000);
-        });
-    }
+    const tree: DataNode = makeArticleTree(savedArticleList);
+    const articleWithoutParentList = getArticleWithoutParentList(savedArticleList);
+    const articleWithLostChildList = getArticleWithLostChildList(savedArticleList);
+
+    const renderArticleWithoutParent = useCallback(
+        (articleWithoutParent: ArticleForTreeType, index: number): JSX.Element => {
+            const {title, slug, isActive, articleType, id: articleId} = articleWithoutParent;
+
+            return (
+                <ListItem>
+                    <Text>{index + 1}.&nbsp;</Text>
+                    <Link>{title}</Link>
+                    {' | '}
+                    <Link href={getArticleLinkToEdit(articleId)}>{slug}</Link>
+                    {' | '}
+                    <Text>
+                        {articleType}&nbsp;{getTickCross(isActive)}
+                    </Text>
+                </ListItem>
+            );
+        },
+        []
+    );
+
+    const renderArticleWithLostChild = useCallback(
+        (articleWithLostChild: ArticleForTreeType, index: number): JSX.Element => {
+            const {title, slug, isActive, articleType, id: articleId, subDocumentIdList} = articleWithLostChild;
+
+            const lostIdList = subDocumentIdList
+                .filter((lostId: string): boolean => !getArticleForTreeById(savedArticleList, lostId))
+                .join(', ');
+
+            return (
+                <ListItem>
+                    <Text>{index + 1}.&nbsp;</Text>
+                    <Link>{title}</Link>
+                    {' | '}
+                    <Link href={getArticleLinkToEdit(articleId)}>{slug}</Link>
+                    {' | '}
+                    <Text>
+                        {articleType} {getTickCross(isActive)}
+                    </Text>
+                    {' | '}
+                    <Text type="danger">Ids:&nbsp;{lostIdList}</Text>
+                </ListItem>
+            );
+        },
+        [savedArticleList]
+    );
 
     return (
         <CmsPage>
             <Title level={2}>Article tree (does not work into &lt;StrictMode/&gt;)</Title>
-            <hr />
-            {/* <pre>{JSON.stringify(treeData, null, 4)}</pre>*/}
-            <hr />
+
+            <Divider orientation="left">
+                Articles in a tree, total (include non-parents): {savedArticleList.length}
+            </Divider>
             <Tree<DataNode>
+                autoExpandParent
                 defaultExpandAll
-                loadData={onLoadData}
                 showLine
                 switcherIcon={<DownOutlined />}
-                treeData={treeData}
+                treeData={[tree]}
             />
-            <hr />
-            <Title level={2}>Article without parent:</Title>
-            <h2>here should be article without parent</h2>
+
+            <Divider orientation="left">Articles without parent, total: {articleWithoutParentList.length}</Divider>
+            <Box backgroundColor="#fff">
+                <List<ArticleForTreeType>
+                    bordered
+                    dataSource={articleWithoutParentList}
+                    renderItem={renderArticleWithoutParent}
+                />
+            </Box>
+
+            <Divider orientation="left">Articles with lost children, total: {articleWithLostChildList.length}</Divider>
+            <Box backgroundColor="#fff">
+                <List<ArticleForTreeType>
+                    bordered
+                    dataSource={articleWithLostChildList}
+                    renderItem={renderArticleWithLostChild}
+                />
+            </Box>
+
+            <Spinner isShow={isInProgressArticleListPagination} position="absolute" />
         </CmsPage>
     );
 }

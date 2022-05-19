@@ -5,7 +5,7 @@ import path from 'path';
 
 import JSZip from 'jszip';
 
-import {sortXCallbackReverse} from '../../www/util/string';
+import {sortStringCallbackReverse} from '../../www/util/string';
 
 import {dataBaseBackUpFolderPath} from './data-base-const';
 import {CrudConfigOnChangeArgumentType} from './data-base-type';
@@ -24,7 +24,7 @@ function removeOldDataBaseBackUp() {
         }
 
         // new files at first
-        const sortedFileNameList = fileList.sort(sortXCallbackReverse);
+        const sortedFileNameList = fileList.sort(sortStringCallbackReverse);
 
         // all files after maxBackUpCount
         const extraFileNameList = sortedFileNameList.slice(maxBackUpCount);

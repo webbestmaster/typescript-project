@@ -1,3 +1,4 @@
+import {ReactNode} from 'react';
 import {Layout, Menu} from 'antd';
 import {MenuInfo} from 'rc-menu/lib/interface';
 import {useLocation, useNavigate} from 'react-router-dom';
@@ -8,7 +9,7 @@ import {appRoute} from '../../../../component/app/app-route';
 const {Content, Footer} = Layout;
 
 type CmsPagePropsType = {
-    children: Array<JSX.Element> | JSX.Element;
+    children: ReactNode;
 };
 
 export function CmsPage(props: CmsPagePropsType): JSX.Element {

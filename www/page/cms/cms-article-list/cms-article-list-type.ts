@@ -16,4 +16,14 @@ export type ArticleForTableListKeysType =
     | 'titleImage'
     | 'updatedDate';
 export type ArticleForTableListType = Pick<ArticleType, ArticleForTableListKeysType>;
-export type KeyForTableListListType = Array<ArticleForTableListKeysType>;
+export type KeyForTableListListType = [
+    'articleType',
+    'createdDate',
+    'id',
+    'isActive',
+    'publishDate',
+    'slug',
+    'title',
+    'titleImage',
+    'updatedDate'
+];

@@ -23,14 +23,14 @@ import {useMakeExecutableState} from '../../../util/function';
 import {PaginationQueryType, PaginationResultType} from '../../../../server/data-base/data-base-type';
 import {getArticleListPaginationPick} from '../../../service/article/article-api';
 import {MarkdownInputWrapper} from '../../../layout/markdown-input-wrapper';
+import {IsRender} from '../../../layout/is-render/is-render';
 
-import {getPathToImage, uploadFile, makeHtmlValidator, makeSlugValidator} from './cms-article-helper';
+import {getPathToImage, uploadFile, makeHtmlValidator, makeSlugValidator, getAbsentIdList} from './cms-article-helper';
 import {renderUploadedFileListItem, makeSubDocumentOption, renderParentList, UploadButton} from './cms-article-layout';
-
 import {CmsArticleModeEnum, fileAccept, imageAccept, keyForValidationList, noDateUTC} from './cms-article-const';
 import {ArticleForValidationType, KeyForValidationListType} from './cms-article-type';
 
-const {Text} = Typography;
+const {Text, Title} = Typography;
 const {Option} = Select;
 const {TextArea} = Input;
 
@@ -173,6 +173,8 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
         console.log('handleChangeTitleImage:', article);
     }
 
+    const absentIdList = getAbsentIdList(subDocumentIdList, savedArticleList);
+
     return (
         <Form<ArticleType>
             autoComplete="off"
@@ -186,6 +188,12 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             onValuesChange={onValuesChangeForm}
             scrollToFirstError
         >
+            <IsRender isRender={absentIdList.length > 0}>
+                <Title level={4} type="danger">
+                    Document has missing children, children Id:&nbsp;{absentIdList.join(', ')}
+                </Title>
+            </IsRender>
+
             <Text>Parents:&nbsp;{renderParentList(article, savedArticleList)}</Text>
             <Form.Item hidden initialValue={id} label={`Article id: ${id}`} name="id">
                 <Input disabled />
