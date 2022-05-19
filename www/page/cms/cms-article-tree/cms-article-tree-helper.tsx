@@ -1,5 +1,6 @@
 import {DataNode} from 'rc-tree/lib/interface';
 import {Typography} from 'antd';
+import {Link} from 'react-router-dom';
 
 import {rootArticleId} from '../../../../server/article/article-const';
 import {getArticleLinkToEdit} from '../cms-article/cms-article-helper';
@@ -7,7 +8,7 @@ import {getTickCross} from '../../../util/string';
 
 import {ArticleForTreeType} from './cms-article-tree-type';
 
-const {Link, Text} = Typography;
+const {Text} = Typography;
 
 export function getArticleForTreeById(
     articleList: Array<ArticleForTreeType>,
@@ -46,7 +47,7 @@ function populateChildren(
             return {
                 key: articleId,
                 title: (
-                    <Link href={urlToEdit}>
+                    <Link to={urlToEdit}>
                         <Text type="danger">[ERROR]: can NOT find article by id: {articleId}</Text>
                     </Link>
                 ),
@@ -57,9 +58,9 @@ function populateChildren(
 
         const titleNode = (
             <>
-                <Link>{title}</Link>
+                <Link to="#">{title}</Link>
                 {' | '}
-                <Link href={urlToEdit}>{slug}</Link>
+                <Link to={urlToEdit}>{slug}</Link>
                 {' | '}
                 <Text>
                     {articleType} {getTickCross(isActive)}
@@ -81,7 +82,7 @@ export function makeArticleTree(articleList: Array<ArticleForTreeType>): DataNod
     return {
         children: populateChildren(rootArticleId, articleList, 10),
         key: rootArticleId,
-        title: <Link href={getArticleLinkToEdit(rootArticleId)}>{rootArticleId}</Link>,
+        title: <Link to={getArticleLinkToEdit(rootArticleId)}>{rootArticleId}</Link>,
     };
 }
 

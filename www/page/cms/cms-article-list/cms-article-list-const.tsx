@@ -1,8 +1,9 @@
 /* global HTMLInputElement */
 import {SyntheticEvent} from 'react';
-import {Typography, Input} from 'antd';
+import {Input} from 'antd';
 import {ColumnType} from 'antd/lib/table/interface';
 import {SearchOutlined} from '@ant-design/icons';
+import {Link} from 'react-router-dom';
 
 import {getPathToImage, getArticleLinkToEdit} from '../cms-article/cms-article-helper';
 import {getTickCross} from '../../../util/string';
@@ -14,8 +15,6 @@ import {
     SortDirectionEnum,
 } from './cms-article-list-type';
 import {renderDate} from './cms-article-list-helper';
-
-const {Link} = Typography;
 
 type GetArticleTableColumnListArgumentType = {
     setSearchText: (searchText: string) => void;
@@ -78,7 +77,7 @@ export function getArticleTableColumnList(
             key: 'slug',
             render(slug: string, article: ArticleForTableListType) {
                 return (
-                    <Link href={getArticleLinkToEdit(article.id)} key={article.id}>
+                    <Link key={article.id} to={getArticleLinkToEdit(article.id)}>
                         {slug}
                     </Link>
                 );

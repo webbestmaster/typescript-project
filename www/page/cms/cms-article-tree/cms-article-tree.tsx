@@ -3,6 +3,7 @@ import {useState, useEffect, useCallback} from 'react';
 import {Tree, Typography, List, Divider, message} from 'antd';
 import {DataNode} from 'rc-tree/lib/interface';
 import {DownOutlined} from '@ant-design/icons';
+import {Link} from 'react-router-dom';
 
 import {CmsPage} from '../layout/cms-page/cms-page';
 import {useMakeExecutableState} from '../../../util/function';
@@ -23,7 +24,7 @@ import {
     makeArticleTree,
 } from './cms-article-tree-helper';
 
-const {Title, Text, Link} = Typography;
+const {Title, Text} = Typography;
 const {Item: ListItem} = List;
 
 export function CmsArticleTree(): JSX.Element {
@@ -55,9 +56,9 @@ export function CmsArticleTree(): JSX.Element {
             return (
                 <ListItem>
                     <Text>{index + 1}.&nbsp;</Text>
-                    <Link>{title}</Link>
+                    <Link to="#">{title}</Link>
                     {' | '}
-                    <Link href={getArticleLinkToEdit(articleId)}>{slug}</Link>
+                    <Link to={getArticleLinkToEdit(articleId)}>{slug}</Link>
                     {' | '}
                     <Text>
                         {articleType}&nbsp;{getTickCross(isActive)}
@@ -79,9 +80,9 @@ export function CmsArticleTree(): JSX.Element {
             return (
                 <ListItem>
                     <Text>{index + 1}.&nbsp;</Text>
-                    <Link>{title}</Link>
+                    <Link to="#">{title}</Link>
                     {' | '}
-                    <Link href={getArticleLinkToEdit(articleId)}>{slug}</Link>
+                    <Link to={getArticleLinkToEdit(articleId)}>{slug}</Link>
                     {' | '}
                     <Text>
                         {articleType} {getTickCross(isActive)}

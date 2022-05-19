@@ -56,7 +56,7 @@ export function CmsArticleEdit(): JSX.Element {
 
     if (articleToEdit === null) {
         return (
-            <CmsPage>
+            <CmsPage key="no-article">
                 <IsRender isRender={isInProgressArticleById}>
                     <Title level={2}>Edit an article: {articleId}</Title>
                     <Spinner isShow={isInProgressArticleById} position="fixed" />
@@ -69,7 +69,7 @@ export function CmsArticleEdit(): JSX.Element {
     }
 
     return (
-        <CmsPage>
+        <CmsPage key={articleId}>
             <Title level={2}>Edit an article: {articleId}</Title>
             <CmsArticle article={articleToEdit} mode={CmsArticleModeEnum.edit} onFinish={handleOnFinish} />
             <Spinner isShow={isInProgressUpdateArticle} position="fixed" />

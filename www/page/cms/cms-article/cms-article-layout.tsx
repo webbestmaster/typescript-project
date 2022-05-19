@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react';
 import {Typography, Select, Input, Button} from 'antd';
 import {PlusOutlined} from '@ant-design/icons';
 import {UploadFile} from 'antd/lib/upload/interface';
+import {Link} from 'react-router-dom';
 
 import {Box} from '../../../layout/box/box';
 import {ArticleType} from '../../../../server/article/article-type';
@@ -10,7 +11,7 @@ import {ArticleForValidationType} from './cms-article-type';
 import {getArticleLinkToEdit, getFileMarkdown} from './cms-article-helper';
 
 const {Option} = Select;
-const {Link, Text} = Typography;
+const {Text} = Typography;
 
 export function renderUploadedFileListItem(
     originNode: JSX.Element,
@@ -67,7 +68,7 @@ export function renderParentList(
             return (
                 <Text key={id}>
                     {index > 0 ? ', ' : null}
-                    <Link href={getArticleLinkToEdit(id)} target="_blank">
+                    <Link to={getArticleLinkToEdit(id)}>
                         {title}/{slug}
                     </Link>
                 </Text>

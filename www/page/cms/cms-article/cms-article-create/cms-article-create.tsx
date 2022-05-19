@@ -2,8 +2,6 @@ import {Typography, message} from 'antd';
 import {JSONSchemaType} from 'ajv';
 import {useNavigate} from 'react-router';
 
-const {Title} = Typography;
-
 import {CmsArticle} from '../cms-article';
 import {makeDefaultArticle} from '../../../../../server/article/article-helper';
 import {CmsArticleModeEnum} from '../cms-article-const';
@@ -15,6 +13,8 @@ import {getRandomString} from '../../../../util/string';
 import {Spinner} from '../../../../layout/spinner/spinner';
 import {CmsPage} from '../../layout/cms-page/cms-page';
 import {getArticleLinkToEdit} from '../cms-article-helper';
+
+const {Title} = Typography;
 
 export function CmsArticleCreate(): JSX.Element {
     const navigate = useNavigate();
@@ -39,7 +39,7 @@ export function CmsArticleCreate(): JSX.Element {
     }
 
     return (
-        <CmsPage>
+        <CmsPage key="create-create">
             <Title level={2}>Create new article</Title>
             <CmsArticle
                 article={{
