@@ -168,3 +168,19 @@ export async function postAdminArticleUpdate(
         .header(...mainResponseHeader)
         .send(actualizedArticle);
 }
+
+// eslint-disable-next-line complexity, max-statements
+export async function deleteAdminArticleDelete(
+    request: FastifyRequest<{Body: string; Params?: {articleId: string}}>,
+    reply: FastifyReply
+): Promise<void> {
+    const {params} = request;
+    const articleId = params?.articleId || '';
+
+    await articleCrud.deleteOne({id: articleId});
+
+    reply
+        .code(200)
+        .header(...mainResponseHeader)
+        .send({articleId});
+}

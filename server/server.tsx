@@ -20,6 +20,7 @@ import {
     getArticleListPagination,
     getArticleListPaginationPick,
     postAdminArticleCreate,
+    deleteAdminArticleDelete,
     postAdminArticleUpdate,
 } from './article/article-api';
 import {getFile, uploadFile} from './file/file';
@@ -89,6 +90,7 @@ const serverPort = 3000;
     fastify.get(apiUrl.imageGet, getFile);
     fastify.post(apiUrl.adminArticleCreate, adminOnly(postAdminArticleCreate));
     fastify.post(apiUrl.adminArticleUpdate, adminOnly(postAdminArticleUpdate));
+    fastify.delete(apiUrl.adminArticleDelete, adminOnly(deleteAdminArticleDelete));
 
     // //////////////
     // Pages

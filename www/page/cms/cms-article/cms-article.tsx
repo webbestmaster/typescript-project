@@ -1,12 +1,12 @@
 /* global File */
-import {useState, useEffect} from 'react';
+import {useEffect, useState} from 'react';
 // node_modules/antd/lib/upload/index.d.ts
 // TODO: set declare const Upload: UploadInterface<any>; TO declare const Upload: UploadInterface<unknown>;
 // node_modules/antd/lib/upload/index.d.ts
 // WARNING: set declare const Upload: UploadInterface<any>; TO declare const Upload: UploadInterface<unknown>;
-import {Upload, Form, Input, Button, Typography, Select, Checkbox, DatePicker, Popconfirm, message} from 'antd';
+import {Button, Checkbox, DatePicker, Form, Input, message, Popconfirm, Select, Typography, Upload} from 'antd';
 import moment, {Moment} from 'moment';
-import {ValidateErrorEntity, FieldData} from 'rc-field-form/lib/interface';
+import {FieldData, ValidateErrorEntity} from 'rc-field-form/lib/interface';
 import {UploadChangeParam, UploadFile} from 'antd/lib/upload/interface';
 import {QuestionCircleOutlined} from '@ant-design/icons';
 import {red} from '@ant-design/colors';
@@ -29,19 +29,19 @@ import {IsRender} from '../../../layout/is-render/is-render';
 import {rootArticleId} from '../../../../server/article/article-const';
 
 import {
+    getAbsentIdList,
     getPathToImage,
-    uploadFile,
+    handleDeleteArticle,
     makeHtmlValidator,
     makeSlugValidator,
-    getAbsentIdList,
-    handleDeleteArticle,
+    uploadFile,
 } from './cms-article-helper';
 import {
-    renderUploadedFileListItem,
+    getParentLit,
     makeSubDocumentOption,
     renderParentList,
+    renderUploadedFileListItem,
     UploadButton,
-    getParentLit,
 } from './cms-article-layout';
 import {CmsArticleModeEnum, fileAccept, imageAccept, keyForValidationList, noDateUTC} from './cms-article-const';
 import {ArticleForValidationType, KeyForValidationListType} from './cms-article-type';
@@ -509,19 +509,21 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 <Button htmlType="submit" type="primary">
                     Submit
                 </Button>
-                &nbsp;
-                <Popconfirm
-                    cancelText="No"
-                    disabled={isDisableToDelete}
-                    icon={<QuestionCircleOutlined style={{color: red.primary}} />}
-                    okText="Delete"
-                    onConfirm={() => handleDeleteArticle(id)}
-                    title="Are you sure to delete the article？"
-                >
-                    <Button disabled={isDisableToDelete} htmlType="button" type="default">
-                        {isDisableToDelete ? 'Can NOT delete, article has parent' : 'Delete'}
-                    </Button>
-                </Popconfirm>
+                <IsRender isRender={mode === CmsArticleModeEnum.edit}>
+                    &nbsp;
+                    <Popconfirm
+                        cancelText="No"
+                        disabled={isDisableToDelete}
+                        icon={<QuestionCircleOutlined style={{color: red.primary}} />}
+                        okText="Delete"
+                        onConfirm={() => handleDeleteArticle(id)}
+                        title="Are you sure to delete the article？"
+                    >
+                        <Button disabled={isDisableToDelete} htmlType="button" type="default">
+                            {isDisableToDelete ? 'Can NOT delete, article has parent' : 'Delete'}
+                        </Button>
+                    </Popconfirm>
+                </IsRender>
             </Form.Item>
         </Form>
     );
