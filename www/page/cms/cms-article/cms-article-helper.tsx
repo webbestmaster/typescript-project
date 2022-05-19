@@ -1,4 +1,4 @@
-/* global document, Image, HTMLImageElement, File, FormData */
+/* global document, Image, HTMLImageElement, File, FormData, location */
 import {RuleObject, Rule} from 'rc-field-form/lib/interface';
 import {generatePath} from 'react-router';
 
@@ -183,6 +183,8 @@ export function getAbsentIdList(
     });
 }
 
-export function handleDeleteArticle(articleId: string) {
-    deleteArticle(articleId).catch(console.error);
+export function handleDeleteArticle(articleId: string): Promise<unknown> {
+    return deleteArticle(articleId)
+        .then((): unknown => location.reload())
+        .catch(console.error);
 }

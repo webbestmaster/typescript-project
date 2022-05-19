@@ -4,10 +4,12 @@ import {useState, useEffect} from 'react';
 // TODO: set declare const Upload: UploadInterface<any>; TO declare const Upload: UploadInterface<unknown>;
 // node_modules/antd/lib/upload/index.d.ts
 // WARNING: set declare const Upload: UploadInterface<any>; TO declare const Upload: UploadInterface<unknown>;
-import {Upload, Form, Input, Button, Typography, Select, Checkbox, DatePicker, message} from 'antd';
+import {Upload, Form, Input, Button, Typography, Select, Checkbox, DatePicker, Popconfirm, message} from 'antd';
 import moment, {Moment} from 'moment';
 import {ValidateErrorEntity, FieldData} from 'rc-field-form/lib/interface';
 import {UploadChangeParam, UploadFile} from 'antd/lib/upload/interface';
+import {QuestionCircleOutlined} from '@ant-design/icons';
+import {red} from '@ant-design/colors';
 import 'antd/dist/antd.css';
 
 import {ArticleType, ArticleTypeEnum, SubDocumentListViewTypeEnum} from '../../../../server/article/article-type';
@@ -508,14 +510,18 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                     Submit
                 </Button>
                 &nbsp;
-                <Button
+                <Popconfirm
+                    cancelText="No"
                     disabled={isDisableToDelete}
-                    htmlType="button"
-                    onClick={() => handleDeleteArticle(id)}
-                    type="default"
+                    icon={<QuestionCircleOutlined style={{color: red.primary}} />}
+                    okText="Delete"
+                    onConfirm={() => handleDeleteArticle(id)}
+                    title="Are you sure to delete the article？"
                 >
-                    {isDisableToDelete ? 'Can NOT delete, article has parent' : 'Delete'}
-                </Button>
+                    <Button disabled={isDisableToDelete} htmlType="button" type="default">
+                        {isDisableToDelete ? 'Can NOT delete, article has parent' : 'Delete'}
+                    </Button>
+                </Popconfirm>
             </Form.Item>
         </Form>
     );
