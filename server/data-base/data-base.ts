@@ -1,6 +1,5 @@
-/* global process */
-
 import path from 'path';
+import {promises as fileSystemPromises} from 'fs';
 
 import Ajv, {JSONSchemaType} from 'ajv';
 import Datastore from 'nedb';
@@ -16,28 +15,35 @@ import {
     PaginationResultType,
 } from './data-base-type';
 import {makeDataBaseBackUp} from './data-base-back-up';
-import {dataBaseFolderPath} from './data-base-const';
+import {dataBaseBackUpPathAbsolute, dataBasePathAbsolute} from './data-base-const';
 
-const cwd = process.cwd();
 const ajv = new Ajv();
 
-// TODO: detect like regexp string and make from it regexp
-// detect only this /text/i or /text/
 export function makeCrud<ModelType extends Record<string, unknown>>(
     crudConfig: CrudConfigType,
     modelJsonSchema: JSONSchemaType<ModelType>
 ): CrudType<ModelType> {
     const {dataBaseId, onChange} = crudConfig;
     const dataBaseFileName = `data-base.${dataBaseId}.db`;
-    const dataBasePath = path.join(cwd, dataBaseFolderPath, dataBaseFileName);
-    const onChangeData: CrudConfigOnChangeArgumentType = {dataBaseFileName, dataBasePath};
+    const dataBasePath = path.join(dataBasePathAbsolute, dataBaseFileName);
+    const onChangeData: CrudConfigOnChangeArgumentType = {dataBaseFileName, dataBaseId, dataBasePath};
 
     function handleDataBaseUpdate() {
         makeDataBaseBackUp(onChangeData);
         onChange(onChangeData);
     }
 
-    makeDataBaseBackUp(onChangeData);
+    (async () => {
+        try {
+            await fileSystemPromises.mkdir(dataBaseBackUpPathAbsolute);
+            // eslint-disable-next-line no-empty
+        } catch {}
+        try {
+            await fileSystemPromises.mkdir(path.join(dataBaseBackUpPathAbsolute, dataBaseId));
+            // eslint-disable-next-line no-empty
+        } catch {}
+        makeDataBaseBackUp(onChangeData);
+    })();
 
     const dataBase = new Datastore<ModelType>({
         autoload: true,

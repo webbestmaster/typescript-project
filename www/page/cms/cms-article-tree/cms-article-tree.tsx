@@ -95,9 +95,11 @@ export function CmsArticleTree(): JSX.Element {
         [savedArticleList]
     );
 
+    console.log('%c[WARNING]: Article tree (does not work into <StrictMode/>)', 'color: #fff; background-color: #c00;');
+
     return (
         <CmsPage>
-            <Title level={2}>Article tree (does not work into &lt;StrictMode/&gt;)</Title>
+            <Title level={2}>Article tree</Title>
 
             <Divider orientation="left">
                 Articles in a tree, total (include non-parents): {savedArticleList.length}

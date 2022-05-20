@@ -1,5 +1,1 @@
-function getIsBrowser(): boolean {
-    return typeof window !== 'undefined';
-}
-
-export const isBrowser = getIsBrowser();
+export const isBrowser = typeof window !== 'undefined';

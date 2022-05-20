@@ -4,22 +4,10 @@ export type AppRoutType = {
     path: string;
 };
 
-export const appRoute: Record<string, AppRoutType> = {
+export const appRoute = {
     // client
     root: {
         path: '/',
-    },
-
-    info: {
-        path: '/info',
-    },
-
-    testUseDeferredValue: {
-        path: '/test/use-deferred-value',
-    },
-
-    testUseDeferredValueSecond: {
-        path: '/test/use-deferred-value-second',
     },
 
     // cms

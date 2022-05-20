@@ -6,7 +6,7 @@ import {authUserSchema} from './auth-validation';
 
 export const authCrud = makeCrud<AuthUserType>(
     {
-        dataBaseId: 'auth.user',
+        dataBaseId: 'user',
         onChange: (data: CrudConfigOnChangeArgumentType) => {
             console.log('update DB');
             console.log('update sitemap.xml');

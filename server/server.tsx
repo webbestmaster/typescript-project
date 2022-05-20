@@ -1,9 +1,9 @@
-/* global Buffer */
+/* global Buffer, process */
 
-// import path from 'path';
+import path from 'path';
 
 // remove '@fastify/static' from package.json
-// import fastifyStaticServer from '@fastify/static';
+import fastifyStaticServer from '@fastify/static';
 import fastifyCors from '@fastify/cors';
 import fastifyMultipart from '@fastify/multipart';
 import fastifySecureSession from '@fastify/secure-session';
@@ -26,7 +26,7 @@ import {
 import {getFile, uploadFile} from './file/file';
 import {adminOnly} from './auth/auth-helper';
 
-// const cwd = process.cwd();
+const cwd = process.cwd();
 
 const serverPort = 3000;
 
@@ -46,18 +46,19 @@ const serverPort = 3000;
         });
     */
 
-    /*
     fastify.register(fastifyStaticServer, {
         prefix: '/', // optional: default '/'
         root: path.join(cwd, 'dist'),
-        /!*
-        allowedPath: (pathName: string, root?: string | undefined): boolean => {
-            console.log(pathName)
-            return true;
-        }
-*!/
+        // setHeaders: (response: FastifyReply) => {
+        //     response.setHeader('x-warning-get-file', 'need-use-nginx')
+        // }
+        /*
+            allowedPath: (pathName: string, root?: string | undefined): boolean => {
+                console.log(pathName)
+                return true;
+            }
+        */
     });
-*/
 
     /*
         fastify.register(fastifyStaticServer, {

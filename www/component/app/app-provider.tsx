@@ -1,23 +1,23 @@
 import {ReactNode} from 'react';
 
 import {LocalizationProvider} from '../../provider/locale/locale-context';
-import {ServerData} from '../../provider/server-data/server-data-context';
-import {ServerDataContextType} from '../../provider/server-data/server-data-context-type';
 import {User} from '../../provider/user/user-context';
+import {NavigationProvider} from '../../layout/navigation/navigation-context/navigation-context';
+import {NavigationContextType} from '../../layout/navigation/navigation-context/navigation-context-type';
 
 type PropsType = {
     children: ReactNode;
-    serverData: ServerDataContextType;
+    navigationData: NavigationContextType | null;
 };
 
 export function AppProvider(props: PropsType): JSX.Element {
-    const {children, serverData} = props;
+    const {children, navigationData} = props;
 
     return (
-        <ServerData defaultServerData={serverData}>
-            <User>
+        <User>
+            <NavigationProvider navigationData={navigationData}>
                 <LocalizationProvider>{children}</LocalizationProvider>
-            </User>
-        </ServerData>
+            </NavigationProvider>
+        </User>
     );
 }

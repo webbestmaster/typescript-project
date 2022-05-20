@@ -9,6 +9,7 @@ export type PaginationQueryQueryExtendedType<ModelType> = {
 
 export type CrudConfigOnChangeArgumentType = {
     dataBaseFileName: string;
+    dataBaseId: string;
     dataBasePath: string;
 };
 

@@ -1,7 +1,7 @@
 /* global URLSearchParams */
 
 import {ReactNode} from 'react';
-import {Link as RouterLink, useSearchParams} from 'react-router-dom';
+import {Link, useSearchParams} from 'react-router-dom';
 
 export type NavigationLinkPropsType = {
     children?: ReactNode;
@@ -25,8 +25,8 @@ export function NavigationLink(props: NavigationLinkPropsType): JSX.Element {
     const queriesAsPartUrl = queriesAsString && `?${queriesAsString}`;
 
     return (
-        <RouterLink className={className} title={title} to={to + queriesAsPartUrl}>
+        <Link className={className} title={title} to={to + queriesAsPartUrl}>
             {children}
-        </RouterLink>
+        </Link>
     );
 }

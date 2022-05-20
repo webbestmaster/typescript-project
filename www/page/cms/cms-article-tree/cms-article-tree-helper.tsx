@@ -21,12 +21,9 @@ export function getArticleForTreeById(
     return foundedArticle || null;
 }
 
-function populateChildren(
-    parentArticleId: string,
-    articleList: Array<ArticleForTreeType>,
-    deep: number
-): Array<DataNode> {
+function getChildList(parentArticleId: string, articleList: Array<ArticleForTreeType>, deep: number): Array<DataNode> {
     if (deep === 0) {
+        console.error('[ERROR]: populateChildren: limit exceeded');
         return [];
     }
 
@@ -38,7 +35,7 @@ function populateChildren(
 
     const {subDocumentIdList} = article;
 
-    const children: Array<DataNode> = subDocumentIdList.map<DataNode>((articleId: string): DataNode => {
+    return subDocumentIdList.map<DataNode>((articleId: string): DataNode => {
         const childArticle: ArticleForTreeType | null = getArticleForTreeById(articleList, articleId);
 
         const urlToEdit = getArticleLinkToEdit(articleId);
@@ -69,18 +66,16 @@ function populateChildren(
         );
 
         return {
-            children: populateChildren(articleId, articleList, deep - 1),
+            children: getChildList(articleId, articleList, deep - 1),
             key: articleId,
             title: titleNode,
         };
     });
-
-    return children;
 }
 
 export function makeArticleTree(articleList: Array<ArticleForTreeType>): DataNode {
     return {
-        children: populateChildren(rootArticleId, articleList, 10),
+        children: getChildList(rootArticleId, articleList, 10),
         key: rootArticleId,
         title: <Link to={getArticleLinkToEdit(rootArticleId)}>{rootArticleId}</Link>,
     };

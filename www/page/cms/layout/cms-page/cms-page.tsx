@@ -1,7 +1,6 @@
 import {ReactNode} from 'react';
 import {Layout, Menu} from 'antd';
-import {MenuInfo} from 'rc-menu/lib/interface';
-import {useLocation, useNavigate} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 
 import {Box} from '../../../../layout/box/box';
 import {appRoute} from '../../../../component/app/app-route';
@@ -15,13 +14,6 @@ type CmsPagePropsType = {
 export function CmsPage(props: CmsPagePropsType): JSX.Element {
     const {children} = props;
     const routerLocation = useLocation();
-    const navigate = useNavigate();
-
-    function handleMenuOnLick(menuInfo: MenuInfo) {
-        const {key} = menuInfo;
-
-        navigate(key);
-    }
 
     return (
         <Layout>
@@ -31,19 +23,18 @@ export function CmsPage(props: CmsPagePropsType): JSX.Element {
                     items={[
                         {
                             key: appRoute.articleList.path,
-                            label: 'List',
+                            label: <Link to={appRoute.articleList.path}>List</Link>,
                         },
                         {
                             key: appRoute.articleCreate.path,
-                            label: 'Create',
+                            label: <Link to={appRoute.articleCreate.path}>Create</Link>,
                         },
                         {
                             key: appRoute.articleTree.path,
-                            label: 'Tree',
+                            label: <Link to={appRoute.articleTree.path}>Tree</Link>,
                         },
                     ]}
                     mode="horizontal"
-                    onClick={handleMenuOnLick}
                 />
             </Box>
 

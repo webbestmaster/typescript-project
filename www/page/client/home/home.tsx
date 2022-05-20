@@ -1,7 +1,7 @@
 /* global setTimeout */
 
 // import {useSystem} from 'react-system-hook';
-import {Suspense, lazy, useEffect, useState, useContext, ComponentType} from 'react';
+import {Suspense, lazy, useEffect, useState, ComponentType} from 'react';
 import markdownPro, {MarkdownConfigShallowType} from 'markdown-pro';
 import {JSONSchemaType} from 'ajv';
 
@@ -16,13 +16,10 @@ import {AsciiSpinner} from '../../../layout/spinner/c-ascii-spinner';
 import {ExampleAudio} from '../../../component/example-audio/c-example-audio';
 import {ExamplePlayer} from '../../../component/example-audio-player/c-example-audio-player';
 import {fetchX} from '../../../util/fetch';
-import {appRoute} from '../../../component/app/app-route';
-import {NavigationLink} from '../../../layout/navigation-link/navigation-link';
-import {ServerDataContextType} from '../../../provider/server-data/server-data-context-type';
-import {ServerDataContext} from '../../../provider/server-data/server-data-context';
 import {useMakeExecutableState} from '../../../util/function';
 import {LazyResultType} from '../../../util/type';
 import {LoadMeAsyncPropsType} from '../../../component/load-me-async/load-me-async';
+import {Navigation} from '../../../layout/navigation/navigation';
 
 import pngImageSrc from './image/marker-icon-2x.png';
 import svgImageSrc from './image/questions-with-an-official-answer.svg';
@@ -69,7 +66,6 @@ export function Home(): JSX.Element {
     console.log(ErrorData);
 
     const {getLocalizedString, setLocaleName, localeName} = useLocale();
-    const serverDataContext = useContext<ServerDataContextType>(ServerDataContext);
     const {getFormattedNumber} = useFormat();
     // const {screenInfo} = useSystem();
     const {execute, isInProgress, result, error} = useMakeExecutableState<[string, JSONSchemaType<MyIpType>], MyIpType>(
@@ -104,11 +100,10 @@ export function Home(): JSX.Element {
 
     return (
         <div>
+            <Navigation />
             <h1 className={homeStyle.home_header}>
                 home page (<AsciiSpinner />)
             </h1>
-
-            <h3>{JSON.stringify(serverDataContext)}</h3>
 
             <h4>your ip is: {myIp ? myIp.ip : <AsciiSpinner />}</h4>
             <h4>
@@ -129,10 +124,6 @@ export function Home(): JSX.Element {
 
             <hr />
 
-            <NavigationLink to={appRoute.info.path}>to info</NavigationLink>
-
-            <hr />
-
             <code>{getFormattedNumber(321, {style: 'unit', unit: 'liter', unitDisplay: 'long'})}</code>
 
             {/* <pre>{JSON.stringify(screenInfo, null, 4)}</pre>*/}
@@ -147,9 +138,11 @@ export function Home(): JSX.Element {
 
             {/* <SvgImageComponent />*/}
 
+            {/*
             <Suspense fallback={<Spinner position="absolute" />}>
                 <LoadMeAsyncLazy smth="smth" />
             </Suspense>
+*/}
 
             <Library textContent="Hello, World">
                 <p>inner !! text</p>

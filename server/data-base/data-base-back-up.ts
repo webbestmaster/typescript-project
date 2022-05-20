@@ -1,55 +1,42 @@
-/* global process */
-
-import fileSystem from 'fs';
+import fileSystem, {promises as fileSystemPromises} from 'fs';
 import path from 'path';
 
 import JSZip from 'jszip';
 
 import {sortStringCallbackReverse} from '../../www/util/string';
 
-import {dataBaseBackUpFolderPath} from './data-base-const';
+import {dataBaseBackUpPathAbsolute} from './data-base-const';
 import {CrudConfigOnChangeArgumentType} from './data-base-type';
 
-const cwd = process.cwd();
+async function removeOldDataBaseBackUp(dataBaseInfo: CrudConfigOnChangeArgumentType) {
+    const {dataBaseId} = dataBaseInfo;
 
-const backUpFolderPath = path.join(cwd, dataBaseBackUpFolderPath);
-
-function removeOldDataBaseBackUp() {
     const maxBackUpCount = 100;
 
-    fileSystem.readdir(backUpFolderPath, (error: Error | null, fileList: Array<string>) => {
-        if (error) {
-            console.log('[ERROR]: removeOldDataBaseBackUp: unable to read directory: ' + error.message);
-            return;
-        }
+    const fileList: Array<string> = await fileSystemPromises.readdir(path.join(dataBaseBackUpPathAbsolute, dataBaseId));
 
-        // new files at first
-        const sortedFileNameList = fileList.sort(sortStringCallbackReverse);
+    // new files at first
+    const sortedFileNameList = fileList.sort(sortStringCallbackReverse);
 
-        // all files after maxBackUpCount
-        const extraFileNameList = sortedFileNameList.slice(maxBackUpCount);
+    // all files after maxBackUpCount
+    const extraFileNameList = sortedFileNameList.slice(maxBackUpCount);
 
-        extraFileNameList.forEach((fileNameToRemove: string) => {
-            const pathToFile = path.join(backUpFolderPath, fileNameToRemove);
+    extraFileNameList.forEach((fileNameToRemove: string) => {
+        const pathToFile = path.join(dataBaseBackUpPathAbsolute, dataBaseId, fileNameToRemove);
 
-            fileSystem.unlink(pathToFile, (errorForRemove: Error | null) => {
-                if (!errorForRemove) {
-                    return;
-                }
-                console.log('[ERROR]: removeOldDataBaseBackUp: can not remove file: ' + errorForRemove.message);
-            });
+        fileSystemPromises.unlink(pathToFile).catch((error: Error) => {
+            console.log('[ERROR]: removeOldDataBaseBackUp:', error.message);
         });
     });
 }
 
 export function makeDataBaseBackUp(dataBaseInfo: CrudConfigOnChangeArgumentType) {
-    removeOldDataBaseBackUp();
+    removeOldDataBaseBackUp(dataBaseInfo);
 
-    const {dataBaseFileName, dataBasePath} = dataBaseInfo;
+    const {dataBaseFileName, dataBasePath, dataBaseId} = dataBaseInfo;
     const zip = new JSZip();
-    const fileNamePrefix = new Date().toISOString().replace(/\.\S+/, '').replace(/:+/g, '-');
-
-    const newFileName = path.join(backUpFolderPath, `${fileNamePrefix}-${dataBaseFileName}.zip`);
+    const fileNamePrefix = new Date().toISOString().replace(/[:tz]+/gi, '-');
+    const newFileName = path.join(dataBaseBackUpPathAbsolute, dataBaseId, `${fileNamePrefix}${dataBaseFileName}.zip`);
 
     zip.file(dataBaseFileName, fileSystem.createReadStream(dataBasePath))
         .generateNodeStream({compression: 'DEFLATE', streamFiles: true})
