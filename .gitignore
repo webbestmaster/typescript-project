@@ -3,7 +3,7 @@
 /.vscode/
 
 # data base
-# /db/back-up/
+/db/back-up/
 
 # Logs
 logs
