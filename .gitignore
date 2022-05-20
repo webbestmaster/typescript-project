@@ -2,7 +2,7 @@
 /.idea/
 /.vscode/
 
-data base
+# data base
 /db/back-up/
 
 # Logs
