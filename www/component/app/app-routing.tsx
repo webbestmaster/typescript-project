@@ -7,13 +7,13 @@ import {
 import {StaticRouter} from 'react-router-dom/server';
 
 import {isBrowser} from '../../util/system';
+import {Home} from '../../page/client/home/home';
 import {Error404} from '../../page/service/error-404/error-404';
 import {LoginAsync} from '../../page/service/login/login-async';
 import {CmsArticleListAsync} from '../../page/cms/cms-article-list/cms-article-list-async';
 import {CmsArticleTreeAsync} from '../../page/cms/cms-article-tree/cms-article-tree-async';
 import {CmsArticleCreateAsync} from '../../page/cms/cms-article/cms-article-create/cms-article-create-async';
 import {CmsArticleEditAsync} from '../../page/cms/cms-article/cms-article-edit/cms-article-edit-async';
-import {HomeAsync} from '../../page/client/home/home-async';
 
 import {appRoute} from './app-route';
 
@@ -24,7 +24,7 @@ type PropsType = {
 export function AppRouting(props: PropsType): JSX.Element {
     const switchNode = (
         <Routes>
-            <Route element={<HomeAsync />} path={appRoute.root.path} />
+            <Route element={<Home />} path={appRoute.root.path} />
 
             <Route element={<LoginAsync />} path={appRoute.login.path} />
 

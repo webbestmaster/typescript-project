@@ -1,12 +1,11 @@
 /* global setTimeout */
 
 // import {useSystem} from 'react-system-hook';
-import {Suspense, lazy, useEffect, useState, ComponentType} from 'react';
+import {useEffect, useState} from 'react';
 import markdownPro, {MarkdownConfigShallowType} from 'markdown-pro';
 import {JSONSchemaType} from 'ajv';
 
 import {Locale, useLocale} from '../../../provider/locale/locale-context';
-import {Spinner} from '../../../layout/spinner/spinner';
 import {ErrorData} from '../../../layout/error-data/error-data';
 import {LocaleNameEnum} from '../../../provider/locale/locale-context-type';
 import {useFormat} from '../../../hook/format-hook/format-hook';
@@ -17,8 +16,6 @@ import {ExampleAudio} from '../../../component/example-audio/c-example-audio';
 import {ExamplePlayer} from '../../../component/example-audio-player/c-example-audio-player';
 import {fetchX} from '../../../util/fetch';
 import {useMakeExecutableState} from '../../../util/function';
-import {LazyResultType} from '../../../util/type';
-import {LoadMeAsyncPropsType} from '../../../component/load-me-async/load-me-async';
 import {Navigation} from '../../../layout/navigation/navigation';
 
 import pngImageSrc from './image/marker-icon-2x.png';
@@ -38,17 +35,6 @@ const myIpSchema: JSONSchemaType<MyIpType> = {
     required: ['ip'],
     type: 'object',
 };
-
-const LoadMeAsyncLazy = lazy<ComponentType<LoadMeAsyncPropsType>>(
-    async (): Promise<LazyResultType<LoadMeAsyncPropsType>> => {
-        const {LoadMeAsync} = await import(
-            /* webpackChunkName: 'load-me-async' */
-            '../../../component/load-me-async/load-me-async'
-        );
-
-        return {'default': LoadMeAsync};
-    }
-);
 
 const htmlCode = markdownPro('# Markdown Pro'); // <h1>Markdown Pro</h1>
 
