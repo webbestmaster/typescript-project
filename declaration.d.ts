@@ -28,6 +28,9 @@ declare const IS_PRODUCTION: unknown;
 
 declare const BUILD_DATE_H: unknown;
 
+// SSR
+
+// SSR Navigation
 type NavigationItemType = {
     href: string;
     title: string;
