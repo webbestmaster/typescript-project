@@ -28,6 +28,17 @@ declare const IS_PRODUCTION: unknown;
 
 declare const BUILD_DATE_H: unknown;
 
+type NavigationItemType = {
+    href: string;
+    title: string;
+};
+
+type NavigationContextType = {
+    itemList: Array<NavigationItemType>;
+};
+
+declare const NAVIGATION_DATA: NavigationContextType | void;
+
 /*
 declare module '*.scss';
 declare module '*.png';

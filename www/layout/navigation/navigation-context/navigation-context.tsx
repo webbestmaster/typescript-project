@@ -1,3 +1,4 @@
+/* global NAVIGATION_DATA */
 import {createContext} from 'react';
 
 import {isBrowser} from '../../../util/system';
@@ -18,8 +19,11 @@ export function NavigationProvider(props: NavigationProviderPropsType): JSX.Elem
     const {children, navigationData} = props;
 
     if (isBrowser) {
+        const ssrNavigationData: NavigationContextType | null =
+            typeof NAVIGATION_DATA === 'object' ? NAVIGATION_DATA : null;
+
         // get data from window global object
-        return <Provider value={navigationData || defaultNavigationContextData}>{children}</Provider>;
+        return <Provider value={ssrNavigationData || defaultNavigationContextData}>{children}</Provider>;
     }
 
     return <Provider value={navigationData || defaultNavigationContextData}>{children}</Provider>;
