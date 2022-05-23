@@ -1,5 +1,3 @@
-import fileSystem from 'fs';
-
 import {FastifyRequest, FastifyReply} from 'fastify';
 import ReactDOMServer from 'react-dom/server';
 
@@ -13,29 +11,19 @@ import {
 } from '../../www/layout/navigation/navigation-const';
 import {NavigationContextType} from '../../www/layout/navigation/navigation-context/navigation-context-type';
 
-const contentStringBegin = '<div class="js-app-wrapper">';
-const contentStringEnd = '</div>';
-const contentStringFull = contentStringBegin + contentStringEnd;
-
-// eslint-disable-next-line no-sync
-const indexHtml: string = fileSystem.readFileSync('./dist/index.html', 'utf8');
+import {getNavigationContextData} from './api/ssr-navigation';
+import {contentStringBegin, contentStringEnd, contentStringFull, indexHtml} from './ssr-const';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
 export async function getHtmlCallBack(request: FastifyRequest, reply: FastifyReply) {
     reply.type('text/html');
 
-    const navigationData: NavigationContextType = {
-        itemList: [
-            {
-                href: '/',
-                title: 'ssr',
-            },
-            {
-                href: '/22',
-                title: 'home',
-            },
-        ],
-    };
+    const navigationData: NavigationContextType = await getNavigationContextData();
+    const navigationDataHtmlString: string = [
+        navigationReplaceSelectorBegin,
+        `window.${navigationSsrFieldName} = ${JSON.stringify(navigationData)}`,
+        navigationReplaceSelectorEnd,
+    ].join('');
 
     const pathname: string = request.raw.url || '/';
     const appStream = ReactDOMServer.renderToStaticNodeStream(
@@ -46,12 +34,5 @@ export async function getHtmlCallBack(request: FastifyRequest, reply: FastifyRep
 
     return indexHtml
         .replace(contentStringFull, [contentStringBegin, htmlString, contentStringEnd].join(''))
-        .replace(
-            navigationReplaceSelector,
-            [
-                navigationReplaceSelectorBegin,
-                `window.${navigationSsrFieldName} = ${JSON.stringify(navigationData)}`,
-                navigationReplaceSelectorEnd,
-            ].join('')
-        );
+        .replace(navigationReplaceSelector, navigationDataHtmlString);
 }
