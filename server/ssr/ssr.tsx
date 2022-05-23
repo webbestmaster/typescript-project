@@ -5,7 +5,12 @@ import ReactDOMServer from 'react-dom/server';
 
 import {App} from '../../www/component/app/app';
 import {streamToString} from '../util/stream';
-import {navigationReplaceSelector, navigationSsrFieldName} from '../../www/layout/navigation/navigation-const';
+import {
+    navigationReplaceSelector,
+    navigationReplaceSelectorBegin,
+    navigationReplaceSelectorEnd,
+    navigationSsrFieldName,
+} from '../../www/layout/navigation/navigation-const';
 import {NavigationContextType} from '../../www/layout/navigation/navigation-context/navigation-context-type';
 
 const contentStringBegin = '<div class="js-app-wrapper">';
@@ -43,6 +48,10 @@ export async function getHtmlCallBack(request: FastifyRequest, reply: FastifyRep
         .replace(contentStringFull, [contentStringBegin, htmlString, contentStringEnd].join(''))
         .replace(
             navigationReplaceSelector,
-            `<script>window.${navigationSsrFieldName} = ${JSON.stringify(navigationData)}</script>`
+            [
+                navigationReplaceSelectorBegin,
+                `window.${navigationSsrFieldName} = ${JSON.stringify(navigationData)}`,
+                navigationReplaceSelectorEnd,
+            ].join('')
         );
 }

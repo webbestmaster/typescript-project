@@ -2,6 +2,8 @@
 import {createContext} from 'react';
 
 import {isBrowser} from '../../../util/system';
+import {navigationScriptSelector} from '../navigation-const';
+import {removeBySelector} from '../../../util/dom';
 
 import {NavigationContextType} from './navigation-context-type';
 import {defaultNavigationContextData} from './navigation-context-const';
@@ -18,11 +20,12 @@ type NavigationProviderPropsType = {
 export function NavigationProvider(props: NavigationProviderPropsType): JSX.Element {
     const {children, navigationData} = props;
 
-    if (isBrowser) {
-        const ssrNavigationData: NavigationContextType | null =
-            typeof NAVIGATION_DATA === 'object' ? NAVIGATION_DATA : null;
+    const ssrNavigationData: NavigationContextType | null =
+        typeof NAVIGATION_DATA === 'object' ? NAVIGATION_DATA : null;
 
-        // get data from window global object
+    removeBySelector(navigationScriptSelector);
+
+    if (isBrowser) {
         return <Provider value={ssrNavigationData || defaultNavigationContextData}>{children}</Provider>;
     }
 
