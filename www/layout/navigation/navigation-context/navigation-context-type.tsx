@@ -1,5 +1,5 @@
 export type NavigationItemType = {
-    href: string;
+    slug: string;
     title: string;
 };
 

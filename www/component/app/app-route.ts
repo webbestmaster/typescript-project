@@ -11,8 +11,8 @@ export const appRoute = {
     },
 
     // client
-    test: {
-        path: '/test/:someId' as const,
+    article: {
+        path: '/article/:slug' as const,
     },
 
     // cms

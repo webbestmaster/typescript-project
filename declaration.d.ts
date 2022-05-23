@@ -32,7 +32,7 @@ declare const BUILD_DATE_H: unknown;
 
 // SSR Navigation
 type NavigationItemType = {
-    href: string;
+    slug: string;
     title: string;
 };
 

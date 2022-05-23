@@ -1,7 +1,7 @@
 /* global document, Image, HTMLImageElement, File, FormData, location */
 import {RuleObject, Rule} from 'rc-field-form/lib/interface';
-import {generatePath} from 'react-router';
 
+import {generatePath} from '../../../util/url';
 import {textToSlug} from '../../../util/human';
 import {appRoute} from '../../../component/app/app-route';
 import {PromiseResolveType} from '../../../util/promise';
@@ -116,7 +116,7 @@ export function makeHtmlValidator(): Array<Rule> {
 }
 
 export function getArticleLinkToEdit(articleId: string): string {
-    return generatePath(appRoute.articleEdit.path, {articleId});
+    return generatePath<typeof appRoute.articleEdit.path>(appRoute.articleEdit.path, {articleId});
 }
 
 export function getFileExtension(fileName: string): string {

@@ -17,7 +17,7 @@ export async function getNavigationContextData(): Promise<[NavigationContextType
     const navigationData: NavigationContextType = {
         itemList: articleList.map<NavigationItemType>((article: ArticleType): NavigationItemType => {
             return {
-                href: article.slug,
+                slug: article.slug,
                 title: article.title,
             };
         }),

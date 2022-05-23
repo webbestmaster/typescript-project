@@ -1,21 +1,31 @@
-import {useContext} from 'react';
-import {Link, generatePath} from 'react-router-dom';
+import {useCallback, useContext} from 'react';
+import {Link} from 'react-router-dom';
 
-import {appRoute} from '../../component/app/app-route';
+import {getArticleLinkToViewClient} from '../../page/client/article/article-helper';
 
-import {NavigationContextType} from './navigation-context/navigation-context-type';
+import {NavigationContextType, NavigationItemType} from './navigation-context/navigation-context-type';
 import {navigationContext} from './navigation-context/navigation-context';
 
 export function Navigation(): JSX.Element {
     const navigationContextData = useContext<NavigationContextType>(navigationContext);
 
+    const {itemList} = navigationContextData;
+
+    const renderNavigationListItem = useCallback((menuItem: NavigationItemType, index: number): JSX.Element => {
+        const {slug, title} = menuItem;
+
+        return (
+            <Link key={`${slug}-${String(index)}`} to={getArticleLinkToViewClient(slug)}>
+                {title}
+            </Link>
+        );
+    }, []);
+
     return (
         <div>
             <h1>Navigation</h1>
 
-            <Link to={generatePath(appRoute.test.path, {someId: '1'})}>to test</Link>
-
-            <div>{JSON.stringify(navigationContextData, null, 4)}</div>
+            {itemList.map(renderNavigationListItem)}
         </div>
     );
 }

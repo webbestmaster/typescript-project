@@ -14,7 +14,7 @@ import {CmsArticleListAsync} from '../../page/cms/cms-article-list/cms-article-l
 import {CmsArticleTreeAsync} from '../../page/cms/cms-article-tree/cms-article-tree-async';
 import {CmsArticleCreateAsync} from '../../page/cms/cms-article/cms-article-create/cms-article-create-async';
 import {CmsArticleEditAsync} from '../../page/cms/cms-article/cms-article-edit/cms-article-edit-async';
-import {Test} from '../../page/client/test/text';
+import {Article} from '../../page/client/article/article';
 
 import {appRoute} from './app-route';
 
@@ -26,7 +26,7 @@ export function AppRouting(props: PropsType): JSX.Element {
     const switchNode = (
         <Routes>
             <Route element={<Home />} path={appRoute.root.path} />
-            <Route element={<Test />} path={appRoute.test.path} />
+            <Route element={<Article />} path={appRoute.article.path} />
 
             <Route element={<LoginAsync />} path={appRoute.login.path} />
 
