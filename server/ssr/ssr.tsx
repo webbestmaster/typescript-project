@@ -3,7 +3,7 @@ import ReactDOMServer from 'react-dom/server';
 
 import {App} from '../../www/component/app/app';
 import {streamToString} from '../util/stream';
-import {navigationReplaceSelector} from '../../www/layout/navigation/navigation-const';
+import {navigationReplaceSelector} from '../../www/client-component/navigation/navigation-const';
 
 import {getNavigationContextData} from './api/ssr-navigation';
 import {contentStringBegin, contentStringEnd, contentStringFull, indexHtml} from './ssr-const';

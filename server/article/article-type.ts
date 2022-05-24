@@ -40,3 +40,5 @@ export type ArticleType = {
     titleImage: string;
     updatedDate: string;
 };
+
+export type ArticlePreviewType = Pick<ArticleType, 'articleType' | 'fileList' | 'slug' | 'title' | 'titleImage'>;

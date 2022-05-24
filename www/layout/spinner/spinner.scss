@@ -1,4 +1,7 @@
-/* stylelint-disable keyframes-name-pattern, function-no-unknown */
+/* stylelint-disable keyframes-name-pattern, function-no-unknown, no-duplicate-selectors */
+
+// no-duplicate-selectors: suddenly the "%spinner-animation" and the "%show-spinner-animation" -
+// the same selectors for linter
 
 @use 'sass:math';
 

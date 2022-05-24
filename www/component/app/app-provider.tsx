@@ -2,8 +2,8 @@ import {ReactNode} from 'react';
 
 import {LocalizationProvider} from '../../provider/locale/locale-context';
 import {User} from '../../provider/user/user-context';
-import {NavigationProvider} from '../../layout/navigation/navigation-context/navigation-context';
-import {NavigationContextType} from '../../layout/navigation/navigation-context/navigation-context-type';
+import {NavigationProvider} from '../../client-component/navigation/navigation-context/navigation-context';
+import {NavigationContextType} from '../../client-component/navigation/navigation-context/navigation-context-type';
 
 type PropsType = {
     children: ReactNode;

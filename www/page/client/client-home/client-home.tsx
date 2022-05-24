@@ -16,11 +16,11 @@ import {ExampleAudio} from '../../../component/example-audio/c-example-audio';
 import {ExamplePlayer} from '../../../component/example-audio-player/c-example-audio-player';
 import {fetchX} from '../../../util/fetch';
 import {useMakeExecutableState} from '../../../util/function';
-import {Navigation} from '../../../layout/navigation/navigation';
+import {Navigation} from '../../../client-component/navigation/navigation';
 
 import pngImageSrc from './image/marker-icon-2x.png';
 import svgImageSrc from './image/questions-with-an-official-answer.svg';
-import homeStyle from './home.scss';
+import clientHomeStyle from './client-home.scss';
 
 type MyIpType = {
     ip: string;
@@ -47,7 +47,7 @@ const config: MarkdownConfigShallowType = {
 
 const htmlCodeConfigured = markdownPro('# Markdown Pro', config);
 
-export function Home(): JSX.Element {
+export function ClientHome(): JSX.Element {
     console.log(htmlCode, htmlCodeConfigured);
     console.log(ErrorData);
 
@@ -87,7 +87,7 @@ export function Home(): JSX.Element {
     return (
         <div>
             <Navigation />
-            <h1 className={homeStyle.home_header}>
+            <h1 className={clientHomeStyle.home_header}>
                 home page (<AsciiSpinner />)
             </h1>
 

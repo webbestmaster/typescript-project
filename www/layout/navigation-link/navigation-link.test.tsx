@@ -3,7 +3,7 @@ import {useSearchParams} from 'react-router-dom';
 import {useEffect} from 'react';
 import {render, screen} from '@testing-library/react';
 
-import {NavigationProvider} from '../../../test-unit/util/navigation-provider';
+import {TestUtilNavigationProvider} from '../../../test-unit/util/test-util-navigation-provider';
 
 import {NavigationLink} from './navigation-link';
 
@@ -14,7 +14,7 @@ describe('NavigationLink', () => {
             return <NavigationLink to="/default-state" />;
         }
 
-        const {unmount, container} = render(<NavigationProvider component={DefaultState} />);
+        const {unmount, container} = render(<TestUtilNavigationProvider component={DefaultState} />);
 
         const link = container.querySelector('a[href="/default-state"]');
 
@@ -33,7 +33,7 @@ describe('NavigationLink', () => {
             );
         }
 
-        const {unmount, container} = render(<NavigationProvider component={WithProps} />);
+        const {unmount, container} = render(<TestUtilNavigationProvider component={WithProps} />);
 
         const link = container.querySelector(
             'a.props-class-name[href="/with-props"][class="props-class-name"][title="props-title"]'
@@ -57,7 +57,7 @@ describe('NavigationLink', () => {
             return <NavigationLink to="/use-query-by-default" />;
         }
 
-        const {unmount, container} = render(<NavigationProvider component={UseQuery} />);
+        const {unmount, container} = render(<TestUtilNavigationProvider component={UseQuery} />);
 
         const link = container.querySelector('a[href="/use-query-by-default?nick=mike"]');
 
@@ -78,7 +78,7 @@ describe('NavigationLink', () => {
             return <NavigationLink isSaveQueries to="/use-query-by-props" />;
         }
 
-        const {unmount, container} = render(<NavigationProvider component={UseQuery} />);
+        const {unmount, container} = render(<TestUtilNavigationProvider component={UseQuery} />);
 
         const link = container.querySelector('a[href="/use-query-by-props?nick=mike"]');
 
@@ -99,7 +99,7 @@ describe('NavigationLink', () => {
             return <NavigationLink isSaveQueries={false} to="/do-not-use-query" />;
         }
 
-        const {unmount, container} = render(<NavigationProvider component={DoNotUseQuery} />);
+        const {unmount, container} = render(<TestUtilNavigationProvider component={DoNotUseQuery} />);
 
         const link = container.querySelector('a[href="/do-not-use-query"]');
 
@@ -120,7 +120,7 @@ describe('NavigationLink', () => {
             return <NavigationLink queries={{foo: 'bar'}} to="/use-own-queries" />;
         }
 
-        const {unmount, container} = render(<NavigationProvider component={UseOwnQueries} />);
+        const {unmount, container} = render(<TestUtilNavigationProvider component={UseOwnQueries} />);
 
         const link = container.querySelector('a[href="/use-own-queries?nick=mike&foo=bar"]');
 
@@ -141,7 +141,7 @@ describe('NavigationLink', () => {
             return <NavigationLink isSaveQueries={false} queries={{foo: 'bar'}} to="/use-own-queries-only" />;
         }
 
-        const {unmount, container} = render(<NavigationProvider component={UseOwnQueriesOnly} />);
+        const {unmount, container} = render(<TestUtilNavigationProvider component={UseOwnQueriesOnly} />);
 
         const link = container.querySelector('a[href="/use-own-queries-only?foo=bar"]');
 

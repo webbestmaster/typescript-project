@@ -14,13 +14,18 @@ export function paginationQueryToURLSearchParameters<DataType>(
     });
 }
 
-type ExtractKeysType<StringConstType> = StringConstType extends `${string}:${infer KeyNames}/${infer Rest}`
-    ? ExtractKeysType<Rest> & {[key in KeyNames]: string}
+export type ExtractPathDataType<StringConstType> = StringConstType extends `${string}:${infer KeyNames}/${infer Rest}`
+    ? ExtractPathDataType<Rest> & {[key in KeyNames]: string}
     : StringConstType extends `${string}:${infer KeyNames}`
-    ? ExtractKeysType<string> & {[key in KeyNames]: string}
+    ? ExtractPathDataType<string> & {[key in KeyNames]: string}
     : Record<never, string>;
 
-export function generatePath<PathType extends string>(rawPath: PathType, pathData: ExtractKeysType<PathType>): string {
+export type ExtractPathKeysType<StringConstType> = keyof ExtractPathDataType<StringConstType>;
+
+export function generatePath<PathType extends string>(
+    rawPath: PathType,
+    pathData: ExtractPathDataType<PathType>
+): string {
     return reactRouterGeneratePath(rawPath, pathData);
 }
 

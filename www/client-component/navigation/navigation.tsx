@@ -1,7 +1,7 @@
 import {useCallback, useContext} from 'react';
 import {Link} from 'react-router-dom';
 
-import {getArticleLinkToViewClient} from '../../page/client/article/article-helper';
+import {getArticleLinkToViewClient} from '../article/article-helper';
 
 import {NavigationContextType, NavigationItemType} from './navigation-context/navigation-context-type';
 import {navigationContext} from './navigation-context/navigation-context';

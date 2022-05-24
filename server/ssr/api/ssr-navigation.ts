@@ -1,12 +1,12 @@
 import {
     NavigationContextType,
     NavigationItemType,
-} from '../../../www/layout/navigation/navigation-context/navigation-context-type';
+} from '../../../www/client-component/navigation/navigation-context/navigation-context-type';
 import {
     navigationReplaceSelectorBegin,
     navigationReplaceSelectorEnd,
     navigationSsrFieldName,
-} from '../../../www/layout/navigation/navigation-const';
+} from '../../../www/client-component/navigation/navigation-const';
 import {getSubDocumentListByParentIdFiltered} from '../../article/article-util';
 import {rootArticleId} from '../../article/article-const';
 import {ArticleType} from '../../article/article-type';
@@ -15,12 +15,14 @@ export async function getNavigationContextData(): Promise<[NavigationContextType
     const articleList = await getSubDocumentListByParentIdFiltered(rootArticleId);
 
     const navigationData: NavigationContextType = {
-        itemList: articleList.map<NavigationItemType>((article: ArticleType): NavigationItemType => {
-            return {
-                slug: article.slug,
-                title: article.title,
-            };
-        }),
+        itemList: articleList
+            .filter<ArticleType>((article: ArticleType): article is ArticleType => article.isActive)
+            .map<NavigationItemType>((article: ArticleType): NavigationItemType => {
+                return {
+                    slug: article.slug,
+                    title: article.title,
+                };
+            }),
     };
 
     const navigationDataHtmlString: string = [
