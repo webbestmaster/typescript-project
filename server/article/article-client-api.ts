@@ -1,21 +1,21 @@
-/*
-import {FastifyReply, FastifyRequest} from 'fastify';
+import {ArticleContextType} from '../../www/client-component/article/article-context/article-context-type';
 
-import {PaginationQueryType} from '../data-base/data-base-type';
-import {mainResponseHeader} from '../const';
-import {defaultPaginationQuery} from '../data-base/data-base-const';
+import {getArticleById, getArticleBySlug, getArticlePreviewListByIdListFiltered} from './article-util';
+import {makeDefaultArticle} from './article-helper';
 
-import {articleCrud} from './article';
-import {ArticleType} from './article-type';
-import {validateArticle} from './article-validation';
-import {ArticleContextType} from "../../www/client-component/article/article-context/article-context-type";
-*/
+import {ArticlePreviewType} from './article-type';
 
-/*
-function getClientArticle(slug: string): Promise<ArticleContextType> {
+async function getClientArticle(slug: string): Promise<ArticleContextType> {
+    const article = (await getArticleBySlug(slug)) || makeDefaultArticle();
 
+    const {subDocumentIdList, id} = article;
+    // const parentIdList =
 
+    return {
+        article,
+        childList: await getArticlePreviewListByIdListFiltered(subDocumentIdList),
+        siblingList: [],
+    };
 }
-*/
 
 console.log('22');
