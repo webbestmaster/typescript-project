@@ -1,21 +1,31 @@
 import {ArticleContextType} from '../../www/client-component/article/article-context/article-context-type';
+import {defaultArticleContextData} from '../../www/client-component/article/article-context/article-context-const';
 
-import {getArticleById, getArticleBySlug, getArticlePreviewListByIdListFiltered} from './article-util';
+import {getArticleBySlug, getArticlePreviewListByIdListFiltered, getSiblingPreviewListById} from './article-util';
 import {makeDefaultArticle} from './article-helper';
-
 import {ArticlePreviewType} from './article-type';
 
-async function getClientArticle(slug: string): Promise<ArticleContextType> {
+function getIsActiveArticlePreview(article: ArticlePreviewType): article is ArticlePreviewType {
+    return article.isActive;
+}
+
+export async function getClientArticle(slug: string): Promise<ArticleContextType> {
     const article = (await getArticleBySlug(slug)) || makeDefaultArticle();
 
+    if (!article.isActive || article.id === '') {
+        return defaultArticleContextData;
+    }
+
     const {subDocumentIdList, id} = article;
-    // const parentIdList =
+
+    const [childList, siblingList] = await Promise.all([
+        getArticlePreviewListByIdListFiltered(subDocumentIdList),
+        getSiblingPreviewListById(id),
+    ]);
 
     return {
         article,
-        childList: await getArticlePreviewListByIdListFiltered(subDocumentIdList),
-        siblingList: [],
+        childList: childList.filter<ArticlePreviewType>(getIsActiveArticlePreview),
+        siblingList: siblingList.filter<ArticlePreviewType>(getIsActiveArticlePreview),
     };
 }
-
-console.log('22');

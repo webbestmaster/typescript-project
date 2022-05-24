@@ -41,4 +41,7 @@ export type ArticleType = {
     updatedDate: string;
 };
 
-export type ArticlePreviewType = Pick<ArticleType, 'articleType' | 'fileList' | 'slug' | 'title' | 'titleImage'>;
+export type ArticlePreviewType = Pick<
+    ArticleType,
+    'articleType' | 'fileList' | 'isActive' | 'slug' | 'title' | 'titleImage'
+>;

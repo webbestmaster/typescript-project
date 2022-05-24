@@ -22,7 +22,9 @@ export type CrudType<ModelType> = {
     // count: (query: PaginationQueryQueryExtendedType<ModelType>) => Promise<number>; // throw error if smth wrong
     createOne: (model: ModelType) => Promise<null>; // throw error if smth wrong
     deleteOne: (model: Partial<ModelType>) => Promise<null>; // throw error if smth wrong
-    // findMany: (partialModel: Partial<ModelType>) => Promise<Array<ModelType>>;
+    findMany: (
+        partialModelData: Partial<ModelType> | Partial<Record<keyof ModelType, string>>
+    ) => Promise<Array<ModelType>>;
     findManyPagination: (paginationQuery: PaginationQueryType<ModelType>) => Promise<PaginationResultType<ModelType>>;
     findManyPaginationPartial: (
         paginationQuery: PaginationQueryType<ModelType>,
@@ -34,7 +36,7 @@ export type CrudType<ModelType> = {
         requiredPropertyList: Array<keyof ModelType>
     ) => Promise<Array<Partial<ModelType>>>;
 */
-    findOne: (partialModel: Partial<ModelType>) => Promise<ModelType | null>;
+    findOne: (partialModel: Partial<ModelType> | Partial<Record<keyof ModelType, string>>) => Promise<ModelType | null>;
     updateOne: (partialModel: Partial<ModelType>, model: ModelType) => Promise<null>; // throw error if smth wrong
 };
 

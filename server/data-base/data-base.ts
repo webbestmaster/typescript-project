@@ -69,7 +69,9 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
         });
     }
 
-    function findOne(partialModelData: Partial<ModelType>): Promise<ModelType | null> {
+    function findOne(
+        partialModelData: Partial<ModelType> | Partial<Record<keyof ModelType, string>>
+    ): Promise<ModelType | null> {
         return new Promise<ModelType | null>((resolve: PromiseResolveType<ModelType | null>) => {
             dataBase.findOne<ModelType>(partialModelData, (maybeError: Error | null, data: ModelType | null) => {
                 if (maybeError) {
@@ -87,26 +89,26 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
         });
     }
 
-    /*
-        function findMany(partialModelData: Partial<ModelType>): Promise<Array<ModelType>> {
-            return new Promise<Array<ModelType>>((resolve: PromiseResolveType<Array<ModelType>>) => {
-                // eslint-disable-next-line unicorn/no-array-method-this-argument
-                dataBase.find<ModelType>(partialModelData, (maybeError: Error | null, data: Array<ModelType> | null) => {
-                    if (maybeError) {
-                        resolve([]);
-                        return;
-                    }
+    function findMany(
+        partialModelData: Partial<ModelType> | Partial<Record<keyof ModelType, string>>
+    ): Promise<Array<ModelType>> {
+        return new Promise<Array<ModelType>>((resolve: PromiseResolveType<Array<ModelType>>) => {
+            // eslint-disable-next-line unicorn/no-array-method-this-argument
+            dataBase.find<ModelType>(partialModelData, (maybeError: Error | null, data: Array<ModelType> | null) => {
+                if (maybeError) {
+                    resolve([]);
+                    return;
+                }
 
-                    if (!Array.isArray(data)) {
-                        resolve([]);
-                        return;
-                    }
+                if (!Array.isArray(data)) {
+                    resolve([]);
+                    return;
+                }
 
-                    resolve(data);
-                });
+                resolve(data);
             });
-        }
-    */
+        });
+    }
 
     /*
         function findManyPartial(
@@ -236,7 +238,7 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
         // count,
         createOne,
         deleteOne,
-        // findMany,
+        findMany,
         findManyPagination,
         findManyPaginationPartial,
         // findManyPartial,
