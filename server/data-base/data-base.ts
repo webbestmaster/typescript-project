@@ -121,15 +121,14 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
         }
     */
 
-    async function findManyPagination(
+    function findManyPaginationNoCount(
         paginationQuery: PaginationQueryType<ModelType>
     ): Promise<PaginationResultType<ModelType>> {
-        const {query, pageSize, pageIndex, sort} = paginationQuery;
-        const preparedQuery = prepareQuery<ModelType>(query);
-        const countOfAll = await count(preparedQuery);
-
         return new Promise<PaginationResultType<ModelType>>(
             (resolve: PromiseResolveType<PaginationResultType<ModelType>>) => {
+                const {query, pageSize, pageIndex, sort} = paginationQuery;
+                const preparedQuery = prepareQuery<ModelType>(query);
+
                 dataBase
                     .find<ModelType>(preparedQuery)
                     .sort(sort)
@@ -144,12 +143,29 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
                         }
 
                         if (Array.isArray(dataList)) {
-                            resolve({count: countOfAll, pageIndex, pageSize, result: dataList});
+                            resolve({count: 0, pageIndex, pageSize, result: dataList});
                             return;
                         }
 
                         resolve(noFound);
                     });
+            }
+        );
+    }
+
+    async function findManyPagination(
+        paginationQuery: PaginationQueryType<ModelType>
+    ): Promise<PaginationResultType<ModelType>> {
+        const {query} = paginationQuery;
+        const preparedQuery = prepareQuery<ModelType>(query);
+
+        return Promise.all([count(preparedQuery), findManyPaginationNoCount(paginationQuery)]).then(
+            (data: [number, PaginationResultType<ModelType>]): PaginationResultType<ModelType> => {
+                const [countOfItems, result] = data;
+
+                result.count = countOfItems;
+
+                return result;
             }
         );
     }
