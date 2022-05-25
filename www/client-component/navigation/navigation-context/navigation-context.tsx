@@ -25,9 +25,8 @@ export function NavigationProvider(props: NavigationProviderPropsType): JSX.Elem
 
     removeBySelector(navigationScriptSelector);
 
-    if (isBrowser) {
-        return <Provider value={ssrNavigationData || defaultNavigationContextData}>{children}</Provider>;
-    }
+    const resultData: NavigationContextType =
+        (isBrowser ? ssrNavigationData : navigationData) || defaultNavigationContextData;
 
-    return <Provider value={navigationData || defaultNavigationContextData}>{children}</Provider>;
+    return <Provider value={resultData}>{children}</Provider>;
 }
