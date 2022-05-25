@@ -9,12 +9,23 @@ import {
 } from '../../article/article-util';
 import {defaultArticleContextData} from '../../../www/client-component/article/article-context/article-context-const';
 import {ArticlePreviewType} from '../../article/article-type';
+import {
+    articleReplaceSelectorBegin,
+    articleReplaceSelectorEnd,
+    articleSsrFieldName,
+} from '../../../www/client-component/article/article-const';
 
-export async function getClientArticle(slug: string): Promise<ArticleContextType> {
+export async function getClientArticle(slug: string): Promise<[ArticleContextType, string]> {
     const article = (await getArticleBySlug(slug)) || makeDefaultArticle();
 
     if (!article.isActive || article.id === '') {
-        return defaultArticleContextData;
+        const articleDataHtmlStringNotFound: string = [
+            articleReplaceSelectorBegin,
+            `window.${articleSsrFieldName} = '${JSON.stringify(defaultArticleContextData)}'`,
+            articleReplaceSelectorEnd,
+        ].join('');
+
+        return [defaultArticleContextData, articleDataHtmlStringNotFound];
     }
 
     const {subDocumentIdList, id} = article;
@@ -25,10 +36,18 @@ export async function getClientArticle(slug: string): Promise<ArticleContextType
         getArticlePreviewBreadcrumbListById(id),
     ]);
 
-    return {
+    const articleData: ArticleContextType = {
         article,
         breadcrumbs: breadcrumbs.filter<ArticlePreviewType>(getIsActiveArticlePreview),
         childList: childList.filter<ArticlePreviewType>(getIsActiveArticlePreview),
         siblingList: siblingList.filter<ArticlePreviewType>(getIsActiveArticlePreview),
     };
+
+    const articleDataHtmlString: string = [
+        articleReplaceSelectorBegin,
+        `window.${articleSsrFieldName} = '${JSON.stringify(articleData)}'`,
+        articleReplaceSelectorEnd,
+    ].join('');
+
+    return [articleData, articleDataHtmlString];
 }

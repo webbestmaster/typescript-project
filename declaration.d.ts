@@ -31,6 +31,8 @@ declare const BUILD_DATE_H: unknown;
 // SSR
 declare const NAVIGATION_DATA: string | void;
 
+declare const ARTICLE_DATA: string | void;
+
 /*
 declare module '*.scss';
 declare module '*.png';
