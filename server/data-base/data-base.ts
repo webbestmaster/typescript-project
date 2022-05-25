@@ -10,6 +10,7 @@ import {prepareQuery, partialData, makeSimpleDataBaseCallBack} from './data-base
 import {
     CrudConfigOnChangeArgumentType,
     CrudConfigType,
+    CrudSearchQueryType,
     CrudType,
     PaginationQueryType,
     PaginationResultType,
@@ -51,7 +52,7 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
         filename: dataBasePath,
     });
 
-    function count(query: Record<string, unknown>): Promise<number> {
+    function count(query: CrudSearchQueryType<ModelType>): Promise<number> {
         return new Promise<number>((resolve: PromiseResolveType<number>, reject: PromiseResolveType<Error>) => {
             dataBase.count(query, (maybeError: Error | null, objectCount: number | null): void => {
                 if (maybeError) {
@@ -69,9 +70,7 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
         });
     }
 
-    function findOne(
-        partialModelData: Partial<ModelType> | Partial<Record<keyof ModelType, string>>
-    ): Promise<ModelType | null> {
+    function findOne(partialModelData: CrudSearchQueryType<ModelType>): Promise<ModelType | null> {
         return new Promise<ModelType | null>((resolve: PromiseResolveType<ModelType | null>) => {
             dataBase.findOne<ModelType>(partialModelData, (maybeError: Error | null, data: ModelType | null) => {
                 if (maybeError) {
@@ -89,9 +88,7 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
         });
     }
 
-    function findMany(
-        partialModelData: Partial<ModelType> | Partial<Record<keyof ModelType, string>>
-    ): Promise<Array<ModelType>> {
+    function findMany(partialModelData: CrudSearchQueryType<ModelType>): Promise<Array<ModelType>> {
         return new Promise<Array<ModelType>>((resolve: PromiseResolveType<Array<ModelType>>) => {
             // eslint-disable-next-line unicorn/no-array-method-this-argument
             dataBase.find<ModelType>(partialModelData, (maybeError: Error | null, data: Array<ModelType> | null) => {
@@ -207,7 +204,7 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
     }
 
     // throw error if smth wrong
-    function updateOne(searchModelData: Partial<ModelType>, modelData: ModelType): Promise<null> {
+    function updateOne(searchModelData: CrudSearchQueryType<ModelType>, modelData: ModelType): Promise<null> {
         return new Promise<null>((resolve: PromiseResolveType<null>, reject: PromiseResolveType<Error>) => {
             const modelJsonSchemaValidate = ajv.compile<ModelType>(modelJsonSchema);
             const isValid = modelJsonSchemaValidate(modelData);
@@ -225,7 +222,7 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
     }
 
     // throw error if smth wrong
-    function deleteOne(searchModelData: Partial<ModelType>): Promise<null> {
+    function deleteOne(searchModelData: CrudSearchQueryType<ModelType>): Promise<null> {
         return new Promise<null>((resolve: PromiseResolveType<null>, reject: PromiseResolveType<Error>) => {
             dataBase.remove(searchModelData, {}, (maybeError: Error | null): void => {
                 makeSimpleDataBaseCallBack(maybeError, resolve, reject);

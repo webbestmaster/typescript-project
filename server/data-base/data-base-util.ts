@@ -1,6 +1,6 @@
 import {PromiseResolveType} from '../../www/util/promise';
 
-import {PaginationQueryQueryExtendedType, RegExQueryType} from './data-base-type';
+import {CrudSearchQueryType, RegExQueryType} from './data-base-type';
 
 export function makeSimpleDataBaseCallBack(
     maybeError: Error | null,
@@ -45,8 +45,8 @@ export function getRegExFromUnknown(value: unknown): RegExQueryType | null {
     return {$regex, $regexFlag};
 }
 
-export function prepareQuery<ModelType>(query: PaginationQueryQueryExtendedType<ModelType>): Record<string, unknown> {
-    const result: Record<string, unknown> = {};
+export function prepareQuery<ModelType>(query: CrudSearchQueryType<ModelType>): CrudSearchQueryType<ModelType> {
+    const result: CrudSearchQueryType<ModelType> = {};
 
     // eslint-disable-next-line guard-for-in, no-loops/no-loops
     for (const key in query) {
