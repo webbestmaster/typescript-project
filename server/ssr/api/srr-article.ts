@@ -1,18 +1,14 @@
-import {ArticleContextType} from '../../www/client-component/article/article-context/article-context-type';
-import {defaultArticleContextData} from '../../www/client-component/article/article-context/article-context-const';
-
+import {ArticleContextType} from '../../../www/client-component/article/article-context/article-context-type';
+import {makeDefaultArticle} from '../../article/article-helper';
 import {
     getArticleBySlug,
     getArticlePreviewBreadcrumbListById,
     getArticlePreviewListByIdListFiltered,
+    getIsActiveArticlePreview,
     getSiblingPreviewListById,
-} from './article-util';
-import {makeDefaultArticle} from './article-helper';
-import {ArticlePreviewType} from './article-type';
-
-export function getIsActiveArticlePreview(article: ArticlePreviewType): article is ArticlePreviewType {
-    return article.isActive;
-}
+} from '../../article/article-util';
+import {defaultArticleContextData} from '../../../www/client-component/article/article-context/article-context-const';
+import {ArticlePreviewType} from '../../article/article-type';
 
 export async function getClientArticle(slug: string): Promise<ArticleContextType> {
     const article = (await getArticleBySlug(slug)) || makeDefaultArticle();

@@ -1,6 +1,10 @@
 import {ArticlePreviewType, ArticleType} from './article-type';
 import {articleCrud} from './article';
 
+export function getIsActiveArticlePreview(article: ArticlePreviewType): article is ArticlePreviewType {
+    return article.isActive;
+}
+
 export function getArticleById(id: string): Promise<ArticleType | null> {
     return articleCrud.findOne({id});
 }

@@ -5,10 +5,13 @@ import {
     navigationReplaceSelectorEnd,
     navigationSsrFieldName,
 } from '../../../www/client-component/navigation/navigation-const';
-import {articleToArticlePreview, getSubDocumentListByParentIdFiltered} from '../../article/article-util';
+import {
+    articleToArticlePreview,
+    getSubDocumentListByParentIdFiltered,
+    getIsActiveArticlePreview,
+} from '../../article/article-util';
 import {rootArticleId} from '../../article/article-const';
 import {ArticlePreviewType} from '../../article/article-type';
-import {getIsActiveArticlePreview} from '../../article/article-client-api';
 
 export async function getNavigationContextData(): Promise<[NavigationContextType, string]> {
     const articleList = await getSubDocumentListByParentIdFiltered(rootArticleId);
