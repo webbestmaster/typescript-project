@@ -38,6 +38,34 @@ export async function getArticlePreviewListByIdListFiltered(idList: Array<string
     return articlePreviewList.map<ArticlePreviewType>(articleToArticlePreview);
 }
 
+export async function getArticleBreadcrumbListById(id: string): Promise<Array<ArticleType>> {
+    const articleList: Array<ArticleType> = [];
+
+    let parent: ArticleType | null = null;
+    let deep = 10;
+    let childId: string = id;
+
+    // eslint-disable-next-line no-loops/no-loops
+    do {
+        deep -= 1;
+        parent = await articleCrud.findOne({subDocumentIdList: childId});
+
+        if (parent) {
+            childId = parent.id;
+            articleList.unshift(parent);
+        }
+    } while (parent && deep > 0);
+
+    return articleList;
+}
+
+// eslint-disable-next-line id-length
+export async function getArticlePreviewBreadcrumbListById(id: string): Promise<Array<ArticlePreviewType>> {
+    const articleList = await getArticleBreadcrumbListById(id);
+
+    return articleList.map<ArticlePreviewType>(articleToArticlePreview);
+}
+
 export async function getSiblingListById(articleId: string): Promise<Array<ArticleType>> {
     const parentList = await getArticleParentListById(articleId);
 

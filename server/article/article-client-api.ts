@@ -1,7 +1,12 @@
 import {ArticleContextType} from '../../www/client-component/article/article-context/article-context-type';
 import {defaultArticleContextData} from '../../www/client-component/article/article-context/article-context-const';
 
-import {getArticleBySlug, getArticlePreviewListByIdListFiltered, getSiblingPreviewListById} from './article-util';
+import {
+    getArticleBySlug,
+    getArticlePreviewBreadcrumbListById,
+    getArticlePreviewListByIdListFiltered,
+    getSiblingPreviewListById,
+} from './article-util';
 import {makeDefaultArticle} from './article-helper';
 import {ArticlePreviewType} from './article-type';
 
@@ -18,14 +23,15 @@ export async function getClientArticle(slug: string): Promise<ArticleContextType
 
     const {subDocumentIdList, id} = article;
 
-    const [childList, siblingList] = await Promise.all([
+    const [childList, siblingList, breadcrumbs] = await Promise.all([
         getArticlePreviewListByIdListFiltered(subDocumentIdList),
         getSiblingPreviewListById(id),
+        getArticlePreviewBreadcrumbListById(id),
     ]);
 
     return {
         article,
-        breadcrumbs: [],
+        breadcrumbs: breadcrumbs.filter<ArticlePreviewType>(getIsActiveArticlePreview),
         childList: childList.filter<ArticlePreviewType>(getIsActiveArticlePreview),
         siblingList: siblingList.filter<ArticlePreviewType>(getIsActiveArticlePreview),
     };
