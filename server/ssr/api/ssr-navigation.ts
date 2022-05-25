@@ -21,7 +21,7 @@ export async function getNavigationContextData(): Promise<[NavigationContextType
 
     const navigationDataHtmlString: string = [
         navigationReplaceSelectorBegin,
-        `window.${navigationSsrFieldName} = ${JSON.stringify(navigationData)}`,
+        `window.${navigationSsrFieldName} = '${JSON.stringify(navigationData)}'`,
         navigationReplaceSelectorEnd,
     ].join('');
 

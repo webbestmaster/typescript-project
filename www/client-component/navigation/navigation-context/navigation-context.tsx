@@ -21,7 +21,7 @@ export function NavigationProvider(props: NavigationProviderPropsType): JSX.Elem
     const {children, navigationData} = props;
 
     const ssrNavigationData: NavigationContextType | null =
-        typeof NAVIGATION_DATA === 'object' ? NAVIGATION_DATA : null;
+        typeof NAVIGATION_DATA === 'string' ? JSON.parse(NAVIGATION_DATA) : null;
 
     removeBySelector(navigationScriptSelector);
 
