@@ -4,19 +4,24 @@ import {LocalizationProvider} from '../../provider/locale/locale-context';
 import {User} from '../../provider/user/user-context';
 import {NavigationProvider} from '../../client-component/navigation/navigation-context/navigation-context';
 import {NavigationContextType} from '../../client-component/navigation/navigation-context/navigation-context-type';
+import {ArticleProvider} from '../../client-component/article/article-context/article-context';
+import {ArticleContextType} from '../../client-component/article/article-context/article-context-type';
 
 type PropsType = {
+    articleData: ArticleContextType | null;
     children: ReactNode;
     navigationData: NavigationContextType | null;
 };
 
 export function AppProvider(props: PropsType): JSX.Element {
-    const {children, navigationData} = props;
+    const {children, navigationData, articleData} = props;
 
     return (
         <User>
             <NavigationProvider navigationData={navigationData}>
-                <LocalizationProvider>{children}</LocalizationProvider>
+                <ArticleProvider articleData={articleData}>
+                    <LocalizationProvider>{children}</LocalizationProvider>
+                </ArticleProvider>
             </NavigationProvider>
         </User>
     );

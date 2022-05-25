@@ -1,10 +1,16 @@
-import {useParams} from 'react-router-dom';
+import {useContext} from 'react';
 
-import {appRoute} from '../../component/app/app-route';
-import {ExtractPathKeysType} from '../../util/url';
+import {ArticleContextType} from './article-context/article-context-type';
+import {articleContext} from './article-context/article-context';
 
 export function Article(): JSX.Element {
-    const {slug} = useParams<ExtractPathKeysType<typeof appRoute.article.path>>();
+    const articleContextData = useContext<ArticleContextType>(articleContext);
 
-    return <h1>article = {slug}</h1>;
+    console.info(articleContextData);
+
+    return (
+        <h1>
+            article = {articleContextData.article.slug} - {articleContextData.article.id}
+        </h1>
+    );
 }
