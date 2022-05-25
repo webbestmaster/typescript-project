@@ -25,6 +25,7 @@ export async function getClientArticle(slug: string): Promise<ArticleContextType
 
     return {
         article,
+        breadcrumbs: [],
         childList: childList.filter<ArticlePreviewType>(getIsActiveArticlePreview),
         siblingList: siblingList.filter<ArticlePreviewType>(getIsActiveArticlePreview),
     };

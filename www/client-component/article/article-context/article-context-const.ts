@@ -4,6 +4,7 @@ import {ArticleContextType} from './article-context-type';
 
 export const defaultArticleContextData: ArticleContextType = {
     article: makeDefaultArticle(),
+    breadcrumbs: [],
     childList: [],
     siblingList: [],
 };
