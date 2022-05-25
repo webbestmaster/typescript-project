@@ -29,18 +29,7 @@ declare const IS_PRODUCTION: unknown;
 declare const BUILD_DATE_H: unknown;
 
 // SSR
-
-// SSR Navigation
-type NavigationItemType = {
-    slug: string;
-    title: string;
-};
-
-type NavigationContextType = {
-    itemList: Array<NavigationItemType>;
-};
-
-declare const NAVIGATION_DATA: NavigationContextType | void;
+declare const NAVIGATION_DATA: string | void;
 
 /*
 declare module '*.scss';

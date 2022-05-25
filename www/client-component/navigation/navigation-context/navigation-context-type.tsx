@@ -1,8 +1,5 @@
-export type NavigationItemType = {
-    slug: string;
-    title: string;
-};
+import {ArticlePreviewType} from '../../../../server/article/article-type';
 
 export type NavigationContextType = {
-    itemList: Array<NavigationItemType>;
+    itemList: Array<ArticlePreviewType>;
 };

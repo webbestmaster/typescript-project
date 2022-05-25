@@ -5,7 +5,7 @@ import {getArticleBySlug, getArticlePreviewListByIdListFiltered, getSiblingPrevi
 import {makeDefaultArticle} from './article-helper';
 import {ArticlePreviewType} from './article-type';
 
-function getIsActiveArticlePreview(article: ArticlePreviewType): article is ArticlePreviewType {
+export function getIsActiveArticlePreview(article: ArticlePreviewType): article is ArticlePreviewType {
     return article.isActive;
 }
 

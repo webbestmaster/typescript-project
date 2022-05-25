@@ -2,8 +2,9 @@ import {useCallback, useContext} from 'react';
 import {Link} from 'react-router-dom';
 
 import {getArticleLinkToViewClient} from '../article/article-helper';
+import {ArticlePreviewType} from '../../../server/article/article-type';
 
-import {NavigationContextType, NavigationItemType} from './navigation-context/navigation-context-type';
+import {NavigationContextType} from './navigation-context/navigation-context-type';
 import {navigationContext} from './navigation-context/navigation-context';
 
 export function Navigation(): JSX.Element {
@@ -11,7 +12,7 @@ export function Navigation(): JSX.Element {
 
     const {itemList} = navigationContextData;
 
-    const renderNavigationListItem = useCallback((menuItem: NavigationItemType, index: number): JSX.Element => {
+    const renderNavigationListItem = useCallback((menuItem: ArticlePreviewType, index: number): JSX.Element => {
         const {slug, title} = menuItem;
 
         return (
