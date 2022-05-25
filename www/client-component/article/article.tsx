@@ -1,16 +1,26 @@
-import {useContext} from 'react';
+import {useContext, useEffect} from 'react';
+import {useParams} from 'react-router-dom';
+
+import {ExtractPathKeysType} from '../../util/url';
+import {appRoute} from '../../component/app/app-route';
+import {noop} from '../../util/function';
 
 import {ArticleContextType} from './article-context/article-context-type';
 import {articleContext} from './article-context/article-context';
 
 export function Article(): JSX.Element {
-    const articleContextData = useContext<ArticleContextType>(articleContext);
+    const {setSlug = noop, article} = useContext<ArticleContextType>(articleContext);
+    const {slug = ''} = useParams<ExtractPathKeysType<typeof appRoute.article.path>>();
 
-    console.info(articleContextData);
+    useEffect(() => {
+        setSlug(slug);
+    }, [slug, setSlug]);
+
+    console.info(article);
 
     return (
         <h1>
-            article = {articleContextData.article.slug} - {articleContextData.article.id}
+            article = {article.slug} - {article.id}
         </h1>
     );
 }

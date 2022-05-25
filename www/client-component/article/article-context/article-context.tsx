@@ -1,5 +1,5 @@
 /* global ARTICLE_DATA */
-import {createContext, useEffect} from 'react';
+import {createContext, useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 
 import {isBrowser} from '../../../util/system';
@@ -15,26 +15,30 @@ export const articleContext = createContext<ArticleContextType>(defaultArticleCo
 
 const {Provider} = articleContext;
 
-type NavigationProviderPropsType = {
+type ArticleProviderPropsType = {
     articleData: ArticleContextType | null;
     children: Array<JSX.Element> | JSX.Element;
 };
 
-export function ArticleProvider(props: NavigationProviderPropsType): JSX.Element {
+export function ArticleProvider(props: ArticleProviderPropsType): JSX.Element {
     const {children, articleData} = props;
-    const data = useParams<ExtractPathKeysType<typeof appRoute.article.path>>();
+    const defaultParameters = useParams<ExtractPathKeysType<typeof appRoute.article.path>>();
+    const [slug, setSlug] = useState<string>(defaultParameters.slug || '');
+
+    console.info('ArticleProvider');
 
     // TODO: store article by slug to cache
+    // TODO: add is article loading
     const ssrArticleData: ArticleContextType | null =
         typeof ARTICLE_DATA === 'string' ? JSON.parse(ARTICLE_DATA) : null;
 
     useEffect(() => {
         console.info('fetch data about article');
-    }, [data]);
+    }, [slug]);
 
     removeBySelector(articleScriptSelector);
 
     const resultData: ArticleContextType = (isBrowser ? ssrArticleData : articleData) || defaultArticleContextData;
 
-    return <Provider value={resultData}>{children}</Provider>;
+    return <Provider value={{...resultData, setSlug}}>{children}</Provider>;
 }
