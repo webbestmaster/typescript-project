@@ -2,7 +2,7 @@ import Ajv, {JSONSchemaType, ValidateFunction} from 'ajv';
 
 import {PaginationResultType} from '../data-base/data-base-type';
 
-import {ArticleType, ArticleTypeEnum, SubDocumentListViewTypeEnum} from './article-type';
+import {ArticlePreviewType, ArticleType, ArticleTypeEnum, SubDocumentListViewTypeEnum} from './article-type';
 
 export function makeArticleSchema(): JSONSchemaType<ArticleType> {
     const articleSchemaProperties = {
@@ -129,6 +129,35 @@ export function validateArticle(data: unknown): [boolean, ValidateFunction<Artic
     const isValidArticle = modelJsonSchemaValidate(data);
 
     return [isValidArticle, modelJsonSchemaValidate];
+}
+
+export function makeArticlePreviewSchema(): JSONSchemaType<ArticlePreviewType> {
+    const articlePreviewSchemaProperties = {
+        articleType: {'enum': Object.values(ArticleTypeEnum), type: 'string'},
+        fileList: {items: {type: 'string'}, type: 'array'},
+        isActive: {type: 'boolean'}, // actually temporary "removed"
+        slug: {type: 'string'},
+        title: {type: 'string'},
+        titleImage: {type: 'string'},
+    } as const;
+
+    const requiredFieldList: Array<keyof ArticlePreviewType> = [
+        'articleType',
+        'fileList',
+        'isActive',
+        'slug',
+        'title',
+        'titleImage',
+    ];
+
+    const articlePreviewSchema: JSONSchemaType<ArticlePreviewType> = {
+        additionalProperties: false,
+        properties: articlePreviewSchemaProperties,
+        required: requiredFieldList,
+        type: 'object',
+    };
+
+    return articlePreviewSchema;
 }
 
 /*

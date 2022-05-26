@@ -3,6 +3,7 @@ import {FastifyReply, FastifyRequest} from 'fastify';
 import {PaginationQueryType} from '../data-base/data-base-type';
 import {mainResponseHeader} from '../const';
 import {defaultPaginationQuery} from '../data-base/data-base-const';
+import {getClientArticle as getClientArticleSsr} from '../ssr/api/srr-article';
 
 import {articleCrud} from './article';
 import {ArticleType} from './article-type';
@@ -169,7 +170,6 @@ export async function postAdminArticleUpdate(
         .send(actualizedArticle);
 }
 
-// eslint-disable-next-line complexity, max-statements
 export async function deleteAdminArticleDelete(
     request: FastifyRequest<{Body: string; Params?: {articleId: string}}>,
     reply: FastifyReply
@@ -183,4 +183,21 @@ export async function deleteAdminArticleDelete(
         .code(200)
         .header(...mainResponseHeader)
         .send({articleId});
+}
+
+export async function getClientArticle(
+    request: FastifyRequest<{Body: string; Params?: {slug: string}}>,
+    reply: FastifyReply
+): Promise<void> {
+    const {params} = request;
+    const slug = params?.slug || '';
+
+    const [clientArticleData] = await getClientArticleSsr(slug);
+
+    const status = clientArticleData.article.id === '' ? 404 : 200;
+
+    reply
+        .code(status)
+        .header(...mainResponseHeader)
+        .send(clientArticleData);
 }

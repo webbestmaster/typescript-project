@@ -8,6 +8,7 @@ export const apiUrl = {
     adminFileUpload: '/api/admin/file/upload',
     articleListPagination: '/api/article/pagination',
     articleListPaginationPick: '/api/article/pagination-pick',
+    clientArticleContextGet: '/api/client-article/:slug' as const,
     fileGet: '/static-file/:fileName' as const,
     getUser: '/api/auth/get-user',
     imageGet: '/api-image/:size/:fileName' as const,

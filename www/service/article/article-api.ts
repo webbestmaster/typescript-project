@@ -9,6 +9,8 @@ import {
 import {apiUrl} from '../../../server/const';
 import {paginationQueryToURLSearchParameters as paginationQueryToURLSearchParameters} from '../../util/url';
 import {UnknownObjectType} from '../../util/type';
+import {ArticleContextType} from '../../client-component/article/article-context/article-context-type';
+import {articleContextDataSchema} from '../../client-component/article/article-context/article-context-const';
 
 export async function getArticleListPagination(
     paginationQuery: PaginationQueryType<ArticleType>
@@ -69,4 +71,11 @@ export async function deleteArticle(articleId: string): Promise<UnknownObjectTyp
             method: FetchMethodEnum.delete,
         }
     );
+}
+
+export async function getArticleContextBySlug(slug: string): Promise<ArticleContextType> {
+    return fetchX<ArticleContextType>(apiUrl.clientArticleContextGet.replace(':slug', slug), articleContextDataSchema, {
+        credentials: 'include',
+        method: FetchMethodEnum.get,
+    });
 }

@@ -7,6 +7,7 @@ import {articleScriptSelector} from '../article-const';
 import {removeBySelector} from '../../../util/dom';
 import {ExtractPathKeysType} from '../../../util/url';
 import {appRoute} from '../../../component/app/app-route';
+import {getArticleContextBySlug} from '../../../service/article/article-api';
 
 import {ArticleContextType} from './article-context-type';
 import {defaultArticleContextData} from './article-context-const';
@@ -34,6 +35,10 @@ export function ArticleProvider(props: ArticleProviderPropsType): JSX.Element {
 
     useEffect(() => {
         console.info('fetch data about article');
+        if (slug.trim()) {
+            // eslint-disable-next-line promise/catch-or-return
+            getArticleContextBySlug(slug).then(console.info);
+        }
     }, [slug]);
 
     removeBySelector(articleScriptSelector);
