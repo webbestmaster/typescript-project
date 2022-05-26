@@ -40,6 +40,7 @@ export async function getClientArticle(slug: string): Promise<[ArticleContextTyp
         article,
         breadcrumbs: breadcrumbs.filter<ArticlePreviewType>(getIsActiveArticlePreview),
         childList: childList.filter<ArticlePreviewType>(getIsActiveArticlePreview),
+        isInProgressArticle: false,
         siblingList: siblingList.filter<ArticlePreviewType>(getIsActiveArticlePreview),
     };
 

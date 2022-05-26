@@ -9,6 +9,7 @@ export const defaultArticleContextData: ArticleContextType = {
     article: makeDefaultArticle(),
     breadcrumbs: [],
     childList: [],
+    isInProgressArticle: false,
     siblingList: [],
 };
 
@@ -24,6 +25,9 @@ export const articleContextDataSchema: JSONSchemaType<ArticleContextType> = {
             items: makeArticlePreviewSchema(),
             type: 'array',
         },
+        isInProgressArticle: {
+            type: 'boolean',
+        },
         setSlug: {
             nullable: true,
             type: 'object',
@@ -33,6 +37,6 @@ export const articleContextDataSchema: JSONSchemaType<ArticleContextType> = {
             type: 'array',
         },
     },
-    required: ['article', 'breadcrumbs', 'childList', 'siblingList'],
+    required: ['article', 'breadcrumbs', 'childList', 'isInProgressArticle', 'siblingList'],
     type: 'object',
 };
