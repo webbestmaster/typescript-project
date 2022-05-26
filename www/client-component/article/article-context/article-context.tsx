@@ -1,12 +1,9 @@
 /* global ARTICLE_DATA */
 import {createContext, useEffect, useState} from 'react';
-import {useParams} from 'react-router-dom';
 
 import {isBrowser} from '../../../util/system';
 import {articleScriptSelector} from '../article-const';
 import {removeBySelector} from '../../../util/dom';
-import {ExtractPathKeysType} from '../../../util/url';
-import {appRoute} from '../../../component/app/app-route';
 import {getArticleContextBySlug} from '../../../service/article/article-api';
 
 import {ArticleContextType} from './article-context-type';
@@ -22,28 +19,28 @@ type ArticleProviderPropsType = {
 };
 
 export function ArticleProvider(props: ArticleProviderPropsType): JSX.Element {
-    const {children, articleData} = props;
-    const defaultParameters = useParams<ExtractPathKeysType<typeof appRoute.article.path>>();
-    const [slug, setSlug] = useState<string>(defaultParameters.slug || '');
+    const {children, articleData: passedArticleData} = props;
+    const [articleData, setArticleData] = useState<ArticleContextType>(
+        typeof ARTICLE_DATA === 'string' ? JSON.parse(ARTICLE_DATA) : defaultArticleContextData
+    );
+    const [slug, setSlug] = useState<string>(articleData.article.slug);
 
-    console.info('ArticleProvider');
+    console.info('ArticleProvider', slug);
 
     // TODO: store article by slug to cache
     // TODO: add is article loading
-    const ssrArticleData: ArticleContextType | null =
-        typeof ARTICLE_DATA === 'string' ? JSON.parse(ARTICLE_DATA) : null;
 
     useEffect(() => {
-        console.info('fetch data about article');
+        console.info('fetch data about article, slug:', slug);
         if (slug.trim()) {
             // eslint-disable-next-line promise/catch-or-return
-            getArticleContextBySlug(slug).then(console.info);
+            getArticleContextBySlug(slug).then(setArticleData);
         }
     }, [slug]);
 
     removeBySelector(articleScriptSelector);
 
-    const resultData: ArticleContextType = (isBrowser ? ssrArticleData : articleData) || defaultArticleContextData;
+    const resultData: ArticleContextType = (isBrowser ? articleData : passedArticleData) || defaultArticleContextData;
 
     return <Provider value={{...resultData, setSlug}}>{children}</Provider>;
 }

@@ -10,10 +10,14 @@ import {articleContext} from './article-context/article-context';
 
 export function Article(): JSX.Element {
     const {setSlug = noop, article} = useContext<ArticleContextType>(articleContext);
-    const {slug = ''} = useParams<ExtractPathKeysType<typeof appRoute.article.path>>();
+    const {slug} = useParams<ExtractPathKeysType<typeof appRoute.article.path>>();
+
+    console.log('slug', slug);
 
     useEffect(() => {
-        setSlug(slug);
+        if (slug) {
+            setSlug(slug);
+        }
     }, [slug, setSlug]);
 
     console.info(article);

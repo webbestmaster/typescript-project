@@ -1,7 +1,7 @@
 /* global setTimeout */
 
 // import {useSystem} from 'react-system-hook';
-import {useEffect, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import markdownPro, {MarkdownConfigShallowType} from 'markdown-pro';
 import {JSONSchemaType} from 'ajv';
 
@@ -15,8 +15,12 @@ import {AsciiSpinner} from '../../../layout/spinner/c-ascii-spinner';
 import {ExampleAudio} from '../../../component/example-audio/c-example-audio';
 import {ExamplePlayer} from '../../../component/example-audio-player/c-example-audio-player';
 import {fetchX} from '../../../util/fetch';
-import {useMakeExecutableState} from '../../../util/function';
+import {noop, useMakeExecutableState} from '../../../util/function';
 import {Navigation} from '../../../client-component/navigation/navigation';
+import {Article} from '../../../client-component/article/article';
+import {rootArticleSlug} from '../../../../server/article/article-const';
+import {ArticleContextType} from '../../../client-component/article/article-context/article-context-type';
+import {articleContext} from '../../../client-component/article/article-context/article-context';
 
 import pngImageSrc from './image/marker-icon-2x.png';
 import svgImageSrc from './image/questions-with-an-official-answer.svg';
@@ -50,13 +54,17 @@ const htmlCodeConfigured = markdownPro('# Markdown Pro', config);
 export function ClientHome(): JSX.Element {
     console.log(htmlCode, htmlCodeConfigured);
     console.log(ErrorData);
-
+    const {setSlug = noop} = useContext<ArticleContextType>(articleContext);
     const {getLocalizedString, setLocaleName, localeName} = useLocale();
     const {getFormattedNumber} = useFormat();
     // const {screenInfo} = useSystem();
     const {execute, isInProgress, result, error} = useMakeExecutableState<[string, JSONSchemaType<MyIpType>], MyIpType>(
         fetchX
     );
+
+    useEffect(() => {
+        setSlug(rootArticleSlug);
+    }, [setSlug]);
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [myIp, setMyIp] = useState<MyIpType | null>(null);
@@ -87,6 +95,7 @@ export function ClientHome(): JSX.Element {
     return (
         <div>
             <Navigation />
+            <Article />
             <h1 className={clientHomeStyle.home_header}>
                 home page (<AsciiSpinner />)
             </h1>
