@@ -12,15 +12,11 @@ export function Article(): JSX.Element {
     const {setSlug = noop, article} = useContext<ArticleContextType>(articleContext);
     const {slug} = useParams<ExtractPathKeysType<typeof appRoute.article.path>>();
 
-    console.log('slug', slug);
-
     useEffect(() => {
         if (slug) {
             setSlug(slug);
         }
     }, [slug, setSlug]);
-
-    console.info(article);
 
     return (
         <h1>

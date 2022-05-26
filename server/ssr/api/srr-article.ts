@@ -14,9 +14,10 @@ import {
     articleReplaceSelectorEnd,
     articleSsrFieldName,
 } from '../../../www/client-component/article/article-const';
+import {rootArticleSlug} from '../../article/article-const';
 
 export async function getClientArticle(slug: string): Promise<[ArticleContextType, string]> {
-    const article = (await getArticleBySlug(slug)) || makeDefaultArticle();
+    const article = (await getArticleBySlug(slug || rootArticleSlug)) || makeDefaultArticle();
 
     if (!article.isActive || article.id === '') {
         const articleDataHtmlStringNotFound: string = [

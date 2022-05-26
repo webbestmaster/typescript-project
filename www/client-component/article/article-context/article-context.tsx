@@ -33,11 +33,12 @@ export function ArticleProvider(props: ArticleProviderPropsType): JSX.Element {
 
     useEffect(() => {
         console.info('fetch data about article, slug:', slug);
-        if (slug.trim()) {
+        if (slug === articleData.article.slug) {
             // eslint-disable-next-line promise/catch-or-return
-            fetchArticle(slug).then(setArticleData);
+            return;
         }
-    }, [slug, fetchArticle]);
+        fetchArticle(slug).then(setArticleData).catch(console.error);
+    }, [slug, fetchArticle, articleData.article.slug]);
 
     removeBySelector(articleScriptSelector);
 
