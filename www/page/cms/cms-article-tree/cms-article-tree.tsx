@@ -13,7 +13,7 @@ import {getArticleListPaginationPick} from '../../../service/article/article-api
 import {Spinner} from '../../../layout/spinner/spinner';
 import {Box} from '../../../layout/box/box';
 import {getTickCross} from '../../../util/string';
-import {getArticleLinkToEdit} from '../cms-article/cms-article-helper';
+import {getArticleLinkToEdit, getClientArticleLink} from '../cms-article/cms-article-helper';
 
 import {ArticleForTreeType, KeyForTreeType} from './cms-article-tree-type';
 import {keyForTreeList} from './cms-article-tree-const';
@@ -56,7 +56,7 @@ export function CmsArticleTree(): JSX.Element {
             return (
                 <ListItem>
                     <Text>{index + 1}.&nbsp;</Text>
-                    <Link to="#">{title}</Link>
+                    <Link to={getClientArticleLink(slug)}>{title}</Link>
                     {' | '}
                     <Link to={getArticleLinkToEdit(articleId)}>{slug}</Link>
                     {' | '}
@@ -80,7 +80,7 @@ export function CmsArticleTree(): JSX.Element {
             return (
                 <ListItem>
                     <Text>{index + 1}.&nbsp;</Text>
-                    <Link to="#">{title}</Link>
+                    <Link to={getClientArticleLink(slug)}>{title}</Link>
                     {' | '}
                     <Link to={getArticleLinkToEdit(articleId)}>{slug}</Link>
                     {' | '}

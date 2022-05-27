@@ -29,6 +29,7 @@
     "back:build": "cross-env NODE_ENV=production SIDE=back IS_SERVER_PROD_BUILD=true NODE_OPTIONS=--max-old-space-size=1536 webpack --progress",
     "back:build:watch": "cross-env NODE_ENV=production SIDE=back webpack --progress --watch",
     "back:nodemon": "nodemon ./dist-server/dist/index.js",
+    "build:prod:start": "npm run front:build && npm run back:build && npm run back:start",
     "front:build-library": "cross-env NODE_ENV=production SIDE=front IS_BUILD_LIBRARY=true NODE_OPTIONS=--max-old-space-size=1536 webpack --progress && npm run front:tsc-library",
     "check": "npm run ts-coverage && npm run tsc && npm run eslint && npm run stylelint",
     "check:fix": "npm run prettier && npm run ts-coverage && npm run tsc && npm run eslint:fix && npm run stylelint:fix",

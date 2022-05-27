@@ -6,7 +6,7 @@ import Datastore from 'nedb';
 
 import {PromiseResolveType} from '../../www/util/promise';
 
-import {prepareQuery, partialData, makeSimpleDataBaseCallBack} from './data-base-util';
+import {makePreparedQuery, getPartialData, makeSimpleDataBaseCallBack} from './data-base-util';
 import {
     CrudConfigOnChangeArgumentType,
     CrudConfigType,
@@ -126,7 +126,7 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
         return new Promise<PaginationResultType<ModelType>>(
             (resolve: PromiseResolveType<PaginationResultType<ModelType>>) => {
                 const {query, pageSize, pageIndex, sort} = paginationQuery;
-                const preparedQuery = prepareQuery<ModelType>(query);
+                const preparedQuery = makePreparedQuery<ModelType>(query);
 
                 dataBase
                     .find<ModelType>(preparedQuery)
@@ -156,7 +156,7 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
         paginationQuery: PaginationQueryType<ModelType>
     ): Promise<PaginationResultType<ModelType>> {
         const {query} = paginationQuery;
-        const preparedQuery = prepareQuery<ModelType>(query);
+        const preparedQuery = makePreparedQuery<ModelType>(query);
 
         return Promise.all([count(preparedQuery), findManyPaginationNoCount(paginationQuery)]).then(
             (data: [number, PaginationResultType<ModelType>]): PaginationResultType<ModelType> => {
@@ -178,7 +178,7 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
                 return {
                     ...paginationData,
                     result: paginationData.result.map<Partial<ModelType>>((data: ModelType): Partial<ModelType> => {
-                        return partialData<ModelType>(data, requiredPropertyList);
+                        return getPartialData<ModelType>(data, requiredPropertyList);
                     }),
                 };
             }

@@ -9,15 +9,15 @@ export type CrudConfigType = {
     onChange: (data: CrudConfigOnChangeArgumentType) => void;
 };
 
-export type RegExQueryType = {
+export type RegExpQueryType = {
     $regex: string; // Operators ($lt, $lte, $gt, $gte, $in, $nin, $ne, $exists, $regex)
     $regexFlag: string; // 'g' | 'gi' | 'i';
 };
 
 export type CrudSearchQueryType<ModelType> = {
-    [key in keyof ModelType]?: ModelType[key] extends Array<unknown>
-        ? ModelType[key] | RegExQueryType | string
-        : ModelType[key] | RegExQueryType;
+    [key in keyof ModelType]?: ModelType[key] extends Array<number | string>
+        ? ModelType[key] | RegExp | RegExpQueryType | string
+        : ModelType[key] | RegExp | RegExpQueryType;
 };
 
 export type CrudType<ModelType> = {

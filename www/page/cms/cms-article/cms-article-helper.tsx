@@ -11,6 +11,8 @@ import {FetchMethodEnum, fetchX} from '../../../util/fetch';
 import {uploadFileResponseSchema} from '../../../../server/file/file-validation';
 import {deleteArticle} from '../../../service/article/article-api';
 
+import {httpsSiteDomain} from '../../../const';
+
 import {ArticleForValidationType, MakeSlugValidatorArgumentType} from './cms-article-type';
 import {CmsArticleModeEnum} from './cms-article-const';
 
@@ -117,6 +119,14 @@ export function makeHtmlValidator(): Array<Rule> {
 
 export function getArticleLinkToEdit(articleId: string): string {
     return generatePath<typeof appRoute.articleEdit.path>(appRoute.articleEdit.path, {articleId});
+}
+
+export function getClientArticleLink(slug: string): string {
+    return generatePath<typeof appRoute.article.path>(appRoute.article.path, {slug});
+}
+
+export function getClientArticleLinkWithDomain(slug: string): string {
+    return httpsSiteDomain + getClientArticleLink(slug);
 }
 
 export function getFileExtension(fileName: string): string {

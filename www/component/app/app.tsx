@@ -4,6 +4,7 @@ import {ErrorBoundary} from '../error-boundary/error-boundary';
 
 import {NavigationContextType} from '../../client-component/navigation/navigation-context/navigation-context-type';
 import {ArticleContextType} from '../../client-component/article/article-context/article-context-type';
+import {ShareButtonSprite} from '../../client-component/share/share-button/c-share-button-sprite';
 
 import {AppProvider} from './app-provider';
 import {AppRouting} from './app-routing';
@@ -24,6 +25,7 @@ export function App(props: AppPropsType): JSX.Element {
                     <AppRouting pathname={pathname} />
                 </AppProvider>
             </ErrorBoundary>
+            <ShareButtonSprite />
         </StrictMode>
     );
 }

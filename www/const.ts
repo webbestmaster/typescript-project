@@ -7,6 +7,9 @@ export const selector = {
 
 export const demoUrl = 'http://webbestmaster.github.io/react-audio-player-pro';
 
+export const siteDomain = 'my-best-site.com';
+export const httpsSiteDomain = `https://${siteDomain}`;
+
 function sayHi() {
     const {log} = console;
 

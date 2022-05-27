@@ -1,3 +1,5 @@
+/* global location */
+
 import {createContext, useMemo, useState, useContext, useEffect} from 'react';
 
 import {getAutoAuthLogin} from '../../service/auth/auth-api';
@@ -32,11 +34,13 @@ export function User(props: PropsType): JSX.Element {
     }, [isInProgressAutoLogin, user]);
 
     useEffect(() => {
-        executeAutoLogin()
-            .then((loginResponse: LoginResponseType) => {
-                setUser(loginResponse.user);
-            })
-            .catch(throwError);
+        if (typeof location === 'object' && location.pathname?.includes('/cms/')) {
+            executeAutoLogin()
+                .then((loginResponse: LoginResponseType) => {
+                    setUser(loginResponse.user);
+                })
+                .catch(throwError);
+        }
     }, [executeAutoLogin]);
 
     const {children} = props;

@@ -1,0 +1,26 @@
+.share_button_list__wrapper {
+    box-sizing: border-box;
+    display: block;
+    //min-height: 89px;
+    padding-bottom: 16px;
+}
+
+@media print {
+    .share_button_list__wrapper {
+        display: none;
+    }
+}
+
+.share_button_list {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.share_button_list__title {
+    display: block;
+    font-size: 18px;
+    font-style: normal;
+    padding-bottom: 8px;
+}

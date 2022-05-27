@@ -5,7 +5,7 @@ import {ColumnType} from 'antd/lib/table/interface';
 import {SearchOutlined} from '@ant-design/icons';
 import {Link} from 'react-router-dom';
 
-import {getPathToImage, getArticleLinkToEdit} from '../cms-article/cms-article-helper';
+import {getPathToImage, getArticleLinkToEdit, getClientArticleLink} from '../cms-article/cms-article-helper';
 import {getTickCross} from '../../../util/string';
 
 import {
@@ -54,6 +54,13 @@ export function getArticleTableColumnList(
             },
             filterIcon: <SearchOutlined />,
             key: 'title',
+            render(title: string, article: ArticleForTableListType) {
+                return (
+                    <Link key={article.id} to={getClientArticleLink(article.slug)}>
+                        {title}
+                    </Link>
+                );
+            },
             sorter: () => 0,
             title: 'Title',
         },

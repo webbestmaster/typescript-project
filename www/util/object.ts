@@ -4,6 +4,7 @@ export function isObjectInclude(object: Record<string, unknown>, query: Record<s
     return Object.keys(query).every((queryKey: string): boolean => query[queryKey] === object[queryKey]);
 }
 
+/*
 export function pickData<ModelType extends Record<string, unknown>, Keys extends string>(
     data: ModelType,
     requiredPropertyList: Array<keyof ModelType>
@@ -15,6 +16,7 @@ export function pickData<ModelType extends Record<string, unknown>, Keys extends
         })
     );
 }
+*/
 
 const ajv = new Ajv();
 

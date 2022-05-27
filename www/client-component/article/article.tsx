@@ -4,6 +4,7 @@ import {useParams} from 'react-router-dom';
 import {ExtractPathKeysType} from '../../util/url';
 import {appRoute} from '../../component/app/app-route';
 import {noop} from '../../util/function';
+import {Markdown} from '../../layout/markdown';
 
 import {ArticleContextType} from './article-context/article-context-type';
 import {articleContext} from './article-context/article-context';
@@ -19,8 +20,11 @@ export function Article(): JSX.Element {
     }, [slug, setSlug]);
 
     return (
-        <h1>
-            article = {article.slug} - {article.id}
-        </h1>
+        <div>
+            <h1>
+                article = {article.slug} - {article.id}
+            </h1>
+            <Markdown config={{useWrapper: false}} mdInput={article.content} />
+        </div>
     );
 }

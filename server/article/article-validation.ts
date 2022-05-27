@@ -83,9 +83,11 @@ export function makeArticleSchema(): JSONSchemaType<ArticleType> {
 export function makeArticleSchemaPick<Keys extends keyof ArticleType>(
     fieldList: Array<Keys>
 ): JSONSchemaType<Pick<ArticleType, Keys>> {
-    const art: JSONSchemaType<Pick<ArticleType, Keys>> = JSON.parse(JSON.stringify(makeArticleSchema()));
+    const articlePickedSchema: JSONSchemaType<Pick<ArticleType, Keys>> = makeArticleSchema();
 
-    return Object.assign(art, {required: fieldList});
+    return Object.assign<JSONSchemaType<Pick<ArticleType, Keys>>, {required: Array<Keys>}>(articlePickedSchema, {
+        required: fieldList,
+    });
 }
 
 export function makeArticlePaginationSchema(): JSONSchemaType<PaginationResultType<ArticleType>> {
