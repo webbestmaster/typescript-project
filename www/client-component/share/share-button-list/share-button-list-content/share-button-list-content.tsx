@@ -1,18 +1,18 @@
-import {ShareButtonVkontakte} from '../../share-button/button/c-share-button-vkontakte';
-import {ShareButtonFacebook} from '../../share-button/button/c-share-button-facebook';
-import {ShareButtonOdnoklassniki} from '../../share-button/button/c-share-button-odnoklassniki';
-import {ShareButtonTwitter} from '../../share-button/button/c-share-button-twitter';
-import {ShareButtonTelegram} from '../../share-button/button/c-share-button-telegram';
+import {ShareButtonVkontakte} from '../../share-button/button/share-button-vkontakte';
+import {ShareButtonFacebook} from '../../share-button/button/share-button-facebook';
+import {ShareButtonOdnoklassniki} from '../../share-button/button/share-button-odnoklassniki';
+import {ShareButtonTwitter} from '../../share-button/button/share-button-twitter';
+import {ShareButtonTelegram} from '../../share-button/button/share-button-telegram';
 
 import shareButtonListContentStyle from './share-button-list-content.scss';
 
-type PropsType = {
+type ShareButtonListContentPropsType = {
     listHeader: string;
     title: string;
     url: string;
 };
 
-export function ShareButtonListContent(props: PropsType): JSX.Element {
+export function ShareButtonListContent(props: ShareButtonListContentPropsType): JSX.Element {
     const {url, title, listHeader} = props;
 
     return (

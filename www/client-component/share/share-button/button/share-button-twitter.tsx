@@ -2,7 +2,7 @@ import shareButtonStyle from '../share-button.scss';
 import type {ShareButtonPropsType} from '../share-button-type';
 import {share} from '../share-button-helper';
 import {SvgImage} from '../../../../layout/svg-image/c-svg-image';
-import {shareIconIdPrefix} from '../c-share-button-sprite';
+import {shareIconIdPrefix} from '../share-button-sprite';
 
 export function ShareButtonTwitter(props: ShareButtonPropsType): JSX.Element {
     const {url, title} = props;
