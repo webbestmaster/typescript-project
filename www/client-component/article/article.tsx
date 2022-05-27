@@ -24,7 +24,7 @@ export function Article(): JSX.Element {
             <h1>
                 article = {article.slug} - {article.id}
             </h1>
-            <Markdown config={{useWrapper: false}} mdInput={article.content} />
+            <Markdown mdInput={article.content} />
         </div>
     );
 }

@@ -80,7 +80,7 @@ const audioDataList: Array<TrackType> = [
 export function ExamplePlayer(): JSX.Element {
     return (
         <div className="example-wrapper">
-            <Markdown config={{useWrapper: false}} mdInput={exampleAudioPlayer} />
+            <Markdown mdInput={exampleAudioPlayer} />
 
             <AudioPlayerAsync
                 defaultState={{
