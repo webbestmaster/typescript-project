@@ -1,7 +1,7 @@
 import {FastifyReply, FastifyRequest} from 'fastify';
 
 import {LoginResponseType} from '../../www/service/auth/auth-type';
-import {getSha256Hash} from '../util/string';
+import {getSha256HashServer} from '../util/string';
 import {UserRoleEnum} from '../../www/provider/user/user-context-type';
 import {mainResponseHeader} from '../const';
 
@@ -20,7 +20,7 @@ export async function postAuthLogin(request: FastifyRequest<{Body: string}>, rep
         return;
     }
 
-    const user = await authCrud.findOne({login, password: getSha256Hash(password)});
+    const user = await authCrud.findOne({login, password: getSha256HashServer(password)});
 
     if (!user) {
         reply.code(400).send(null);

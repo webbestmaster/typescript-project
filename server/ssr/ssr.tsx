@@ -2,7 +2,7 @@ import {FastifyRequest, FastifyReply} from 'fastify';
 import ReactDOMServer from 'react-dom/server';
 
 import {App} from '../../www/component/app/app';
-import {streamToString} from '../util/stream';
+import {streamToStringServer} from '../util/stream';
 import {navigationReplaceSelector} from '../../www/client-component/navigation/navigation-const';
 import {articleReplaceSelector} from '../../www/client-component/article/article-const';
 
@@ -28,7 +28,7 @@ export async function getHtmlCallBack(
         <App articleData={articleData} navigationData={navigationData} pathname={pathname} />
     );
 
-    const htmlString = await streamToString(appStream);
+    const htmlString = await streamToStringServer(appStream);
 
     return indexHtml
         .replace(contentStringFull, [contentStringBegin, htmlString, contentStringEnd].join(''))
