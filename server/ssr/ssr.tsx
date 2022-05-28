@@ -8,7 +8,7 @@ import {articleReplaceSelector} from '../../www/client-component/article/article
 
 import {getNavigationContextData} from './api/ssr-navigation';
 import {contentStringBegin, contentStringEnd, contentStringFull, indexHtml} from './ssr-const';
-import {getClientArticle} from './api/srr-article';
+import {getClientArticleContextData} from './api/srr-article';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
 export async function getHtmlCallBack(
@@ -21,7 +21,7 @@ export async function getHtmlCallBack(
     const slug = params?.slug || '';
 
     const [navigationData, navigationDataHtmlString] = await getNavigationContextData();
-    const [articleData, articleDataHtmlString] = await getClientArticle(slug);
+    const [articleData, articleDataHtmlString] = await getClientArticleContextData(slug);
 
     const pathname: string = raw.url || '/';
     const appStream = ReactDOMServer.renderToStaticNodeStream(

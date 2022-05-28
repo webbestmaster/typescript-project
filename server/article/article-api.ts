@@ -3,7 +3,7 @@ import {FastifyReply, FastifyRequest} from 'fastify';
 import {PaginationQueryType} from '../data-base/data-base-type';
 import {mainResponseHeader} from '../const';
 import {defaultPaginationQuery} from '../data-base/data-base-const';
-import {getClientArticle as getClientArticleSsr} from '../ssr/api/srr-article';
+import {getClientArticleContextData} from '../ssr/api/srr-article';
 
 import {articleCrud} from './article';
 import {ArticleType} from './article-type';
@@ -192,7 +192,7 @@ export async function getClientArticle(
     const {params} = request;
     const slug = params?.slug || '';
 
-    const [clientArticleData] = await getClientArticleSsr(slug);
+    const [clientArticleData] = await getClientArticleContextData(slug);
 
     const status = clientArticleData.article.id === '' ? 404 : 200;
 
