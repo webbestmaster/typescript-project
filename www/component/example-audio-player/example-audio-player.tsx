@@ -5,7 +5,7 @@ import {Markdown} from '../../layout/markdown';
 import {demoUrl} from '../../const';
 
 import exampleAudioPlayer from './example-audio-player.md';
-import {CustomContent} from './c-custom-content';
+import {CustomContent} from './custom-content';
 
 const icon64 = demoUrl + '/image-file/react-icon-64.png';
 const icon128 = demoUrl + '/image-file/react-icon-128.png';
