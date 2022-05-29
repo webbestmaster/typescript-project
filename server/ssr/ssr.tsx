@@ -36,6 +36,10 @@ export async function getHtmlCallBack(
         reply.code(404);
     }
 
+    if (articleData.article.hasMetaRobotsNoIndexSeo) {
+        reply.header('X-Robots-Tag', 'noindex');
+    }
+
     return indexHtml
         .replace(titleSsrReplaceData.selector, titleSsrReplaceData.value)
         .replace(contentStringFull, [contentStringBegin, htmlString, contentStringEnd].join(''))

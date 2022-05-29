@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom';
 
 import {Box} from '../../../layout/box/box';
 import {ArticleType} from '../../../../server/article/article-type';
+import {getArticleLinkToViewClient} from '../../../client-component/article/article-helper';
 
 import {ArticleForValidationType} from './cms-article-type';
 import {getArticleLinkToEdit, getFileMarkdown} from './cms-article-helper';
@@ -68,9 +69,8 @@ export function renderParentList(
             return (
                 <Text key={id}>
                     {index > 0 ? ', ' : null}
-                    <Link to={getArticleLinkToEdit(id)}>
-                        {title}/{slug}
-                    </Link>
+                    <Link to={getArticleLinkToViewClient(slug)}>{title}</Link>/
+                    <Link to={getArticleLinkToEdit(id)}>{slug}</Link>
                 </Text>
             );
         }

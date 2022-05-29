@@ -8,6 +8,7 @@ import {Button, Checkbox, DatePicker, Form, Input, message, Popconfirm, Select, 
 import moment, {Moment} from 'moment';
 import {FieldData, ValidateErrorEntity} from 'rc-field-form/lib/interface';
 import {UploadChangeParam, UploadFile} from 'antd/lib/upload/interface';
+import {Link} from 'react-router-dom';
 import {QuestionCircleOutlined} from '@ant-design/icons';
 import {red} from '@ant-design/colors';
 import 'antd/dist/antd.css';
@@ -27,9 +28,12 @@ import {getArticleListPaginationPick} from '../../../service/article/article-api
 import {MarkdownInputWrapper} from '../../../layout/markdown-input-wrapper';
 import {IsRender} from '../../../layout/is-render/is-render';
 import {rootArticleId} from '../../../../server/article/article-const';
+import {getArticleLinkToViewClient} from '../../../client-component/article/article-helper';
+import {Box} from '../../../layout/box/box';
 
 import {
     getAbsentIdList,
+    getArticleLinkToEdit,
     getPathToImage,
     handleDeleteArticle,
     makeHtmlValidator,
@@ -213,7 +217,18 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 </Title>
             </IsRender>
 
-            <Text>Parents:&nbsp;{renderParentList(article, savedArticleList)}</Text>
+            <Box padding={[8, 0]}>
+                <Text>
+                    Article: &nbsp;
+                    <Link to={getArticleLinkToViewClient(slug)}>{title}</Link>/
+                    <Link to={getArticleLinkToEdit(id)}>{slug}</Link>
+                </Text>
+            </Box>
+
+            <Box padding={[8, 0, 16]}>
+                <Text>Parents:&nbsp;{renderParentList(article, savedArticleList)}</Text>
+            </Box>
+
             <Form.Item hidden initialValue={id} label={`Article id: ${id}`} name="id">
                 <Input disabled />
             </Form.Item>
