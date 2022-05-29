@@ -23,7 +23,7 @@ type ArticleProviderPropsType = {
 export function ArticleProvider(props: ArticleProviderPropsType): JSX.Element {
     const {children, articleData: passedArticleData} = props;
     const [articleData, setArticleData] = useState<ArticleContextType>(
-        typeof ARTICLE_DATA === 'string' ? JSON.parse(ARTICLE_DATA) : defaultArticleContextData
+        typeof ARTICLE_DATA === 'string' ? JSON.parse(decodeURIComponent(ARTICLE_DATA)) : defaultArticleContextData
     );
     const [slug, setSlug] = useState<string>(articleData.article.slug);
 
@@ -33,7 +33,7 @@ export function ArticleProvider(props: ArticleProviderPropsType): JSX.Element {
     >(getArticleContextBySlug);
 
     useEffect(() => {
-        console.info('fetch data about article, slug:', slug);
+        console.log('fetch data about article, slug:', slug);
         if (slug === articleData.article.slug) {
             // eslint-disable-next-line promise/catch-or-return
             return;

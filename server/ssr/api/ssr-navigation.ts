@@ -20,7 +20,7 @@ export async function getNavigationContextData(): Promise<[NavigationContextType
 
     const navigationDataHtmlString: string = [
         '<script>',
-        `window.${navigationSsrFieldName} = '${JSON.stringify(navigationData)}'`,
+        `window.${navigationSsrFieldName} = '${encodeURIComponent(JSON.stringify(navigationData))}'`,
         '</script>',
     ].join('');
 

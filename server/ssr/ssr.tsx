@@ -32,6 +32,10 @@ export async function getHtmlCallBack(
 
     const htmlString = await streamToStringServer(appStream);
 
+    if (articleData.article.id === '') {
+        reply.code(404);
+    }
+
     return indexHtml
         .replace(titleSsrReplaceData.selector, titleSsrReplaceData.value)
         .replace(contentStringFull, [contentStringBegin, htmlString, contentStringEnd].join(''))

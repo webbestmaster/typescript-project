@@ -7,23 +7,12 @@ import {
     getIsActiveArticlePreview,
     getSiblingPreviewListById,
 } from '../../article/article-util';
-import {defaultArticleContextData} from '../../../www/client-component/article/article-context/article-context-const';
-import {ArticlePreviewType} from '../../article/article-type';
+import {ArticlePreviewType, ArticleType} from '../../article/article-type';
 import {articleSsrFieldName} from '../../../www/client-component/article/article-const';
 import {rootArticleSlug} from '../../article/article-const';
 
 export async function makeClientArticleContextData(slug: string): Promise<[ArticleContextType, string]> {
-    const article = (await getArticleBySlug(slug || rootArticleSlug)) || makeDefaultArticle();
-
-    if (!article.isActive || article.id === '') {
-        const articleDataHtmlStringNotFound: string = [
-            '<script>',
-            `window.${articleSsrFieldName} = '${JSON.stringify(defaultArticleContextData)}'`,
-            '</script>',
-        ].join('');
-
-        return [defaultArticleContextData, articleDataHtmlStringNotFound];
-    }
+    const article: ArticleType = (await getArticleBySlug(slug || rootArticleSlug)) || makeDefaultArticle();
 
     const {subDocumentIdList, id} = article;
 
@@ -43,7 +32,7 @@ export async function makeClientArticleContextData(slug: string): Promise<[Artic
 
     const articleDataHtmlString: string = [
         '<script>',
-        `window.${articleSsrFieldName} = '${JSON.stringify(articleData)}'`,
+        `window.${articleSsrFieldName} = '${encodeURIComponent(JSON.stringify(articleData))}'`,
         '</script>',
     ].join('');
 
