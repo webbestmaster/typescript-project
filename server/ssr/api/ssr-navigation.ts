@@ -1,10 +1,6 @@
 // eslint-disable-next-line max-len
 import {NavigationContextType} from '../../../www/client-component/navigation/navigation-context/navigation-context-type';
-import {
-    navigationReplaceSelectorBegin,
-    navigationReplaceSelectorEnd,
-    navigationSsrFieldName,
-} from '../../../www/client-component/navigation/navigation-const';
+import {navigationSsrFieldName} from '../../../www/client-component/navigation/navigation-const';
 import {
     articleToArticlePreview,
     getSubDocumentListByParentIdFiltered,
@@ -23,9 +19,9 @@ export async function getNavigationContextData(): Promise<[NavigationContextType
     };
 
     const navigationDataHtmlString: string = [
-        navigationReplaceSelectorBegin,
+        '<script>',
         `window.${navigationSsrFieldName} = '${JSON.stringify(navigationData)}'`,
-        navigationReplaceSelectorEnd,
+        '</script>',
     ].join('');
 
     return [navigationData, navigationDataHtmlString];

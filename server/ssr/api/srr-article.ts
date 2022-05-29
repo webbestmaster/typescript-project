@@ -9,11 +9,7 @@ import {
 } from '../../article/article-util';
 import {defaultArticleContextData} from '../../../www/client-component/article/article-context/article-context-const';
 import {ArticlePreviewType} from '../../article/article-type';
-import {
-    articleReplaceSelectorBegin,
-    articleReplaceSelectorEnd,
-    articleSsrFieldName,
-} from '../../../www/client-component/article/article-const';
+import {articleSsrFieldName} from '../../../www/client-component/article/article-const';
 import {rootArticleSlug} from '../../article/article-const';
 
 export async function makeClientArticleContextData(slug: string): Promise<[ArticleContextType, string]> {
@@ -21,9 +17,9 @@ export async function makeClientArticleContextData(slug: string): Promise<[Artic
 
     if (!article.isActive || article.id === '') {
         const articleDataHtmlStringNotFound: string = [
-            articleReplaceSelectorBegin,
+            '<script>',
             `window.${articleSsrFieldName} = '${JSON.stringify(defaultArticleContextData)}'`,
-            articleReplaceSelectorEnd,
+            '</script>',
         ].join('');
 
         return [defaultArticleContextData, articleDataHtmlStringNotFound];
@@ -46,9 +42,9 @@ export async function makeClientArticleContextData(slug: string): Promise<[Artic
     };
 
     const articleDataHtmlString: string = [
-        articleReplaceSelectorBegin,
+        '<script>',
         `window.${articleSsrFieldName} = '${JSON.stringify(articleData)}'`,
-        articleReplaceSelectorEnd,
+        '</script>',
     ].join('');
 
     return [articleData, articleDataHtmlString];

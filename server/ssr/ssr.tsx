@@ -9,6 +9,7 @@ import {articleReplaceSelector} from '../../www/client-component/article/article
 import {getNavigationContextData} from './api/ssr-navigation';
 import {contentStringBegin, contentStringEnd, contentStringFull, indexHtml} from './ssr-const';
 import {makeClientArticleContextData} from './api/srr-article';
+import {getTitleSsrReplaceData} from './api/ssr-helper/ssr-title';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
 export async function getHtmlCallBack(
@@ -22,6 +23,7 @@ export async function getHtmlCallBack(
 
     const [navigationData, navigationDataHtmlString] = await getNavigationContextData();
     const [articleData, articleDataHtmlString] = await makeClientArticleContextData(slug);
+    const titleSsrReplaceData = getTitleSsrReplaceData(articleData.article);
 
     const pathname: string = raw.url || '/';
     const appStream = ReactDOMServer.renderToStaticNodeStream(
@@ -31,6 +33,7 @@ export async function getHtmlCallBack(
     const htmlString = await streamToStringServer(appStream);
 
     return indexHtml
+        .replace(titleSsrReplaceData.selector, titleSsrReplaceData.value)
         .replace(contentStringFull, [contentStringBegin, htmlString, contentStringEnd].join(''))
         .replace(navigationReplaceSelector, navigationDataHtmlString)
         .replace(articleReplaceSelector, articleDataHtmlString);
