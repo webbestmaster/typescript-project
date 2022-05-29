@@ -12,7 +12,7 @@ import {defaultArticleContextData} from './article-context-const';
 
 export const articleContext = createContext<ArticleContextType>(defaultArticleContextData);
 
-const {Provider} = articleContext;
+const {Provider: ArticleContextProvider} = articleContext;
 
 type ArticleProviderPropsType = {
     articleData: ArticleContextType | null;
@@ -44,5 +44,9 @@ export function ArticleProvider(props: ArticleProviderPropsType): JSX.Element {
 
     const resultData: ArticleContextType = (isBrowser ? articleData : passedArticleData) || defaultArticleContextData;
 
-    return <Provider value={{...resultData, isInProgressArticle, setSlug}}>{children}</Provider>;
+    return (
+        <ArticleContextProvider value={{...resultData, isInProgressArticle, setSlug}}>
+            {children}
+        </ArticleContextProvider>
+    );
 }

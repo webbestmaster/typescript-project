@@ -59,3 +59,7 @@ export function getDateTimeHumanSize(option: GetDateTimeDifferenceOptionType): s
         })
         .join(' ');
 }
+
+export function dateIsoToHumanView(dateIso: string): string {
+    return dateIso.replace('T', ' ').replace(/\.\S+/, '');
+}

@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import {ArticleContextType} from '../article/article-context/article-context-type';
 import {articleContext} from '../article/article-context/article-context';
 import {ArticlePreviewType} from '../../../server/article/article-type';
-import {getClientArticleLink} from '../../page/cms/cms-article/cms-article-helper';
+import {getArticleLinkToViewClient} from '../article/article-helper';
 
 export function Breadcrumbs(): JSX.Element {
     const {breadcrumbs, article} = useContext<ArticleContextType>(articleContext);
@@ -12,7 +12,7 @@ export function Breadcrumbs(): JSX.Element {
     const renderLink = useCallback((articlePreview: ArticlePreviewType, index: number): JSX.Element => {
         const {slug, title} = articlePreview;
 
-        const href = index === 0 ? '/' : getClientArticleLink(slug);
+        const href = index === 0 ? '/' : getArticleLinkToViewClient(slug);
 
         return (
             <Fragment key={`${slug}-${String(index)}`}>

@@ -3,8 +3,9 @@ import {Typography} from 'antd';
 import {Link} from 'react-router-dom';
 
 import {rootArticleId} from '../../../../server/article/article-const';
-import {getArticleLinkToEdit, getClientArticleLink} from '../cms-article/cms-article-helper';
+import {getArticleLinkToEdit} from '../cms-article/cms-article-helper';
 import {getTickCross} from '../../../util/string';
+import {getArticleLinkToViewClient} from '../../../client-component/article/article-helper';
 
 import {ArticleForTreeType} from './cms-article-tree-type';
 
@@ -55,7 +56,7 @@ function getChildList(parentArticleId: string, articleList: Array<ArticleForTree
 
         const titleNode = (
             <>
-                <Link to={getClientArticleLink(slug)}>{title}</Link>
+                <Link to={getArticleLinkToViewClient(slug)}>{title}</Link>
                 {' | '}
                 <Link to={urlToEdit}>{slug}</Link>
                 {' | '}

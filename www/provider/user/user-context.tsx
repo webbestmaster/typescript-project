@@ -22,7 +22,9 @@ type PropsType = {
     children: Array<JSX.Element> | JSX.Element;
 };
 
-export function User(props: PropsType): JSX.Element {
+export function UserProvider(props: PropsType): JSX.Element {
+    const {children} = props;
+
     const [user, setUser] = useState<UserType>(defaultUserContext.user);
     const {execute: executeAutoLogin, isInProgress: isInProgressAutoLogin} = useMakeExecutableState<
         [],
@@ -42,8 +44,6 @@ export function User(props: PropsType): JSX.Element {
                 .catch(throwError);
         }
     }, [executeAutoLogin]);
-
-    const {children} = props;
 
     return <UserContextProvider value={providedData}>{children}</UserContextProvider>;
 }

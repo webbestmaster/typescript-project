@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import {ArticleContextType} from '../article/article-context/article-context-type';
 import {articleContext} from '../article/article-context/article-context';
 import {ArticlePreviewType} from '../../../server/article/article-type';
-import {getClientArticleLink} from '../../page/cms/cms-article/cms-article-helper';
+import {getArticleLinkToViewClient} from '../article/article-helper';
 
 export function Siblings(): JSX.Element {
     const {siblingList} = useContext<ArticleContextType>(articleContext);
@@ -14,7 +14,7 @@ export function Siblings(): JSX.Element {
 
         return (
             <Fragment key={`${slug}-${String(index)}`}>
-                <Link to={getClientArticleLink(slug)}>{title}</Link>
+                <Link to={getArticleLinkToViewClient(slug)}>{title}</Link>
                 <br />
             </Fragment>
         );

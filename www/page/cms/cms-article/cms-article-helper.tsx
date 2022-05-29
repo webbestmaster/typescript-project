@@ -10,8 +10,8 @@ import {UploadFileResponseType} from '../../../../server/file/file-type';
 import {FetchMethodEnum, fetchX} from '../../../util/fetch';
 import {uploadFileResponseSchema} from '../../../../server/file/file-validation';
 import {deleteArticle} from '../../../service/article/article-api';
-
 import {httpsSiteDomain} from '../../../const';
+import {getArticleLinkToViewClient} from '../../../client-component/article/article-helper';
 
 import {ArticleForValidationType, MakeSlugValidatorArgumentType} from './cms-article-type';
 import {CmsArticleModeEnum} from './cms-article-const';
@@ -121,12 +121,8 @@ export function getArticleLinkToEdit(articleId: string): string {
     return generatePath<typeof appRoute.articleEdit.path>(appRoute.articleEdit.path, {articleId});
 }
 
-export function getClientArticleLink(slug: string): string {
-    return generatePath<typeof appRoute.article.path>(appRoute.article.path, {slug});
-}
-
 export function getClientArticleLinkWithDomain(slug: string): string {
-    return httpsSiteDomain + getClientArticleLink(slug);
+    return httpsSiteDomain + getArticleLinkToViewClient(slug);
 }
 
 export function getFileExtension(fileName: string): string {

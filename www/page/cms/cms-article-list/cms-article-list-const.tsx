@@ -5,8 +5,10 @@ import {ColumnType} from 'antd/lib/table/interface';
 import {SearchOutlined} from '@ant-design/icons';
 import {Link} from 'react-router-dom';
 
-import {getPathToImage, getArticleLinkToEdit, getClientArticleLink} from '../cms-article/cms-article-helper';
+import {getPathToImage, getArticleLinkToEdit} from '../cms-article/cms-article-helper';
 import {getTickCross} from '../../../util/string';
+import {dateIsoToHumanView} from '../../../util/time';
+import {getArticleLinkToViewClient} from '../../../client-component/article/article-helper';
 
 import {
     ArticleForTableListKeysType,
@@ -14,7 +16,6 @@ import {
     KeyForTableListListType,
     SortDirectionEnum,
 } from './cms-article-list-type';
-import {renderDate} from './cms-article-list-helper';
 
 type GetArticleTableColumnListArgumentType = {
     setSearchText: (searchText: string) => void;
@@ -56,7 +57,7 @@ export function getArticleTableColumnList(
             key: 'title',
             render(title: string, article: ArticleForTableListType) {
                 return (
-                    <Link key={article.id} to={getClientArticleLink(article.slug)}>
+                    <Link key={article.id} to={getArticleLinkToViewClient(article.slug)}>
                         {title}
                     </Link>
                 );
@@ -140,7 +141,7 @@ export function getArticleTableColumnList(
             dataIndex: 'createdDate',
             defaultSortOrder: null,
             key: 'createdDate',
-            render: renderDate,
+            render: dateIsoToHumanView,
             sorter: () => 0,
             title: 'Created UTC',
             width: 120,
@@ -150,7 +151,7 @@ export function getArticleTableColumnList(
             dataIndex: 'updatedDate',
             defaultSortOrder: null,
             key: 'updatedDate',
-            render: renderDate,
+            render: dateIsoToHumanView,
             sorter: () => 0,
             title: 'Updated UTC',
             width: 120,
@@ -160,7 +161,7 @@ export function getArticleTableColumnList(
             dataIndex: 'publishDate',
             defaultSortOrder: null,
             key: 'publishDate',
-            render: renderDate,
+            render: dateIsoToHumanView,
             sorter: () => 0,
             title: 'Publish UTC',
             width: 120,

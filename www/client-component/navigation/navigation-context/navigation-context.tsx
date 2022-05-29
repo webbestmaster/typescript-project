@@ -10,7 +10,7 @@ import {defaultNavigationContextData} from './navigation-context-const';
 
 export const navigationContext = createContext<NavigationContextType>(defaultNavigationContextData);
 
-const {Provider} = navigationContext;
+const {Provider: NavigationContextProvider} = navigationContext;
 
 type NavigationProviderPropsType = {
     children: Array<JSX.Element> | JSX.Element;
@@ -28,5 +28,5 @@ export function NavigationProvider(props: NavigationProviderPropsType): JSX.Elem
     const resultData: NavigationContextType =
         (isBrowser ? ssrNavigationData : navigationData) || defaultNavigationContextData;
 
-    return <Provider value={resultData}>{children}</Provider>;
+    return <NavigationContextProvider value={resultData}>{children}</NavigationContextProvider>;
 }
