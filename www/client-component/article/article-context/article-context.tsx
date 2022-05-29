@@ -9,6 +9,7 @@ import {useMakeExecutableState} from '../../../util/function';
 
 import {ArticleContextType} from './article-context-type';
 import {defaultArticleContextData} from './article-context-const';
+import {articleContextDom} from './article-context-dom';
 
 export const articleContext = createContext<ArticleContextType>(defaultArticleContextData);
 
@@ -39,6 +40,10 @@ export function ArticleProvider(props: ArticleProviderPropsType): JSX.Element {
         }
         fetchArticle(slug).then(setArticleData).catch(console.error);
     }, [slug, fetchArticle, articleData.article.slug]);
+
+    useEffect(() => {
+        articleContextDom(articleData);
+    }, [articleData]);
 
     removeBySelector(articleScriptSelector);
 
