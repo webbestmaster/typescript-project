@@ -12,11 +12,9 @@ export function Breadcrumbs(): JSX.Element {
     const renderLink = useCallback((articlePreview: ArticlePreviewType, index: number): JSX.Element => {
         const {slug, title} = articlePreview;
 
-        const href = index === 0 ? '/' : getArticleLinkToViewClient(slug);
-
         return (
             <Fragment key={`${slug}-${String(index)}`}>
-                <Link to={href}>{title}</Link>
+                <Link to={getArticleLinkToViewClient(slug)}>{title}</Link>
                 <span>&nbsp;/&nbsp;</span>
             </Fragment>
         );
