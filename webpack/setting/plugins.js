@@ -28,6 +28,10 @@ const staticFilesSiteList = [
         from: './www/favicon.ico',
         to: filePathPrefix + 'favicon.ico',
     },
+    {
+        from: './www/robots.txt',
+        to: filePathPrefix + 'robots.txt',
+    },
 ];
 
 const pluginList = [
