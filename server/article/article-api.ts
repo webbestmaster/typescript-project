@@ -1,9 +1,9 @@
 import {FastifyReply, FastifyRequest} from 'fastify';
 
-import {PaginationQueryType} from '../data-base/data-base-type';
+import {PaginationQueryType, PaginationResultType} from '../data-base/data-base-type';
 import {mainResponseHeader} from '../const';
 import {defaultPaginationQuery} from '../data-base/data-base-const';
-import {getClientArticleContextData} from '../ssr/api/srr-article';
+import {makeClientArticleContextData} from '../ssr/api/srr-article';
 
 import {articleCrud} from './article';
 import {ArticleType} from './article-type';
@@ -18,7 +18,9 @@ export async function getArticleListPagination(
         request.query
     );
     const paginationQuery: PaginationQueryType<ArticleType> = JSON.parse(decodeURIComponent(pagination));
-    const articleListPagination = await articleCrud.findManyPagination(paginationQuery);
+    const articleListPagination: PaginationResultType<ArticleType> = await articleCrud.findManyPagination(
+        paginationQuery
+    );
 
     reply
         .code(200)
@@ -41,7 +43,8 @@ export async function getArticleListPaginationPick(
     const paginationQuery: PaginationQueryType<ArticleType> = JSON.parse(decodeURIComponent(pagination));
     const pickQuery: Array<keyof ArticleType> = JSON.parse(decodeURIComponent(pick));
 
-    const articleListPagination = await articleCrud.findManyPaginationPartial(paginationQuery, pickQuery);
+    const articleListPagination: PaginationResultType<Partial<ArticleType>> =
+        await articleCrud.findManyPaginationPartial(paginationQuery, pickQuery);
 
     reply
         .code(200)
@@ -185,14 +188,14 @@ export async function deleteAdminArticleDelete(
         .send({articleId});
 }
 
-export async function getClientArticle(
+export async function getClientArticleContextData(
     request: FastifyRequest<{Body: string; Params?: {slug: string}}>,
     reply: FastifyReply
 ): Promise<void> {
     const {params} = request;
     const slug = params?.slug || '';
 
-    const [clientArticleData] = await getClientArticleContextData(slug);
+    const [clientArticleData] = await makeClientArticleContextData(slug);
 
     const status = clientArticleData.article.id === '' ? 404 : 200;
 

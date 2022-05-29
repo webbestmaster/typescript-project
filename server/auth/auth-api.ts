@@ -27,6 +27,9 @@ export async function postAuthLogin(request: FastifyRequest<{Body: string}>, rep
         return;
     }
 
+    session.set(cookieFieldUserId, user.id);
+    session.options({maxAge: 1000 * 60 * 60});
+
     const loginResponse: LoginResponseType = {
         user: {
             id: user.id,
@@ -34,9 +37,6 @@ export async function postAuthLogin(request: FastifyRequest<{Body: string}>, rep
             role: user.role,
         },
     };
-
-    session.set(cookieFieldUserId, user.id);
-    session.options({maxAge: 1000 * 60 * 60});
 
     reply
         .code(200)

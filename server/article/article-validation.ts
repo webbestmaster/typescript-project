@@ -161,18 +161,3 @@ export function makeArticlePreviewSchema(): JSONSchemaType<ArticlePreviewType> {
 
     return articlePreviewSchema;
 }
-
-/*
-export function getIsValidArticle(data: unknown): data is ArticleType {
-    const ajv = new Ajv();
-    const modelJsonSchemaValidate = ajv.compile<ArticleType>(articleSchema);
-
-    const isValidArticle = modelJsonSchemaValidate(data);
-
-    if (modelJsonSchemaValidate.errors?.length) {
-        console.log(modelJsonSchemaValidate.errors);
-    }
-
-    return isValidArticle;
-}
-*/
