@@ -8,7 +8,7 @@ export function articleContextDom(articleData: ArticleContextType) {
     }
 
     const {article} = articleData;
-    const {title} = article;
+    const {title, tagTitleSeo} = article;
 
-    document.title = title;
+    document.title = tagTitleSeo || title;
 }
