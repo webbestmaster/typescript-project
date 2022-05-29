@@ -2,8 +2,6 @@
 import {createContext, useEffect, useState} from 'react';
 
 import {isBrowser} from '../../../util/system';
-import {articleScriptSelector} from '../article-const';
-import {removeBySelector} from '../../../util/dom';
 import {getArticleContextBySlug} from '../../../service/article/article-api';
 import {useMakeExecutableState} from '../../../util/function';
 
@@ -44,8 +42,6 @@ export function ArticleProvider(props: ArticleProviderPropsType): JSX.Element {
     useEffect(() => {
         articleContextDom(articleData);
     }, [articleData]);
-
-    removeBySelector(articleScriptSelector);
 
     const resultData: ArticleContextType = (isBrowser ? articleData : passedArticleData) || defaultArticleContextData;
 

@@ -2,8 +2,6 @@
 import {createContext} from 'react';
 
 import {isBrowser} from '../../../util/system';
-import {navigationScriptSelector} from '../navigation-const';
-import {removeBySelector} from '../../../util/dom';
 
 import {NavigationContextType} from './navigation-context-type';
 import {defaultNavigationContextData} from './navigation-context-const';
@@ -22,8 +20,6 @@ export function NavigationProvider(props: NavigationProviderPropsType): JSX.Elem
 
     const ssrNavigationData: NavigationContextType | null =
         typeof NAVIGATION_DATA === 'string' ? JSON.parse(decodeURIComponent(NAVIGATION_DATA)) : null;
-
-    removeBySelector(navigationScriptSelector);
 
     const resultData: NavigationContextType =
         (isBrowser ? ssrNavigationData : navigationData) || defaultNavigationContextData;
