@@ -13,8 +13,8 @@ export function makeDefaultArticle(): ArticleType {
         id: '',
         isActive: true, // actually temporary "removed"
         isInSiteMapXmlSeo: true, // has sitemap.xml link to article or not
-        metaDescriptionSeo: '', // tag <meta type="description" content="....." />
-        metaKeyWordsSeo: '', // tag <meta type="keywords" content="....." />
+        metaDescriptionSeo: '', // tag <meta name="description" content="....." />
+        metaKeyWordsSeo: '', // tag <meta name="keywords" content="....." />
         metaSeo: '', // actually any html code
         publishDate: '',
         slug: '',

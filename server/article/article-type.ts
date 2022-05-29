@@ -21,8 +21,8 @@ export type ArticleType = {
     id: string;
     isActive: boolean; // actually temporary "removed"
     isInSiteMapXmlSeo: boolean; // has sitemap.xml link to article or not
-    metaDescriptionSeo: string; // tag <meta type="description" content="....." />
-    metaKeyWordsSeo: string; // tag <meta type="keywords" content="....." />
+    metaDescriptionSeo: string; // tag <meta name="description" content="....." />
+    metaKeyWordsSeo: string; // tag <meta name="keywords" content="....." />
     metaSeo: string; // actually any html code
     publishDate: string;
     slug: string;

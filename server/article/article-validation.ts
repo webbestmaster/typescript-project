@@ -18,8 +18,8 @@ export function makeArticleSchema(): JSONSchemaType<ArticleType> {
         id: {type: 'string'},
         isActive: {type: 'boolean'}, // actually temporary "removed"
         isInSiteMapXmlSeo: {type: 'boolean'}, // has sitemap.xml link to article or not
-        metaDescriptionSeo: {type: 'string'}, // tag <meta type="description" content="....." />
-        metaKeyWordsSeo: {type: 'string'}, // tag <meta type="keywords" content="....." />
+        metaDescriptionSeo: {type: 'string'}, // tag <meta name="description" content="....." />
+        metaKeyWordsSeo: {type: 'string'}, // tag <meta name="keywords" content="....." />
         metaSeo: {type: 'string'}, // actually any html code
         publishDate: {type: 'string'},
         slug: {type: 'string'},

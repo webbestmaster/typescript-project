@@ -11,6 +11,8 @@ import {contentStringBegin, contentStringEnd, contentStringFull, indexHtml} from
 import {makeClientArticleContextData} from './api/srr-article';
 import {getTitleSsrReplaceData} from './api/ssr-helper/ssr-title';
 import {getMetaRobotsSsrReplaceData} from './api/ssr-helper/ssr-meta-robots';
+import {getMetaKeywordsSsrReplaceData} from './api/ssr-helper/ssr-meta-keywords';
+import {getMetaDescriptionSsrReplaceData} from './api/ssr-helper/ssr-meta-description';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
 export async function getHtmlCallBack(
@@ -26,6 +28,8 @@ export async function getHtmlCallBack(
     const [articleData, articleDataHtmlString] = await makeClientArticleContextData(slug);
     const titleSsrReplaceData = getTitleSsrReplaceData(articleData.article);
     const metaRobotsSsrReplaceData = getMetaRobotsSsrReplaceData(articleData.article);
+    const metaKeywordsSsrReplaceData = getMetaKeywordsSsrReplaceData(articleData.article);
+    const metaDescriptionSsrReplaceData = getMetaDescriptionSsrReplaceData(articleData.article);
 
     const pathname: string = raw.url || '/';
     const appStream = ReactDOMServer.renderToStaticNodeStream(
@@ -45,6 +49,8 @@ export async function getHtmlCallBack(
     return indexHtml
         .replace(titleSsrReplaceData.selector, titleSsrReplaceData.value)
         .replace(metaRobotsSsrReplaceData.selector, metaRobotsSsrReplaceData.value)
+        .replace(metaDescriptionSsrReplaceData.selector, metaDescriptionSsrReplaceData.value)
+        .replace(metaKeywordsSsrReplaceData.selector, metaKeywordsSsrReplaceData.value)
         .replace(contentStringFull, [contentStringBegin, htmlString, contentStringEnd].join(''))
         .replace(navigationReplaceSelector, navigationDataHtmlString)
         .replace(articleReplaceSelector, articleDataHtmlString);

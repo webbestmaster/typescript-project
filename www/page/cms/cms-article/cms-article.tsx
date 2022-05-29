@@ -76,8 +76,8 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
         id,
         isActive, // actually temporary "removed"
         isInSiteMapXmlSeo, // has sitemap.xml link to article or not
-        metaDescriptionSeo, // tag <meta type="description" content="....." />
-        metaKeyWordsSeo, // tag <meta type="keywords" content="....." />
+        metaDescriptionSeo, // tag <meta name="description" content="....." />
+        metaKeyWordsSeo, // tag <meta name="keywords" content="....." />
         metaSeo, // actually any html code
         publishDate: defaultPublishDate,
         slug,
@@ -400,7 +400,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
             <Form.Item
                 initialValue={metaDescriptionSeo}
-                label={'Meta Description, tag <meta type="description" content="..." />:'}
+                label={'Meta Description, tag <meta name="description" content="..." />:'}
                 name="metaDescriptionSeo"
             >
                 <Input placeholder="Description..." />
@@ -408,7 +408,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
             <Form.Item
                 initialValue={metaKeyWordsSeo}
-                label={'Meta KeyWords, tag <meta type="keywords" content="..." />:'}
+                label={'Meta KeyWords, tag <meta name="keywords" content="..." />:'}
                 name="metaKeyWordsSeo"
             >
                 <Input placeholder="KeyWords..." />
