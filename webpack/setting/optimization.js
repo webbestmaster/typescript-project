@@ -88,6 +88,7 @@ module.exports.optimization = isDevelopment
     : {
           minimize: true,
           minimizer: [
+              /*
               new TerserPlugin({
                   terserOptions: {
                       output: {
@@ -100,6 +101,7 @@ module.exports.optimization = isDevelopment
                       },
                   },
               }),
+*/
               new CssMinimizerPlugin(),
           ],
       };
