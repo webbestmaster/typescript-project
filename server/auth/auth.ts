@@ -8,9 +8,7 @@ export const authCrud = makeCrud<AuthUserType>(
     {
         dataBaseId: 'user',
         onChange: (data: CrudConfigOnChangeArgumentType) => {
-            console.log('update DB');
-            console.log('update sitemap.xml');
-            console.log('update sitemap-img.xml');
+            console.log('update auth DB');
             console.log(JSON.stringify(data));
 
             return Promise.resolve();

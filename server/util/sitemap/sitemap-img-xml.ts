@@ -35,7 +35,7 @@ function getImageListFromArticle(article: ArticleType): ArticleXmlImgDataType {
     };
 }
 
-function ArticleImageDataToString(articleImageData: ArticleImageDataType): string {
+function articleImageDataToString(articleImageData: ArticleImageDataType): string {
     const {alt, src} = articleImageData;
 
     return [
@@ -46,13 +46,17 @@ function ArticleImageDataToString(articleImageData: ArticleImageDataType): strin
         `<image:title>${alt}</image:title>`,
         // -- `            <image:license>${getLastmodTagContent(mongoDocument)}</image:license>`,
         '</image:image>',
-    ].join('\n');
+    ].join('');
 }
 
-function ArticleXmlImgDataToString(articleXmlImg: ArticleXmlImgDataType): string {
+function articleXmlImgDataToString(articleXmlImg: ArticleXmlImgDataType): string {
     const {imageList, url} = articleXmlImg;
 
-    return ['<url>', `<loc>${url}</loc>`, ...imageList.map(ArticleImageDataToString), '</url>'].join('\n');
+    if (imageList.length > 0) {
+        return ['<url>', `<loc>${url}</loc>`, ...imageList.map(articleImageDataToString), '</url>'].join('');
+    }
+
+    return '';
 }
 
 export function getSiteMapImgXml(articleList: Array<ArticleType>): string {
@@ -66,7 +70,7 @@ export function getSiteMapImgXml(articleList: Array<ArticleType>): string {
     return [
         '<?xml version="1.0" encoding="UTF-8"?>',
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">',
-        ...imageDataList.map(ArticleXmlImgDataToString),
+        ...imageDataList.map(articleXmlImgDataToString),
         '</urlset>',
-    ].join('\n');
+    ].join('');
 }

@@ -38,7 +38,7 @@ function getSiteMapXmlItem(article: ArticleType): string {
         `<changefreq>${getChangefreqTagContent(article)}</changefreq>`,
         `<priority>${getPriorityTagContent(article)}</priority>`,
         '</url>',
-    ].join('\n');
+    ].join('');
 }
 
 export function getSiteMapXml(articleList: Array<ArticleType>): string {
@@ -48,5 +48,5 @@ export function getSiteMapXml(articleList: Array<ArticleType>): string {
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
         ...articleList.map(getSiteMapXmlItem),
         '</urlset>',
-    ].join('\n');
+    ].join('');
 }

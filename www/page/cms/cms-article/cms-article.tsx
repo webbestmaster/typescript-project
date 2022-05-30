@@ -387,7 +387,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             </Form.Item>
 
             <Form.Item initialValue={isActive} label="Is Active:" name="isActive" valuePropName="checked">
-                <Checkbox>Uncheck to temporary &quot;remove&quot;</Checkbox>
+                <Checkbox>Uncheck to temporary &quot;remove&quot; (also remove from sitemap.xml)</Checkbox>
             </Form.Item>
 
             <Form.Item
