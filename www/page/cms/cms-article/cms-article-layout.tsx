@@ -69,7 +69,8 @@ export function renderParentList(
             return (
                 <Text key={id}>
                     {index > 0 ? ', ' : null}
-                    <Link to={getArticleLinkToViewClient(slug)}>{title}</Link>/
+                    <Link to={getArticleLinkToViewClient(slug)}>{title}</Link>
+                    &nbsp;|&nbsp;
                     <Link to={getArticleLinkToEdit(id)}>{slug}</Link>
                 </Text>
             );

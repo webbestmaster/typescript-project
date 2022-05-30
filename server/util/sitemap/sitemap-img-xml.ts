@@ -23,8 +23,6 @@ function getImageListFromArticle(article: ArticleType): ArticleXmlImgDataType {
         imageList.push({alt: title, src: httpsSiteDomain + getPathToImage(titleImage, {height: 1024, width: 1024})});
     }
 
-    console.log([...content.matchAll(findImageRegExpGlobal)]);
-
     content.replace(findImageRegExpGlobal, (matchedString: string, alt: string, src: string): string => {
         imageList.push({alt, src: httpsSiteDomain + src});
 

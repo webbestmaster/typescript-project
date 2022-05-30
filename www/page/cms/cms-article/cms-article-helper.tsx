@@ -10,7 +10,7 @@ import {UploadFileResponseType} from '../../../../server/file/file-type';
 import {FetchMethodEnum, fetchX} from '../../../util/fetch';
 import {uploadFileResponseSchema} from '../../../../server/file/file-validation';
 import {deleteArticle} from '../../../service/article/article-api';
-import {httpsSiteDomain, siteDomain} from '../../../const';
+import {httpsSiteDomain} from '../../../const';
 import {getArticleLinkToViewClient} from '../../../client-component/article/article-helper';
 
 import {ArticleForValidationType, MakeSlugValidatorArgumentType} from './cms-article-type';

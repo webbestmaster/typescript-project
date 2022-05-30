@@ -219,8 +219,9 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
             <Box padding={[8, 0]}>
                 <Text>
-                    Article: &nbsp;
-                    <Link to={getArticleLinkToViewClient(slug)}>{title}</Link>/
+                    Article:&nbsp;
+                    <Link to={getArticleLinkToViewClient(slug)}>{title}</Link>
+                    &nbsp;|&nbsp;
                     <Link to={getArticleLinkToEdit(id)}>{slug}</Link>
                 </Text>
             </Box>
