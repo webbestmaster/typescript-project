@@ -23,7 +23,7 @@ const definePluginParameters = {
     // IS_DEVELOPMENT: JSON.stringify(IS_DEVELOPMENT)
 };
 
-const staticFilesSiteList = ['favicon.ico', 'robots.txt', 'ads.txt', 'gss-0.9.xsl'].map(fileName => ({
+const staticFilesSiteList = ['favicon.ico', 'robots.txt', 'ads.txt', 'gss-0.9.xsl', 'manifest.json'].map(fileName => ({
     from: `./www/${fileName}`,
     to: `${filePathPrefix}${fileName}`,
 }));
