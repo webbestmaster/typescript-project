@@ -1,6 +1,8 @@
+console.log('just example, remove');
+/*
 // @flow
 
-/* global process */
+/!* global process *!/
 
 import path from 'path';
 import fileSystem from 'fs';
@@ -169,3 +171,4 @@ export async function updateSiteMapImgXml(): Promise<null | Error> {
         });
     });
 }
+*/

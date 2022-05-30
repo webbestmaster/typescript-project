@@ -1,6 +1,6 @@
 import {makeCrud} from '../data-base/data-base';
 import {CrudConfigOnChangeArgumentType} from '../data-base/data-base-type';
-import {updateSiteMapXml} from '../util/sitemap';
+import {updateSiteMapXml} from '../util/sitemap/sitemap';
 
 import {ArticleType} from './article-type';
 import {makeArticleSchema} from './article-validation';
@@ -17,3 +17,5 @@ export const articleCrud = makeCrud<ArticleType>(
     },
     makeArticleSchema()
 );
+
+updateSiteMapXml();
