@@ -37,7 +37,7 @@ import {
 import {useMakeExecutableState} from '../../../util/function';
 import {PaginationQueryType, PaginationResultType} from '../../../../server/data-base/data-base-type';
 import {getArticleListPaginationPick} from '../../../service/article/article-api';
-import {MarkdownInputWrapper} from '../../../layout/markdown-input-wrapper';
+import {MarkdownInputWrapper} from '../../../layout/markdown-input-wrapper/markdown-input-wrapper';
 import {IsRender} from '../../../layout/is-render/is-render';
 import {rootArticleId} from '../../../../server/article/article-const';
 import {getArticleLinkToViewClient} from '../../../client-component/article/article-helper';

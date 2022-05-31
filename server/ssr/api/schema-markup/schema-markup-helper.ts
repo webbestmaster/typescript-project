@@ -1,13 +1,11 @@
+import {humanNormalizeString} from '../../../../www/util/human';
+
 export function removeNonJsonSymbols(rawString: string): string {
     return rawString.replace(/["[\]{}]/g, '');
 }
 
-function cleanText(text: string): string {
-    return text.trim().replace(/\s+/g, ' ');
-}
-
 export function fitTextTo(fullString: string, maxSize: number): string {
-    const cleanString = cleanText(fullString);
+    const cleanString = humanNormalizeString(fullString);
 
     if (cleanString.length <= maxSize) {
         return cleanString;

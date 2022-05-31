@@ -1,0 +1,23 @@
+/* stylelint-disable selector-pseudo-class-no-unknown */
+
+.markdown_input_wrapper {
+    :global {
+        .ant-row.ant-form-item {
+            height: 100%;
+        }
+
+        .ant-form-item-control-input {
+            flex-grow: 1;
+        }
+
+        .ant-form-item-control-input-content {
+            height: 100%;
+        }
+
+        .ant-input {
+            box-sizing: border-box;
+            height: calc(100% - 24px);
+            min-height: 200px;
+        }
+    }
+}
