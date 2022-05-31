@@ -35,7 +35,8 @@ export function getSchemaMarkupArticleSsrReplaceData(article: ArticleType): SsrR
                 "dateModified": "${timeTo0000(updatedDate)}",
                 "author": {
                     "@type": "Person",
-                    "name": "${removeNonJsonSymbols(staffAuthorList.join(', ')) || 'N/A'}"
+                    "name": "${removeNonJsonSymbols(staffAuthorList.join(', ')) || 'N/A'}",
+                    "url": "${httpsSiteDomain}"
                 },
                 "publisher": {
                     "@type": "Organization",
