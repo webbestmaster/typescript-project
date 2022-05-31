@@ -4,7 +4,19 @@ import {useEffect, useState} from 'react';
 // TODO: set declare const Upload: UploadInterface<any>; TO declare const Upload: UploadInterface<unknown>;
 // node_modules/antd/lib/upload/index.d.ts
 // WARNING: set declare const Upload: UploadInterface<any>; TO declare const Upload: UploadInterface<unknown>;
-import {Button, Checkbox, DatePicker, Form, Input, message, Popconfirm, Select, Typography, Upload} from 'antd';
+import {
+    Button,
+    Checkbox,
+    DatePicker,
+    Form,
+    Input,
+    message,
+    Popconfirm,
+    Select,
+    Typography,
+    Upload,
+    Divider,
+} from 'antd';
 import moment, {Moment} from 'moment';
 import {FieldData, ValidateErrorEntity} from 'rc-field-form/lib/interface';
 import {UploadChangeParam, UploadFile} from 'antd/lib/upload/interface';
@@ -81,12 +93,12 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
         metaSeo, // actually any html code
         publishDate: defaultPublishDate,
         slug,
-        stuffArtistList,
-        stuffAuthorList,
-        stuffCompositorList,
-        stuffDirectorList,
-        stuffIllustratorList,
-        stuffReaderList,
+        staffArtistList,
+        staffAuthorList,
+        staffCompositorList,
+        staffDirectorList,
+        staffIllustratorList,
+        staffReaderList,
         subDocumentIdList,
         subDocumentListViewType,
         tagList,
@@ -124,12 +136,12 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             ...rawValues,
             fileList,
             publishDate,
-            stuffArtistList: stringToArrayByComma(rawValues.stuffArtistList),
-            stuffAuthorList: stringToArrayByComma(rawValues.stuffAuthorList),
-            stuffCompositorList: stringToArrayByComma(rawValues.stuffCompositorList),
-            stuffDirectorList: stringToArrayByComma(rawValues.stuffDirectorList),
-            stuffIllustratorList: stringToArrayByComma(rawValues.stuffIllustratorList),
-            stuffReaderList: stringToArrayByComma(rawValues.stuffReaderList),
+            staffArtistList: stringToArrayByComma(rawValues.staffArtistList),
+            staffAuthorList: stringToArrayByComma(rawValues.staffAuthorList),
+            staffCompositorList: stringToArrayByComma(rawValues.staffCompositorList),
+            staffDirectorList: stringToArrayByComma(rawValues.staffDirectorList),
+            staffIllustratorList: stringToArrayByComma(rawValues.staffIllustratorList),
+            staffReaderList: stringToArrayByComma(rawValues.staffReaderList),
             tagList: stringToArrayByComma(rawValues.tagList),
             title: humanNormalizeString(rawValues.title),
             titleImage,
@@ -292,6 +304,39 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 </Select>
             </Form.Item>
 
+            <Form.Item
+                initialValue={arrayToStringByComma(tagList)}
+                label={`Tag List, use comma "," to divide: ${makeTagsPreview(currentArticleState.tagList)}`}
+                name="tagList"
+            >
+                <Input placeholder="Tag1, Tag2, Tag3..." />
+            </Form.Item>
+
+            <Form.Item
+                initialValue={subDocumentListViewType}
+                label="Sub Document List View Type:"
+                name="subDocumentListViewType"
+            >
+                <Select<SubDocumentListViewTypeEnum>>
+                    <Option value={SubDocumentListViewTypeEnum.header}>Header</Option>
+                    <Option value={SubDocumentListViewTypeEnum.headerImage}>Header-Image</Option>
+                    <Option value={SubDocumentListViewTypeEnum.headerAudio}>Header-Audio</Option>
+                </Select>
+            </Form.Item>
+
+            <Form.Item initialValue={subDocumentIdList} label="Sub Document List:" name="subDocumentIdList">
+                <Select<Array<string>>
+                    disabled={savedArticleList.length === 0}
+                    filterOption
+                    loading={savedArticleList.length === 0}
+                    mode="multiple"
+                    optionFilterProp="title"
+                    placeholder="Sub Document Id..."
+                >
+                    {savedArticleList.map(makeSubDocumentOption)}
+                </Select>
+            </Form.Item>
+
             <MarkdownInputWrapper mdInput={currentArticleState.content}>
                 <Form.Item initialValue={content} label="Content, use markdown:" name="content">
                     <TextArea placeholder="# Markdown..." rows={10} />
@@ -304,36 +349,12 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 </Form.Item>
             </MarkdownInputWrapper>
 
-            <MarkdownInputWrapper mdInput={currentArticleState.descriptionShort}>
-                <Form.Item
-                    initialValue={descriptionShort}
-                    label="Short description, use markdown:"
-                    name="descriptionShort"
-                >
-                    <TextArea placeholder="Some short description is here..." rows={3} />
-                </Form.Item>
-            </MarkdownInputWrapper>
-
             <Form.Item
-                // set on server
-                initialValue={createdDate || noDateUTC}
-                label="Created date UTC:"
-                name="createdDate"
+                initialValue={descriptionShort}
+                label="Short description, plain text only, used for Open Graph:"
+                name="descriptionShort"
             >
-                <Input disabled />
-            </Form.Item>
-
-            <Form.Item
-                // set on server
-                initialValue={updatedDate || noDateUTC}
-                label="Updated date UTC:"
-                name="updatedDate"
-            >
-                <Input disabled />
-            </Form.Item>
-
-            <Form.Item initialValue={moment(publishDate)} label="Publish date UTC:" name="publishDate">
-                <DatePicker onOk={(date: Moment): void => setPublishDate(date.toISOString())} showTime />
+                <TextArea placeholder="Some short description is here..." rows={3} />
             </Form.Item>
 
             <Form.Item label={`Files: ${fileList.length}`}>
@@ -363,6 +384,34 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 >
                     <UploadButton />
                 </Upload>
+            </Form.Item>
+
+            <Form.Item initialValue={moment(publishDate)} label="Publish date UTC:" name="publishDate">
+                <DatePicker onOk={(date: Moment): void => setPublishDate(date.toISOString())} showTime />
+            </Form.Item>
+
+            <Form.Item
+                // set on server
+                initialValue={createdDate || noDateUTC}
+                label="Created date UTC:"
+                name="createdDate"
+            >
+                <Input disabled />
+            </Form.Item>
+
+            <Form.Item
+                // set on server
+                initialValue={updatedDate || noDateUTC}
+                label="Updated date UTC:"
+                name="updatedDate"
+            >
+                <Input disabled />
+            </Form.Item>
+
+            <Divider orientation="center">SEO</Divider>
+
+            <Form.Item initialValue={tagTitleSeo} label="Meta Title, tag <title>...</title>:" name="tagTitleSeo">
+                <Input placeholder="Title..." />
             </Form.Item>
 
             <Form.Item
@@ -424,106 +473,71 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 <TextArea placeholder="Additional meta tags..." rows={3} />
             </Form.Item>
 
+            <Divider orientation="center">Staff</Divider>
+
             <Form.Item
-                initialValue={arrayToStringByComma(stuffArtistList)}
-                label={`Stuff Artists, use comma "," to divide: ${makeTagsPreview(
-                    currentArticleState.stuffArtistList
+                initialValue={arrayToStringByComma(staffArtistList)}
+                label={`Staff Artists, use comma "," to divide: ${makeTagsPreview(
+                    currentArticleState.staffArtistList
                 )}`}
-                name="stuffArtistList"
+                name="staffArtistList"
             >
                 <Input placeholder="Name1, Name2, Name3..." />
             </Form.Item>
 
             <Form.Item
-                initialValue={arrayToStringByComma(stuffAuthorList)}
-                label={`Stuff Authors, use comma "," to divide: ${makeTagsPreview(
-                    currentArticleState.stuffAuthorList
+                initialValue={arrayToStringByComma(staffAuthorList)}
+                label={`Staff Authors, use comma "," to divide: ${makeTagsPreview(
+                    currentArticleState.staffAuthorList
                 )}`}
-                name="stuffAuthorList"
+                name="staffAuthorList"
             >
                 <Input placeholder="Name1, Name2, Name3..." />
             </Form.Item>
 
             <Form.Item
-                initialValue={arrayToStringByComma(stuffCompositorList)}
-                label={`Stuff Compositors, use comma "," to divide: ${makeTagsPreview(
-                    currentArticleState.stuffCompositorList
+                initialValue={arrayToStringByComma(staffCompositorList)}
+                label={`Staff Compositors, use comma "," to divide: ${makeTagsPreview(
+                    currentArticleState.staffCompositorList
                 )}`}
-                name="stuffCompositorList"
+                name="staffCompositorList"
             >
                 <Input placeholder="Name1, Name2, Name3..." />
             </Form.Item>
 
             <Form.Item
-                initialValue={arrayToStringByComma(stuffDirectorList)}
-                label={`Stuff Directors, use comma "," to divide: ${makeTagsPreview(
-                    currentArticleState.stuffDirectorList
+                initialValue={arrayToStringByComma(staffDirectorList)}
+                label={`Staff Directors, use comma "," to divide: ${makeTagsPreview(
+                    currentArticleState.staffDirectorList
                 )}`}
-                name="stuffDirectorList"
+                name="staffDirectorList"
             >
                 <Input placeholder="Name1, Name2, Name3..." />
             </Form.Item>
 
             <Form.Item
-                initialValue={arrayToStringByComma(stuffIllustratorList)}
-                label={`Stuff Illustrators, use comma "," to divide: ${makeTagsPreview(
-                    currentArticleState.stuffIllustratorList
+                initialValue={arrayToStringByComma(staffIllustratorList)}
+                label={`Staff Illustrators, use comma "," to divide: ${makeTagsPreview(
+                    currentArticleState.staffIllustratorList
                 )}`}
-                name="stuffIllustratorList"
+                name="staffIllustratorList"
             >
                 <Input placeholder="Name1, Name2, Name3..." />
             </Form.Item>
 
             <Form.Item
-                initialValue={arrayToStringByComma(stuffReaderList)}
-                label={`Stuff Readers, use comma "," to divide: ${makeTagsPreview(
-                    currentArticleState.stuffReaderList
+                initialValue={arrayToStringByComma(staffReaderList)}
+                label={`Staff Readers, use comma "," to divide: ${makeTagsPreview(
+                    currentArticleState.staffReaderList
                 )}`}
-                name="stuffReaderList"
+                name="staffReaderList"
             >
                 <Input placeholder="Name1, Name2, Name3..." />
-            </Form.Item>
-
-            <Form.Item initialValue={tagTitleSeo} label="Meta Title, tag <title>...</title>:" name="tagTitleSeo">
-                <Input placeholder="Title..." />
-            </Form.Item>
-
-            <Form.Item
-                initialValue={arrayToStringByComma(tagList)}
-                label={`Tag List, use comma "," to divide: ${makeTagsPreview(currentArticleState.tagList)}`}
-                name="tagList"
-            >
-                <Input placeholder="Tag1, Tag2, Tag3..." />
-            </Form.Item>
-
-            <Form.Item initialValue={subDocumentIdList} label="Sub Document Id List:" name="subDocumentIdList">
-                <Select<Array<string>>
-                    disabled={savedArticleList.length === 0}
-                    filterOption
-                    loading={savedArticleList.length === 0}
-                    mode="multiple"
-                    optionFilterProp="title"
-                    placeholder="Sub Document Id..."
-                >
-                    {savedArticleList.map(makeSubDocumentOption)}
-                </Select>
-            </Form.Item>
-
-            <Form.Item
-                initialValue={subDocumentListViewType}
-                label="Sub Document List View Type:"
-                name="subDocumentListViewType"
-            >
-                <Select<SubDocumentListViewTypeEnum>>
-                    <Option value={SubDocumentListViewTypeEnum.header}>Header</Option>
-                    <Option value={SubDocumentListViewTypeEnum.headerImage}>Header-Image</Option>
-                    <Option value={SubDocumentListViewTypeEnum.headerAudio}>Header-Audio</Option>
-                </Select>
             </Form.Item>
 
             <Form.Item>
-                <Button htmlType="submit" type="primary">
-                    Submit
+                <Button accessKey="s" htmlType="submit" type="primary">
+                    Submit (S)
                 </Button>
                 <IsRender isRender={mode === CmsArticleModeEnum.edit}>
                     &nbsp;

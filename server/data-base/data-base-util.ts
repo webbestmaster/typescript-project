@@ -1,7 +1,11 @@
+import path from 'path';
+import {promises as fileSystemPromises} from 'fs';
+
 import {PromiseResolveType} from '../../www/util/promise';
 import {extractFromUnknown} from '../../www/util/type';
 
 import {CrudSearchQueryType, RegExpQueryType} from './data-base-type';
+import {dataBaseBackUpPathAbsolute} from './data-base-const';
 
 export function makeSimpleDataBaseCallBack(
     maybeError: Error | null,
@@ -51,4 +55,15 @@ export function makePreparedQuery<ModelType>(query: CrudSearchQueryType<ModelTyp
     });
 
     return result;
+}
+
+export async function makeBackUpFolder(dataBaseId: string): Promise<void> {
+    try {
+        await fileSystemPromises.mkdir(dataBaseBackUpPathAbsolute);
+        // eslint-disable-next-line no-empty
+    } catch {}
+    try {
+        await fileSystemPromises.mkdir(path.join(dataBaseBackUpPathAbsolute, dataBaseId));
+        // eslint-disable-next-line no-empty
+    } catch {}
 }

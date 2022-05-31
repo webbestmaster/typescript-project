@@ -1,8 +1,8 @@
-import {ArticleType} from '../../article/article-type';
-import {getClientArticleLinkWithDomain, getPathToImage} from '../../../www/page/cms/cms-article/cms-article-helper';
-import {httpsSiteDomain} from '../../../www/const';
+import {ArticleType} from '../article/article-type';
+import {getClientArticleLinkWithDomain, getPathToImage} from '../../www/page/cms/cms-article/cms-article-helper';
+import {httpsSiteDomain} from '../../www/const';
 
-type ArticleImageDataType = {
+export type ArticleImageDataType = {
     alt: string;
     src: string;
 };
@@ -14,7 +14,7 @@ type ArticleXmlImgDataType = {
 
 const findImageRegExpGlobal = /!\[([\S\s]*?)]\((\S+?)(?:\s+"([\S\s]+?)")?\)/g;
 
-function getImageListFromArticle(article: ArticleType): ArticleXmlImgDataType {
+export function getImageListFromArticle(article: ArticleType): ArticleXmlImgDataType {
     const {titleImage, content, title, slug} = article;
 
     const imageList: Array<ArticleImageDataType> = [];

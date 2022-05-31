@@ -1,12 +1,11 @@
 import path from 'path';
-import {promises as fileSystemPromises} from 'fs';
 
 import Ajv, {JSONSchemaType} from 'ajv';
 import Datastore from 'nedb';
 
 import {PromiseResolveType} from '../../www/util/promise';
 
-import {makePreparedQuery, getPartialData, makeSimpleDataBaseCallBack} from './data-base-util';
+import {makePreparedQuery, getPartialData, makeSimpleDataBaseCallBack, makeBackUpFolder} from './data-base-util';
 import {
     CrudConfigOnChangeArgumentType,
     CrudConfigType,
@@ -16,7 +15,7 @@ import {
     PaginationResultType,
 } from './data-base-type';
 import {makeDataBaseBackUp} from './data-base-back-up';
-import {dataBaseBackUpPathAbsolute, dataBasePathAbsolute} from './data-base-const';
+import {dataBasePathAbsolute} from './data-base-const';
 
 const ajv = new Ajv();
 
@@ -33,18 +32,6 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
         makeDataBaseBackUp(onChangeData);
         onChange(onChangeData);
     }
-
-    (async () => {
-        try {
-            await fileSystemPromises.mkdir(dataBaseBackUpPathAbsolute);
-            // eslint-disable-next-line no-empty
-        } catch {}
-        try {
-            await fileSystemPromises.mkdir(path.join(dataBaseBackUpPathAbsolute, dataBaseId));
-            // eslint-disable-next-line no-empty
-        } catch {}
-        makeDataBaseBackUp(onChangeData);
-    })();
 
     const dataBase = new Datastore<ModelType>({
         autoload: true,
@@ -230,6 +217,45 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
             });
         });
     }
+
+    async function makeStructureSelfCheck(): Promise<void> {
+        console.info(`Structure self check for ${dataBaseId} started`);
+
+        const allRowList: Array<ModelType> = await findMany({});
+
+        let hasError = false;
+
+        allRowList.forEach((modelData: ModelType) => {
+            const modelJsonSchemaValidate = ajv.compile<ModelType>(modelJsonSchema);
+            const isValid = modelJsonSchemaValidate(modelData);
+
+            if (isValid) {
+                return;
+            }
+
+            hasError = true;
+
+            console.error('[ERROR]: makeCrud:');
+            console.error('[ERROR]: makeCrud: model data');
+            console.error(modelData);
+            console.error('[ERROR]: makeCrud: errors:');
+            console.error(modelJsonSchemaValidate.errors || '');
+        });
+
+        if (hasError) {
+            console.error(`[ERROR]: makeCrud: ${dataBaseId} has wrong data!`);
+        } else {
+            console.info(`[ OK ]: makeCrud: ${dataBaseId} all data correct!`);
+        }
+
+        console.info(`Structure self check for ${dataBaseId} finished`);
+    }
+
+    (async () => {
+        await makeBackUpFolder(dataBaseId);
+        await makeDataBaseBackUp(onChangeData);
+        await makeStructureSelfCheck();
+    })();
 
     return {
         // count,

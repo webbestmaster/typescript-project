@@ -62,7 +62,7 @@ $ sudo chown -R user_name:user_name /home/user_name // to make user_name as owne
 $ ls -la // show all files and owners
 ```
 
-if ssh-add do not works, try to use
+if ssh-add does not work, try to use
 ```bash
 $ eval `ssh-agent -s`
 ```

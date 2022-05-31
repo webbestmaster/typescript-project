@@ -15,8 +15,12 @@ import {getMetaKeywordsSsrReplaceData} from './api/ssr-helper/ssr-meta-keywords'
 import {getMetaDescriptionSsrReplaceData} from './api/ssr-helper/ssr-meta-description';
 import {getMetaSeoSsrReplaceData} from './api/ssr-helper/ssr-meta-seo';
 import {getCanonicalLinkSsrReplaceData} from './api/ssr-helper/ssr-meta-canonical';
+import {getMetaOpenGraphSsrReplaceData} from './api/ssr-helper/ssr-meta-open-graph';
+import {getMetaTwitterCardSsrReplaceData} from './api/ssr-helper/ssr-meta-twitter-card';
+import {getSchemaMarkupArticleSsrReplaceData} from './api/schema-markup/schema-markup-article';
+import {getSchemaMarkupBreadcrumbsSsrReplaceData} from './api/schema-markup/schema-markup-breadcrumbs';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars, max-statements
 export async function getHtmlCallBack(
     request: FastifyRequest<{Body: string; Params?: {slug: string}}>,
     reply: FastifyReply
@@ -28,12 +32,19 @@ export async function getHtmlCallBack(
 
     const [navigationData, navigationDataHtmlString] = await getNavigationContextData();
     const [articleData, articleDataHtmlString] = await makeClientArticleContextData(slug);
-    const titleSsrReplaceData = getTitleSsrReplaceData(articleData.article);
-    const metaRobotsSsrReplaceData = getMetaRobotsSsrReplaceData(articleData.article);
-    const metaKeywordsSsrReplaceData = getMetaKeywordsSsrReplaceData(articleData.article);
-    const metaDescriptionSsrReplaceData = getMetaDescriptionSsrReplaceData(articleData.article);
-    const metaSeoSsrReplaceData = getMetaSeoSsrReplaceData(articleData.article);
-    const canonicalLinkSsrReplaceData = getCanonicalLinkSsrReplaceData(articleData.article);
+
+    const {article, breadcrumbs} = articleData;
+
+    const schemaBreadcrumbsSsrReplaceData = getSchemaMarkupBreadcrumbsSsrReplaceData(article, breadcrumbs);
+    const schemaArticleSsrReplaceData = getSchemaMarkupArticleSsrReplaceData(article);
+    const titleSsrReplaceData = getTitleSsrReplaceData(article);
+    const metaRobotsSsrReplaceData = getMetaRobotsSsrReplaceData(article);
+    const metaKeywordsSsrReplaceData = getMetaKeywordsSsrReplaceData(article);
+    const metaDescriptionSsrReplaceData = getMetaDescriptionSsrReplaceData(article);
+    const metaSeoSsrReplaceData = getMetaSeoSsrReplaceData(article);
+    const canonicalLinkSsrReplaceData = getCanonicalLinkSsrReplaceData(article);
+    const metaOpenGraphSsrReplaceData = getMetaOpenGraphSsrReplaceData(article);
+    const metaTwitterCardSsrReplaceData = getMetaTwitterCardSsrReplaceData(article);
 
     const pathname: string = raw.url || '/';
     const appStream = ReactDOMServer.renderToStaticNodeStream(
@@ -42,11 +53,11 @@ export async function getHtmlCallBack(
 
     const htmlString = await streamToStringServer(appStream);
 
-    if (articleData.article.id === '') {
+    if (article.id === '') {
         reply.code(404);
     }
 
-    if (articleData.article.hasMetaRobotsNoIndexSeo) {
+    if (article.hasMetaRobotsNoIndexSeo) {
         reply.header('X-Robots-Tag', 'noindex');
     }
 
@@ -57,6 +68,11 @@ export async function getHtmlCallBack(
         .replace(metaKeywordsSsrReplaceData.selector, metaKeywordsSsrReplaceData.value)
         .replace(metaSeoSsrReplaceData.selector, metaSeoSsrReplaceData.value)
         .replace(canonicalLinkSsrReplaceData.selector, canonicalLinkSsrReplaceData.value)
+        .replace(metaOpenGraphSsrReplaceData.selector, metaOpenGraphSsrReplaceData.value)
+        .replace(metaTwitterCardSsrReplaceData.selector, metaTwitterCardSsrReplaceData.value)
+        .replace(schemaBreadcrumbsSsrReplaceData.selector, schemaBreadcrumbsSsrReplaceData.value)
+        .replace(schemaArticleSsrReplaceData.selector, schemaArticleSsrReplaceData.value)
+
         .replace(contentStringFull, [contentStringBegin, htmlString, contentStringEnd].join(''))
         .replace(navigationReplaceSelector, navigationDataHtmlString)
         .replace(articleReplaceSelector, articleDataHtmlString);

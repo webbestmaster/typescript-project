@@ -26,12 +26,12 @@ export type ArticleType = {
     metaSeo: string; // actually any html code
     publishDate: string;
     slug: string;
-    stuffArtistList: Array<string>;
-    stuffAuthorList: Array<string>;
-    stuffCompositorList: Array<string>;
-    stuffDirectorList: Array<string>;
-    stuffIllustratorList: Array<string>;
-    stuffReaderList: Array<string>;
+    staffArtistList: Array<string>;
+    staffAuthorList: Array<string>;
+    staffCompositorList: Array<string>;
+    staffDirectorList: Array<string>;
+    staffIllustratorList: Array<string>;
+    staffReaderList: Array<string>;
     subDocumentIdList: Array<string>;
     subDocumentListViewType: SubDocumentListViewTypeEnum;
     tagList: Array<string>;

@@ -1,9 +1,9 @@
 /* global process */
 import path from 'path';
 
-import {ArticleType} from '../../article/article-type';
-import {articleCrud} from '../../article/article';
-import {writeStringToFile} from '../file';
+import {ArticleType} from '../article/article-type';
+import {articleCrud} from '../article/article';
+import {writeStringToFile} from '../util/file';
 
 import {getSiteMapXml} from './sitemap-xml';
 import {getSiteMapImgXml} from './sitemap-img-xml';

@@ -9,6 +9,10 @@ export const demoUrl = 'http://webbestmaster.github.io/react-audio-player-pro';
 
 export const siteDomain = 'my-best-site.com';
 export const httpsSiteDomain = `https://${siteDomain}`;
+export const openGraphLocaleName = 'en_US';
+export const copyrightName = 'My Best Site Dot Com';
+export const companyLogoPngFileName = 'company-logo.png';
+export const appIconPngFileName = 'app-icon.png';
 
 function sayHi() {
     const {log} = console;
