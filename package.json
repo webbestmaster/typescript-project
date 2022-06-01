@@ -60,7 +60,7 @@
     "@fastify/secure-session": "^4.1.1",
     "@fastify/static": "^5.0.2",
     "@types/nedb": "^1.8.12",
-    "@types/react": "^18.0.9",
+    "@types/react": "^18.0.10",
     "@types/react-dom": "^18.0.5",
     "ajv": "^8.11.0",
     "antd": "^4.20.7",

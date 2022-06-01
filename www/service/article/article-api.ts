@@ -18,7 +18,7 @@ export async function getArticleListPagination(
     const urlSearchParameters = paginationQueryToURLSearchParameters<ArticleType>(paginationQuery, []);
 
     return fetchX<PaginationResultType<ArticleType>>(
-        `${apiUrl.articleListPagination}?${urlSearchParameters.toString()}`,
+        `${apiUrl.adminArticleListPagination}?${urlSearchParameters.toString()}`,
         makeArticlePaginationSchema(),
         {
             credentials: 'include',
@@ -34,7 +34,7 @@ export async function getArticleListPaginationPick<Keys extends keyof ArticleTyp
     const urlSearchParameters = paginationQueryToURLSearchParameters<ArticleType>(paginationQuery, fieldList);
 
     return fetchX<PaginationResultType<Pick<ArticleType, Keys>>>(
-        `${apiUrl.articleListPaginationPick}?${urlSearchParameters.toString()}`,
+        `${apiUrl.adminArticleListPaginationPick}?${urlSearchParameters.toString()}`,
         makeArticlePaginationSchemaPick<Keys>(fieldList),
         {
             credentials: 'include',
