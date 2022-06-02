@@ -7,8 +7,6 @@ import {ArticleContextType} from '../../client-component/article/article-context
 import {ShareButtonSprite} from '../../client-component/share/share-button/share-button-sprite';
 import {GdprInfo} from '../../layout/gdpr-info/gdpr-info';
 
-import {GoogleAnalytics} from '../google-analytics/google-analytics';
-
 import {AppProvider} from './app-provider';
 import {AppRouting} from './app-routing';
 
@@ -30,7 +28,6 @@ export function App(props: AppPropsType): JSX.Element {
                 </AppProvider>
             </ErrorBoundary>
             <ShareButtonSprite />
-            <GoogleAnalytics />
         </StrictMode>
     );
 }

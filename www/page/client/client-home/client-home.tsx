@@ -4,6 +4,7 @@
 import {useContext, useEffect, useState} from 'react';
 import markdownPro, {MarkdownConfigShallowType} from 'markdown-pro';
 import {JSONSchemaType} from 'ajv';
+import {useLocation} from 'react-router';
 
 import {Locale, useLocale} from '../../../provider/locale/locale-context';
 import {ErrorData} from '../../../layout/error-data/error-data';
@@ -21,6 +22,8 @@ import {Article} from '../../../client-component/article/article';
 import {rootArticleSlug} from '../../../../server/article/article-const';
 import {ArticleContextType} from '../../../client-component/article/article-context/article-context-type';
 import {articleContext} from '../../../client-component/article/article-context/article-context';
+import {useGoogleAnalytics} from '../../../component/google-analytics/google-analytics';
+import {googleAnalyticsId} from '../../../const';
 
 import pngImageSrc from './image/marker-icon-2x.png';
 import svgImageSrc from './image/questions-with-an-official-answer.svg';
@@ -54,6 +57,7 @@ const htmlCodeConfigured = markdownPro('# Markdown Pro', config);
 export function ClientHome(): JSX.Element {
     console.log(htmlCode, htmlCodeConfigured);
     console.log(ErrorData);
+    const location = useLocation();
     const {setSlug = noop} = useContext<ArticleContextType>(articleContext);
     const {getLocalizedString, setLocaleName, localeName} = useLocale();
     const {getFormattedNumber} = useFormat();
@@ -61,6 +65,8 @@ export function ClientHome(): JSX.Element {
     const {execute, isInProgress, result, error} = useMakeExecutableState<[string, JSONSchemaType<MyIpType>], MyIpType>(
         fetchX
     );
+
+    useGoogleAnalytics({googleAnalyticsId, pathname: location.pathname});
 
     useEffect(() => {
         setSlug(rootArticleSlug);

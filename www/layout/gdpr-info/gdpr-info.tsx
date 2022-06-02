@@ -1,10 +1,11 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 
 import {applyGdpr, getDefaultIsVisible} from './gdpr-info-helper';
 import gdprInfoStyle from './gdpr-info.scss';
 
 export function GdprInfo(): JSX.Element | null {
     const [isVisible, setIsVisible] = useState<boolean>(getDefaultIsVisible());
+    const [isVisibleByTimeout, setIsVisibleByTimeout] = useState<boolean>(false);
 
     function handleApplyGdpr() {
         setIsVisible(false);
@@ -12,7 +13,11 @@ export function GdprInfo(): JSX.Element | null {
         applyGdpr();
     }
 
-    if (!isVisible) {
+    useEffect(() => {
+        setIsVisibleByTimeout(true);
+    }, []);
+
+    if (!isVisible || !isVisibleByTimeout) {
         return null;
     }
 
