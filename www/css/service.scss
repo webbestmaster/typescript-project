@@ -1,11 +1,36 @@
 @import './var';
 
+%width-limit,
+.width_limit {
+    background-color: $main-background-color;
+    box-sizing: border-box;
+    display: block;
+    margin: 0 auto;
+    max-width: $max-width;
+    padding-left: $ui-unit * 4;
+    padding-right: $ui-unit * 4;
+}
+
+/*
+:global .mobile {
+    :local {
+        %width-limit,
+        .width_limit {
+            padding-left: $ui-unit * 2;
+            padding-right: $ui-unit * 2;
+        }
+    }
+}
+*/
+
+/*
 .width_limiter {
     box-sizing: border-box;
     margin: 0 auto;
     max-width: 990px;
     padding: 0;
 }
+*/
 
 .main_font_color {
     color: $main-font-color;

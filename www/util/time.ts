@@ -1,3 +1,4 @@
+/* global setTimeout */
 import {LocaleNameEnum} from '../provider/locale/locale-context-type';
 
 import {getFormattedNumber, NumberFormatOptionsType, TimeSizeEnum} from './format';
@@ -62,4 +63,30 @@ export function getDateTimeHumanSize(option: GetDateTimeDifferenceOptionType): s
 
 export function dateIsoToHumanView(dateIso: string): string {
     return dateIso.replace('T', ' ').replace(/\.\S+/, '');
+}
+
+export function waitForTime(timeInMs: number): Promise<void> {
+    return new Promise<void>((resolve: () => void) => {
+        setTimeout(resolve, timeInMs);
+    });
+}
+
+export async function waitForCallback(
+    callBack: () => Promise<boolean> | boolean,
+    maxCount: number,
+    timeOutMs: number
+): Promise<boolean> {
+    if (maxCount === 0) {
+        throw new Error('waitForCallback, timeout');
+    }
+
+    const isDone = await callBack();
+
+    if (isDone) {
+        return true;
+    }
+
+    await waitForTime(timeOutMs);
+
+    return waitForCallback(callBack, maxCount - 1, timeOutMs);
 }

@@ -7,6 +7,7 @@ export const selector = {
 
 export const demoUrl = 'http://webbestmaster.github.io/react-audio-player-pro';
 
+export const googleAnalyticsId = 'UA-156987706-1';
 export const siteDomain = 'my-best-site.com';
 export const httpsSiteDomain = `https://${siteDomain}`;
 export const openGraphLocaleName = 'en_US';
