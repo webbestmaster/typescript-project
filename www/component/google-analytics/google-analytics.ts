@@ -51,7 +51,7 @@ export function useGoogleAnalytics(config: GoogleAnalyticsType): null {
     const scriptSrc = `https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`;
 
     if (document.querySelector(`script[src="${scriptSrc}"]`)) {
-        console.log('Google Analytics script already exists');
+        console.info('Google Analytics script already exists');
         return null;
     }
 
