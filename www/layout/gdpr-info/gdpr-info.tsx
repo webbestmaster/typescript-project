@@ -1,5 +1,7 @@
 import {useEffect, useState} from 'react';
 
+import {Locale} from '../../provider/locale/locale-context';
+
 import {applyGdpr, getDefaultIsVisible} from './gdpr-info-helper';
 import gdprInfoStyle from './gdpr-info.scss';
 
@@ -25,7 +27,7 @@ export function GdprInfo(): JSX.Element | null {
         <div className={gdprInfoStyle.gdpr_info__wrapper}>
             <div className={gdprInfoStyle.gdpr_info__container}>
                 <p className={gdprInfoStyle.gdpr_info__text}>
-                    Пользуясь настоящим веб-сайтом, вы даёте свое согласие на использование файлов cookies.
+                    <Locale stringKey="GDPR__WE_USE_COOKIES" />
                 </p>
 
                 <button

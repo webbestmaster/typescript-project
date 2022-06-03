@@ -1,4 +1,4 @@
-/* global URLSearchParams */
+/* global URLSearchParams, location */
 import {generatePath as reactRouterGeneratePath} from 'react-router-dom';
 
 import {PaginationQueryType} from '../../server/data-base/data-base-type';
@@ -41,3 +41,11 @@ export function urlSearchParametersToPaginationQuery<DataType>(
     return result;
 }
 */
+
+export function getIsLocalhost(): boolean {
+    if (typeof location === 'undefined') {
+        return false;
+    }
+
+    return location.hostname === 'localhost';
+}

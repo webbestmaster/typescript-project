@@ -22,8 +22,9 @@ import {Article} from '../../../client-component/article/article';
 import {rootArticleSlug} from '../../../../server/article/article-const';
 import {ArticleContextType} from '../../../client-component/article/article-context/article-context-type';
 import {articleContext} from '../../../client-component/article/article-context/article-context';
-import {useGoogleAnalytics} from '../../../component/google-analytics/google-analytics';
+import {useGoogleAnalytics} from '../../../client-component/google-analytics/google-analytics';
 import {googleAnalyticsId} from '../../../const';
+import {TopAdsWrapper} from '../../../client-component/ads/top-ads-wrapper/top-ads-wrapper';
 
 import pngImageSrc from './image/marker-icon-2x.png';
 import svgImageSrc from './image/questions-with-an-official-answer.svg';
@@ -101,6 +102,9 @@ export function ClientHome(): JSX.Element {
     return (
         <div>
             <Navigation />
+
+            <TopAdsWrapper />
+
             <Article />
             <h1 className={clientHomeStyle.home_header}>
                 home page (<AsciiSpinner />)

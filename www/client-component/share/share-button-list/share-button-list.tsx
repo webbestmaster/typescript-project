@@ -2,9 +2,9 @@ import {useContext} from 'react';
 
 import {ArticleContextType} from '../../article/article-context/article-context-type';
 import {articleContext} from '../../article/article-context/article-context';
+import {Locale} from '../../../provider/locale/locale-context';
 import {getClientArticleLinkWithDomain} from '../../../page/cms/cms-article/cms-article-helper';
 
-import {defaultListHeader} from './share-button-list-const';
 import {ShareButtonListContent} from './share-button-list-content/share-button-list-content';
 
 export function ShareButtonList(): JSX.Element {
@@ -12,7 +12,7 @@ export function ShareButtonList(): JSX.Element {
 
     return (
         <ShareButtonListContent
-            listHeader={defaultListHeader}
+            listHeader={<Locale stringKey="SHARE__RECOMMEND_TO_FRIENDS__HEADER" />}
             title={article.title}
             url={getClientArticleLinkWithDomain(article.slug)}
         />

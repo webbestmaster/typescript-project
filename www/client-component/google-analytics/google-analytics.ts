@@ -6,9 +6,9 @@
 import {useRef} from 'react';
 
 import {waitForCallback} from '../../util/time';
-// import {isCMS} from '../../../lib/url';
-// import {promiseCatch} from '../../../lib/promise';
-// import {waitForCallback} from "../../util/time";
+import {getIsLocalhost} from '../../util/url';
+
+import {loadGoogleAnalyticsScript} from './google-analytics-helper';
 
 type GoogleAnalyticsType = {
     googleAnalyticsId: string;
@@ -28,15 +28,25 @@ export function useGoogleAnalytics(config: GoogleAnalyticsType): null {
     const {googleAnalyticsId, pathname} = config;
     const pathnameRef = useRef<string>('');
 
+    if (getIsLocalhost()) {
+        return null;
+    }
+
     function setAndSend(newPathname: string) {
         const {ga: definedGa} = window;
 
-        if (definedGa && pathnameRef.current !== newPathname) {
-            pathnameRef.current = newPathname;
-            console.info(`%cGoogle Analytics set and send page: ${newPathname}`, 'color: #0c0');
-            definedGa('set', 'page', newPathname);
-            definedGa('send', 'pageview');
+        if (!definedGa) {
+            throw new Error('Google Analytics (window.ga) is not defined');
         }
+
+        if (pathnameRef.current === newPathname) {
+            return;
+        }
+
+        pathnameRef.current = newPathname;
+        console.info(`%cGoogle Analytics set and send page: ${newPathname}`, 'color: #0c0');
+        definedGa('set', 'page', newPathname);
+        definedGa('send', 'pageview');
     }
 
     if (typeof document === 'undefined' || typeof window === 'undefined') {
@@ -48,26 +58,7 @@ export function useGoogleAnalytics(config: GoogleAnalyticsType): null {
         return null;
     }
 
-    const scriptSrc = `https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`;
-
-    if (document.querySelector(`script[src="${scriptSrc}"]`)) {
-        console.info('Google Analytics script already exists');
-        return null;
-    }
-
-    const script = document.createElement('script');
-
-    script.async = true;
-    script.src = scriptSrc;
-
-    const {head} = document;
-
-    if (!head) {
-        console.error('[ERROR]: document.header is not define');
-        return null;
-    }
-
-    head.append(script);
+    loadGoogleAnalyticsScript(googleAnalyticsId);
 
     // eslint-disable-next-line unicorn/consistent-destructuring
     window.dataLayer = window.dataLayer || [];
@@ -95,12 +86,13 @@ export function useGoogleAnalytics(config: GoogleAnalyticsType): null {
             }
 
             ga('create', googleAnalyticsId, 'auto');
+
+            console.info('Google Analytics is initialized');
+
             setAndSend(pathname);
 
             // fix pokazatel' otkazov
             setInterval((): unknown => ga('send', 'event', 'nobouncy', '15sec'), 15e3);
-
-            console.info('Google Analytics is initialized');
         })
         .catch(console.error);
 

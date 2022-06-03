@@ -51,7 +51,11 @@ export const enUs = {
     EMPTY__TRY_CHANGING_FILTERS: 'Try changing filters.',
     EMPTY__EMPTY: 'Empty.',
 
+    GDPR__WE_USE_COOKIES: 'By using this website, you consent to the use of cookies.',
+
     ERROR__CAN_NOT_LOAD_THE_COMPONENT: 'Can not load the component.',
+
+    SHARE__RECOMMEND_TO_FRIENDS__HEADER: 'Recommend to friends:',
 
     /* eslint-enable id-match, id-length, max-len,sonarjs/no-duplicate-string, sort-keys */
 };

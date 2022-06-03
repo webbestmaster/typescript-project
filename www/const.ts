@@ -8,12 +8,16 @@ export const selector = {
 export const demoUrl = 'http://webbestmaster.github.io/react-audio-player-pro';
 
 export const googleAnalyticsId = 'UA-156987706-1';
+export const googleAdSenseId = 'ca-pub-8997870404482178';
+export const googleAdSenseBottomAdId = '9673664092';
+export const googleAdSenseTopAdId = '4086736743';
+
 export const siteDomain = 'my-best-site.com';
 export const httpsSiteDomain = `https://${siteDomain}`;
 export const openGraphLocaleName = 'en_US';
 export const copyrightName = 'My Best Site Dot Com';
 export const companyLogoPngFileName = 'company-logo.png';
-export const appIconPngFileName = 'app-icon.png';
+// export const appIconPngFileName = 'app-icon.png';
 
 function sayHi() {
     const {log} = console;

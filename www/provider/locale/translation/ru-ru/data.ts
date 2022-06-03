@@ -53,7 +53,11 @@ export const ruRu: LocaleDictionaryType = {
     EMPTY__TRY_CHANGING_FILTERS: 'Попробуйте изменить фильтры.',
     EMPTY__EMPTY: 'Пусто.',
 
+    GDPR__WE_USE_COOKIES: 'Пользуясь настоящим веб-сайтом, вы даёте свое согласие на использование файлов cookies.',
+
     ERROR__CAN_NOT_LOAD_THE_COMPONENT: 'Не получилось загрузить компонент.',
+
+    SHARE__RECOMMEND_TO_FRIENDS__HEADER: 'Рекомендовать друзьям:',
 
     /* eslint-enable id-match, id-length, max-len,sonarjs/no-duplicate-string, sort-keys */
 };
