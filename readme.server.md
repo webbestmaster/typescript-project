@@ -96,6 +96,7 @@ Execute this from your local machine:
 ```bash
 // download
 $ scp deploy@188.166.70.236:~/<file-name>.zip ~/<file-name>.zip
+$ scp -r deploy@188.166.70.236:~/<folder-name> ~/<folder-name>
 
 // upload
 $ scp /path/to/file username@servername/ip:/destination/folder/
