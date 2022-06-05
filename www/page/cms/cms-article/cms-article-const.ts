@@ -11,3 +11,5 @@ export const noDateUTC = '0000-00-00T00:00:00.000Z';
 
 export const imageAccept = 'image/png, image/jpeg, image/gif, image/webp';
 export const fileAccept = `${imageAccept}, audio/mp3`;
+export const imageFileSizeLimit = 16e6;
+export const fileSizeLimit = 75e6;

@@ -46,6 +46,7 @@ import {Box} from '../../../layout/box/box';
 import {
     getAbsentIdList,
     getArticleLinkToEdit,
+    getIsImage,
     getPathToImage,
     handleDeleteArticle,
     makeHtmlValidator,
@@ -59,7 +60,15 @@ import {
     renderUploadedFileListItem,
     UploadButton,
 } from './cms-article-layout';
-import {CmsArticleModeEnum, fileAccept, imageAccept, keyForValidationList, noDateUTC} from './cms-article-const';
+import {
+    CmsArticleModeEnum,
+    fileAccept,
+    fileSizeLimit,
+    imageAccept,
+    imageFileSizeLimit,
+    keyForValidationList,
+    noDateUTC,
+} from './cms-article-const';
 import {ArticleForValidationType, KeyForValidationListType} from './cms-article-type';
 
 const {Text, Title} = Typography;
@@ -251,7 +260,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                     accept={imageAccept}
                     action={async (file: File): Promise<string> => {
                         try {
-                            const {uniqueFileName} = await uploadFile(file, 16e6);
+                            const {uniqueFileName} = await uploadFile(file, imageFileSizeLimit);
 
                             setTitleImage(uniqueFileName);
                         } catch (error: unknown) {
@@ -363,15 +372,23 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 <TextArea placeholder="Some short description is here..." rows={3} />
             </Form.Item>
 
-            <Form.Item label={`Files: ${fileList.length}`}>
+            <Form.Item label={`Files (image to 16MB, other to 75MB): ${fileList.length}`}>
                 <Upload<unknown>
                     accept={fileAccept}
                     action={async (file: File): Promise<string> => {
-                        const {uniqueFileName} = await uploadFile(file, 10e3);
+                        try {
+                            const sizeLimit = getIsImage(file.name) ? imageFileSizeLimit : fileSizeLimit;
 
-                        setFileList((currentFileList: Array<string>): Array<string> => {
-                            return [...currentFileList, uniqueFileName];
-                        });
+                            const {uniqueFileName} = await uploadFile(file, sizeLimit);
+
+                            setFileList((currentFileList: Array<string>): Array<string> => {
+                                return [...currentFileList, uniqueFileName];
+                            });
+                        } catch (error: unknown) {
+                            const errorMessage = error instanceof Error ? error.message : 'Too big file';
+
+                            message.error(errorMessage);
+                        }
 
                         // just prevent extra request to our server
                         return 'https://dev.null/dev/null';

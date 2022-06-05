@@ -19,10 +19,6 @@ import {CmsArticleModeEnum} from './cms-article-const';
 export function uploadFile(file: File, fileSizeLimitBytes: number): Promise<UploadFileResponseType> {
     const formData = new FormData();
 
-    console.log('file file');
-    console.log(file);
-    console.log(file.size);
-
     if (file.size >= fileSizeLimitBytes) {
         throw new Error(`Too big file, limit ${fileSizeLimitBytes / 1e6}MB`);
     }
