@@ -50,15 +50,10 @@ const serverPort = 3000;
     fastify.register(fastifyStaticServer, {
         prefix: '/', // optional: default '/'
         root: path.join(cwd, 'dist'),
-        // setHeaders: (response: FastifyReply) => {
-        //     response.setHeader('x-warning-get-file', 'need-use-nginx')
-        // }
-        /*
-            allowedPath: (pathName: string, root?: string | undefined): boolean => {
-                console.log(pathName)
-                return true;
-            }
-        */
+        setHeaders: (response: {setHeader: (header: string, value: string) => void}) => {
+            console.info(`[ERROR] using fastifyStaticServer`);
+            response.setHeader('x-warning-get-file', 'need-use-nginx');
+        },
     });
 
     /*
