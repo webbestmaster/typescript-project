@@ -246,13 +246,19 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 <Input disabled />
             </Form.Item>
 
-            <Form.Item label={`Title image: ${titleImage}`}>
+            <Form.Item label={`Title image (to 16MB): ${titleImage}`}>
                 <Upload<unknown>
                     accept={imageAccept}
                     action={async (file: File): Promise<string> => {
-                        const {uniqueFileName} = await uploadFile(file);
+                        try {
+                            const {uniqueFileName} = await uploadFile(file, 16e6);
 
-                        setTitleImage(uniqueFileName);
+                            setTitleImage(uniqueFileName);
+                        } catch (error: unknown) {
+                            const errorMessage = error instanceof Error ? error.message : 'Too big file';
+
+                            message.error(errorMessage);
+                        }
 
                         // just prevent extra request to our server
                         return 'https://dev.null/dev/null';
@@ -361,7 +367,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 <Upload<unknown>
                     accept={fileAccept}
                     action={async (file: File): Promise<string> => {
-                        const {uniqueFileName} = await uploadFile(file);
+                        const {uniqueFileName} = await uploadFile(file, 10e3);
 
                         setFileList((currentFileList: Array<string>): Array<string> => {
                             return [...currentFileList, uniqueFileName];

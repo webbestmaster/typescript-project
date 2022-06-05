@@ -16,8 +16,16 @@ import {getArticleLinkToViewClient} from '../../../client-component/article/arti
 import {ArticleForValidationType, MakeSlugValidatorArgumentType} from './cms-article-type';
 import {CmsArticleModeEnum} from './cms-article-const';
 
-export function uploadFile(file: File): Promise<UploadFileResponseType> {
+export function uploadFile(file: File, fileSizeLimitBytes: number): Promise<UploadFileResponseType> {
     const formData = new FormData();
+
+    console.log('file file');
+    console.log(file);
+    console.log(file.size);
+
+    if (file.size >= fileSizeLimitBytes) {
+        throw new Error(`Too big file, limit ${fileSizeLimitBytes / 1e6}MB`);
+    }
 
     formData.append('file', file);
 
