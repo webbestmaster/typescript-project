@@ -31,7 +31,7 @@ const staticFilesSiteList = ['favicon.ico', 'robots.txt', 'ads.txt', 'gss-0.9.xs
 const pluginList = [
     new CircularDependencyPlugin({exclude: /node_modules/}),
     new DuplicatePackageCheckerPlugin(),
-    // new CleanWebpackPlugin(),
+    new CleanWebpackPlugin(),
     new webpack.DefinePlugin(definePluginParameters),
     new ScriptExtHtmlWebpackPlugin({defaultAttribute: 'defer'}),
     new MiniCssExtractPlugin({
