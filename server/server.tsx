@@ -26,8 +26,8 @@ import {
 } from './article/article-api';
 import {getFile, uploadFile} from './file/file';
 import {adminOnly} from './auth/auth-helper';
-import {cacheHtmlFileFolder, indexHtmlError500} from './ssr/ssr-const';
-import {writeStringToFile} from './util/file';
+import {indexHtmlError500} from './ssr/ssr-const';
+import {makeCacheFile} from './article/article-cache';
 
 const cwd = process.cwd();
 
@@ -107,12 +107,10 @@ const serverPort = 3000;
                 const [ssrResponse, article] = await getHtmlCallBack(request, reply);
 
                 if (article.slug) {
-                    writeStringToFile(path.join(cwd, cacheHtmlFileFolder, article.slug + '.html'), ssrResponse).catch(
-                        console.error
-                    );
+                    makeCacheFile(article.slug, ssrResponse).catch(console.error);
                 }
 
-                reply.header('X-generated', 'now');
+                reply.header('X-file-generated', 'use-nginx');
 
                 return ssrResponse;
             }
