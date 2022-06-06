@@ -32,7 +32,7 @@ export function Search(): JSX.Element {
             executeArticleList(
                 {
                     pageIndex: 0,
-                    pageSize: 10,
+                    pageSize: 0,
                     query: {
                         title: {
                             $regex: searchString,
