@@ -120,6 +120,8 @@ const serverPort = 3000;
 
     await fastify.listen(serverPort);
 
+    console.log(`> Server started port: ${serverPort}`);
+
     // fastify.post('/', (request: FastifyRequest, reply: FastifyReply) => {
     //     request.session.set('data', request.body);
     //     reply.send('hello world');
