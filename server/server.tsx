@@ -27,7 +27,6 @@ import {
 import {getFile, uploadFile} from './file/file';
 import {adminOnly} from './auth/auth-helper';
 import {cacheHtmlFileFolder, indexHtmlError500} from './ssr/ssr-const';
-import {rootArticleSlug} from './article/article-const';
 import {writeStringToFile} from './util/file';
 
 const cwd = process.cwd();
@@ -105,14 +104,10 @@ const serverPort = 3000;
                 request: FastifyRequest<{Body?: string; Params?: {slug?: string}}>,
                 reply: FastifyReply
             ): Promise<string> => {
-                const {params, raw} = request;
-                const pathname: string = raw.url || '/';
-                const slug: string = pathname === '/' ? rootArticleSlug : String(params?.slug || '');
-
                 const [ssrResponse, article] = await getHtmlCallBack(request, reply);
 
-                if (slug && article.id) {
-                    writeStringToFile(path.join(cwd, cacheHtmlFileFolder, slug + '.html'), ssrResponse).catch(
+                if (article.slug) {
+                    writeStringToFile(path.join(cwd, cacheHtmlFileFolder, article.slug + '.html'), ssrResponse).catch(
                         console.error
                     );
                 }
