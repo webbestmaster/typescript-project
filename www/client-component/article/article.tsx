@@ -19,6 +19,14 @@ export function Article(): JSX.Element {
         }
     }, [slug, setSlug]);
 
+    if (article.id === '') {
+        return (
+            <div>
+                <h1>no article</h1>
+            </div>
+        );
+    }
+
     return (
         <div>
             <h1>

@@ -26,7 +26,7 @@ import {
 } from './article/article-api';
 import {getFile, uploadFile} from './file/file';
 import {adminOnly} from './auth/auth-helper';
-import {indexHtml} from './ssr/ssr-const';
+import {indexHtmlError500} from './ssr/ssr-const';
 
 const cwd = process.cwd();
 
@@ -106,12 +106,7 @@ const serverPort = 3000;
         // TODO: maybe use here getHtmlCallBack to show error
         request.log.warn(error);
 
-        // TODO: add data to show 500
-        // use
-        // export const contentStringBegin = '<div class="js-app-wrapper">';
-        // export const contentStringEnd = '</div>';
-        // to replace extra
-        reply.code(500).type('text/html').send(indexHtml);
+        reply.code(500).type('text/html').send(indexHtmlError500);
     });
 
     fastify.setNotFoundHandler(
