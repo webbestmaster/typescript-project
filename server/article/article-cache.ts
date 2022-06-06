@@ -12,7 +12,7 @@ const absolutePathHtmlFileFolder = path.join(cwd, cacheHtmlFileFolder);
 
 export async function clearCacheHtmlFileFolder(): Promise<void> {
     try {
-        await fileSystemPromises.rmdir(absolutePathHtmlFileFolder, {recursive: true});
+        await fileSystemPromises.rm(absolutePathHtmlFileFolder, {recursive: true});
     } catch (error: unknown) {
         console.info(error);
     }
