@@ -43,6 +43,21 @@ export async function getArticleListPaginationPick<Keys extends keyof ArticleTyp
     );
 }
 
+export async function getArticleClientListPaginationPick<Keys extends keyof ArticleType>(
+    paginationQuery: PaginationQueryType<ArticleType>,
+    fieldList: Array<Keys>
+): Promise<PaginationResultType<Pick<ArticleType, Keys>>> {
+    const urlSearchParameters = paginationQueryToURLSearchParameters<ArticleType>(paginationQuery, fieldList);
+
+    return fetchX<PaginationResultType<Pick<ArticleType, Keys>>>(
+        `${apiUrl.clientSearchArticle}?${urlSearchParameters.toString()}`,
+        makeArticlePaginationSchemaPick<Keys>(fieldList),
+        {
+            method: FetchMethodEnum.get,
+        }
+    );
+}
+
 export async function postArticleCreate(article: ArticleType): Promise<ArticleType> {
     return fetchX<ArticleType>(apiUrl.adminArticleCreate, makeArticleSchema(), {
         body: JSON.stringify(article),

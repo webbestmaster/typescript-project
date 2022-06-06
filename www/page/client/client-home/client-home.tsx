@@ -25,6 +25,7 @@ import {articleContext} from '../../../client-component/article/article-context/
 import {useGoogleAnalytics} from '../../../client-component/google-analytics/google-analytics';
 import {googleAnalyticsId} from '../../../const';
 import {TopAdsWrapper} from '../../../client-component/ads/top-ads-wrapper/top-ads-wrapper';
+import {Search} from '../../../client-component/search/search';
 
 import pngImageSrc from './image/marker-icon-2x.png';
 import svgImageSrc from './image/questions-with-an-official-answer.svg';
@@ -109,6 +110,8 @@ export function ClientHome(): JSX.Element {
             <h1 className={clientHomeStyle.home_header}>
                 home page (<AsciiSpinner />)
             </h1>
+
+            <Search />
 
             <h4>your ip is: {myIp ? myIp.ip : <AsciiSpinner />}</h4>
             <h4>
