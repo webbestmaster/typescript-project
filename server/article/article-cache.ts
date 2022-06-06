@@ -12,14 +12,16 @@ const absolutePathHtmlFileFolder = path.join(cwd, cacheHtmlFileFolder);
 
 export async function clearCacheHtmlFileFolder(): Promise<void> {
     try {
-        await fileSystemPromises.rmdir(absolutePathHtmlFileFolder);
-        // eslint-disable-next-line no-empty
-    } catch {}
+        await fileSystemPromises.rmdir(absolutePathHtmlFileFolder, {recursive: true});
+    } catch (error: unknown) {
+        console.info(error);
+    }
 
     try {
         await fileSystemPromises.mkdir(absolutePathHtmlFileFolder);
-        // eslint-disable-next-line no-empty
-    } catch {}
+    } catch (error: unknown) {
+        console.info(error);
+    }
 }
 
 export function makeCacheFile(slug: string, page: string): Promise<void> {
