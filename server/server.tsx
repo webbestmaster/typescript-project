@@ -117,6 +117,8 @@ const serverPort = 3000;
                     );
                 }
 
+                reply.header('X-generated', 'now');
+
                 return ssrResponse;
             }
         );
