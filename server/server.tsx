@@ -26,7 +26,9 @@ import {
 } from './article/article-api';
 import {getFile, uploadFile} from './file/file';
 import {adminOnly} from './auth/auth-helper';
-import {indexHtmlError500} from './ssr/ssr-const';
+import {cacheHtmlFileFolder, indexHtmlError500} from './ssr/ssr-const';
+import {rootArticleSlug} from './article/article-const';
+import {writeStringToFile} from './util/file';
 
 const cwd = process.cwd();
 
@@ -52,7 +54,7 @@ const serverPort = 3000;
     fastify.register(fastifyStaticServer, {
         prefix: '/', // optional: default '/'
         root: path.join(cwd, 'dist'),
-        setHeaders: (response: {setHeader: (header: string, value: string) => void}) => {
+        setHeaders: (response: { setHeader: (header: string, value: string) => void }) => {
             console.info('[ERROR] using fastifyStaticServer');
             response.setHeader('x-warning-get-file', 'need-use-nginx');
         },
@@ -96,7 +98,24 @@ const serverPort = 3000;
     // Pages
     // //////////////
     Object.values(appRoute).forEach((rout: AppRoutType) => {
-        fastify.get(rout.path, getHtmlCallBack);
+        fastify.get(
+            rout.path, async (
+                request: FastifyRequest<{ Body?: string; Params?: { slug?: string } }>,
+                reply: FastifyReply
+            ): Promise<string> => {
+                const {params, raw} = request;
+                const slug = params?.slug || rootArticleSlug;
+                const pathname: string = raw.url || '/';
+
+                const ssrResponse: string = await getHtmlCallBack(request, reply);
+
+                // make cache for / and /article/:slug only
+
+                writeStringToFile(path.join(cwd, cacheHtmlFileFolder, slug + '.html'), ssrResponse)
+                    .catch(console.error);
+
+                return ssrResponse;
+            });
     });
 
     // //////////////
@@ -110,7 +129,7 @@ const serverPort = 3000;
     });
 
     fastify.setNotFoundHandler(
-        (request: FastifyRequest<{Body?: string; Params?: {slug?: string}}>, reply: FastifyReply): Promise<string> => {
+        (request: FastifyRequest<{ Body?: string; Params?: { slug?: string } }>, reply: FastifyReply): Promise<string> => {
             request.log.warn(request);
 
             reply.code(404);

@@ -8,3 +8,5 @@ export const contentStringFull = contentStringBegin + contentStringEnd;
 export const indexHtml: string = fileSystem.readFileSync('./dist/index.html', 'utf8');
 // eslint-disable-next-line no-sync
 export const indexHtmlError500: string = fileSystem.readFileSync('./dist/index-500.html', 'utf8');
+
+export const cacheHtmlFileFolder = 'article-cache';
