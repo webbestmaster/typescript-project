@@ -14,4 +14,3 @@ export function writeStringToFile(pathToFile: string, data: string): Promise<voi
         });
     });
 }
-
