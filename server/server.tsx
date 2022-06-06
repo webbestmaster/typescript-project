@@ -23,6 +23,7 @@ import {
     deleteAdminArticleDelete,
     postAdminArticleUpdate,
     getClientArticleContextData,
+    getArticleClientListPaginationPick,
 } from './article/article-api';
 import {getFile, uploadFile} from './file/file';
 import {adminOnly} from './auth/auth-helper';
@@ -89,6 +90,7 @@ const serverPort = 3000;
     fastify.get(apiUrl.fileGet, getFile);
     fastify.get(apiUrl.imageGet, getFile);
     fastify.get(apiUrl.clientArticleContextGet, getClientArticleContextData);
+    fastify.get(apiUrl.clientSearchArticle, getArticleClientListPaginationPick);
     fastify.post(apiUrl.adminArticleCreate, adminOnly(postAdminArticleCreate));
     fastify.post(apiUrl.adminArticleUpdate, adminOnly(postAdminArticleUpdate));
     fastify.delete(apiUrl.adminArticleDelete, adminOnly(deleteAdminArticleDelete));

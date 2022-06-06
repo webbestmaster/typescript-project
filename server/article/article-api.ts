@@ -13,7 +13,7 @@ export async function getArticleListPagination(
     request: FastifyRequest<{Body: string}>,
     reply: FastifyReply
 ): Promise<void> {
-    const {pagination} = Object.assign(
+    const {pagination} = Object.assign<{pagination: string}, unknown>(
         {pagination: encodeURIComponent(JSON.stringify(defaultPaginationQuery))},
         request.query
     );
@@ -203,4 +203,30 @@ export async function getClientArticleContextData(
         .code(status)
         .header(...mainResponseHeader)
         .send(clientArticleData);
+}
+
+// eslint-disable-next-line id-length, sonarjs/no-identical-functions
+export async function getArticleClientListPaginationPick(
+    request: FastifyRequest<{Body: string}>,
+    reply: FastifyReply
+): Promise<void> {
+    const {pagination, pick} = Object.assign(
+        {
+            pagination: encodeURIComponent(JSON.stringify(defaultPaginationQuery)),
+            pick: encodeURIComponent(JSON.stringify([])),
+        },
+        request.query
+    );
+    const paginationQuery: PaginationQueryType<ArticleType> = JSON.parse(decodeURIComponent(pagination));
+    const pickQuery: Array<keyof ArticleType> = JSON.parse(decodeURIComponent(pick));
+
+    paginationQuery.query.isActive = true;
+
+    const articleListPagination: PaginationResultType<Partial<ArticleType>> =
+        await articleCrud.findManyPaginationPartial(paginationQuery, pickQuery);
+
+    reply
+        .code(200)
+        .header(...mainResponseHeader)
+        .send(articleListPagination);
 }
