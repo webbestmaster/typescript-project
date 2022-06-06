@@ -26,11 +26,13 @@ import {
 } from './article/article-api';
 import {getFile, uploadFile} from './file/file';
 import {adminOnly} from './auth/auth-helper';
+import {indexHtml} from './ssr/ssr-const';
 
 const cwd = process.cwd();
 
 const serverPort = 3000;
 
+// eslint-disable-next-line max-statements
 (async () => {
     const fastify = fastifyConstructor({logger: false});
 
@@ -104,19 +106,23 @@ const serverPort = 3000;
         // TODO: maybe use here getHtmlCallBack to show error
         request.log.warn(error);
 
-        const {statusCode = 500, message} = error;
-
-        reply
-            .code(statusCode)
-            .type('text/plain')
-            .send(statusCode >= 500 ? 'Custom Internal server error' : message);
+        // TODO: add data to show 500
+        // use
+        // export const contentStringBegin = '<div class="js-app-wrapper">';
+        // export const contentStringEnd = '</div>';
+        // to replace extra
+        reply.code(500).type('text/html').send(indexHtml);
     });
 
-    fastify.setNotFoundHandler((request: FastifyRequest, reply: FastifyReply) => {
-        request.log.warn(request);
+    fastify.setNotFoundHandler(
+        (request: FastifyRequest<{Body?: string; Params?: {slug?: string}}>, reply: FastifyReply): Promise<string> => {
+            request.log.warn(request);
 
-        reply.code(404).type('text/plain').send('The page not found');
-    });
+            reply.code(404);
+
+            return getHtmlCallBack(request, reply);
+        }
+    );
 
     await fastify.listen(serverPort);
 

@@ -22,9 +22,9 @@ import {getSchemaMarkupBreadcrumbsSsrReplaceData} from './api/schema-markup/sche
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars, max-statements
 export async function getHtmlCallBack(
-    request: FastifyRequest<{Body: string; Params?: {slug: string}}>,
+    request: FastifyRequest<{Body?: string; Params?: {slug?: string}}>,
     reply: FastifyReply
-) {
+): Promise<string> {
     reply.type('text/html');
 
     const {params, raw} = request;

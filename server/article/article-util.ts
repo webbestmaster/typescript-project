@@ -13,6 +13,10 @@ export function getArticleBySlug(slug: string): Promise<ArticleType | null> {
     return articleCrud.findOne({slug});
 }
 
+export function getActiveArticleBySlug(slug: string): Promise<ArticleType | null> {
+    return articleCrud.findOne({isActive: true, slug});
+}
+
 export function articleToArticlePreview(article: ArticleType): ArticlePreviewType {
     const {articleType, fileList, isActive, slug, title, titleImage} = article;
 
