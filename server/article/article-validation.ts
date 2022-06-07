@@ -80,14 +80,28 @@ export function makeArticleSchema(): JSONSchemaType<ArticleType> {
     return articleSchema;
 }
 
-export function makeArticleSchemaPick<Keys extends keyof ArticleType>(
-    fieldList: Array<Keys>
-): JSONSchemaType<Pick<ArticleType, Keys>> {
-    const articlePickedSchema: JSONSchemaType<Pick<ArticleType, Keys>> = makeArticleSchema();
+export function makeArticleSchemaPick<KeyOfArticle extends keyof ArticleType>(
+    fieldList: Array<KeyOfArticle>
+): JSONSchemaType<Pick<ArticleType, KeyOfArticle>> {
+    const articlePickedSchema: JSONSchemaType<Pick<ArticleType, KeyOfArticle>> = makeArticleSchema();
+    const {properties} = articlePickedSchema;
 
-    return Object.assign<JSONSchemaType<Pick<ArticleType, Keys>>, {required: Array<Keys>}>(articlePickedSchema, {
+    const pickedProperties: Record<string, unknown> = fieldList.reduce<Record<string, unknown>>(
+        (accumulator: Record<string, unknown>, propertyName: KeyOfArticle) => {
+            return {...accumulator, [propertyName]: properties[propertyName]};
+        },
+        {}
+    );
+
+    const articleSchemaPick: JSONSchemaType<Pick<ArticleType, KeyOfArticle>> = Object.assign<
+        JSONSchemaType<Pick<ArticleType, KeyOfArticle>>,
+        {properties: Record<string, unknown>; required: Array<KeyOfArticle>}
+    >(articlePickedSchema, {
+        properties: pickedProperties,
         required: fieldList,
     });
+
+    return articleSchemaPick;
 }
 
 export function makeArticlePaginationSchema(): JSONSchemaType<PaginationResultType<ArticleType>> {
@@ -134,15 +148,6 @@ export function validateArticle(data: unknown): [boolean, ValidateFunction<Artic
 }
 
 export function makeArticlePreviewSchema(): JSONSchemaType<ArticlePreviewType> {
-    const articlePreviewSchemaProperties = {
-        articleType: {'enum': Object.values(ArticleTypeEnum), type: 'string'},
-        fileList: {items: {type: 'string'}, type: 'array'},
-        isActive: {type: 'boolean'}, // actually temporary "removed"
-        slug: {type: 'string'},
-        title: {type: 'string'},
-        titleImage: {type: 'string'},
-    } as const;
-
     const requiredFieldList: Array<keyof ArticlePreviewType> = [
         'articleType',
         'fileList',
@@ -152,12 +157,8 @@ export function makeArticlePreviewSchema(): JSONSchemaType<ArticlePreviewType> {
         'titleImage',
     ];
 
-    const articlePreviewSchema: JSONSchemaType<ArticlePreviewType> = {
-        additionalProperties: false,
-        properties: articlePreviewSchemaProperties,
-        required: requiredFieldList,
-        type: 'object',
-    };
+    const articlePreviewSchema: JSONSchemaType<ArticlePreviewType> =
+        makeArticleSchemaPick<keyof ArticlePreviewType>(requiredFieldList);
 
     return articlePreviewSchema;
 }
