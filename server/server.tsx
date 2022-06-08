@@ -137,7 +137,7 @@ const serverPort = 3000;
         }
     );
 
-    await fastify.listen(serverPort);
+    await fastify.listen({port: serverPort});
 
     console.log(`> Server started port: ${serverPort}`);
 

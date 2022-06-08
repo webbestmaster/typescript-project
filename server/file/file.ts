@@ -1,4 +1,4 @@
-import fileSystem from 'fs';
+import fileSystem, {ReadStream} from 'fs';
 import path from 'path';
 
 import {FastifyReply, FastifyRequest} from 'fastify';
@@ -46,16 +46,11 @@ export async function uploadFile(request: FastifyRequest, reply: FastifyReply): 
     reply.code(200).send(uploadResponse);
 }
 
-export async function getFile(
-    request: FastifyRequest<{Params: {fileName?: string}}>,
-    reply: FastifyReply
-): Promise<void> {
+export function getFile(request: FastifyRequest<{Params: {fileName?: string}}>, reply: FastifyReply): ReadStream {
     const {params} = request;
     const fileName = getStringFromUnknown(params, 'fileName');
 
-    const stream = fileSystem.createReadStream(path.join(uploadFolder, fileName));
+    reply.header('x-warning-get-file', 'need-use-nginx');
 
-    console.info(`[ERROR] using getFile: ${fileName}`);
-
-    reply.header('x-warning-get-file', 'need-use-nginx').code(200).send(stream);
+    return fileSystem.createReadStream(path.join(uploadFolder, fileName));
 }
