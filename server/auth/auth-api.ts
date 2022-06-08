@@ -8,10 +8,10 @@ import {mainResponseHeader} from '../const';
 import {authCrud} from './auth';
 import {cookieFieldUserId} from './auth-const';
 
-export async function postAuthLogin(request: FastifyRequest<{Body: string}>, reply: FastifyReply): Promise<void> {
+export async function postAuthLogin(request: FastifyRequest<{Body?: string}>, reply: FastifyReply): Promise<void> {
     const {body, session} = request;
 
-    const parsedData: Record<string, unknown> = JSON.parse(body);
+    const parsedData: Record<string, unknown> = JSON.parse(String(body || '{}'));
 
     const {login, password} = parsedData;
 
@@ -44,7 +44,7 @@ export async function postAuthLogin(request: FastifyRequest<{Body: string}>, rep
         .send(loginResponse);
 }
 
-export async function getAutoAuthLogin(request: FastifyRequest<{Body: string}>, reply: FastifyReply): Promise<void> {
+export async function getAutoAuthLogin(request: FastifyRequest, reply: FastifyReply): Promise<void> {
     const defaultLoginResponse: LoginResponseType = {user: {id: '', login: '', role: UserRoleEnum.user}};
     const {session} = request;
     const userId = String(session.get(cookieFieldUserId) || '');

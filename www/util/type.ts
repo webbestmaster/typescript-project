@@ -4,6 +4,15 @@ export type UnknownObjectType = Record<string, unknown>;
 
 export type LazyResultType<ComponentPropsType> = {default: ComponentType<ComponentPropsType>};
 
+export function getStringFromUnknown(data: Record<string, unknown>, requiredKey: string): string {
+    // actually data has unknown type
+    if (Object.keys(data || {}).length === 0) {
+        return '';
+    }
+
+    return String(data[requiredKey] || '');
+}
+
 export function extractFromUnknown<ExtractType extends Record<string, boolean | number | string | null>>(
     unknownData: unknown,
     resultData: ExtractType

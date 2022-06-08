@@ -4,15 +4,13 @@ import {PaginationQueryType, PaginationResultType} from '../data-base/data-base-
 import {mainResponseHeader} from '../const';
 import {defaultPaginationQuery} from '../data-base/data-base-const';
 import {makeClientArticleContextData} from '../ssr/api/srr-article';
+import {getStringFromUnknown} from '../../www/util/type';
 
 import {articleCrud} from './article';
 import {ArticleType} from './article-type';
 import {validateArticle} from './article-validation';
 
-export async function getArticleListPagination(
-    request: FastifyRequest<{Body: string}>,
-    reply: FastifyReply
-): Promise<void> {
+export async function getArticleListPagination(request: FastifyRequest, reply: FastifyReply): Promise<void> {
     const {pagination} = Object.assign<{pagination: string}, unknown>(
         {pagination: encodeURIComponent(JSON.stringify(defaultPaginationQuery))},
         request.query
@@ -29,10 +27,7 @@ export async function getArticleListPagination(
 }
 
 // eslint-disable-next-line id-length, sonarjs/no-identical-functions
-export async function getArticleListPaginationPick(
-    request: FastifyRequest<{Body: string}>,
-    reply: FastifyReply
-): Promise<void> {
+export async function getArticleListPaginationPick(request: FastifyRequest, reply: FastifyReply): Promise<void> {
     const {pagination, pick} = Object.assign(
         {
             pagination: encodeURIComponent(JSON.stringify(defaultPaginationQuery)),
@@ -54,11 +49,11 @@ export async function getArticleListPaginationPick(
 
 // eslint-disable-next-line complexity, max-statements
 export async function postAdminArticleCreate(
-    request: FastifyRequest<{Body: string}>,
+    request: FastifyRequest<{Body?: string}>,
     reply: FastifyReply
 ): Promise<void> {
     const {body} = request;
-    const parsedData: ArticleType = JSON.parse(body);
+    const parsedData: ArticleType = JSON.parse(String(body || '{}'));
     const [isValidArticle, modelJsonSchemaValidate] = validateArticle(parsedData);
 
     if (!isValidArticle) {
@@ -125,11 +120,11 @@ export async function postAdminArticleCreate(
 
 // eslint-disable-next-line complexity, max-statements
 export async function postAdminArticleUpdate(
-    request: FastifyRequest<{Body: string}>,
+    request: FastifyRequest<{Body?: string}>,
     reply: FastifyReply
 ): Promise<void> {
     const {body} = request;
-    const parsedData: ArticleType = JSON.parse(body);
+    const parsedData: ArticleType = JSON.parse(String(body || '{}'));
     const [isValidArticle, modelJsonSchemaValidate] = validateArticle(parsedData);
 
     if (!isValidArticle) {
@@ -174,11 +169,11 @@ export async function postAdminArticleUpdate(
 }
 
 export async function deleteAdminArticleDelete(
-    request: FastifyRequest<{Body: string; Params?: {articleId: string}}>,
+    request: FastifyRequest<{Params: {articleId?: string}}>,
     reply: FastifyReply
 ): Promise<void> {
     const {params} = request;
-    const articleId = params?.articleId || '';
+    const articleId = getStringFromUnknown(params, 'articleId');
 
     await articleCrud.deleteOne({id: articleId});
 
@@ -189,11 +184,11 @@ export async function deleteAdminArticleDelete(
 }
 
 export async function getClientArticleContextData(
-    request: FastifyRequest<{Body: string; Params?: {slug: string}}>,
+    request: FastifyRequest<{Params: {slug?: string}}>,
     reply: FastifyReply
 ): Promise<void> {
     const {params} = request;
-    const slug = params?.slug || '';
+    const slug = getStringFromUnknown(params, 'slug');
 
     const [clientArticleData] = await makeClientArticleContextData(slug);
 
@@ -206,10 +201,7 @@ export async function getClientArticleContextData(
 }
 
 // eslint-disable-next-line id-length, sonarjs/no-identical-functions
-export async function getArticleClientListPaginationPick(
-    request: FastifyRequest<{Body: string}>,
-    reply: FastifyReply
-): Promise<void> {
+export async function getArticleClientListPaginationPick(request: FastifyRequest, reply: FastifyReply): Promise<void> {
     const {pagination, pick} = Object.assign(
         {
             pagination: encodeURIComponent(JSON.stringify(defaultPaginationQuery)),

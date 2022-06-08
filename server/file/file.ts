@@ -5,11 +5,12 @@ import {FastifyReply, FastifyRequest} from 'fastify';
 
 import {PromiseResolveType} from '../../www/util/promise';
 import {getRandomString} from '../../www/util/string';
+import {getStringFromUnknown} from '../../www/util/type';
 
 import {uploadFolder} from './file-const';
 import {UploadFileResponseType} from './file-type';
 
-export async function uploadFile(request: FastifyRequest<{Body: string}>, reply: FastifyReply): Promise<void> {
+export async function uploadFile(request: FastifyRequest, reply: FastifyReply): Promise<void> {
     const uploadFileLimit = 75e6; // 75MB
 
     const {filename, file} = await request.file({
@@ -46,12 +47,11 @@ export async function uploadFile(request: FastifyRequest<{Body: string}>, reply:
 }
 
 export async function getFile(
-    request: FastifyRequest<{Body: string; Params: {fileName: string}}>,
+    request: FastifyRequest<{Params: {fileName?: string}}>,
     reply: FastifyReply
 ): Promise<void> {
-    // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
     const {params} = request;
-    const {fileName} = params;
+    const fileName = getStringFromUnknown(params, 'fileName');
 
     const stream = fileSystem.createReadStream(path.join(uploadFolder, fileName));
 

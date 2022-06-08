@@ -102,10 +102,7 @@ const serverPort = 3000;
         fastify.get(
             rout.path,
             // eslint-disable-next-line complexity
-            async (
-                request: FastifyRequest<{Body?: string; Params?: {slug?: string}}>,
-                reply: FastifyReply
-            ): Promise<string> => {
+            async (request: FastifyRequest<{Params: {slug?: string}}>, reply: FastifyReply): Promise<string> => {
                 const [ssrResponse, article] = await getHtmlCallBack(request, reply);
 
                 if (article.slug) {
@@ -129,10 +126,7 @@ const serverPort = 3000;
     });
 
     fastify.setNotFoundHandler(
-        async (
-            request: FastifyRequest<{Body?: string; Params?: {slug?: string}}>,
-            reply: FastifyReply
-        ): Promise<string> => {
+        async (request: FastifyRequest<{Params: {slug?: string}}>, reply: FastifyReply): Promise<string> => {
             request.log.warn(request);
 
             reply.code(404);

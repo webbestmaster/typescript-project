@@ -6,6 +6,7 @@ import {streamToStringServer} from '../util/stream';
 import {navigationReplaceSelector} from '../../www/client-component/navigation/navigation-const';
 import {articleReplaceSelector} from '../../www/client-component/article/article-const';
 import {ArticleType} from '../article/article-type';
+import {getStringFromUnknown} from '../../www/util/type';
 
 import {getNavigationContextData} from './api/ssr-navigation';
 import {contentStringBegin, contentStringEnd, contentStringFull, indexHtml} from './ssr-const';
@@ -23,13 +24,13 @@ import {getSchemaMarkupBreadcrumbsSsrReplaceData} from './api/schema-markup/sche
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars, max-statements
 export async function getHtmlCallBack(
-    request: FastifyRequest<{Body?: string; Params?: {slug?: string}}>,
+    request: FastifyRequest<{Params: {slug?: string}}>,
     reply: FastifyReply
 ): Promise<[string, ArticleType]> {
     reply.type('text/html');
 
     const {params, raw} = request;
-    const slug = params?.slug || '';
+    const slug = getStringFromUnknown(params, 'slug');
 
     const [navigationData, navigationDataHtmlString] = await getNavigationContextData();
     const [articleData, articleDataHtmlString] = await makeClientArticleContextData(slug);
