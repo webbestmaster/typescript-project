@@ -4,11 +4,12 @@ import path from 'path';
 import JSZip from 'jszip';
 
 import {sortStringCallbackReverse} from '../../www/util/string';
+import {PromiseResolveType} from '../../www/util/promise';
 
 import {dataBaseBackUpPathAbsolute} from './data-base-const';
 import {CrudConfigOnChangeArgumentType} from './data-base-type';
 
-async function removeOldDataBaseBackUp(dataBaseInfo: CrudConfigOnChangeArgumentType) {
+async function removeOldDataBaseBackUp(dataBaseInfo: CrudConfigOnChangeArgumentType): Promise<void> {
     const {dataBaseId} = dataBaseInfo;
 
     const maxBackUpCount = 100;
@@ -21,24 +22,32 @@ async function removeOldDataBaseBackUp(dataBaseInfo: CrudConfigOnChangeArgumentT
     // all files after maxBackUpCount
     const extraFileNameList = sortedFileNameList.slice(maxBackUpCount);
 
-    extraFileNameList.forEach((fileNameToRemove: string) => {
-        const pathToFile = path.join(dataBaseBackUpPathAbsolute, dataBaseId, fileNameToRemove);
+    await Promise.all(
+        extraFileNameList.map((fileNameToRemove: string): Promise<void> => {
+            const pathToFile = path.join(dataBaseBackUpPathAbsolute, dataBaseId, fileNameToRemove);
 
-        fileSystemPromises.unlink(pathToFile).catch((error: Error) => {
-            console.log('[ERROR]: removeOldDataBaseBackUp:', error.message);
-        });
+            return fileSystemPromises.unlink(pathToFile);
+        })
+    ).catch((error: Error): void => {
+        console.log('[ERROR]: removeOldDataBaseBackUp:', error.message);
     });
 }
 
-export function makeDataBaseBackUp(dataBaseInfo: CrudConfigOnChangeArgumentType) {
-    removeOldDataBaseBackUp(dataBaseInfo);
+export async function makeDataBaseBackUp(dataBaseInfo: CrudConfigOnChangeArgumentType): Promise<void> {
+    await removeOldDataBaseBackUp(dataBaseInfo);
 
     const {dataBaseFileName, dataBasePath, dataBaseId} = dataBaseInfo;
     const zip = new JSZip();
     const fileNamePrefix = new Date().toISOString().replace(/[:tz]+/gi, '-');
     const newFileName = path.join(dataBaseBackUpPathAbsolute, dataBaseId, `${fileNamePrefix}${dataBaseFileName}.zip`);
 
-    zip.file(dataBaseFileName, fileSystem.createReadStream(dataBasePath))
-        .generateNodeStream({compression: 'DEFLATE', streamFiles: true})
-        .pipe(fileSystem.createWriteStream(newFileName));
+    await new Promise((resolve: PromiseResolveType<void>, reject: PromiseResolveType<Error>) => {
+        zip.file(dataBaseFileName, fileSystem.createReadStream(dataBasePath))
+            .generateNodeStream({compression: 'DEFLATE', streamFiles: true})
+            .pipe(fileSystem.createWriteStream(newFileName))
+            .on('close', resolve)
+            .on('error', reject);
+    });
+
+    console.info(`[ OK ]: makeDataBaseBackUp - done, data base id: ${dataBaseId}`);
 }

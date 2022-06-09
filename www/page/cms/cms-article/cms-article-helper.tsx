@@ -136,7 +136,7 @@ export function getFileExtension(fileName: string): string {
         return '';
     }
 
-    return fileName.split('.').pop() || '';
+    return (fileName.split('.').pop() || '').toLowerCase();
 }
 
 export function getIsImage(fileName: string): boolean {

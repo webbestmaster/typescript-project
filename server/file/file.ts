@@ -1,15 +1,18 @@
-import fileSystem, {ReadStream} from 'fs';
+import fileSystem, {ReadStream, promises as fileSystemPromises, Stats} from 'fs';
 import path from 'path';
 
 import {FastifyReply, FastifyRequest} from 'fastify';
+import webpConverter from 'webp-converter';
 
 import {PromiseResolveType} from '../../www/util/promise';
 import {getRandomString} from '../../www/util/string';
 import {getStringFromUnknown} from '../../www/util/type';
+import {getFileExtension, getIsImage} from '../../www/page/cms/cms-article/cms-article-helper';
 
 import {uploadFolder} from './file-const';
 import {UploadFileResponseType} from './file-type';
 
+// eslint-disable-next-line max-statements
 export async function uploadFile(request: FastifyRequest, reply: FastifyReply): Promise<void> {
     const uploadFileLimit = 75e6; // 75MB
 
@@ -21,29 +24,41 @@ export async function uploadFile(request: FastifyRequest, reply: FastifyReply): 
     const hasExtension = rawFileExtension !== filename;
     const fileExtension = hasExtension ? `.${rawFileExtension}` : '';
 
-    const uniqueFileName = `${getRandomString()}${fileExtension}`;
+    const uniqueFileNameWidthOutExtension = getRandomString();
+    const uniqueFileName = `${uniqueFileNameWidthOutExtension}${fileExtension}`;
     const fullFilePath = path.join(uploadFolder, uniqueFileName);
 
-    await new Promise((resolve: PromiseResolveType<void>, reject: PromiseResolveType<string>) => {
+    await new Promise((resolve: PromiseResolveType<void>, reject: PromiseResolveType<Error>) => {
         const writeStream = fileSystem.createWriteStream(fullFilePath);
 
-        file.pipe(writeStream)
-            .on('close', () => {
-                if (file.bytesRead >= uploadFileLimit) {
-                    fileSystem.unlink(fullFilePath, () => {
-                        console.info('Too big file. Deleted.');
-                    });
-                    reject('Too big file');
-                    return;
-                }
-                resolve();
-            })
-            .on('error', reject);
+        file.pipe(writeStream).on('close', resolve).on('error', reject);
     });
+
+    const stats: Stats = await fileSystemPromises.stat(fullFilePath);
+
+    if (stats.size >= uploadFileLimit) {
+        await fileSystemPromises.unlink(fullFilePath);
+
+        throw new Error('File too big, limit 75MB');
+    }
 
     const uploadResponse: UploadFileResponseType = {uniqueFileName};
 
-    reply.code(200).send(uploadResponse);
+    if (!getIsImage(uniqueFileName) || getFileExtension(uniqueFileName) === 'webp') {
+        console.info(uploadResponse);
+        reply.code(200).send(uploadResponse);
+        return;
+    }
+
+    const webPFileName = `${uniqueFileNameWidthOutExtension}.webp`;
+
+    await webpConverter.cwebp(fullFilePath, path.join(uploadFolder, webPFileName), '-q 80 -m 6', '-v');
+
+    await fileSystemPromises.unlink(fullFilePath);
+
+    const uploadResponseWebP: UploadFileResponseType = {uniqueFileName: webPFileName};
+
+    reply.code(200).send(uploadResponseWebP);
 }
 
 export function getFile(request: FastifyRequest<{Params: {fileName?: string}}>, reply: FastifyReply): ReadStream {
