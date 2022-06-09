@@ -4,7 +4,7 @@ import {useParams} from 'react-router-dom';
 import {ExtractPathKeysType} from '../../util/url';
 import {appRoute} from '../../component/app/app-route';
 import {noop} from '../../util/function';
-import {Markdown} from '../../layout/markdown';
+import {Markdown} from '../../layout/markdown/markdown';
 
 import {ArticleContextType} from './article-context/article-context-type';
 import {articleContext} from './article-context/article-context';

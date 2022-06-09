@@ -1,7 +1,7 @@
 import {AudioPlayerControlSpriteAsync, AudioAsync} from '../../layout/audio-player';
 
 import {demoUrl} from '../../const';
-import {Markdown} from '../../layout/markdown';
+import {Markdown} from '../../layout/markdown/markdown';
 
 import exampleAudio from './example-audio.md';
 

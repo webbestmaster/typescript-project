@@ -1,7 +1,7 @@
 import {TrackType} from 'react-audio-player-pro';
 
 import {AudioPlayerAsync, AudioPlayerControlSpriteAsync} from '../../layout/audio-player';
-import {Markdown} from '../../layout/markdown';
+import {Markdown} from '../../layout/markdown/markdown';
 import {demoUrl} from '../../const';
 
 import exampleAudioPlayer from './example-audio-player.md';
