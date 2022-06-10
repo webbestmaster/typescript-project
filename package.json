@@ -56,8 +56,8 @@
   "dependencies": {
     "@fastify/cors": "^8.0.0",
     "@fastify/error": "^3.0.0",
-    "@fastify/multipart": "^7.0.0",
-    "@fastify/secure-session": "^5.1.1",
+    "@fastify/multipart": "^7.1.0",
+    "@fastify/secure-session": "^5.2.0",
     "@fastify/static": "^6.4.0",
     "@types/nedb": "^1.8.12",
     "@types/react": "^18.0.12",

@@ -127,7 +127,7 @@ export function getArticleTableColumnList(
                     <img
                         alt={imageName}
                         height="64px"
-                        src={getPathToImage(imageName, {height: 96, width: 96})}
+                        src={getPathToImage(imageName, {height: 64, width: 64})}
                         style={{objectFit: 'contain'}}
                         width="64px"
                     />

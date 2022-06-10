@@ -167,7 +167,7 @@ export function fetchImage(pathToImage: string): Promise<HTMLImageElement> {
 
 export async function getFileMarkdown(fileName: string): Promise<string> {
     if (getIsImage(fileName)) {
-        const pathToImage = getPathToImage(fileName, {height: 1024, width: 1024});
+        const pathToImage = getPathToImage(fileName, {height: 320, width: 320});
         const {naturalHeight, naturalWidth} = await fetchImage(getPathToFile(fileName));
 
         return `![THE ALT](${pathToImage} "THE TITLE" height="${naturalHeight}" width="${naturalWidth}")`;

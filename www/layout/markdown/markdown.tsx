@@ -5,7 +5,8 @@ import {markdown, defaultMarkdownConfig} from 'markdown-pro';
 
 import {classNames} from '../../util/css';
 
-import {markdownImage} from './markdown-helper';
+import {markdownImage} from './markdown-helper-image';
+import markdownStyle from './markdown.scss';
 
 type PropsType = HTMLAttributes<HTMLDivElement> & {
     mdInput: string;
@@ -23,7 +24,7 @@ export function Markdown(props: PropsType): JSX.Element {
         <div
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...divAttributes}
-            className={classNames(defaultMarkdownConfig.wrapperClassName, className)}
+            className={classNames(defaultMarkdownConfig.wrapperClassName, markdownStyle.markdown, className)}
             // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{__html: htmlCode}}
         />
