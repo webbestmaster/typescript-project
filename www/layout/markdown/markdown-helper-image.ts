@@ -1,31 +1,12 @@
 // 1 find and replace all image
 // 2 find and replace ads place
+import {ScreenWidthNameEnum, getScreenName} from 'react-system-hook';
 
 import {getPathToImage} from '../../page/cms/cms-article/cms-article-helper';
 
 // max website width is 1200
 const screenWidthList: Array<number> = [1200, 1024, 912, 820, 768, 540, 425, 390, 375, 320, 280, 128];
 const screenAspectRation: Array<number> = [1, 2, 3];
-
-enum ScreenWidthNameEnum {
-    desktop = 'desktop',
-    mobile = 'mobile',
-    tablet = 'tablet',
-}
-
-function getScreenName(width: number): ScreenWidthNameEnum {
-    if (width < 768) {
-        // 767.999 and smaller
-        return ScreenWidthNameEnum.mobile;
-    }
-
-    if (width < 1024) {
-        // 768 up to 1023.999 and smaller
-        return ScreenWidthNameEnum.tablet;
-    }
-
-    return ScreenWidthNameEnum.desktop;
-}
 
 type SourceArgumentTagType = {
     fileName: string;

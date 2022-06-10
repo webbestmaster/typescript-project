@@ -75,7 +75,7 @@
     "react-localization-library": "^0.0.19",
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
-    "react-system-hook": "^1.0.2",
+    "react-system-hook": "^1.0.4",
     "synced-delay": "^1.0.0",
     "webp-converter": "^2.3.3"
   },
