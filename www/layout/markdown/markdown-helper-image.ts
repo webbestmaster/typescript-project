@@ -1,5 +1,3 @@
-// 1 find and replace all image
-// 2 find and replace ads place
 import {ScreenWidthNameEnum, getScreenName} from 'react-system-hook';
 
 import {getPathToImage} from '../../page/cms/cms-article/cms-article-helper';

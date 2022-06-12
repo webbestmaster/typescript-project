@@ -38,6 +38,7 @@ export function AudioAsync(props: AudioPropsType) {
     return (
         <Suspense fallback={<Loading />}>
             <AudioLazy {...props} />
+            <AudioPlayerControlSpriteAsync />
         </Suspense>
     );
 }
@@ -57,6 +58,7 @@ export function AudioPlayerAsync(props: AudioPlayerPropsType) {
     return (
         <Suspense fallback={<Loading />}>
             <AudioPlayerLazy {...props} />
+            <AudioPlayerControlSpriteAsync />
         </Suspense>
     );
 }

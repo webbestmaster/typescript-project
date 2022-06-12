@@ -7,6 +7,7 @@ import {classNames} from '../../util/css';
 
 import {markdownImage} from './markdown-helper-image';
 import markdownStyle from './markdown.scss';
+import {markdownAudio} from './markdown-helper-audio';
 
 type PropsType = HTMLAttributes<HTMLDivElement> & {
     mdInput: string;
@@ -18,7 +19,8 @@ export function Markdown(props: PropsType): JSX.Element {
 
     const htmlCodeClean = markdown(mdInput, {useWrapper: false});
 
-    const htmlCode = markdownImage(htmlCodeClean);
+    const htmlCodeImage = markdownImage(htmlCodeClean);
+    const htmlCodeListAudio = markdownAudio(htmlCodeImage);
 
     return (
         <div
@@ -26,7 +28,9 @@ export function Markdown(props: PropsType): JSX.Element {
             {...divAttributes}
             className={classNames(defaultMarkdownConfig.wrapperClassName, markdownStyle.markdown, className)}
             // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{__html: htmlCode}}
-        />
+            // dangerouslySetInnerHTML={{__html: htmlCode}}
+        >
+            {htmlCodeListAudio}
+        </div>
     );
 }
