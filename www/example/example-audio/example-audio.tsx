@@ -1,10 +1,9 @@
-import {AudioPlayerControlSpriteAsync, AudioAsync} from '../../layout/audio-player';
+import {AudioPlayerControlSpriteAsync, AudioAsync} from '../audio-player';
 
 import {demoUrl} from '../../const';
 import {Markdown} from '../../layout/markdown/markdown';
 
 import exampleAudio from './example-audio.md';
-
 const meydnPureWater = demoUrl + '/audio-file/meydn-pure-water.mp3';
 
 const icon64 = demoUrl + '/image-file/react-icon-64.png';

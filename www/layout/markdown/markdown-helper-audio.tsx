@@ -1,6 +1,5 @@
 import {Fragment} from 'react';
-
-import {AudioAsync} from '../audio-player';
+import {Audio} from 'react-audio-player-pro';
 
 function getAudioFromHtml(audioHtmlCode: string): JSX.Element {
     // className?: string;
@@ -12,7 +11,7 @@ function getAudioFromHtml(audioHtmlCode: string): JSX.Element {
 
     const [ignoredFullSrcString, srcAsString = ''] = audioHtmlCode.match(/src="(\S+)"/) || ['', ''];
 
-    return <AudioAsync src={srcAsString} />;
+    return <Audio src={srcAsString} />;
 }
 
 export function markdownAudio(htmlCode: string): Array<JSX.Element> {

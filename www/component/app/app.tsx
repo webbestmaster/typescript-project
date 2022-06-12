@@ -1,4 +1,5 @@
 import {StrictMode} from 'react';
+import {AudioPlayerControlSprite} from 'react-audio-player-pro';
 
 import {ErrorBoundary} from '../error-boundary/error-boundary';
 
@@ -25,6 +26,7 @@ export function App(props: AppPropsType): JSX.Element {
                 <AppProvider articleData={articleData} navigationData={navigationData}>
                     <AppRouting pathname={pathname} />
                     <GdprInfo />
+                    <AudioPlayerControlSprite />
                 </AppProvider>
             </ErrorBoundary>
             <ShareButtonSprite />
