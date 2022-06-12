@@ -7,10 +7,12 @@ import {PaginationQueryType, PaginationResultType} from '../../../server/data-ba
 import {useMakeExecutableState} from '../../util/function';
 import {getArticleClientListPaginationPick} from '../../service/article/article-api';
 import {useLocale} from '../../provider/locale/locale-context';
+import {IsRender} from '../../layout/is-render/is-render';
 
 import {articlePreviewKeyList} from './search-const';
 import {KeyForArticleSearchType, SearchArticleType} from './search-type';
 import searchStyle from './search.scss';
+import {SearchResult} from './search-result/search-result';
 
 export function Search(): JSX.Element {
     const wrapperRef = useRef<HTMLDivElement>(null);
@@ -83,17 +85,17 @@ export function Search(): JSX.Element {
                 type="text"
             />
 
-            <hr />
-
-            <div>
-                {isInProgressArticleList ? 'loading' : 'loaded'}
-                <br />
-                {hasFocus ? 'hasFocus' : 'hasNoFocus'}
-            </div>
-
-            <div>
-                {searchString.length >= minLetters ? JSON.stringify(resultArticleList, null, 4) : <h1>[empty]</h1>}
-            </div>
+            <IsRender isRender={hasFocus}>
+                <hr />
+                <div className={searchStyle.result_wrapper}>
+                    <SearchResult
+                        isLoading={isInProgressArticleList}
+                        list={resultArticleList?.result || []}
+                        minLetters={minLetters}
+                        searchString={searchString}
+                    />
+                </div>
+            </IsRender>
         </div>
     );
 }
