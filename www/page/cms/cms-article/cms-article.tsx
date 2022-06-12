@@ -42,6 +42,7 @@ import {IsRender} from '../../../layout/is-render/is-render';
 import {rootArticleId} from '../../../../server/article/article-const';
 import {getArticleLinkToViewClient} from '../../../client-component/article/article-helper';
 import {Box} from '../../../layout/box/box';
+import {useCtrlShiftKey} from '../../../util/hot-key';
 
 import {
     getAbsentIdList,
@@ -123,6 +124,8 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
     const [publishDate, setPublishDate] = useState<string>(defaultPublishDate || new Date().toISOString());
     const [recommendedSlug, setRecommendedSlug] = useState<string>(textToSlug(title));
     const [currentArticleState, setCurrentArticleState] = useState<ArticleType>(article);
+
+    useCtrlShiftKey('s', form.submit);
 
     const {execute: executeArticleListPaginationPick} = useMakeExecutableState<
         [PaginationQueryType<ArticleType>, KeyForValidationListType],
@@ -559,8 +562,8 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             </Form.Item>
 
             <Form.Item>
-                <Button accessKey="s" htmlType="submit" type="primary">
-                    Submit (S)
+                <Button htmlType="submit" type="primary">
+                    Submit (ctrl+shift+S)
                 </Button>
                 <IsRender isRender={mode === CmsArticleModeEnum.edit}>
                     &nbsp;

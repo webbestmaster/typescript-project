@@ -20,7 +20,7 @@ export async function uploadFile(request: FastifyRequest, reply: FastifyReply): 
         limits: {fileSize: uploadFileLimit, files: 1},
     });
 
-    const rawFileExtension = filename.split('.').pop();
+    const rawFileExtension = getFileExtension(filename);
     const hasExtension = rawFileExtension !== filename;
     const fileExtension = hasExtension ? `.${rawFileExtension}` : '';
 
