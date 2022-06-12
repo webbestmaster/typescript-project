@@ -6,12 +6,14 @@ import {ArticleType} from '../../../server/article/article-type';
 import {PaginationQueryType, PaginationResultType} from '../../../server/data-base/data-base-type';
 import {useMakeExecutableState} from '../../util/function';
 import {getArticleClientListPaginationPick} from '../../service/article/article-api';
+import {useLocale} from '../../provider/locale/locale-context';
 
 import {articlePreviewKeyList} from './search-const';
 import {KeyForArticleSearchType, SearchArticleType} from './search-type';
 
 export function Search(): JSX.Element {
-    // article for table
+    const {getLocalizedString} = useLocale();
+
     const {
         execute: executeArticleList,
         result: resultArticleList,
@@ -48,7 +50,7 @@ export function Search(): JSX.Element {
 
     return (
         <div>
-            <input onInput={handleInput} placeholder="Search..." type="text" />
+            <input onInput={handleInput} placeholder={getLocalizedString('UI__SEARCH_PLACEHOLDER')} type="text" />
 
             <hr />
 

@@ -137,9 +137,9 @@ export function ClientHome(): JSX.Element {
 
             {/* <pre>{JSON.stringify(screenInfo, null, 4)}</pre>*/}
 
-            <Locale stringKey="BUTTON__APPLY" />
+            <Locale stringKey="UI__APPLY" />
 
-            <h4>{getLocalizedString('BUTTON__APPLY')}</h4>
+            <h4>{getLocalizedString('UI__APPLY')}</h4>
 
             <img alt="" src={pngImageSrc} />
 
