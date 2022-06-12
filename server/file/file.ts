@@ -24,8 +24,7 @@ export async function uploadFile(request: FastifyRequest, reply: FastifyReply): 
     const hasExtension = rawFileExtension !== filename;
     const fileExtension = hasExtension ? `.${rawFileExtension}` : '';
 
-    const uniqueFileNameWidthOutExtension = getRandomString();
-    const uniqueFileName = `${uniqueFileNameWidthOutExtension}${fileExtension}`;
+    const uniqueFileName = `${getRandomString()}${fileExtension}`;
     const fullFilePath = path.join(uploadFolder, uniqueFileName);
 
     await new Promise((resolve: PromiseResolveType<void>, reject: PromiseResolveType<Error>) => {
@@ -44,13 +43,13 @@ export async function uploadFile(request: FastifyRequest, reply: FastifyReply): 
 
     const uploadResponse: UploadFileResponseType = {uniqueFileName};
 
-    if (!getIsImage(uniqueFileName) || getFileExtension(uniqueFileName) === 'webp') {
+    if (!getIsImage(uniqueFileName)) {
         console.info(uploadResponse);
         reply.code(200).send(uploadResponse);
         return;
     }
 
-    const webPFileName = `${uniqueFileNameWidthOutExtension}.webp`;
+    const webPFileName = `${getRandomString()}.webp`;
 
     await webpConverter.cwebp(fullFilePath, path.join(uploadFolder, webPFileName), '-q 80 -m 6', '-v');
 

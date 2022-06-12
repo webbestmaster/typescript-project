@@ -5,7 +5,7 @@ import {Link, useLocation} from 'react-router-dom';
 import {Box} from '../../../../layout/box/box';
 import {appRoute} from '../../../../component/app/app-route';
 
-const {Content, Footer} = Layout;
+const {Content} = Layout;
 
 type CmsPagePropsType = {
     children: ReactNode;
@@ -42,7 +42,7 @@ export function CmsPage(props: CmsPagePropsType): JSX.Element {
                 <Content>{children}</Content>
             </Box>
 
-            <Footer>Footer is here</Footer>
+            {/* <Footer>Footer is here</Footer> */}
         </Layout>
     );
 }
