@@ -36,7 +36,7 @@ export function GdprInfo(): JSX.Element | null {
                         rel="noreferrer"
                         target="_blank"
                     >
-                        <Locale stringKey="LINK__LEARN_MORE" />
+                        <Locale stringKey="UI__LEARN_MORE" />
                     </a>
                 </p>
 

@@ -38,8 +38,7 @@ export const enUs = {
     UI__LOG_OUT: 'Log out',
     UI__SEARCH: 'Search',
     UI__SEARCH_PLACEHOLDER: 'Search...',
-
-    LINK__LEARN_MORE: 'Learn more',
+    UI__LEARN_MORE: 'Learn more',
 
     WEEK_DAY__MONDAY: 'Monday',
     WEEK_DAY__TUESDAY: 'Tuesday',

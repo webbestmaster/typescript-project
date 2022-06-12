@@ -40,8 +40,7 @@ export const ruRu: LocaleDictionaryType = {
     UI__LOG_OUT: 'Выйти',
     UI__SEARCH: 'Поиск',
     UI__SEARCH_PLACEHOLDER: 'Поиск...',
-
-    LINK__LEARN_MORE: 'Узнать больше',
+    UI__LEARN_MORE: 'Узнать больше',
 
     WEEK_DAY__MONDAY: 'Понедельник',
     WEEK_DAY__TUESDAY: 'Вторник',
