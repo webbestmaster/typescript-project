@@ -39,6 +39,8 @@ export const ruRu: LocaleDictionaryType = {
     BUTTON__LOG_IN: 'Войти',
     BUTTON__LOG_OUT: 'Выйти',
 
+    LINK__LEARN_MORE: 'Узнать больше',
+
     WEEK_DAY__MONDAY: 'Понедельник',
     WEEK_DAY__TUESDAY: 'Вторник',
     WEEK_DAY__WEDNESDAY: 'Среда',
@@ -49,7 +51,7 @@ export const ruRu: LocaleDictionaryType = {
     WEEK_DAY__ALL_DAYS: 'Все дни',
 
     EMPTY__THERE_IS_NOTHING_HERE_YET: 'Здесь пока ничего нет.',
-    EMPTY__THERES_NOTHING_HERE: 'Здесь ничего нет.',
+    EMPTY__THERE_IS_NOTHING_HERE: 'Здесь ничего нет.',
     EMPTY__TRY_CHANGING_FILTERS: 'Попробуйте изменить фильтры.',
     EMPTY__EMPTY: 'Пусто.',
 

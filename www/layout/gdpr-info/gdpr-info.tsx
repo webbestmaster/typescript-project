@@ -4,6 +4,7 @@ import {Locale} from '../../provider/locale/locale-context';
 
 import {applyGdpr, getDefaultIsVisible} from './gdpr-info-helper';
 import gdprInfoStyle from './gdpr-info.scss';
+import {gdprLinkAboutCookie} from './gdpr-info-const';
 
 export function GdprInfo(): JSX.Element | null {
     const [isVisible, setIsVisible] = useState<boolean>(getDefaultIsVisible());
@@ -28,6 +29,15 @@ export function GdprInfo(): JSX.Element | null {
             <div className={gdprInfoStyle.gdpr_info__container}>
                 <p className={gdprInfoStyle.gdpr_info__text}>
                     <Locale stringKey="GDPR__WE_USE_COOKIES" />
+                    <br />
+                    <a
+                        className={gdprInfoStyle.gdpr_info__link}
+                        href={gdprLinkAboutCookie}
+                        rel="noreferrer"
+                        target="_blank"
+                    >
+                        <Locale stringKey="LINK__LEARN_MORE" />
+                    </a>
                 </p>
 
                 <button

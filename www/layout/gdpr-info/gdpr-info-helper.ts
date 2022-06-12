@@ -2,7 +2,7 @@
 
 import {getCookie} from '../../util/cookie';
 
-const gdprCookieKey = 'gdpr-cookie-key';
+const gdprCookieKey = 'gdpr-cookie';
 
 export function applyGdpr() {
     if (typeof document === 'undefined') {
@@ -10,7 +10,7 @@ export function applyGdpr() {
     }
 
     // eslint-disable-next-line unicorn/no-document-cookie
-    document.cookie = `${gdprCookieKey}=1; path=/; max-age=36000000;`;
+    document.cookie = `${gdprCookieKey}=${gdprCookieKey}; path=/; max-age=36000000;`;
 }
 
 function getIsGdprApplied(): boolean {

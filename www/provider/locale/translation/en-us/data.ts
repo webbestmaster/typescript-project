@@ -37,6 +37,8 @@ export const enUs = {
     BUTTON__LOG_IN: 'Log in',
     BUTTON__LOG_OUT: 'Log out',
 
+    LINK__LEARN_MORE: 'Learn more',
+
     WEEK_DAY__MONDAY: 'Monday',
     WEEK_DAY__TUESDAY: 'Tuesday',
     WEEK_DAY__WEDNESDAY: 'Wednesday',
@@ -47,7 +49,7 @@ export const enUs = {
     WEEK_DAY__ALL_DAYS: 'All days',
 
     EMPTY__THERE_IS_NOTHING_HERE_YET: 'There is nothing here yet.',
-    EMPTY__THERES_NOTHING_HERE: "There's nothing here.",
+    EMPTY__THERE_IS_NOTHING_HERE: 'There is nothing here.',
     EMPTY__TRY_CHANGING_FILTERS: 'Try changing filters.',
     EMPTY__EMPTY: 'Empty.',
 

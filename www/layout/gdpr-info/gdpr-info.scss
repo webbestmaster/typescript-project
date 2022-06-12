@@ -32,6 +32,10 @@ $gdpr-background-color: #222;
     min-width: 200px;
 }
 
+.gdpr_info__link {
+    color: inherit;
+}
+
 .gdpr_info__button {
     background-color: $gdpr-background-color;
     background-position: center center;
