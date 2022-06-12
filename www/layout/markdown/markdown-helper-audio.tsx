@@ -11,7 +11,7 @@ function getAudioFromHtml(audioHtmlCode: string): JSX.Element {
 
     const [ignoredFullSrcString, srcAsString = ''] = audioHtmlCode.match(/src="(\S+)"/) || ['', ''];
 
-    return <Audio src={srcAsString} />;
+    return <Audio src={srcAsString} useRepeatButton />;
 }
 
 export function markdownAudio(htmlCode: string): Array<JSX.Element> {
