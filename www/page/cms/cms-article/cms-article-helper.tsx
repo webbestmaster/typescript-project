@@ -1,4 +1,4 @@
-/* global document, Image, HTMLImageElement, File, FormData, location */
+/* global document, Image, HTMLImageElement, Audio, HTMLAudioElement, File, FormData, location */
 import {RuleObject, Rule} from 'rc-field-form/lib/interface';
 
 import {generatePath} from '../../../util/url';
@@ -165,19 +165,38 @@ export function fetchImage(pathToImage: string): Promise<HTMLImageElement> {
     );
 }
 
+export function fetchAudio(pathToAudio: string): Promise<HTMLAudioElement> {
+    const audio = new Audio();
+
+    return new Promise<HTMLAudioElement>(
+        (resolve: PromiseResolveType<HTMLAudioElement>, reject: PromiseResolveType<unknown>) => {
+            audio.addEventListener('loadedmetadata', () => resolve(audio), false);
+
+            audio.addEventListener('error', reject, false);
+
+            audio.preload = 'metadata';
+            audio.src = pathToAudio;
+        }
+    );
+}
+
 export async function getFileMarkdown(fileName: string): Promise<string> {
+    const pathToFile = getPathToFile(fileName);
+
     if (getIsImage(fileName)) {
         const pathToImage = getPathToImage(fileName, {height: 320, width: 320});
-        const {naturalHeight, naturalWidth} = await fetchImage(getPathToFile(fileName));
+        const {naturalHeight, naturalWidth} = await fetchImage(pathToFile);
 
         return `![THE ALT](${pathToImage} "THE TITLE" height="${naturalHeight}" width="${naturalWidth}")`;
     }
 
     if (getIsAudio(fileName)) {
-        return `<audio controls preload="metadata" src="${getPathToFile(fileName)}"></audio>`;
+        const {duration} = await fetchAudio(pathToFile);
+
+        return `<audio data-duration="${duration}" data-download="${fileName}" src="${pathToFile}"></audio>`;
     }
 
-    return `[ ${getPathToFile(fileName)} ]`;
+    return `<a href="${pathToFile}" target="_blank" download="${fileName}">${fileName}</a>`;
 }
 
 export function getAbsentIdList(

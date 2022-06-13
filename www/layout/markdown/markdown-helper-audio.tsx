@@ -1,6 +1,7 @@
 import {Fragment} from 'react';
 import {Audio} from 'react-audio-player-pro';
 
+// eslint-disable-next-line complexity
 function getAudioFromHtml(audioHtmlCode: string): JSX.Element {
     // className?: string;
     // downloadFileName?: string;
@@ -10,8 +11,24 @@ function getAudioFromHtml(audioHtmlCode: string): JSX.Element {
     // useRepeatButton?: boolean;
 
     const [ignoredFullSrcString, srcAsString = ''] = audioHtmlCode.match(/src="(\S+)"/) || ['', ''];
+    const [ignoredFullDurationString, durationAsString = ''] = audioHtmlCode.match(/data-duration="(\S+)"/) || ['', ''];
+    const [ignoredFullDownloadString, downloadAsString = ''] = audioHtmlCode.match(/data-download="(\S+)"/) || ['', ''];
+    const durationAsNumber = Number.parseFloat(durationAsString) || 0;
+    const downloadFileName = downloadAsString.trim();
 
-    return <Audio src={srcAsString} useRepeatButton />;
+    if (durationAsNumber) {
+        return (
+            <Audio
+                downloadFileName={downloadFileName}
+                duration={durationAsNumber}
+                preload="none"
+                src={srcAsString}
+                useRepeatButton
+            />
+        );
+    }
+
+    return <Audio downloadFileName={downloadFileName} preload="metadata" src={srcAsString} useRepeatButton />;
 }
 
 export function markdownAudio(htmlCode: string): Array<JSX.Element> {

@@ -63,7 +63,7 @@ import {
 } from './cms-article-layout';
 import {
     CmsArticleModeEnum,
-    fileAccept,
+    // fileAccept,
     fileSizeLimit,
     imageAccept,
     imageFileSizeLimit,
@@ -377,7 +377,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
             <Form.Item label={`Files (image to 16MB, other to 75MB): ${fileList.length}`}>
                 <Upload<unknown>
-                    accept={fileAccept}
+                    // accept={fileAccept}
                     action={async (file: File): Promise<string> => {
                         try {
                             const sizeLimit = getIsImage(file.name) ? imageFileSizeLimit : fileSizeLimit;
