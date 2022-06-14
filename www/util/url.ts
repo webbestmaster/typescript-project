@@ -42,10 +42,15 @@ export function urlSearchParametersToPaginationQuery<DataType>(
 }
 */
 
-export function getIsLocalhost(): boolean {
+export function getNeedUseThirdPartyServices(): boolean {
     if (typeof location === 'undefined') {
         return false;
     }
 
-    return location.hostname === 'localhost';
+    // eslint-disable-next-line sonarjs/prefer-single-boolean-return
+    if (location.hostname === 'localhost') {
+        return false;
+    }
+
+    return true;
 }

@@ -6,7 +6,7 @@ import {googleAdSenseId} from '../../../const';
 import {classNames} from '../../../util/css';
 import {waitForCallback} from '../../../util/time';
 import {getRandomString} from '../../../util/string';
-import {getIsLocalhost} from '../../../util/url';
+import {getNeedUseThirdPartyServices} from '../../../util/url';
 
 import {loadAdSenseScript} from './ad-sense-helper';
 
@@ -26,9 +26,9 @@ export function AdSenseAds(props: AdSenseAdsPropsType): JSX.Element {
     const [adNodeId, setAdNodeId] = useState<string>(getRandomString());
     const routerLocation = useLocation();
     const pathnameRef = useRef<string>('');
-    const isLocalhost = getIsLocalhost();
+    const isNeedUseThirdPartyServices = getNeedUseThirdPartyServices();
 
-    if (!isLocalhost) {
+    if (isNeedUseThirdPartyServices) {
         loadAdSenseScript(googleAdSenseId);
     }
 
@@ -47,7 +47,7 @@ export function AdSenseAds(props: AdSenseAdsPropsType): JSX.Element {
     }, [adSlotId]);
 
     function showAd(newPathname: string, newAdNodeId: string) {
-        if (isLocalhost) {
+        if (!isNeedUseThirdPartyServices) {
             return;
         }
 

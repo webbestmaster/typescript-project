@@ -6,7 +6,7 @@
 import {useRef} from 'react';
 
 import {waitForCallback} from '../../util/time';
-import {getIsLocalhost} from '../../util/url';
+import {getNeedUseThirdPartyServices} from '../../util/url';
 
 import {loadGoogleAnalyticsScript} from './google-analytics-helper';
 
@@ -27,8 +27,9 @@ declare global {
 export function useGoogleAnalytics(config: GoogleAnalyticsType): null {
     const {googleAnalyticsId, pathname} = config;
     const pathnameRef = useRef<string>('');
+    const isNeedUseThirdPartyServices = getNeedUseThirdPartyServices();
 
-    if (getIsLocalhost()) {
+    if (!isNeedUseThirdPartyServices) {
         return null;
     }
 

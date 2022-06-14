@@ -5,6 +5,8 @@ import {ShareButtonFacebook} from '../../share-button/button/share-button-facebo
 import {ShareButtonOdnoklassniki} from '../../share-button/button/share-button-odnoklassniki';
 import {ShareButtonTwitter} from '../../share-button/button/share-button-twitter';
 import {ShareButtonTelegram} from '../../share-button/button/share-button-telegram';
+import {ShareButtonViber} from '../../share-button/button/share-button-viber';
+import {ShareButtonWhatsApp} from '../../share-button/button/share-button-whats-app';
 
 import shareButtonListContentStyle from './share-button-list-content.scss';
 
@@ -31,6 +33,10 @@ export function ShareButtonListContent(props: ShareButtonListContentPropsType): 
                 <ShareButtonTwitter title={title} url={url} />
 
                 <ShareButtonTelegram title={title} url={url} />
+
+                <ShareButtonViber title={title} url={url} />
+
+                <ShareButtonWhatsApp title={title} url={url} />
             </div>
         </div>
     );
