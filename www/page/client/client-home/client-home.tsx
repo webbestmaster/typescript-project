@@ -26,6 +26,8 @@ import {useGoogleAnalytics} from '../../../client-component/google-analytics/goo
 import {googleAnalyticsId} from '../../../const';
 import {TopAdsWrapper} from '../../../client-component/ads/top-ads-wrapper/top-ads-wrapper';
 import {Search} from '../../../client-component/search/search';
+import {makePdf} from '../../../service/pdf/pdf';
+import {htmlToPdfString} from '../../../service/pdf/pdf-example';
 
 import pngImageSrc from './image/marker-icon-2x.png';
 import svgImageSrc from './image/questions-with-an-official-answer.svg';
@@ -105,6 +107,10 @@ export function ClientHome(): JSX.Element {
             <Navigation />
 
             <TopAdsWrapper />
+
+            <button onClick={() => makePdf(htmlToPdfString, 'my-file')} type="button">
+                make pdf
+            </button>
 
             <Article />
             <h1 className={clientHomeStyle.home_header}>

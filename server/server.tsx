@@ -29,6 +29,7 @@ import {getFile, uploadFile} from './file/file';
 import {adminOnly} from './auth/auth-helper';
 import {indexHtmlError500} from './ssr/ssr-const';
 import {makeCacheFile} from './article/article-cache';
+import {getPdf} from './pdf/pdf';
 
 const cwd = process.cwd();
 
@@ -91,6 +92,7 @@ const serverPort = 3000;
     fastify.get(apiUrl.imageGet, getFile);
     fastify.get(apiUrl.clientArticleContextGet, getClientArticleContextData);
     fastify.get(apiUrl.clientSearchArticle, getArticleClientListPaginationPick);
+    fastify.post(apiUrl.clientMakePdf, getPdf);
     fastify.post(apiUrl.adminArticleCreate, adminOnly(postAdminArticleCreate));
     fastify.post(apiUrl.adminArticleUpdate, adminOnly(postAdminArticleUpdate));
     fastify.delete(apiUrl.adminArticleDelete, adminOnly(deleteAdminArticleDelete));
