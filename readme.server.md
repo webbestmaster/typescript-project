@@ -70,6 +70,11 @@ Use key `-it` to exit from terminal by ctrl+C
 
 9090 - server's port of app
 
+Run with external folders
+```bash
+sudo docker run -it -v /home/storage/static-file:/usr/app/static-file -v /home/storage/db:/usr/app/db -p "8080:9191" project-name:0.0.1
+```
+
 Image list
 ```bash
 $ docker image ls
