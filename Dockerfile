@@ -10,7 +10,8 @@ RUN rm -rf ./node_modules
 RUN npm install
 RUN npm run front:build
 RUN npm run back:build
+RUN npm install pm2 -g
 
-CMD ["npm", "run", "back:start"]
+RUN chmod 777 ./docker-start.sh
 
-#CMD ["nginx", "-c", "/usr/app/nginx/nginx.docker.conf", "-g", "daemon off;"]
+CMD ./docker-start.sh
