@@ -60,9 +60,11 @@ $ docker build -t project-name:0.0.1 .
 
 Run
 ```bash
-$ docker run [-d] -p "8080:9090" project-name:0.0.1
+$ docker run -it [-d] -p "8080:9090" project-name:0.0.1
 ```
 Use key `-d` to exit from terminal without stop server\image
+
+Use key `-it` to exit from terminal by ctrl+C
 
 8080 - your local port to open app
 

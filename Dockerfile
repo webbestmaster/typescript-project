@@ -6,11 +6,11 @@ COPY ./ ./
 RUN chmod 777 ./script/install-all.sh
 RUN ./script/install-all.sh
 
-#RUN npm install && npm run build
+RUN rm -rf ./node_modules
+RUN npm install
+RUN npm run front:build
+RUN npm run back:build
 
-# RUN rm -rf ./node_modules
-# RUN npm install && npm run build
+CMD ["npm", "run", "back:start"]
 
-# RUN apt-get update && apt-get install -y --no-install-recommends nginx
-
-# CMD ["nginx", "-c", "/usr/app/nginx/nginx.docker.conf", "-g", "daemon off;"]
+#CMD ["nginx", "-c", "/usr/app/nginx/nginx.docker.conf", "-g", "daemon off;"]

@@ -139,9 +139,14 @@ const serverPort = 3000;
         }
     );
 
-    await fastify.listen({port: serverPort});
+    fastify.listen({host: '0.0.0.0', port: serverPort}, (error: Error | null) => {
+        if (error) {
+            fastify.log.error(error);
+            throw error;
+        }
 
-    console.log(`> Server started port: ${serverPort}`);
+        console.info(`> Server started port: ${serverPort}`);
+    });
 
     // fastify.post('/', (request: FastifyRequest, reply: FastifyReply) => {
     //     request.session.set('data', request.body);
