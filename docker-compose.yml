@@ -3,21 +3,11 @@ services:
     server:
         image: my_image
         container_name: my_server
-        deploy:
-            resources:
-                limits:
-                    cpus: '0.50'
-                    memory: 50M
-                reservations:
-                    cpus: '0.25'
-                    memory: 20M
         build:
             context: .
-            shm_size: 256M
         command: ./docker-start.sh
         ports:
             - 8080:9191
         volumes:
             - /home/storage/static-file:/usr/app/static-file
             - /home/storage/db:/usr/app/db
-        shm_size: 256M #1gb #512M
