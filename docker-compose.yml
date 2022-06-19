@@ -1,6 +1,7 @@
 version: "3"
 services:
     server:
+        container_name: my_server
         build: .
         command: ./docker-start.sh
         ports:
