@@ -5,7 +5,10 @@ import puppeteer from 'puppeteer';
 import {FastifyReply, FastifyRequest} from 'fastify';
 
 async function htmlToPdf(html: string): Promise<Buffer> {
-    const browser = await puppeteer.launch({headless: true});
+    const browser = await puppeteer.launch({
+        args: ['--disable-gpu', '--disable-dev-shm-usage', '--disable-setuid-sandbox', '--no-sandbox'],
+        headless: true,
+    });
 
     const page = await browser.newPage();
 

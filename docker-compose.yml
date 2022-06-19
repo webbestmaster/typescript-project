@@ -1,11 +1,14 @@
-version: "3"
+version: "3.7"
 services:
     server:
         container_name: my_server
-        build: .
+        build:
+            context: .
+            shm_size: 256M
         command: ./docker-start.sh
         ports:
             - 8080:9191
         volumes:
             - /home/storage/static-file:/usr/app/static-file
             - /home/storage/db:/usr/app/db
+        shm_size: 256M #1gb #512M
