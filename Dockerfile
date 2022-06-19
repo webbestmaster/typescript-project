@@ -13,4 +13,4 @@ RUN npm install pm2 -g
 
 RUN chmod 777 ./docker-start.sh
 
-CMD ./docker-start.sh
+#CMD ./docker-start.sh

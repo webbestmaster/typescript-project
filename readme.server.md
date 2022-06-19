@@ -50,12 +50,10 @@ Remove\uninstall docker
 $ sudo apt-get remove docker docker-engine docker.io containerd runc
 ```
 
-
 Build
 ```bash
 $ docker build -t project-name:0.0.1 .
 ```
-
 `-t` - add project name
 
 Run
@@ -95,6 +93,21 @@ Remove image
 $ docker image rm -f <image id>
 ```
 
+### Docker compose
+Build
+```bash
+sudo docker-compose build
+```
+
+Use key `-d` to exit from terminal without stop server\image
+```bash
+sudo docker-compose up [-d]
+```
+
+Stop docker compose
+```bash
+sudo docker-compose down
+```
 
 ### How to download backup
 

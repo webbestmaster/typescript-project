@@ -1,0 +1,10 @@
+version: "3"
+services:
+    server:
+        build: .
+        command: ./docker-start.sh
+        ports:
+            - 8080:9191
+        volumes:
+            - /home/storage/static-file:/usr/app/static-file
+            - /home/storage/db:/usr/app/db
