@@ -109,6 +109,12 @@ Stop docker compose
 sudo docker-compose down
 ```
 
+### Monitoring, ctop
+
+```bash
+docker run --rm -ti --name=ctop --volume /var/run/docker.sock:/var/run/docker.sock:ro quay.io/vektorlab/ctop:latest -a
+```
+
 ### How to download backup
 
 Execute this from your local machine:
