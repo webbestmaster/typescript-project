@@ -1,4 +1,3 @@
-# FROM node:14.4.0-stretch
 FROM ubuntu:20.04
 WORKDIR /usr/app/
 COPY ./ ./
