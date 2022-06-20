@@ -2,7 +2,7 @@
 
 import puppeteer from 'puppeteer';
 
-import {FastifyReply, FastifyRequest} from 'fastify';
+import {FastifyRequest} from 'fastify';
 
 async function htmlToPdf(html: string): Promise<Buffer> {
     const browser = await puppeteer.launch({
@@ -32,14 +32,12 @@ async function htmlToPdf(html: string): Promise<Buffer> {
     return pdf;
 }
 
-export async function getPdf(request: FastifyRequest<{Body?: string}>, reply: FastifyReply): Promise<void> {
+export async function getPdf(request: FastifyRequest<{Body?: string}>): Promise<Buffer> {
     const {body} = request;
 
     const rawHtml = String(body || '');
 
     const html = decodeURIComponent(rawHtml);
 
-    const pdf = await htmlToPdf(html);
-
-    reply.send(pdf);
+    return htmlToPdf(html);
 }
