@@ -10,7 +10,9 @@ async function htmlToPdf(html: string): Promise<Buffer> {
         headless: true,
     });
 
-    const page = await browser.newPage();
+    const context = await browser.createIncognitoBrowserContext();
+
+    const page = await context.newPage();
 
     await page.setJavaScriptEnabled(false);
 
@@ -22,6 +24,8 @@ async function htmlToPdf(html: string): Promise<Buffer> {
     });
 
     await page.close();
+
+    await context.close();
 
     await browser.close();
 
