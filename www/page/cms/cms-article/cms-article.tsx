@@ -8,6 +8,7 @@ import {
     Button,
     Checkbox,
     DatePicker,
+    Divider,
     Form,
     Input,
     message,
@@ -15,7 +16,6 @@ import {
     Select,
     Typography,
     Upload,
-    Divider,
 } from 'antd';
 import moment, {Moment} from 'moment';
 import {FieldData, ValidateErrorEntity} from 'rc-field-form/lib/interface';
@@ -42,7 +42,7 @@ import {IsRender} from '../../../layout/is-render/is-render';
 import {rootArticleId} from '../../../../server/article/article-const';
 import {getArticleLinkToViewClient} from '../../../client-component/article/article-helper';
 import {Box} from '../../../layout/box/box';
-import {useCtrlShiftKey} from '../../../util/hot-key';
+import {HotKeyModifierEnum, useHotKey} from '../../../util/hot-key';
 
 import {
     getAbsentIdList,
@@ -63,7 +63,6 @@ import {
 } from './cms-article-layout';
 import {
     CmsArticleModeEnum,
-    // fileAccept,
     fileSizeLimit,
     imageAccept,
     imageFileSizeLimit,
@@ -125,7 +124,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
     const [recommendedSlug, setRecommendedSlug] = useState<string>(textToSlug(title));
     const [currentArticleState, setCurrentArticleState] = useState<ArticleType>(article);
 
-    useCtrlShiftKey('s', form.submit);
+    useHotKey([HotKeyModifierEnum.ctrl], 's', form.submit);
 
     const {execute: executeArticleListPaginationPick} = useMakeExecutableState<
         [PaginationQueryType<ArticleType>, KeyForValidationListType],

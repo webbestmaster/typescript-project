@@ -1,4 +1,4 @@
-/* global setTimeout */
+/* global setTimeout, document */
 
 // import {useSystem} from 'react-system-hook';
 import {useContext, useEffect, useState} from 'react';
@@ -27,7 +27,8 @@ import {googleAnalyticsId} from '../../../const';
 import {TopAdsWrapper} from '../../../client-component/ads/top-ads-wrapper/top-ads-wrapper';
 import {Search} from '../../../client-component/search/search';
 import {makePdf} from '../../../service/pdf/pdf';
-import {htmlToPdfString} from '../../../service/pdf/pdf-example';
+import {htmlToPdfString, htmlToPdfStringLocal} from '../../../service/pdf/pdf-example';
+import {sendToPrint} from '../../../util/print';
 
 import pngImageSrc from './image/marker-icon-2x.png';
 import svgImageSrc from './image/questions-with-an-official-answer.svg';
@@ -110,6 +111,14 @@ export function ClientHome(): JSX.Element {
 
             <button onClick={() => makePdf(htmlToPdfString, 'my-file')} type="button">
                 make pdf
+            </button>
+
+            <button onClick={() => sendToPrint(htmlToPdfStringLocal)} type="button">
+                make pdf 2
+            </button>
+
+            <button onClick={() => sendToPrint(document.body.innerHTML + document.head.innerHTML)} type="button">
+                make pdf 3
             </button>
 
             <Article />

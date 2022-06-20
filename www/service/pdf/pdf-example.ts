@@ -1,3 +1,5 @@
+import pngImageSrc from '../../page/client/client-home/image/marker-icon-2x.png';
+
 /* eslint-disable max-len */
 export const htmlToPdfString = `
     <!DOCTYPE html>
@@ -18,8 +20,28 @@ export const htmlToPdfString = `
     </head>
     <body>
         <h1>The pdf</h1>
+        <img width="200" height="200" src="${pngImageSrc}?sdsd=sdsd"/>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur consectetur cum cupiditate, est, hic id, illo laudantium molestias omnis perspiciatis possimus voluptatum? Ad dolores molestiae sed. Consequatur repudiandae sit voluptas!</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur consectetur cum cupiditate, est, hic id, illo laudantium molestias omnis perspiciatis possimus voluptatum? Ad dolores molestiae sed. Consequatur repudiandae sit voluptas!</p>
     </body>
     </html>
+`;
+
+export const htmlToPdfStringLocal = `
+    <div>
+        <style>
+            @page {
+                size: A4 landscape;
+                margin: 0.4cm;
+            }
+
+            body {
+                background-color: #00cccc;
+            }
+        </style>
+        <h1>The pdf</h1>
+        <img width="200" height="200" src="${pngImageSrc}"/>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur consectetur cum cupiditate, est, hic id, illo laudantium molestias omnis perspiciatis possimus voluptatum? Ad dolores molestiae sed. Consequatur repudiandae sit voluptas!</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur consectetur cum cupiditate, est, hic id, illo laudantium molestias omnis perspiciatis possimus voluptatum? Ad dolores molestiae sed. Consequatur repudiandae sit voluptas!</p>
+    </div>
 `;
