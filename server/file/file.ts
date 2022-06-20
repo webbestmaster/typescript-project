@@ -13,7 +13,7 @@ import {uploadFolder} from './file-const';
 import {UploadFileResponseType} from './file-type';
 
 // eslint-disable-next-line max-statements
-export async function uploadFile(request: FastifyRequest, reply: FastifyReply): Promise<void> {
+export async function uploadFile(request: FastifyRequest): Promise<UploadFileResponseType> {
     const uploadFileLimit = 75e6; // 75MB
 
     const {filename, file} = await request.file({
@@ -44,9 +44,7 @@ export async function uploadFile(request: FastifyRequest, reply: FastifyReply): 
     const uploadResponse: UploadFileResponseType = {uniqueFileName};
 
     if (!getIsImage(uniqueFileName)) {
-        console.info(uploadResponse);
-        reply.code(200).send(uploadResponse);
-        return;
+        return uploadResponse;
     }
 
     const webPFileName = `${getRandomString()}.webp`;
@@ -57,7 +55,7 @@ export async function uploadFile(request: FastifyRequest, reply: FastifyReply): 
 
     const uploadResponseWebP: UploadFileResponseType = {uniqueFileName: webPFileName};
 
-    reply.code(200).send(uploadResponseWebP);
+    return uploadResponseWebP;
 }
 
 export function getFile(request: FastifyRequest<{Params: {fileName?: string}}>, reply: FastifyReply): ReadStream {

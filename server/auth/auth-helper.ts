@@ -26,31 +26,24 @@ async function getIsAdmin(request: FastifyRequest): Promise<boolean> {
     return Boolean(user && user.role === UserRoleEnum.admin);
 }
 
-async function getIsNotAdmin(request: FastifyRequest): Promise<boolean> {
-    const isAdmin = await getIsAdmin(request);
-
-    return !isAdmin;
-}
-
-type AdminOnlyWrapperType = (
+type AdminOnlyWrapperType<ResponseType> = (
     request: FastifyRequest<{Body?: string; Params: {articleId?: string}}>,
     reply: FastifyReply
-) => Promise<void>;
+) => Promise<ResponseType>;
 
-export function adminOnly(callBack: AdminOnlyWrapperType): AdminOnlyWrapperType {
+export function adminOnly<ResponseType>(
+    callBack: AdminOnlyWrapperType<ResponseType>
+): AdminOnlyWrapperType<ResponseType> {
     return async (
         request: FastifyRequest<{Body?: string; Params: {articleId?: string}}>,
         reply: FastifyReply
-    ): Promise<void> => {
-        if (await getIsNotAdmin(request)) {
-            reply
-                .code(403)
-                .header(...mainResponseHeader)
-                .send(null);
-            // eslint-disable-next-line no-undefined
-            return undefined;
+    ): Promise<ResponseType> => {
+        if (await getIsAdmin(request)) {
+            return callBack(request, reply);
         }
 
-        return callBack(request, reply);
+        reply.code(403).header(...mainResponseHeader);
+
+        throw new Error('403 Forbidden');
     };
 }

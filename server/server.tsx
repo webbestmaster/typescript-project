@@ -30,6 +30,9 @@ import {adminOnly} from './auth/auth-helper';
 import {indexHtmlError500} from './ssr/ssr-const';
 import {makeCacheFile} from './article/article-cache';
 import {getPdf} from './pdf/pdf';
+import {PaginationResultType} from './data-base/data-base-type';
+import {ArticleType} from './article/article-type';
+import {UploadFileResponseType} from './file/file-type';
 
 const cwd = process.cwd();
 
@@ -85,17 +88,23 @@ const serverPort = 3000;
     // //////////////
     fastify.post(apiUrl.login, postAuthLogin);
     fastify.get(apiUrl.getUser, getAutoAuthLogin);
-    fastify.get(apiUrl.adminArticleListPagination, adminOnly(getArticleListPagination));
-    fastify.get(apiUrl.adminArticleListPaginationPick, adminOnly(getArticleListPaginationPick));
-    fastify.post(apiUrl.adminFileUpload, adminOnly(uploadFile));
+    fastify.get(
+        apiUrl.adminArticleListPagination,
+        adminOnly<PaginationResultType<ArticleType>>(getArticleListPagination)
+    );
+    fastify.get(
+        apiUrl.adminArticleListPaginationPick,
+        adminOnly<PaginationResultType<Partial<ArticleType>>>(getArticleListPaginationPick)
+    );
+    fastify.post(apiUrl.adminFileUpload, adminOnly<UploadFileResponseType>(uploadFile));
     fastify.get(apiUrl.fileGet, getFile);
     fastify.get(apiUrl.imageGet, getFile);
     fastify.get(apiUrl.clientArticleContextGet, getClientArticleContextData);
     fastify.get(apiUrl.clientSearchArticle, getArticleClientListPaginationPick);
     fastify.post(apiUrl.clientMakePdf, getPdf);
-    fastify.post(apiUrl.adminArticleCreate, adminOnly(postAdminArticleCreate));
-    fastify.post(apiUrl.adminArticleUpdate, adminOnly(postAdminArticleUpdate));
-    fastify.delete(apiUrl.adminArticleDelete, adminOnly(deleteAdminArticleDelete));
+    fastify.post(apiUrl.adminArticleCreate, adminOnly<ArticleType | Record<'message', string>>(postAdminArticleCreate));
+    fastify.post(apiUrl.adminArticleUpdate, adminOnly<ArticleType | Record<'message', string>>(postAdminArticleUpdate));
+    fastify.delete(apiUrl.adminArticleDelete, adminOnly<Record<'articleId', string>>(deleteAdminArticleDelete));
 
     // //////////////
     // Pages
@@ -121,10 +130,12 @@ const serverPort = 3000;
     // //////////////
     // 4xx & 5xx
     // //////////////
-    fastify.setErrorHandler((error: FastifyError, request: FastifyRequest, reply: FastifyReply) => {
+    fastify.setErrorHandler((error: FastifyError, request: FastifyRequest, reply: FastifyReply): string => {
         request.log.warn(error);
 
-        reply.code(500).type('text/html').send(indexHtmlError500);
+        reply.code(500).type('text/html');
+
+        return indexHtmlError500;
     });
 
     fastify.setNotFoundHandler(

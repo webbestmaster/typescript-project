@@ -8,7 +8,10 @@ import {mainResponseHeader} from '../const';
 import {authCrud} from './auth';
 import {cookieFieldUserId} from './auth-const';
 
-export async function postAuthLogin(request: FastifyRequest<{Body?: string}>, reply: FastifyReply): Promise<void> {
+export async function postAuthLogin(
+    request: FastifyRequest<{Body?: string}>,
+    reply: FastifyReply
+): Promise<LoginResponseType> {
     const {body, session} = request;
 
     const parsedData: Record<string, unknown> = JSON.parse(String(body || '{}'));
@@ -16,15 +19,17 @@ export async function postAuthLogin(request: FastifyRequest<{Body?: string}>, re
     const {login, password} = parsedData;
 
     if (typeof login !== 'string' || typeof password !== 'string') {
-        reply.code(400).send(null);
-        return;
+        reply.code(400);
+
+        throw new Error('Login or password is not define.');
     }
 
     const user = await authCrud.findOne({login, password: getSha256HashServer(password)});
 
     if (!user) {
-        reply.code(400).send(null);
-        return;
+        reply.code(400);
+
+        throw new Error('User Not Found.');
     }
 
     session.set(cookieFieldUserId, user.id);
@@ -38,33 +43,30 @@ export async function postAuthLogin(request: FastifyRequest<{Body?: string}>, re
         },
     };
 
-    reply
-        .code(200)
-        .header(...mainResponseHeader)
-        .send(loginResponse);
+    reply.code(200).header(...mainResponseHeader);
+
+    return loginResponse;
 }
 
-export async function getAutoAuthLogin(request: FastifyRequest, reply: FastifyReply): Promise<void> {
+export async function getAutoAuthLogin(request: FastifyRequest, reply: FastifyReply): Promise<LoginResponseType> {
     const defaultLoginResponse: LoginResponseType = {user: {id: '', login: '', role: UserRoleEnum.user}};
     const {session} = request;
     const userId = String(session.get(cookieFieldUserId) || '');
 
+    reply.header(...mainResponseHeader);
+
     if (!userId) {
-        reply
-            .code(200)
-            .header(...mainResponseHeader)
-            .send(defaultLoginResponse);
-        return;
+        reply.code(200);
+
+        return defaultLoginResponse;
     }
 
     const user = await authCrud.findOne({id: userId});
 
     if (!user) {
-        reply
-            .code(200)
-            .header(...mainResponseHeader)
-            .send(defaultLoginResponse);
-        return;
+        reply.code(200);
+
+        return defaultLoginResponse;
     }
 
     const loginResponse: LoginResponseType = {
@@ -78,8 +80,7 @@ export async function getAutoAuthLogin(request: FastifyRequest, reply: FastifyRe
     session.set(cookieFieldUserId, user.id);
     session.options({maxAge: 1000 * 60 * 60});
 
-    reply
-        .code(200)
-        .header(...mainResponseHeader)
-        .send(loginResponse);
+    reply.code(200);
+
+    return loginResponse;
 }
