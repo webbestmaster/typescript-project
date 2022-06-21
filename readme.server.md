@@ -7,7 +7,7 @@ $ pm2 kill // kill 'em all!
 ```
 
 
-#### ./run-server.sh
+#### Run server
 ```bash
 $ npm run front:build
 $ npm run back:build
