@@ -115,6 +115,18 @@ sudo docker-compose down
 docker run --rm -ti --name=ctop --volume /var/run/docker.sock:/var/run/docker.sock:ro quay.io/vektorlab/ctop:latest -a
 ```
 
+### K8s
+1 - install `minikube` - https://minikube.sigs.k8s.io/docs/start/
+2 - install `kubectl`
+3 - `$ minikube start` - start minikube
+4 - `kubectl apply -f ./pod.yml` - apply/run a pod.yml config
+5 - `kubectl port-forward pod/my-site 9191:80` - forward ports
+6 - add your own image
+- 6.1 Set the environment variables with eval $(minikube docker-env)
+- 6.2 Build the image with the Docker daemon of Minikube (eg docker build -t my-image .)
+- 6.3 Set the image in the pod spec like the build tag (eg my-image)
+- 6.4 Set the imagePullPolicy to Never, otherwise Kubernetes will try to download the image.
+
 ### How to download backup
 
 Execute this from your local machine:
