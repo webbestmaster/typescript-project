@@ -15,6 +15,7 @@ enum VisibleStateEnum {
 }
 
 export function Popup(props: PopupPropsType): JSX.Element | null {
+    const transitionTime = 1e3;
     const {isOpen = false, children} = props;
 
     const [isSelfOpen, setIsSelfOpen] = useState<boolean>(false);
@@ -51,7 +52,7 @@ export function Popup(props: PopupPropsType): JSX.Element | null {
 
         timeOutRef.current = window.setTimeout(() => {
             setIsSelfOpen(isOpen);
-        }, 1e3);
+        }, transitionTime);
     }, [isOpen, isSelfOpen, timeOutRef]);
 
     if (visibleState === VisibleStateEnum.closed) {
