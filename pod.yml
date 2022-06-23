@@ -8,7 +8,7 @@ metadata:
 spec:
     containers:
         - name: just-my-site
-          image: my-image
+          image: my-image:0.0.5
           command: ['./docker-start.sh']
           ports:
               - containerPort: 9191
