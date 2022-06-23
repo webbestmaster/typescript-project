@@ -1,10 +1,11 @@
-/* global setTimeout, document */
+/* global setTimeout, document, URLSearchParams */
 
 // import {useSystem} from 'react-system-hook';
 import {useContext, useEffect, useState} from 'react';
 import markdownPro, {MarkdownConfigShallowType} from 'markdown-pro';
 import {JSONSchemaType} from 'ajv';
 import {useLocation} from 'react-router';
+import {Link} from 'react-router-dom';
 
 import {Locale, useLocale} from '../../../provider/locale/locale-context';
 import {ErrorData} from '../../../layout/error-data/error-data';
@@ -29,6 +30,7 @@ import {Search} from '../../../client-component/search/search';
 import {makePdf} from '../../../service/pdf/pdf';
 import {htmlToPdfString, htmlToPdfStringLocal} from '../../../service/pdf/pdf-example';
 import {sendToPrint} from '../../../util/print';
+import {Popup} from '../../../layout/popup/popup';
 
 import pngImageSrc from './image/marker-icon-2x.png';
 import svgImageSrc from './image/questions-with-an-official-answer.svg';
@@ -103,11 +105,22 @@ export function ClientHome(): JSX.Element {
 
     console.log('evaluate home');
 
+    const search = new URLSearchParams(location.search);
+
+    console.log([...search.keys()]);
+
     return (
         <div>
+            <Link to={{pathname: location.pathname, search: 'open=popup'}}>open popup</Link>
+
             <Navigation />
 
             <TopAdsWrapper />
+
+            <Popup isOpen={search.get('open') === 'popup'}>
+                <h1>popup - header</h1>
+                <div>popup - content</div>
+            </Popup>
 
             <button onClick={() => makePdf(htmlToPdfString, 'my-file')} type="button">
                 make pdf

@@ -28,8 +28,8 @@ export function App(props: AppPropsType): JSX.Element {
                     <GdprInfo />
                     <AudioPlayerControlSprite />
                 </AppProvider>
+                <ShareButtonSprite />
             </ErrorBoundary>
-            <ShareButtonSprite />
         </StrictMode>
     );
 }
