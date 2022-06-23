@@ -120,7 +120,7 @@ docker run --rm -ti --name=ctop --volume /var/run/docker.sock:/var/run/docker.so
 2 - install `kubectl`
 3 - `$ minikube start` - start minikube
 4 - `kubectl apply -f ./pod.yml` - apply/run a pod.yml config
-5 - `kubectl port-forward pod/my-site 9191:80` - forward ports
+5 - `kubectl port-forward pod/my-site 9191:8080` - forward ports
 6 - add your own image
 - 6.1 Set the environment variables with eval $(minikube docker-env)
 - 6.2 Build the image with the Docker daemon of Minikube (eg docker build -t my-image .)
