@@ -1,6 +1,7 @@
-/* global setTimeout, clearTimeout, NodeJS */
+/* global document, setTimeout, clearTimeout, NodeJS */
 
 import {ReactNode, useEffect, useRef, useState} from 'react';
+import {createPortal} from 'react-dom';
 
 type PopupPropsType = {
     children: ReactNode;
@@ -19,6 +20,7 @@ export function Popup(props: PopupPropsType): JSX.Element | null {
     const {isOpen = false, children} = props;
 
     const [isSelfOpen, setIsSelfOpen] = useState<boolean>(false);
+    const [isMounted, setIsMounted] = useState<boolean>(false);
     const timeOutRef = useRef<NodeJS.Timeout | number>(Number.NaN);
 
     const visibleState: VisibleStateEnum = (() => {
@@ -38,7 +40,10 @@ export function Popup(props: PopupPropsType): JSX.Element | null {
     console.info(`%c${infoState}`, 'font-size: 24px');
 
     useEffect(() => {
+        setIsMounted(true);
+
         return () => {
+            setIsMounted(false);
             clearTimeout(timeOutRef.current);
         };
     }, []);
@@ -59,9 +64,14 @@ export function Popup(props: PopupPropsType): JSX.Element | null {
         return null;
     }
 
-    return (
+    if (typeof document === 'undefined' || isMounted === false) {
+        return null;
+    }
+
+    return createPortal(
         <div>
             {children} {visibleState}
-        </div>
+        </div>,
+        document.body
     );
 }
