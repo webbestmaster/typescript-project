@@ -1,4 +1,4 @@
-/* global window, clearTimeout */
+/* global setTimeout, clearTimeout, NodeJS */
 
 import {ReactNode, useEffect, useRef, useState} from 'react';
 
@@ -19,7 +19,7 @@ export function Popup(props: PopupPropsType): JSX.Element | null {
     const {isOpen = false, children} = props;
 
     const [isSelfOpen, setIsSelfOpen] = useState<boolean>(false);
-    const timeOutRef = useRef<number>(Number.NaN);
+    const timeOutRef = useRef<NodeJS.Timeout | number>(Number.NaN);
 
     const visibleState: VisibleStateEnum = (() => {
         if (isOpen === isSelfOpen) {
@@ -50,7 +50,7 @@ export function Popup(props: PopupPropsType): JSX.Element | null {
             return;
         }
 
-        timeOutRef.current = window.setTimeout(() => {
+        timeOutRef.current = setTimeout(() => {
             setIsSelfOpen(isOpen);
         }, transitionTime);
     }, [isOpen, isSelfOpen, timeOutRef]);
