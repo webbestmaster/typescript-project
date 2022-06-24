@@ -14,17 +14,17 @@ import {AppRouting} from './app-routing';
 export type AppPropsType = {
     articleData: ArticleContextType | null;
     navigationData: NavigationContextType | null;
-    pathname: string;
+    url: string;
 };
 
 export function App(props: AppPropsType): JSX.Element {
-    const {pathname, navigationData, articleData} = props;
+    const {url, navigationData, articleData} = props;
 
     return (
         <StrictMode>
             <ErrorBoundary errorFallBack={<h1>Front-end error</h1>}>
                 <AppProvider articleData={articleData} navigationData={navigationData}>
-                    <AppRouting pathname={pathname} />
+                    <AppRouting url={url} />
                     <GdprInfo />
                     <AudioPlayerControlSprite />
                 </AppProvider>

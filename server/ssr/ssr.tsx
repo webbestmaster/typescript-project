@@ -48,9 +48,9 @@ export async function getHtmlCallBack(
     const metaOpenGraphSsrReplaceData = getMetaOpenGraphSsrReplaceData(article);
     const metaTwitterCardSsrReplaceData = getMetaTwitterCardSsrReplaceData(article);
 
-    const pathname: string = raw.url || '/';
+    const url: string = raw.url || '/';
     const appStream = ReactDOMServer.renderToStaticNodeStream(
-        <App articleData={articleData} navigationData={navigationData} pathname={pathname} />
+        <App articleData={articleData} navigationData={navigationData} url={url} />
     );
 
     const htmlString = await streamToStringServer(appStream);

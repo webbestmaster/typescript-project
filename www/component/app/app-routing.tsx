@@ -19,7 +19,7 @@ import {ClientArticle} from '../../page/client/client-article/client-article';
 import {appRoute} from './app-route';
 
 type PropsType = {
-    pathname: string;
+    url: string;
 };
 
 export function AppRouting(props: PropsType): JSX.Element {
@@ -43,7 +43,7 @@ export function AppRouting(props: PropsType): JSX.Element {
         return <BrowserRouter>{switchNode}</BrowserRouter>;
     }
 
-    const {pathname} = props;
+    const {url} = props;
 
-    return <StaticRouter location={pathname}>{switchNode}</StaticRouter>;
+    return <StaticRouter location={url}>{switchNode}</StaticRouter>;
 }
