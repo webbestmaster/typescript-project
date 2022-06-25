@@ -8,16 +8,6 @@
     }
 }
 
-@keyframes fade-out {
-    0% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-    }
-}
-
 .popup__fade {
     animation-fill-mode: forwards;
     animation-iteration-count: 1;
@@ -27,12 +17,13 @@
     display: block;
     height: 100%;
     left: 0;
+    opacity: 1;
     position: fixed;
     top: 0;
     width: 100%;
 
     &.popup__fade__closed {
-        opacity: 0;
+        outline: 0;
     }
 
     &.popup__fade__opening {
@@ -40,15 +31,31 @@
     }
 
     &.popup__fade__open {
-        opacity: 1;
+        outline: 0;
     }
 
     &.popup__fade__closing {
-        animation-name: fade-out;
+        animation-direction: reverse;
+        animation-name: fade-in;
+    }
+}
+
+@keyframes content-in {
+    0% {
+        opacity: 0;
+        transform: translate3d(-50%, -200%, 0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate3d(-50%, -50%, 0);
     }
 }
 
 .popup__container {
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in-out;
     background-color: #0c0;
     left: 50%;
     max-height: 80vh;
@@ -56,21 +63,21 @@
     position: fixed;
     top: 50%;
     transform: translate3d(-50%, -50%, 0);
-    //transition: opacity 1s ease-in-out;
 
     &.popup__container__closed {
-        opacity: 0;
+        outline: 0;
     }
 
     &.popup__container__opening {
-        opacity: 1;
+        animation-name: content-in;
     }
 
     &.popup__container__open {
-        opacity: 1;
+        outline: 0;
     }
 
     &.popup__container__closing {
-        opacity: 0;
+        animation-direction: reverse;
+        animation-name: content-in;
     }
 }
