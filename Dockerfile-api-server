@@ -15,7 +15,8 @@ RUN apt update
 RUN curl -sL https://deb.nodesource.com/setup_18.x -o ./nodesource_setup.sh
 RUN bash ./nodesource_setup.sh
 RUN apt install -y nodejs
-# install latest npm
+
+# install\update latest npm
 RUN apt update
 RUN npm install -g npm
 
