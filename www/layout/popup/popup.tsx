@@ -79,7 +79,10 @@ export function Popup(props: PopupPropsType): JSX.Element | null {
         return null;
     }
 
-    const style = {zIndex};
+    const style = {
+        animationDuration: `${transitionTime}ms`,
+        zIndex,
+    };
 
     const fadeClassName = `${popupStyle.popup__fade} ${fadeClassNameMap[visibleState]}`;
     const containerClassName = `${popupStyle.popup__container} ${containerClassNameMap[visibleState]}`;
