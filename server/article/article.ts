@@ -16,11 +16,11 @@ export const articleCrud = makeCrud<ArticleType>(
             console.log('crudConfigOnChange', crudConfigOnChange);
 
             await clearCacheHtmlFileFolder();
-            await updateSiteMapXml();
+            await updateSiteMapXml(articleCrud);
         },
     },
     makeArticleSchema()
 );
 
-setTimeout(updateSiteMapXml, 1e3);
+setTimeout((): Promise<void> => updateSiteMapXml(articleCrud), 1e3);
 setTimeout(clearCacheHtmlFileFolder, 1e3);
