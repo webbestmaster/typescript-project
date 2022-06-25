@@ -27,7 +27,7 @@ type PopupPropsType = {
 };
 
 export function Popup(props: PopupPropsType): JSX.Element | null {
-    const transitionTime = 1e3;
+    const transitionTime = 300;
     const {isOpen = false, children, zIndex = 1000} = props;
 
     const [isSelfOpen, setIsSelfOpen] = useState<boolean>(false);

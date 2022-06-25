@@ -21,14 +21,14 @@
 .popup__fade {
     animation-fill-mode: forwards;
     animation-iteration-count: 1;
-    animation-timing-function: ease-in-out;
-    background-color: #c00;
+    animation-timing-function: linear;
+    backdrop-filter: blur(2px);
+    background-color: rgb(127 127 127 / 66%);
     display: block;
     height: 100%;
     left: 0;
     position: fixed;
     top: 0;
-    //transition: opacity 1s ease-in-out;
     width: 100%;
 
     &.popup__fade__closed {
@@ -51,8 +51,8 @@
 .popup__container {
     background-color: #0c0;
     left: 50%;
-    max-height: 500px;
-    max-width: 500px;
+    max-height: 80vh;
+    max-width: 80vw;
     position: fixed;
     top: 50%;
     transform: translate3d(-50%, -50%, 0);
