@@ -31,6 +31,7 @@ import {makePdf} from '../../../service/pdf/pdf';
 import {htmlToPdfString, htmlToPdfStringLocal} from '../../../service/pdf/pdf-example';
 import {sendToPrint} from '../../../util/print';
 import {Popup} from '../../../layout/popup/popup';
+import {useHotKey} from '../../../util/hot-key';
 
 import pngImageSrc from './image/marker-icon-2x.png';
 import svgImageSrc from './image/questions-with-an-official-answer.svg';
@@ -61,9 +62,19 @@ const config: MarkdownConfigShallowType = {
 
 const htmlCodeConfigured = markdownPro('# Markdown Pro', config);
 
+// eslint-disable-next-line max-statements
 export function ClientHome(): JSX.Element {
     console.log(htmlCode, htmlCodeConfigured);
     console.log(ErrorData);
+    useHotKey([], 'Escape', () => {
+        console.log('you press Escape');
+    });
+    useHotKey([], 'f1', () => {
+        console.log('you press f1');
+    });
+    useHotKey([], 'k', () => {
+        console.log('you press k');
+    });
     const location = useLocation();
     const {setSlug = noop} = useContext<ArticleContextType>(articleContext);
     const {getLocalizedString, setLocaleName, localeName} = useLocale();
