@@ -21,14 +21,14 @@ const containerClassNameMap: Record<PopupVisibleStateEnum, string> = {
 };
 
 type PopupPropsType = {
+    animationDurationMs?: number;
     children: ReactNode;
     isOpen: boolean;
     zIndex?: number;
 };
 
 export function Popup(props: PopupPropsType): JSX.Element | null {
-    const transitionTime = 300;
-    const {isOpen = false, children, zIndex = 1000} = props;
+    const {isOpen = false, children, zIndex = 1000, animationDurationMs = 300} = props;
 
     const [isSelfOpen, setIsSelfOpen] = useState<boolean>(false);
     const [isMounted, setIsMounted] = useState<boolean>(false);
@@ -68,8 +68,8 @@ export function Popup(props: PopupPropsType): JSX.Element | null {
 
         timeOutRef.current = setTimeout(() => {
             setIsSelfOpen(isOpen);
-        }, transitionTime);
-    }, [isOpen, isSelfOpen, timeOutRef]);
+        }, animationDurationMs);
+    }, [isOpen, isSelfOpen, timeOutRef, animationDurationMs]);
 
     if (visibleState === PopupVisibleStateEnum.closed) {
         return null;
@@ -80,7 +80,7 @@ export function Popup(props: PopupPropsType): JSX.Element | null {
     }
 
     const style = {
-        animationDuration: `${transitionTime}ms`,
+        animationDuration: `${animationDurationMs}ms`,
         zIndex,
     };
 
