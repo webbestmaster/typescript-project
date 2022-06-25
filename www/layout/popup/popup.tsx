@@ -1,7 +1,9 @@
-/* global document, setTimeout, clearTimeout, NodeJS */
+/* global document, setTimeout, clearTimeout, NodeJS, HTMLDivElement */
 
-import {ReactNode, useEffect, useRef, useState} from 'react';
+import {ReactNode, useEffect, useRef, useState, DetailedHTMLProps, HTMLAttributes} from 'react';
 import {createPortal} from 'react-dom';
+
+import {classNames} from '../../util/css';
 
 import popupStyle from './popup.scss';
 import {PopupVisibleStateEnum} from './popup-const';
@@ -23,12 +25,22 @@ const containerClassNameMap: Record<PopupVisibleStateEnum, string> = {
 type PopupPropsType = {
     animationDurationMs?: number;
     children: ReactNode;
+    containerProps?: DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
+    fadeProps?: DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
     isOpen: boolean;
     zIndex?: number;
 };
 
+// eslint-disable-next-line complexity
 export function Popup(props: PopupPropsType): JSX.Element | null {
     const {isOpen = false, children, zIndex = 1000, animationDurationMs = 300} = props;
+
+    const mainStyle = {
+        animationDuration: `${animationDurationMs}ms`,
+        zIndex,
+    };
+
+    const {fadeProps = {}, containerProps = {}} = props;
 
     const [isSelfOpen, setIsSelfOpen] = useState<boolean>(false);
     const [isMounted, setIsMounted] = useState<boolean>(false);
@@ -41,6 +53,16 @@ export function Popup(props: PopupPropsType): JSX.Element | null {
 
         return isOpen ? PopupVisibleStateEnum.opening : PopupVisibleStateEnum.closing;
     })();
+
+    fadeProps.className = classNames(popupStyle.popup__fade, fadeClassNameMap[visibleState], fadeProps.className);
+    fadeProps.style = {...fadeProps.style, ...mainStyle};
+
+    containerProps.className = classNames(
+        popupStyle.popup__container,
+        containerClassNameMap[visibleState],
+        containerProps.className
+    );
+    containerProps.style = {...containerProps.style, ...mainStyle};
 
     const infoState = [
         `Popup - isOpen: ${String(isOpen)}`,
@@ -79,19 +101,17 @@ export function Popup(props: PopupPropsType): JSX.Element | null {
         return null;
     }
 
-    const style = {
-        animationDuration: `${animationDurationMs}ms`,
-        zIndex,
-    };
-
-    const fadeClassName = `${popupStyle.popup__fade} ${fadeClassNameMap[visibleState]}`;
-    const containerClassName = `${popupStyle.popup__container} ${containerClassNameMap[visibleState]}`;
-
     return createPortal(
         <>
-            <div className={fadeClassName} style={style} />
-            <div className={containerClassName} style={style}>
-                {children} {visibleState}
+            <div
+                // eslint-disable-next-line react/jsx-props-no-spreading
+                {...fadeProps}
+            />
+            <div
+                // eslint-disable-next-line react/jsx-props-no-spreading
+                {...containerProps}
+            >
+                {children}
             </div>
         </>,
         document.body
