@@ -2,13 +2,15 @@
 version: "3.7"
 services:
     server:
-        image: my-image:0.0.5
-        container_name: my-server
+        image: api-server-image:0.0.1
+        container_name: api-server-image
         build:
             context: .
-        command: ./docker-start.sh
+            dockerfile: Dockerfile-api-server
+        command: npm run back:start
         ports:
-            - 8080:9191
+            - 3001:3000
+        restart: on-failure
         volumes:
             - /home/storage/static-file:/usr/app/static-file
             - /home/storage/db:/usr/app/db
