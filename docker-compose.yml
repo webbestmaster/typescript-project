@@ -2,7 +2,7 @@
 version: "3.7"
 services:
     nginx:
-        image: nginx:0.0.1
+        image: nginx:0.0.6
         container_name: api-nginx-image
         build:
             context: .
@@ -17,7 +17,7 @@ services:
             - /home/storage/static-file:/usr/app/static-file
             - /home/storage/nginx-images-cache:/usr/app/nginx/nginx-images-cache
     api-server:
-        image: api-server-image:0.0.1
+        image: api-server-image:0.0.6
         container_name: api-server-image
         build:
             context: .

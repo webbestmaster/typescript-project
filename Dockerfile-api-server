@@ -5,28 +5,22 @@ COPY ./ ./
 ENV DEBIAN_FRONTEND=noninteractive
 # ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 
-RUN apt update
-
+RUN apt update \
 # install curl
-RUN apt install -y curl
-
+&& apt install -y curl \
 # install nodejs
-RUN apt update
-RUN curl -sL https://deb.nodesource.com/setup_18.x -o ./nodesource_setup.sh
-RUN bash ./nodesource_setup.sh
-RUN apt install -y nodejs
-
+&& curl -sL https://deb.nodesource.com/setup_18.x -o ./node-source-setup.sh \
+&& bash ./node-source-setup.sh \
+&& apt install -y nodejs \
 # install\update latest npm
-RUN apt update
-RUN npm install -g npm
-
-# instal dependencies and build app
-RUN rm -rf ./node_modules
-RUN npm install
-RUN npm run front:build
-RUN npm run back:build
-
+&& npm install -g npm \
+# install dependencies and build app
+&& rm -rf ./node_modules \
+&& npm install \
+&& npm run front:build \
+&& npm run back:build \
 # dependencies for puppeteer
-RUN apt install -y fonts-liberation gconf-service libappindicator1 libasound2 libatk1.0-0 libcairo2 libcups2 libfontconfig1 libgbm-dev libgdk-pixbuf2.0-0 libgtk-3-0 libicu-dev libjpeg-dev libnspr4 libnss3 libpango-1.0-0 libpangocairo-1.0-0 libpng-dev libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 xdg-utils
+&& apt install -y fonts-liberation gconf-service libappindicator1 libasound2 libatk1.0-0 libcairo2 libcups2 libfontconfig1 libgbm-dev libgdk-pixbuf2.0-0 libgtk-3-0 libicu-dev libjpeg-dev libnspr4 libnss3 libpango-1.0-0 libpangocairo-1.0-0 libpng-dev libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 xdg-utils \
+&& rm -rf /var/lib/apt/lists/*
 
 CMD /usr/app/script/api-server.sh
