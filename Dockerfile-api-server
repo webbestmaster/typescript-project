@@ -37,11 +37,11 @@ RUN apt update \
         libxss1 \
         libxtst6 \
         xdg-utils \
-    && curl -sL https://deb.nodesource.com/setup_18.x -o ./node-source-setup.sh \
-    && bash ./node-source-setup.sh \
+        wget \
+        ca-certificates \
+    && wget -qO- https://deb.nodesource.com/setup_18.x | bash - \
     && apt install -y nodejs \
     && npm install -g npm \
-    && rm ./node-source-setup.sh \
     && rm -rf /var/lib/apt/lists/*
 
 
