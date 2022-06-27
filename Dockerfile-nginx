@@ -1,9 +1,10 @@
 FROM ubuntu:20.04
 WORKDIR /usr/app/
-COPY ./nginx ./nginx
 
 RUN apt update \
 && apt install -y --no-install-recommends nginx \
 && rm -rf /var/lib/apt/lists/*
+
+COPY ./nginx ./nginx
 
 CMD ["nginx", "-c", "/usr/app/nginx/nginx.docker.conf", "-g", "daemon off;"]
