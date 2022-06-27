@@ -37,15 +37,14 @@ RUN apt update \
         libxss1 \
         libxtst6 \
         xdg-utils \
-        wget \
         ca-certificates \
-    && wget -qO- https://deb.nodesource.com/setup_18.x | bash - \
+    && curl -sL https://deb.nodesource.com/setup_18.x | bash - \
     && apt install -y nodejs \
     && npm install -g npm \
     && rm -rf /var/lib/apt/lists/*
 
-
 COPY ./ ./
+
 RUN rm -rf ./node_modules \
     && npm install \
     && npm run front:build \
