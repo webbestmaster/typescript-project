@@ -7,4 +7,5 @@ RUN apt update \
 
 COPY ./nginx ./nginx
 
-CMD ["nginx", "-c", "/usr/app/nginx/nginx.docker.conf", "-g", "daemon off;"]
+ENTRYPOINT ["nginx"]
+CMD ["-c", "/usr/app/nginx/nginx.docker.conf", "-g", "daemon off;"]

@@ -50,4 +50,4 @@ RUN rm -rf ./node_modules \
     && npm run front:build \
     && npm run back:build
 
-CMD /usr/app/script/api-server.sh
+ENTRYPOINT ["/usr/app/script/api-server.sh"]
