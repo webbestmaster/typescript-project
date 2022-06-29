@@ -43,7 +43,7 @@ const configFront = {
     },
 
     mode: nodeEnvironment,
-    devtool: isDevelopment ? 'source-map' : false,
+    devtool: 'source-map', // isDevelopment ? 'source-map' : false,
     optimization,
     module: {rules},
     resolve: {alias, extensions},
@@ -55,9 +55,9 @@ const configFront = {
 const configBack = {
     ...configFront,
     entry: ['./server/server.tsx'],
-    optimization: isServerProdBuild ? optimization : {minimize: false},
+    optimization: {minimize: false}, // isServerProdBuild ? optimization : {minimize: false},
     target: 'node',
-    devtool: isServerProdBuild ? false : 'source-map',
+    devtool: 'source-map', // isServerProdBuild ? false : 'source-map',
     externalsPresets,
     externals,
 };
