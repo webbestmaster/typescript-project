@@ -38,7 +38,7 @@ const cwd = process.cwd();
 
 const serverPort = 3000;
 
-// eslint-disable-next-line max-statements
+// eslint-disable-next-line max-statements, unicorn/prefer-top-level-await
 (async () => {
     const fastify = fastifyConstructor({logger: false});
 

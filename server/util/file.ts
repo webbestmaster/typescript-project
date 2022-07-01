@@ -14,3 +14,7 @@ export function writeStringToFile(pathToFile: string, data: string): Promise<voi
         });
     });
 }
+
+export function getIsKeepFileName(fileName: string): boolean {
+    return fileName === '.keep';
+}
