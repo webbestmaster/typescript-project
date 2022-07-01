@@ -7,6 +7,7 @@ $ npm i [-g] artillery
 ```
 
 ## Running
+
 ```bash
 $ artillery quick --count 20 --num 10 http://localhost:4000/example
 ```
