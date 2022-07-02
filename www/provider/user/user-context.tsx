@@ -1,6 +1,6 @@
 /* global location */
 
-import {createContext, useMemo, useState, useContext, useEffect} from 'react';
+import {createContext, useMemo, useState, useContext, useEffect, ReactNode} from 'react';
 
 import {getAutoAuthLogin} from '../../service/auth/auth-api';
 import {useMakeExecutableState} from '../../util/function';
@@ -18,11 +18,11 @@ export function useUserContext(): UserContextType {
 
 const {Provider: UserContextProvider} = UserContext;
 
-type PropsType = {
-    children: Array<JSX.Element> | JSX.Element;
+type UserProviderPropsType = {
+    children: ReactNode;
 };
 
-export function UserProvider(props: PropsType): JSX.Element {
+export function UserProvider(props: UserProviderPropsType): JSX.Element {
     const {children} = props;
 
     const [user, setUser] = useState<UserType>(defaultUserContext.user);

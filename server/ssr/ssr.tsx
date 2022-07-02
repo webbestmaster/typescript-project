@@ -1,4 +1,4 @@
-import {FastifyRequest, FastifyReply} from 'fastify';
+import {FastifyReply, FastifyRequest} from 'fastify';
 import ReactDOMServer from 'react-dom/server';
 
 import {App} from '../../www/component/app/app';
@@ -7,6 +7,7 @@ import {navigationReplaceSelector} from '../../www/client-component/navigation/n
 import {articleReplaceSelector} from '../../www/client-component/article/article-const';
 import {ArticleType} from '../article/article-type';
 import {getStringFromUnknown} from '../../www/util/type';
+import {ThemeNameEnum} from '../../www/provider/theme/theme-context-type';
 
 import {getNavigationContextData} from './api/ssr-navigation';
 import {contentStringBegin, contentStringEnd, contentStringFull, indexHtml} from './ssr-const';
@@ -50,7 +51,12 @@ export async function getHtmlCallBack(
 
     const url: string = raw.url || '/';
     const appStream = ReactDOMServer.renderToStaticNodeStream(
-        <App articleData={articleData} navigationData={navigationData} url={url} />
+        <App
+            articleData={articleData}
+            defaultThemeName={ThemeNameEnum.light}
+            navigationData={navigationData}
+            url={url}
+        />
     );
 
     const htmlString = await streamToStringServer(appStream);

@@ -14,7 +14,7 @@ import {App} from './component/app/app';
 
     const {innerHTML} = nodeWrapper;
 
-    const appNode = <App articleData={null} navigationData={null} url="" />;
+    const appNode = <App articleData={null} defaultThemeName={null} navigationData={null} url="" />;
 
     if (innerHTML.trim() === '') {
         console.log('[main]: Render App as SPA');

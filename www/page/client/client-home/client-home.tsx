@@ -32,6 +32,8 @@ import {htmlToPdfString, htmlToPdfStringLocal} from '../../../service/pdf/pdf-ex
 import {sendToPrint} from '../../../util/print';
 import {Popup} from '../../../layout/popup/popup';
 import {useHotKey} from '../../../util/hot-key';
+import {ThemeContext} from '../../../provider/theme/theme-context';
+import {ThemeContextType, ThemeNameEnum} from '../../../provider/theme/theme-context-type';
 
 import pngImageSrc from './image/marker-icon-2x.png';
 import svgImageSrc from './image/questions-with-an-official-answer.svg';
@@ -75,6 +77,8 @@ export function ClientHome(): JSX.Element {
     useHotKey([], 'k', () => {
         console.log('you press k');
     });
+
+    const {setThemeName, themeName} = useContext<ThemeContextType>(ThemeContext);
     const location = useLocation();
     const {setSlug = noop} = useContext<ArticleContextType>(articleContext);
     const {getLocalizedString, setLocaleName, localeName} = useLocale();
@@ -127,6 +131,24 @@ export function ClientHome(): JSX.Element {
             <Navigation />
 
             <TopAdsWrapper />
+
+            <button onClick={() => setThemeName(ThemeNameEnum.light)} type="button">
+                theme light
+            </button>
+
+            <button onClick={() => setThemeName(ThemeNameEnum.dark)} type="button">
+                theme dark
+            </button>
+
+            <button onClick={() => setThemeName(ThemeNameEnum.neon)} type="button">
+                theme neon
+            </button>
+
+            <button onClick={() => setThemeName(ThemeNameEnum.twilight)} type="button">
+                theme twilight
+            </button>
+
+            <div>theme name: {themeName}</div>
 
             <Popup isOpen={search.get('open') === 'popup'}>
                 <h1>popup - header</h1>
