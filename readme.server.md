@@ -6,14 +6,12 @@ $ pm2 monit // show current state \
 $ pm2 kill // kill 'em all!
 ```
 
-
 ## Run server
 ```bash
 $ npm run front:build
 $ npm run back:build
 $ npm run back:start
 ```
-
 
 ## Nginx
 
@@ -93,7 +91,7 @@ Remove image
 $ docker image rm -f <image id>
 ```
 
-### Docker compose
+## Docker compose
 Build
 ```bash
 sudo docker-compose build
@@ -109,13 +107,13 @@ Stop docker compose
 sudo docker-compose down
 ```
 
-### Monitoring, ctop
+## Monitoring, ctop
 
 ```bash
 docker run --rm -ti --name=ctop --volume /var/run/docker.sock:/var/run/docker.sock:ro quay.io/vektorlab/ctop:latest -a
 ```
 
-### K8s
+## K8s
 1 - install `minikube` - https://minikube.sigs.k8s.io/docs/start/
 2 - install `kubectl`
 3 - `$ minikube start` - start minikube

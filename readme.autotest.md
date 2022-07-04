@@ -1,6 +1,6 @@
-### Autotests
+# Autotests
 
-#### End-to-End test: jest + puppeteer
+## End-to-End test: jest + puppeteer
 
 Required libraries:
 1. jest
@@ -18,7 +18,7 @@ $ jest ./test-e2e/ [--runInBand]
 `--runInBand` - run tests sequentially
 
 
-#### Unit test: jest + react-*
+## Unit test: jest + react-*
 
 Required libraries:
 1. jest

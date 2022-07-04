@@ -1,4 +1,4 @@
-## NPM scripts
+# NPM scripts
 
 ### front:start-dev
 Run webpack and webpack dev-server on 9090
