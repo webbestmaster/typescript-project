@@ -1,4 +1,4 @@
-### PM2
+## PM2
 ```bash
 $ sudo npm i -g pm2 \
 $ sudo pm2 start ./run-server.sh --name server // start process with name 'server' \
@@ -7,7 +7,7 @@ $ pm2 kill // kill 'em all!
 ```
 
 
-#### Run server
+## Run server
 ```bash
 $ npm run front:build
 $ npm run back:build
@@ -15,7 +15,7 @@ $ npm run back:start
 ```
 
 
-### Nginx
+## Nginx
 
 Run
 ```bash
@@ -34,7 +34,7 @@ $ sudo nginx -s stop
 $ sudo nginx -s reload
 ```
 
-### Docker
+## Docker
 
 Install docker
 ```bash
@@ -126,22 +126,3 @@ docker run --rm -ti --name=ctop --volume /var/run/docker.sock:/var/run/docker.so
 - 6.2 Build the image with the Docker daemon of Minikube (eg docker build -t my-image .)
 - 6.3 Set the image in the pod spec like the build tag (eg my-image)
 - 6.4 Set the imagePullPolicy to Never, otherwise Kubernetes will try to download the image.
-
-### How to download backup
-
-Execute this from your local machine:
-
-```bash
-// download
-$ scp deploy@188.166.70.236:~/<file-name>.zip ~/<file-name>.zip
-$ scp -r deploy@188.166.70.236:~/<folder-name> ~/<folder-name>
-
-// upload
-$ scp /path/to/file username@servername/ip:/destination/folder/
-```
-
-### Watch
-
-```bash
-$ nohup watch -n 3600 ./make-db-dump.sh & // make back up every one hour
-```

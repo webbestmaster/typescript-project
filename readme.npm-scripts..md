@@ -22,3 +22,7 @@ Rebuild front if needed.
 ### back:nodemon
 Just nodemon for `./dist-server/dist/index.js`
 Rebuild front if needed.
+
+### back:prod:start
+Build front and back, after that run back.
+All in prod mode.

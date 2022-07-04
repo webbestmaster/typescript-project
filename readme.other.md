@@ -41,3 +41,24 @@ depcheck
 $ [sudo] npm i -g depcheck
 $ depcheck
 ```
+
+### How to download backup
+
+Execute this from your local machine:
+
+Download:
+```bash
+$ scp deploy@188.166.70.236:~/<file-name>.zip ~/<file-name>.zip
+$ scp -r deploy@188.166.70.236:~/<folder-name> ~/<folder-name>
+```
+
+Upload:
+```bash
+$ scp /path/to/file username@servername/ip:/destination/folder/
+```
+
+### Watch
+
+```bash
+$ nohup watch -n 3600 ./make-db-dump.sh & // make back up every one hour
+```
