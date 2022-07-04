@@ -1,0 +1,54 @@
+{
+    "id": "responsiveDemoPage",
+    "viewports": [
+        {
+            "label": "phone",
+            "width": 320,
+            "height": 480
+        },
+        {
+            "label": "tablet",
+            "width": 1024,
+            "height": 768
+        }
+    ],
+    "onBeforeScript": "puppet/onBefore.js",
+    "onReadyScript": "puppet/onReady.js",
+    "scenarios": [
+        {
+            "label": "comparePage",
+            "cookiePath": "backstop_data/engine_scripts/cookies.json",
+            "url": "http://127.0.0.1:3000/",
+            "referenceUrl": "",
+            "readyEvent": "",
+            "readySelector": "",
+            "delay": 100,
+            "hideSelectors": [],
+            "removeSelectors": [],
+            "hoverSelector": "",
+            "clickSelector": "",
+            "postInteractionWait": 0,
+            "selectors": [],
+            "selectorExpansion": true,
+            "expect": 0,
+            "misMatchThreshold" : 0.1,
+            "requireSameDimensions": true
+        }
+    ],
+    "engine": "puppeteer",
+    "engineOptions": {
+        "args": ["--no-sandbox"]
+    },
+    "asyncCaptureLimit": 5,
+    "asyncCompareLimit": 50,
+    "debugWindow": false,
+    "paths": {
+        "bitmaps_reference": "test-backstop/bitmap/reference",
+        "bitmaps_test": "test-backstop/bitmap/test",
+        "html_report": "test-backstop/report/html",
+        "ci_report": "test-backstop/report/ci",
+        "casper_scripts": "test-backstop/engine-scripts"
+    },
+    "report": ["browser"],
+    "debug": false
+}
