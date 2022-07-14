@@ -18,6 +18,9 @@
 *.scss.d.ts
 *.css.d.ts
 
+# test
+/backstop_data/
+
 # example
 
 # /* eslint consistent-this: ["error", "unit", "aggressor"] */
