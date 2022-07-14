@@ -195,7 +195,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
     function handleChangeFileList(info: UploadChangeParam<UploadFile<unknown>>) {
         const {file} = info;
 
-        if (file.status === 'removed') {
+        if (file.status === 'done') {
             setFileList((currentFileList: Array<string>): Array<string> => {
                 return currentFileList.filter((fileName: string): boolean => fileName !== file.name);
             });
@@ -208,7 +208,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
     function handleChangeTitleImage(info: UploadChangeParam<UploadFile<unknown>>) {
         const {file} = info;
 
-        if (file.status === 'removed') {
+        if (file.status === 'done') {
             setTitleImage('');
         }
 
