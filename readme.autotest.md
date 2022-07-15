@@ -53,3 +53,17 @@ Running example:
 ```bash
 $ jest ./test-unit/ --coverage
 ```
+
+
+## BackstopJS
+
+Documentation: https://github.com/garris/BackstopJS
+
+Generating test bitmaps
+```bash
+$ backstop test --config="./test-backstop/backstop-config.json"
+```
+
+```bash
+$ backstop approve --config="./test-backstop/backstop-config.json"
+```
