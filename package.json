@@ -49,7 +49,6 @@
     "test:unit": "jest --config='test-unit/config/jest.config.js' ./www/ --coverage --silent --passWithNoTests",
     "backstop:approve": "backstop approve --config=./test-backstop/backstop-config.json",
     "backstop:test": "backstop test --config=./test-backstop/backstop-config.json",
-    "backstop:init": "backstop init",
     "pre-commit-hook": "npm run check",
     "_postinstall": "cp ./git-hooks/pre-commit ./.git/hooks",
     "__start-site": "sudo nginx -c ~/user/master-git/db-cms/site/nginx/nginx.site.conf -g 'daemon off;'",

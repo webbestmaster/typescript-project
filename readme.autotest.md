@@ -59,6 +59,8 @@ $ jest ./test-unit/ --coverage
 
 Documentation: https://github.com/garris/BackstopJS
 
+Documentation about scenarios' settings: https://github.com/garris/BackstopJS#using-backstopjs
+
 Generating test bitmaps
 ```bash
 $ backstop test --config="./test-backstop/backstop-config.json"

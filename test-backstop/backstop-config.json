@@ -12,25 +12,14 @@
             "height": 768
         }
     ],
-    "onBeforeScript": "puppet/onBefore.js",
-    "onReadyScript": "puppet/onReady.js",
     "scenarios": [
         {
             "label": "comparePage",
-            "cookiePath": "backstop_data/engine_scripts/cookies.json",
             "url": "http://127.0.0.1:3000/",
-            "referenceUrl": "",
-            "readyEvent": "",
-            "readySelector": "",
-            "delay": 100,
+            "delay": 1000,
             "hideSelectors": [],
             "removeSelectors": [],
-            "hoverSelector": "",
-            "clickSelector": "",
-            "postInteractionWait": 0,
-            "selectors": [],
-            "selectorExpansion": true,
-            "expect": 0,
+            "selectors": ["body", "div.js-app-wrapper"],
             "misMatchThreshold" : 0.1,
             "requireSameDimensions": true
         }

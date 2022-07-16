@@ -22,6 +22,10 @@ node_modules
 /tsc-check/
 /coverage/
 
+# backstopjs
+/test-backstop/report/
+/test-backstop/bitmap/test/
+
 # style's d.ts
 *.scss.d.ts
 
