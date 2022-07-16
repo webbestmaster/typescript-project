@@ -19,14 +19,19 @@
             "delay": 1000,
             "hideSelectors": [],
             "removeSelectors": [],
-            "selectors": ["body", "div.js-app-wrapper"],
-            "misMatchThreshold" : 0.1,
+            "selectors": [
+                "body",
+                "div.js-app-wrapper"
+            ],
+            "misMatchThreshold": 0.1,
             "requireSameDimensions": true
         }
     ],
     "engine": "puppeteer",
     "engineOptions": {
-        "args": ["--no-sandbox"]
+        "args": [
+            "--no-sandbox"
+        ]
     },
     "asyncCaptureLimit": 5,
     "asyncCompareLimit": 50,
@@ -38,6 +43,8 @@
         "ci_report": "test-backstop/report/ci",
         "casper_scripts": "test-backstop/engine-scripts"
     },
-    "report": ["browser"],
+    "report": [
+        "browser"
+    ],
     "debug": false
 }
