@@ -49,30 +49,31 @@ export function CmsArticleList(): JSX.Element {
     function handleTableChange(
         pagination: TablePaginationConfig,
         filters: Record<string, FilterValue | null>,
-        sorter: Array<SorterResult<ArticleForTableListType>> | SorterResult<ArticleForTableListType>,
+        sorter: SorterResult<Array<ArticleForTableListType>> | SorterResult<ArticleForTableListType>,
         extra: TableCurrentDataSource<ArticleForTableListType>
     ) {
-        if (!Array.isArray(sorter)) {
-            const {field, order} = sorter;
-            const sortDirection = order === SortDirectionEnum.descend ? -1 : 1;
+        const {column, order, field, columnKey} = sorter;
+        const sortDirection = order === SortDirectionEnum.descend ? -1 : 1;
 
-            const pageIndex = (pagination.current || 1) - 1;
-            const pageSize = pagination.pageSize || defaultPageSize;
+        const pageIndex = (pagination.current || 1) - 1;
+        const pageSize = pagination.pageSize || defaultPageSize;
 
-            setPaginationArticleList((): PaginationQueryType<ArticleForTableListType> => {
-                return {
-                    pageIndex,
-                    pageSize,
-                    query: {[searchedColumn]: {$regex: searchText, $regexFlag: 'i'}},
-                    sort: {[String(field)]: sortDirection},
-                };
-            });
-        }
+        setPaginationArticleList((): PaginationQueryType<ArticleForTableListType> => {
+            return {
+                pageIndex,
+                pageSize,
+                query: {[searchedColumn]: {$regex: searchText, $regexFlag: 'i'}},
+                sort: {[String(field)]: sortDirection},
+            };
+        });
 
         console.log('handleTableChange');
         console.log('pagination:', pagination);
         console.log('filters:', filters);
+        console.log('column:', column);
         console.log('sorter:', sorter);
+        console.log('order:', order);
+        console.log('columnKey:', columnKey);
         console.log('extra:', extra);
         console.log('///');
         console.log(searchedColumn);
