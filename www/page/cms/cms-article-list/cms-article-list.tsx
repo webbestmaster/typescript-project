@@ -46,13 +46,21 @@ export function CmsArticleList(): JSX.Element {
         executeArticleList(paginationArticleList, keyForTableListList);
     }, [executeArticleList, paginationArticleList]);
 
+    // eslint-disable-next-line complexity, max-statements
     function handleTableChange(
         pagination: TablePaginationConfig,
         filters: Record<string, FilterValue | null>,
-        sorter: SorterResult<Array<ArticleForTableListType>> | SorterResult<ArticleForTableListType>,
+        sorter: Array<SorterResult<ArticleForTableListType>> | SorterResult<ArticleForTableListType>,
         extra: TableCurrentDataSource<ArticleForTableListType>
     ) {
-        const {column, order, field, columnKey} = sorter;
+        const firstSorter: SorterResult<ArticleForTableListType> | void = Array.isArray(sorter) ? sorter[0] : sorter;
+
+        if (!firstSorter) {
+            console.warn('handleTableChange - NO firstSorter');
+            return;
+        }
+
+        const {column, order, field, columnKey} = firstSorter;
         const sortDirection = order === SortDirectionEnum.descend ? -1 : 1;
 
         const pageIndex = (pagination.current || 1) - 1;
