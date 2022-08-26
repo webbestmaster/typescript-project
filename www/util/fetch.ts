@@ -1,4 +1,4 @@
-/* global fetch, Headers, FormData, Response, File */
+/* global fetch, HeadersInit, FormData, Response, File */
 
 import {JSONSchemaType} from 'ajv';
 
@@ -15,7 +15,7 @@ export const enum FetchMethodEnum {
 type OptionsType = {
     body?: File | FormData | string; // body data type must match "Content-Type" header
     credentials?: 'include' | 'omit' | 'same-origin'; // include, same-origin, omit (default: same-origin)
-    headers?: Array<Array<string>> | Headers | Record<string, string>;
+    headers?: HeadersInit;
     method?: FetchMethodEnum; // GET, POST, PUT, DELETE, etc. (default: GET)
     mode?: 'cors' | 'no-cors' | 'same-origin'; // no-cors, cors, same-origin (default: same-origin)
     // cache?: 'default'; // default, no-cache, reload, force-cache, only-if-cached (default: default)

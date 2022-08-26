@@ -1,7 +1,7 @@
 /* global HTMLDivElement */
 
 import {HTMLAttributes} from 'react';
-import {markdown, defaultMarkdownConfig} from 'markdown-pro';
+import {markdown} from 'markdown-pro';
 
 import {classNames} from '../../util/css';
 
@@ -17,7 +17,7 @@ export function Markdown(props: PropsType): JSX.Element {
     const {mdInput, ...divAttributes} = props;
     const {className} = divAttributes;
 
-    const htmlCodeClean = markdown(mdInput, {useWrapper: false});
+    const htmlCodeClean = markdown(mdInput);
 
     const htmlCodeImage = markdownImage(htmlCodeClean);
     const htmlCodeListAudio = markdownAudio(htmlCodeImage);
@@ -26,7 +26,7 @@ export function Markdown(props: PropsType): JSX.Element {
         <div
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...divAttributes}
-            className={classNames(defaultMarkdownConfig.wrapperClassName, markdownStyle.markdown, className)}
+            className={classNames(markdownStyle.markdown, className)}
             // eslint-disable-next-line react/no-danger
             // dangerouslySetInnerHTML={{__html: htmlCode}}
         >
