@@ -52,8 +52,8 @@
     "pre-commit-hook": "npm run check",
     "_postinstall": "cp ./git-hooks/pre-commit ./.git/hooks",
     "__start-site": "sudo nginx -c ~/user/master-git/db-cms/site/nginx/nginx.site.conf -g 'daemon off;'",
-    "__storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider start-storybook -p 6006",
-    "__build-storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider NODE_ENV=development SIDE=front build-storybook"
+    "storybook": "cross-env SIDE=front start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "@fastify/cors": "^8.1.0",
@@ -85,6 +85,14 @@
     "@babel/core": "^7.18.13",
     "@babel/eslint-parser": "^7.18.9",
     "@babel/plugin-transform-strict-mode": "^7.18.6",
+    "@storybook/addon-actions": "^6.5.10",
+    "@storybook/addon-essentials": "^6.5.10",
+    "@storybook/addon-interactions": "^6.5.10",
+    "@storybook/addon-links": "^6.5.10",
+    "@storybook/builder-webpack5": "^6.5.10",
+    "@storybook/manager-webpack5": "^6.5.10",
+    "@storybook/react": "^6.5.10",
+    "@storybook/testing-library": "^0.0.13",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
     "@typescript-eslint/eslint-plugin": "^5.35.1",
