@@ -1,20 +1,20 @@
-import React from 'react';
-
-import {Button} from './Button';
+import {Button} from './button';
 import './header.css';
 
-type User = {
+type UserType = {
     name: string;
 };
 
-interface HeaderProps {
+type HeaderPropsType = {
     onCreateAccount: () => void;
     onLogin: () => void;
     onLogout: () => void;
-    user: User | void;
-}
+    user: UserType | null;
+};
 
-export function Header({user, onLogin, onLogout, onCreateAccount}: HeaderProps) {
+export function Header(props: HeaderPropsType): JSX.Element {
+    const {user, onLogin, onLogout, onCreateAccount} = props;
+
     return (
         <header>
             <div className="wrapper">

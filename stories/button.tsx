@@ -1,8 +1,6 @@
-import React from 'react';
-
 import buttonStyle from './button.scss';
 
-interface ButtonProps {
+type ButtonPropsType = {
     /**
      * What background color to use
      */
@@ -23,20 +21,18 @@ interface ButtonProps {
      * How large should the button be?
      */
     size?: 'large' | 'medium' | 'small';
-}
+};
 
-/**
- * Primary UI component for user interaction
- */
-export function Button({primary = false, size = 'medium', backgroundColor, label, ...props}: ButtonProps) {
+export function Button(props: ButtonPropsType): JSX.Element {
+    const {primary, size = 'medium', backgroundColor, label, onClick} = props;
     const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
 
     return (
         <button
             className={[buttonStyle['storybook-button'], buttonStyle[`storybook-button--${size}`], mode].join(' ')}
+            onClick={onClick}
             style={{backgroundColor}}
             type="button"
-            {...props}
         >
             {label}
         </button>

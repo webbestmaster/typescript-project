@@ -1,21 +1,21 @@
-import React from 'react';
+import {useState} from 'react';
 
-import {Header} from './Header';
+import {Header} from './header';
 import './page.css';
 
-type User = {
+type PageUserType = {
     name: string;
 };
 
-export const Page: React.VFC = () => {
-    const [user, setUser] = React.useState<User>();
+export function Page(): JSX.Element {
+    const [user, setUser] = useState<PageUserType | null>(null);
 
     return (
         <article>
             <Header
                 onCreateAccount={() => setUser({name: 'Jane Doe'})}
                 onLogin={() => setUser({name: 'Jane Doe'})}
-                onLogout={() => setUser(undefined)}
+                onLogout={() => setUser(null)}
                 user={user}
             />
 
@@ -34,8 +34,8 @@ export const Page: React.VFC = () => {
                 </p>
                 <ul>
                     <li>
-                        Use a higher-level connected component. Storybook helps you compose such data from the "args" of
-                        child component stories
+                        Use a higher-level connected component. Storybook helps you compose such data from the
+                        &quot;args&quot; of child component stories
                     </li>
                     <li>
                         Assemble data in the page component from your services. You can mock these services out using
@@ -45,20 +45,22 @@ export const Page: React.VFC = () => {
                 <p>
                     Get a guided tutorial on component-driven development at{' '}
                     <a href="https://storybook.js.org/tutorials/" rel="noopener noreferrer" target="_blank">
-                        Storybook tutorials
-                    </a>
-                    . Read more in the{' '}
+                        Storybook tutorials.
+                    </a>{' '}
+                    Read more in the{' '}
                     <a href="https://storybook.js.org/docs" rel="noopener noreferrer" target="_blank">
-                        docs
+                        docs.
                     </a>
-                    .
                 </p>
                 <div className="tip-wrapper">
                     <span className="tip">Tip</span> Adjust the width of the canvas with the{' '}
                     <svg height="10" viewBox="0 0 12 12" width="10" xmlns="http://www.w3.org/2000/svg">
                         <g fill="none" fillRule="evenodd">
                             <path
-                                d="M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z"
+                                d="M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0
+                                01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1
+                                0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5
+                                0 010-1zm4.3 5.2H2V10h3.8V6.2z"
                                 fill="#999"
                                 id="a"
                             />
@@ -69,4 +71,4 @@ export const Page: React.VFC = () => {
             </section>
         </article>
     );
-};
+}

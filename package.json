@@ -53,7 +53,7 @@
     "_postinstall": "cp ./git-hooks/pre-commit ./.git/hooks",
     "__start-site": "sudo nginx -c ~/user/master-git/db-cms/site/nginx/nginx.site.conf -g 'daemon off;'",
     "storybook": "cross-env SIDE=front start-storybook -p 6006",
-    "storybook:ts-coverage": "typescript-coverage-report --threshold=90 --strict=true --project ./stories/",
+    "storybook:ts-coverage": "typescript-coverage-report --threshold=100 --strict=true --project ./stories/",
     "storybook:build": "build-storybook"
   },
   "dependencies": {
