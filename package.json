@@ -44,7 +44,7 @@
     "front:tsc-library-css": "cross-env NODE_ENV=production SIDE=front IS_BUILD_LIBRARY=true node ./webpack/util/library/css.js",
     "front:ts-coverage": "typescript-coverage-report --threshold=99.94 --strict=true --project ./www/",
     "back:ts-coverage": "typescript-coverage-report --threshold=100 --strict=true --project ./server/",
-    "ts-coverage": "npm run front:ts-coverage && npm run back:ts-coverage",
+    "ts-coverage": "npm run front:ts-coverage && npm run back:ts-coverage && npm run storybook:ts-coverage",
     "test:e2e": "jest --config='test-e2e/config/jest.config.js' ./test-e2e/ --runInBand --silent --passWithNoTests",
     "test:unit": "jest --config='test-unit/config/jest.config.js' ./www/ --coverage --silent --passWithNoTests",
     "backstop:approve": "backstop approve --config=./test-backstop/backstop-config.json",
@@ -53,7 +53,8 @@
     "_postinstall": "cp ./git-hooks/pre-commit ./.git/hooks",
     "__start-site": "sudo nginx -c ~/user/master-git/db-cms/site/nginx/nginx.site.conf -g 'daemon off;'",
     "storybook": "cross-env SIDE=front start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "storybook:ts-coverage": "typescript-coverage-report --threshold=90 --strict=true --project ./stories/",
+    "storybook:build": "build-storybook"
   },
   "dependencies": {
     "@fastify/cors": "^8.1.0",
@@ -95,8 +96,8 @@
     "@storybook/testing-library": "^0.0.13",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
-    "@typescript-eslint/eslint-plugin": "^5.35.1",
-    "@typescript-eslint/parser": "^5.35.1",
+    "@typescript-eslint/eslint-plugin": "^5.36.0",
+    "@typescript-eslint/parser": "^5.36.0",
     "babel-loader": "^8.2.5",
     "backstopjs": "^6.1.1",
     "circular-dependency-plugin": "^5.2.2",
@@ -133,7 +134,7 @@
     "prettier": "^2.7.1",
     "puppeteer": "^17.0.0",
     "raw-loader": "^4.0.2",
-    "sass": "^1.54.5",
+    "sass": "^1.54.6",
     "sass-loader": "^13.0.2",
     "script-ext-html-webpack-plugin": "^2.1.5",
     "style-loader": "^3.3.1",
@@ -141,7 +142,7 @@
     "stylelint-config-sass-guidelines": "^9.0.1",
     "stylelint-config-standard": "^28.0.0",
     "stylelint-scss": "^4.3.0",
-    "terser-webpack-plugin": "^5.3.5",
+    "terser-webpack-plugin": "^5.3.6",
     "ts-jest": "^28.0.8",
     "ts-loader": "^9.3.1",
     "typescript": "^4.8.2",
@@ -149,7 +150,7 @@
     "webpack": "^5.74.0",
     "webpack-bundle-analyzer": "^4.6.1",
     "webpack-cli": "^4.10.0",
-    "webpack-dev-server": "^4.10.0",
+    "webpack-dev-server": "^4.10.1",
     "webpack-node-externals": "^3.0.0"
   }
 }
