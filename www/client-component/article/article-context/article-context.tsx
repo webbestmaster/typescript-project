@@ -26,7 +26,7 @@ export function ArticleProvider(props: ArticleProviderPropsType): JSX.Element {
     const [slug, setSlug] = useState<string>(articleData.article.slug);
 
     const {execute: fetchArticle, isInProgress: isInProgressArticle} = useMakeExecutableState<
-        [string],
+        Parameters<typeof getArticleContextBySlug>,
         ArticleContextType
     >(getArticleContextBySlug);
 

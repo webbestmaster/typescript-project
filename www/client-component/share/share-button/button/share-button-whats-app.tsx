@@ -2,7 +2,7 @@ import shareButtonStyle from '../share-button.scss';
 import type {ShareButtonPropsType} from '../share-button-type';
 import {share} from '../share-button-helper';
 import {SvgImage} from '../../../../layout/svg-image/svg-image';
-import {shareIconIdPrefix} from '../share-button-sprite';
+import {shareButtonName} from '../share-button-const';
 
 export function ShareButtonWhatsApp(props: ShareButtonPropsType): JSX.Element {
     const {title} = props;
@@ -18,10 +18,7 @@ export function ShareButtonWhatsApp(props: ShareButtonPropsType): JSX.Element {
             onClick={handleClick}
             type="button"
         >
-            <SvgImage
-                className={shareButtonStyle.share_button__image}
-                imageId={'#' + shareIconIdPrefix + 'whats-app'}
-            />
+            <SvgImage className={shareButtonStyle.share_button__image} imageId={'#' + shareButtonName.whatsApp} />
         </button>
     );
 }

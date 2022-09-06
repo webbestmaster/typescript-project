@@ -7,8 +7,7 @@ import {Link} from 'react-router-dom';
 
 import {CmsPage} from '../layout/cms-page/cms-page';
 import {useMakeExecutableState} from '../../../util/function';
-import {PaginationQueryType, PaginationResultType} from '../../../../server/data-base/data-base-type';
-import {ArticleType} from '../../../../server/article/article-type';
+import {PaginationResultType} from '../../../../server/data-base/data-base-type';
 import {getArticleListPaginationPick} from '../../../service/article/article-api';
 import {Spinner} from '../../../layout/spinner/spinner';
 import {Box} from '../../../layout/box/box';
@@ -16,7 +15,7 @@ import {getTickCross} from '../../../util/string';
 import {getArticleLinkToEdit} from '../cms-article/cms-article-helper';
 import {getArticleLinkToViewClient} from '../../../client-component/article/article-helper';
 
-import {ArticleForTreeType, KeyForTreeType} from './cms-article-tree-type';
+import {ArticleForTreeType} from './cms-article-tree-type';
 import {keyForTreeList} from './cms-article-tree-const';
 import {
     getArticleForTreeById,
@@ -31,7 +30,7 @@ const {Item: ListItem} = List;
 export function CmsArticleTree(): JSX.Element {
     const {execute: executeArticleListPaginationPick, isInProgress: isInProgressArticleListPagination} =
         useMakeExecutableState<
-            [PaginationQueryType<ArticleType>, KeyForTreeType],
+            Parameters<typeof getArticleListPaginationPick<keyof ArticleForTreeType>>,
             PaginationResultType<ArticleForTreeType>
         >(getArticleListPaginationPick);
 

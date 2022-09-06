@@ -16,7 +16,7 @@ import {Library} from '../../../library/library';
 import {AsciiSpinner} from '../../../layout/spinner/ascii-spinner';
 import {ExampleAudio} from '../../../example/example-audio/example-audio';
 import {ExamplePlayer} from '../../../example/example-audio-player/example-audio-player';
-import {fetchX} from '../../../util/fetch';
+import {fetchX, FetchArgumentsType} from '../../../util/fetch';
 import {noop, useMakeExecutableState} from '../../../util/function';
 import {Navigation} from '../../../client-component/navigation/navigation';
 import {Article} from '../../../client-component/article/article';
@@ -83,8 +83,8 @@ export function ClientHome(): JSX.Element {
     const {setSlug = noop} = useContext<ArticleContextType>(articleContext);
     const {getLocalizedString, setLocaleName, localeName} = useLocale();
     const {getFormattedNumber} = useFormat();
-    // const {screenInfo} = useSystem();
-    const {execute, isInProgress, result, error} = useMakeExecutableState<[string, JSONSchemaType<MyIpType>], MyIpType>(
+
+    const {execute, isInProgress, result, error} = useMakeExecutableState<FetchArgumentsType<MyIpType>, MyIpType>(
         fetchX
     );
 

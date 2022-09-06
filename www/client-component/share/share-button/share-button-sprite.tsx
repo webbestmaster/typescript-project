@@ -1,8 +1,8 @@
-/* eslint-disable max-len */
+/* eslint-disable max-len,  react/no-unknown-property */
 
 import {IsHidden} from '../../../layout/is-hidden/is-hidden';
 
-export const shareIconIdPrefix = 'share-button-icon-id-prefix-';
+import {shareButtonName} from './share-button-const';
 
 export function ShareButtonSprite(): JSX.Element {
     return (
@@ -11,7 +11,7 @@ export function ShareButtonSprite(): JSX.Element {
                 <symbol
                     fill="#fff"
                     height="110%"
-                    id={shareIconIdPrefix + 'facebook'}
+                    id={shareButtonName.facebook}
                     viewBox="1 1 41 41"
                     width="110%"
                     xmlns="http://www.w3.org/2000/svg"
@@ -22,7 +22,7 @@ export function ShareButtonSprite(): JSX.Element {
                 <symbol
                     fill="#fff"
                     height="100%"
-                    id={shareIconIdPrefix + 'vkontakte'}
+                    id={shareButtonName.vkontakte}
                     viewBox="0 0 40 40"
                     width="100%"
                     xmlns="http://www.w3.org/2000/svg"
@@ -33,7 +33,7 @@ export function ShareButtonSprite(): JSX.Element {
                 <symbol
                     fill="#fff"
                     height="90%"
-                    id={shareIconIdPrefix + 'odnoklassniki'}
+                    id={shareButtonName.odnoklassniki}
                     viewBox="-1 -1 39 39"
                     width="90%"
                     xmlns="http://www.w3.org/2000/svg"
@@ -44,7 +44,7 @@ export function ShareButtonSprite(): JSX.Element {
                 <symbol
                     fill="#fff"
                     height="100%"
-                    id={shareIconIdPrefix + 'twitter'}
+                    id={shareButtonName.twitter}
                     viewBox="0 0 40 40"
                     width="100%"
                     xmlns="http://www.w3.org/2000/svg"
@@ -55,7 +55,7 @@ export function ShareButtonSprite(): JSX.Element {
                 <symbol
                     fill="#fff"
                     height="100%"
-                    id={shareIconIdPrefix + 'telegram'}
+                    id={shareButtonName.telegram}
                     viewBox="0 0 35 35"
                     width="100%"
                     xmlns="http://www.w3.org/2000/svg"
@@ -82,7 +82,7 @@ export function ShareButtonSprite(): JSX.Element {
                 <symbol
                     fill="#fff"
                     height="100%"
-                    id={shareIconIdPrefix + 'viber'}
+                    id={shareButtonName.viber}
                     viewBox="0 0 512 512"
                     width="100%"
                     xmlns="http://www.w3.org/2000/svg"
@@ -95,7 +95,7 @@ export function ShareButtonSprite(): JSX.Element {
                 <symbol
                     fill="#fff"
                     height="100%"
-                    id={shareIconIdPrefix + 'whats-app'}
+                    id={shareButtonName.whatsApp}
                     viewBox="1 2 27 27"
                     width="100%"
                     xmlns="http://www.w3.org/2000/svg"

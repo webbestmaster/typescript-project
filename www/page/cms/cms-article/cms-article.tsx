@@ -35,7 +35,7 @@ import {
     textToSlug,
 } from '../../../util/human';
 import {useMakeExecutableState} from '../../../util/function';
-import {PaginationQueryType, PaginationResultType} from '../../../../server/data-base/data-base-type';
+import {PaginationResultType} from '../../../../server/data-base/data-base-type';
 import {getArticleListPaginationPick} from '../../../service/article/article-api';
 import {MarkdownInputWrapper} from '../../../layout/markdown-input-wrapper/markdown-input-wrapper';
 import {IsRender} from '../../../layout/is-render/is-render';
@@ -69,7 +69,7 @@ import {
     keyForValidationList,
     noDateUTC,
 } from './cms-article-const';
-import {ArticleForValidationType, KeyForValidationListType} from './cms-article-type';
+import {ArticleForValidationType} from './cms-article-type';
 
 const {Text, Title} = Typography;
 const {Option} = Select;
@@ -127,7 +127,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
     useHotKey([HotKeyModifierEnum.ctrl], 's', form.submit);
 
     const {execute: executeArticleListPaginationPick} = useMakeExecutableState<
-        [PaginationQueryType<ArticleType>, KeyForValidationListType],
+        Parameters<typeof getArticleListPaginationPick<keyof ArticleForValidationType>>,
         PaginationResultType<ArticleForValidationType>
     >(getArticleListPaginationPick);
 

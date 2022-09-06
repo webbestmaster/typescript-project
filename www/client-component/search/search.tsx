@@ -2,15 +2,14 @@
 
 import {SyntheticEvent, useCallback, useEffect, useRef, useState} from 'react';
 
-import {ArticleType} from '../../../server/article/article-type';
-import {PaginationQueryType, PaginationResultType} from '../../../server/data-base/data-base-type';
+import {PaginationResultType} from '../../../server/data-base/data-base-type';
 import {useMakeExecutableState} from '../../util/function';
 import {getArticleClientListPaginationPick} from '../../service/article/article-api';
 import {useLocale} from '../../provider/locale/locale-context';
 import {IsRender} from '../../layout/is-render/is-render';
 
 import {articlePreviewKeyList} from './search-const';
-import {KeyForArticleSearchType, SearchArticleType} from './search-type';
+import {SearchArticleType} from './search-type';
 import searchStyle from './search.scss';
 import {SearchResult} from './search-result/search-result';
 
@@ -47,7 +46,7 @@ export function Search(): JSX.Element {
         result: resultArticleList,
         isInProgress: isInProgressArticleList,
     } = useMakeExecutableState<
-        [PaginationQueryType<ArticleType>, KeyForArticleSearchType],
+        Parameters<typeof getArticleClientListPaginationPick<keyof SearchArticleType>>,
         PaginationResultType<SearchArticleType>
     >(getArticleClientListPaginationPick);
 

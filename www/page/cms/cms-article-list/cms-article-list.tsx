@@ -6,17 +6,11 @@ import {TablePaginationConfig, FilterValue, SorterResult, TableCurrentDataSource
 
 import {useMakeExecutableState} from '../../../util/function';
 import {PaginationQueryType, PaginationResultType} from '../../../../server/data-base/data-base-type';
-import {ArticleType} from '../../../../server/article/article-type';
 import {getArticleListPaginationPick} from '../../../service/article/article-api';
 import {CmsPage} from '../layout/cms-page/cms-page';
 
 import {getArticleTableColumnList, keyForTableListList} from './cms-article-list-const';
-import {
-    ArticleForTableListKeysType,
-    ArticleForTableListType,
-    KeyForTableListListType,
-    SortDirectionEnum,
-} from './cms-article-list-type';
+import {ArticleForTableListKeysType, ArticleForTableListType, SortDirectionEnum} from './cms-article-list-type';
 
 const {Title} = Typography;
 
@@ -31,7 +25,7 @@ export function CmsArticleList(): JSX.Element {
         result: resultArticleList,
         isInProgress: isInProgressArticleList,
     } = useMakeExecutableState<
-        [PaginationQueryType<ArticleType>, KeyForTableListListType],
+        Parameters<typeof getArticleListPaginationPick<keyof ArticleForTableListType>>,
         PaginationResultType<ArticleForTableListType>
     >(getArticleListPaginationPick);
 

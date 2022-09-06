@@ -27,7 +27,7 @@ export function UserProvider(props: UserProviderPropsType): JSX.Element {
 
     const [user, setUser] = useState<UserType>(defaultUserContext.user);
     const {execute: executeAutoLogin, isInProgress: isInProgressAutoLogin} = useMakeExecutableState<
-        [],
+        Parameters<typeof getAutoAuthLogin>,
         LoginResponseType
     >(getAutoAuthLogin);
 

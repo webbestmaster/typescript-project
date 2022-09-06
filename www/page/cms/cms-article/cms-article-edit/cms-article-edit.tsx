@@ -1,6 +1,5 @@
 import {useEffect} from 'react';
 import {Typography, message} from 'antd';
-import {JSONSchemaType} from 'ajv';
 import {useParams} from 'react-router-dom';
 
 import {CmsArticle} from '../cms-article';
@@ -8,10 +7,9 @@ import {CmsArticleModeEnum} from '../cms-article-const';
 import {ArticleType} from '../../../../../server/article/article-type';
 import {getArticleListPagination, postArticleUpdate} from '../../../../service/article/article-api';
 import {useMakeExecutableState} from '../../../../util/function';
-import {makeArticleSchema} from '../../../../../server/article/article-validation';
 import {Spinner} from '../../../../layout/spinner/spinner';
 import {CmsPage} from '../../layout/cms-page/cms-page';
-import {PaginationQueryType, PaginationResultType} from '../../../../../server/data-base/data-base-type';
+import {PaginationResultType} from '../../../../../server/data-base/data-base-type';
 import {IsRender} from '../../../../layout/is-render/is-render';
 
 const {Title} = Typography;
@@ -23,7 +21,7 @@ export function CmsArticleEdit(): JSX.Element {
         execute: articleById,
         isInProgress: isInProgressArticleById,
         result: articleByIdResult,
-    } = useMakeExecutableState<[PaginationQueryType<ArticleType>], PaginationResultType<ArticleType>>(
+    } = useMakeExecutableState<Parameters<typeof getArticleListPagination>, PaginationResultType<ArticleType>>(
         getArticleListPagination
     );
 
@@ -37,12 +35,12 @@ export function CmsArticleEdit(): JSX.Element {
     }, [articleById, articleId]);
 
     const {execute: updateArticle, isInProgress: isInProgressUpdateArticle} = useMakeExecutableState<
-        [ArticleType, JSONSchemaType<ArticleType>],
+        Parameters<typeof postArticleUpdate>,
         ArticleType
     >(postArticleUpdate);
 
     function handleOnFinish(article: ArticleType) {
-        updateArticle(article, makeArticleSchema())
+        updateArticle(article)
             .then((savedArticle: ArticleType) => {
                 console.log(savedArticle);
                 message.success('Article has been updated!');

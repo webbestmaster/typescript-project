@@ -105,3 +105,5 @@ export function fetchX<ExpectedResponseType>(
 
     return fetchResult;
 }
+
+export type FetchArgumentsType<ResultType> = Parameters<typeof fetchX<ResultType>>;

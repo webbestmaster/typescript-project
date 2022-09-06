@@ -1,5 +1,4 @@
 import {Typography, message} from 'antd';
-import {JSONSchemaType} from 'ajv';
 import {useNavigate} from 'react-router';
 
 import {CmsArticle} from '../cms-article';
@@ -8,7 +7,6 @@ import {CmsArticleModeEnum} from '../cms-article-const';
 import {ArticleType} from '../../../../../server/article/article-type';
 import {postArticleCreate} from '../../../../service/article/article-api';
 import {useMakeExecutableState} from '../../../../util/function';
-import {makeArticleSchema} from '../../../../../server/article/article-validation';
 import {getRandomString} from '../../../../util/string';
 import {Spinner} from '../../../../layout/spinner/spinner';
 import {CmsPage} from '../../layout/cms-page/cms-page';
@@ -20,12 +18,12 @@ export function CmsArticleCreate(): JSX.Element {
     const navigate = useNavigate();
 
     const {execute: createArticle, isInProgress: isInProgressCreateArticle} = useMakeExecutableState<
-        [ArticleType, JSONSchemaType<ArticleType>],
+        Parameters<typeof postArticleCreate>,
         ArticleType
     >(postArticleCreate);
 
     function handleOnFinish(article: ArticleType) {
-        createArticle(article, makeArticleSchema())
+        createArticle(article)
             .then((savedArticle: ArticleType) => {
                 console.log(savedArticle);
 

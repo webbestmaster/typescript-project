@@ -12,7 +12,7 @@ export function Login(): JSX.Element {
     const userContext = useUserContext();
     const [login, setLogin] = useState<string>('');
     const [password, setPassword] = useState<string>('');
-    const loginHook = useMakeExecutableState<[string, string], LoginResponseType>(loginUser);
+    const loginHook = useMakeExecutableState<Parameters<typeof loginUser>, LoginResponseType>(loginUser);
 
     const onSubmit = useCallback(
         (evt: SyntheticEvent<HTMLFormElement>) => {
