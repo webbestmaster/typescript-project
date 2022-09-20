@@ -2,6 +2,7 @@ import fileSystem, {ReadStream, promises as fileSystemPromises, Stats} from 'fs'
 import path from 'path';
 
 import {FastifyReply, FastifyRequest} from 'fastify';
+import {MultipartFile} from '@fastify/multipart';
 import webpConverter from 'webp-converter';
 
 import {PromiseResolveType} from '../../www/util/promise';
@@ -16,9 +17,15 @@ import {UploadFileResponseType} from './file-type';
 export async function uploadFile(request: FastifyRequest): Promise<UploadFileResponseType> {
     const uploadFileLimit = 75e6; // 75MB
 
-    const {filename, file} = await request.file({
+    const fileData: MultipartFile | void = await request.file({
         limits: {fileSize: uploadFileLimit, files: 1},
     });
+
+    if (!fileData) {
+        throw new Error('[uploadFile]: Can not get file');
+    }
+
+    const {filename, file} = fileData;
 
     const rawFileExtension = getFileExtension(filename);
     const hasExtension = rawFileExtension !== filename;

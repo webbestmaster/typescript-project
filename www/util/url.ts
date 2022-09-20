@@ -22,11 +22,20 @@ export type ExtractPathDataType<StringConstType> = StringConstType extends `${st
 
 export type ExtractPathKeysType<StringConstType> = keyof ExtractPathDataType<StringConstType>;
 
+// Just workaround for react-router-dom, should be the same as ExtractPathDataType, but use Record<string, string> in the and
+type RouterPathDataType<StringConstType> = StringConstType extends `${string}:${infer KeyNames}/${infer Rest}`
+    ? ExtractPathDataType<Rest> & {[key in KeyNames]: string}
+    : StringConstType extends `${string}:${infer KeyNames}`
+    ? ExtractPathDataType<string> & {[key in KeyNames]: string}
+    : Record<string, string>;
+
 export function generatePath<PathType extends string>(
     rawPath: PathType,
     pathData: ExtractPathDataType<PathType>
 ): string {
-    return reactRouterGeneratePath(rawPath, pathData);
+    const pathDataForRouter: RouterPathDataType<PathType> = JSON.parse(JSON.stringify(pathData));
+
+    return reactRouterGeneratePath(rawPath, pathDataForRouter);
 }
 
 /*

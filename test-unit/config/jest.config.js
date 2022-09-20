@@ -1,10 +1,15 @@
 // eslint-disable-next-line unicorn/prefer-module
 module.exports = {
-    globals: {
-        'ts-jest': {
-            tsconfig: './tsconfig.test.json',
-        },
+    /*
+    transform: {
+        '/*.(ts|tsx)$/': [
+            'ts-jest',
+            {
+                tsconfig: './tsconfig.test.json',
+            },
+        ],
     },
+*/
     moduleNameMapper: {
         '^\\S+.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
     },
