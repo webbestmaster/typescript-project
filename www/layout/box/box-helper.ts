@@ -11,18 +11,24 @@ export function makeCssArray(value?: Array<number> | number): [number, number, n
     const arrayLength = value.length;
 
     switch (arrayLength) {
-        case 0:
+        case 0: {
             return [0, 0, 0, 0];
-        case 1:
+        }
+        case 1: {
             return [value[0], value[0], value[0], value[0]];
-        case 2:
+        }
+        case 2: {
             return [value[0], value[1], value[0], value[1]];
-        case 3:
+        }
+        case 3: {
             return [value[0], value[1], value[2], value[1]];
-        case 4:
+        }
+        case 4: {
             return [value[0], value[1], value[2], value[3]];
-        default:
+        }
+        default: {
             console.error('makeCssArray: too big array');
             return [value[0], value[1], value[2], value[3]];
+        }
     }
 }
