@@ -15,7 +15,7 @@ import {appRoute, AppRoutType} from '../www/component/app/app-route';
 import {getAutoAuthLogin, postAuthLogin} from './auth/auth-api';
 import {getHtmlCallBack} from './ssr/ssr';
 import {secretKey} from './key';
-import {apiUrl, siteCookieKey} from './const';
+import {apiUrl, mainResponseHeader, siteCookieKey} from './const';
 import {
     getArticleListPagination,
     getArticleListPaginationPick,
@@ -25,7 +25,7 @@ import {
     getClientArticleContextData,
     getArticleClientListPaginationPick,
 } from './article/article-api';
-import {getFile, uploadFile} from './file/file';
+import {getFile, getImage, uploadFile} from './file/file';
 import {adminOnly} from './auth/auth-helper';
 import {indexHtmlError500} from './ssr/ssr-const';
 import {makeCacheFile} from './article/article-cache';
@@ -33,6 +33,7 @@ import {getPdf} from './pdf/pdf';
 import {PaginationResultType} from './data-base/data-base-type';
 import {ArticleType} from './article/article-type';
 import {UploadFileResponseType} from './file/file-type';
+import {makeStatic} from './make-static';
 
 const cwd = process.cwd();
 
@@ -98,9 +99,16 @@ const serverPort = 3000;
     );
     fastify.post(apiUrl.adminFileUpload, adminOnly<UploadFileResponseType>(uploadFile));
     fastify.get(apiUrl.fileGet, getFile);
-    fastify.get(apiUrl.imageGet, getFile);
+    fastify.get(apiUrl.imageGet, getImage);
     fastify.get(apiUrl.clientArticleContextGet, getClientArticleContextData);
     fastify.get(apiUrl.clientSearchArticle, getArticleClientListPaginationPick);
+    fastify.get(apiUrl.makeStatic, async (request: FastifyRequest, reply: FastifyReply) => {
+        await makeStatic();
+
+        reply.code(200).header(...mainResponseHeader);
+
+        return {};
+    });
     fastify.post(apiUrl.clientMakePdf, getPdf);
     fastify.post(apiUrl.adminArticleCreate, adminOnly<ArticleType | Record<'message', string>>(postAdminArticleCreate));
     fastify.post(apiUrl.adminArticleUpdate, adminOnly<ArticleType | Record<'message', string>>(postAdminArticleUpdate));
@@ -112,7 +120,6 @@ const serverPort = 3000;
     Object.values(appRoute).forEach((rout: AppRoutType) => {
         fastify.get(
             rout.path,
-            // eslint-disable-next-line complexity
             async (request: FastifyRequest<{Params: {slug?: string}}>, reply: FastifyReply): Promise<string> => {
                 const [ssrResponse, article] = await getHtmlCallBack(request, reply);
 

@@ -65,11 +65,46 @@ export async function uploadFile(request: FastifyRequest): Promise<UploadFileRes
     return uploadResponseWebP;
 }
 
-export function getFile(request: FastifyRequest<{Params: {fileName?: string}}>, reply: FastifyReply): ReadStream {
+export function getFile(request: FastifyRequest<{ Params: { fileName?: string } }>, reply: FastifyReply): ReadStream {
     const {params} = request;
     const fileName = getStringFromUnknown(params, 'fileName');
 
     reply.header('x-warning-get-file', 'need-use-nginx');
 
     return fileSystem.createReadStream(path.join(uploadFolder, fileName));
+}
+
+export async function getImage(request: FastifyRequest<{ Params: { fileName?: string } }>, reply: FastifyReply): Promise<ReadStream> {
+    const {params} = request;
+    const fileName = getStringFromUnknown(params, 'fileName');
+    const size = getStringFromUnknown(params, 'size');
+
+    reply.header('x-warning-get-file', 'need-use-nginx');
+
+    const rawFileExtension = getFileExtension(fileName);
+    const fullFilePath = path.join(uploadFolder, fileName);
+
+    // console.info('getImage /////////////');
+    // console.info(fileName);
+    // console.info(rawFileExtension);
+    // console.info(fullFilePath);
+    // console.info(path.join(uploadFolder, '___' + fileName));
+    // console.info(size);
+
+    const newFileName: string = '______temp______remove_me______' + (Math.random() * 1000).toFixed(0).padStart(3, '0');
+    const temporaryFilePath: string = path.join(uploadFolder, `${newFileName}.${rawFileExtension}`);
+
+    const parsedSize = size.replace('x', ' ');
+
+    if (rawFileExtension === 'webp') {
+        await webpConverter.cwebp(fullFilePath, temporaryFilePath, `-q 80 -m 6 -resize ${parsedSize}`, '-v');
+
+        return fileSystem.createReadStream(temporaryFilePath);
+    }
+
+    if (rawFileExtension === 'png') {
+        console.log('!!!!!!!!!!!!!! add png logic');
+    }
+
+    return getFile(request, reply);
 }

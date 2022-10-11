@@ -17,7 +17,7 @@ export const httpsSiteDomain = `https://${siteDomain}`;
 export const openGraphLocaleName = 'en_US';
 export const copyrightName = 'My Best Site Dot Com';
 export const companyLogoPngFileName = 'company-logo.png';
-// export const appIconPngFileName = 'app-icon.png';
+export const appIconPngFileName = 'app-icon.png';
 
 function sayHi() {
     const {log} = console;
