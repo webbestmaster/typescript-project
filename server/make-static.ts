@@ -1,13 +1,12 @@
-/* global process */
+/* global process, fetch, Response, Buffer */
 import fileSystem, {promises as fileSystemPromise} from 'fs';
 import path from 'path';
-import nodeFetch, {Response as NodeFetchResponse} from 'node-fetch';
 
 import {getArticleLinkToViewClient} from '../www/client-component/article/article-helper';
 import {generatePath} from '../www/util/url';
 import {appRoute} from '../www/component/app/app-route';
-import {appIconPngFileName, companyLogoPngFileName} from "../www/const";
-import {getPathToImage} from "../www/page/cms/cms-article/cms-article-helper";
+import {appIconPngFileName, companyLogoPngFileName} from '../www/const';
+import {getPathToImage} from '../www/page/cms/cms-article/cms-article-helper';
 
 import {articleCrud} from './article/article';
 import {ArticleType} from './article/article-type';
@@ -15,7 +14,7 @@ import {uploadFileFolder} from './file/file-const';
 import {apiUrl} from './const';
 
 const staticSiteFolderName = 'static-site';
-const mainUrl = 'http://localhost:3000';
+const mainUrl = 'http://127.0.0.1:3000';
 
 const cwd = process.cwd();
 
@@ -25,7 +24,7 @@ type StaticPageType = Readonly<{
 }>;
 
 async function getTextFromUrl(fullUrl: string): Promise<string> {
-    const response: NodeFetchResponse = await nodeFetch(fullUrl);
+    const response = await fetch(fullUrl);
 
     return response.text();
 }
@@ -41,8 +40,7 @@ async function copyFrontFolder(): Promise<void> {
     try {
         await fileSystemPromise.mkdir(path.join(cwd, staticSiteFolderName));
         // eslint-disable-next-line no-empty
-    } catch {
-    }
+    } catch {}
 
     await fileSystemPromise.cp(path.join(cwd, 'dist'), path.join(cwd, staticSiteFolderName), {recursive: true});
 }
@@ -51,15 +49,13 @@ async function copyStaticFileFolder(): Promise<void> {
     try {
         await fileSystemPromise.mkdir(path.join(cwd, staticSiteFolderName));
         // eslint-disable-next-line no-empty
-    } catch {
-    }
+    } catch {}
 
-    await fileSystemPromise
-        .cp(
-            path.join(cwd, uploadFileFolder),
-            path.join(cwd, staticSiteFolderName, uploadFileFolder),
-            {recursive: true}
-        );
+    await fileSystemPromise.cp(
+        path.join(cwd, uploadFileFolder),
+        path.join(cwd, staticSiteFolderName, uploadFileFolder),
+        {recursive: true}
+    );
 }
 
 async function collectHtmlPages(): Promise<Array<StaticPageType>> {
@@ -83,8 +79,7 @@ async function makeHtmlPages(pageList: Array<StaticPageType>) {
     try {
         await fileSystemPromise.mkdir(path.join(cwd, staticSiteFolderName, 'article'));
         // eslint-disable-next-line no-empty
-    } catch {
-    }
+    } catch {}
 
     // write html files
     // eslint-disable-next-line no-loops/no-loops
@@ -101,8 +96,7 @@ async function makeApiArticle(pageList: Array<StaticPageType>) {
         await fileSystemPromise.mkdir(path.join(cwd, staticSiteFolderName, 'api'));
         await fileSystemPromise.mkdir(path.join(cwd, staticSiteFolderName, 'api', 'client-article'));
         // eslint-disable-next-line no-empty
-    } catch {
-    }
+    } catch {}
 
     // write html files
     // eslint-disable-next-line no-loops/no-loops
@@ -112,41 +106,26 @@ async function makeApiArticle(pageList: Array<StaticPageType>) {
         });
         const data = await getTextFromUrl(mainUrl + apiPath);
 
-        await fileSystemPromise.writeFile(path.join(cwd, staticSiteFolderName, 'api', 'client-article', page.slug), data);
+        await fileSystemPromise.writeFile(
+            path.join(cwd, staticSiteFolderName, 'api', 'client-article', page.slug),
+            data
+        );
     }
 }
 
+// eslint-disable-next-line max-statements
 async function makeIcons() {
     try {
         await fileSystemPromise.mkdir(path.join(cwd, staticSiteFolderName, 'api-image'));
         // eslint-disable-next-line no-empty
-    } catch {
-    }
+    } catch {}
 
     const appIconSizeList: Array<number> = [
         // manifest.json, check in manifest.json
-        36,
-        48,
-        72,
-        96,
-        144,
-        192,
-        512,
-        1024,
-        2048,
+        36, 48, 72, 96, 144, 192, 512, 1024, 2048,
         // apple icon, check in index.html
-        57,
-        60,
-        72,
-        76,
-        114,
-        120,
-        144,
-        152,
-        180,
+        57, 60, 72, 76, 114, 120, 144, 152, 180,
     ];
-    // appIconPngFileName
-    // companyLogoPngFileName
 
     // eslint-disable-next-line no-loops/no-loops
     for (const iconSize of appIconSizeList) {
@@ -155,18 +134,14 @@ async function makeIcons() {
         try {
             await fileSystemPromise.mkdir(path.join(cwd, staticSiteFolderName, 'api-image', sizeFolderName));
             // eslint-disable-next-line no-empty
-        } catch {
-        }
+        } catch {}
 
-        // const imagePath = generatePath<typeof apiUrl.imageGet>(apiUrl.imageGet, {
-        //     fileName: appIconPngFileName,
-        //     size: sizeFolderName,
-        // });
-        const imagePath = getPathToImage(appIconPngFileName, {height: iconSize, width: iconSize});
+        const iconImagePath = getPathToImage(appIconPngFileName, {height: iconSize, width: iconSize});
+        const responseIcon: Response = await fetch(mainUrl + iconImagePath);
+        const responseIconArrayBuffer = await responseIcon.arrayBuffer();
+        const responseIconBuffer = Buffer.from(responseIconArrayBuffer);
 
-        const responseIcon: NodeFetchResponse = await nodeFetch(mainUrl + imagePath);
-
-        responseIcon.body.pipe(fileSystem.createWriteStream(path.join(cwd, staticSiteFolderName, imagePath)));
+        fileSystem.createWriteStream(path.join(cwd, staticSiteFolderName, iconImagePath)).write(responseIconBuffer);
     }
 
     const logoWidth = 600;
@@ -175,14 +150,14 @@ async function makeIcons() {
     try {
         await fileSystemPromise.mkdir(path.join(cwd, staticSiteFolderName, 'api-image', `${logoWidth}x${logoHeight}`));
         // eslint-disable-next-line no-empty
-    } catch {
-    }
+    } catch {}
 
     const companyLogoPath = getPathToImage(companyLogoPngFileName, {height: logoHeight, width: logoWidth});
+    const responseLogo: Response = await fetch(mainUrl + companyLogoPath);
+    const responseLogoArrayBuffer = await responseLogo.arrayBuffer();
+    const responseLogoBuffer = Buffer.from(responseLogoArrayBuffer);
 
-    const response: NodeFetchResponse = await nodeFetch(mainUrl + companyLogoPath);
-
-    response.body.pipe(fileSystem.createWriteStream(path.join(cwd, staticSiteFolderName, companyLogoPath)));
+    fileSystem.createWriteStream(path.join(cwd, staticSiteFolderName, companyLogoPath)).write(responseLogoBuffer);
 }
 
 async function makeImages(pageList: Array<StaticPageType>) {
@@ -196,19 +171,19 @@ async function makeImages(pageList: Array<StaticPageType>) {
         });
     });
 
-    const imageUrlList:Array<string> = [...imageUrlSet];
+    const imageUrlList: Array<string> = [...imageUrlSet];
 
+    // eslint-disable-next-line no-loops/no-loops
     for (const imageUrl of imageUrlList) {
         const imageUrlChunks = imageUrl.split('/');
         const imageName = imageUrlChunks[3];
         const imageSize = imageUrlChunks[2];
+
         console.log(imageName, imageSize);
     }
-
 }
 
 export async function makeStatic() {
-    await copyFrontFolder();
     await copyFrontFolder();
     await copyStaticFileFolder();
 
@@ -220,7 +195,3 @@ export async function makeStatic() {
 
     await makeImages(pageList);
 }
-
-// 1 - copy folder dist to static-site;
-// 2 - make html files;
-// make json for fetch articles

@@ -65,7 +65,7 @@ export async function uploadFile(request: FastifyRequest): Promise<UploadFileRes
     return uploadResponseWebP;
 }
 
-export function getFile(request: FastifyRequest<{ Params: { fileName?: string } }>, reply: FastifyReply): ReadStream {
+export function getFile(request: FastifyRequest<{Params: {fileName?: string}}>, reply: FastifyReply): ReadStream {
     const {params} = request;
     const fileName = getStringFromUnknown(params, 'fileName');
 
@@ -74,7 +74,10 @@ export function getFile(request: FastifyRequest<{ Params: { fileName?: string } 
     return fileSystem.createReadStream(path.join(uploadFolder, fileName));
 }
 
-export async function getImage(request: FastifyRequest<{ Params: { fileName?: string } }>, reply: FastifyReply): Promise<ReadStream> {
+export async function getImage(
+    request: FastifyRequest<{Params: {fileName?: string}}>,
+    reply: FastifyReply
+): Promise<ReadStream> {
     const {params} = request;
     const fileName = getStringFromUnknown(params, 'fileName');
     const size = getStringFromUnknown(params, 'size');
