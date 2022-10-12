@@ -12,6 +12,8 @@ import {articleCrud} from './article/article';
 import {ArticleType} from './article/article-type';
 import {uploadFileFolder} from './file/file-const';
 import {apiUrl, serverPort} from './const';
+import {rootArticleSlug} from './article/article-const';
+import {tryToMkdir} from './file/directory';
 
 const staticSiteFolderName = 'static-site';
 const mainUrl = `http://127.0.0.1:${serverPort}`;
@@ -22,14 +24,6 @@ type StaticPageType = Readonly<{
     html: string;
     slug: string;
 }>;
-
-async function tryToMkdir(...args: Array<string>): Promise<void> {
-    try {
-        await fileSystemPromise.mkdir(path.join(...args));
-    } catch {
-        console.log('[ERROR]: tryToMkdir: can not create folder:', path.join(...args));
-    }
-}
 
 async function getTextFromUrl(fullUrl: string): Promise<string> {
     const response = await fetch(fullUrl);
@@ -187,6 +181,18 @@ async function makeImages(pageList: Array<StaticPageType>) {
     }
 }
 
+async function makeIndexHtml(pageList: Array<StaticPageType>) {
+    const rootArticle = pageList.find((article: StaticPageType): boolean => {
+        return article.slug === rootArticleSlug;
+    });
+
+    if (!rootArticle) {
+        throw new Error(`[ERROR]: makeIndexHtml: can not find root article, slug: ${rootArticleSlug}`);
+    }
+
+    await fileSystemPromise.writeFile(path.join(cwd, staticSiteFolderName, 'index.html'), rootArticle.html);
+}
+
 // eslint-disable-next-line max-statements
 export async function makeStatic() {
     console.log('> [makeStatic]: makeStatic: begin');
@@ -223,6 +229,10 @@ export async function makeStatic() {
     console.log('>> [makeStatic]: makeImages: begin');
     await makeImages(pageList);
     console.log('>> [makeStatic]: makeImages: end');
+
+    console.log('>> [makeStatic]: makeIndexHtml: begin');
+    await makeIndexHtml(pageList);
+    console.log('>> [makeStatic]: makeIndexHtml: end');
 
     console.log('> [makeStatic]: makeStatic: end');
 }

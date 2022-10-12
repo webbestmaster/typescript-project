@@ -39,3 +39,6 @@ node_modules
 
 # static site
 /static-site/
+
+# temp
+/static-file-temp/
