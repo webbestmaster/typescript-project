@@ -10,7 +10,7 @@ import {getRandomString} from '../../www/util/string';
 import {getStringFromUnknown} from '../../www/util/type';
 import {getFileExtension, getIsImage} from '../../www/page/cms/cms-article/cms-article-helper';
 
-import {uploadFolder} from './file-const';
+import {temporaryUploadFolder, uploadFolder} from './file-const';
 import {UploadFileResponseType} from './file-type';
 
 // eslint-disable-next-line max-statements
@@ -94,8 +94,8 @@ export async function getImage(
     // console.info(path.join(uploadFolder, '___' + fileName));
     // console.info(size);
 
-    const newFileName: string = '______temp______remove_me______' + (Math.random() * 1000).toFixed(0).padStart(3, '0');
-    const temporaryFilePath: string = path.join(uploadFolder, `${newFileName}.${rawFileExtension}`);
+    const newFileName: string = 'remove-me-' + (Math.random() * 1000).toFixed(0).padStart(3, '0');
+    const temporaryFilePath: string = path.join(temporaryUploadFolder, `${newFileName}.${rawFileExtension}`);
 
     const parsedSize = size.replace('x', ' ');
 

@@ -132,6 +132,7 @@ async function makeIcons() {
         fileSystem.createWriteStream(path.join(cwd, staticSiteFolderName, iconImagePath)).write(responseIconBuffer);
     }
 }
+
 async function makeCompanyLogo() {
     const logoWidth = 600;
     const logoHeight = 60;
@@ -148,6 +149,8 @@ async function makeCompanyLogo() {
 }
 
 async function makeImages(pageList: Array<StaticPageType>) {
+    await tryToMkdir(cwd, staticSiteFolderName, 'api-image');
+
     const imageUrlSet = new Set<string>();
 
     pageList.forEach((page: StaticPageType) => {
@@ -163,9 +166,23 @@ async function makeImages(pageList: Array<StaticPageType>) {
     // eslint-disable-next-line no-loops/no-loops
     for (const imageUrl of imageUrlList) {
         const imageUrlChunks = imageUrl.split('/');
-        const imageName = imageUrlChunks.pop();
-        const imageSize = imageUrlChunks.pop();
+        const [ignoredSpace, ignoredImageApiString, imageSize, imageName] = imageUrlChunks;
 
+        if (!imageName || !imageSize) {
+            console.log('[ERROR]: makeImages: wrong image url:', imageUrl);
+            // eslint-disable-next-line no-continue
+            continue;
+        }
+
+        await tryToMkdir(cwd, staticSiteFolderName, 'api-image', imageSize);
+
+        const imageResponse: Response = await fetch(mainUrl + imageUrl);
+        const imageArrayBuffer = await imageResponse.arrayBuffer();
+        const imageBuffer = Buffer.from(imageArrayBuffer);
+
+        fileSystem.createWriteStream(path.join(cwd, staticSiteFolderName, imageUrl)).write(imageBuffer);
+
+        console.log(`[INFO]: makeImages: ${imageUrlList.indexOf(imageUrl) + 1}/${imageUrlList.length} : ${imageUrl}`);
         console.log(imageName, imageSize);
     }
 }
