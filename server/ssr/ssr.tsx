@@ -83,6 +83,10 @@ export async function getHtmlCallBack(
 
         .replace(contentStringFull, [contentStringBegin, htmlString, contentStringEnd].join(''))
         .replace(navigationReplaceSelector, navigationDataHtmlString)
+        // .replace(/<track([\S\s]+?)\/>/gi, '<track$1>')
+        // .replace(/ translateZ\(0\)/g, 'translateZ(0px)')
+        // .replace(/scaleX\(1\);/g, 'scaleX(1)')
+        // .replace(/left: 100%;/g, 'left:100%')
         .replace(articleReplaceSelector, articleDataHtmlString);
 
     return [html, article];
