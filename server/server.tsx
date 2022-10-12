@@ -15,7 +15,7 @@ import {appRoute, AppRoutType} from '../www/component/app/app-route';
 import {getAutoAuthLogin, postAuthLogin} from './auth/auth-api';
 import {getHtmlCallBack} from './ssr/ssr';
 import {secretKey} from './key';
-import {apiUrl, mainResponseHeader, siteCookieKey} from './const';
+import {apiUrl, mainResponseHeader, serverPort, siteCookieKey} from './const';
 import {
     getArticleListPagination,
     getArticleListPaginationPick,
@@ -36,8 +36,6 @@ import {UploadFileResponseType} from './file/file-type';
 import {makeStatic} from './make-static';
 
 const cwd = process.cwd();
-
-const serverPort = 3000;
 
 // eslint-disable-next-line max-statements, unicorn/prefer-top-level-await
 (async () => {

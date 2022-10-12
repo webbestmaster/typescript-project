@@ -11,10 +11,10 @@ import {getPathToImage} from '../www/page/cms/cms-article/cms-article-helper';
 import {articleCrud} from './article/article';
 import {ArticleType} from './article/article-type';
 import {uploadFileFolder} from './file/file-const';
-import {apiUrl} from './const';
+import {apiUrl, serverPort} from './const';
 
 const staticSiteFolderName = 'static-site';
-const mainUrl = 'http://127.0.0.1:3000';
+const mainUrl = `http://127.0.0.1:${serverPort}`;
 
 const cwd = process.cwd();
 
@@ -22,6 +22,14 @@ type StaticPageType = Readonly<{
     html: string;
     slug: string;
 }>;
+
+async function tryToMkdir(...args: Array<string>): Promise<void> {
+    try {
+        await fileSystemPromise.mkdir(path.join(...args));
+    } catch {
+        console.log('[ERROR]: tryToMkdir: can not create folder:', path.join(...args));
+    }
+}
 
 async function getTextFromUrl(fullUrl: string): Promise<string> {
     const response = await fetch(fullUrl);
@@ -37,19 +45,13 @@ async function getStaticPage(slug: string): Promise<StaticPageType> {
 }
 
 async function copyFrontFolder(): Promise<void> {
-    try {
-        await fileSystemPromise.mkdir(path.join(cwd, staticSiteFolderName));
-        // eslint-disable-next-line no-empty
-    } catch {}
+    await tryToMkdir(cwd, staticSiteFolderName);
 
     await fileSystemPromise.cp(path.join(cwd, 'dist'), path.join(cwd, staticSiteFolderName), {recursive: true});
 }
 
 async function copyStaticFileFolder(): Promise<void> {
-    try {
-        await fileSystemPromise.mkdir(path.join(cwd, staticSiteFolderName));
-        // eslint-disable-next-line no-empty
-    } catch {}
+    await tryToMkdir(cwd, staticSiteFolderName);
 
     await fileSystemPromise.cp(
         path.join(cwd, uploadFileFolder),
@@ -76,10 +78,7 @@ async function collectHtmlPages(): Promise<Array<StaticPageType>> {
 }
 
 async function makeHtmlPages(pageList: Array<StaticPageType>) {
-    try {
-        await fileSystemPromise.mkdir(path.join(cwd, staticSiteFolderName, 'article'));
-        // eslint-disable-next-line no-empty
-    } catch {}
+    await tryToMkdir(cwd, staticSiteFolderName, 'article');
 
     // write html files
     // eslint-disable-next-line no-loops/no-loops
@@ -91,12 +90,8 @@ async function makeHtmlPages(pageList: Array<StaticPageType>) {
 }
 
 async function makeApiArticle(pageList: Array<StaticPageType>) {
-    // api/client-article/header-1
-    try {
-        await fileSystemPromise.mkdir(path.join(cwd, staticSiteFolderName, 'api'));
-        await fileSystemPromise.mkdir(path.join(cwd, staticSiteFolderName, 'api', 'client-article'));
-        // eslint-disable-next-line no-empty
-    } catch {}
+    await tryToMkdir(cwd, staticSiteFolderName, 'api');
+    await tryToMkdir(cwd, staticSiteFolderName, 'api', 'client-article');
 
     // write html files
     // eslint-disable-next-line no-loops/no-loops
@@ -113,12 +108,8 @@ async function makeApiArticle(pageList: Array<StaticPageType>) {
     }
 }
 
-// eslint-disable-next-line max-statements
 async function makeIcons() {
-    try {
-        await fileSystemPromise.mkdir(path.join(cwd, staticSiteFolderName, 'api-image'));
-        // eslint-disable-next-line no-empty
-    } catch {}
+    await tryToMkdir(cwd, staticSiteFolderName, 'api-image');
 
     const appIconSizeList: Array<number> = [
         // manifest.json, check in manifest.json
@@ -131,10 +122,7 @@ async function makeIcons() {
     for (const iconSize of appIconSizeList) {
         const sizeFolderName = `${iconSize}x${iconSize}`;
 
-        try {
-            await fileSystemPromise.mkdir(path.join(cwd, staticSiteFolderName, 'api-image', sizeFolderName));
-            // eslint-disable-next-line no-empty
-        } catch {}
+        await tryToMkdir(cwd, staticSiteFolderName, 'api-image', sizeFolderName);
 
         const iconImagePath = getPathToImage(appIconPngFileName, {height: iconSize, width: iconSize});
         const responseIcon: Response = await fetch(mainUrl + iconImagePath);
@@ -143,14 +131,13 @@ async function makeIcons() {
 
         fileSystem.createWriteStream(path.join(cwd, staticSiteFolderName, iconImagePath)).write(responseIconBuffer);
     }
-
+}
+async function makeCompanyLogo() {
     const logoWidth = 600;
     const logoHeight = 60;
 
-    try {
-        await fileSystemPromise.mkdir(path.join(cwd, staticSiteFolderName, 'api-image', `${logoWidth}x${logoHeight}`));
-        // eslint-disable-next-line no-empty
-    } catch {}
+    await tryToMkdir(cwd, staticSiteFolderName, 'api-image');
+    await tryToMkdir(cwd, staticSiteFolderName, 'api-image', `${logoWidth}x${logoHeight}`);
 
     const companyLogoPath = getPathToImage(companyLogoPngFileName, {height: logoHeight, width: logoWidth});
     const responseLogo: Response = await fetch(mainUrl + companyLogoPath);
@@ -176,22 +163,49 @@ async function makeImages(pageList: Array<StaticPageType>) {
     // eslint-disable-next-line no-loops/no-loops
     for (const imageUrl of imageUrlList) {
         const imageUrlChunks = imageUrl.split('/');
-        const imageName = imageUrlChunks[3];
-        const imageSize = imageUrlChunks[2];
+        const imageName = imageUrlChunks.pop();
+        const imageSize = imageUrlChunks.pop();
 
         console.log(imageName, imageSize);
     }
 }
 
+// eslint-disable-next-line max-statements
 export async function makeStatic() {
-    await copyFrontFolder();
-    await copyStaticFileFolder();
+    console.log('> [makeStatic]: makeStatic: begin');
 
+    console.log('>> [makeStatic]: copyFrontFolder: begin');
+    await copyFrontFolder();
+    console.log('>> [makeStatic]: copyFrontFolder: end');
+
+    console.log('>> [makeStatic]: copyStaticFileFolder: begin');
+    await copyStaticFileFolder();
+    console.log('>> [makeStatic]: copyStaticFileFolder: end');
+
+    console.log('>> [makeStatic]: collectHtmlPages: begin');
     const pageList: Array<StaticPageType> = await collectHtmlPages();
 
-    await makeHtmlPages(pageList);
-    await makeApiArticle(pageList);
-    await makeIcons();
+    console.log('>> [makeStatic]: collectHtmlPages: end');
 
+    console.log('>> [makeStatic]: makeHtmlPages: begin');
+    await makeHtmlPages(pageList);
+    console.log('>> [makeStatic]: makeHtmlPages: end');
+
+    console.log('>> [makeStatic]: makeApiArticle: begin');
+    await makeApiArticle(pageList);
+    console.log('>> [makeStatic]: makeApiArticle: end');
+
+    console.log('>> [makeStatic]: makeIcons: begin');
+    await makeIcons();
+    console.log('>> [makeStatic]: makeIcons: end');
+
+    console.log('>> [makeStatic]: makeCompanyLogo: begin');
+    await makeCompanyLogo();
+    console.log('>> [makeStatic]: makeCompanyLogo: end');
+
+    console.log('>> [makeStatic]: makeImages: begin');
     await makeImages(pageList);
+    console.log('>> [makeStatic]: makeImages: end');
+
+    console.log('> [makeStatic]: makeStatic: end');
 }

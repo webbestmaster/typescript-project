@@ -1,5 +1,7 @@
 export const siteCookieKey = 'site-cookie';
 
+export const serverPort = 3000;
+
 export const apiUrl = {
     adminArticleCreate: '/api/admin/article/create',
     adminArticleDelete: '/api/admin/article/delete/:articleId' as const,
