@@ -1,6 +1,7 @@
 import fileSystem, {ReadStream, promises as fileSystemPromises, Stats} from 'fs';
 import path from 'path';
 
+import sharp from 'sharp';
 import {FastifyReply, FastifyRequest} from 'fastify';
 import {MultipartFile} from '@fastify/multipart';
 import webpConverter from 'webp-converter';
@@ -101,16 +102,24 @@ export async function getImage(
     const newFileName: string = 'remove-me-' + getImageCount.toString(10).padStart(3, '0');
     const temporaryFilePath: string = path.join(temporaryUploadFolder, `${newFileName}.${rawFileExtension}`);
 
-    const parsedSize = size.replace('x', ' ');
+    const [rawImageWidth, rawImageHeight] = size.split('x');
+    const imageWidth: number = Number.parseInt(rawImageWidth, 10) || 0;
+    const imageHeight: number = Number.parseInt(rawImageHeight, 10) || 0;
 
     if (rawFileExtension === 'webp') {
-        await webpConverter.cwebp(fullFilePath, temporaryFilePath, `-q 80 -m 6 -resize ${parsedSize}`, '-v');
+        await webpConverter.cwebp(
+            fullFilePath,
+            temporaryFilePath,
+            `-q 80 -m 6 -resize ${imageWidth.toString(10)} ${imageHeight.toString(10)}`,
+            '-v'
+        );
 
         return fileSystem.createReadStream(temporaryFilePath);
     }
 
     if (rawFileExtension === 'png') {
-        console.log('!!!!!!!!!!!!!! add png logic');
+        await sharp(fullFilePath).resize(imageWidth, imageHeight).toFile(temporaryFilePath);
+        return fileSystem.createReadStream(temporaryFilePath);
     }
 
     return getFile(request, reply);
