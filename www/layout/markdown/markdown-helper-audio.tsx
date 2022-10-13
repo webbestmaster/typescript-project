@@ -1,5 +1,6 @@
 import {Fragment} from 'react';
-import {Audio} from 'react-audio-player-pro';
+
+import {AudioAsync} from '../../example/audio-player';
 
 // eslint-disable-next-line complexity
 function getAudioFromHtml(audioHtmlCode: string): JSX.Element {
@@ -18,7 +19,7 @@ function getAudioFromHtml(audioHtmlCode: string): JSX.Element {
 
     if (durationAsNumber) {
         return (
-            <Audio
+            <AudioAsync
                 downloadFileName={downloadFileName}
                 duration={durationAsNumber}
                 preload="none"
@@ -28,7 +29,7 @@ function getAudioFromHtml(audioHtmlCode: string): JSX.Element {
         );
     }
 
-    return <Audio downloadFileName={downloadFileName} preload="metadata" src={srcAsString} useRepeatButton />;
+    return <AudioAsync downloadFileName={downloadFileName} preload="metadata" src={srcAsString} useRepeatButton />;
 }
 
 export function markdownAudio(htmlCode: string): Array<JSX.Element> {

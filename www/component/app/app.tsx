@@ -1,5 +1,4 @@
 import {StrictMode} from 'react';
-import {AudioPlayerControlSprite} from 'react-audio-player-pro';
 
 import {ErrorBoundary} from '../error-boundary/error-boundary';
 
@@ -9,6 +8,7 @@ import {ShareButtonSprite} from '../../client-component/share/share-button/share
 import {ThemeProvider} from '../../provider/theme/theme-context';
 import {GdprInfo} from '../../layout/gdpr-info/gdpr-info';
 import {ThemeNameEnum} from '../../provider/theme/theme-context-type';
+import {AudioPlayerControlSpriteAsync} from '../../example/audio-player';
 
 import {AppProvider} from './app-provider';
 import {AppRouting} from './app-routing';
@@ -30,7 +30,7 @@ export function App(props: AppPropsType): JSX.Element {
                     <AppProvider articleData={articleData} navigationData={navigationData}>
                         <AppRouting url={url} />
                         <GdprInfo />
-                        <AudioPlayerControlSprite />
+                        <AudioPlayerControlSpriteAsync />
                     </AppProvider>
                     <ShareButtonSprite />
                 </ThemeProvider>

@@ -19,7 +19,7 @@ const AudioPlayerControlSpriteLazy = lazy<ComponentType<unknown>>(async (): Prom
 
 export function AudioPlayerControlSpriteAsync() {
     return (
-        <Suspense fallback={<Loading />}>
+        <Suspense fallback={null}>
             <AudioPlayerControlSpriteLazy />
         </Suspense>
     );
