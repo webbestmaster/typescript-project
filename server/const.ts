@@ -1,6 +1,6 @@
 export const siteCookieKey = 'site-cookie';
 
-export const serverPort = 3000;
+export const serverPort = 3011;
 
 export const apiUrl = {
     adminArticleCreate: '/api/admin/article/create',

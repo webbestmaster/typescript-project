@@ -30,8 +30,9 @@ export function App(props: AppPropsType): JSX.Element {
                     <AppProvider articleData={articleData} navigationData={navigationData}>
                         <AppRouting url={url} />
                         <GdprInfo />
-                        <AudioPlayerControlSpriteAsync />
                     </AppProvider>
+
+                    <AudioPlayerControlSpriteAsync />
                     <ShareButtonSprite />
                 </ThemeProvider>
             </ErrorBoundary>
