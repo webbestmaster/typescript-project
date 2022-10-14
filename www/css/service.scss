@@ -11,6 +11,18 @@
     padding-right: $ui-unit * 4;
 }
 
+%ellipsis,
+.ellipsis {
+    display: block;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 /*
 :global .mobile {
     :local {
@@ -85,4 +97,12 @@
 
 .inline {
     display: inline;
+}
+
+@media screen and (max-width: 768px) {
+    %width-limit,
+    .width_limit {
+        padding-left: $ui-unit * 2;
+        padding-right: $ui-unit * 2;
+    }
 }
