@@ -562,7 +562,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
             <Form.Item>
                 <Button htmlType="submit" type="primary">
-                    Submit (ctrl+shift+S)
+                    Submit (ctrl+S)
                 </Button>
                 <IsRender isRender={mode === CmsArticleModeEnum.edit}>
                     &nbsp;
