@@ -7,8 +7,8 @@
     display: block;
     margin: 0 auto;
     max-width: $max-width;
-    padding-left: $ui-unit * 4;
-    padding-right: $ui-unit * 4;
+    padding-left: $ui-unit * 3;
+    padding-right: $ui-unit * 3;
 }
 
 %ellipsis,
@@ -99,10 +99,26 @@
     display: inline;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: $tablet-width) {
     %width-limit,
     .width_limit {
         padding-left: $ui-unit * 2;
         padding-right: $ui-unit * 2;
+    }
+}
+
+@media screen and (max-width: $tablet-width) {
+    %width-limit,
+    .width_limit {
+        padding-left: $ui-unit * 2;
+        padding-right: $ui-unit * 2;
+    }
+}
+
+@media screen and (max-width: $phone-width) {
+    %width-limit,
+    .width_limit {
+        padding-left: $ui-unit;
+        padding-right: $ui-unit;
     }
 }
