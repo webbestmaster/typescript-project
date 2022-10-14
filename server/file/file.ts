@@ -1,7 +1,7 @@
 import fileSystem, {ReadStream, promises as fileSystemPromises, Stats} from 'fs';
 import path from 'path';
 
-import sharp from 'sharp';
+// import sharp from 'sharp';
 import {FastifyReply, FastifyRequest} from 'fastify';
 import {MultipartFile} from '@fastify/multipart';
 import webpConverter from 'webp-converter';
@@ -118,8 +118,9 @@ export async function getImage(
     }
 
     if (rawFileExtension === 'png') {
-        await sharp(fullFilePath).resize(imageWidth, imageHeight).toFile(temporaryFilePath);
-        return fileSystem.createReadStream(temporaryFilePath);
+        // await sharp(fullFilePath).resize(imageWidth, imageHeight).toFile(temporaryFilePath);
+        // return fileSystem.createReadStream(temporaryFilePath);
+        return getFile(request, reply);
     }
 
     return getFile(request, reply);
