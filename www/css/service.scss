@@ -5,6 +5,7 @@
     background-color: $main-background-color;
     box-sizing: border-box;
     display: block;
+    font-family: $main-font-family;
     margin: 0 auto;
     max-width: $max-width;
     padding-left: $ui-unit * 3;
@@ -97,14 +98,6 @@
 
 .inline {
     display: inline;
-}
-
-@media screen and (max-width: $tablet-width) {
-    %width-limit,
-    .width_limit {
-        padding-left: $ui-unit * 2;
-        padding-right: $ui-unit * 2;
-    }
 }
 
 @media screen and (max-width: $tablet-width) {
