@@ -157,7 +157,7 @@ const cwd = process.cwd();
 
     fastify.listen({host: '0.0.0.0', port: serverPort}, (error: Error | null) => {
         if (error) {
-            fastify.log.error(error);
+            console.log(error);
             throw error;
         }
 
