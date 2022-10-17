@@ -59,6 +59,10 @@ export const enUs = {
     ERROR__CAN_NOT_LOAD_THE_COMPONENT: 'Can not load the component.',
 
     SHARE__RECOMMEND_TO_FRIENDS__HEADER: 'Recommend to friends:',
+    SHARE__HEADER: 'Share:',
+    SEE_ALSO__HEADER: 'See also:',
+
+    NAVIGATION__HOME: 'Home',
 
     /* eslint-enable id-match, id-length, max-len,sonarjs/no-duplicate-string, sort-keys */
 };

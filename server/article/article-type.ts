@@ -1,11 +1,11 @@
 export enum ArticleTypeEnum {
-    article = 'article',
-    container = 'container',
+    article = 'article', // usual article
+    audioList = 'audio-list', // get first *.mp3 file from every child and makes play list from it
+    container = 'container', // shor children as [subDocumentListViewType: SubDocumentListViewTypeEnum]
 }
 
 export enum SubDocumentListViewTypeEnum {
     header = 'header', // just header
-    headerAudio = 'header-audio', // header + audio
     headerImage = 'header-image', // header + image
 }
 

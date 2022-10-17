@@ -1,0 +1,30 @@
+@import './../../css/var';
+
+.article_preview_list {
+    align-items: flex-start;
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    gap: $ui-unit * 2;
+    justify-content: flex-start;
+    list-style: none;
+    margin: 0;
+    padding: 0 0 $ui-unit * 3;
+}
+
+.article_preview_list_item {
+    display: block;
+    width: calc((100% - 3 * $ui-unit * 2) / 4);
+}
+
+@media screen and (max-width: $desktop-width) {
+    .article_preview_list_item {
+        width: calc((100% - 2 * $ui-unit * 2) / 3);
+    }
+}
+
+@media screen and (max-width: $tablet-width) {
+    .article_preview_list_item {
+        width: calc((100% - $ui-unit * 2) / 2);
+    }
+}

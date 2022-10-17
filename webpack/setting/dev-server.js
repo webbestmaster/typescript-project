@@ -1,6 +1,7 @@
 const {pathToDist, webpackDevServerPort} = require('./../config');
 const {isBack} = require('../config');
 
+const serverPort = 3011;
 const host = 'localhost';
 // const host = '192.168.147.45';
 
@@ -25,15 +26,15 @@ module.exports.devServer = {
     hot: true,
     proxy: {
         '/api/': {
-            target: 'http://127.0.0.1:3000/',
+            target: `http://127.0.0.1:${serverPort}/`,
         },
         // TODO: need watch nginx
         '/api-image/': {
-            target: 'http://127.0.0.1:3000/',
+            target: `http://127.0.0.1:${serverPort}/`,
         },
         // TODO: need watch nginx
         '/static-file/': {
-            target: 'http://127.0.0.1:3000/',
+            target: `http://127.0.0.1:${serverPort}/`,
         },
     },
     // hotOnly: false,

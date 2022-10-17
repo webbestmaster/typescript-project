@@ -1,38 +1,34 @@
-import {useContext, useEffect} from 'react';
-import {useParams} from 'react-router-dom';
+import {useContext} from 'react';
 
-import {ExtractPathKeysType} from '../../util/url';
-import {appRoute} from '../../component/app/app-route';
-import {noop} from '../../util/function';
-import {Markdown} from '../../layout/markdown/markdown';
+import {ArticleTypeEnum} from '../../../server/article/article-type';
+import {NeverError} from '../../util/error';
 
 import {ArticleContextType} from './article-context/article-context-type';
 import {articleContext} from './article-context/article-context';
 
+import {ArticleArticle} from './article-type/article-article';
+import {ArticleContainer} from './article-type/article-container';
+import {ArticleAudioList} from './article-type/article-audio-list';
+
 export function Article(): JSX.Element {
-    const {setSlug = noop, article} = useContext<ArticleContextType>(articleContext);
-    const {slug} = useParams<ExtractPathKeysType<typeof appRoute.article.path>>();
+    const {article} = useContext<ArticleContextType>(articleContext);
+    const {articleType} = article;
 
-    useEffect(() => {
-        if (slug) {
-            setSlug(slug);
+    switch (articleType) {
+        case ArticleTypeEnum.article: {
+            return <ArticleArticle />;
         }
-    }, [slug, setSlug]);
-
-    if (article.id === '') {
-        return (
-            <div>
-                <h1>no article</h1>
-            </div>
-        );
+        case ArticleTypeEnum.container: {
+            return <ArticleContainer />;
+        }
+        case ArticleTypeEnum.audioList: {
+            return <ArticleAudioList />;
+        }
+        default: {
+            throw new NeverError(articleType);
+        }
     }
 
-    return (
-        <div>
-            <h1>
-                article = {article.slug} - {article.id}
-            </h1>
-            <Markdown mdInput={article.content} />
-        </div>
-    );
+    // eslint-disable-next-line no-unreachable
+    return <ArticleArticle />;
 }

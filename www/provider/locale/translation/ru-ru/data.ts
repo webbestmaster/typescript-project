@@ -61,6 +61,10 @@ export const ruRu: LocaleDictionaryType = {
     ERROR__CAN_NOT_LOAD_THE_COMPONENT: 'Не получилось загрузить компонент.',
 
     SHARE__RECOMMEND_TO_FRIENDS__HEADER: 'Рекомендовать друзьям:',
+    SHARE__HEADER: 'Поделиться:',
+    SEE_ALSO__HEADER: 'Смотрите также:',
+
+    NAVIGATION__HOME: 'Главная',
 
     /* eslint-enable id-match, id-length, max-len,sonarjs/no-duplicate-string, sort-keys */
 };

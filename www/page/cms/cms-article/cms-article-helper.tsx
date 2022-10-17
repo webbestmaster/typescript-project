@@ -148,7 +148,7 @@ export function getIsImage(fileName: string): boolean {
 export function getIsAudio(fileName: string): boolean {
     const fileExtension = getFileExtension(fileName);
 
-    return ['mp3'].includes(fileExtension);
+    return ['mp3', 'wav'].includes(fileExtension);
 }
 
 export function fetchImage(pathToImage: string): Promise<HTMLImageElement> {

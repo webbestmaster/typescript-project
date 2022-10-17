@@ -1,0 +1,30 @@
+/* global localStorage */
+const fontSizeSavedKey = 'md-font-size';
+const defaultFontSize = 16; // 16px is default font-size for markdown-pro
+
+export const maxFontSize = 24;
+export const minFontSize = 12;
+
+// eslint-disable-next-line complexity
+export function getSavedFontSize(): number {
+    if (typeof localStorage === 'undefined') {
+        return defaultFontSize;
+    }
+
+    const rawSavedFontSize: string = localStorage.getItem(fontSizeSavedKey) || defaultFontSize.toString(10);
+    const savedFontSize: number = Number.parseInt(rawSavedFontSize, 10) || defaultFontSize;
+
+    if (savedFontSize > maxFontSize) {
+        return maxFontSize;
+    }
+
+    if (savedFontSize < minFontSize) {
+        return minFontSize;
+    }
+
+    return savedFontSize;
+}
+
+export function saveFontSize(fontSizeForSave: number) {
+    localStorage.setItem(fontSizeSavedKey, fontSizeForSave.toString(10));
+}

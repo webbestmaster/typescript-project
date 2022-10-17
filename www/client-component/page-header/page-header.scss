@@ -1,0 +1,23 @@
+@import './../../css/var';
+
+.page_header__wrapper {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    gap: $ui-unit * 2;
+    justify-content: flex-start;
+}
+
+.page_header {
+    display: block;
+    flex-grow: 1;
+    font-size: 36px;
+    font-weight: normal;
+    margin: 0;
+    padding: 0 0 $ui-unit;
+    word-break: break-word;
+}
+
+.page_header__font_size {
+    padding-top: 6px;
+}

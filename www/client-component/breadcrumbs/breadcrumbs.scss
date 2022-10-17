@@ -1,0 +1,40 @@
+@import './../../css/service';
+@import './../../css/var';
+
+.breadcrumbs_list {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    font-size: 14px;
+    justify-content: flex-start;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.breadcrumbs_link {
+    @extend %link;
+
+    display: block;
+    padding: $ui-unit 0;
+}
+
+.breadcrumbs_tail {
+    display: block;
+    padding: $ui-unit 0;
+}
+
+.breadcrumbs_list_item {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin: 0;
+    padding: 0;
+}
+
+.breadcrumbs_separator {
+    display: block;
+    padding: $ui-unit;
+    text-align: center;
+}

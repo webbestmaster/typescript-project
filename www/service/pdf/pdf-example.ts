@@ -1,4 +1,4 @@
-import pngImageSrc from '../../page/client/client-home/image/marker-icon-2x.png';
+// import pngImageSrc from '../../page/client/client-home/image/marker-icon-2x.png';
 
 /* eslint-disable max-len */
 export const htmlToPdfString = `
@@ -20,7 +20,6 @@ export const htmlToPdfString = `
     </head>
     <body>
         <h1>The pdf</h1>
-        <img width="200" height="200" src="${pngImageSrc}?sdsd=sdsd"/>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur consectetur cum cupiditate, est, hic id, illo laudantium molestias omnis perspiciatis possimus voluptatum? Ad dolores molestiae sed. Consequatur repudiandae sit voluptas!</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur consectetur cum cupiditate, est, hic id, illo laudantium molestias omnis perspiciatis possimus voluptatum? Ad dolores molestiae sed. Consequatur repudiandae sit voluptas!</p>
     </body>
@@ -40,7 +39,6 @@ export const htmlToPdfStringLocal = `
             }
         </style>
         <h1>The pdf</h1>
-        <img width="200" height="200" src="${pngImageSrc}"/>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur consectetur cum cupiditate, est, hic id, illo laudantium molestias omnis perspiciatis possimus voluptatum? Ad dolores molestiae sed. Consequatur repudiandae sit voluptas!</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur consectetur cum cupiditate, est, hic id, illo laudantium molestias omnis perspiciatis possimus voluptatum? Ad dolores molestiae sed. Consequatur repudiandae sit voluptas!</p>
     </div>

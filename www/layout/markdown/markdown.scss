@@ -1,4 +1,8 @@
+/* stylelint-disable selector-pseudo-class-no-unknown, selector-max-compound-selectors */
+
 .markdown {
+    background-color: transparent;
+
     img {
         display: block;
         margin-left: auto;

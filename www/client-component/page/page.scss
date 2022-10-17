@@ -1,0 +1,26 @@
+@import './../../css/var';
+@import './../../css/service';
+
+.page {
+    background-color: #afafaf;
+    color: $main-font-color;
+    font-family: $main-font-family;
+    height: 100%;
+    line-height: 1.4;
+    margin: 0;
+    width: 100%;
+}
+
+.page_children {
+    @extend %width-limit;
+
+    min-height: calc(100vh - 157px);
+    padding-bottom: $ui-unit * 2;
+    padding-top: $ui-unit * 2;
+}
+
+@media screen and (max-width: $tablet-width) {
+    .page_children {
+        min-height: calc(100vh - 103px);
+    }
+}

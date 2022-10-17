@@ -9,12 +9,13 @@ import webpConverter from 'webp-converter';
 import {PromiseResolveType} from '../../www/util/promise';
 import {getRandomString} from '../../www/util/string';
 import {getStringFromUnknown} from '../../www/util/type';
-import {getFileExtension, getIsImage} from '../../www/page/cms/cms-article/cms-article-helper';
+import {getFileExtension, getIsAudio, getIsImage} from '../../www/page/cms/cms-article/cms-article-helper';
 
 import {temporaryUploadFolder, uploadFolder} from './file-const';
 import {UploadFileResponseType} from './file-type';
+import {makeAudioFile} from './file-audio';
 
-// eslint-disable-next-line max-statements
+// eslint-disable-next-line max-statements, complexity
 export async function uploadFile(request: FastifyRequest): Promise<UploadFileResponseType> {
     const uploadFileLimit = 75e6; // 75MB
 
@@ -44,6 +45,7 @@ export async function uploadFile(request: FastifyRequest): Promise<UploadFileRes
     const stats: Stats = await fileSystemPromises.stat(fullFilePath);
 
     if (stats.size >= uploadFileLimit) {
+        // remove original file
         await fileSystemPromises.unlink(fullFilePath);
 
         throw new Error('File too big, limit 75MB');
@@ -51,19 +53,31 @@ export async function uploadFile(request: FastifyRequest): Promise<UploadFileRes
 
     const uploadResponse: UploadFileResponseType = {uniqueFileName};
 
-    if (!getIsImage(uniqueFileName)) {
-        return uploadResponse;
+    if (getIsImage(uniqueFileName)) {
+        const webPFileName = `${getRandomString()}.webp`;
+
+        await webpConverter.cwebp(fullFilePath, path.join(uploadFolder, webPFileName), '-q 80 -m 6', '-v');
+
+        // remove original file
+        await fileSystemPromises.unlink(fullFilePath);
+
+        const uploadResponseWebP: UploadFileResponseType = {uniqueFileName: webPFileName};
+
+        return uploadResponseWebP;
     }
 
-    const webPFileName = `${getRandomString()}.webp`;
+    if (getIsAudio(uniqueFileName)) {
+        const mp3FileName = await makeAudioFile(fullFilePath);
 
-    await webpConverter.cwebp(fullFilePath, path.join(uploadFolder, webPFileName), '-q 80 -m 6', '-v');
+        // remove original file
+        await fileSystemPromises.unlink(fullFilePath);
 
-    await fileSystemPromises.unlink(fullFilePath);
+        const uploadResponseAudio: UploadFileResponseType = {uniqueFileName: mp3FileName};
 
-    const uploadResponseWebP: UploadFileResponseType = {uniqueFileName: webPFileName};
+        return uploadResponseAudio;
+    }
 
-    return uploadResponseWebP;
+    return uploadResponse;
 }
 
 export function getFile(request: FastifyRequest<{Params: {fileName?: string}}>, reply: FastifyReply): ReadStream {
@@ -103,6 +117,7 @@ export async function getImage(
     const temporaryFilePath: string = path.join(temporaryUploadFolder, `${newFileName}.${rawFileExtension}`);
 
     const [rawImageWidth, rawImageHeight] = size.split('x');
+    // https://developers.google.com/speed/webp/docs/cwebp, 0 -> means auto
     const imageWidth: number = Number.parseInt(rawImageWidth, 10) || 0;
     const imageHeight: number = Number.parseInt(rawImageHeight, 10) || 0;
 
