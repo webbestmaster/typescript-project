@@ -2,6 +2,7 @@ import fileSystem, {promises as fileSystemPromises, ReadStream, Stats} from 'fs'
 import path from 'path';
 
 // import sharp from 'sharp';
+import {getAudioDurationInSeconds} from 'get-audio-duration';
 import {FastifyReply, FastifyRequest} from 'fastify';
 import {MultipartFile} from '@fastify/multipart';
 import webpConverter from 'webp-converter';
@@ -56,15 +57,18 @@ export async function uploadFile(request: FastifyRequest): Promise<UploadFileRes
         duration: 0,
         height: 0,
         name: uniqueFileName,
-        size: 0,
-        type: ArticleFileTypeEnum.image,
+        size: stats.size,
+        type: ArticleFileTypeEnum.unknown,
         width: 0,
     };
 
     if (getIsImage(uniqueFileName)) {
         const webPFileName = `${getRandomString()}.webp`;
+        const webPFilePath = path.join(uploadFolder, webPFileName);
 
-        await webpConverter.cwebp(fullFilePath, path.join(uploadFolder, webPFileName), '-q 80 -m 6', '-v');
+        await webpConverter.cwebp(fullFilePath, webPFilePath, '-q 80 -m 6', '-v');
+
+        const webPStats: Stats = await fileSystemPromises.stat(webPFilePath);
 
         // remove original file
         await fileSystemPromises.unlink(fullFilePath);
@@ -73,7 +77,7 @@ export async function uploadFile(request: FastifyRequest): Promise<UploadFileRes
             duration: 0,
             height: 0,
             name: webPFileName,
-            size: 0,
+            size: webPStats.size,
             type: ArticleFileTypeEnum.image,
             width: 0,
         };
@@ -83,15 +87,18 @@ export async function uploadFile(request: FastifyRequest): Promise<UploadFileRes
 
     if (getIsAudio(uniqueFileName)) {
         const mp3FileName = await makeAudioFile(fullFilePath);
+        const mp3FilePath = path.join(uploadFolder, mp3FileName);
+        const mp3Stats: Stats = await fileSystemPromises.stat(mp3FilePath);
+        const durationInSeconds = await getAudioDurationInSeconds(mp3FilePath);
 
         // remove original file
         await fileSystemPromises.unlink(fullFilePath);
 
         const uploadResponseAudio: UploadFileResponseType = {
-            duration: 0,
+            duration: durationInSeconds,
             height: 0,
             name: mp3FileName,
-            size: 0,
+            size: mp3Stats.size,
             type: ArticleFileTypeEnum.audio,
             width: 0,
         };

@@ -27,7 +27,6 @@ import 'antd/dist/antd.css';
 
 import {
     ArticleFileType,
-    ArticleFileTypeEnum,
     ArticleType,
     ArticleTypeEnum,
     SubDocumentListViewTypeEnum,
@@ -266,20 +265,13 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             </Form.Item>
 
             <Form.Item label={`Title image (to 16MB): ${titleImage}`}>
-                <Upload<ArticleFileType>
+                <Upload<unknown>
                     accept={imageAccept}
                     action={async (file: File): Promise<string> => {
                         try {
-                            const {name: uniqueFileName} = await uploadFile(file, imageFileSizeLimit);
+                            const uploadedFileInfo: ArticleFileType = await uploadFile(file, imageFileSizeLimit);
 
-                            setTitleImage({
-                                duration: 0,
-                                height: 0,
-                                name: uniqueFileName,
-                                size: 0,
-                                type: ArticleFileTypeEnum.unknown,
-                                width: 0,
-                            });
+                            setTitleImage(uploadedFileInfo);
                         } catch (error: unknown) {
                             const errorMessage = error instanceof Error ? error.message : 'Too big file';
 
@@ -395,20 +387,10 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                     action={async (file: File): Promise<string> => {
                         try {
                             const sizeLimit = getIsImage(file.name) ? imageFileSizeLimit : fileSizeLimit;
-
-                            const {name: uniqueFileName} = await uploadFile(file, sizeLimit);
-
-                            const newFileInfo: ArticleFileType = {
-                                duration: 0,
-                                height: 0,
-                                name: uniqueFileName,
-                                size: 0,
-                                type: ArticleFileTypeEnum.unknown,
-                                width: 0,
-                            };
+                            const uploadedFileInfo: ArticleFileType = await uploadFile(file, sizeLimit);
 
                             setFileList((currentFileList: Array<ArticleFileType>): Array<ArticleFileType> => {
-                                return [...currentFileList, newFileInfo];
+                                return [...currentFileList, uploadedFileInfo];
                             });
                         } catch (error: unknown) {
                             const errorMessage = error instanceof Error ? error.message : 'Too big file';
