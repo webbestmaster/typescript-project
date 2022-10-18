@@ -232,7 +232,7 @@ export async function getFileMarkdownByName(fileName: string): Promise<string> {
     return `<a href="${pathToFile}" target="_blank" download="${fileName}">${fileName}</a>`;
 }
 
-export async function getFileMarkdownByFullInfo(fullFileInfo: ArticleFileType): Promise<string> {
+export function getFileMarkdownByFullInfo(fullFileInfo: ArticleFileType): string {
     const {duration, name, width, height, type} = fullFileInfo;
     const pathToFile = getPathToFile(name);
 
