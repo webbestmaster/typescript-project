@@ -1,3 +1,3 @@
-export type UploadFileResponseType = {
-    uniqueFileName: string;
-};
+import {ArticleFileType} from '../article/article-type';
+
+export type UploadFileResponseType = ArticleFileType;

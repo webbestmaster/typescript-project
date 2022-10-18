@@ -1,4 +1,4 @@
-import fileSystem, {ReadStream, promises as fileSystemPromises, Stats} from 'fs';
+import fileSystem, {promises as fileSystemPromises, ReadStream, Stats} from 'fs';
 import path from 'path';
 
 // import sharp from 'sharp';
@@ -10,6 +10,7 @@ import {PromiseResolveType} from '../../www/util/promise';
 import {getRandomString} from '../../www/util/string';
 import {getStringFromUnknown} from '../../www/util/type';
 import {getFileExtension, getIsAudio, getIsImage} from '../../www/page/cms/cms-article/cms-article-helper';
+import {ArticleFileTypeEnum} from '../article/article-type';
 
 import {temporaryUploadFolder, uploadFolder} from './file-const';
 import {UploadFileResponseType} from './file-type';
@@ -51,7 +52,14 @@ export async function uploadFile(request: FastifyRequest): Promise<UploadFileRes
         throw new Error('File too big, limit 75MB');
     }
 
-    const uploadResponse: UploadFileResponseType = {uniqueFileName};
+    const uploadResponse: UploadFileResponseType = {
+        duration: 0,
+        height: 0,
+        name: uniqueFileName,
+        size: 0,
+        type: ArticleFileTypeEnum.image,
+        width: 0,
+    };
 
     if (getIsImage(uniqueFileName)) {
         const webPFileName = `${getRandomString()}.webp`;
@@ -61,7 +69,14 @@ export async function uploadFile(request: FastifyRequest): Promise<UploadFileRes
         // remove original file
         await fileSystemPromises.unlink(fullFilePath);
 
-        const uploadResponseWebP: UploadFileResponseType = {uniqueFileName: webPFileName};
+        const uploadResponseWebP: UploadFileResponseType = {
+            duration: 0,
+            height: 0,
+            name: webPFileName,
+            size: 0,
+            type: ArticleFileTypeEnum.image,
+            width: 0,
+        };
 
         return uploadResponseWebP;
     }
@@ -72,7 +87,14 @@ export async function uploadFile(request: FastifyRequest): Promise<UploadFileRes
         // remove original file
         await fileSystemPromises.unlink(fullFilePath);
 
-        const uploadResponseAudio: UploadFileResponseType = {uniqueFileName: mp3FileName};
+        const uploadResponseAudio: UploadFileResponseType = {
+            duration: 0,
+            height: 0,
+            name: mp3FileName,
+            size: 0,
+            type: ArticleFileTypeEnum.audio,
+            width: 0,
+        };
 
         return uploadResponseAudio;
     }

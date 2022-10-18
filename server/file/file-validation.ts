@@ -1,19 +1,10 @@
 import Ajv, {JSONSchemaType, ValidateFunction} from 'ajv';
 
+import {makeArticleFileSchema} from '../article/article-validation';
+
 import {UploadFileResponseType} from './file-type';
 
-const uploadFileResponseSchemaProperties = {
-    uniqueFileName: {type: 'string'},
-} as const;
-
-const requiredFieldList: Array<keyof UploadFileResponseType> = ['uniqueFileName'];
-
-export const uploadFileResponseSchema: JSONSchemaType<UploadFileResponseType> = {
-    additionalProperties: false,
-    properties: uploadFileResponseSchemaProperties,
-    required: requiredFieldList,
-    type: 'object',
-};
+export const uploadFileResponseSchema: JSONSchemaType<UploadFileResponseType> = makeArticleFileSchema();
 
 export function validateUploadFileResponse(data: unknown): [boolean, ValidateFunction<UploadFileResponseType>] {
     const ajv = new Ajv();

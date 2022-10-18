@@ -270,7 +270,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                     accept={imageAccept}
                     action={async (file: File): Promise<string> => {
                         try {
-                            const {uniqueFileName} = await uploadFile(file, imageFileSizeLimit);
+                            const {name: uniqueFileName} = await uploadFile(file, imageFileSizeLimit);
 
                             setTitleImage({
                                 duration: 0,
@@ -396,7 +396,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                         try {
                             const sizeLimit = getIsImage(file.name) ? imageFileSizeLimit : fileSizeLimit;
 
-                            const {uniqueFileName} = await uploadFile(file, sizeLimit);
+                            const {name: uniqueFileName} = await uploadFile(file, sizeLimit);
 
                             const newFileInfo: ArticleFileType = {
                                 duration: 0,
