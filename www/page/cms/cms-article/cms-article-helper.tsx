@@ -6,17 +6,17 @@ import {textToSlug} from '../../../util/human';
 import {appRoute} from '../../../component/app/app-route';
 import {PromiseResolveType} from '../../../util/promise';
 import {apiUrl} from '../../../../server/const';
-import {UploadFileResponseType} from '../../../../server/file/file-type';
 import {FetchMethodEnum, fetchX} from '../../../util/fetch';
-import {uploadFileResponseSchema} from '../../../../server/file/file-validation';
 import {deleteArticle} from '../../../service/article/article-api';
 import {httpsSiteDomain} from '../../../const';
 import {getArticleLinkToViewClient} from '../../../client-component/article/article-helper';
+import {ArticleFileType} from '../../../../server/article/article-type';
+import {makeArticleFileSchema} from '../../../../server/article/article-validation';
 
 import {ArticleForValidationType, MakeSlugValidatorArgumentType} from './cms-article-type';
 import {CmsArticleModeEnum} from './cms-article-const';
 
-export function uploadFile(file: File, fileSizeLimitBytes: number): Promise<UploadFileResponseType> {
+export function uploadFile(file: File, fileSizeLimitBytes: number): Promise<ArticleFileType> {
     const formData = new FormData();
 
     if (file.size >= fileSizeLimitBytes) {
@@ -25,7 +25,7 @@ export function uploadFile(file: File, fileSizeLimitBytes: number): Promise<Uplo
 
     formData.append('file', file);
 
-    return fetchX<UploadFileResponseType>(apiUrl.adminFileUpload, uploadFileResponseSchema, {
+    return fetchX<ArticleFileType>(apiUrl.adminFileUpload, makeArticleFileSchema(), {
         body: formData,
         credentials: 'include',
         method: FetchMethodEnum.post,

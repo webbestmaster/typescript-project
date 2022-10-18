@@ -11,14 +11,13 @@ import {PromiseResolveType} from '../../www/util/promise';
 import {getRandomString} from '../../www/util/string';
 import {getStringFromUnknown} from '../../www/util/type';
 import {getFileExtension, getIsAudio, getIsImage} from '../../www/page/cms/cms-article/cms-article-helper';
-import {ArticleFileTypeEnum} from '../article/article-type';
+import {ArticleFileType, ArticleFileTypeEnum} from '../article/article-type';
 
 import {temporaryUploadFolder, uploadFolder} from './file-const';
-import {UploadFileResponseType} from './file-type';
 import {makeAudioFile} from './file-audio';
 
 // eslint-disable-next-line max-statements, complexity
-export async function uploadFile(request: FastifyRequest): Promise<UploadFileResponseType> {
+export async function uploadFile(request: FastifyRequest): Promise<ArticleFileType> {
     const uploadFileLimit = 75e6; // 75MB
 
     const fileData: MultipartFile | void = await request.file({
@@ -53,7 +52,7 @@ export async function uploadFile(request: FastifyRequest): Promise<UploadFileRes
         throw new Error('File too big, limit 75MB');
     }
 
-    const uploadResponse: UploadFileResponseType = {
+    const uploadResponse: ArticleFileType = {
         duration: 0,
         height: 0,
         name: uniqueFileName,
@@ -73,7 +72,7 @@ export async function uploadFile(request: FastifyRequest): Promise<UploadFileRes
         // remove original file
         await fileSystemPromises.unlink(fullFilePath);
 
-        const uploadResponseWebP: UploadFileResponseType = {
+        const uploadResponseWebP: ArticleFileType = {
             duration: 0,
             height: 0,
             name: webPFileName,
@@ -94,7 +93,7 @@ export async function uploadFile(request: FastifyRequest): Promise<UploadFileRes
         // remove original file
         await fileSystemPromises.unlink(fullFilePath);
 
-        const uploadResponseAudio: UploadFileResponseType = {
+        const uploadResponseAudio: ArticleFileType = {
             duration: durationInSeconds,
             height: 0,
             name: mp3FileName,

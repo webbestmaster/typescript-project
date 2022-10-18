@@ -31,8 +31,7 @@ import {indexHtmlError500} from './ssr/ssr-const';
 import {makeCacheFile} from './article/article-cache';
 import {getPdf} from './pdf/pdf';
 import {PaginationResultType} from './data-base/data-base-type';
-import {ArticleType} from './article/article-type';
-import {UploadFileResponseType} from './file/file-type';
+import {ArticleFileType, ArticleType} from './article/article-type';
 import {makeStatic} from './make-static';
 
 const cwd = process.cwd();
@@ -95,7 +94,7 @@ const cwd = process.cwd();
         apiUrl.adminArticleListPaginationPick,
         adminOnly<PaginationResultType<Partial<ArticleType>>>(getArticleListPaginationPick)
     );
-    fastify.post(apiUrl.adminFileUpload, adminOnly<UploadFileResponseType>(uploadFile));
+    fastify.post(apiUrl.adminFileUpload, adminOnly<ArticleFileType>(uploadFile));
     fastify.get(apiUrl.fileGet, getFile);
     fastify.get(apiUrl.imageGet, getImage);
     fastify.get(apiUrl.clientArticleContextGet, getClientArticleContextData);
