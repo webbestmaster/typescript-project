@@ -1,4 +1,21 @@
-import {ArticleType, ArticleTypeEnum, SubDocumentListViewTypeEnum} from './article-type';
+import {
+    ArticleFileType,
+    ArticleFileTypeEnum,
+    ArticleType,
+    ArticleTypeEnum,
+    SubDocumentListViewTypeEnum,
+} from './article-type';
+
+export function makeDefaultArticleFile(): ArticleFileType {
+    return {
+        duration: 0,
+        height: 0,
+        name: '',
+        size: 0,
+        type: ArticleFileTypeEnum.unknown,
+        width: 0,
+    };
+}
 
 export function makeDefaultArticle(): ArticleType {
     const defaultArticleData: ArticleType = {
@@ -29,7 +46,7 @@ export function makeDefaultArticle(): ArticleType {
         tagList: [],
         tagTitleSeo: '', // tag <title>....</title>
         title: '',
-        titleImage: '',
+        titleImage: makeDefaultArticleFile(),
         updatedDate: '',
     };
 

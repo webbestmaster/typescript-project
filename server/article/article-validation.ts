@@ -2,7 +2,36 @@ import Ajv, {JSONSchemaType, ValidateFunction} from 'ajv';
 
 import {PaginationResultType} from '../data-base/data-base-type';
 
-import {ArticlePreviewType, ArticleType, ArticleTypeEnum, SubDocumentListViewTypeEnum} from './article-type';
+import {
+    ArticleFileType,
+    ArticleFileTypeEnum,
+    ArticlePreviewType,
+    ArticleType,
+    ArticleTypeEnum,
+    SubDocumentListViewTypeEnum,
+} from './article-type';
+
+export function makeArticleFileSchema(): JSONSchemaType<ArticleFileType> {
+    const articleFileProperties = {
+        duration: {type: 'number'}, // in seconds
+        height: {type: 'number'}, // original height
+        name: {type: 'string'}, // name of file
+        size: {type: 'number'}, // size of file in bytes
+        type: {'enum': Object.values(ArticleFileTypeEnum), type: 'string'}, // audio, image, etc.
+        width: {type: 'number'}, // original width
+    } as const;
+
+    const requiredFieldList: Array<keyof ArticleFileType> = ['duration', 'height', 'name', 'size', 'type', 'width'];
+
+    const articleFileSchema: JSONSchemaType<ArticleFileType> = {
+        additionalProperties: false,
+        properties: articleFileProperties,
+        required: requiredFieldList,
+        type: 'object',
+    };
+
+    return articleFileSchema;
+}
 
 export function makeArticleSchema(): JSONSchemaType<ArticleType> {
     const articleSchemaProperties = {
@@ -34,7 +63,7 @@ export function makeArticleSchema(): JSONSchemaType<ArticleType> {
         tagList: {items: {type: 'string'}, type: 'array'},
         tagTitleSeo: {type: 'string'}, // tag <title>....</title>
         title: {type: 'string'},
-        titleImage: {type: 'string'},
+        titleImage: makeArticleFileSchema(),
         updatedDate: {type: 'string'},
     } as const;
 

@@ -13,7 +13,7 @@ export function getMetaTwitterCardSsrReplaceData(article: ArticleType): SsrRepla
         `<meta property="twitter:title" content="${title}"/>`,
         `<meta property="twitter:description" content="${descriptionShort}"/>`,
         `<meta property="twitter:image" content="${
-            httpsSiteDomain + getPathToImage(titleImage, {height: 1024, width: 1024})
+            httpsSiteDomain + getPathToImage(titleImage.name, {height: 1024, width: 1024})
         }"/>`,
     ].join('');
 

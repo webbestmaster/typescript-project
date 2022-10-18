@@ -20,7 +20,10 @@ export function getImageListFromArticle(article: ArticleType): ArticleXmlImgData
     const imageList: Array<ArticleImageDataType> = [];
 
     if (titleImage) {
-        imageList.push({alt: title, src: httpsSiteDomain + getPathToImage(titleImage, {height: 1024, width: 1024})});
+        imageList.push({
+            alt: title,
+            src: httpsSiteDomain + getPathToImage(titleImage.name, {height: 1024, width: 1024}),
+        });
     }
 
     content.replace(findImageRegExpGlobal, (matchedString: string, alt: string, src: string): string => {

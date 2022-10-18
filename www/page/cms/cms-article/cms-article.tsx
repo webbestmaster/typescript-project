@@ -25,7 +25,13 @@ import {QuestionCircleOutlined} from '@ant-design/icons';
 import {red} from '@ant-design/colors';
 import 'antd/dist/antd.css';
 
-import {ArticleType, ArticleTypeEnum, SubDocumentListViewTypeEnum} from '../../../../server/article/article-type';
+import {
+    ArticleFileType,
+    ArticleFileTypeEnum,
+    ArticleType,
+    ArticleTypeEnum,
+    SubDocumentListViewTypeEnum,
+} from '../../../../server/article/article-type';
 import {validateArticle} from '../../../../server/article/article-validation';
 import {
     arrayToStringByComma,
@@ -43,6 +49,8 @@ import {rootArticleId} from '../../../../server/article/article-const';
 import {getArticleLinkToViewClient} from '../../../client-component/article/article-helper';
 import {Box} from '../../../layout/box/box';
 import {HotKeyModifierEnum, useHotKey} from '../../../util/hot-key';
+
+import {makeDefaultArticleFile} from '../../../../server/article/article-helper';
 
 import {
     getAbsentIdList,
@@ -119,7 +127,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
     const [form] = Form.useForm<ArticleType>();
     const [fileList, setFileList] = useState<Array<string>>([...defaultFileList]);
-    const [titleImage, setTitleImage] = useState<string>(defaultTitleImage);
+    const [titleImage, setTitleImage] = useState<ArticleFileType>(defaultTitleImage);
     const [publishDate, setPublishDate] = useState<string>(defaultPublishDate || new Date().toISOString());
     const [recommendedSlug, setRecommendedSlug] = useState<string>(textToSlug(title));
     const [currentArticleState, setCurrentArticleState] = useState<ArticleType>(article);
@@ -209,7 +217,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
         const {file} = info;
 
         if (file.status === 'removed') {
-            setTitleImage('');
+            setTitleImage(makeDefaultArticleFile());
         }
 
         console.log('handleChangeTitleImage:', info);
@@ -258,13 +266,20 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             </Form.Item>
 
             <Form.Item label={`Title image (to 16MB): ${titleImage}`}>
-                <Upload<unknown>
+                <Upload<ArticleFileType>
                     accept={imageAccept}
                     action={async (file: File): Promise<string> => {
                         try {
                             const {uniqueFileName} = await uploadFile(file, imageFileSizeLimit);
 
-                            setTitleImage(uniqueFileName);
+                            setTitleImage({
+                                duration: 0,
+                                height: 0,
+                                name: uniqueFileName,
+                                size: 0,
+                                type: ArticleFileTypeEnum.unknown,
+                                width: 0,
+                            });
                         } catch (error: unknown) {
                             const errorMessage = error instanceof Error ? error.message : 'Too big file';
 
@@ -275,13 +290,13 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                         return 'https://dev.null/dev/null';
                     }}
                     fileList={
-                        titleImage
+                        titleImage.name
                             ? [
                                   {
-                                      name: titleImage,
+                                      name: titleImage.name,
                                       status: 'done',
-                                      uid: titleImage,
-                                      url: getPathToImage(titleImage, {height: 96, width: 96}),
+                                      uid: titleImage.name,
+                                      url: getPathToImage(titleImage.name, {height: 96, width: 96}),
                                   },
                               ]
                             : []

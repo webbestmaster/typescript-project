@@ -24,12 +24,12 @@ export function ArticlePreview(props: ArticlePreviewPropsType): JSX.Element {
                 <img
                     alt={title}
                     className={articlePreviewListStyle.article_preview__header_image__back_image}
-                    src={getPathToImage(titleImage, {height: '-', width: 300})}
+                    src={getPathToImage(titleImage.name, {height: '-', width: 300})}
                 />
                 <img
                     alt={title}
                     className={articlePreviewListStyle.article_preview___header_image_image}
-                    src={getPathToImage(titleImage, {height: '-', width: 300})}
+                    src={getPathToImage(titleImage.name, {height: '-', width: 300})}
                 />
                 <p className={articlePreviewListStyle.article_preview__header_image__title}>{title}</p>
             </Link>

@@ -1,5 +1,7 @@
 import {ArticleTypeEnum} from '../../../../server/article/article-type';
 
+import {makeDefaultArticleFile} from '../../../../server/article/article-helper';
+
 import {NavigationContextType} from './navigation-context-type';
 
 export const defaultNavigationContextData: NavigationContextType = {
@@ -10,7 +12,7 @@ export const defaultNavigationContextData: NavigationContextType = {
             isActive: true,
             slug: 'header-1',
             title: 'Header 1',
-            titleImage: '',
+            titleImage: makeDefaultArticleFile(),
         },
         {
             articleType: ArticleTypeEnum.article,
@@ -18,7 +20,7 @@ export const defaultNavigationContextData: NavigationContextType = {
             isActive: true,
             slug: 'header-2',
             title: 'Header 2',
-            titleImage: '',
+            titleImage: makeDefaultArticleFile(),
         },
         {
             articleType: ArticleTypeEnum.article,
@@ -26,7 +28,7 @@ export const defaultNavigationContextData: NavigationContextType = {
             isActive: true,
             slug: 'header-3',
             title: 'Header 3',
-            titleImage: '',
+            titleImage: makeDefaultArticleFile(),
         },
     ],
 };

@@ -9,6 +9,21 @@ export enum SubDocumentListViewTypeEnum {
     headerImage = 'header-image', // header + image
 }
 
+export enum ArticleFileTypeEnum {
+    audio = 'audio',
+    image = 'image',
+    unknown = 'unknown',
+}
+
+export type ArticleFileType = {
+    duration: number; // in seconds
+    height: number; // original height
+    name: string; // name of file
+    size: number; // size of file in bytes
+    type: ArticleFileTypeEnum; // audio, image, etc.
+    width: number; // original width
+};
+
 export type ArticleType = {
     articleType: ArticleTypeEnum;
     content: string;
@@ -37,7 +52,7 @@ export type ArticleType = {
     tagList: Array<string>;
     tagTitleSeo: string; // tag <title>....</title>
     title: string;
-    titleImage: string;
+    titleImage: ArticleFileType;
     updatedDate: string;
 };
 

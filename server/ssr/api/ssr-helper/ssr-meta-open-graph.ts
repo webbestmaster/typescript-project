@@ -12,7 +12,7 @@ export function getMetaOpenGraphSsrReplaceData(article: ArticleType): SsrReplace
         `<meta property="og:title" content="${title}"/>`,
         '<meta property="og:type" content="article"/>',
         `<meta property="og:image" content="${
-            httpsSiteDomain + getPathToImage(titleImage, {height: 1024, width: 1024})
+            httpsSiteDomain + getPathToImage(titleImage.name, {height: 1024, width: 1024})
         }"/>`,
         `<meta property="og:description" content="${descriptionShort}"/>`,
         `<meta property="og:locale" content="${openGraphLocaleName}"/>`,
