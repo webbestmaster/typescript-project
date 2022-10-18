@@ -213,7 +213,7 @@ export function getIsAudio(fileName: string): boolean {
     return ['mp3', 'wav'].includes(fileExtension);
 }
 
-export async function getFileMarkdown(fileName: string): Promise<string> {
+export async function getFileMarkdownByName(fileName: string): Promise<string> {
     const pathToFile = getPathToFile(fileName);
 
     if (getIsImage(fileName)) {
@@ -230,6 +230,29 @@ export async function getFileMarkdown(fileName: string): Promise<string> {
     }
 
     return `<a href="${pathToFile}" target="_blank" download="${fileName}">${fileName}</a>`;
+}
+
+export async function getFileMarkdownByFullInfo(fullFileInfo: ArticleFileType): Promise<string> {
+    const {duration, name, width, height, type} = fullFileInfo;
+    const pathToFile = getPathToFile(name);
+
+    switch (type) {
+        case ArticleFileTypeEnum.image: {
+            return `![THE ALT](${pathToFile} "THE TITLE" height="${height}" width="${width}")`;
+        }
+        case ArticleFileTypeEnum.audio: {
+            return `<audio data-duration="${duration}" data-download="${name}" src="${pathToFile}"></audio>`;
+        }
+        case ArticleFileTypeEnum.unknown: {
+            return `<a href="${pathToFile}" target="_blank" download="${name}">${name}</a>`;
+        }
+        default: {
+            throw new NeverError(type);
+        }
+    }
+
+    // eslint-disable-next-line no-unreachable
+    return `<a href="${pathToFile}" target="_blank" download="${name}">${name}</a>`;
 }
 
 export function getAbsentIdList(

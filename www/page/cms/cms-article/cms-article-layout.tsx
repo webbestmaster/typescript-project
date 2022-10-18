@@ -9,7 +9,7 @@ import {ArticleType} from '../../../../server/article/article-type';
 import {getArticleLinkToViewClient} from '../../../client-component/article/article-helper';
 
 import {ArticleForValidationType} from './cms-article-type';
-import {getArticleLinkToEdit, getFileMarkdown} from './cms-article-helper';
+import {getArticleLinkToEdit, getFileMarkdownByName} from './cms-article-helper';
 
 const {Option} = Select;
 const {Text} = Typography;
@@ -26,7 +26,7 @@ export function renderUploadedFileListItem(
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
-        getFileMarkdown(name).then(setMarkdown).catch(console.error);
+        getFileMarkdownByName(name).then(setMarkdown).catch(console.error);
     }, [name]);
 
     return (
