@@ -264,7 +264,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 <Input disabled />
             </Form.Item>
 
-            <Form.Item label={`Title image (to 16MB): ${titleImage}`}>
+            <Form.Item label={`Title image (to 16MB): ${titleImage.name}`}>
                 <Upload<unknown>
                     accept={imageAccept}
                     action={async (file: File): Promise<string> => {
@@ -282,7 +282,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                         return 'https://dev.null/dev/null';
                     }}
                     fileList={
-                        titleImage.name
+                        titleImage.size > 0
                             ? [
                                   {
                                       name: titleImage.name,
@@ -298,7 +298,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                     maxCount={1}
                     onChange={handleChangeTitleImage}
                 >
-                    {titleImage ? null : <UploadButton />}
+                    {titleImage.size > 0 ? null : <UploadButton />}
                 </Upload>
             </Form.Item>
 

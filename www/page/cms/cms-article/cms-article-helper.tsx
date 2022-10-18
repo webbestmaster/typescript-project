@@ -1,5 +1,5 @@
 /* global document, Image, HTMLImageElement, Audio, HTMLAudioElement, File, FormData, location */
-import {RuleObject, Rule} from 'rc-field-form/lib/interface';
+import {Rule, RuleObject} from 'rc-field-form/lib/interface';
 
 import {generatePath} from '../../../util/url';
 import {textToSlug} from '../../../util/human';
@@ -10,13 +10,47 @@ import {FetchMethodEnum, fetchX} from '../../../util/fetch';
 import {deleteArticle} from '../../../service/article/article-api';
 import {httpsSiteDomain} from '../../../const';
 import {getArticleLinkToViewClient} from '../../../client-component/article/article-helper';
-import {ArticleFileType} from '../../../../server/article/article-type';
+import {ArticleFileType, ArticleFileTypeEnum} from '../../../../server/article/article-type';
 import {makeArticleFileSchema} from '../../../../server/article/article-validation';
+import {NeverError} from '../../../util/error';
 
 import {ArticleForValidationType, MakeSlugValidatorArgumentType} from './cms-article-type';
 import {CmsArticleModeEnum} from './cms-article-const';
 
-export function uploadFile(file: File, fileSizeLimitBytes: number): Promise<ArticleFileType> {
+export function getPathToFile(uniqueFileName: string): string {
+    return apiUrl.fileGet.replace(':fileName', uniqueFileName);
+}
+
+export function fetchImage(pathToImage: string): Promise<HTMLImageElement> {
+    const image = new Image();
+
+    return new Promise<HTMLImageElement>(
+        (resolve: PromiseResolveType<HTMLImageElement>, reject: PromiseResolveType<unknown>) => {
+            image.addEventListener('load', () => resolve(image), false);
+
+            image.addEventListener('error', reject, false);
+
+            image.src = pathToImage;
+        }
+    );
+}
+
+export function fetchAudio(pathToAudio: string): Promise<HTMLAudioElement> {
+    const audio = new Audio();
+
+    return new Promise<HTMLAudioElement>(
+        (resolve: PromiseResolveType<HTMLAudioElement>, reject: PromiseResolveType<unknown>) => {
+            audio.addEventListener('loadedmetadata', () => resolve(audio), false);
+
+            audio.addEventListener('error', reject, false);
+
+            audio.preload = 'metadata';
+            audio.src = pathToAudio;
+        }
+    );
+}
+
+export async function uploadFile(file: File, fileSizeLimitBytes: number): Promise<ArticleFileType> {
     const formData = new FormData();
 
     if (file.size >= fileSizeLimitBytes) {
@@ -25,21 +59,49 @@ export function uploadFile(file: File, fileSizeLimitBytes: number): Promise<Arti
 
     formData.append('file', file);
 
-    return fetchX<ArticleFileType>(apiUrl.adminFileUpload, makeArticleFileSchema(), {
+    const fileInfo: ArticleFileType = await fetchX<ArticleFileType>(apiUrl.adminFileUpload, makeArticleFileSchema(), {
         body: formData,
         credentials: 'include',
         method: FetchMethodEnum.post,
     });
+
+    const pathToFile = getPathToFile(fileInfo.name);
+
+    switch (fileInfo.type) {
+        case ArticleFileTypeEnum.image: {
+            const {naturalHeight, naturalWidth} = await fetchImage(pathToFile);
+
+            return {
+                ...fileInfo,
+                height: naturalHeight,
+                width: naturalWidth,
+            };
+        }
+        case ArticleFileTypeEnum.audio: {
+            const {duration} = await fetchAudio(pathToFile);
+
+            return {
+                ...fileInfo,
+                duration,
+            };
+        }
+        case ArticleFileTypeEnum.unknown: {
+            return fileInfo;
+        }
+
+        default: {
+            throw new NeverError(fileInfo.type);
+        }
+    }
+
+    // eslint-disable-next-line no-unreachable
+    return fileInfo;
 }
 
 export function getPathToImage(uniqueFileName: string, imageConfig: Record<'height' | 'width', number | '-'>): string {
     const {width, height} = imageConfig;
 
     return apiUrl.imageGet.replace(':size', `${String(width)}x${String(height)}`).replace(':fileName', uniqueFileName);
-}
-
-export function getPathToFile(uniqueFileName: string): string {
-    return apiUrl.fileGet.replace(':fileName', uniqueFileName);
 }
 
 export function makeSlugValidator(data: MakeSlugValidatorArgumentType): Array<Rule> {
@@ -149,35 +211,6 @@ export function getIsAudio(fileName: string): boolean {
     const fileExtension = getFileExtension(fileName);
 
     return ['mp3', 'wav'].includes(fileExtension);
-}
-
-export function fetchImage(pathToImage: string): Promise<HTMLImageElement> {
-    const image = new Image();
-
-    return new Promise<HTMLImageElement>(
-        (resolve: PromiseResolveType<HTMLImageElement>, reject: PromiseResolveType<unknown>) => {
-            image.addEventListener('load', () => resolve(image), false);
-
-            image.addEventListener('error', reject, false);
-
-            image.src = pathToImage;
-        }
-    );
-}
-
-export function fetchAudio(pathToAudio: string): Promise<HTMLAudioElement> {
-    const audio = new Audio();
-
-    return new Promise<HTMLAudioElement>(
-        (resolve: PromiseResolveType<HTMLAudioElement>, reject: PromiseResolveType<unknown>) => {
-            audio.addEventListener('loadedmetadata', () => resolve(audio), false);
-
-            audio.addEventListener('error', reject, false);
-
-            audio.preload = 'metadata';
-            audio.src = pathToAudio;
-        }
-    );
 }
 
 export async function getFileMarkdown(fileName: string): Promise<string> {

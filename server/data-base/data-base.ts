@@ -240,6 +240,21 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
             console.error(modelData);
             console.error('[ERROR]: makeCrud: errors:');
             console.error(modelJsonSchemaValidate.errors || '');
+
+            /*
+                await updateOne({slug:modelData.slug}, {
+                    ...modelData,
+                    titleImage: {
+                        duration: 0, // in seconds
+                        height: 0, // original height
+                        name: '', // name of file
+                        size: 0, // size of file in bytes
+                        type: ArticleFileTypeEnum.unknown, // audio, image, etc.
+                        width: 0, // original width
+                    },
+                    fileList: []
+                });
+            */
         });
 
         if (hasError) {

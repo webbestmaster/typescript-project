@@ -9,6 +9,7 @@ import {getPathToImage, getArticleLinkToEdit} from '../cms-article/cms-article-h
 import {getTickCross} from '../../../util/string';
 import {dateIsoToHumanView} from '../../../util/time';
 import {getArticleLinkToViewClient} from '../../../client-component/article/article-helper';
+import {ArticleFileType} from '../../../../server/article/article-type';
 
 import {
     ArticleForTableListKeysType,
@@ -119,15 +120,12 @@ export function getArticleTableColumnList(
             dataIndex: 'titleImage',
             defaultSortOrder: null,
             key: 'titleImage',
-            render(
-                imageName: string
-                // article: ArticleForTableListType
-            ) {
+            render(imageFile: ArticleFileType) {
                 return (
                     <img
-                        alt={imageName}
+                        alt={imageFile.name}
                         height="64px"
-                        src={getPathToImage(imageName, {height: 64, width: 64})}
+                        src={getPathToImage(imageFile.name, {height: 64, width: 64})}
                         style={{objectFit: 'contain'}}
                         width="64px"
                     />

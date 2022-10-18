@@ -2,7 +2,6 @@ import fileSystem, {promises as fileSystemPromises, ReadStream, Stats} from 'fs'
 import path from 'path';
 
 // import sharp from 'sharp';
-import {getAudioDurationInSeconds} from 'get-audio-duration';
 import {FastifyReply, FastifyRequest} from 'fastify';
 import {MultipartFile} from '@fastify/multipart';
 import webpConverter from 'webp-converter';
@@ -88,13 +87,12 @@ export async function uploadFile(request: FastifyRequest): Promise<ArticleFileTy
         const mp3FileName = await makeAudioFile(fullFilePath);
         const mp3FilePath = path.join(uploadFolder, mp3FileName);
         const mp3Stats: Stats = await fileSystemPromises.stat(mp3FilePath);
-        const durationInSeconds = await getAudioDurationInSeconds(mp3FilePath);
 
         // remove original file
         await fileSystemPromises.unlink(fullFilePath);
 
         const uploadResponseAudio: ArticleFileType = {
-            duration: durationInSeconds,
+            duration: 0,
             height: 0,
             name: mp3FileName,
             size: mp3Stats.size,

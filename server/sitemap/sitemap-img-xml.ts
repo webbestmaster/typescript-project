@@ -19,7 +19,7 @@ export function getImageListFromArticle(article: ArticleType): ArticleXmlImgData
 
     const imageList: Array<ArticleImageDataType> = [];
 
-    if (titleImage) {
+    if (titleImage.size > 0) {
         imageList.push({
             alt: title,
             src: httpsSiteDomain + getPathToImage(titleImage.name, {height: 1024, width: 1024}),
