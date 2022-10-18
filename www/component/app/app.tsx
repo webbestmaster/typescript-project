@@ -8,7 +8,7 @@ import {ShareButtonSprite} from '../../client-component/share/share-button/share
 import {ThemeProvider} from '../../provider/theme/theme-context';
 import {GdprInfo} from '../../layout/gdpr-info/gdpr-info';
 import {ThemeNameEnum} from '../../provider/theme/theme-context-type';
-import {AudioPlayerControlSpriteAsync} from '../../example/audio-player';
+import {AudioPlayerControlSpriteAsync} from '../../layout/audio-player/audio-player';
 
 import {AppProvider} from './app-provider';
 import {AppRouting} from './app-routing';

@@ -1,9 +1,10 @@
 import {Fragment} from 'react';
 
-import {AudioAsync} from '../../example/audio-player';
+import {AudioAsync} from '../audio-player/audio-player';
+import {defaultMediaMetadata} from '../audio-player/audio-player-const';
 
 // eslint-disable-next-line complexity
-function getAudioFromHtml(audioHtmlCode: string): JSX.Element {
+function getAudioFromHtml(audioHtmlCode: string, title: string): JSX.Element {
     // className?: string;
     // downloadFileName?: string;
     // mediaMetadata?: MediaMetadataInit;
@@ -17,22 +18,19 @@ function getAudioFromHtml(audioHtmlCode: string): JSX.Element {
     const durationAsNumber = Number.parseFloat(durationAsString) || 0;
     const downloadFileName = downloadAsString.trim();
 
-    if (durationAsNumber) {
-        return (
-            <AudioAsync
-                downloadFileName={downloadFileName}
-                duration={durationAsNumber}
-                preload="none"
-                src={srcAsString}
-                useRepeatButton
-            />
-        );
-    }
-
-    return <AudioAsync downloadFileName={downloadFileName} preload="metadata" src={srcAsString} useRepeatButton />;
+    return (
+        <AudioAsync
+            downloadFileName={downloadFileName}
+            duration={durationAsNumber}
+            mediaMetadata={{...defaultMediaMetadata, title}}
+            preload={durationAsNumber ? 'none' : 'metadata'}
+            src={srcAsString}
+            useRepeatButton
+        />
+    );
 }
 
-export function markdownAudio(htmlCode: string): Array<JSX.Element> {
+export function markdownAudio(htmlCode: string, title: string): Array<JSX.Element> {
     const audioRegExp = /<audio[\S\s]+?<\/audio>/gi;
 
     const splitTextList: Array<string> = htmlCode.split(audioRegExp);
@@ -48,7 +46,7 @@ export function markdownAudio(htmlCode: string): Array<JSX.Element> {
                     // eslint-disable-next-line react/no-danger
                     dangerouslySetInnerHTML={{__html: htmlChunk}}
                 />
-                {audioPart ? getAudioFromHtml(audioPart) : null}
+                {audioPart ? getAudioFromHtml(audioPart, title) : null}
             </Fragment>
         );
     });

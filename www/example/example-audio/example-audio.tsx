@@ -1,4 +1,4 @@
-import {AudioPlayerControlSpriteAsync, AudioAsync} from '../audio-player';
+import {AudioPlayerControlSpriteAsync, AudioAsync} from '../../layout/audio-player/audio-player';
 
 import {demoUrl} from '../../const';
 import {Markdown} from '../../layout/markdown/markdown';

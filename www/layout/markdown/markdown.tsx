@@ -18,10 +18,10 @@ type PropsType = HTMLAttributes<HTMLDivElement> & {
 export function Markdown(props: PropsType): JSX.Element {
     const {mdFontSize} = useContext<ThemeContextType>(ThemeContext);
     const {mdInput, ...divAttributes} = props;
-    const {className} = divAttributes;
+    const {className, title = ''} = divAttributes;
     const htmlCodeClean = markdown(mdInput, {useWrapper: false});
     const htmlCodeImage = markdownImage(htmlCodeClean);
-    const htmlCodeListAudio = markdownAudio(htmlCodeImage);
+    const htmlCodeListAudio = markdownAudio(htmlCodeImage, title);
     const fullClassName = classNames(markdownStyle.markdown, defaultMarkdownConfig.wrapperClassName, className);
 
     return (

@@ -2,7 +2,7 @@
 import {lazy, Suspense, ComponentType} from 'react';
 import {AudioPropsType, AudioPlayerPropsType, PlayListProviderPropsType} from 'react-audio-player-pro';
 
-import {LazyResultType} from '../util/type';
+import {LazyResultType} from '../../util/type';
 
 function Loading(): JSX.Element {
     return <h1>loading</h1>;

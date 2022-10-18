@@ -1,0 +1,9 @@
+@import './../../css/service';
+@import './../../css/var';
+
+.audio_player_list_link {
+    @extend %link;
+
+    display: block;
+    padding: $ui-unit 0;
+}
