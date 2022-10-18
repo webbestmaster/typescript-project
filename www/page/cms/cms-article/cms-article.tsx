@@ -48,8 +48,8 @@ import {rootArticleId} from '../../../../server/article/article-const';
 import {getArticleLinkToViewClient} from '../../../client-component/article/article-helper';
 import {Box} from '../../../layout/box/box';
 import {HotKeyModifierEnum, useHotKey} from '../../../util/hot-key';
-
 import {makeDefaultArticleFile} from '../../../../server/article/article-helper';
+import {Spinner} from '../../../layout/spinner/spinner';
 
 import {
     getAbsentIdList,
@@ -130,6 +130,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
     const [publishDate, setPublishDate] = useState<string>(defaultPublishDate || new Date().toISOString());
     const [recommendedSlug, setRecommendedSlug] = useState<string>(textToSlug(title));
     const [currentArticleState, setCurrentArticleState] = useState<ArticleType>(article);
+    const [isFileLoading, setIsFileLoading] = useState<boolean>(false);
 
     useHotKey([HotKeyModifierEnum.ctrl], 's', form.submit);
 
@@ -241,6 +242,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             onValuesChange={onValuesChangeForm}
             scrollToFirstError
         >
+            <Spinner isShow={isFileLoading} position="fixed" />
             <IsRender isRender={absentIdList.length > 0}>
                 <Title level={4} type="danger">
                     Document has missing children, children Id:&nbsp;{absentIdList.join(', ')}
@@ -269,6 +271,8 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                     accept={imageAccept}
                     action={async (file: File): Promise<string> => {
                         try {
+                            setIsFileLoading(true);
+
                             const uploadedFileInfo: ArticleFileType = await uploadFile(file, imageFileSizeLimit);
 
                             setTitleImage(uploadedFileInfo);
@@ -276,6 +280,8 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                             const errorMessage = error instanceof Error ? error.message : 'Too big file';
 
                             message.error(errorMessage);
+                        } finally {
+                            setIsFileLoading(false);
                         }
 
                         // just prevent extra request to our server
@@ -386,6 +392,8 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                     // accept={fileAccept}
                     action={async (file: File): Promise<string> => {
                         try {
+                            setIsFileLoading(true);
+
                             const sizeLimit = getIsImage(file.name) ? imageFileSizeLimit : fileSizeLimit;
                             const uploadedFileInfo: ArticleFileType = await uploadFile(file, sizeLimit);
 
@@ -396,6 +404,8 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                             const errorMessage = error instanceof Error ? error.message : 'Too big file';
 
                             message.error(errorMessage);
+                        } finally {
+                            setIsFileLoading(false);
                         }
 
                         // just prevent extra request to our server
