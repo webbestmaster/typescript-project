@@ -41,7 +41,7 @@ export function makeArticleSchema(): JSONSchemaType<ArticleType> {
         createdDate: {type: 'string'},
         description: {type: 'string'},
         descriptionShort: {type: 'string'},
-        fileList: {items: {type: 'string'}, type: 'array'},
+        fileList: {items: makeArticleFileSchema(), type: 'array'},
         hasMetaRobotsNoFollowSeo: {type: 'boolean'},
         hasMetaRobotsNoIndexSeo: {type: 'boolean'},
         id: {type: 'string'},

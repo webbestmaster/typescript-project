@@ -126,7 +126,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
     } = article;
 
     const [form] = Form.useForm<ArticleType>();
-    const [fileList, setFileList] = useState<Array<string>>([...defaultFileList]);
+    const [fileList, setFileList] = useState<Array<ArticleFileType>>([...defaultFileList]);
     const [titleImage, setTitleImage] = useState<ArticleFileType>(defaultTitleImage);
     const [publishDate, setPublishDate] = useState<string>(defaultPublishDate || new Date().toISOString());
     const [recommendedSlug, setRecommendedSlug] = useState<string>(textToSlug(title));
@@ -204,8 +204,8 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
         const {file} = info;
 
         if (file.status === 'removed') {
-            setFileList((currentFileList: Array<string>): Array<string> => {
-                return currentFileList.filter((fileName: string): boolean => fileName !== file.name);
+            setFileList((currentFileList: Array<ArticleFileType>): Array<ArticleFileType> => {
+                return currentFileList.filter((fileInfo: ArticleFileType): boolean => fileInfo.name !== file.name);
             });
         }
 
@@ -398,8 +398,17 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
                             const {uniqueFileName} = await uploadFile(file, sizeLimit);
 
-                            setFileList((currentFileList: Array<string>): Array<string> => {
-                                return [...currentFileList, uniqueFileName];
+                            const newFileInfo: ArticleFileType = {
+                                duration: 0,
+                                height: 0,
+                                name: uniqueFileName,
+                                size: 0,
+                                type: ArticleFileTypeEnum.unknown,
+                                width: 0,
+                            };
+
+                            setFileList((currentFileList: Array<ArticleFileType>): Array<ArticleFileType> => {
+                                return [...currentFileList, newFileInfo];
                             });
                         } catch (error: unknown) {
                             const errorMessage = error instanceof Error ? error.message : 'Too big file';
@@ -410,12 +419,12 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                         // just prevent extra request to our server
                         return 'https://dev.null/dev/null';
                     }}
-                    fileList={fileList.map((fileName: string): UploadFile<unknown> => {
+                    fileList={fileList.map((fileInfo: ArticleFileType): UploadFile<unknown> => {
                         return {
-                            name: fileName,
+                            name: fileInfo.name,
                             status: 'done',
-                            uid: fileName,
-                            url: getPathToImage(fileName, {height: 96, width: 96}),
+                            uid: fileInfo.name,
+                            url: getPathToImage(fileInfo.name, {height: 96, width: 96}),
                         };
                     })}
                     itemRender={renderUploadedFileListItem}

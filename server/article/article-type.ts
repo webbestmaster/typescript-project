@@ -30,7 +30,7 @@ export type ArticleType = {
     createdDate: string;
     description: string;
     descriptionShort: string;
-    fileList: Array<string>;
+    fileList: Array<ArticleFileType>;
     hasMetaRobotsNoFollowSeo: boolean; // Add/combine <meta name="robots" content="nofollow"/>
     hasMetaRobotsNoIndexSeo: boolean; // Add/combine <meta name="robots" content="noindex"/> and add X-Robots-Tag: noindex
     id: string;
