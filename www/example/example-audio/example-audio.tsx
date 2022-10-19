@@ -29,7 +29,7 @@ export function ExampleAudio(): JSX.Element {
 
     return (
         <div className="example-wrapper">
-            <Markdown mdInput={exampleAudio} />
+            <Markdown articleTitle="" mdInput={exampleAudio} />
 
             <AudioAsync mediaMetadata={singleAudioData.mediaMetadata} src={singleAudioData.src} useRepeatButton />
 

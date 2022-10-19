@@ -8,12 +8,12 @@ import {ArticlePreviewList} from '../../article-preview-list/article-preview-lis
 
 export function ArticleContainer(): JSX.Element {
     const {article, childList} = useContext<ArticleContextType>(articleContext);
-    const {content, subDocumentListViewType} = article;
+    const {content, subDocumentListViewType, title} = article;
 
     return (
         <>
             <ArticlePreviewList childList={childList} previewStyle={subDocumentListViewType} />
-            <Markdown className={articleStyle.article_markdown} mdInput={content} />
+            <Markdown articleTitle={title} className={articleStyle.article_markdown} mdInput={content} />
         </>
     );
 }

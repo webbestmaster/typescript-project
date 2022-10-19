@@ -12,16 +12,17 @@ import {markdownAudio} from './markdown-helper-audio';
 import markdownStyle from './markdown.scss';
 
 type PropsType = HTMLAttributes<HTMLDivElement> & {
+    articleTitle: string;
     mdInput: string;
 };
 
 export function Markdown(props: PropsType): JSX.Element {
     const {mdFontSize} = useContext<ThemeContextType>(ThemeContext);
-    const {mdInput, ...divAttributes} = props;
-    const {className, title = ''} = divAttributes;
+    const {mdInput, articleTitle, ...divAttributes} = props;
+    const {className} = divAttributes;
     const htmlCodeClean = markdown(mdInput, {useWrapper: false});
     const htmlCodeImage = markdownImage(htmlCodeClean);
-    const htmlCodeListAudio = markdownAudio(htmlCodeImage, title);
+    const htmlCodeListAudio = markdownAudio(htmlCodeImage, articleTitle);
     const fullClassName = classNames(markdownStyle.markdown, defaultMarkdownConfig.wrapperClassName, className);
 
     return (

@@ -15,11 +15,11 @@ import articleStyle from '../article.scss';
 
 export function ArticleAudioList(): JSX.Element {
     const {article, childList} = useContext<ArticleContextType>(articleContext);
-    const {content, titleImage} = article;
+    const {content, titleImage, title} = article;
     const trackList: Array<TrackType> = [];
 
     childList.forEach((articleChild: ArticlePreviewType) => {
-        const {title, slug, fileList} = articleChild;
+        const {title: childTitle, slug, fileList} = articleChild;
 
         fileList
             .filter<ArticleFileType>((fileInfo: ArticleFileType): fileInfo is ArticleFileType => {
@@ -28,7 +28,7 @@ export function ArticleAudioList(): JSX.Element {
             .forEach((fileInfo: ArticleFileType, index: number) => {
                 const {name, duration} = fileInfo;
                 const titleIndex = index > 0 ? ` (${(index + 1).toString(10)})` : '';
-                const endTitle = `${title}${titleIndex}`;
+                const endTitle = `${childTitle}${titleIndex}`;
 
                 const track: TrackType = {
                     content: (
@@ -48,9 +48,13 @@ export function ArticleAudioList(): JSX.Element {
 
     return (
         <>
-            <Markdown className={articleStyle.article_markdown} mdInput={getFileMarkdownByFullInfo(titleImage)} />
+            <Markdown
+                articleTitle={title}
+                className={articleStyle.article_markdown}
+                mdInput={getFileMarkdownByFullInfo(titleImage)}
+            />
             <AudioPlayerAsync className={articleStyle.article_audio_player} trackList={trackList} />
-            <Markdown className={articleStyle.article_markdown} mdInput={content} />;
+            <Markdown articleTitle={title} className={articleStyle.article_markdown} mdInput={content} />;
         </>
     );
 }

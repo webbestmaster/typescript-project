@@ -226,7 +226,7 @@ export async function getFileMarkdownByName(fileName: string): Promise<string> {
     if (getIsAudio(fileName)) {
         const {duration} = await fetchAudio(pathToFile);
 
-        return `<audio data-duration="${duration}" data-download="${fileName}" src="${pathToFile}"></audio>`;
+        return `<audio data-duration="${duration}" data-download="" src="${pathToFile}"></audio>`;
     }
 
     return `<a href="${pathToFile}" target="_blank" download="${fileName}">${fileName}</a>`;

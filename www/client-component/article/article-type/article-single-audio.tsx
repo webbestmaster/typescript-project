@@ -9,5 +9,5 @@ export function ArticleSingleAudio(): JSX.Element {
     const {article} = useContext<ArticleContextType>(articleContext);
     const {content} = article;
 
-    return <Markdown className={articleStyle.article_markdown} mdInput={content} />;
+    return <Markdown articleTitle="" className={articleStyle.article_markdown} mdInput={content} />;
 }

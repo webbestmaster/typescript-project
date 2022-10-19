@@ -33,7 +33,6 @@ export async function makeAudioFile(fullFilePath: string): Promise<string> {
         bitrate,
         output: outputPath,
         quality: 0,
-        sfreq: 44.1,
     }).setFile(fullFilePath);
 
     await audioEncoder.encode().catch(console.info);

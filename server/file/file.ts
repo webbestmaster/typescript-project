@@ -11,16 +11,15 @@ import {getRandomString} from '../../www/util/string';
 import {getStringFromUnknown} from '../../www/util/type';
 import {getFileExtension, getIsAudio, getIsImage} from '../../www/page/cms/cms-article/cms-article-helper';
 import {ArticleFileType, ArticleFileTypeEnum} from '../article/article-type';
+import {fileSizeLimit} from '../../www/page/cms/cms-article/cms-article-const';
 
 import {temporaryUploadFolder, uploadFolder} from './file-const';
 import {makeAudioFile} from './file-audio';
 
 // eslint-disable-next-line max-statements, complexity
 export async function uploadFile(request: FastifyRequest): Promise<ArticleFileType> {
-    const uploadFileLimit = 75e6; // 75MB
-
     const fileData: MultipartFile | void = await request.file({
-        limits: {fileSize: uploadFileLimit, files: 1},
+        limits: {fileSize: fileSizeLimit, files: 1},
     });
 
     if (!fileData) {
@@ -44,7 +43,7 @@ export async function uploadFile(request: FastifyRequest): Promise<ArticleFileTy
 
     const stats: Stats = await fileSystemPromises.stat(fullFilePath);
 
-    if (stats.size >= uploadFileLimit) {
+    if (stats.size >= fileSizeLimit) {
         // remove original file
         await fileSystemPromises.unlink(fullFilePath);
 

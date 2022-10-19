@@ -13,13 +13,13 @@ import {SubDocumentListViewTypeEnum} from '../../../../server/article/article-ty
 // eslint-disable-next-line max-statements
 export function ClientHome(): JSX.Element {
     const {article, childList} = useContext<ArticleContextType>(articleContext);
-    const {content} = article;
+    const {content, title} = article;
 
     return (
         <Page>
             <PageHeader>{copyrightName}</PageHeader>
             <ArticlePreviewList childList={childList} previewStyle={SubDocumentListViewTypeEnum.headerImage} />
-            <Markdown mdInput={content} />
+            <Markdown articleTitle={title} mdInput={content} />
         </Page>
     );
 }

@@ -8,7 +8,7 @@ import articleStyle from '../article.scss';
 
 export function ArticleArticle(): JSX.Element {
     const {article} = useContext<ArticleContextType>(articleContext);
-    const {content} = article;
+    const {content, title} = article;
 
-    return <Markdown className={articleStyle.article_markdown} mdInput={content} />;
+    return <Markdown articleTitle={title} className={articleStyle.article_markdown} mdInput={content} />;
 }
