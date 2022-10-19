@@ -2,7 +2,7 @@ import {Fragment} from 'react';
 
 import {AudioAsync} from '../audio-player/audio-player';
 import {defaultMediaMetadata} from '../audio-player/audio-player-const';
-import {makeFileNameString} from '../../util/string';
+import {textToSlug} from '../../util/human';
 
 // eslint-disable-next-line complexity
 function getAudioFromHtml(audioHtmlCode: string, title: string): JSX.Element {
@@ -17,7 +17,7 @@ function getAudioFromHtml(audioHtmlCode: string, title: string): JSX.Element {
     const [ignoredFullDurationString, durationAsString = ''] = audioHtmlCode.match(/data-duration="(\S+)"/) || ['', ''];
     const [ignoredFullDownloadString, downloadAsString = ''] = audioHtmlCode.match(/data-download="(\S+)"/) || ['', ''];
     const durationAsNumber = Number.parseFloat(durationAsString) || 0;
-    const downloadFileName = downloadAsString.trim() || makeFileNameString(title);
+    const downloadFileName = downloadAsString.trim() || textToSlug(title);
 
     return (
         <AudioAsync
