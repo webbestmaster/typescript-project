@@ -1,6 +1,11 @@
 @import './../../css/service';
 @import './../../css/var';
 
+.audio_player__spinner {
+    display: block;
+    text-align: center;
+}
+
 .audio_player_list_link {
     @extend %link;
 

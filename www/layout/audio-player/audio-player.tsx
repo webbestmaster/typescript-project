@@ -3,9 +3,12 @@ import {lazy, Suspense, ComponentType} from 'react';
 import {AudioPropsType, AudioPlayerPropsType, PlayListProviderPropsType} from 'react-audio-player-pro';
 
 import {LazyResultType} from '../../util/type';
+import {AsciiSpinner} from '../spinner/ascii-spinner';
 
-function Loading(): JSX.Element {
-    return <h1>loading</h1>;
+import audioPlayerStyle from './audio-player.scss';
+
+function AudioPlayerLoading(): JSX.Element {
+    return <AsciiSpinner className={audioPlayerStyle.audio_player__spinner} isShow />;
 }
 
 const AudioPlayerControlSpriteLazy = lazy<ComponentType<unknown>>(async (): Promise<LazyResultType<unknown>> => {
@@ -36,7 +39,7 @@ const AudioLazy = lazy<ComponentType<AudioPropsType>>(async (): Promise<LazyResu
 
 export function AudioAsync(props: AudioPropsType) {
     return (
-        <Suspense fallback={<Loading />}>
+        <Suspense fallback={<AudioPlayerLoading />}>
             <AudioLazy {...props} />
         </Suspense>
     );
@@ -55,7 +58,7 @@ const AudioPlayerLazy = lazy<ComponentType<AudioPlayerPropsType>>(
 
 export function AudioPlayerAsync(props: AudioPlayerPropsType) {
     return (
-        <Suspense fallback={<Loading />}>
+        <Suspense fallback={<AudioPlayerLoading />}>
             <AudioPlayerLazy {...props} />
         </Suspense>
     );
@@ -74,7 +77,7 @@ const PlayListProviderLazy = lazy<ComponentType<PlayListProviderPropsType>>(
 
 export function PlayListProviderAsync(props: PlayListProviderPropsType) {
     return (
-        <Suspense fallback={<Loading />}>
+        <Suspense fallback={<AudioPlayerLoading />}>
             <PlayListProviderLazy {...props} />
         </Suspense>
     );
@@ -91,7 +94,7 @@ const PlayListPanelLazy = lazy<ComponentType<unknown>>(async (): Promise<LazyRes
 
 export function PlayListPanelAsync() {
     return (
-        <Suspense fallback={<Loading />}>
+        <Suspense fallback={<AudioPlayerLoading />}>
             <PlayListPanelLazy />
         </Suspense>
     );
