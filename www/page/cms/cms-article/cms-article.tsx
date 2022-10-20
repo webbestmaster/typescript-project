@@ -55,7 +55,6 @@ import {
     getAbsentIdList,
     getArticleLinkToEdit,
     getIsImage,
-    getPathToImage,
     handleDeleteArticle,
     makeHtmlValidator,
     makeSlugValidator,
@@ -63,6 +62,7 @@ import {
 } from './cms-article-helper';
 import {
     getParentLit,
+    makeFileListItem,
     makeSubDocumentOption,
     renderParentList,
     renderUploadedFileListItem,
@@ -287,19 +287,10 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                         // just prevent extra request to our server
                         return 'https://dev.null/dev/null';
                     }}
-                    fileList={
-                        titleImage.size > 0
-                            ? [
-                                  {
-                                      name: titleImage.name,
-                                      status: 'done',
-                                      uid: titleImage.name,
-                                      url: getPathToImage(titleImage.name, {height: 96, width: 96}),
-                                  },
-                              ]
-                            : []
-                    }
-                    itemRender={renderUploadedFileListItem}
+                    fileList={titleImage.size > 0 ? [titleImage].map(makeFileListItem) : []}
+                    itemRender={(originNode: JSX.Element, file: UploadFile<unknown>): JSX.Element => {
+                        return renderUploadedFileListItem(originNode, file, [titleImage]);
+                    }}
                     listType="picture"
                     maxCount={1}
                     onChange={handleChangeTitleImage}
@@ -411,15 +402,11 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                         // just prevent extra request to our server
                         return 'https://dev.null/dev/null';
                     }}
-                    fileList={fileList.map((fileInfo: ArticleFileType): UploadFile<unknown> => {
-                        return {
-                            name: fileInfo.name,
-                            status: 'done',
-                            uid: fileInfo.name,
-                            url: getPathToImage(fileInfo.name, {height: 96, width: 96}),
-                        };
-                    })}
-                    itemRender={renderUploadedFileListItem}
+                    fileList={fileList.map(makeFileListItem)}
+                    // itemRender={renderUploadedFileListItem}
+                    itemRender={(originNode: JSX.Element, file: UploadFile<unknown>): JSX.Element => {
+                        return renderUploadedFileListItem(originNode, file, fileList);
+                    }}
                     listType="picture"
                     onChange={handleChangeFileList}
                 >

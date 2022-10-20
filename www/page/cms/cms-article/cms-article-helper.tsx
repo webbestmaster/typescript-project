@@ -241,7 +241,7 @@ export function getFileMarkdownByFullInfo(fullFileInfo: ArticleFileType): string
             return `![THE ALT](${pathToFile} "THE TITLE" height="${height}" width="${width}")`;
         }
         case ArticleFileTypeEnum.audio: {
-            return `<audio data-duration="${duration}" data-download="${name}" src="${pathToFile}"></audio>`;
+            return `<audio data-duration="${duration}" data-download="" src="${pathToFile}"></audio>`;
         }
         case ArticleFileTypeEnum.unknown: {
             return `<a href="${pathToFile}" target="_blank" download="${name}">${name}</a>`;

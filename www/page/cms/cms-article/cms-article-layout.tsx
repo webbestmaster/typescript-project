@@ -1,38 +1,59 @@
-import {useEffect, useState} from 'react';
 import {Typography, Select, Input, Button} from 'antd';
 import {PlusOutlined} from '@ant-design/icons';
 import {UploadFile} from 'antd/lib/upload/interface';
 import {Link} from 'react-router-dom';
 
 import {Box} from '../../../layout/box/box';
-import {ArticleType} from '../../../../server/article/article-type';
+import {ArticleFileType, ArticleType} from '../../../../server/article/article-type';
 import {getArticleLinkToViewClient} from '../../../client-component/article/article-helper';
 
 import {ArticleForValidationType} from './cms-article-type';
-import {getArticleLinkToEdit, getFileMarkdownByName} from './cms-article-helper';
+import {
+    getArticleLinkToEdit,
+    getFileMarkdownByFullInfo,
+    getIsImage,
+    getPathToFile,
+    getPathToImage,
+} from './cms-article-helper';
 
 const {Option} = Select;
 const {Text} = Typography;
 
+export function makeFileListItem(fileInfo: ArticleFileType): UploadFile<unknown> {
+    const {name: fileInfoName} = fileInfo;
+
+    const url = getIsImage(fileInfoName)
+        ? getPathToImage(fileInfoName, {height: 96, width: 96})
+        : getPathToFile(fileInfoName);
+
+    return {
+        name: fileInfoName,
+        status: 'done',
+        uid: fileInfoName,
+        url,
+    };
+}
+
 export function renderUploadedFileListItem(
     originNode: JSX.Element,
-    file: UploadFile<unknown>
+    file: UploadFile<unknown>,
+    fileList: Array<ArticleFileType>
     // uploadedFileList: Array<UploadFile<unknown>>,
     // actions: { download: () => void; preview: () => void; remove: () => void }
 ): JSX.Element {
     const {name} = file;
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [markdown, setMarkdown] = useState<string>('');
-
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useEffect(() => {
-        getFileMarkdownByName(name).then(setMarkdown).catch(console.error);
-    }, [name]);
+    const fileInfo: ArticleFileType | void = fileList.find(
+        (fileInfoInFileList: ArticleFileType): boolean => fileInfoInFileList.name === name
+    );
 
     return (
         <Box height={112}>
             {originNode}
-            <Input value={markdown} />
+            {fileInfo ? (
+                <Input value={getFileMarkdownByFullInfo(fileInfo)} />
+            ) : (
+                <Input status="error" value={`[ERROR]: can not find file by name: ${name}`} />
+            )}
         </Box>
     );
 }
