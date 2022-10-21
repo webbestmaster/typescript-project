@@ -66,6 +66,9 @@ export const ruRu: LocaleDictionaryType = {
 
     NAVIGATION__HOME: 'Главная',
 
+    SEARCH__REQUEST_TOO_SHORT: 'Слишком короткий запрос',
+    SEARCH__NOTHING_FOUND: 'Ничего не найдено',
+
     /* eslint-enable id-match, id-length, max-len,sonarjs/no-duplicate-string, sort-keys */
 };
 

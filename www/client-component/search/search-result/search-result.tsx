@@ -1,9 +1,11 @@
-import {Link} from 'react-router-dom';
-
 import {SearchArticleType} from '../search-type';
-import {getArticleLinkToViewClient} from '../../article/article-helper';
+import {Spinner} from '../../../layout/spinner/spinner';
+import {Locale} from '../../../provider/locale/locale-context';
+import {classNames} from '../../../util/css';
 
 import searchResultStyle from './search-result.scss';
+import {sortSearchArticle} from './search-result-helper';
+import {SearchResultLink} from './search-result-link/search-result-link';
 
 type SearchResultPropsType = {
     className?: string;
@@ -15,34 +17,51 @@ type SearchResultPropsType = {
 
 export function SearchResult(props: SearchResultPropsType): JSX.Element {
     const {isLoading, list, searchString, minLetters, className = ''} = props;
+    const fullClassName = classNames(searchResultStyle.search_result_wrapper, className);
 
     if (isLoading) {
-        return <h1>Loading...</h1>;
+        return (
+            <div className={fullClassName}>
+                <div className={searchResultStyle.search_result__loading}>
+                    <Spinner isShow wrapperColor="transparent" />
+                </div>
+            </div>
+        );
     }
 
     if (searchString.length < minLetters) {
-        return <h1>[ Empty ]</h1>;
+        return (
+            <div className={fullClassName}>
+                <p className={searchResultStyle.search_result__just_text}>
+                    <Locale stringKey="SEARCH__REQUEST_TOO_SHORT" />
+                </p>
+            </div>
+        );
     }
 
     if (list.length === 0) {
-        return <h1>no result for {searchString}</h1>;
+        return (
+            <div className={fullClassName}>
+                <p className={searchResultStyle.search_result__just_text}>
+                    <Locale stringKey="SEARCH__NOTHING_FOUND" />
+                </p>
+            </div>
+        );
     }
 
     return (
-        <div>
-            {list.map<JSX.Element>((searchArticle: SearchArticleType): JSX.Element => {
-                const {title, slug} = searchArticle;
+        <div className={fullClassName}>
+            <ul className={searchResultStyle.search_result__list}>
+                {list.sort(sortSearchArticle).map<JSX.Element>((searchArticle: SearchArticleType): JSX.Element => {
+                    const {slug} = searchArticle;
 
-                return (
-                    <Link
-                        className={searchResultStyle.search_result_link}
-                        key={slug}
-                        to={getArticleLinkToViewClient(slug)}
-                    >
-                        {title}
-                    </Link>
-                );
-            })}
+                    return (
+                        <li className={searchResultStyle.search_result__list_item} key={slug}>
+                            <SearchResultLink searchArticle={searchArticle} searchString={searchString} />
+                        </li>
+                    );
+                })}
+            </ul>
         </div>
     );
 }

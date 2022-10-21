@@ -6,7 +6,6 @@ import {PaginationResultType} from '../../../server/data-base/data-base-type';
 import {noop, useMakeExecutableState} from '../../util/function';
 import {getArticleClientListPaginationPick} from '../../service/article/article-api';
 import {useLocale} from '../../provider/locale/locale-context';
-import {IsRender} from '../../layout/is-render/is-render';
 import {classNames} from '../../util/css';
 
 import {articlePreviewKeyList} from './search-const';
@@ -24,7 +23,7 @@ export function Search(props: SearchPropsType): JSX.Element {
     const wrapperRef = useRef<HTMLDivElement>(null);
     const {getLocalizedString} = useLocale();
     const [hasFocus, setHasFocus] = useState<boolean>(false);
-    const minLetters = 2;
+    const minLetters = 3;
 
     const handleOnFocus = useCallback(() => {
         setHasFocus(true);
@@ -95,17 +94,19 @@ export function Search(props: SearchPropsType): JSX.Element {
                 placeholder={getLocalizedString('UI__SEARCH_PLACEHOLDER')}
                 type="text"
             />
+
             <div className={classNames(searchStyle.search_icon, {[searchStyle.search_icon__focused]: hasFocus})} />
 
-            <IsRender isRender={hasFocus}>
-                <SearchResult
-                    className={searchStyle.result_wrapper}
-                    isLoading={isInProgressArticleList}
-                    list={resultArticleList?.result || []}
-                    minLetters={minLetters}
-                    searchString={searchString}
-                />
-            </IsRender>
+            {hasFocus ? (
+                <div className={searchStyle.result_wrapper}>
+                    <SearchResult
+                        isLoading={isInProgressArticleList}
+                        list={resultArticleList?.result || []}
+                        minLetters={minLetters}
+                        searchString={searchString}
+                    />
+                </div>
+            ) : null}
         </div>
     );
 }

@@ -64,6 +64,9 @@ export const enUs = {
 
     NAVIGATION__HOME: 'Home',
 
+    SEARCH__REQUEST_TOO_SHORT: 'Request too short',
+    SEARCH__NOTHING_FOUND: 'Nothing found',
+
     /* eslint-enable id-match, id-length, max-len,sonarjs/no-duplicate-string, sort-keys */
 };
 

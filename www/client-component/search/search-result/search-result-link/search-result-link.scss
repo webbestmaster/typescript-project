@@ -1,0 +1,16 @@
+@import './../../../../css/var';
+@import './../../../../css/service';
+
+.search_result_link {
+    @extend %link;
+
+    display: block;
+    font-size: 16px;
+    line-height: 1.4;
+    padding-bottom: $ui-unit;
+    padding-top: $ui-unit;
+}
+
+.search_result_link__highlight_text {
+    font-weight: bold;
+}
