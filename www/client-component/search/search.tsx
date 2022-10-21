@@ -106,7 +106,11 @@ export function Search(props: SearchPropsType): JSX.Element {
                 <div className={searchStyle.result_wrapper}>
                     <SearchResult
                         isLoading={isInProgressArticleList}
-                        list={resultArticleList?.result || []}
+                        list={(resultArticleList?.result || []).filter(
+                            (searchArticle: SearchArticleType): searchArticle is SearchArticleType => {
+                                return searchArticle.title.toLowerCase().includes(searchString.toLowerCase());
+                            }
+                        )}
                         minLetters={minLetters}
                         searchString={searchString}
                     />

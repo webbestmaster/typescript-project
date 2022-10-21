@@ -3,10 +3,11 @@ import fileSystem, {promises as fileSystemPromise} from 'fs';
 import path from 'path';
 
 import {getArticleLinkToViewClient} from '../www/client-component/article/article-helper';
-import {generatePath} from '../www/util/url';
+import {generatePath, paginationQueryToURLSearchParameters} from '../www/util/url';
 import {appRoute} from '../www/component/app/app-route';
 import {appIconPngFileName, companyLogoPngFileName} from '../www/const';
 import {getPathToImage} from '../www/page/cms/cms-article/cms-article-helper';
+import {articlePreviewKeyList} from '../www/client-component/search/search-const';
 
 import {articleCrud} from './article/article';
 import {ArticleType} from './article/article-type';
@@ -85,6 +86,7 @@ async function makeHtmlPages(pageList: Array<StaticPageType>) {
 
 async function makeApiArticle(pageList: Array<StaticPageType>) {
     await tryToMkdir(cwd, staticSiteFolderName, 'api');
+    // eslint-disable-next-line sonarjs/no-duplicate-string
     await tryToMkdir(cwd, staticSiteFolderName, 'api', 'client-article');
 
     // write html files
@@ -100,6 +102,25 @@ async function makeApiArticle(pageList: Array<StaticPageType>) {
             data
         );
     }
+}
+
+async function makeApiArticleSearch() {
+    await tryToMkdir(cwd, staticSiteFolderName, 'api');
+    await tryToMkdir(cwd, staticSiteFolderName, 'api', 'client-article');
+
+    const querySearchParameters = paginationQueryToURLSearchParameters<ArticleType>(
+        {pageIndex: 0, pageSize: 0, query: {}, sort: {title: 1}},
+        articlePreviewKeyList
+    );
+
+    const apiPath = `${apiUrl.clientSearchArticle}?${querySearchParameters}`;
+
+    const data = await getTextFromUrl(mainUrl + apiPath);
+
+    await fileSystemPromise.writeFile(
+        path.join(cwd, staticSiteFolderName, 'api', 'client-article', 'pagination-pick'),
+        data
+    );
 }
 
 async function makeIcons() {
@@ -217,6 +238,10 @@ export async function makeStatic() {
     console.log('>> [makeStatic]: makeApiArticle: begin');
     await makeApiArticle(pageList);
     console.log('>> [makeStatic]: makeApiArticle: end');
+
+    console.log('>> [makeStatic]: makeApiArticleSearch: begin');
+    await makeApiArticleSearch();
+    console.log('>> [makeStatic]: makeApiArticleSearch: end');
 
     console.log('>> [makeStatic]: makeIcons: begin');
     await makeIcons();
