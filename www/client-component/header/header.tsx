@@ -5,6 +5,7 @@ import {copyrightName} from '../../const';
 import {appRoute} from '../../component/app/app-route';
 import {Navigation} from '../navigation/navigation';
 import {classNames} from '../../util/css';
+import {Search} from '../search/search';
 
 import headerStyle from './header.scss';
 
@@ -13,6 +14,8 @@ export function Header(): JSX.Element {
     const toggleNavigation = useCallback(() => {
         setIsNavigationOpen((isOpen: boolean): boolean => !isOpen);
     }, []);
+
+    const [hasSearchFocus, setHasSearchFocus] = useState<boolean>(false);
 
     return (
         <>
@@ -36,7 +39,13 @@ export function Header(): JSX.Element {
                     />
                     <span className={headerStyle.header__home_text}>{copyrightName}</span>
                 </Link>
-                <div className={headerStyle.header__search}>&nbsp;</div>
+                <div
+                    className={classNames(headerStyle.header__search, {
+                        [headerStyle.header__search__focused]: hasSearchFocus,
+                    })}
+                >
+                    <Search onChangeFocus={setHasSearchFocus} />
+                </div>
             </header>
             <div
                 className={classNames(headerStyle.header__navigation_wrapper, {

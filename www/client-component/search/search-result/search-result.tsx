@@ -6,6 +6,7 @@ import {getArticleLinkToViewClient} from '../../article/article-helper';
 import searchResultStyle from './search-result.scss';
 
 type SearchResultPropsType = {
+    className?: string;
     isLoading: boolean;
     list: Array<SearchArticleType>;
     minLetters: number;
@@ -13,7 +14,7 @@ type SearchResultPropsType = {
 };
 
 export function SearchResult(props: SearchResultPropsType): JSX.Element {
-    const {isLoading, list, searchString, minLetters} = props;
+    const {isLoading, list, searchString, minLetters, className = ''} = props;
 
     if (isLoading) {
         return <h1>Loading...</h1>;

@@ -40,6 +40,12 @@
 
 .header__search {
     display: block;
+    transition: width 0.1s linear;
+    width: 33%;
+
+    &.header__search__focused {
+        width: 50%;
+    }
 }
 
 %header-navigation-toggle-button {
