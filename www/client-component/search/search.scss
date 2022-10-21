@@ -4,6 +4,7 @@
     height: 100%;
     position: relative;
     width: 100%;
+    z-index: 1;
 }
 
 .search_input {
@@ -24,8 +25,12 @@
 }
 
 .search_icon {
+    background-color: transparent;
+    border: 0;
     display: block;
     height: 100%;
+    margin: 0;
+    padding: 0;
     pointer-events: none;
     position: absolute;
     right: 0;
@@ -60,6 +65,9 @@
     }
 
     &.search_icon__focused {
+        cursor: pointer;
+        pointer-events: auto;
+
         &:before,
         &:after {
             background-color: $main-font-color;

@@ -120,9 +120,27 @@
 
     %header-navigation-toggle-button {
         display: block;
+
+        &.header__navigation_toggle_button__search_focused {
+            display: none;
+        }
     }
 
     .header__navigation_wrapper {
         display: none;
+    }
+
+    .header__search {
+        transition: none;
+
+        &.header__search__focused {
+            width: 100%;
+        }
+    }
+
+    .header__home_link {
+        &.header__header__home_link__search_focused {
+            display: none;
+        }
     }
 }

@@ -7,6 +7,7 @@ import {noop, useMakeExecutableState} from '../../util/function';
 import {getArticleClientListPaginationPick} from '../../service/article/article-api';
 import {useLocale} from '../../provider/locale/locale-context';
 import {classNames} from '../../util/css';
+import {useHotKey} from '../../util/hot-key';
 
 import {articlePreviewKeyList} from './search-const';
 import {SearchArticleType} from './search-type';
@@ -24,10 +25,10 @@ export function Search(props: SearchPropsType): JSX.Element {
     const {getLocalizedString} = useLocale();
     const [hasFocus, setHasFocus] = useState<boolean>(false);
     const minLetters = 3;
+    const forceBlur = useCallback(() => setHasFocus(false), []);
+    const forceFocus = useCallback(() => setHasFocus(true), []);
 
-    const handleOnFocus = useCallback(() => {
-        setHasFocus(true);
-    }, []);
+    useHotKey([], 'Escape', forceBlur);
 
     useEffect(() => {
         function handleBodyOnClick(evt: MouseEvent) {
@@ -37,7 +38,7 @@ export function Search(props: SearchPropsType): JSX.Element {
                 return;
             }
 
-            setHasFocus(false);
+            forceBlur();
         }
 
         document.body.addEventListener('click', handleBodyOnClick, false);
@@ -45,7 +46,7 @@ export function Search(props: SearchPropsType): JSX.Element {
         return () => {
             document.body.removeEventListener('click', handleBodyOnClick, false);
         };
-    }, []);
+    }, [forceBlur]);
 
     const {
         execute: executeArticleList,
@@ -89,15 +90,19 @@ export function Search(props: SearchPropsType): JSX.Element {
         <div className={classNames(searchStyle.search_wrapper, className)} ref={wrapperRef}>
             <input
                 className={searchStyle.search_input}
-                onFocus={handleOnFocus}
+                onFocus={forceFocus}
                 onInput={handleInput}
                 placeholder={getLocalizedString('UI__SEARCH_PLACEHOLDER')}
                 type="text"
             />
 
-            <div className={classNames(searchStyle.search_icon, {[searchStyle.search_icon__focused]: hasFocus})} />
+            <button
+                className={classNames(searchStyle.search_icon, {[searchStyle.search_icon__focused]: hasFocus})}
+                onClick={forceBlur}
+                type="button"
+            />
 
-            {hasFocus ? (
+            {hasFocus && searchString.trim() ? (
                 <div className={searchStyle.result_wrapper}>
                     <SearchResult
                         isLoading={isInProgressArticleList}

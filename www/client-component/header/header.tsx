@@ -19,19 +19,24 @@ export function Header(): JSX.Element {
 
     return (
         <>
-            <header className={headerStyle.header} key="header">
+            <header className={headerStyle.header}>
                 <button
-                    className={
-                        isNavigationOpen
-                            ? headerStyle.header__navigation_toggle_button__open
-                            : headerStyle.header__navigation_toggle_button__closed
-                    }
+                    className={classNames({
+                        [headerStyle.header__navigation_toggle_button__open]: isNavigationOpen,
+                        [headerStyle.header__navigation_toggle_button__closed]: !isNavigationOpen,
+                        [headerStyle.header__navigation_toggle_button__search_focused]: hasSearchFocus,
+                    })}
                     onClick={toggleNavigation}
                     type="button"
                 >
                     &nbsp;
                 </button>
-                <Link className={headerStyle.header__home_link} to={appRoute.root.path}>
+                <Link
+                    className={classNames(headerStyle.header__home_link, {
+                        [headerStyle.header__header__home_link__search_focused]: hasSearchFocus,
+                    })}
+                    to={appRoute.root.path}
+                >
                     <img
                         alt={copyrightName}
                         className={headerStyle.header__home_icon}
