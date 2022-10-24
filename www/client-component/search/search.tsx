@@ -8,6 +8,7 @@ import {getArticleClientListPaginationPick} from '../../service/article/article-
 import {useLocale} from '../../provider/locale/locale-context';
 import {classNames} from '../../util/css';
 import {useHotKey} from '../../util/hot-key';
+import {useStaticStringState} from '../../util/use-static-state';
 
 import {articlePreviewKeyList} from './search-const';
 import {SearchArticleType} from './search-type';
@@ -27,6 +28,7 @@ export function Search(props: SearchPropsType): JSX.Element {
     const minLetters = 3;
     const forceBlur = useCallback(() => setHasFocus(false), []);
     const forceFocus = useCallback(() => setHasFocus(true), []);
+    const [searchString, setSearchString] = useStaticStringState('', 'search-value');
 
     useHotKey([], 'Escape', forceBlur);
 
@@ -57,11 +59,12 @@ export function Search(props: SearchPropsType): JSX.Element {
         PaginationResultType<SearchArticleType>
     >(getArticleClientListPaginationPick);
 
-    const [searchString, setSearchString] = useState<string>('');
-
-    const handleInput = useCallback((evt: SyntheticEvent<HTMLInputElement>) => {
-        setSearchString(evt.currentTarget.value.trim());
-    }, []);
+    const handleInput = useCallback(
+        (evt: SyntheticEvent<HTMLInputElement>) => {
+            setSearchString(evt.currentTarget.value.trim());
+        },
+        [setSearchString]
+    );
 
     useEffect(() => {
         if (searchString.length >= minLetters) {
@@ -90,6 +93,7 @@ export function Search(props: SearchPropsType): JSX.Element {
         <div className={classNames(searchStyle.search_wrapper, className)} ref={wrapperRef}>
             <input
                 className={searchStyle.search_input}
+                defaultValue={searchString}
                 onFocus={forceFocus}
                 onInput={handleInput}
                 placeholder={getLocalizedString('UI__SEARCH_PLACEHOLDER')}
