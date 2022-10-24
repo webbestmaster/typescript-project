@@ -6,6 +6,7 @@ import {useLocation} from 'react-router';
 import {PromiseResolveType} from '../../util/promise';
 import {debounce} from '../../util/function';
 import {classNames} from '../../util/css';
+import {useStaticNumberState} from "../../util/use-static-state";
 
 import scrollRestorationStyle from './scroll-restoration.scss';
 
@@ -15,23 +16,23 @@ const storageKeyPrefix = 'scroll-restoration-path:';
 
 export function ScrollRestoration(): JSX.Element {
     const [isToTopButtonVisible, setIsToTopButtonVisible] = useState<boolean>(false);
-    const [scrollTop, setScrollTop] = useState<number>(0);
     const {pathname} = useLocation();
+    const [scrollTop, setScrollTop] = useStaticNumberState(0, 'scroll-top/' + pathname);
 
     function getItemKey(): string {
         return storageKeyPrefix + pathname;
     }
 
     function restoreScrollTopPosition(): Promise<void> {
-        const savedScrollTop = Number.parseInt(sessionStorage.getItem(getItemKey()) || '0', 0) || 0;
         const {documentElement} = window.document;
 
         return new Promise((resolve: PromiseResolveType<void>) => {
             requestAnimationFrame(() => {
-                documentElement.scrollTop = savedScrollTop;
+                // TODO: check for 'scroll' event was fired
+                documentElement.scrollTop = scrollTop;
 
                 requestAnimationFrame(() => {
-                    documentElement.scrollTop = savedScrollTop;
+                    documentElement.scrollTop = scrollTop;
 
                     refreshIsToTopButtonVisible();
 

@@ -1,8 +1,6 @@
 import {useState, Dispatch, SetStateAction, useEffect} from 'react';
 
 const savedValueMapString: Record<string, string> = {};
-// const savedValueMapNumber: Record<string, number> = {};
-// const savedValueMapBoolean: Record<string, boolean> = {};
 
 export function useStaticStringState(
     defaultValue: string,
@@ -16,6 +14,25 @@ export function useStaticStringState(
 
     useEffect(() => {
         savedValueMapString[savedKey] = value;
+    }, [value, savedKey]);
+
+    return [value, setValue];
+}
+
+const savedValueMapNumber: Record<string, number> = {};
+
+export function useStaticNumberState(
+    defaultValue: number,
+    savedKey: string
+): [number, Dispatch<SetStateAction<number>>] {
+    // eslint-disable-next-line no-prototype-builtins
+    const savedValue: number = savedValueMapNumber.hasOwnProperty(savedKey)
+        ? savedValueMapNumber[savedKey]
+        : defaultValue;
+    const [value, setValue] = useState<number>(savedValue);
+
+    useEffect(() => {
+        savedValueMapNumber[savedKey] = value;
     }, [value, savedKey]);
 
     return [value, setValue];
