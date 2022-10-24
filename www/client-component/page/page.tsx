@@ -13,6 +13,8 @@ import {noop} from '../../util/function';
 import {ArticleContextType} from '../article/article-context/article-context-type';
 import {articleContext} from '../article/article-context/article-context';
 
+import {ScrollRestoration} from '../scroll-restoration/scroll-restoration';
+
 import pageStyle from './page.scss';
 
 type PagePropsType = {
@@ -36,8 +38,18 @@ export function Page(props: PagePropsType): JSX.Element {
             <Header />
 
             <div className={pageStyle.page_children}>{children}</div>
+            <div className={pageStyle.page_children}>{children}</div>
+            <div className={pageStyle.page_children}>{children}</div>
+            <div className={pageStyle.page_children}>{children}</div>
+            <div className={pageStyle.page_children}>{children}</div>
+            <div className={pageStyle.page_children}>{children}</div>
+            <div className={pageStyle.page_children}>{children}</div>
+            <div className={pageStyle.page_children}>{children}</div>
+            <div className={pageStyle.page_children}>{children}</div>
+            <div className={pageStyle.page_children}>{children}</div>
 
             <Footer />
+            <ScrollRestoration />
         </div>
     );
 }
