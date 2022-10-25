@@ -15,6 +15,7 @@ import {CmsArticleTreeAsync} from '../../page/cms/cms-article-tree/cms-article-t
 import {CmsArticleCreateAsync} from '../../page/cms/cms-article/cms-article-create/cms-article-create-async';
 import {CmsArticleEditAsync} from '../../page/cms/cms-article/cms-article-edit/cms-article-edit-async';
 import {ClientArticle} from '../../page/client/client-article/client-article';
+import {Page} from '../../client-component/page/page';
 
 import {appRoute} from './app-route';
 
@@ -35,7 +36,14 @@ export function AppRouting(props: PropsType): JSX.Element {
             <Route element={<CmsArticleCreateAsync />} path={appRoute.articleCreate.path} />
             <Route element={<CmsArticleEditAsync />} path={appRoute.articleEdit.path} />
 
-            <Route element={<Error404 />} path="*" />
+            <Route
+                element={
+                    <Page>
+                        <Error404 />
+                    </Page>
+                }
+                path="*"
+            />
         </Routes>
     );
 

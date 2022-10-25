@@ -84,6 +84,14 @@ async function makeHtmlPages(pageList: Array<StaticPageType>) {
     }
 }
 
+async function makeServicePages() {
+    await tryToMkdir(cwd, staticSiteFolderName);
+
+    const html404 = await getTextFromUrl(mainUrl + '/404');
+
+    await fileSystemPromise.writeFile(path.join(cwd, staticSiteFolderName, '404.html'), html404);
+}
+
 async function makeApiArticle(pageList: Array<StaticPageType>) {
     await tryToMkdir(cwd, staticSiteFolderName, 'api');
     // eslint-disable-next-line sonarjs/no-duplicate-string
@@ -233,6 +241,10 @@ export async function makeStatic() {
 
     console.log('>> [makeStatic]: makeHtmlPages: begin');
     await makeHtmlPages(pageList);
+    console.log('>> [makeStatic]: makeHtmlPages: end');
+
+    console.log('>> [makeStatic]: makeHtmlPages: begin');
+    await makeServicePages();
     console.log('>> [makeStatic]: makeHtmlPages: end');
 
     console.log('>> [makeStatic]: makeApiArticle: begin');
