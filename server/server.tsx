@@ -24,7 +24,7 @@ import {
     getClientArticleContextData,
     getArticleClientListPaginationPick,
 } from './article/article-api';
-import {getFile, getImage, uploadFile} from './file/file';
+import {getImage, uploadFile} from './file/file';
 import {adminOnly} from './auth/auth-helper';
 import {indexHtmlError500} from './ssr/ssr-const';
 import {makeCacheFile} from './article/article-cache';
@@ -32,6 +32,7 @@ import {getPdf} from './pdf/pdf';
 import {PaginationResultType} from './data-base/data-base-type';
 import {ArticleFileType, ArticleType} from './article/article-type';
 import {makeStatic} from './make-static';
+import {uploadFileFolder, uploadFolder} from './file/file-const';
 
 const cwd = process.cwd();
 // eslint-disable-next-line no-process-env
@@ -47,28 +48,26 @@ const isMakeStaticSite = process.env.MAKE_STATIC_SITE === 'TRUE';
     fastify.register(fastifyCors);
     fastify.register(fastifyMultipart);
 
-    /*
-        fastify.register(fastifyStaticServer, {
-            prefix: '/upload-file', // optional: default '/'
-            root: path.join(cwd, 'upload-file'),
-        });
-    */
-
+    // first of two fastifyStaticServer plugin
     fastify.register(fastifyStaticServer, {
-        prefix: '/', // optional: default '/'
-        root: path.join(cwd, 'dist'),
+        prefix: `/${uploadFileFolder}/`,
+        root: uploadFolder,
         setHeaders: (response: {setHeader: (header: string, value: string) => void}) => {
-            console.info('[ERROR] using fastifyStaticServer');
+            console.info('[ERROR] using fastifyStaticServer: upload foles');
             response.setHeader('x-warning-get-file', 'need-use-nginx');
         },
     });
 
-    /*
-        fastify.register(fastifyStaticServer, {
-            prefix: '/upload-file/', // optional: default '/'
-            root: path.join(cwd, 'upload-file'),
-        });
-    */
+    // second of two fastifyStaticServer plugin
+    fastify.register(fastifyStaticServer, {
+        decorateReply: false, // the reply decorator has been added by the first plugin registration
+        prefix: '/', // optional: default '/'
+        root: path.join(cwd, 'dist'),
+        setHeaders: (response: {setHeader: (header: string, value: string) => void}) => {
+            console.info('[ERROR] using fastifyStaticServer: html, css...');
+            response.setHeader('x-warning-get-file', 'need-use-nginx');
+        },
+    });
 
     // options for setCookie, see https://github.com/fastify/fastify-cookie
     fastify.register(fastifySecureSession, {
@@ -96,7 +95,6 @@ const isMakeStaticSite = process.env.MAKE_STATIC_SITE === 'TRUE';
         adminOnly<PaginationResultType<Partial<ArticleType>>>(getArticleListPaginationPick)
     );
     fastify.post(apiUrl.adminFileUpload, adminOnly<ArticleFileType>(uploadFile));
-    fastify.get(apiUrl.fileGet, getFile);
     fastify.get(apiUrl.imageGet, getImage);
     fastify.get(apiUrl.clientArticleContextGet, getClientArticleContextData);
     fastify.get(apiUrl.clientSearchArticle, getArticleClientListPaginationPick);
@@ -162,11 +160,6 @@ const isMakeStaticSite = process.env.MAKE_STATIC_SITE === 'TRUE';
             console.info(`> Server on port: ${serverPort} has been closed`);
         }
     });
-
-    // fastify.post('/', (request: FastifyRequest, reply: FastifyReply) => {
-    //     request.session.set('data', request.body);
-    //     reply.send('hello world');
-    // });
 
     // fastify.get('/set-cookie', (request: FastifyRequest, reply: FastifyReply) => {
     //     console.log('/////////');

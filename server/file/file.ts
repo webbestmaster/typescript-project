@@ -105,7 +105,7 @@ export async function uploadFile(request: FastifyRequest): Promise<ArticleFileTy
     return uploadResponse;
 }
 
-export function getFile(request: FastifyRequest<{Params: {fileName?: string}}>, reply: FastifyReply): ReadStream {
+function getFile(request: FastifyRequest<{Params: {fileName?: string}}>, reply: FastifyReply): ReadStream {
     const {params} = request;
     const fileName = getStringFromUnknown(params, 'fileName');
 
@@ -128,13 +128,6 @@ export async function getImage(
 
     const rawFileExtension = getFileExtension(fileName);
     const fullFilePath = path.join(uploadFolder, fileName);
-
-    // console.info('getImage /////////////');
-    // console.info(fileName);
-    // console.info(rawFileExtension);
-    // console.info(fullFilePath);
-    // console.info(path.join(uploadFolder, '___' + fileName));
-    // console.info(size);
 
     getImageCount = (getImageCount + 1) % 1000;
 
