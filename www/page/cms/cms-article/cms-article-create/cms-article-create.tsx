@@ -1,5 +1,5 @@
 import {Typography, message} from 'antd';
-import {useNavigate} from 'react-router';
+import {useNavigate} from 'react-router-dom';
 
 import {CmsArticle} from '../cms-article';
 import {makeDefaultArticle} from '../../../../../server/article/article-helper';

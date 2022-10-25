@@ -4,7 +4,7 @@
 import {useContext, useEffect, useState} from 'react';
 import markdownPro, {MarkdownConfigShallowType} from 'markdown-pro';
 import {JSONSchemaType} from 'ajv';
-import {useLocation} from 'react-router';
+import {useLocation} from 'react-router-dom';
 
 import {Locale, useLocale} from '../../../provider/locale/locale-context';
 import {ErrorData} from '../../../layout/error-data/error-data';

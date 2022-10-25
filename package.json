@@ -81,7 +81,6 @@
     "react-audio-player-pro": "^1.2.2",
     "react-dom": "^18.2.0",
     "react-localization-library": "^0.0.19",
-    "react-router": "^6.4.2",
     "react-router-dom": "^6.4.2",
     "react-system-hook": "^1.0.4",
     "sharp": "^0.31.1",

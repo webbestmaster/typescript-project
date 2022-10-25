@@ -1,7 +1,7 @@
 /* global window, document, requestAnimationFrame, sessionStorage */
 
 import {useEffect, useState, useCallback, useContext} from 'react';
-import {useLocation} from 'react-router';
+import {useLocation} from 'react-router-dom';
 
 import {debounce} from '../../util/function';
 import {classNames} from '../../util/css';

@@ -1,6 +1,5 @@
 import {ReactNode, useContext, useEffect} from 'react';
-import {useLocation} from 'react-router';
-import {useParams} from 'react-router-dom';
+import {useParams, useLocation} from 'react-router-dom';
 
 import {Header} from '../header/header';
 import {Footer} from '../footer/footer';
