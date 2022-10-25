@@ -11,10 +11,19 @@ import {PageHeader} from '../../../client-component/page-header/page-header';
 import {ArticleContextType} from '../../../client-component/article/article-context/article-context-type';
 import {articleContext} from '../../../client-component/article/article-context/article-context';
 import {Error404} from '../../service/error-404/error-404';
+import {Spinner} from '../../../layout/spinner/spinner';
 
 export function ClientArticle(): JSX.Element {
-    const {article} = useContext<ArticleContextType>(articleContext);
+    const {article, isInProgressArticle} = useContext<ArticleContextType>(articleContext);
     const {title, id} = article;
+
+    if (isInProgressArticle) {
+        return (
+            <Page>
+                <Spinner isShow wrapperColor="transparent" wrapperHeight="50vh" />
+            </Page>
+        );
+    }
 
     if (id === '') {
         return (

@@ -38,15 +38,6 @@ export function Page(props: PagePropsType): JSX.Element {
             <Header />
 
             <div className={pageStyle.page_children}>{children}</div>
-            <div className={pageStyle.page_children}>{children}</div>
-            <div className={pageStyle.page_children}>{children}</div>
-            <div className={pageStyle.page_children}>{children}</div>
-            <div className={pageStyle.page_children}>{children}</div>
-            <div className={pageStyle.page_children}>{children}</div>
-            <div className={pageStyle.page_children}>{children}</div>
-            <div className={pageStyle.page_children}>{children}</div>
-            <div className={pageStyle.page_children}>{children}</div>
-            <div className={pageStyle.page_children}>{children}</div>
 
             <Footer />
             <ScrollRestoration />
