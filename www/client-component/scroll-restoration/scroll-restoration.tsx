@@ -7,12 +7,14 @@ import {debounce} from '../../util/function';
 import {classNames} from '../../util/css';
 import {ArticleContextType} from '../article/article-context/article-context-type';
 import {articleContext} from '../article/article-context/article-context';
+import {useLocale} from '../../provider/locale/locale-context';
 
 import {getAbsoluteScrollTop, getRelativeScrollTop, handleScrollToTop} from './scroll-restoration-helper';
 import scrollRestorationStyle from './scroll-restoration.scss';
 
 export function ScrollRestoration(): JSX.Element {
     const topScrollPositionToShowToTopButton = 100;
+    const {getLocalizedString} = useLocale();
     const {pathname} = useLocation();
     const [scrollTop, setScrollTop] = useState<number>(0);
     const getItemKey = useCallback((): string => 'ScrollRestoration:' + pathname, [pathname]);
@@ -57,6 +59,7 @@ export function ScrollRestoration(): JSX.Element {
                     scrollTop > topScrollPositionToShowToTopButton,
             })}
             onClick={handleScrollToTop}
+            title={getLocalizedString('UI__TO_TOP')}
             type="button"
         >
             <span className={scrollRestorationStyle.scroll_restoration__scroll_to_top_button__arrow} />

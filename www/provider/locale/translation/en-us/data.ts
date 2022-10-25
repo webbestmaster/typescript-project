@@ -2,6 +2,7 @@ export const enUs = {
     /* eslint-disable id-match, id-length, max-len, sonarjs/no-duplicate-string, sort-keys */
     META__LANGUAGE_NAME: 'English',
 
+    UI__MENU: 'Menu',
     UI__YES: 'Yes',
     UI__NO: 'No',
     UI__CANCEL: 'Cancel',
@@ -38,7 +39,10 @@ export const enUs = {
     UI__LOG_OUT: 'Log out',
     UI__SEARCH: 'Search',
     UI__SEARCH_PLACEHOLDER: 'Search...',
+    UI__SEARCH_BUTTON: 'Search button',
+    UI__SEARCH_INPUT: 'Search input',
     UI__LEARN_MORE: 'Learn more',
+    UI__TO_TOP: 'To top',
 
     WEEK_DAY__MONDAY: 'Monday',
     WEEK_DAY__TUESDAY: 'Tuesday',

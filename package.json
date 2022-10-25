@@ -58,6 +58,7 @@
     "storybook:build": "build-storybook"
   },
   "dependencies": {
+    "@fastify/compress": "^6.1.1",
     "@fastify/cors": "^8.1.0",
     "@fastify/error": "^3.0.0",
     "@fastify/multipart": "^7.2.0",

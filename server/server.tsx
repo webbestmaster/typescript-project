@@ -4,6 +4,7 @@ import path from 'path';
 
 import fastifyStaticServer from '@fastify/static';
 import fastifyCors from '@fastify/cors';
+import fastifyCompress from '@fastify/compress';
 import fastifyMultipart from '@fastify/multipart';
 import fastifySecureSession from '@fastify/secure-session';
 import {FastifyError} from '@fastify/error';
@@ -46,6 +47,7 @@ const isMakeStaticSite = process.env.MAKE_STATIC_SITE === 'TRUE';
     // Services
     // //////////////
     fastify.register(fastifyCors);
+    fastify.register(fastifyCompress);
     fastify.register(fastifyMultipart);
 
     // first of two fastifyStaticServer plugin

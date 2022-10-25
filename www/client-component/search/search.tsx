@@ -97,12 +97,14 @@ export function Search(props: SearchPropsType): JSX.Element {
                 onFocus={forceFocus}
                 onInput={handleInput}
                 placeholder={getLocalizedString('UI__SEARCH_PLACEHOLDER')}
+                title={getLocalizedString('UI__SEARCH_INPUT')}
                 type="text"
             />
 
             <button
                 className={classNames(searchStyle.search_icon, {[searchStyle.search_icon__focused]: hasFocus})}
                 onClick={forceBlur}
+                title={getLocalizedString('UI__SEARCH_BUTTON')}
                 type="button"
             />
 

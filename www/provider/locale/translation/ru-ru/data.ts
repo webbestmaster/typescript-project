@@ -4,6 +4,7 @@ export const ruRu: LocaleDictionaryType = {
     /* eslint-disable id-match, id-length, max-len, sonarjs/no-duplicate-string, sort-keys */
     META__LANGUAGE_NAME: 'Русский',
 
+    UI__MENU: 'Menu',
     UI__YES: 'Да',
     UI__NO: 'Нет',
     UI__CANCEL: 'Отмена',
@@ -40,7 +41,10 @@ export const ruRu: LocaleDictionaryType = {
     UI__LOG_OUT: 'Выйти',
     UI__SEARCH: 'Поиск',
     UI__SEARCH_PLACEHOLDER: 'Поиск...',
+    UI__SEARCH_BUTTON: 'Поиск кнопка',
+    UI__SEARCH_INPUT: 'Поиск поле',
     UI__LEARN_MORE: 'Узнать больше',
+    UI__TO_TOP: 'Наверх',
 
     WEEK_DAY__MONDAY: 'Понедельник',
     WEEK_DAY__TUESDAY: 'Вторник',

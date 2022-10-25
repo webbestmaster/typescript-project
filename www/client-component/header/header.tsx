@@ -6,10 +6,12 @@ import {appRoute} from '../../component/app/app-route';
 import {Navigation} from '../navigation/navigation';
 import {classNames} from '../../util/css';
 import {Search} from '../search/search';
+import {useLocale} from '../../provider/locale/locale-context';
 
 import headerStyle from './header.scss';
 
 export function Header(): JSX.Element {
+    const {getLocalizedString} = useLocale();
     const [isNavigationOpen, setIsNavigationOpen] = useState<boolean>(false);
     const toggleNavigation = useCallback(() => {
         setIsNavigationOpen((isOpen: boolean): boolean => !isOpen);
@@ -27,6 +29,7 @@ export function Header(): JSX.Element {
                         [headerStyle.header__navigation_toggle_button__search_focused]: hasSearchFocus,
                     })}
                     onClick={toggleNavigation}
+                    title={getLocalizedString('UI__MENU')}
                     type="button"
                 >
                     &nbsp;
