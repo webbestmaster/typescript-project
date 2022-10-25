@@ -27,10 +27,15 @@ export async function makeAudioFile(fullFilePath: string): Promise<string> {
     const audioFileName = `${getRandomString()}.mp3`;
     const outputPath = path.join(uploadFolder, audioFileName);
     const trackBitrate = await getAudioFileBitrate(fullFilePath);
-    const bitrate: BitrateType = maxKiloBytesPerSecond > trackBitrate ? trackBitrate : maxKiloBytesPerSecond;
+
+    if (trackBitrate <= maxKiloBytesPerSecond) {
+        await fileSystemPromises.copyFile(fullFilePath, outputPath);
+
+        return audioFileName;
+    }
 
     const audioEncoder = new Lame({
-        bitrate,
+        bitrate: maxKiloBytesPerSecond,
         output: outputPath,
         quality: 0,
     }).setFile(fullFilePath);
