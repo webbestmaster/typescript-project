@@ -2,8 +2,8 @@
 
 import path from 'path';
 
+import fastifySetupCors from '@fastify/cors';
 import fastifyStaticServer from '@fastify/static';
-import fastifyCors from '@fastify/cors';
 import fastifyCompress from '@fastify/compress';
 import fastifyMultipart from '@fastify/multipart';
 import fastifySecureSession from '@fastify/secure-session';
@@ -46,7 +46,7 @@ const isMakeStaticSite = process.env.MAKE_STATIC_SITE === 'TRUE';
     // //////////////
     // Services
     // //////////////
-    fastify.register(fastifyCors);
+    fastify.register(fastifySetupCors);
     fastify.register(fastifyCompress);
     fastify.register(fastifyMultipart);
 
