@@ -6,7 +6,7 @@ import {useLocation} from 'react-router';
 import {debounce} from '../../util/function';
 import {classNames} from '../../util/css';
 
-import {handleScrollToTop} from './scroll-restoration-helper';
+import {getAbsoluteScrollTop, getRelativeScrollTop, handleScrollToTop} from './scroll-restoration-helper';
 import scrollRestorationStyle from './scroll-restoration.scss';
 
 export function ScrollRestoration(): JSX.Element {
@@ -17,13 +17,14 @@ export function ScrollRestoration(): JSX.Element {
 
     useEffect(() => {
         const {documentElement} = window.document;
-        const savedScrollTop = Number.parseInt(sessionStorage.getItem(getItemKey()) || '0', 10) || 0;
+        const relativeScrollTop = Number.parseFloat(sessionStorage.getItem(getItemKey()) || '0') || 0;
+        const absoluteScrollTop = getAbsoluteScrollTop(relativeScrollTop);
 
         requestAnimationFrame(() => {
-            documentElement.scrollTop = savedScrollTop;
+            documentElement.scrollTop = absoluteScrollTop;
 
             requestAnimationFrame(() => {
-                documentElement.scrollTop = savedScrollTop;
+                documentElement.scrollTop = absoluteScrollTop;
             });
         });
     }, [getItemKey]);
@@ -32,7 +33,7 @@ export function ScrollRestoration(): JSX.Element {
         const debouncedChangeScrollTopPosition = debounce<[]>(() => {
             const {documentElement} = window.document;
 
-            sessionStorage.setItem(getItemKey(), documentElement.scrollTop.toString(10));
+            sessionStorage.setItem(getItemKey(), getRelativeScrollTop().toString(10));
 
             setScrollTop(documentElement.scrollTop);
         }, 150);
