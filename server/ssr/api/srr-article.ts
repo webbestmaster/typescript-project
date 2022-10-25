@@ -9,10 +9,9 @@ import {
 } from '../../article/article-util';
 import {ArticlePreviewType, ArticleType} from '../../article/article-type';
 import {articleSsrFieldName} from '../../../www/client-component/article/article-const';
-import {rootArticleSlug} from '../../article/article-const';
 
 export async function makeClientArticleContextData(slug: string): Promise<[ArticleContextType, string]> {
-    const article: ArticleType = (await getActiveArticleBySlug(slug || rootArticleSlug)) || makeDefaultArticle();
+    const article: ArticleType = (await getActiveArticleBySlug(slug)) || makeDefaultArticle();
 
     const {subDocumentIdList, id} = article;
 

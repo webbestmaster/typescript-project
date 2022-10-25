@@ -34,6 +34,7 @@ import {PaginationResultType} from './data-base/data-base-type';
 import {ArticleFileType, ArticleType} from './article/article-type';
 import {makeStatic} from './make-static';
 import {uploadFileFolder, uploadFolder} from './file/file-const';
+import {rootArticleSlug} from './article/article-const';
 
 const cwd = process.cwd();
 // eslint-disable-next-line no-process-env
@@ -112,7 +113,16 @@ const isMakeStaticSite = process.env.MAKE_STATIC_SITE === 'TRUE';
         fastify.get(
             rout.path,
             async (request: FastifyRequest<{Params: {slug?: string}}>, reply: FastifyReply): Promise<string> => {
-                const [ssrResponse, article] = await getHtmlCallBack(request, reply);
+                const [ssrResponse, article] = await getHtmlCallBack(
+                    {
+                        ...request,
+                        params: {
+                            ...request.params,
+                            slug: (rout.path === appRoute.root.path ? rootArticleSlug : request.params.slug) || '',
+                        },
+                    },
+                    reply
+                );
 
                 if (article.slug) {
                     makeCacheFile(article.slug, ssrResponse).catch(console.error);

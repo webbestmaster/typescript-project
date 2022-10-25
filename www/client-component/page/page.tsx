@@ -12,7 +12,7 @@ import {rootArticleSlug} from '../../../server/article/article-const';
 import {noop} from '../../util/function';
 import {ArticleContextType} from '../article/article-context/article-context-type';
 import {articleContext} from '../article/article-context/article-context';
-
+import {getArticleLinkToViewClient} from '../article/article-helper';
 import {ScrollRestoration} from '../scroll-restoration/scroll-restoration';
 
 import pageStyle from './page.scss';
@@ -24,14 +24,25 @@ type PagePropsType = {
 export function Page(props: PagePropsType): JSX.Element {
     const {children} = props;
     const location = useLocation();
-    const {slug = rootArticleSlug} = useParams<ExtractPathKeysType<typeof appRoute.article.path>>();
+    const {pathname} = location;
+    const {slug = ''} = useParams<ExtractPathKeysType<typeof appRoute.article.path>>();
     const {setSlug = noop} = useContext<ArticleContextType>(articleContext);
 
     useEffect(() => {
-        setSlug(slug);
-    }, [slug, setSlug]);
+        const trimmedSlug = slug.trim();
 
-    useGoogleAnalytics({googleAnalyticsId, pathname: location.pathname});
+        // check for /article/<slug>
+        if (trimmedSlug && pathname === getArticleLinkToViewClient(trimmedSlug)) {
+            setSlug(trimmedSlug);
+            return;
+        }
+
+        if (pathname === appRoute.root.path) {
+            setSlug(rootArticleSlug);
+        }
+    }, [slug, setSlug, pathname]);
+
+    useGoogleAnalytics({googleAnalyticsId, pathname});
 
     return (
         <div className={pageStyle.page}>
