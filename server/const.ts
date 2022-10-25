@@ -17,8 +17,6 @@ export const apiUrl = {
     getUser: '/api/auth/get-user',
     imageGet: '/api-image/:size/:fileName' as const,
     login: '/api/auth/login',
-
-    makeStatic: '/make-static',
 };
 
 export const mainResponseHeader: [string, string] = ['Content-Type', 'application/json; charset=utf-8'];

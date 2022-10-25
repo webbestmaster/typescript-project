@@ -243,9 +243,9 @@ export async function makeStatic() {
     await makeHtmlPages(pageList);
     console.log('>> [makeStatic]: makeHtmlPages: end');
 
-    console.log('>> [makeStatic]: makeHtmlPages: begin');
+    console.log('>> [makeStatic]: makeServicePages: begin');
     await makeServicePages();
-    console.log('>> [makeStatic]: makeHtmlPages: end');
+    console.log('>> [makeStatic]: makeServicePages: end');
 
     console.log('>> [makeStatic]: makeApiArticle: begin');
     await makeApiArticle(pageList);

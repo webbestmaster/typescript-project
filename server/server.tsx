@@ -2,7 +2,6 @@
 
 import path from 'path';
 
-// remove '@fastify/static' from package.json
 import fastifyStaticServer from '@fastify/static';
 import fastifyCors from '@fastify/cors';
 import fastifyMultipart from '@fastify/multipart';
@@ -15,7 +14,7 @@ import {appRoute, AppRoutType} from '../www/component/app/app-route';
 import {getAutoAuthLogin, postAuthLogin} from './auth/auth-api';
 import {getHtmlCallBack} from './ssr/ssr';
 import {secretKey} from './key';
-import {apiUrl, mainResponseHeader, serverPort, siteCookieKey} from './const';
+import {apiUrl, serverPort, siteCookieKey} from './const';
 import {
     getArticleListPagination,
     getArticleListPaginationPick,
@@ -35,6 +34,8 @@ import {ArticleFileType, ArticleType} from './article/article-type';
 import {makeStatic} from './make-static';
 
 const cwd = process.cwd();
+// eslint-disable-next-line no-process-env
+const isMakeStaticSite = process.env.MAKE_STATIC_SITE === 'TRUE';
 
 // eslint-disable-next-line max-statements, unicorn/prefer-top-level-await
 (async () => {
@@ -99,13 +100,6 @@ const cwd = process.cwd();
     fastify.get(apiUrl.imageGet, getImage);
     fastify.get(apiUrl.clientArticleContextGet, getClientArticleContextData);
     fastify.get(apiUrl.clientSearchArticle, getArticleClientListPaginationPick);
-    fastify.get(apiUrl.makeStatic, async (request: FastifyRequest, reply: FastifyReply) => {
-        await makeStatic();
-
-        reply.code(200).header(...mainResponseHeader);
-
-        return {};
-    });
     fastify.post(apiUrl.clientMakePdf, getPdf);
     fastify.post(apiUrl.adminArticleCreate, adminOnly<ArticleType | Record<'message', string>>(postAdminArticleCreate));
     fastify.post(apiUrl.adminArticleUpdate, adminOnly<ArticleType | Record<'message', string>>(postAdminArticleUpdate));
@@ -154,13 +148,19 @@ const cwd = process.cwd();
         }
     );
 
-    fastify.listen({host: '0.0.0.0', port: serverPort}, (error: Error | null) => {
+    fastify.listen({host: '0.0.0.0', port: serverPort}, async (error: Error | null): Promise<void> => {
         if (error) {
             console.log(error);
             throw error;
         }
 
         console.info(`> Server started port: ${serverPort}`);
+
+        if (isMakeStaticSite) {
+            await makeStatic();
+            await fastify.close();
+            console.info(`> Server on port: ${serverPort} has been closed`);
+        }
     });
 
     // fastify.post('/', (request: FastifyRequest, reply: FastifyReply) => {

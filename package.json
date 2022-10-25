@@ -31,6 +31,7 @@
     "back:nodemon": "nodemon ./dist-server/dist/index.js",
     "build:prod:start": "npm run front:build && npm run back:build && npm run back:start",
     "front:build-library": "cross-env NODE_ENV=production SIDE=front IS_BUILD_LIBRARY=true NODE_OPTIONS=--max-old-space-size=256 webpack --progress && npm run front:tsc-library",
+    "make-static-site": "cross-env MAKE_STATIC_SITE=TRUE npm run build:prod:start",
     "check": "npm run ts-coverage && npm run tsc && npm run eslint && npm run stylelint",
     "check:fix": "npm run prettier && npm run ts-coverage && npm run tsc && npm run eslint:fix && npm run stylelint:fix",
     "eslint": "eslint .",
