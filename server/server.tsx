@@ -10,7 +10,7 @@ import fastifySecureSession from '@fastify/secure-session';
 import {FastifyError} from '@fastify/error';
 import fastifyConstructor, {FastifyRequest, FastifyReply} from 'fastify';
 
-import {appRoute, AppRoutType} from '../www/component/app/app-route';
+import {appRoute} from '../www/component/app/app-route';
 
 import {getAutoAuthLogin, postAuthLogin} from './auth/auth-api';
 import {getHtmlCallBack} from './ssr/ssr';
@@ -34,6 +34,7 @@ import {PaginationResultType} from './data-base/data-base-type';
 import {ArticleFileType, ArticleType} from './article/article-type';
 import {makeStatic} from './make-static';
 import {uploadFileFolder, uploadFolder} from './file/file-const';
+import {getHtmlCallBackRequest} from './ssr/ssr-helper';
 import {rootArticleSlug} from './article/article-const';
 
 const cwd = process.cwd();
@@ -109,30 +110,69 @@ const isMakeStaticSite = process.env.MAKE_STATIC_SITE === 'TRUE';
     // //////////////
     // Pages
     // //////////////
-    Object.values(appRoute).forEach((rout: AppRoutType) => {
-        fastify.get(
-            rout.path,
-            async (request: FastifyRequest<{Params: {slug?: string}}>, reply: FastifyReply): Promise<string> => {
-                const {article, html} = await getHtmlCallBack(
-                    {
-                        ...request,
-                        params: {
-                            ...request.params,
-                            slug: (rout.path === appRoute.root.path ? rootArticleSlug : request.params.slug) || '',
-                        },
-                    },
-                    reply
-                );
+    // [client root]
+    fastify.get(appRoute.root.path, async (request: FastifyRequest, reply: FastifyReply): Promise<string> => {
+        const {html} = await getHtmlCallBack({slug: rootArticleSlug, url: appRoute.root.path});
 
-                if (article.slug) {
-                    makeCacheFile(article.slug, html).catch(console.error);
-                }
+        makeCacheFile('index', html).catch(console.error);
 
-                reply.header('X-file-generated', 'use-nginx');
+        // eslint-disable-next-line sonarjs/no-duplicate-string
+        reply.header('X-file-generated', 'use-nginx');
+        reply.type('text/html');
 
-                return html;
+        return html;
+    });
+    // [client article]
+    fastify.get(
+        appRoute.article.path,
+        async (request: FastifyRequest<{Params: {slug?: string}}>, reply: FastifyReply): Promise<string> => {
+            const {article, html} = await getHtmlCallBack(getHtmlCallBackRequest(request));
+
+            if (article.slug) {
+                makeCacheFile(article.slug, html).catch(console.error);
             }
-        );
+
+            if (article.hasMetaRobotsNoIndexSeo) {
+                reply.header('X-Robots-Tag', 'noindex');
+            }
+
+            if (article.id === '') {
+                reply.code(404);
+            }
+
+            reply.header('X-file-generated', 'use-nginx');
+            reply.type('text/html');
+
+            return html;
+        }
+    );
+
+    // [service login]
+    fastify.get(appRoute.login.path, async (request: FastifyRequest, reply: FastifyReply): Promise<string> => {
+        const {html} = await getHtmlCallBack({slug: '', url: appRoute.login.path});
+
+        makeCacheFile('login', html).catch(console.error);
+
+        reply.header('X-file-generated', 'use-nginx');
+        reply.type('text/html');
+
+        return html;
+    });
+
+    [
+        appRoute.articleList.path,
+        appRoute.articleTree.path,
+        appRoute.articleCreate.path,
+        appRoute.articleEdit.path,
+    ].forEach((cmsPath: string): void => {
+        // [cms articleList]
+        fastify.get(cmsPath, async (request: FastifyRequest, reply: FastifyReply): Promise<string> => {
+            const {html} = await getHtmlCallBack({slug: '', url: request.raw.url || ''});
+
+            reply.type('text/html');
+
+            return html;
+        });
     });
 
     // //////////////
@@ -146,17 +186,15 @@ const isMakeStaticSite = process.env.MAKE_STATIC_SITE === 'TRUE';
         return indexHtmlError500;
     });
 
-    fastify.setNotFoundHandler(
-        async (request: FastifyRequest<{Params: {slug?: string}}>, reply: FastifyReply): Promise<string> => {
-            request.log.warn(request);
+    fastify.setNotFoundHandler(async (request: FastifyRequest, reply: FastifyReply): Promise<string> => {
+        request.log.warn(request);
 
-            reply.code(404);
+        const {html} = await getHtmlCallBack({slug: '', url: request.raw.url || ''});
 
-            const {html} = await getHtmlCallBack(request, reply);
+        reply.code(404);
 
-            return html;
-        }
-    );
+        return html;
+    });
 
     fastify.listen({host: '0.0.0.0', port: serverPort}, async (error: Error | null): Promise<void> => {
         if (error) {

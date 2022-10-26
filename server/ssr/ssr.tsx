@@ -1,4 +1,3 @@
-import {FastifyReply, FastifyRequest} from 'fastify';
 import ReactDOMServer from 'react-dom/server';
 
 import {App} from '../../www/component/app/app';
@@ -6,8 +5,8 @@ import {streamToStringServer} from '../util/stream';
 import {navigationReplaceSelector} from '../../www/client-component/navigation/navigation-const';
 import {articleReplaceSelector} from '../../www/client-component/article/article-const';
 import {ArticleType} from '../article/article-type';
-import {getStringFromUnknown} from '../../www/util/type';
 import {ThemeNameEnum} from '../../www/provider/theme/theme-context-type';
+import {appRoute} from '../../www/component/app/app-route';
 
 import {getNavigationContextData} from './api/ssr-navigation';
 import {contentStringBegin, contentStringEnd, contentStringFull, indexHtml} from './ssr-const';
@@ -22,16 +21,13 @@ import {getMetaOpenGraphSsrReplaceData} from './api/ssr-helper/ssr-meta-open-gra
 import {getMetaTwitterCardSsrReplaceData} from './api/ssr-helper/ssr-meta-twitter-card';
 import {getSchemaMarkupArticleSsrReplaceData} from './api/schema-markup/schema-markup-article';
 import {getSchemaMarkupBreadcrumbsSsrReplaceData} from './api/schema-markup/schema-markup-breadcrumbs';
+import {GetHtmlCallBackRequestType} from './ssr-type';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars, max-statements
 export async function getHtmlCallBack(
-    request: FastifyRequest<{Params: {slug?: string}}>,
-    reply: FastifyReply
+    options: GetHtmlCallBackRequestType
 ): Promise<{article: ArticleType; html: string}> {
-    reply.type('text/html');
-
-    const {params, raw} = request;
-    const slug = getStringFromUnknown(params, 'slug');
+    const {slug, url} = options;
 
     const [navigationData, navigationDataHtmlString] = await getNavigationContextData();
     const [articleData, articleDataHtmlString] = await makeClientArticleContextData(slug);
@@ -49,25 +45,16 @@ export async function getHtmlCallBack(
     const metaOpenGraphSsrReplaceData = getMetaOpenGraphSsrReplaceData(article);
     const metaTwitterCardSsrReplaceData = getMetaTwitterCardSsrReplaceData(article);
 
-    const url: string = raw.url || '/';
     const appStream = ReactDOMServer.renderToStaticNodeStream(
         <App
             articleData={articleData}
             defaultThemeName={ThemeNameEnum.light}
             navigationData={navigationData}
-            url={url}
+            url={url || appRoute.root.path}
         />
     );
 
     const htmlString = await streamToStringServer(appStream);
-
-    if (article.id === '') {
-        reply.code(404);
-    }
-
-    if (article.hasMetaRobotsNoIndexSeo) {
-        reply.header('X-Robots-Tag', 'noindex');
-    }
 
     const html = indexHtml
         .replace(titleSsrReplaceData.selector, titleSsrReplaceData.value)
