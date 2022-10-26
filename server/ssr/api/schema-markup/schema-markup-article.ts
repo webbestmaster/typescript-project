@@ -48,7 +48,7 @@ export function getSchemaMarkupArticleSsrReplaceData(article: ArticleType): SsrR
                 },
                 "description": "${fitTextTo(removeNonJsonSymbols(descriptionShort || title), 300)}"
             }
-        </script>`;
+        </script>`.replace(/\s+/gi, ' ');
 
     return {selector, value};
 }

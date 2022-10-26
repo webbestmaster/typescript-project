@@ -50,7 +50,7 @@ export function getSchemaMarkupBreadcrumbsSsrReplaceData(
                 "@type": "BreadcrumbList",
                 "itemListElement": ${JSON.stringify([...itemListElement, schemaBreadcrumbItemLast])}
             }
-        </script>`;
+        </script>`.replace(/\s+/gi, ' ');
 
     return {selector, value};
 }
