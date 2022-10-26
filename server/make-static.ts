@@ -226,10 +226,6 @@ async function makeIndexHtml(pageList: Array<StaticPageType>) {
 export async function makeStatic() {
     console.log('> [makeStatic]: makeStatic: begin');
 
-    console.log('>> [makeStatic]: copyFrontFolder: begin');
-    await copyFrontFolder();
-    console.log('>> [makeStatic]: copyFrontFolder: end');
-
     console.log('>> [makeStatic]: copyStaticFileFolder: begin');
     await copyStaticFileFolder();
     console.log('>> [makeStatic]: copyStaticFileFolder: end');
@@ -270,6 +266,10 @@ export async function makeStatic() {
     console.log('>> [makeStatic]: makeIndexHtml: begin');
     await makeIndexHtml(pageList);
     console.log('>> [makeStatic]: makeIndexHtml: end');
+
+    console.log('>> [makeStatic]: copyFrontFolder: begin');
+    await copyFrontFolder();
+    console.log('>> [makeStatic]: copyFrontFolder: end');
 
     console.log('> [makeStatic]: makeStatic: end');
 }

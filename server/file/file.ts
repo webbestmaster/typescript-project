@@ -114,8 +114,6 @@ function getFile(request: FastifyRequest<{Params: {fileName?: string}}>, reply: 
     return fileSystem.createReadStream(path.join(uploadFolder, fileName));
 }
 
-let getImageCount = 0;
-
 export async function getImage(
     request: FastifyRequest<{Params: {fileName?: string}}>,
     reply: FastifyReply
@@ -129,9 +127,7 @@ export async function getImage(
     const rawFileExtension = getFileExtension(fileName);
     const fullFilePath = path.join(uploadFolder, fileName);
 
-    getImageCount = (getImageCount + 1) % 1000;
-
-    const newFileName: string = 'remove-me-' + getImageCount.toString(10).padStart(3, '0');
+    const newFileName: string = 'remove-me-' + getRandomString();
     const temporaryFilePath: string = path.join(temporaryUploadFolder, `${newFileName}.${rawFileExtension}`);
 
     const [rawImageWidth, rawImageHeight] = size.split('x');
