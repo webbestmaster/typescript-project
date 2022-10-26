@@ -27,7 +27,7 @@ import {getSchemaMarkupBreadcrumbsSsrReplaceData} from './api/schema-markup/sche
 export async function getHtmlCallBack(
     request: FastifyRequest<{Params: {slug?: string}}>,
     reply: FastifyReply
-): Promise<[string, ArticleType]> {
+): Promise<{article: ArticleType; html: string}> {
     reply.type('text/html');
 
     const {params, raw} = request;
@@ -89,5 +89,5 @@ export async function getHtmlCallBack(
         // .replace(/left: 100%;/g, 'left:100%')
         .replace(articleReplaceSelector, articleDataHtmlString);
 
-    return [html, article];
+    return {article, html};
 }

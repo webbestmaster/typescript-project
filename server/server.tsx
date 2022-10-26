@@ -113,7 +113,7 @@ const isMakeStaticSite = process.env.MAKE_STATIC_SITE === 'TRUE';
         fastify.get(
             rout.path,
             async (request: FastifyRequest<{Params: {slug?: string}}>, reply: FastifyReply): Promise<string> => {
-                const [ssrResponse, article] = await getHtmlCallBack(
+                const {article, html} = await getHtmlCallBack(
                     {
                         ...request,
                         params: {
@@ -125,12 +125,12 @@ const isMakeStaticSite = process.env.MAKE_STATIC_SITE === 'TRUE';
                 );
 
                 if (article.slug) {
-                    makeCacheFile(article.slug, ssrResponse).catch(console.error);
+                    makeCacheFile(article.slug, html).catch(console.error);
                 }
 
                 reply.header('X-file-generated', 'use-nginx');
 
-                return ssrResponse;
+                return html;
             }
         );
     });
@@ -152,7 +152,7 @@ const isMakeStaticSite = process.env.MAKE_STATIC_SITE === 'TRUE';
 
             reply.code(404);
 
-            const [html] = await getHtmlCallBack(request, reply);
+            const {html} = await getHtmlCallBack(request, reply);
 
             return html;
         }

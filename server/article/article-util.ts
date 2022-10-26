@@ -15,8 +15,16 @@ export function getArticleBySlug(slug: string): Promise<ArticleType | null> {
 }
 */
 
-export function getActiveArticleBySlug(slug: string): Promise<ArticleType | null> {
+function getActiveArticleBySlug(slug: string): Promise<ArticleType | null> {
     return articleCrud.findOne({isActive: true, slug});
+}
+
+export async function getActiveArticleBySlugEnsure(slug: string, defaultArticle: ArticleType): Promise<ArticleType> {
+    if (!slug) {
+        return defaultArticle;
+    }
+
+    return (await getActiveArticleBySlug(slug)) || defaultArticle;
 }
 
 export function articleToArticlePreview(article: ArticleType): ArticlePreviewType {

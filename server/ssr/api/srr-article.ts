@@ -1,7 +1,7 @@
 import {ArticleContextType} from '../../../www/client-component/article/article-context/article-context-type';
 import {makeDefaultArticle} from '../../article/article-helper';
 import {
-    getActiveArticleBySlug,
+    getActiveArticleBySlugEnsure,
     getArticlePreviewBreadcrumbListById,
     getArticlePreviewListByIdListFiltered,
     getIsActiveArticlePreview,
@@ -11,7 +11,7 @@ import {ArticlePreviewType, ArticleType} from '../../article/article-type';
 import {articleSsrFieldName} from '../../../www/client-component/article/article-const';
 
 export async function makeClientArticleContextData(slug: string): Promise<[ArticleContextType, string]> {
-    const article: ArticleType = (await getActiveArticleBySlug(slug)) || makeDefaultArticle();
+    const article: ArticleType = await getActiveArticleBySlugEnsure(slug, makeDefaultArticle());
 
     const {subDocumentIdList, id} = article;
 
