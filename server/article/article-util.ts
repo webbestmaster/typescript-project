@@ -9,9 +9,11 @@ export function getArticleById(id: string): Promise<ArticleType | null> {
     return articleCrud.findOne({id});
 }
 
+/*
 export function getArticleBySlug(slug: string): Promise<ArticleType | null> {
     return articleCrud.findOne({slug});
 }
+*/
 
 export function getActiveArticleBySlug(slug: string): Promise<ArticleType | null> {
     return articleCrud.findOne({isActive: true, slug});

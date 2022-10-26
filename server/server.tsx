@@ -2,10 +2,10 @@
 
 import path from 'path';
 
-import fastifySetupCors from '@fastify/cors';
-import fastifyStaticServer from '@fastify/static';
+import {fastifyCors} from '@fastify/cors';
+import {fastifyStatic} from '@fastify/static';
 import fastifyCompress from '@fastify/compress';
-import fastifyMultipart from '@fastify/multipart';
+import {fastifyMultipart} from '@fastify/multipart';
 import fastifySecureSession from '@fastify/secure-session';
 import {FastifyError} from '@fastify/error';
 import fastifyConstructor, {FastifyRequest, FastifyReply} from 'fastify';
@@ -47,12 +47,12 @@ const isMakeStaticSite = process.env.MAKE_STATIC_SITE === 'TRUE';
     // //////////////
     // Services
     // //////////////
-    fastify.register(fastifySetupCors);
+    fastify.register(fastifyCors);
     fastify.register(fastifyCompress);
     fastify.register(fastifyMultipart);
 
     // first of two fastifyStaticServer plugin
-    fastify.register(fastifyStaticServer, {
+    fastify.register(fastifyStatic, {
         prefix: `/${uploadFileFolder}/`,
         root: uploadFolder,
         setHeaders: (response: {setHeader: (header: string, value: string) => void}) => {
@@ -62,7 +62,7 @@ const isMakeStaticSite = process.env.MAKE_STATIC_SITE === 'TRUE';
     });
 
     // second of two fastifyStaticServer plugin
-    fastify.register(fastifyStaticServer, {
+    fastify.register(fastifyStatic, {
         decorateReply: false, // the reply decorator has been added by the first plugin registration
         prefix: '/', // optional: default '/'
         root: path.join(cwd, 'dist'),

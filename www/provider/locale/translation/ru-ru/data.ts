@@ -4,7 +4,7 @@ export const ruRu: LocaleDictionaryType = {
     /* eslint-disable id-match, id-length, max-len, sonarjs/no-duplicate-string, sort-keys */
     META__LANGUAGE_NAME: 'Русский',
 
-    UI__MENU: 'Menu',
+    UI__MENU: 'Меню',
     UI__YES: 'Да',
     UI__NO: 'Нет',
     UI__CANCEL: 'Отмена',
