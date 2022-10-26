@@ -27,7 +27,6 @@ import {
 } from './article/article-api';
 import {getImage, uploadFile} from './file/file';
 import {adminOnly} from './auth/auth-helper';
-import {indexHtmlError500} from './ssr/ssr-const';
 import {makeCacheFile} from './article/article-cache';
 import {getPdf} from './pdf/pdf';
 import {PaginationResultType} from './data-base/data-base-type';
@@ -178,13 +177,18 @@ const isMakeStaticSite = process.env.MAKE_STATIC_SITE === 'TRUE';
     // //////////////
     // 4xx & 5xx
     // //////////////
-    fastify.setErrorHandler((error: FastifyError, request: FastifyRequest, reply: FastifyReply): string => {
-        request.log.warn(error);
+    fastify.setErrorHandler(
+        async (error: FastifyError, request: FastifyRequest, reply: FastifyReply): Promise<string> => {
+            request.log.warn(error);
 
-        reply.code(500).type('text/html');
+            const {html} = await getHtmlCallBack({slug: '', url: request.raw.url || ''});
 
-        return indexHtmlError500;
-    });
+            reply.code(500);
+            reply.type('text/html');
+
+            return html;
+        }
+    );
 
     fastify.setNotFoundHandler(async (request: FastifyRequest, reply: FastifyReply): Promise<string> => {
         request.log.warn(request);
@@ -192,6 +196,7 @@ const isMakeStaticSite = process.env.MAKE_STATIC_SITE === 'TRUE';
         const {html} = await getHtmlCallBack({slug: '', url: request.raw.url || ''});
 
         reply.code(404);
+        reply.type('text/html');
 
         return html;
     });

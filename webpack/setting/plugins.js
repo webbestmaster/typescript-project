@@ -29,7 +29,7 @@ const staticFilesSiteList = [
     'ads.txt',
     'gss-0.9.xsl',
     'manifest.json',
-    'index-500.html',
+    // 'index-500.html',
 ].map(fileName => ({
     from: `./www/${fileName}`,
     to: `${filePathPrefix}${fileName}`,
