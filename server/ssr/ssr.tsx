@@ -6,7 +6,6 @@ import {navigationReplaceSelector} from '../../www/client-component/navigation/n
 import {articleReplaceSelector} from '../../www/client-component/article/article-const';
 import {ArticleType} from '../article/article-type';
 import {ThemeNameEnum} from '../../www/provider/theme/theme-context-type';
-import {appRoute} from '../../www/component/app/app-route';
 
 import {getNavigationContextData} from './api/ssr-navigation';
 import {contentStringBegin, contentStringEnd, contentStringFull, indexHtml} from './ssr-const';
@@ -50,7 +49,7 @@ export async function getHtmlCallBack(
             articleData={articleData}
             defaultThemeName={ThemeNameEnum.light}
             navigationData={navigationData}
-            url={url || appRoute.root.path}
+            url={url}
         />
     );
 

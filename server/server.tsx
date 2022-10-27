@@ -129,14 +129,12 @@ const isMakeStaticSite = process.env.MAKE_STATIC_SITE === 'TRUE';
 
             if (article.slug) {
                 makeCacheFile(article.slug, html).catch(console.error);
+            } else {
+                reply.code(404);
             }
 
             if (article.hasMetaRobotsNoIndexSeo) {
                 reply.header('X-Robots-Tag', 'noindex');
-            }
-
-            if (article.id === '') {
-                reply.code(404);
             }
 
             reply.header('X-file-generated', 'use-nginx');
