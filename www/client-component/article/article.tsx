@@ -9,6 +9,7 @@ import {articleContext} from './article-context/article-context';
 import {ArticleArticle} from './article-type/article-article';
 import {ArticleContainer} from './article-type/article-container';
 import {ArticleAudioList} from './article-type/article-audio-list';
+import {ArticleAudioSingle} from './article-type/article-audio-single';
 
 export function Article(): JSX.Element {
     const {article} = useContext<ArticleContextType>(articleContext);
@@ -23,6 +24,9 @@ export function Article(): JSX.Element {
         }
         case ArticleTypeEnum.audioList: {
             return <ArticleAudioList />;
+        }
+        case ArticleTypeEnum.audioSingle: {
+            return <ArticleAudioSingle />;
         }
         default: {
             throw new NeverError(articleType);
