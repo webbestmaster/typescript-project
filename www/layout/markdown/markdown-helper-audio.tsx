@@ -15,15 +15,16 @@ function getAudioFromHtml(audioHtmlCode: string, title: string): JSX.Element {
 
     const [ignoredFullSrcString, srcAsString = ''] = audioHtmlCode.match(/src="(\S+)"/) || ['', ''];
     const [ignoredFullDurationString, durationAsString = ''] = audioHtmlCode.match(/data-duration="(\S+)"/) || ['', ''];
-    const [ignoredFullDownloadString, downloadAsString = ''] = audioHtmlCode.match(/data-download="(\S+)"/) || ['', ''];
+    const [ignoredFullTitleString, titleAsString = ''] = audioHtmlCode.match(/data-title="([^"]*?)"/) || ['', ''];
     const durationAsNumber = Number.parseFloat(durationAsString) || 0;
-    const downloadFileName = downloadAsString.trim() || textToSlug(title);
+    const endTitle: string = titleAsString || title;
+    const downloadFileName = textToSlug(endTitle);
 
     return (
         <AudioAsync
             downloadFileName={downloadFileName}
             duration={durationAsNumber}
-            mediaMetadata={{...defaultMediaMetadata, title}}
+            mediaMetadata={{...defaultMediaMetadata, title: endTitle}}
             preload={durationAsNumber ? 'none' : 'metadata'}
             src={srcAsString}
             useRepeatButton

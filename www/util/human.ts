@@ -75,7 +75,7 @@ export function arrayToStringByComma(texts: Array<string> | string): string {
 export function textToSlug(test: string): string {
     return [...textToLatin(test.trim().toLowerCase().replace(/\s+/gi, wordSeparator))]
         .filter<string>((char: string): char is string => {
-            return char === wordSeparator || /\w/gi.test(char);
+            return char === wordSeparator || /[\da-z]/gi.test(char);
         })
         .join('');
 }

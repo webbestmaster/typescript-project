@@ -213,6 +213,7 @@ export function getIsAudio(fileName: string): boolean {
     return ['mp3', 'wav'].includes(fileExtension);
 }
 
+/*
 export async function getFileMarkdownByName(fileName: string): Promise<string> {
     const pathToFile = getPathToFile(fileName);
 
@@ -231,20 +232,29 @@ export async function getFileMarkdownByName(fileName: string): Promise<string> {
 
     return `<a href="${pathToFile}" target="_blank" download="${fileName}">${fileName}</a>`;
 }
+*/
 
-export function getFileMarkdownByFullInfo(fullFileInfo: ArticleFileType): string {
+// eslint-disable-next-line complexity
+export function getFileMarkdownByFullInfo(
+    fullFileInfo: ArticleFileType,
+    additionalInfo: Record<'alt' | 'title', string>
+): string {
     const {duration, name, width, height, type} = fullFileInfo;
+    const {alt, title} = additionalInfo;
     const pathToFile = getPathToFile(name);
+
+    const htmlAlt = alt || 'THE ALT';
+    const htmlTitle = title || 'THE TITLE';
 
     switch (type) {
         case ArticleFileTypeEnum.image: {
-            return `![THE ALT](${pathToFile} "THE TITLE" height="${height}" width="${width}")`;
+            return `![${htmlAlt}](${pathToFile} "${htmlTitle}" height="${height}" width="${width}")`;
         }
         case ArticleFileTypeEnum.audio: {
-            return `<audio data-duration="${duration}" data-download="" src="${pathToFile}"></audio>`;
+            return `<audio data-duration="${duration}" data-title="${title}" src="${pathToFile}"></audio>`;
         }
         case ArticleFileTypeEnum.unknown: {
-            return `<a href="${pathToFile}" target="_blank" download="${name}">${name}</a>`;
+            return `<a href="${pathToFile}" target="_blank" download="${textToSlug(title)}">${name}</a>`;
         }
         default: {
             throw new NeverError(type);
