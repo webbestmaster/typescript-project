@@ -13,7 +13,7 @@ import {defaultMediaMetadata} from '../../../layout/audio-player/audio-player-co
 import audioPlayerStyle from '../../../layout/audio-player/audio-player.scss';
 import articleStyle from '../article.scss';
 
-export function ArticleAudioList(): JSX.Element {
+export function ArticleAudioChildrenList(): JSX.Element {
     const {article, childList} = useContext<ArticleContextType>(articleContext);
     const {content, titleImage, title} = article;
     const trackList: Array<TrackType> = [];

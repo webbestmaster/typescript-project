@@ -8,7 +8,7 @@ import {articleContext} from './article-context/article-context';
 
 import {ArticleArticle} from './article-type/article-article';
 import {ArticleContainer} from './article-type/article-container';
-import {ArticleAudioList} from './article-type/article-audio-list';
+import {ArticleAudioChildrenList} from './article-type/article-audio-children-list';
 import {ArticleAudioSingle} from './article-type/article-audio-single';
 
 export function Article(): JSX.Element {
@@ -22,8 +22,8 @@ export function Article(): JSX.Element {
         case ArticleTypeEnum.container: {
             return <ArticleContainer />;
         }
-        case ArticleTypeEnum.audioList: {
-            return <ArticleAudioList />;
+        case ArticleTypeEnum.audioChildrenList: {
+            return <ArticleAudioChildrenList />;
         }
         case ArticleTypeEnum.audioSingle: {
             return <ArticleAudioSingle />;

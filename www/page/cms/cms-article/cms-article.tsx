@@ -322,7 +322,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 <Select<ArticleTypeEnum>>
                     <Option value={ArticleTypeEnum.article}>Article</Option>
                     <Option value={ArticleTypeEnum.container}>Container</Option>
-                    <Option value={ArticleTypeEnum.audioList}>Audio list</Option>
+                    <Option value={ArticleTypeEnum.audioChildrenList}>Audio Children List</Option>
                     <Option value={ArticleTypeEnum.audioSingle}>Audio Single</Option>
                 </Select>
             </Form.Item>
