@@ -55,6 +55,7 @@ export async function uploadFile(request: FastifyRequest): Promise<ArticleFileTy
         height: 0,
         name: uniqueFileName,
         size: stats.size,
+        title: '',
         type: ArticleFileTypeEnum.unknown,
         width: 0,
     };
@@ -75,6 +76,7 @@ export async function uploadFile(request: FastifyRequest): Promise<ArticleFileTy
             height: 0,
             name: webPFileName,
             size: webPStats.size,
+            title: '',
             type: ArticleFileTypeEnum.image,
             width: 0,
         };
@@ -95,6 +97,7 @@ export async function uploadFile(request: FastifyRequest): Promise<ArticleFileTy
             height: 0,
             name: mp3FileName,
             size: mp3Stats.size,
+            title: '',
             type: ArticleFileTypeEnum.audio,
             width: 0,
         };

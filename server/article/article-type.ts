@@ -1,7 +1,7 @@
 export enum ArticleTypeEnum {
     article = 'article', // usual article
     audioChildrenList = 'audio-children-list', // get all *.mp3 files from every child and makes play list from it
-    audioList = 'audio-list', // get first *.mp3 file from file list
+    audioList = 'audio-list', // get all *.mp3 files from file list
     audioSingle = 'audio-single', // get first *.mp3 file from file list
     container = 'container', // show children as [subDocumentListViewType: SubDocumentListViewTypeEnum]
 }
@@ -22,6 +22,7 @@ export type ArticleFileType = {
     height: number; // original height
     name: string; // name of file
     size: number; // size of file in bytes
+    title: string; // human read able title
     type: ArticleFileTypeEnum; // audio, image, etc.
     width: number; // original width
 };

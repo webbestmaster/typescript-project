@@ -12,6 +12,7 @@ export function makeDefaultArticleFile(): ArticleFileType {
         height: 0,
         name: '',
         size: 0,
+        title: '',
         type: ArticleFileTypeEnum.unknown,
         width: 0,
     };

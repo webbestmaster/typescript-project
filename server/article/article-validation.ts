@@ -17,11 +17,20 @@ export function makeArticleFileSchema(): JSONSchemaType<ArticleFileType> {
         height: {type: 'number'}, // original height
         name: {type: 'string'}, // name of file
         size: {type: 'number'}, // size of file in bytes
+        title: {type: 'string'},
         type: {'enum': Object.values(ArticleFileTypeEnum), type: 'string'}, // audio, image, etc.
         width: {type: 'number'}, // original width
     } as const;
 
-    const requiredFieldList: Array<keyof ArticleFileType> = ['duration', 'height', 'name', 'size', 'type', 'width'];
+    const requiredFieldList: Array<keyof ArticleFileType> = [
+        'duration',
+        'height',
+        'name',
+        'size',
+        'title',
+        'type',
+        'width',
+    ];
 
     const articleFileSchema: JSONSchemaType<ArticleFileType> = {
         additionalProperties: false,
