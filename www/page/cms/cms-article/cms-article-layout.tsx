@@ -50,9 +50,9 @@ export function renderUploadedFileListItem(
         <Box height={112}>
             {originNode}
             {fileInfo ? (
-                <Input value={getFileMarkdownByFullInfo(fileInfo, {alt: '', title: ''})} />
+                <Input readOnly value={getFileMarkdownByFullInfo(fileInfo, {alt: '', title: ''})} />
             ) : (
-                <Input status="error" value={`[ERROR]: can not find file by name: ${name}`} />
+                <Input readOnly status="error" value={`[ERROR]: can not find file by name: ${name}`} />
             )}
         </Box>
     );

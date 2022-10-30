@@ -11,6 +11,7 @@ import {ArticleContainer} from './article-type/article-container';
 import {ArticleAudioChildrenList} from './article-type/article-audio-children-list';
 import {ArticleAudioSingle} from './article-type/article-audio-single';
 
+// eslint-disable-next-line complexity
 export function Article(): JSX.Element {
     const {article} = useContext<ArticleContextType>(articleContext);
     const {articleType} = article;
@@ -26,6 +27,9 @@ export function Article(): JSX.Element {
             return <ArticleAudioChildrenList />;
         }
         case ArticleTypeEnum.audioSingle: {
+            return <ArticleAudioSingle />;
+        }
+        case ArticleTypeEnum.audioList: {
             return <ArticleAudioSingle />;
         }
         default: {
