@@ -31,7 +31,7 @@ export function ArticleAudioSingle(): JSX.Element {
                     useRepeatButton
                 />
             ) : null}
-            <Markdown articleTitle={title} className={articleStyle.article_markdown} mdInput={content} />;
+            <Markdown articleTitle={title} className={articleStyle.article_markdown} mdInput={content} />
         </>
     );
 }

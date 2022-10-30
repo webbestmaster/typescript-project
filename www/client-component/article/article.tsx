@@ -10,6 +10,7 @@ import {ArticleArticle} from './article-type/article-article';
 import {ArticleContainer} from './article-type/article-container';
 import {ArticleAudioChildrenList} from './article-type/article-audio-children-list';
 import {ArticleAudioSingle} from './article-type/article-audio-single';
+import {ArticleAudioList} from './article-type/article-audio-list';
 
 // eslint-disable-next-line complexity
 export function Article(): JSX.Element {
@@ -30,7 +31,7 @@ export function Article(): JSX.Element {
             return <ArticleAudioSingle />;
         }
         case ArticleTypeEnum.audioList: {
-            return <ArticleAudioSingle />;
+            return <ArticleAudioList />;
         }
         default: {
             throw new NeverError(articleType);
