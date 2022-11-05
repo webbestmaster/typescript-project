@@ -51,7 +51,7 @@ export function ArticleAudioChildrenList(): JSX.Element {
             <Markdown
                 articleTitle={title}
                 className={articleStyle.article_markdown}
-                mdInput={getFileMarkdownByFullInfo(titleImage, {alt: title, title})}
+                mdInput={getFileMarkdownByFullInfo(titleImage, {alt: title})}
             />
             <AudioPlayerAsync className={articleStyle.article_audio_player} trackList={trackList} />
             <Markdown articleTitle={title} className={articleStyle.article_markdown} mdInput={content} />

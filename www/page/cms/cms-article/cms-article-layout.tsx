@@ -1,20 +1,13 @@
-import {Typography, Select, Input, Button} from 'antd';
+import {Typography, Select, Button} from 'antd';
 import {PlusOutlined} from '@ant-design/icons';
 import {UploadFile} from 'antd/lib/upload/interface';
 import {Link} from 'react-router-dom';
 
-import {Box} from '../../../layout/box/box';
 import {ArticleFileType, ArticleType} from '../../../../server/article/article-type';
 import {getArticleLinkToViewClient} from '../../../client-component/article/article-helper';
 
 import {ArticleForValidationType} from './cms-article-type';
-import {
-    getArticleLinkToEdit,
-    getFileMarkdownByFullInfo,
-    getIsImage,
-    getPathToFile,
-    getPathToImage,
-} from './cms-article-helper';
+import {getArticleLinkToEdit, getIsImage, getPathToFile, getPathToImage} from './cms-article-helper';
 
 const {Option} = Select;
 const {Text} = Typography;
@@ -34,30 +27,6 @@ export function makeFileListItem(fileInfo: ArticleFileType): UploadFile<unknown>
     };
 }
 
-export function renderUploadedFileListItem(
-    originNode: JSX.Element,
-    file: UploadFile<unknown>,
-    fileList: Array<ArticleFileType>
-    // uploadedFileList: Array<UploadFile<unknown>>,
-    // actions: { download: () => void; preview: () => void; remove: () => void }
-): JSX.Element {
-    const {name} = file;
-    const fileInfo: ArticleFileType | void = fileList.find(
-        (fileInfoInFileList: ArticleFileType): boolean => fileInfoInFileList.name === name
-    );
-
-    return (
-        <Box height={112}>
-            {originNode}
-            {fileInfo ? (
-                <Input readOnly value={getFileMarkdownByFullInfo(fileInfo, {alt: '', title: ''})} />
-            ) : (
-                <Input readOnly status="error" value={`[ERROR]: can not find file by name: ${name}`} />
-            )}
-        </Box>
-    );
-}
-
 export function makeSubDocumentOption(articleForValidation: ArticleForValidationType): JSX.Element {
     const {title, id} = articleForValidation;
 
@@ -68,7 +37,7 @@ export function makeSubDocumentOption(articleForValidation: ArticleForValidation
     );
 }
 
-export function getParentLit(
+export function getParentList(
     article: ArticleType,
     savedArticleList: Array<ArticleForValidationType>
 ): Array<ArticleForValidationType> {
@@ -83,7 +52,7 @@ export function renderParentList(
     article: ArticleType,
     savedArticleList: Array<ArticleForValidationType>
 ): Array<JSX.Element> {
-    const parentList: Array<JSX.Element> = getParentLit(article, savedArticleList).map(
+    const parentList: Array<JSX.Element> = getParentList(article, savedArticleList).map(
         (savedArticle: ArticleForValidationType, index: number): JSX.Element => {
             const {id, title, slug} = savedArticle;
 

@@ -237,14 +237,14 @@ export async function getFileMarkdownByName(fileName: string): Promise<string> {
 // eslint-disable-next-line complexity
 export function getFileMarkdownByFullInfo(
     fullFileInfo: ArticleFileType,
-    additionalInfo: Record<'alt' | 'title', string>
+    additionalInfo: Record<'alt', string>
 ): string {
-    const {duration, name, width, height, type} = fullFileInfo;
-    const {alt, title} = additionalInfo;
+    const {duration, name, width, height, type, title} = fullFileInfo;
+    const {alt} = additionalInfo;
     const pathToFile = getPathToFile(name);
 
-    const htmlAlt = alt || 'THE ALT';
     const htmlTitle = title || 'THE TITLE';
+    const htmlAlt = alt || title;
 
     switch (type) {
         case ArticleFileTypeEnum.image: {

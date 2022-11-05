@@ -61,11 +61,10 @@ import {
     uploadFile,
 } from './cms-article-helper';
 import {
-    getParentLit,
+    getParentList,
     makeFileListItem,
     makeSubDocumentOption,
     renderParentList,
-    renderUploadedFileListItem,
     UploadButton,
 } from './cms-article-layout';
 import {
@@ -77,6 +76,7 @@ import {
     noDateUTC,
 } from './cms-article-const';
 import {ArticleForValidationType} from './cms-article-type';
+import {renderUploadedFileListItem} from './render-uploaded-file-list-item';
 
 const {Text, Title} = Typography;
 const {Option} = Select;
@@ -225,7 +225,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
     }
 
     const absentIdList = getAbsentIdList(subDocumentIdList, savedArticleList);
-    const parentList = getParentLit(article, savedArticleList);
+    const parentList = getParentList(article, savedArticleList);
     const hasParent = parentList.length > 0;
     const isDisableToDelete = hasParent || id === rootArticleId;
 
@@ -289,7 +289,17 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                     }}
                     fileList={titleImage.size > 0 ? [titleImage].map(makeFileListItem) : []}
                     itemRender={(originNode: JSX.Element, file: UploadFile<unknown>): JSX.Element => {
-                        return renderUploadedFileListItem(originNode, file, [titleImage]);
+                        return renderUploadedFileListItem({
+                            file,
+                            fileInfo: titleImage,
+                            originNode,
+                            setFileTitle: (newFileTitle: string) => {
+                                setTitleImage({
+                                    ...titleImage,
+                                    title: newFileTitle,
+                                });
+                            },
+                        });
                     }}
                     listType="picture"
                     maxCount={1}
@@ -407,7 +417,21 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                     fileList={fileList.map(makeFileListItem)}
                     // itemRender={renderUploadedFileListItem}
                     itemRender={(originNode: JSX.Element, file: UploadFile<unknown>): JSX.Element => {
-                        return renderUploadedFileListItem(originNode, file, fileList);
+                        const fileInfo = fileList.find(
+                            (fileInfoIList: ArticleFileType): boolean => fileInfoIList.name === file.name
+                        );
+
+                        return renderUploadedFileListItem({
+                            file,
+                            fileInfo,
+                            originNode,
+                            setFileTitle: (newFileTitle: string) => {
+                                if (fileInfo) {
+                                    fileInfo.title = newFileTitle;
+                                    setFileList([...fileList]);
+                                }
+                            },
+                        });
                     }}
                     listType="picture"
                     onChange={handleChangeFileList}
