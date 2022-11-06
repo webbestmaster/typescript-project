@@ -35,6 +35,7 @@ import {makeStatic} from './make-static';
 import {uploadFileFolder, uploadFolder} from './file/file-const';
 import {getHtmlCallBackRequest} from './ssr/ssr-helper';
 import {rootArticleSlug} from './article/article-const';
+import {removeExtraStaticFiles} from './file/extra-static-files';
 
 const cwd = process.cwd();
 // eslint-disable-next-line no-process-env
@@ -102,6 +103,7 @@ const isMakeStaticSite = process.env.MAKE_STATIC_SITE === 'TRUE';
     fastify.get(apiUrl.clientArticleContextGet, getClientArticleContextData);
     fastify.get(apiUrl.clientSearchArticle, getArticleClientListPaginationPick);
     fastify.post(apiUrl.clientMakePdf, getPdf);
+    fastify.get(apiUrl.removeExtraStaticFilesGet, removeExtraStaticFiles);
     fastify.post(apiUrl.adminArticleCreate, adminOnly<ArticleType | Record<'message', string>>(postAdminArticleCreate));
     fastify.post(apiUrl.adminArticleUpdate, adminOnly<ArticleType | Record<'message', string>>(postAdminArticleUpdate));
     fastify.delete(apiUrl.adminArticleDelete, adminOnly<Record<'articleId', string>>(deleteAdminArticleDelete));

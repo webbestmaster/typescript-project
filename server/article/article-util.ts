@@ -1,4 +1,4 @@
-import {ArticlePreviewType, ArticleType} from './article-type';
+import {ArticleFileType, ArticlePreviewType, ArticleType} from './article-type';
 import {articleCrud} from './article';
 
 export function getIsActiveArticlePreview(article: ArticlePreviewType): article is ArticlePreviewType {
@@ -121,4 +121,30 @@ export async function getSubDocumentListByParentIdFiltered(parentId: string): Pr
     }
 
     return getSubDocumentListFiltered(parent);
+}
+
+export function getIsFileInArticle(fileName: string, article: ArticleType): boolean {
+    const {content, description, descriptionShort, metaSeo, fileList, titleImage} = article;
+
+    const pathOfFilePath = `/${fileName}`.toLowerCase();
+
+    if (content.toLowerCase().includes(pathOfFilePath)) {
+        return true;
+    }
+
+    if (description.toLowerCase().includes(pathOfFilePath)) {
+        return true;
+    }
+
+    if (descriptionShort.toLowerCase().includes(pathOfFilePath)) {
+        return true;
+    }
+
+    if (metaSeo.toLowerCase().includes(pathOfFilePath)) {
+        return true;
+    }
+
+    return [...fileList, titleImage].some((fileInfo: ArticleFileType): boolean => {
+        return fileInfo.name.toLowerCase() === fileName.toLowerCase();
+    });
 }
