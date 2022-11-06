@@ -8,23 +8,21 @@ import {FastifyReply, FastifyRequest} from 'fastify';
 import {ArticleType} from '../article/article-type';
 import {articleCrud} from '../article/article';
 
-import {uploadFileFolder} from './file-const';
 import {specialFileNameList} from '../../www/const';
 import {mainResponseHeader} from '../const';
 import {getIsFileInArticle} from '../article/article-util';
 
+import {uploadFileFolder} from './file-const';
+
 const cwd = process.cwd();
 
 type GetExtraFilesType = {
-    actualSpecialFileList: Array<string>,
-    expectedSpecialFileList: Array<string>,
-    extraFileList: Array<string>,
-}
+    actualSpecialFileList: Array<string>;
+    expectedSpecialFileList: Array<string>;
+    extraFileList: Array<string>;
+};
 
-export async function removeExtraStaticFiles(
-    request: FastifyRequest,
-    reply: FastifyReply
-): Promise<GetExtraFilesType> {
+export async function removeExtraStaticFiles(request: FastifyRequest, reply: FastifyReply): Promise<GetExtraFilesType> {
     const articleList: Array<ArticleType> = await articleCrud.findMany({});
 
     const actualSpecialFileList: Array<string> = [];
@@ -45,7 +43,7 @@ export async function removeExtraStaticFiles(
             return;
         }
 
-        fileSystemPromises.unlink(path.join(cwd, uploadFileFolder, fileName));
+        // fileSystemPromises.unlink(path.join(cwd, uploadFileFolder, fileName));
         extraFileList.push(fileName);
     });
 

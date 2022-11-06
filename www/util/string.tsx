@@ -19,7 +19,7 @@ export function getRandomString(): string {
     const fromRandom = Math.random().toString(32).replace('0.', '');
     const fromTime = Date.now().toString(32);
 
-    return `${fromRandom}${fromTime}`;
+    return `${fromRandom}${fromTime}`.toLowerCase();
 }
 
 export function findString(input: string, searchQuery: string, flags: '' | 'g' | 'gi' = 'gi'): Array<string> {
