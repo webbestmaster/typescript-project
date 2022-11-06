@@ -13,11 +13,11 @@ export const apiUrl = {
     clientArticleContextGet: '/api/client-article/:slug' as const,
     clientMakePdf: '/api/client-make-pdf',
     clientSearchArticle: '/api/client-article/pagination-pick',
-    removeExtraStaticFilesGet: '/api/extra-static-file-list',
     fileGet: '/static-file/:fileName' as const,
     getUser: '/api/auth/get-user',
     imageGet: '/api-image/:size/:fileName' as const,
     login: '/api/auth/login',
+    removeExtraStaticFilesGet: '/api/remove-extra-static-files',
 };
 
 export const mainResponseHeader: [string, string] = ['Content-Type', 'application/json; charset=utf-8'];
