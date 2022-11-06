@@ -26,6 +26,11 @@ type StaticPageType = Readonly<{
     slug: string;
 }>;
 
+type ImageUrlType = Readonly<{
+    slug: string;
+    url: string;
+}>;
+
 async function getTextFromUrl(fullUrl: string): Promise<string> {
     const response = await fetch(fullUrl);
 
@@ -174,39 +179,47 @@ async function makeCompanyLogo() {
 async function makeImages(pageList: Array<StaticPageType>) {
     await tryToMkdir(cwd, staticSiteFolderName, 'api-image');
 
-    const imageUrlSet = new Set<string>();
+    const imageUrlList: Array<ImageUrlType> = [];
 
     pageList.forEach((page: StaticPageType) => {
-        const urlList: Array<string> = page.html.match(/\/api-image\/[^\s"]+/gi) || [];
+        const {html, slug} = page;
+        const urlList: Array<string> = html.match(/\/api-image\/[^\s"]+/gi) || [];
 
         urlList.forEach((url: string) => {
-            imageUrlSet.add(url);
+            imageUrlList.push({slug, url});
         });
     });
 
-    const imageUrlList: Array<string> = [...imageUrlSet];
-
     // eslint-disable-next-line no-loops/no-loops
     for (const imageUrl of imageUrlList) {
-        const imageUrlChunks = imageUrl.split('/');
+        const imageUrlChunks = imageUrl.url.split('/');
         const [ignoredSpace, ignoredImageApiString, imageSize, imageName] = imageUrlChunks;
 
         if (!imageName || !imageSize) {
-            console.log('[ERROR]: makeImages: wrong image url:', imageUrl);
+            console.log('----------------------------------------');
+            console.log(`[ERROR]: makeImages: wrong image url, slug / url:', ${imageUrl.slug}/${imageUrl.url}`);
             // eslint-disable-next-line no-continue
             continue;
         }
 
         await tryToMkdir(cwd, staticSiteFolderName, 'api-image', imageSize);
 
-        const imageResponse: Response = await fetch(mainUrl + imageUrl);
+        const imageResponse: Response = await fetch(mainUrl + imageUrl.url);
+
+        if (!imageResponse.ok) {
+            console.log('----------------------------------------');
+            console.log(`[ERROR]: makeImages: can not get slug/url:', ${imageUrl.slug} / ${imageUrl.url}`);
+            // eslint-disable-next-line no-continue
+            continue;
+        }
+
         const imageArrayBuffer = await imageResponse.arrayBuffer();
         const imageBuffer = Buffer.from(imageArrayBuffer);
 
-        fileSystem.createWriteStream(path.join(cwd, staticSiteFolderName, imageUrl)).write(imageBuffer);
+        fileSystem.createWriteStream(path.join(cwd, staticSiteFolderName, imageUrl.url)).write(imageBuffer);
 
-        console.log(`[INFO]: makeImages: ${imageUrlList.indexOf(imageUrl) + 1}/${imageUrlList.length} : ${imageUrl}`);
-        console.log(imageName, imageSize);
+        // console.log(`[INFO]: makeImages: ${imageUrlList.indexOf(imageUrl) + 1}/${imageUrlList.length} : ${imageUrl.url}`);
+        // console.log(imageName, imageSize);
     }
 }
 
