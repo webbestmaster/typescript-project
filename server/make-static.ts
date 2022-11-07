@@ -14,7 +14,7 @@ import {ArticleType} from './article/article-type';
 import {uploadFileFolder} from './file/file-const';
 import {apiUrl, serverPort} from './const';
 import {rootArticleSlug} from './article/article-const';
-import {tryToMkdir} from './file/directory';
+import {tryToMakeDirectory} from './file/directory';
 
 const staticSiteFolderName = 'static-site';
 const mainUrl = `http://127.0.0.1:${serverPort}`;
@@ -45,13 +45,13 @@ async function getStaticPage(slug: string): Promise<StaticPageType> {
 }
 
 async function copyFrontFolder(): Promise<void> {
-    await tryToMkdir(cwd, staticSiteFolderName);
+    await tryToMakeDirectory(cwd, staticSiteFolderName);
 
     await fileSystemPromise.cp(path.join(cwd, 'dist'), path.join(cwd, staticSiteFolderName), {recursive: true});
 }
 
 async function copyStaticFileFolder(): Promise<void> {
-    await tryToMkdir(cwd, staticSiteFolderName);
+    await tryToMakeDirectory(cwd, staticSiteFolderName);
 
     await fileSystemPromise.cp(
         path.join(cwd, uploadFileFolder),
@@ -78,7 +78,7 @@ async function collectHtmlPages(): Promise<Array<StaticPageType>> {
 }
 
 async function makeHtmlPages(pageList: Array<StaticPageType>) {
-    await tryToMkdir(cwd, staticSiteFolderName, 'article');
+    await tryToMakeDirectory(cwd, staticSiteFolderName, 'article');
 
     // write html files
     // eslint-disable-next-line no-loops/no-loops
@@ -90,7 +90,7 @@ async function makeHtmlPages(pageList: Array<StaticPageType>) {
 }
 
 async function makeServicePages() {
-    await tryToMkdir(cwd, staticSiteFolderName);
+    await tryToMakeDirectory(cwd, staticSiteFolderName);
 
     const html404 = await getTextFromUrl(mainUrl + '/404');
 
@@ -98,9 +98,9 @@ async function makeServicePages() {
 }
 
 async function makeApiArticle(pageList: Array<StaticPageType>) {
-    await tryToMkdir(cwd, staticSiteFolderName, 'api');
+    await tryToMakeDirectory(cwd, staticSiteFolderName, 'api');
     // eslint-disable-next-line sonarjs/no-duplicate-string
-    await tryToMkdir(cwd, staticSiteFolderName, 'api', 'client-article');
+    await tryToMakeDirectory(cwd, staticSiteFolderName, 'api', 'client-article');
 
     // write html files
     // eslint-disable-next-line no-loops/no-loops
@@ -118,8 +118,8 @@ async function makeApiArticle(pageList: Array<StaticPageType>) {
 }
 
 async function makeApiArticleSearch() {
-    await tryToMkdir(cwd, staticSiteFolderName, 'api');
-    await tryToMkdir(cwd, staticSiteFolderName, 'api', 'client-article');
+    await tryToMakeDirectory(cwd, staticSiteFolderName, 'api');
+    await tryToMakeDirectory(cwd, staticSiteFolderName, 'api', 'client-article');
 
     const querySearchParameters = paginationQueryToURLSearchParameters<ArticleType>(
         {pageIndex: 0, pageSize: 0, query: {}, sort: {title: 1}},
@@ -137,7 +137,7 @@ async function makeApiArticleSearch() {
 }
 
 async function makeIcons() {
-    await tryToMkdir(cwd, staticSiteFolderName, 'api-image');
+    await tryToMakeDirectory(cwd, staticSiteFolderName, 'api-image');
 
     const appIconSizeList: Array<number> = [
         // manifest.json, check in manifest.json
@@ -150,7 +150,7 @@ async function makeIcons() {
     for (const iconSize of appIconSizeList) {
         const sizeFolderName = `${iconSize}x${iconSize}`;
 
-        await tryToMkdir(cwd, staticSiteFolderName, 'api-image', sizeFolderName);
+        await tryToMakeDirectory(cwd, staticSiteFolderName, 'api-image', sizeFolderName);
 
         const iconImagePath = getPathToImage(appIconPngFileName, {height: iconSize, width: iconSize});
         const responseIcon: Response = await fetch(mainUrl + iconImagePath);
@@ -165,8 +165,8 @@ async function makeCompanyLogo() {
     const logoWidth = 600;
     const logoHeight = 60;
 
-    await tryToMkdir(cwd, staticSiteFolderName, 'api-image');
-    await tryToMkdir(cwd, staticSiteFolderName, 'api-image', `${logoWidth}x${logoHeight}`);
+    await tryToMakeDirectory(cwd, staticSiteFolderName, 'api-image');
+    await tryToMakeDirectory(cwd, staticSiteFolderName, 'api-image', `${logoWidth}x${logoHeight}`);
 
     const companyLogoPath = getPathToImage(companyLogoPngFileName, {height: logoHeight, width: logoWidth});
     const responseLogo: Response = await fetch(mainUrl + companyLogoPath);
@@ -177,7 +177,7 @@ async function makeCompanyLogo() {
 }
 
 async function makeImages(pageList: Array<StaticPageType>) {
-    await tryToMkdir(cwd, staticSiteFolderName, 'api-image');
+    await tryToMakeDirectory(cwd, staticSiteFolderName, 'api-image');
 
     const imageUrlList: Array<ImageUrlType> = [];
 
@@ -202,7 +202,7 @@ async function makeImages(pageList: Array<StaticPageType>) {
             continue;
         }
 
-        await tryToMkdir(cwd, staticSiteFolderName, 'api-image', imageSize);
+        await tryToMakeDirectory(cwd, staticSiteFolderName, 'api-image', imageSize);
 
         const imageResponse: Response = await fetch(mainUrl + imageUrl.url);
 

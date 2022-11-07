@@ -1,6 +1,6 @@
 import {PromiseResolveType} from '../../www/util/promise';
 import {extractFromUnknown} from '../../www/util/type';
-import {tryToMkdir} from '../file/directory';
+import {tryToMakeDirectory} from '../file/directory';
 
 import {CrudSearchQueryType, RegExpQueryType} from './data-base-type';
 import {dataBaseBackUpPathAbsolute} from './data-base-const';
@@ -56,6 +56,6 @@ export function makePreparedQuery<ModelType>(query: CrudSearchQueryType<ModelTyp
 }
 
 export async function makeBackUpFolder(dataBaseId: string): Promise<void> {
-    await tryToMkdir(dataBaseBackUpPathAbsolute);
-    await tryToMkdir(dataBaseBackUpPathAbsolute, dataBaseId);
+    await tryToMakeDirectory(dataBaseBackUpPathAbsolute);
+    await tryToMakeDirectory(dataBaseBackUpPathAbsolute, dataBaseId);
 }
