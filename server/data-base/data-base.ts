@@ -23,14 +23,14 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
     crudConfig: CrudConfigType,
     modelJsonSchema: JSONSchemaType<ModelType>
 ): CrudType<ModelType> {
-    const {dataBaseId, onChange} = crudConfig;
+    const {dataBaseId, onChange, onInit} = crudConfig;
     const dataBaseFileName = `data-base.${dataBaseId}.db`;
     const dataBasePath = path.join(dataBasePathAbsolute, dataBaseFileName);
     const onChangeData: CrudConfigOnChangeArgumentType = {dataBaseFileName, dataBaseId, dataBasePath};
 
-    function handleDataBaseUpdate() {
-        makeDataBaseBackUp(onChangeData);
-        onChange(onChangeData);
+    async function handleDataBaseUpdate(): Promise<void> {
+        await makeDataBaseBackUp(onChangeData);
+        await onChange(onChangeData);
     }
 
     const dataBase = new Datastore<ModelType>({
@@ -270,6 +270,7 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
         await makeBackUpFolder(dataBaseId);
         await makeDataBaseBackUp(onChangeData);
         await makeStructureSelfCheck();
+        await onInit(onChangeData);
     })();
 
     return {

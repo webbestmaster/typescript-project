@@ -6,7 +6,8 @@ export type CrudConfigOnChangeArgumentType = {
 
 export type CrudConfigType = {
     dataBaseId: string;
-    onChange: (data: CrudConfigOnChangeArgumentType) => void;
+    onChange: (data: CrudConfigOnChangeArgumentType) => Promise<void>;
+    onInit: (data: CrudConfigOnChangeArgumentType) => Promise<void>;
 };
 
 export type RegExpQueryType = {
