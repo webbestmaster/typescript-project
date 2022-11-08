@@ -4,39 +4,48 @@ import {AudioAsync} from '../audio-player/audio-player';
 import {defaultMediaMetadata} from '../audio-player/audio-player-const';
 import {textToSlug} from '../../util/human';
 
-// eslint-disable-next-line complexity
-function getAudioFromHtml(audioHtmlCode: string, title: string): JSX.Element {
-    // className?: string;
-    // downloadFileName?: string;
-    // mediaMetadata?: MediaMetadataInit;
-    // onDidMount?: (audioNode: HTMLAudioElement | null) => void;
-    // src: string;
-    // useRepeatButton?: boolean;
+export const markdownAudioRegExp = /<audio[\S\s]+?<\/audio>/gi;
 
-    const [ignoredFullSrcString, srcAsString = ''] = audioHtmlCode.match(/src="(\S+)"/) || ['', ''];
-    const [ignoredFullDurationString, durationAsString = ''] = audioHtmlCode.match(/data-duration="(\S+)"/) || ['', ''];
-    const [ignoredFullTitleString, titleAsString = ''] = audioHtmlCode.match(/data-title="([^"]*?)"/) || ['', ''];
+export type AudioTagDataType = {
+    duration: number;
+    src: string;
+    title: string;
+};
+
+export function parseAudioTag(audioTag: string): AudioTagDataType {
+    const [ignoredFullSrcString, srcAsString = ''] = audioTag.match(/src="(\S+)"/) || ['', ''];
+    const [ignoredFullDurationString, durationAsString = ''] = audioTag.match(/data-duration="(\S+)"/) || ['', ''];
+    const [ignoredFullTitleString, titleAsString = ''] = audioTag.match(/data-title="([^"]*?)"/) || ['', ''];
     const durationAsNumber = Number.parseFloat(durationAsString) || 0;
-    const endTitle: string = titleAsString || title;
+
+    return {
+        duration: durationAsNumber,
+        src: srcAsString,
+        title: titleAsString,
+    };
+}
+
+function getAudioFromHtml(audioHtmlCode: string, title: string): JSX.Element {
+    const {duration, src, title: parsedTitle} = parseAudioTag(audioHtmlCode);
+
+    const endTitle: string = parsedTitle || title;
     const downloadFileName = textToSlug(endTitle);
 
     return (
         <AudioAsync
             downloadFileName={downloadFileName}
-            duration={durationAsNumber}
+            duration={duration}
             mediaMetadata={{...defaultMediaMetadata, title: endTitle}}
-            preload={durationAsNumber ? 'none' : 'metadata'}
-            src={srcAsString}
+            preload={duration ? 'none' : 'metadata'}
+            src={src}
             useRepeatButton
         />
     );
 }
 
 export function markdownAudio(htmlCode: string, title: string): Array<JSX.Element> {
-    const audioRegExp = /<audio[\S\s]+?<\/audio>/gi;
-
-    const splitTextList: Array<string> = htmlCode.split(audioRegExp);
-    const audioList: Array<string> = htmlCode.match(audioRegExp) || [];
+    const splitTextList: Array<string> = htmlCode.split(markdownAudioRegExp);
+    const audioList: Array<string> = htmlCode.match(markdownAudioRegExp) || [];
 
     return splitTextList.map((htmlChunk: string, index: number): JSX.Element => {
         const key = index.toString(16);
