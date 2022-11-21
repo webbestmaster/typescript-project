@@ -1,7 +1,5 @@
 /* global File */
 
-import 'antd/dist/reset.css';
-
 import {useEffect, useState} from 'react';
 // node_modules/antd/lib/upload/index.d.ts
 // TODO: set declare const Upload: UploadInterface<any>; TO declare const Upload: UploadInterface<unknown>;

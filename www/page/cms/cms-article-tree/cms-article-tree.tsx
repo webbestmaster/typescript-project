@@ -1,5 +1,3 @@
-import 'antd/dist/reset.css';
-
 import {useState, useEffect, useCallback} from 'react';
 import {Tree, Typography, List, Divider, message} from 'antd';
 import {DataNode} from 'rc-tree/lib/interface';

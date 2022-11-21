@@ -2,6 +2,8 @@ import {ReactNode} from 'react';
 import {Layout, Menu} from 'antd';
 import {Link, useLocation} from 'react-router-dom';
 
+import 'antd/dist/reset.css';
+
 import {Box} from '../../../../layout/box/box';
 import {appRoute} from '../../../../component/app/app-route';
 

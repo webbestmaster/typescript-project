@@ -16,7 +16,7 @@ import {uploadFileFolder} from './file-const';
 
 const cwd = process.cwd();
 
-type GetExtraFilesType = {
+export type GetExtraFilesType = {
     actualSpecialFileList: Array<string>;
     expectedSpecialFileList: Array<string>;
     extraFileList: Array<string>;
@@ -43,7 +43,9 @@ export async function removeExtraStaticFiles(request: FastifyRequest, reply: Fas
             return;
         }
 
+        console.warn('[WARNING] >>> to remove file, uncomment next line');
         // fileSystemPromises.unlink(path.join(cwd, uploadFileFolder, fileName));
+
         extraFileList.push(fileName);
     });
 

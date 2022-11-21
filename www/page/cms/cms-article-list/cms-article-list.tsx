@@ -1,5 +1,3 @@
-import 'antd/dist/reset.css';
-
 import {useEffect, useState} from 'react';
 import {Table, Typography} from 'antd';
 import {TablePaginationConfig, FilterValue, SorterResult, TableCurrentDataSource} from 'antd/es/table/interface';

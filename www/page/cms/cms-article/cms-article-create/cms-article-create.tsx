@@ -37,7 +37,7 @@ export function CmsArticleCreate(): JSX.Element {
     }
 
     return (
-        <CmsPage key="create-create">
+        <CmsPage key="create">
             <Title level={2}>Create new article</Title>
             <CmsArticle
                 article={{
