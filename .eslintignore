@@ -21,6 +21,9 @@
 # test
 /test-backstop/
 
+# static site
+/static-site/
+
 # example
 
 # /* eslint consistent-this: ["error", "unit", "aggressor"] */
