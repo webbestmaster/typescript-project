@@ -1,8 +1,8 @@
-import 'antd/dist/antd.css';
+import 'antd/dist/reset.css';
 
 import {useEffect, useState} from 'react';
 import {Table, Typography} from 'antd';
-import {TablePaginationConfig, FilterValue, SorterResult, TableCurrentDataSource} from 'antd/lib/table/interface';
+import {TablePaginationConfig, FilterValue, SorterResult, TableCurrentDataSource} from 'antd/es/table/interface';
 
 import {useMakeExecutableState} from '../../../util/function';
 import {PaginationQueryType, PaginationResultType} from '../../../../server/data-base/data-base-type';

@@ -1,7 +1,7 @@
 /* global HTMLInputElement */
 import {SyntheticEvent} from 'react';
 import {Typography, Input, Col, Row} from 'antd';
-import {UploadFile} from 'antd/lib/upload/interface';
+import {UploadFile} from 'antd/es/upload/interface';
 const {Title} = Typography;
 
 import {ArticleFileType} from '../../../../server/article/article-type';

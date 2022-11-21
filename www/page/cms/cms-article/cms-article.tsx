@@ -1,4 +1,7 @@
 /* global File */
+
+import 'antd/dist/reset.css';
+
 import {useEffect, useState} from 'react';
 // node_modules/antd/lib/upload/index.d.ts
 // TODO: set declare const Upload: UploadInterface<any>; TO declare const Upload: UploadInterface<unknown>;
@@ -17,13 +20,15 @@ import {
     Typography,
     Upload,
 } from 'antd';
-import moment, {Moment} from 'moment';
 import {FieldData, ValidateErrorEntity} from 'rc-field-form/lib/interface';
-import {UploadChangeParam, UploadFile} from 'antd/lib/upload/interface';
+import {UploadChangeParam, UploadFile} from 'antd/es/upload/interface';
 import {Link} from 'react-router-dom';
 import {QuestionCircleOutlined} from '@ant-design/icons';
 import {red} from '@ant-design/colors';
-import 'antd/dist/antd.css';
+import dayjs, {Dayjs} from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+
+dayjs.extend(utc);
 
 import {
     ArticleFileType,
@@ -440,14 +445,14 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 </Upload>
             </Form.Item>
 
-            <Form.Item initialValue={moment(publishDate)} label="Publish date UTC:" name="publishDate">
-                <DatePicker onOk={(date: Moment): void => setPublishDate(date.toISOString())} showTime />
+            <Form.Item initialValue={dayjs.utc(publishDate)} label="Publish date UTC-0:" name="publishDate">
+                <DatePicker onOk={(date: Dayjs): void => setPublishDate(date.toISOString())} showTime />
             </Form.Item>
 
             <Form.Item
                 // set on server
                 initialValue={createdDate || noDateUTC}
-                label="Created date UTC:"
+                label="Created date UTC-0:"
                 name="createdDate"
             >
                 <Input disabled />
@@ -456,7 +461,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             <Form.Item
                 // set on server
                 initialValue={updatedDate || noDateUTC}
-                label="Updated date UTC:"
+                label="Updated date UTC-0:"
                 name="updatedDate"
             >
                 <Input disabled />

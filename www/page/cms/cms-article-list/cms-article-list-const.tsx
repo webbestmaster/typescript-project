@@ -1,7 +1,7 @@
 /* global HTMLInputElement */
 import {SyntheticEvent} from 'react';
 import {Input} from 'antd';
-import {ColumnType} from 'antd/lib/table/interface';
+import {ColumnType} from 'antd/es/table/interface';
 import {SearchOutlined} from '@ant-design/icons';
 import {Link} from 'react-router-dom';
 
@@ -141,7 +141,7 @@ export function getArticleTableColumnList(
             key: 'createdDate',
             render: dateIsoToHumanView,
             sorter: () => 0,
-            title: 'Created UTC',
+            title: 'Created UTC-0',
             width: 120,
         },
         {
@@ -151,7 +151,7 @@ export function getArticleTableColumnList(
             key: 'updatedDate',
             render: dateIsoToHumanView,
             sorter: () => 0,
-            title: 'Updated UTC',
+            title: 'Updated UTC-0',
             width: 120,
         },
         {
@@ -161,7 +161,7 @@ export function getArticleTableColumnList(
             key: 'publishDate',
             render: dateIsoToHumanView,
             sorter: () => 0,
-            title: 'Publish UTC',
+            title: 'Publish UTC-0',
             width: 120,
         },
     ];

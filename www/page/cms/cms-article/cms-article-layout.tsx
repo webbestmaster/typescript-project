@@ -1,6 +1,6 @@
 import {Typography, Select, Button} from 'antd';
 import {PlusOutlined} from '@ant-design/icons';
-import {UploadFile} from 'antd/lib/upload/interface';
+import {UploadFile} from 'antd/es/upload/interface';
 import {Link} from 'react-router-dom';
 
 import {ArticleFileType, ArticleType} from '../../../../server/article/article-type';
