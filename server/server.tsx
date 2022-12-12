@@ -6,7 +6,7 @@ import {fastifyCors} from '@fastify/cors';
 import {fastifyStatic} from '@fastify/static';
 import {fastifyCompress} from '@fastify/compress';
 import {fastifyMultipart} from '@fastify/multipart';
-import fastifySecureSession from '@fastify/secure-session';
+import {fastifySecureSession} from '@fastify/secure-session';
 import {FastifyError} from '@fastify/error';
 import fastifyConstructor, {FastifyRequest, FastifyReply} from 'fastify';
 
