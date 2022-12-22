@@ -43,6 +43,7 @@
         "./dist/",
         "./dist-server/",
         "./tsc-check/",
+        "./storybook-static/",
         "./node_modules/",
     ]
 }

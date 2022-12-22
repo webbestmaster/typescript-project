@@ -40,5 +40,8 @@ npm-debug.log*
 # static site
 /static-site/
 
+# storybook
+/storybook-static/
+
 # temp
 /static-file-temp/

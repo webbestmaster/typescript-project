@@ -19,3 +19,6 @@ logs
 
 # static site
 /static-site/
+
+# storybook
+/storybook-static/

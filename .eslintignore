@@ -24,6 +24,9 @@
 # static site
 /static-site/
 
+# storybook
+/storybook-static/
+
 # example
 
 # /* eslint consistent-this: ["error", "unit", "aggressor"] */
