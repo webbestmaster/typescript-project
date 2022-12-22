@@ -9,7 +9,10 @@
   },
   "homepage": "https://github.com/webbestmaster/typescript-project#readme",
   "license": "MIT",
-  "author": "",
+  "author": {
+    "name": "WebBestMaster",
+    "email": "web.best.master@gmail.com"
+  },
   "version": "0.0.0",
   "description": "",
   "keywords": [
