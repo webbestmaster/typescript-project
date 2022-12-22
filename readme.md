@@ -9,6 +9,7 @@
 ![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/webbestmaster/typescript-project)
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/typescript-project)
 ![node-current](https://img.shields.io/node/v/typescript-project)
+![npm type definitions](https://img.shields.io/npm/types/typescript-project)
 [![GitHub stars](https://img.shields.io/github/stars/webbestmaster/typescript-project?style=social)](https://github.com/webbestmaster/typescript-project/)
 
 ## Installation
