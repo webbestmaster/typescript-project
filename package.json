@@ -21,6 +21,9 @@
   "files": [
     "/dist"
   ],
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "scripts": {
     "front:start-dev": "cross-env NODE_ENV=development SIDE=front webpack-cli serve --progress",
     "front:start-dev:transpile-only": "cross-env NODE_ENV=development SIDE=front TS_TRANSPILE_ONLY=true webpack-cli serve --progress",
