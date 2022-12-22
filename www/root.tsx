@@ -5,6 +5,11 @@ import {hydrateRoot, createRoot} from 'react-dom/client';
 import {selector} from './const';
 import {App} from './component/app/app';
 
+import {ErrorData} from './layout/error-data/error-data';
+import {Popup} from './layout/popup/popup';
+
+console.log(ErrorData, Popup);
+
 (function main() {
     const nodeWrapper = document.querySelector(selector.appWrapper);
 
