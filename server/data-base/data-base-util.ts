@@ -5,6 +5,20 @@ import {tryToMakeDirectory} from '../file/directory';
 // import {CrudSearchQueryType, RegExpQueryType} from './data-base-type';
 import {dataBaseBackUpPathAbsolute} from './data-base-const';
 
+export function getPartialData<FullModelType extends Record<string, unknown>>(
+    data: FullModelType,
+    requiredPropertyList: Array<keyof FullModelType>
+): Partial<FullModelType> {
+    return Object.assign(
+        {},
+        ...requiredPropertyList.map<Record<string, FullModelType[keyof FullModelType]>>(
+            (key: keyof FullModelType): Record<string, FullModelType[keyof FullModelType]> => {
+                return {[key]: data[key]};
+            }
+        )
+    );
+}
+
 /*
 export function makeSimpleDataBaseCallBack(
     maybeError: Error | null,
@@ -19,19 +33,6 @@ export function makeSimpleDataBaseCallBack(
     resolve(null);
 }
 
-export function getPartialData<FullModelType extends Record<string, unknown>>(
-    data: FullModelType,
-    requiredPropertyList: Array<keyof FullModelType>
-): Partial<FullModelType> {
-    return Object.assign(
-        {},
-        ...requiredPropertyList.map<Record<string, FullModelType[keyof FullModelType]>>(
-            (key: keyof FullModelType): Record<string, FullModelType[keyof FullModelType]> => {
-                return {[key]: data[key]};
-            }
-        )
-    );
-}
 
 export function makePreparedQuery<ModelType>(query: CrudSearchQueryType<ModelType>): CrudSearchQueryType<ModelType> {
     const result: CrudSearchQueryType<ModelType> = {};

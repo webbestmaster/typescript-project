@@ -3,7 +3,7 @@ import Ajv, {JSONSchemaType} from 'ajv';
 import {Petsdb} from 'petsdb';
 import type {PetsdbItemType, PetsdbQueryType, PetsdbReadPageConfigType, PetsdbReadPageResultType} from 'petsdb';
 
-import {makeBackUpFolder} from './data-base-util';
+import {getPartialData, makeBackUpFolder} from './data-base-util';
 import {CrudConfigOnChangeArgumentType, CrudConfigType, CrudType} from './data-base-type';
 import {makeDataBaseBackUp} from './data-base-back-up';
 import {dataBaseFolderPath} from './data-base-const';
@@ -54,27 +54,21 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
     function findManyPaginationPartial(
         query: PetsdbQueryType<ModelType>,
         pageConfig: PetsdbReadPageConfigType<ModelType>,
-        requiredPropertyList: Array<keyof PetsdbItemType<ModelType>>
+        requiredPropertyList: Array<keyof ModelType>
     ): Promise<PetsdbReadPageResultType<Partial<ModelType>>> {
-        return findManyPagination(query, pageConfig);
-
-        /*
-        .then(
-            (paginationData: PetsdbReadPageResultType<ModelType>): PetsdbReadPageResultType<Partial<PetsdbItemType<ModelType>>> => {
-
+        return findManyPagination(query, pageConfig).then(
+            (paginationData: PetsdbReadPageResultType<ModelType>): PetsdbReadPageResultType<Partial<ModelType>> => {
                 return {
                     ...paginationData,
-
-                    list: paginationData.list.map<Partial<PetsdbItemType<ModelType>>>(
-                        (data: PetsdbItemType<ModelType>): Partial<PetsdbItemType<ModelType>> => {
-                            return getPartialData<PetsdbItemType<ModelType>>(data, requiredPropertyList);
-                        }),
+                    list: paginationData.list.map<PetsdbItemType<Partial<ModelType>>>(
+                        (data: PetsdbItemType<ModelType>): PetsdbItemType<Partial<ModelType>> => {
+                            // eslint-disable-next-line no-underscore-dangle
+                            return {...getPartialData<ModelType>(data, requiredPropertyList), _id: data._id};
+                        }
+                    ),
                 };
-
-
             }
         );
-*/
     }
 
     // throw error if smth wrong
