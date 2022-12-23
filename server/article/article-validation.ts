@@ -22,7 +22,6 @@ import {
     SubDocumentListViewTypeEnum,
 } from './article-type';
 
-
 export function makeArticleFileSchema(): JSONSchemaType<ArticleFileType> {
     const articleFileProperties = {
         duration: {type: 'number'}, // in seconds

@@ -14,7 +14,6 @@ import {UnknownObjectType} from '../../util/type';
 import {ArticleContextType} from '../../client-component/article/article-context/article-context-type';
 import {articleContextDataSchema} from '../../client-component/article/article-context/article-context-const';
 
-
 export async function getArticleListPagination(
     query: PetsdbQueryType<ArticleType>,
     pageConfig: PetsdbReadPageConfigType<ArticleType>

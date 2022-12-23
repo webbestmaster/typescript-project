@@ -12,7 +12,6 @@ import {articleCrud} from './article';
 import {ArticleType} from './article-type';
 import {validateArticle} from './article-validation';
 
-
 export async function getArticleListPagination(
     request: FastifyRequest,
     reply: FastifyReply
