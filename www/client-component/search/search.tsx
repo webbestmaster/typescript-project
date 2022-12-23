@@ -69,10 +69,10 @@ export function Search(props: SearchPropsType): JSX.Element {
     useEffect(() => {
         if (searchString.length >= minLetters) {
             executeArticleList(
-                {title: new RegExp(searchString, 'gi')},
+                {title: new RegExp(searchString, 'gi').toString()},
                 {
                     pageIndex: 0,
-                    pageSize: 0,
+                    pageSize: 10_000,
                     sort: {title: 1},
                 },
                 articlePreviewKeyList

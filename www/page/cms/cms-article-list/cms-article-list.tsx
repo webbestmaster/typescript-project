@@ -67,7 +67,7 @@ export function CmsArticleList(): JSX.Element {
                     pageSize,
                     sort: {[String(field)]: sortDirection},
                 },
-                query: {[searchedColumn]: {$regex: searchText, $regexFlag: 'i'}},
+                query: {[searchedColumn]: new RegExp(searchText, 'i').toString()},
             };
         });
 

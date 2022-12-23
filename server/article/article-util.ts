@@ -126,3 +126,19 @@ export async function getSubDocumentListByParentIdFiltered(parentId: string): Pr
 export function getIsFileInArticle(fileName: string, article: ArticleType): boolean {
     return JSON.stringify(article).toLowerCase().includes(fileName.toLowerCase());
 }
+
+export function tryQueryStringToRegExp(value: string): RegExp | string {
+    const partList = value.split('/');
+
+    if (partList.length !== 3) {
+        return value;
+    }
+
+    const [empty, mainValue, flags] = partList;
+
+    if (empty !== '') {
+        return value;
+    }
+
+    return new RegExp(mainValue, flags);
+}

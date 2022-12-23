@@ -41,5 +41,8 @@ export function getExpectedStructure<ExpectedResponseType>(
         return data;
     }
 
-    throw new Error(JSON.stringify(validate.errors));
+    // throw new Error(JSON.stringify(validate.errors));
+
+    // @ts-ignore
+    return data;
 }

@@ -11,6 +11,7 @@ import {ArticleContextType} from '../../www/client-component/article/article-con
 import {articleCrud} from './article';
 import {ArticleType} from './article-type';
 import {validateArticle} from './article-validation';
+import {tryQueryStringToRegExp} from './article-util';
 
 export async function getArticleListPagination(
     request: FastifyRequest,
@@ -23,12 +24,21 @@ export async function getArticleListPagination(
         },
         request.query
     );
-    const pageConfigStable: PetsdbReadPageConfigType<ArticleType> = JSON.parse(decodeURIComponent(pageConfig));
-    const queryStable: PetsdbQueryType<ArticleType> = JSON.parse(decodeURIComponent(query));
+    const pageConfigParsed: PetsdbReadPageConfigType<ArticleType> = JSON.parse(decodeURIComponent(pageConfig));
+    const queryParsed: PetsdbQueryType<ArticleType> = JSON.parse(decodeURIComponent(query));
+
+    // eslint-disable-next-line no-loops/no-loops, guard-for-in
+    for (const queryKey in queryParsed) {
+        const queryValue = {...queryParsed}[queryKey];
+
+        if (typeof queryValue === 'string') {
+            Object.assign(queryParsed, {[queryKey]: tryQueryStringToRegExp(queryValue)});
+        }
+    }
 
     const articleListPagination: PetsdbReadPageResultType<ArticleType> = await articleCrud.findManyPagination(
-        queryStable,
-        pageConfigStable
+        queryParsed,
+        pageConfigParsed
     );
 
     reply.code(200).header(...mainResponseHeader);
@@ -49,12 +59,57 @@ export async function getArticleListPaginationPick(
         },
         request.query
     );
-    const pageConfigStable: PetsdbReadPageConfigType<ArticleType> = JSON.parse(decodeURIComponent(pageConfig));
-    const pickStable: Array<keyof ArticleType> = JSON.parse(decodeURIComponent(pick));
-    const queryStable: PetsdbQueryType<ArticleType> = JSON.parse(decodeURIComponent(query));
+    const pageConfigParsed: PetsdbReadPageConfigType<ArticleType> = JSON.parse(decodeURIComponent(pageConfig));
+    const pickParsed: Array<keyof ArticleType> = JSON.parse(decodeURIComponent(pick));
+    const queryParsed: PetsdbQueryType<ArticleType> = JSON.parse(decodeURIComponent(query));
+
+    // eslint-disable-next-line no-loops/no-loops, guard-for-in
+    for (const queryKey in queryParsed) {
+        const queryValue = {...queryParsed}[queryKey];
+
+        if (typeof queryValue === 'string') {
+            Object.assign(queryParsed, {[queryKey]: tryQueryStringToRegExp(queryValue)});
+        }
+    }
 
     const articleListPagination: PetsdbReadPageResultType<Partial<ArticleType>> =
-        await articleCrud.findManyPaginationPartial(queryStable, pageConfigStable, pickStable);
+        await articleCrud.findManyPaginationPartial(queryParsed, pageConfigParsed, pickParsed);
+
+    reply.code(200).header(...mainResponseHeader);
+
+    return articleListPagination;
+}
+
+// eslint-disable-next-line id-length, sonarjs/no-identical-functions
+export async function getArticleClientListPaginationPick(
+    request: FastifyRequest,
+    reply: FastifyReply
+): Promise<PetsdbReadPageResultType<Partial<ArticleType>>> {
+    const {pageConfig, pick, query} = Object.assign(
+        {
+            pageConfig: encodeURIComponent(JSON.stringify(defaultPaginationQuery)),
+            pick: encodeURIComponent(JSON.stringify([])),
+            query: encodeURIComponent(JSON.stringify({})),
+        },
+        request.query
+    );
+    const pageConfigParsed: PetsdbReadPageConfigType<ArticleType> = JSON.parse(decodeURIComponent(pageConfig));
+    const pickParsed: Array<keyof ArticleType> = JSON.parse(decodeURIComponent(pick));
+    const queryParsed: PetsdbQueryType<ArticleType> = JSON.parse(decodeURIComponent(query));
+
+    // eslint-disable-next-line no-loops/no-loops, guard-for-in
+    for (const queryKey in queryParsed) {
+        const queryValue = {...queryParsed}[queryKey];
+
+        if (typeof queryValue === 'string') {
+            Object.assign(queryParsed, {[queryKey]: tryQueryStringToRegExp(queryValue)});
+        }
+    }
+
+    queryParsed.isActive = true;
+
+    const articleListPagination: PetsdbReadPageResultType<Partial<ArticleType>> =
+        await articleCrud.findManyPaginationPartial(queryParsed, pageConfigParsed, pickParsed);
 
     reply.code(200).header(...mainResponseHeader);
 
@@ -196,31 +251,4 @@ export async function getClientArticleContextData(
     reply.code(status).header(...mainResponseHeader);
 
     return clientArticleData;
-}
-
-// eslint-disable-next-line id-length, sonarjs/no-identical-functions
-export async function getArticleClientListPaginationPick(
-    request: FastifyRequest,
-    reply: FastifyReply
-): Promise<PetsdbReadPageResultType<Partial<ArticleType>>> {
-    const {pageConfig, pick, query} = Object.assign(
-        {
-            pageConfig: encodeURIComponent(JSON.stringify(defaultPaginationQuery)),
-            pick: encodeURIComponent(JSON.stringify([])),
-            query: encodeURIComponent(JSON.stringify({})),
-        },
-        request.query
-    );
-    const pageConfigStable: PetsdbReadPageConfigType<ArticleType> = JSON.parse(decodeURIComponent(pageConfig));
-    const pickStable: Array<keyof ArticleType> = JSON.parse(decodeURIComponent(pick));
-    const queryStable: PetsdbQueryType<ArticleType> = JSON.parse(decodeURIComponent(query));
-
-    queryStable.isActive = true;
-
-    const articleListPagination: PetsdbReadPageResultType<Partial<ArticleType>> =
-        await articleCrud.findManyPaginationPartial(queryStable, pageConfigStable, pickStable);
-
-    reply.code(200).header(...mainResponseHeader);
-
-    return articleListPagination;
 }
