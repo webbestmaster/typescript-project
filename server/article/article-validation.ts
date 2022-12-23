@@ -1,16 +1,5 @@
 import Ajv, {JSONSchemaType, ValidateFunction} from 'ajv';
 
-import type {
-    PetsdbInitialConfigType,
-    PetsdbItemType,
-    PetsdbQueryType,
-    PetsdbReadPageConfigType,
-    PetsdbReadPageResultType,
-    PetsdbSortDirectionType,
-    PetsdbSortType,
-    PetsdbSortValueType,
-} from 'petsdb';
-
 import {PaginationResultType} from '../data-base/data-base-type';
 
 import {

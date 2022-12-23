@@ -1,18 +1,7 @@
-import path from 'path';
-
 import Ajv, {JSONSchemaType} from 'ajv';
 
 import {Petsdb} from 'petsdb';
-import type {
-    PetsdbInitialConfigType,
-    PetsdbItemType,
-    PetsdbQueryType,
-    PetsdbReadPageConfigType,
-    PetsdbReadPageResultType,
-    PetsdbSortDirectionType,
-    PetsdbSortType,
-    PetsdbSortValueType,
-} from 'petsdb';
+import type {PetsdbItemType, PetsdbQueryType, PetsdbReadPageConfigType, PetsdbReadPageResultType} from 'petsdb';
 
 import {makeBackUpFolder} from './data-base-util';
 import {CrudConfigOnChangeArgumentType, CrudConfigType, CrudType} from './data-base-type';

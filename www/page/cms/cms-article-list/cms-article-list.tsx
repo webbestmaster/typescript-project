@@ -40,6 +40,28 @@ export function CmsArticleList(): JSX.Element {
         executeArticleList(paginationArticleList.query, paginationArticleList.pageConfig, keyForTableListList);
     }, [executeArticleList, paginationArticleList]);
 
+    useEffect(() => {
+        setPaginationArticleList(
+            (
+                currentPagination: PaginationQueryType<ArticleForTableListType>
+            ): PaginationQueryType<ArticleForTableListType> => {
+                const sortDirection =
+                    String({...currentPagination.pageConfig.sort}[String(searchedColumn)]) === SortDirectionEnum.descend
+                        ? -1
+                        : 1;
+
+                return {
+                    pageConfig: {
+                        pageIndex: 0,
+                        pageSize: 10,
+                        sort: {[String(searchedColumn)]: sortDirection},
+                    },
+                    query: {[searchedColumn]: new RegExp(searchText, 'i').toString()},
+                };
+            }
+        );
+    }, [searchedColumn, searchText]);
+
     // eslint-disable-next-line complexity, max-statements
     function handleTableChange(
         pagination: TablePaginationConfig,

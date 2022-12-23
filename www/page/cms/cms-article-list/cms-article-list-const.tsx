@@ -1,7 +1,7 @@
 /* global HTMLInputElement */
 import {SyntheticEvent} from 'react';
 import {Input} from 'antd';
-import {ColumnType, FilterDropdownProps} from 'antd/es/table/interface';
+import {ColumnType} from 'antd/es/table/interface';
 import {SearchOutlined} from '@ant-design/icons';
 import {Link} from 'react-router-dom';
 
@@ -42,19 +42,13 @@ export function getArticleTableColumnList(
             dataIndex: 'title',
             defaultSortOrder: SortDirectionEnum.ascend,
             // eslint-disable-next-line react/no-multi-comp
-            filterDropdown: (props: FilterDropdownProps) => {
-                const {setSelectedKeys, selectedKeys, confirm, clearFilters, close} = props;
-
+            filterDropdown: () => {
                 return (
                     <Input
                         key="title"
                         onInput={(evt: SyntheticEvent<HTMLInputElement>) => {
                             setSearchedColumn('title');
-                            setSearchText(evt.currentTarget.value);
-                            const value = evt.currentTarget.value.toString();
-
-                            confirm({closeDropdown: false});
-                            setSelectedKeys(['title', value]);
+                            setSearchText(evt.currentTarget.value.trim());
                         }}
                         placeholder="Search..."
                     />

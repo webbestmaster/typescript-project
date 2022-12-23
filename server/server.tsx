@@ -10,16 +10,7 @@ import {fastifySecureSession} from '@fastify/secure-session';
 import {FastifyError} from '@fastify/error';
 import fastifyConstructor, {FastifyRequest, FastifyReply} from 'fastify';
 
-import type {
-    PetsdbInitialConfigType,
-    PetsdbItemType,
-    PetsdbQueryType,
-    PetsdbReadPageConfigType,
-    PetsdbReadPageResultType,
-    PetsdbSortDirectionType,
-    PetsdbSortType,
-    PetsdbSortValueType,
-} from 'petsdb';
+import type {PetsdbReadPageResultType} from 'petsdb';
 
 import {appRoute} from '../www/component/app/app-route';
 
@@ -40,7 +31,6 @@ import {getImage, uploadFile} from './file/file';
 import {adminOnly} from './auth/auth-helper';
 import {makeCacheFile} from './article/article-cache';
 import {getPdf} from './pdf/pdf';
-import {PaginationResultType} from './data-base/data-base-type';
 import {ArticleFileType, ArticleType} from './article/article-type';
 import {makeStatic} from './make-static';
 import {temporaryUploadFolder, uploadFileFolder, uploadFolder} from './file/file-const';
