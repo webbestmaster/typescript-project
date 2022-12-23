@@ -45,15 +45,14 @@ export function CmsArticleList(): JSX.Element {
             (
                 currentPagination: PaginationQueryType<ArticleForTableListType>
             ): PaginationQueryType<ArticleForTableListType> => {
-                const sortDirection =
-                    String({...currentPagination.pageConfig.sort}[String(searchedColumn)]) === SortDirectionEnum.descend
-                        ? -1
-                        : 1;
+                const rawDirection = String({...currentPagination.pageConfig.sort}[String(searchedColumn)]);
+                const sortDirection = rawDirection === SortDirectionEnum.descend ? -1 : 1;
+                const {pageSize} = currentPagination.pageConfig;
 
                 return {
                     pageConfig: {
                         pageIndex: 0,
-                        pageSize: 10,
+                        pageSize,
                         sort: {[String(searchedColumn)]: sortDirection},
                     },
                     query: {[searchedColumn]: new RegExp(searchText, 'i').toString()},

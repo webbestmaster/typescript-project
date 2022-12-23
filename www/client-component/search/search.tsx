@@ -72,7 +72,7 @@ export function Search(props: SearchPropsType): JSX.Element {
                 {title: new RegExp(searchString, 'gi').toString()},
                 {
                     pageIndex: 0,
-                    pageSize: 10_000,
+                    pageSize: 0,
                     sort: {title: 1},
                 },
                 articlePreviewKeyList
