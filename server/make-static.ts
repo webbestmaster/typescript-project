@@ -122,7 +122,8 @@ async function makeApiArticleSearch() {
     await tryToMakeDirectory(cwd, staticSiteFolderName, 'api', 'client-article');
 
     const querySearchParameters = paginationQueryToURLSearchParameters<ArticleType>(
-        {pageIndex: 0, pageSize: 0, query: {}, sort: {title: 1}},
+        {},
+        {pageIndex: 0, pageSize: 0, sort: {title: 1}},
         articlePreviewKeyList
     );
 

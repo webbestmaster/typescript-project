@@ -11,6 +11,17 @@ import {
     SubDocumentListViewTypeEnum,
 } from './article-type';
 
+import type {
+    PetsdbInitialConfigType,
+    PetsdbItemType,
+    PetsdbQueryType,
+    PetsdbReadPageConfigType,
+    PetsdbReadPageResultType,
+    PetsdbSortDirectionType,
+    PetsdbSortType,
+    PetsdbSortValueType,
+} from 'petsdb';
+
 export function makeArticleFileSchema(): JSONSchemaType<ArticleFileType> {
     const articleFileProperties = {
         duration: {type: 'number'}, // in seconds
@@ -133,7 +144,7 @@ export function makeArticleSchemaPick<KeyOfArticle extends keyof ArticleType>(
 
     const articleSchemaPick: JSONSchemaType<Pick<ArticleType, KeyOfArticle>> = Object.assign<
         JSONSchemaType<Pick<ArticleType, KeyOfArticle>>,
-        {properties: Record<string, unknown>; required: Array<KeyOfArticle>}
+        { properties: Record<string, unknown>; required: Array<KeyOfArticle> }
     >(articlePickedSchema, {
         properties: pickedProperties,
         required: fieldList,
@@ -146,12 +157,14 @@ export function makeArticlePaginationSchema(): JSONSchemaType<PaginationResultTy
     const articlePaginationSchema: JSONSchemaType<PaginationResultType<ArticleType>> = {
         additionalProperties: false,
         properties: {
-            count: {type: 'number'},
+            list: {items: makeArticleSchema(), type: 'array'},
             pageIndex: {type: 'number'},
             pageSize: {type: 'number'},
-            result: {items: makeArticleSchema(), type: 'array'},
+            sort: {type: 'object'},
+            totalItemCount: {type: 'number'},
+            totalPageCount: {type: 'number'},
         },
-        required: ['count', 'pageIndex', 'pageSize', 'result'],
+        required: ['list', 'pageIndex', 'pageSize', 'sort', 'totalItemCount', 'totalPageCount'],
         type: 'object',
     };
 
@@ -164,12 +177,14 @@ export function makeArticlePaginationSchemaPick<Keys extends keyof ArticleType>(
     const articlePaginationSchemaPick: JSONSchemaType<PaginationResultType<Pick<ArticleType, Keys>>> = {
         additionalProperties: false,
         properties: {
-            count: {type: 'number'},
+            list: {items: makeArticleSchemaPick<Keys>(fieldList), type: 'array'},
             pageIndex: {type: 'number'},
             pageSize: {type: 'number'},
-            result: {items: makeArticleSchemaPick<Keys>(fieldList), type: 'array'},
+            sort: {type: 'object'},
+            totalItemCount: {type: 'number'},
+            totalPageCount: {type: 'number'},
         },
-        required: ['count', 'pageIndex', 'pageSize', 'result'],
+        required: ['list', 'pageIndex', 'pageSize', 'sort', 'totalItemCount', 'totalPageCount'],
         type: 'object',
     };
 

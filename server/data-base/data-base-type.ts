@@ -1,3 +1,14 @@
+import type {
+    PetsdbInitialConfigType,
+    PetsdbItemType,
+    PetsdbQueryType,
+    PetsdbReadPageConfigType,
+    PetsdbReadPageResultType,
+    PetsdbSortDirectionType,
+    PetsdbSortType,
+    PetsdbSortValueType,
+} from 'petsdb';
+
 export type CrudConfigOnChangeArgumentType = {
     dataBaseFileName: string;
     dataBaseId: string;
@@ -15,33 +26,22 @@ export type RegExpQueryType = {
     $regexFlag: string; // 'g' | 'gi' | 'i';
 };
 
-export type CrudSearchQueryType<ModelType> = {
-    [key in keyof ModelType]?: ModelType[key] extends Array<number | string>
-        ? ModelType[key] | RegExp | RegExpQueryType | string
-        : ModelType[key] | RegExp | RegExpQueryType;
-};
-
-export type CrudType<ModelType> = {
-    // count: (query: PaginationQueryQueryExtendedType<ModelType>) => Promise<number>; // throw error if smth wrong
+export type CrudType<ModelType extends Record<string, unknown>> = {
     createOne: (model: ModelType) => Promise<null>; // throw error if smth wrong
-    deleteOne: (model: CrudSearchQueryType<ModelType>) => Promise<null>; // throw error if smth wrong
-    findMany: (partialModelData: CrudSearchQueryType<ModelType>) => Promise<Array<ModelType>>;
-    findManyPagination: (paginationQuery: PaginationQueryType<ModelType>) => Promise<PaginationResultType<ModelType>>;
+    deleteOne: (query: PetsdbQueryType<ModelType>) => Promise<null>; // throw error if smth wrong
+    findMany: (query: PetsdbQueryType<ModelType>) => Promise<Array<PetsdbItemType<ModelType>>>;
+    findManyPagination: (
+        query: PetsdbQueryType<ModelType>,
+        pageConfig: PetsdbReadPageConfigType<ModelType>
+    ) => Promise<PetsdbReadPageResultType<ModelType>>;
     findManyPaginationPartial: (
-        paginationQuery: PaginationQueryType<ModelType>,
+        query: PetsdbQueryType<ModelType>,
+        pageConfig: PetsdbReadPageConfigType<ModelType>,
         requiredPropertyList: Array<keyof ModelType>
-    ) => Promise<PaginationResultType<Partial<ModelType>>>;
-    /*
-    findManyPartial: (
-        partialModel: Partial<ModelType>,
-        requiredPropertyList: Array<keyof ModelType>
-    ) => Promise<Array<Partial<ModelType>>>;
-*/
-    findOne: (partialModel: CrudSearchQueryType<ModelType>) => Promise<ModelType | null>;
-    updateOne: (partialModel: CrudSearchQueryType<ModelType>, model: ModelType) => Promise<null>; // throw error if smth wrong
+    ) => Promise<PetsdbReadPageResultType<Partial<ModelType>>>;
+    findOne: (query: PetsdbQueryType<ModelType>) => Promise<PetsdbItemType<ModelType> | null>;
+    updateOne: (query: PetsdbQueryType<ModelType>, model: ModelType) => Promise<null>; // throw error if smth wrong
 };
-
-type PaginationDirectionType = -1 | 1;
 
 /*
 export enum SortDirectionEnum {
@@ -67,16 +67,18 @@ export type GetListPaginationResultType<ItemType> = GetListPaginationArgumentTyp
 };
 */
 
-export type PaginationQueryType<ModelType> = {
-    pageIndex: number;
-    pageSize: number;
-    query: CrudSearchQueryType<ModelType>;
-    sort: Partial<Record<keyof ModelType, PaginationDirectionType>>;
+export type PaginationQueryType<ModelType extends Record<string, unknown>> = {
+    pageConfig: PetsdbReadPageConfigType<ModelType>;
+    query: PetsdbQueryType<ModelType>;
 };
 
+/*
 export type PaginationResultType<ModelType> = {
     count: number;
     pageIndex: number;
     pageSize: number;
     result: Array<ModelType>;
 };
+*/
+
+export type PaginationResultType<ModelType extends Record<string, unknown>> = PetsdbReadPageResultType<ModelType>;

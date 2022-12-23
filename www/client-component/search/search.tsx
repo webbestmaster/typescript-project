@@ -69,15 +69,10 @@ export function Search(props: SearchPropsType): JSX.Element {
     useEffect(() => {
         if (searchString.length >= minLetters) {
             executeArticleList(
+                {title: new RegExp(searchString, 'gi')},
                 {
                     pageIndex: 0,
                     pageSize: 0,
-                    query: {
-                        title: {
-                            $regex: searchString,
-                            $regexFlag: 'gi',
-                        },
-                    },
                     sort: {title: 1},
                 },
                 articlePreviewKeyList
@@ -112,7 +107,7 @@ export function Search(props: SearchPropsType): JSX.Element {
                 <div className={searchStyle.result_wrapper}>
                     <SearchResult
                         isLoading={isInProgressArticleList}
-                        list={(resultArticleList?.result || []).filter(
+                        list={(resultArticleList?.list || []).filter(
                             (searchArticle: SearchArticleType): searchArticle is SearchArticleType => {
                                 return searchArticle.title.toLowerCase().includes(searchString.toLowerCase());
                             }

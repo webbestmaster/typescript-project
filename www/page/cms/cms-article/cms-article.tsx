@@ -145,8 +145,12 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
     const [savedArticleList, setSavedArticleList] = useState<Array<ArticleForValidationType>>([]);
 
     useEffect(() => {
-        executeArticleListPaginationPick({pageIndex: 0, pageSize: 0, query: {}, sort: {title: 1}}, keyForValidationList)
-            .then((data: PaginationResultType<ArticleForValidationType>) => setSavedArticleList(data.result))
+        executeArticleListPaginationPick(
+            {},
+            {pageIndex: 0, pageSize: 0, sort: {title: 1}},
+            keyForValidationList
+        )
+            .then((data: PaginationResultType<ArticleForValidationType>) => setSavedArticleList(data.list))
             .catch((error: Error) => {
                 console.log(error);
                 message.error('Can not fetch article list.');
@@ -245,7 +249,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             onValuesChange={onValuesChangeForm}
             scrollToFirstError
         >
-            <Spinner isShow={isFileLoading} position="fixed" />
+            <Spinner isShow={isFileLoading} position="fixed"/>
             <IsRender isRender={absentIdList.length > 0}>
                 <Title level={4} type="danger">
                     Document has missing children, children Id:&nbsp;{absentIdList.join(', ')}
@@ -266,7 +270,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             </Box>
 
             <Form.Item hidden initialValue={id} label={`Article id: ${id}`} name="id">
-                <Input disabled />
+                <Input disabled/>
             </Form.Item>
 
             <Form.Item label={`Title image (to 16MB): ${titleImage.name}`}>
@@ -308,7 +312,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                     maxCount={1}
                     onChange={handleChangeTitleImage}
                 >
-                    {titleImage.size > 0 ? null : <UploadButton />}
+                    {titleImage.size > 0 ? null : <UploadButton/>}
                 </Upload>
             </Form.Item>
 
@@ -318,7 +322,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 name="title"
                 rules={[{message: 'Required!', required: true}]}
             >
-                <Input placeholder="Title" />
+                <Input placeholder="Title"/>
             </Form.Item>
 
             <Form.Item
@@ -328,7 +332,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 normalize={textToSlug}
                 rules={makeSlugValidator({id, mode, savedArticleList})}
             >
-                <Input disabled={savedArticleList.length === 0} placeholder="slug-is-here" />
+                <Input disabled={savedArticleList.length === 0} placeholder="slug-is-here"/>
             </Form.Item>
 
             <Form.Item initialValue={articleType} label="Article type:" name="articleType">
@@ -346,7 +350,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 label={`Tag List, use comma "," to divide: ${makeTagsPreview(currentArticleState.tagList)}`}
                 name="tagList"
             >
-                <Input placeholder="Tag1, Tag2, Tag3..." />
+                <Input placeholder="Tag1, Tag2, Tag3..."/>
             </Form.Item>
 
             <Form.Item
@@ -375,13 +379,13 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
             <MarkdownInputWrapper mdInput={currentArticleState.content}>
                 <Form.Item initialValue={content} label="Content, use markdown:" name="content">
-                    <TextArea placeholder="# Markdown..." rows={10} />
+                    <TextArea placeholder="# Markdown..." rows={10}/>
                 </Form.Item>
             </MarkdownInputWrapper>
 
             <MarkdownInputWrapper mdInput={currentArticleState.description}>
                 <Form.Item initialValue={description} label="Description, use markdown:" name="description">
-                    <TextArea placeholder="Some description is here..." rows={3} />
+                    <TextArea placeholder="Some description is here..." rows={3}/>
                 </Form.Item>
             </MarkdownInputWrapper>
 
@@ -390,7 +394,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 label="Short description, plain text only, used for Open Graph:"
                 name="descriptionShort"
             >
-                <TextArea placeholder="Some short description is here..." rows={3} />
+                <TextArea placeholder="Some short description is here..." rows={3}/>
             </Form.Item>
 
             <Form.Item label={`Files (image to 16MB, other to 75MB): ${fileList.length}`}>
@@ -439,12 +443,12 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                     listType="picture"
                     onChange={handleChangeFileList}
                 >
-                    <UploadButton />
+                    <UploadButton/>
                 </Upload>
             </Form.Item>
 
             <Form.Item initialValue={dayjs.utc(publishDate)} label="Publish date UTC-0:" name="publishDate">
-                <DatePicker onOk={(date: Dayjs): void => setPublishDate(date.toISOString())} showTime />
+                <DatePicker onOk={(date: Dayjs): void => setPublishDate(date.toISOString())} showTime/>
             </Form.Item>
 
             <Form.Item
@@ -453,7 +457,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 label="Created date UTC-0:"
                 name="createdDate"
             >
-                <Input disabled />
+                <Input disabled/>
             </Form.Item>
 
             <Form.Item
@@ -462,13 +466,13 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 label="Updated date UTC-0:"
                 name="updatedDate"
             >
-                <Input disabled />
+                <Input disabled/>
             </Form.Item>
 
             <Divider orientation="center">SEO</Divider>
 
             <Form.Item initialValue={tagTitleSeo} label="Meta Title, tag <title>...</title>:" name="tagTitleSeo">
-                <Input placeholder="Title..." />
+                <Input placeholder="Title..."/>
             </Form.Item>
 
             <Form.Item
@@ -510,7 +514,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 label={'Meta Description, tag <meta name="description" content="..." />:'}
                 name="metaDescriptionSeo"
             >
-                <Input placeholder="Description..." />
+                <Input placeholder="Description..."/>
             </Form.Item>
 
             <Form.Item
@@ -518,7 +522,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 label={'Meta KeyWords, tag <meta name="keywords" content="..." />:'}
                 name="metaKeyWordsSeo"
             >
-                <Input placeholder="KeyWords..." />
+                <Input placeholder="KeyWords..."/>
             </Form.Item>
 
             <Form.Item
@@ -527,7 +531,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 name="metaSeo"
                 rules={makeHtmlValidator()}
             >
-                <TextArea placeholder="Additional meta tags..." rows={3} />
+                <TextArea placeholder="Additional meta tags..." rows={3}/>
             </Form.Item>
 
             <Divider orientation="center">Staff</Divider>
@@ -539,7 +543,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 )}`}
                 name="staffArtistList"
             >
-                <Input placeholder="Name1, Name2, Name3..." />
+                <Input placeholder="Name1, Name2, Name3..."/>
             </Form.Item>
 
             <Form.Item
@@ -549,7 +553,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 )}`}
                 name="staffAuthorList"
             >
-                <Input placeholder="Name1, Name2, Name3..." />
+                <Input placeholder="Name1, Name2, Name3..."/>
             </Form.Item>
 
             <Form.Item
@@ -559,7 +563,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 )}`}
                 name="staffCompositorList"
             >
-                <Input placeholder="Name1, Name2, Name3..." />
+                <Input placeholder="Name1, Name2, Name3..."/>
             </Form.Item>
 
             <Form.Item
@@ -569,7 +573,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 )}`}
                 name="staffDirectorList"
             >
-                <Input placeholder="Name1, Name2, Name3..." />
+                <Input placeholder="Name1, Name2, Name3..."/>
             </Form.Item>
 
             <Form.Item
@@ -579,7 +583,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 )}`}
                 name="staffIllustratorList"
             >
-                <Input placeholder="Name1, Name2, Name3..." />
+                <Input placeholder="Name1, Name2, Name3..."/>
             </Form.Item>
 
             <Form.Item
@@ -589,7 +593,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 )}`}
                 name="staffReaderList"
             >
-                <Input placeholder="Name1, Name2, Name3..." />
+                <Input placeholder="Name1, Name2, Name3..."/>
             </Form.Item>
 
             <Form.Item>
@@ -601,7 +605,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                     <Popconfirm
                         cancelText="No"
                         disabled={isDisableToDelete}
-                        icon={<QuestionCircleOutlined style={{color: red.primary}} />}
+                        icon={<QuestionCircleOutlined style={{color: red.primary}}/>}
                         okText="Delete"
                         onConfirm={() => handleDeleteArticle(id)}
                         title="Are you sure to delete the article？"

@@ -1,10 +1,11 @@
-import {PromiseResolveType} from '../../www/util/promise';
-import {extractFromUnknown} from '../../www/util/type';
+// import {PromiseResolveType} from '../../www/util/promise';
+// import {extractFromUnknown} from '../../www/util/type';
 import {tryToMakeDirectory} from '../file/directory';
 
-import {CrudSearchQueryType, RegExpQueryType} from './data-base-type';
+// import {CrudSearchQueryType, RegExpQueryType} from './data-base-type';
 import {dataBaseBackUpPathAbsolute} from './data-base-const';
 
+/*
 export function makeSimpleDataBaseCallBack(
     maybeError: Error | null,
     resolve: PromiseResolveType<null>,
@@ -54,6 +55,7 @@ export function makePreparedQuery<ModelType>(query: CrudSearchQueryType<ModelTyp
 
     return result;
 }
+*/
 
 export async function makeBackUpFolder(dataBaseId: string): Promise<void> {
     await tryToMakeDirectory(dataBaseBackUpPathAbsolute);

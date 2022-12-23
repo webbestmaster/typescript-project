@@ -38,6 +38,18 @@ import {rootArticleSlug} from './article/article-const';
 import {GetExtraFilesType, removeExtraStaticFiles} from './file/extra-static-files';
 import {tryToMakeDirectory, tryToRemoveDirectory} from './file/directory';
 
+
+import type {
+    PetsdbInitialConfigType,
+    PetsdbItemType,
+    PetsdbQueryType,
+    PetsdbReadPageConfigType,
+    PetsdbReadPageResultType,
+    PetsdbSortDirectionType,
+    PetsdbSortType,
+    PetsdbSortValueType,
+} from 'petsdb';
+
 const cwd = process.cwd();
 // eslint-disable-next-line no-process-env
 const isMakeStaticSite = process.env.MAKE_STATIC_SITE === 'TRUE';
@@ -96,11 +108,11 @@ const isMakeStaticSite = process.env.MAKE_STATIC_SITE === 'TRUE';
     fastify.get(apiUrl.getUser, getAutoAuthLogin);
     fastify.get(
         apiUrl.adminArticleListPagination,
-        adminOnly<PaginationResultType<ArticleType>>(getArticleListPagination)
+        adminOnly<PetsdbReadPageResultType<ArticleType>>(getArticleListPagination)
     );
     fastify.get(
         apiUrl.adminArticleListPaginationPick,
-        adminOnly<PaginationResultType<Partial<ArticleType>>>(getArticleListPaginationPick)
+        adminOnly<PetsdbReadPageResultType<Partial<ArticleType>>>(getArticleListPaginationPick)
     );
     fastify.post(apiUrl.adminFileUpload, adminOnly<ArticleFileType>(uploadFile));
     fastify.get(apiUrl.imageGet, getImage);

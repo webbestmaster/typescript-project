@@ -26,10 +26,10 @@ export function CmsArticleEdit(): JSX.Element {
     );
 
     useEffect(() => {
-        articleById({
+        articleById({id: articleId || ''},
+            {
             pageIndex: 0,
             pageSize: 1,
-            query: {id: articleId || ''},
             sort: {title: 1},
         });
     }, [articleById, articleId]);
@@ -50,7 +50,7 @@ export function CmsArticleEdit(): JSX.Element {
             });
     }
 
-    const articleToEdit: ArticleType | null = articleByIdResult?.result[0] || null;
+    const articleToEdit: ArticleType | null = articleByIdResult?.list[0] || null;
 
     if (articleToEdit === null) {
         return (

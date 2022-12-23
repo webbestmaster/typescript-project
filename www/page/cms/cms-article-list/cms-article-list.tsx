@@ -28,14 +28,16 @@ export function CmsArticleList(): JSX.Element {
     >(getArticleListPaginationPick);
 
     const [paginationArticleList, setPaginationArticleList] = useState<PaginationQueryType<ArticleForTableListType>>({
-        pageIndex: 0,
-        pageSize: defaultPageSize,
+        pageConfig: {
+            pageIndex: 0,
+            pageSize: defaultPageSize,
+            sort: {title: 1},
+        },
         query: {},
-        sort: {title: 1},
     });
 
     useEffect(() => {
-        executeArticleList(paginationArticleList, keyForTableListList);
+        executeArticleList(paginationArticleList.query, paginationArticleList.pageConfig, keyForTableListList);
     }, [executeArticleList, paginationArticleList]);
 
     // eslint-disable-next-line complexity, max-statements
@@ -60,10 +62,12 @@ export function CmsArticleList(): JSX.Element {
 
         setPaginationArticleList((): PaginationQueryType<ArticleForTableListType> => {
             return {
-                pageIndex,
-                pageSize,
+                pageConfig: {
+                    pageIndex,
+                    pageSize,
+                    sort: {[String(field)]: sortDirection},
+                },
                 query: {[searchedColumn]: {$regex: searchText, $regexFlag: 'i'}},
-                sort: {[String(field)]: sortDirection},
             };
         });
 
@@ -87,17 +91,17 @@ export function CmsArticleList(): JSX.Element {
 
             <Table<ArticleForTableListType>
                 columns={getArticleTableColumnList({setSearchText, setSearchedColumn})}
-                dataSource={resultArticleList?.result || []}
+                dataSource={resultArticleList?.list || []}
                 loading={isInProgressArticleList}
                 onChange={handleTableChange}
                 pagination={{
-                    current: paginationArticleList.pageIndex + 1,
+                    current: paginationArticleList.pageConfig.pageIndex + 1,
                     defaultPageSize,
                     hideOnSinglePage: false,
-                    pageSize: paginationArticleList.pageSize,
+                    pageSize: paginationArticleList.pageConfig.pageSize,
                     pageSizeOptions: [defaultPageSize, 50, 100, 500, 1000, 2000, 5000],
                     showSizeChanger: true,
-                    total: resultArticleList?.count || 0,
+                    total: resultArticleList?.totalItemCount || 0,
                 }}
                 rowKey="id"
             />

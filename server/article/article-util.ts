@@ -34,7 +34,7 @@ export function articleToArticlePreview(article: ArticleType): ArticlePreviewTyp
 }
 
 export function getArticleParentListById(articleId: string): Promise<Array<ArticleType>> {
-    return articleCrud.findMany({subDocumentIdList: articleId});
+    return articleCrud.findMany({subDocumentIdList: [articleId]});
 }
 
 export function getArticleListByIdList(idList: Array<string>): Promise<Array<ArticleType | null>> {
@@ -66,7 +66,7 @@ export async function getArticleBreadcrumbListById(id: string): Promise<Array<Ar
     // eslint-disable-next-line no-loops/no-loops
     do {
         deep -= 1;
-        parent = await articleCrud.findOne({subDocumentIdList: childId});
+        parent = await articleCrud.findOne({subDocumentIdList: [childId]});
 
         if (parent) {
             childId = parent.id;
