@@ -1,10 +1,8 @@
 /* global URLSearchParams, location */
 import {generatePath as reactRouterGeneratePath} from 'react-router-dom';
-import type {
-    PetsdbQueryType,
-    PetsdbReadPageConfigType,
-} from 'petsdb';
-import {ArticleType} from "../../server/article/article-type";
+import type {PetsdbQueryType, PetsdbReadPageConfigType} from 'petsdb';
+
+import {ArticleType} from '../../server/article/article-type';
 
 // eslint-disable-next-line id-length
 export function paginationQueryToURLSearchParameters<DataType extends Record<string, unknown>>(
@@ -20,19 +18,19 @@ export function paginationQueryToURLSearchParameters<DataType extends Record<str
 }
 
 export type ExtractPathDataType<StringConstType> = StringConstType extends `${string}:${infer KeyNames}/${infer Rest}`
-    ? ExtractPathDataType<Rest> & { [key in KeyNames]: string }
+    ? ExtractPathDataType<Rest> & {[key in KeyNames]: string}
     : StringConstType extends `${string}:${infer KeyNames}`
-        ? ExtractPathDataType<string> & { [key in KeyNames]: string }
-        : Record<never, string>;
+    ? ExtractPathDataType<string> & {[key in KeyNames]: string}
+    : Record<never, string>;
 
 export type ExtractPathKeysType<StringConstType> = keyof ExtractPathDataType<StringConstType>;
 
 // Just workaround for react-router-dom, should be the same as ExtractPathDataType, but use Record<string, string> in the and
 type RouterPathDataType<StringConstType> = StringConstType extends `${string}:${infer KeyNames}/${infer Rest}`
-    ? ExtractPathDataType<Rest> & { [key in KeyNames]: string }
+    ? ExtractPathDataType<Rest> & {[key in KeyNames]: string}
     : StringConstType extends `${string}:${infer KeyNames}`
-        ? ExtractPathDataType<string> & { [key in KeyNames]: string }
-        : Record<string, string>;
+    ? ExtractPathDataType<string> & {[key in KeyNames]: string}
+    : Record<string, string>;
 
 export function generatePath<PathType extends string>(
     rawPath: PathType,

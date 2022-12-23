@@ -26,12 +26,14 @@ export function CmsArticleEdit(): JSX.Element {
     );
 
     useEffect(() => {
-        articleById({id: articleId || ''},
+        articleById(
+            {id: articleId || ''},
             {
-            pageIndex: 0,
-            pageSize: 1,
-            sort: {title: 1},
-        });
+                pageIndex: 0,
+                pageSize: 1,
+                sort: {title: 1},
+            }
+        );
     }, [articleById, articleId]);
 
     const {execute: updateArticle, isInProgress: isInProgressUpdateArticle} = useMakeExecutableState<

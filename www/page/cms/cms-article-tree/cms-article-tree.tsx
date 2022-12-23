@@ -36,11 +36,7 @@ export function CmsArticleTree(): JSX.Element {
     const [savedArticleList, setSavedArticleList] = useState<Array<ArticleForTreeType>>([]);
 
     useEffect(() => {
-        executeArticleListPaginationPick(
-            {},
-            {pageIndex: 0, pageSize: 0, sort: {title: 1}},
-            keyForTreeList
-        )
+        executeArticleListPaginationPick({}, {pageIndex: 0, pageSize: 0, sort: {title: 1}}, keyForTreeList)
             .then((data: PaginationResultType<ArticleForTreeType>) => setSavedArticleList(data.list))
             .catch((error: Error) => {
                 console.log(error);
@@ -111,7 +107,7 @@ export function CmsArticleTree(): JSX.Element {
                 autoExpandParent
                 defaultExpandAll
                 showLine
-                switcherIcon={<DownOutlined/>}
+                switcherIcon={<DownOutlined />}
                 treeData={[tree]}
             />
 
@@ -133,7 +129,7 @@ export function CmsArticleTree(): JSX.Element {
                 />
             </Box>
 
-            <Spinner isShow={isInProgressArticleListPagination} position="absolute"/>
+            <Spinner isShow={isInProgressArticleListPagination} position="absolute" />
         </CmsPage>
     );
 }

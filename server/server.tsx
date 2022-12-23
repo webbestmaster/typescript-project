@@ -10,6 +10,17 @@ import {fastifySecureSession} from '@fastify/secure-session';
 import {FastifyError} from '@fastify/error';
 import fastifyConstructor, {FastifyRequest, FastifyReply} from 'fastify';
 
+import type {
+    PetsdbInitialConfigType,
+    PetsdbItemType,
+    PetsdbQueryType,
+    PetsdbReadPageConfigType,
+    PetsdbReadPageResultType,
+    PetsdbSortDirectionType,
+    PetsdbSortType,
+    PetsdbSortValueType,
+} from 'petsdb';
+
 import {appRoute} from '../www/component/app/app-route';
 
 import {getAutoAuthLogin, postAuthLogin} from './auth/auth-api';
@@ -38,17 +49,6 @@ import {rootArticleSlug} from './article/article-const';
 import {GetExtraFilesType, removeExtraStaticFiles} from './file/extra-static-files';
 import {tryToMakeDirectory, tryToRemoveDirectory} from './file/directory';
 
-
-import type {
-    PetsdbInitialConfigType,
-    PetsdbItemType,
-    PetsdbQueryType,
-    PetsdbReadPageConfigType,
-    PetsdbReadPageResultType,
-    PetsdbSortDirectionType,
-    PetsdbSortType,
-    PetsdbSortValueType,
-} from 'petsdb';
 
 const cwd = process.cwd();
 // eslint-disable-next-line no-process-env

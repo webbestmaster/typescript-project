@@ -1,5 +1,7 @@
 import {FastifyReply, FastifyRequest} from 'fastify';
 
+import type {PetsdbQueryType, PetsdbReadPageConfigType, PetsdbReadPageResultType} from 'petsdb';
+
 import {mainResponseHeader} from '../const';
 import {defaultPaginationQuery} from '../data-base/data-base-const';
 import {makeClientArticleContextData} from '../ssr/api/srr-article';
@@ -10,11 +12,6 @@ import {articleCrud} from './article';
 import {ArticleType} from './article-type';
 import {validateArticle} from './article-validation';
 
-import type {
-    PetsdbQueryType,
-    PetsdbReadPageConfigType,
-    PetsdbReadPageResultType,
-} from 'petsdb';
 
 export async function getArticleListPagination(
     request: FastifyRequest,
@@ -30,8 +27,10 @@ export async function getArticleListPagination(
     const pageConfigStable: PetsdbReadPageConfigType<ArticleType> = JSON.parse(decodeURIComponent(pageConfig));
     const queryStable: PetsdbQueryType<ArticleType> = JSON.parse(decodeURIComponent(query));
 
-    const articleListPagination: PetsdbReadPageResultType<ArticleType> =
-        await articleCrud.findManyPagination(queryStable, pageConfigStable);
+    const articleListPagination: PetsdbReadPageResultType<ArticleType> = await articleCrud.findManyPagination(
+        queryStable,
+        pageConfigStable
+    );
 
     reply.code(200).header(...mainResponseHeader);
 
@@ -56,11 +55,7 @@ export async function getArticleListPaginationPick(
     const queryStable: PetsdbQueryType<ArticleType> = JSON.parse(decodeURIComponent(query));
 
     const articleListPagination: PetsdbReadPageResultType<Partial<ArticleType>> =
-        await articleCrud.findManyPaginationPartial(
-            queryStable,
-            pageConfigStable,
-            pickStable
-        );
+        await articleCrud.findManyPaginationPartial(queryStable, pageConfigStable, pickStable);
 
     reply.code(200).header(...mainResponseHeader);
 
@@ -69,7 +64,7 @@ export async function getArticleListPaginationPick(
 
 // eslint-disable-next-line complexity, max-statements
 export async function postAdminArticleCreate(
-    request: FastifyRequest<{ Body?: string }>,
+    request: FastifyRequest<{Body?: string}>,
     reply: FastifyReply
 ): Promise<ArticleType | Record<'message', string>> {
     const {body} = request;
@@ -131,7 +126,7 @@ export async function postAdminArticleCreate(
 
 // eslint-disable-next-line complexity, max-statements
 export async function postAdminArticleUpdate(
-    request: FastifyRequest<{ Body?: string }>,
+    request: FastifyRequest<{Body?: string}>,
     reply: FastifyReply
 ): Promise<ArticleType | Record<'message', string>> {
     const {body} = request;
@@ -175,7 +170,7 @@ export async function postAdminArticleUpdate(
 }
 
 export async function deleteAdminArticleDelete(
-    request: FastifyRequest<{ Params: { articleId?: string } }>,
+    request: FastifyRequest<{Params: {articleId?: string}}>,
     reply: FastifyReply
 ): Promise<Record<'articleId', string>> {
     const {params} = request;
@@ -189,7 +184,7 @@ export async function deleteAdminArticleDelete(
 }
 
 export async function getClientArticleContextData(
-    request: FastifyRequest<{ Params: { slug?: string } }>,
+    request: FastifyRequest<{Params: {slug?: string}}>,
     reply: FastifyReply
 ): Promise<ArticleContextType> {
     const {params} = request;
@@ -224,11 +219,7 @@ export async function getArticleClientListPaginationPick(
     queryStable.isActive = true;
 
     const articleListPagination: PetsdbReadPageResultType<Partial<ArticleType>> =
-        await articleCrud.findManyPaginationPartial(
-            queryStable,
-            pageConfigStable,
-            pickStable
-        );
+        await articleCrud.findManyPaginationPartial(queryStable, pageConfigStable, pickStable);
 
     reply.code(200).header(...mainResponseHeader);
 

@@ -81,4 +81,11 @@ export type PaginationResultType<ModelType> = {
 };
 */
 
-export type PaginationResultType<ModelType extends Record<string, unknown>> = PetsdbReadPageResultType<ModelType>;
+export type PaginationResultType<ModelType extends Record<string, unknown>> = {
+    list: Array<ModelType>;
+    pageIndex: number;
+    pageSize: number;
+    sort: Record<string, unknown>;
+    totalItemCount: number;
+    totalPageCount: number;
+};

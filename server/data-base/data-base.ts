@@ -15,11 +15,7 @@ import type {
 } from 'petsdb';
 
 import {makeBackUpFolder} from './data-base-util';
-import {
-    CrudConfigOnChangeArgumentType,
-    CrudConfigType,
-    CrudType,
-} from './data-base-type';
+import {CrudConfigOnChangeArgumentType, CrudConfigType, CrudType} from './data-base-type';
 import {makeDataBaseBackUp} from './data-base-back-up';
 import {dataBaseFolderPath} from './data-base-const';
 
@@ -43,7 +39,7 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
         dbPath: dataBasePath,
     });
 
-/*
+    /*
     function count(): Promise<number> {
         return new Promise<number>((resolve: PromiseResolveType<number>) => {
             return resolve(dataBase.getSize());
@@ -73,7 +69,7 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
     ): Promise<PetsdbReadPageResultType<Partial<ModelType>>> {
         return findManyPagination(query, pageConfig);
 
-/*
+        /*
         .then(
             (paginationData: PetsdbReadPageResultType<ModelType>): PetsdbReadPageResultType<Partial<PetsdbItemType<ModelType>>> => {
 
@@ -91,7 +87,6 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
         );
 */
     }
-
 
     // throw error if smth wrong
     async function createOne(modelData: ModelType): Promise<null> {

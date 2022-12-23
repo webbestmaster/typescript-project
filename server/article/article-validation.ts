@@ -1,5 +1,16 @@
 import Ajv, {JSONSchemaType, ValidateFunction} from 'ajv';
 
+import type {
+    PetsdbInitialConfigType,
+    PetsdbItemType,
+    PetsdbQueryType,
+    PetsdbReadPageConfigType,
+    PetsdbReadPageResultType,
+    PetsdbSortDirectionType,
+    PetsdbSortType,
+    PetsdbSortValueType,
+} from 'petsdb';
+
 import {PaginationResultType} from '../data-base/data-base-type';
 
 import {
@@ -11,16 +22,6 @@ import {
     SubDocumentListViewTypeEnum,
 } from './article-type';
 
-import type {
-    PetsdbInitialConfigType,
-    PetsdbItemType,
-    PetsdbQueryType,
-    PetsdbReadPageConfigType,
-    PetsdbReadPageResultType,
-    PetsdbSortDirectionType,
-    PetsdbSortType,
-    PetsdbSortValueType,
-} from 'petsdb';
 
 export function makeArticleFileSchema(): JSONSchemaType<ArticleFileType> {
     const articleFileProperties = {
@@ -144,7 +145,7 @@ export function makeArticleSchemaPick<KeyOfArticle extends keyof ArticleType>(
 
     const articleSchemaPick: JSONSchemaType<Pick<ArticleType, KeyOfArticle>> = Object.assign<
         JSONSchemaType<Pick<ArticleType, KeyOfArticle>>,
-        { properties: Record<string, unknown>; required: Array<KeyOfArticle> }
+        {properties: Record<string, unknown>; required: Array<KeyOfArticle>}
     >(articlePickedSchema, {
         properties: pickedProperties,
         required: fieldList,

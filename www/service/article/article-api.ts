@@ -1,3 +1,5 @@
+import type {PetsdbQueryType, PetsdbReadPageConfigType} from 'petsdb';
+
 import {PaginationResultType} from '../../../server/data-base/data-base-type';
 import {ArticleType} from '../../../server/article/article-type';
 import {FetchMethodEnum, fetchX} from '../../util/fetch';
@@ -12,14 +14,10 @@ import {UnknownObjectType} from '../../util/type';
 import {ArticleContextType} from '../../client-component/article/article-context/article-context-type';
 import {articleContextDataSchema} from '../../client-component/article/article-context/article-context-const';
 
-import type {
-    PetsdbQueryType,
-    PetsdbReadPageConfigType,
-} from 'petsdb';
 
 export async function getArticleListPagination(
     query: PetsdbQueryType<ArticleType>,
-    pageConfig: PetsdbReadPageConfigType<ArticleType>,
+    pageConfig: PetsdbReadPageConfigType<ArticleType>
 ): Promise<PaginationResultType<ArticleType>> {
     const urlSearchParameters = paginationQueryToURLSearchParameters<ArticleType>(query, pageConfig, []);
 
@@ -55,11 +53,7 @@ export async function getArticleClientListPaginationPick<Keys extends keyof Arti
     pageConfig: PetsdbReadPageConfigType<ArticleType>,
     fieldList: Array<Keys>
 ): Promise<PaginationResultType<Pick<ArticleType, Keys>>> {
-    const urlSearchParameters = paginationQueryToURLSearchParameters<ArticleType>(
-        query,
-        pageConfig,
-        fieldList
-    );
+    const urlSearchParameters = paginationQueryToURLSearchParameters<ArticleType>(query, pageConfig, fieldList);
 
     return fetchX<PaginationResultType<Pick<ArticleType, Keys>>>(
         `${apiUrl.clientSearchArticle}?${urlSearchParameters.toString()}`,

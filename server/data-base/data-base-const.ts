@@ -2,8 +2,9 @@
 
 import path from 'path';
 
+import {ArticleType} from '../article/article-type';
+
 import {PaginationQueryType} from './data-base-type';
-import {ArticleType} from "../article/article-type";
 
 const cwd = process.cwd();
 
