@@ -4,8 +4,8 @@
 
 # data base
 /db/back-up/
-#/db/data-base.article.db-backup/
-#/db/data-base.user.db-backup/
+/db/data-base.article.db-backup/
+/db/data-base.user.db-backup/
 
 # Logs
 logs
