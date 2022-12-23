@@ -1,4 +1,4 @@
-import type {PetsdbItemType, PetsdbQueryType, PetsdbReadPageConfigType, PetsdbReadPageResultType} from 'petsdb';
+import type {PetsdbItemType, PetsdbQueryType, PetsdbReadPageConfigType} from 'petsdb';
 
 export type CrudConfigOnChangeArgumentType = {
     dataBaseFileName: string;
@@ -24,12 +24,12 @@ export type CrudType<ModelType extends Record<string, unknown>> = {
     findManyPagination: (
         query: PetsdbQueryType<ModelType>,
         pageConfig: PetsdbReadPageConfigType<ModelType>
-    ) => Promise<PetsdbReadPageResultType<ModelType>>;
+    ) => Promise<PaginationResultType<ModelType>>;
     findManyPaginationPartial: (
         query: PetsdbQueryType<ModelType>,
         pageConfig: PetsdbReadPageConfigType<ModelType>,
         requiredPropertyList: Array<keyof ModelType>
-    ) => Promise<PetsdbReadPageResultType<Partial<ModelType>>>;
+    ) => Promise<PaginationResultType<Partial<ModelType>>>;
     findOne: (query: PetsdbQueryType<ModelType>) => Promise<PetsdbItemType<ModelType> | null>;
     updateOne: (query: PetsdbQueryType<ModelType>, model: ModelType) => Promise<null>; // throw error if smth wrong
 };

@@ -1,12 +1,12 @@
 import {FastifyReply, FastifyRequest} from 'fastify';
-
-import type {PetsdbQueryType, PetsdbReadPageConfigType, PetsdbReadPageResultType} from 'petsdb';
+import type {PetsdbQueryType, PetsdbReadPageConfigType} from 'petsdb';
 
 import {mainResponseHeader} from '../const';
 import {defaultPaginationQuery} from '../data-base/data-base-const';
 import {makeClientArticleContextData} from '../ssr/api/srr-article';
 import {getStringFromUnknown} from '../../www/util/type';
 import {ArticleContextType} from '../../www/client-component/article/article-context/article-context-type';
+import {PaginationResultType} from '../data-base/data-base-type';
 
 import {articleCrud} from './article';
 import {ArticleType} from './article-type';
@@ -16,7 +16,7 @@ import {tryQueryStringToRegExp} from './article-util';
 export async function getArticleListPagination(
     request: FastifyRequest,
     reply: FastifyReply
-): Promise<PetsdbReadPageResultType<ArticleType>> {
+): Promise<PaginationResultType<ArticleType>> {
     const {pageConfig, query} = Object.assign(
         {
             pageConfig: encodeURIComponent(JSON.stringify(defaultPaginationQuery)),
@@ -36,7 +36,7 @@ export async function getArticleListPagination(
         }
     }
 
-    const articleListPagination: PetsdbReadPageResultType<ArticleType> = await articleCrud.findManyPagination(
+    const articleListPagination: PaginationResultType<ArticleType> = await articleCrud.findManyPagination(
         queryParsed,
         pageConfigParsed
     );
@@ -50,7 +50,7 @@ export async function getArticleListPagination(
 export async function getArticleListPaginationPick(
     request: FastifyRequest,
     reply: FastifyReply
-): Promise<PetsdbReadPageResultType<Partial<ArticleType>>> {
+): Promise<PaginationResultType<Partial<ArticleType>>> {
     const {pageConfig, pick, query} = Object.assign(
         {
             pageConfig: encodeURIComponent(JSON.stringify(defaultPaginationQuery)),
@@ -72,7 +72,7 @@ export async function getArticleListPaginationPick(
         }
     }
 
-    const articleListPagination: PetsdbReadPageResultType<Partial<ArticleType>> =
+    const articleListPagination: PaginationResultType<Partial<ArticleType>> =
         await articleCrud.findManyPaginationPartial(queryParsed, pageConfigParsed, pickParsed);
 
     reply.code(200).header(...mainResponseHeader);
@@ -84,7 +84,7 @@ export async function getArticleListPaginationPick(
 export async function getArticleClientListPaginationPick(
     request: FastifyRequest,
     reply: FastifyReply
-): Promise<PetsdbReadPageResultType<Partial<ArticleType>>> {
+): Promise<PaginationResultType<Partial<ArticleType>>> {
     const {pageConfig, pick, query} = Object.assign(
         {
             pageConfig: encodeURIComponent(JSON.stringify(defaultPaginationQuery)),
@@ -108,7 +108,7 @@ export async function getArticleClientListPaginationPick(
 
     queryParsed.isActive = true;
 
-    const articleListPagination: PetsdbReadPageResultType<Partial<ArticleType>> =
+    const articleListPagination: PaginationResultType<Partial<ArticleType>> =
         await articleCrud.findManyPaginationPartial(queryParsed, pageConfigParsed, pickParsed);
 
     reply.code(200).header(...mainResponseHeader);

@@ -10,8 +10,6 @@ import {fastifySecureSession} from '@fastify/secure-session';
 import {FastifyError} from '@fastify/error';
 import fastifyConstructor, {FastifyRequest, FastifyReply} from 'fastify';
 
-import type {PetsdbReadPageResultType} from 'petsdb';
-
 import {appRoute} from '../www/component/app/app-route';
 
 import {getAutoAuthLogin, postAuthLogin} from './auth/auth-api';
@@ -38,6 +36,7 @@ import {getHtmlCallBackRequest} from './ssr/ssr-helper';
 import {rootArticleSlug} from './article/article-const';
 import {GetExtraFilesType, removeExtraStaticFiles} from './file/extra-static-files';
 import {tryToMakeDirectory, tryToRemoveDirectory} from './file/directory';
+import {PaginationResultType} from './data-base/data-base-type';
 
 const cwd = process.cwd();
 // eslint-disable-next-line no-process-env
@@ -97,11 +96,11 @@ const isMakeStaticSite = process.env.MAKE_STATIC_SITE === 'TRUE';
     fastify.get(apiUrl.getUser, getAutoAuthLogin);
     fastify.get(
         apiUrl.adminArticleListPagination,
-        adminOnly<PetsdbReadPageResultType<ArticleType>>(getArticleListPagination)
+        adminOnly<PaginationResultType<ArticleType>>(getArticleListPagination)
     );
     fastify.get(
         apiUrl.adminArticleListPaginationPick,
-        adminOnly<PetsdbReadPageResultType<Partial<ArticleType>>>(getArticleListPaginationPick)
+        adminOnly<PaginationResultType<Partial<ArticleType>>>(getArticleListPaginationPick)
     );
     fastify.post(apiUrl.adminFileUpload, adminOnly<ArticleFileType>(uploadFile));
     fastify.get(apiUrl.imageGet, getImage);

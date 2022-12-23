@@ -1,10 +1,9 @@
 import Ajv, {JSONSchemaType} from 'ajv';
-
 import {Petsdb} from 'petsdb';
-import type {PetsdbItemType, PetsdbQueryType, PetsdbReadPageConfigType, PetsdbReadPageResultType} from 'petsdb';
+import type {PetsdbItemType, PetsdbQueryType, PetsdbReadPageConfigType} from 'petsdb';
 
 import {getPartialData, makeBackUpFolder} from './data-base-util';
-import {CrudConfigOnChangeArgumentType, CrudConfigType, CrudType} from './data-base-type';
+import {CrudConfigOnChangeArgumentType, CrudConfigType, CrudType, PaginationResultType} from './data-base-type';
 import {makeDataBaseBackUp} from './data-base-back-up';
 import {dataBaseFolderPath} from './data-base-const';
 
@@ -47,7 +46,7 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
     async function findManyPagination(
         query: PetsdbQueryType<ModelType>,
         pageConfig: PetsdbReadPageConfigType<ModelType>
-    ): Promise<PetsdbReadPageResultType<ModelType>> {
+    ): Promise<PaginationResultType<ModelType>> {
         return dataBase.readPage(query, pageConfig);
     }
 
@@ -55,17 +54,15 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
         query: PetsdbQueryType<ModelType>,
         pageConfig: PetsdbReadPageConfigType<ModelType>,
         requiredPropertyList: Array<keyof ModelType>
-    ): Promise<PetsdbReadPageResultType<Partial<ModelType>>> {
+    ): Promise<PaginationResultType<Partial<ModelType>>> {
         return findManyPagination(query, pageConfig).then(
-            (paginationData: PetsdbReadPageResultType<ModelType>): PetsdbReadPageResultType<Partial<ModelType>> => {
+            (paginationData: PaginationResultType<ModelType>): PaginationResultType<Partial<ModelType>> => {
                 return {
                     ...paginationData,
-                    list: paginationData.list.map<PetsdbItemType<Partial<ModelType>>>(
-                        (data: PetsdbItemType<ModelType>): PetsdbItemType<Partial<ModelType>> => {
-                            // eslint-disable-next-line no-underscore-dangle
-                            return {...getPartialData<ModelType>(data, requiredPropertyList), _id: data._id};
-                        }
-                    ),
+                    list: paginationData.list.map<Partial<ModelType>>((data: ModelType): Partial<ModelType> => {
+                        // eslint-disable-next-line no-underscore-dangle
+                        return getPartialData<ModelType>(data, requiredPropertyList);
+                    }),
                 };
             }
         );
