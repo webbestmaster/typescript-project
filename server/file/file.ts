@@ -5,6 +5,7 @@ import path from 'path';
 import {FastifyReply, FastifyRequest} from 'fastify';
 import {MultipartFile} from '@fastify/multipart';
 import webpConverter from 'webp-converter';
+import sharp from 'sharp';
 
 import {PromiseResolveType} from '../../www/util/promise';
 import {getRandomString} from '../../www/util/string';
@@ -152,9 +153,9 @@ export async function getImage(
     }
 
     if (rawFileExtension === 'png') {
-        // await sharp(fullFilePath).resize(imageWidth, imageHeight).toFile(temporaryFilePath);
-        // return fileSystem.createReadStream(temporaryFilePath);
-        return getFile(request, reply);
+        await sharp(fullFilePath).resize(imageWidth, imageHeight).toFile(temporaryFilePath);
+        return fileSystem.createReadStream(temporaryFilePath);
+        // return getFile(request, reply);
     }
 
     return getFile(request, reply);
