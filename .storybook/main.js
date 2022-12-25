@@ -21,7 +21,7 @@ module.exports = {
                     options: {
                         sourceMap: false,
                         modules: {
-                            localIdentName: '[local]----[fullhash:6]',
+                            localIdentName: '[local]----[hash:6]',
                         },
                     },
                 },
