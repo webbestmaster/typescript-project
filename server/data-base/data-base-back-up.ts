@@ -1,5 +1,6 @@
-import fileSystem, {promises as fileSystemPromises} from 'fs';
-import path from 'path';
+import {createReadStream, createWriteStream} from 'node:fs';
+import fileSystem from 'node:fs/promises';
+import path from 'node:path';
 
 import JSZip from 'jszip';
 
@@ -14,7 +15,7 @@ async function removeOldDataBaseBackUp(dataBaseInfo: CrudConfigOnChangeArgumentT
 
     const maxBackUpCount = 100;
 
-    const fileList: Array<string> = await fileSystemPromises.readdir(path.join(dataBaseBackUpPathAbsolute, dataBaseId));
+    const fileList: Array<string> = await fileSystem.readdir(path.join(dataBaseBackUpPathAbsolute, dataBaseId));
 
     // new files at first
     const sortedFileNameList = fileList.sort(sortStringCallbackReverse);
@@ -26,7 +27,7 @@ async function removeOldDataBaseBackUp(dataBaseInfo: CrudConfigOnChangeArgumentT
         extraFileNameList.map((fileNameToRemove: string): Promise<void> => {
             const pathToFile = path.join(dataBaseBackUpPathAbsolute, dataBaseId, fileNameToRemove);
 
-            return fileSystemPromises.unlink(pathToFile);
+            return fileSystem.unlink(pathToFile);
         })
     ).catch((error: Error): void => {
         console.log('[ERROR]: removeOldDataBaseBackUp:', error.message);
@@ -42,9 +43,9 @@ export async function makeDataBaseBackUp(dataBaseInfo: CrudConfigOnChangeArgumen
     const newFileName = path.join(dataBaseBackUpPathAbsolute, dataBaseId, `${fileNamePrefix}${dataBaseFileName}.zip`);
 
     await new Promise((resolve: PromiseResolveType<void>, reject: PromiseResolveType<Error>) => {
-        zip.file(dataBaseFileName, fileSystem.createReadStream(dataBasePath))
+        zip.file(dataBaseFileName, createReadStream(dataBasePath))
             .generateNodeStream({compression: 'DEFLATE', streamFiles: true})
-            .pipe(fileSystem.createWriteStream(newFileName))
+            .pipe(createWriteStream(newFileName))
             .on('close', resolve)
             .on('error', reject);
     });

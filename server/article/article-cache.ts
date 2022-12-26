@@ -1,5 +1,5 @@
 /* global process */
-import path from 'path';
+import path from 'node:path';
 
 import {writeStringToFile} from '../util/file';
 import {tryToMakeDirectory, tryToRemoveDirectory} from '../file/directory';

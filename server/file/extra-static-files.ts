@@ -1,7 +1,7 @@
 /* global process */
 
-import path from 'path';
-import {promises as fileSystemPromises} from 'fs';
+import path from 'node:path';
+import fileSystem from 'node:fs/promises';
 
 import {FastifyReply, FastifyRequest} from 'fastify';
 
@@ -26,7 +26,7 @@ export async function removeExtraStaticFiles(request: FastifyRequest, reply: Fas
     const articleList: Array<ArticleType> = await articleCrud.findMany({});
 
     const actualSpecialFileList: Array<string> = [];
-    const fileNameList: Array<string> = await fileSystemPromises.readdir(path.join(cwd, uploadFileFolder));
+    const fileNameList: Array<string> = await fileSystem.readdir(path.join(cwd, uploadFileFolder));
     const extraFileList: Array<string> = [];
 
     fileNameList.forEach((fileName: string) => {

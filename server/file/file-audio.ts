@@ -1,5 +1,6 @@
-import {promises as fileSystemPromises, Stats} from 'fs';
-import path from 'path';
+import {Stats} from 'node:fs';
+import fileSystem from 'node:fs/promises';
+import path from 'node:path';
 
 import {Lame} from 'node-lame';
 import {getAudioDurationInSeconds} from 'get-audio-duration';
@@ -14,7 +15,7 @@ const maxKiloBytesPerSecond: BitrateType = 128;
 
 async function getAudioFileBitrate(fullFilePath: string): Promise<BitrateType> {
     const durationInSeconds = await getAudioDurationInSeconds(fullFilePath);
-    const stats: Stats = await fileSystemPromises.stat(fullFilePath);
+    const stats: Stats = await fileSystem.stat(fullFilePath);
     const {size: fileSize} = stats;
     const kiloBytes = fileSize / 128;
 
@@ -29,7 +30,7 @@ export async function makeAudioFile(fullFilePath: string): Promise<string> {
     const trackBitrate = await getAudioFileBitrate(fullFilePath);
 
     if (trackBitrate <= maxKiloBytesPerSecond) {
-        await fileSystemPromises.copyFile(fullFilePath, outputPath);
+        await fileSystem.copyFile(fullFilePath, outputPath);
 
         return audioFileName;
     }

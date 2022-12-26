@@ -1,6 +1,6 @@
 /* global Buffer, process */
 
-import path from 'path';
+import path from 'node:path';
 
 import {fastifyCors} from '@fastify/cors';
 import {fastifyStatic} from '@fastify/static';

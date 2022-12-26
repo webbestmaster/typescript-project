@@ -1,5 +1,6 @@
-import fileSystem, {promises as fileSystemPromises, ReadStream, Stats} from 'fs';
-import path from 'path';
+import {constants as fileSystemConstants, ReadStream, Stats, createWriteStream, createReadStream} from 'node:fs';
+import fileSystem from 'node:fs/promises';
+import path from 'node:path';
 
 // import sharp from 'sharp';
 import {FastifyReply, FastifyRequest} from 'fastify';
@@ -37,16 +38,16 @@ export async function uploadFile(request: FastifyRequest): Promise<ArticleFileTy
     const fullFilePath = path.join(uploadFolder, uniqueFileName);
 
     await new Promise((resolve: PromiseResolveType<void>, reject: PromiseResolveType<Error>) => {
-        const writeStream = fileSystem.createWriteStream(fullFilePath);
+        const writeStream = createWriteStream(fullFilePath);
 
         file.pipe(writeStream).on('close', resolve).on('error', reject);
     });
 
-    const stats: Stats = await fileSystemPromises.stat(fullFilePath);
+    const stats: Stats = await fileSystem.stat(fullFilePath);
 
     if (stats.size >= fileSizeLimit) {
         // remove original file
-        await fileSystemPromises.unlink(fullFilePath);
+        await fileSystem.unlink(fullFilePath);
 
         throw new Error('File too big, limit 75MB');
     }
@@ -67,10 +68,10 @@ export async function uploadFile(request: FastifyRequest): Promise<ArticleFileTy
 
         await webpConverter.cwebp(fullFilePath, webPFilePath, '-q 80 -m 6', '-v');
 
-        const webPStats: Stats = await fileSystemPromises.stat(webPFilePath);
+        const webPStats: Stats = await fileSystem.stat(webPFilePath);
 
         // remove original file
-        await fileSystemPromises.unlink(fullFilePath);
+        await fileSystem.unlink(fullFilePath);
 
         const uploadResponseWebP: ArticleFileType = {
             duration: 0,
@@ -88,10 +89,10 @@ export async function uploadFile(request: FastifyRequest): Promise<ArticleFileTy
     if (getIsAudio(uniqueFileName)) {
         const mp3FileName = await makeAudioFile(fullFilePath);
         const mp3FilePath = path.join(uploadFolder, mp3FileName);
-        const mp3Stats: Stats = await fileSystemPromises.stat(mp3FilePath);
+        const mp3Stats: Stats = await fileSystem.stat(mp3FilePath);
 
         // remove original file
-        await fileSystemPromises.unlink(fullFilePath);
+        await fileSystem.unlink(fullFilePath);
 
         const uploadResponseAudio: ArticleFileType = {
             duration: 0,
@@ -115,7 +116,7 @@ function getFile(request: FastifyRequest<{Params: {fileName?: string}}>, reply: 
 
     reply.header('x-warning-get-file', 'need-use-nginx');
 
-    return fileSystem.createReadStream(path.join(uploadFolder, fileName));
+    return createReadStream(path.join(uploadFolder, fileName));
 }
 
 export async function getImage(
@@ -139,7 +140,7 @@ export async function getImage(
     const imageWidth: number = Number.parseInt(rawImageWidth, 10) || 0;
     const imageHeight: number = Number.parseInt(rawImageHeight, 10) || 0;
 
-    await fileSystemPromises.access(fullFilePath, fileSystem.constants.R_OK);
+    await fileSystem.access(fullFilePath, fileSystemConstants.R_OK);
 
     if (rawFileExtension === 'webp') {
         await webpConverter.cwebp(
@@ -149,12 +150,12 @@ export async function getImage(
             '-v'
         );
 
-        return fileSystem.createReadStream(temporaryFilePath);
+        return createReadStream(temporaryFilePath);
     }
 
     if (rawFileExtension === 'png') {
         await sharp(fullFilePath).resize(imageWidth, imageHeight).toFile(temporaryFilePath);
-        return fileSystem.createReadStream(temporaryFilePath);
+        return createReadStream(temporaryFilePath);
         // return getFile(request, reply);
     }
 

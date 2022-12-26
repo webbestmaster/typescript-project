@@ -1,6 +1,7 @@
 /* global process, fetch, Response, Buffer */
-import fileSystem, {promises as fileSystemPromise} from 'fs';
-import path from 'path';
+import {createWriteStream} from 'node:fs';
+import fileSystem from 'node:fs/promises';
+import path from 'node:path';
 
 import {getArticleLinkToViewClient} from '../www/client-component/article/article-helper';
 import {generatePath, paginationQueryToURLSearchParameters} from '../www/util/url';
@@ -47,17 +48,15 @@ async function getStaticPage(slug: string): Promise<StaticPageType> {
 async function copyFrontFolder(): Promise<void> {
     await tryToMakeDirectory(cwd, staticSiteFolderName);
 
-    await fileSystemPromise.cp(path.join(cwd, 'dist'), path.join(cwd, staticSiteFolderName), {recursive: true});
+    await fileSystem.cp(path.join(cwd, 'dist'), path.join(cwd, staticSiteFolderName), {recursive: true});
 }
 
 async function copyStaticFileFolder(): Promise<void> {
     await tryToMakeDirectory(cwd, staticSiteFolderName);
 
-    await fileSystemPromise.cp(
-        path.join(cwd, uploadFileFolder),
-        path.join(cwd, staticSiteFolderName, uploadFileFolder),
-        {recursive: true}
-    );
+    await fileSystem.cp(path.join(cwd, uploadFileFolder), path.join(cwd, staticSiteFolderName, uploadFileFolder), {
+        recursive: true,
+    });
 }
 
 async function collectHtmlPages(): Promise<Array<StaticPageType>> {
@@ -85,7 +84,7 @@ async function makeHtmlPages(pageList: Array<StaticPageType>) {
     for (const page of pageList) {
         const htmlPath = generatePath<typeof appRoute.article.path>(appRoute.article.path, {slug: page.slug}) + '.html';
 
-        await fileSystemPromise.writeFile(path.join(cwd, staticSiteFolderName, htmlPath), page.html);
+        await fileSystem.writeFile(path.join(cwd, staticSiteFolderName, htmlPath), page.html);
     }
 }
 
@@ -94,7 +93,7 @@ async function makeServicePages() {
 
     const html404 = await getTextFromUrl(mainUrl + '/404');
 
-    await fileSystemPromise.writeFile(path.join(cwd, staticSiteFolderName, '404.html'), html404);
+    await fileSystem.writeFile(path.join(cwd, staticSiteFolderName, '404.html'), html404);
 }
 
 async function makeApiArticle(pageList: Array<StaticPageType>) {
@@ -110,10 +109,7 @@ async function makeApiArticle(pageList: Array<StaticPageType>) {
         });
         const data = await getTextFromUrl(mainUrl + apiPath);
 
-        await fileSystemPromise.writeFile(
-            path.join(cwd, staticSiteFolderName, 'api', 'client-article', page.slug),
-            data
-        );
+        await fileSystem.writeFile(path.join(cwd, staticSiteFolderName, 'api', 'client-article', page.slug), data);
     }
 }
 
@@ -131,10 +127,7 @@ async function makeApiArticleSearch() {
 
     const data = await getTextFromUrl(mainUrl + apiPath);
 
-    await fileSystemPromise.writeFile(
-        path.join(cwd, staticSiteFolderName, 'api', 'client-article', 'pagination-pick'),
-        data
-    );
+    await fileSystem.writeFile(path.join(cwd, staticSiteFolderName, 'api', 'client-article', 'pagination-pick'), data);
 }
 
 async function makeIcons() {
@@ -158,7 +151,7 @@ async function makeIcons() {
         const responseIconArrayBuffer = await responseIcon.arrayBuffer();
         const responseIconBuffer = Buffer.from(responseIconArrayBuffer);
 
-        fileSystem.createWriteStream(path.join(cwd, staticSiteFolderName, iconImagePath)).write(responseIconBuffer);
+        createWriteStream(path.join(cwd, staticSiteFolderName, iconImagePath)).write(responseIconBuffer);
     }
 }
 
@@ -174,7 +167,7 @@ async function makeCompanyLogo() {
     const responseLogoArrayBuffer = await responseLogo.arrayBuffer();
     const responseLogoBuffer = Buffer.from(responseLogoArrayBuffer);
 
-    fileSystem.createWriteStream(path.join(cwd, staticSiteFolderName, companyLogoPath)).write(responseLogoBuffer);
+    createWriteStream(path.join(cwd, staticSiteFolderName, companyLogoPath)).write(responseLogoBuffer);
 }
 
 async function makeImages(pageList: Array<StaticPageType>) {
@@ -217,7 +210,7 @@ async function makeImages(pageList: Array<StaticPageType>) {
         const imageArrayBuffer = await imageResponse.arrayBuffer();
         const imageBuffer = Buffer.from(imageArrayBuffer);
 
-        fileSystem.createWriteStream(path.join(cwd, staticSiteFolderName, imageUrl.url)).write(imageBuffer);
+        createWriteStream(path.join(cwd, staticSiteFolderName, imageUrl.url)).write(imageBuffer);
 
         // console.log(`[INFO]: makeImages: ${imageUrlList.indexOf(imageUrl) + 1}/${imageUrlList.length} : ${imageUrl.url}`);
         // console.log(imageName, imageSize);
@@ -233,7 +226,7 @@ async function makeIndexHtml(pageList: Array<StaticPageType>) {
         throw new Error(`[ERROR]: makeIndexHtml: can not find root article, slug: ${rootArticleSlug}`);
     }
 
-    await fileSystemPromise.writeFile(path.join(cwd, staticSiteFolderName, 'index.html'), rootArticle.html);
+    await fileSystem.writeFile(path.join(cwd, staticSiteFolderName, 'index.html'), rootArticle.html);
 }
 
 // eslint-disable-next-line max-statements

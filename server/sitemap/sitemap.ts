@@ -1,5 +1,5 @@
 /* global process */
-import path from 'path';
+import path from 'node:path';
 
 import {ArticleType} from '../article/article-type';
 import {writeStringToFile} from '../util/file';
