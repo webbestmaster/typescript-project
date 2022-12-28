@@ -35,7 +35,7 @@ import {temporaryUploadFolder, uploadFileFolder, uploadFolder} from './file/file
 import {getHtmlCallBackRequest} from './ssr/ssr-helper';
 import {rootArticleSlug} from './article/article-const';
 import {GetExtraFilesType, removeExtraStaticFiles} from './file/extra-static-files';
-import {tryToMakeDirectory, tryToRemoveDirectory} from './file/directory';
+import {makeDirectory, tryToRemoveDirectory} from './file/directory';
 import {PaginationResultType} from './data-base/data-base-type';
 
 const cwd = process.cwd();
@@ -45,7 +45,7 @@ const isMakeStaticSite = process.env.MAKE_STATIC_SITE === 'TRUE';
 // eslint-disable-next-line max-statements, unicorn/prefer-top-level-await
 (async () => {
     await tryToRemoveDirectory(temporaryUploadFolder);
-    await tryToMakeDirectory(temporaryUploadFolder);
+    await makeDirectory(temporaryUploadFolder);
 
     const fastify = fastifyConstructor({logger: false});
 

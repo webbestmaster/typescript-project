@@ -1,11 +1,25 @@
 import fileSystem from 'node:fs/promises';
 import path from 'node:path';
+import {constants} from 'node:fs';
 
-export async function tryToMakeDirectory(...args: Array<string>): Promise<void> {
+export async function getHasAccessToDirectory(...args: Array<string>): Promise<boolean> {
     try {
-        await fileSystem.mkdir(path.join(...args));
-    } catch {
-        // console.log('[ERROR]: tryToMkdir: can not create folder:', path.join(...args));
+        // eslint-disable-next-line no-bitwise
+        await fileSystem.access(path.join(...args), constants.R_OK | constants.W_OK);
+
+        return true;
+        // eslint-disable-next-line no-empty
+    } catch {}
+
+    return false;
+}
+
+export async function makeDirectory(...args: Array<string>): Promise<void> {
+    const pathToFolder: string = path.join(...args);
+    const hasAccessToDirectory = await getHasAccessToDirectory(pathToFolder);
+
+    if (!hasAccessToDirectory) {
+        await fileSystem.mkdir(pathToFolder);
     }
 }
 

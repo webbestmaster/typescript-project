@@ -2,7 +2,7 @@
 import path from 'node:path';
 
 import {writeStringToFile} from '../util/file';
-import {tryToMakeDirectory, tryToRemoveDirectory} from '../file/directory';
+import {makeDirectory, tryToRemoveDirectory} from '../file/directory';
 
 const cwd = process.cwd();
 
@@ -12,7 +12,7 @@ const absolutePathHtmlFileFolder = path.join(cwd, cacheHtmlFileFolder);
 
 export async function clearCacheHtmlFileFolder(): Promise<void> {
     await tryToRemoveDirectory(absolutePathHtmlFileFolder);
-    await tryToMakeDirectory(absolutePathHtmlFileFolder);
+    await makeDirectory(absolutePathHtmlFileFolder);
 }
 
 export function makeCacheFile(slug: string, page: string): Promise<void> {
