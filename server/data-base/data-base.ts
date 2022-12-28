@@ -111,9 +111,13 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
 
         let hasError = false;
 
-        allRowList.forEach((modelData: ModelType) => {
+        allRowList.forEach((modelData: ModelType, index: number) => {
             const modelJsonSchemaValidate = ajv.compile<ModelType>(modelJsonSchema);
             const isValid = modelJsonSchemaValidate(modelData);
+
+            console.info(
+                `[INFO]: Validation database - ${dataBaseId}: ${Math.floor((index / allRowList.length) * 100)}%`
+            );
 
             if (isValid) {
                 return;
