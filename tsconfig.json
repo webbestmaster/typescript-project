@@ -9,6 +9,7 @@
 
         "strict": true,
         "alwaysStrict": true,
+        "emitDeclarationOnly": false,
         "noImplicitAny": true,
         "strictNullChecks": true,
         "strictFunctionTypes": true,
