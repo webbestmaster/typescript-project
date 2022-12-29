@@ -44,6 +44,7 @@ export function makeArticleFileSchema(): JSONSchemaType<ArticleFileType> {
 
 export function makeArticleSchema(): JSONSchemaType<ArticleType> {
     const articleSchemaProperties = {
+        // eslint-disable-next-line id-match
         _id: {type: 'string'},
         articleType: {'enum': Object.values(ArticleTypeEnum), type: 'string'},
         content: {type: 'string'},

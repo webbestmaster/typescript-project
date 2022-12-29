@@ -1,7 +1,7 @@
 const textToLatinMap: Record<string, string> = {
     // Транслитерация ГОСТ 7.79-2000
     // https://transliteration.ru/gost-7-79-2000/
-    /* eslint-disable id-length, sort-keys */
+    /* eslint-disable id-length, sort-keys, id-match */
     а: 'a',
     б: 'b',
     в: 'v',
@@ -39,7 +39,7 @@ const textToLatinMap: Record<string, string> = {
     å: 'a',
     ä: 'a',
     ö: 'o',
-    /* eslint-enable id-length, sort-keys */
+    /* eslint-enable id-length, sort-keys, id-match */
 };
 
 const wordSeparator = '-';

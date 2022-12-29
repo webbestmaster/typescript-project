@@ -17,6 +17,15 @@ export type RegExpQueryType = {
     $regexFlag: string; // 'g' | 'gi' | 'i';
 };
 
+export type PaginationResultType<ModelType extends Record<string, unknown>> = {
+    list: Array<ModelType>;
+    pageIndex: number;
+    pageSize: number;
+    sort: Record<string, unknown>;
+    totalItemCount: number;
+    totalPageCount: number;
+};
+
 export type CrudType<ModelType extends Record<string, unknown>> = {
     createOne: (model: ModelType) => Promise<null>; // throw error if smth wrong
     deleteOne: (query: PetsdbQueryType<ModelType>) => Promise<null>; // throw error if smth wrong
@@ -71,12 +80,3 @@ export type PaginationResultType<ModelType> = {
     result: Array<ModelType>;
 };
 */
-
-export type PaginationResultType<ModelType extends Record<string, unknown>> = {
-    list: Array<ModelType>;
-    pageIndex: number;
-    pageSize: number;
-    sort: Record<string, unknown>;
-    totalItemCount: number;
-    totalPageCount: number;
-};

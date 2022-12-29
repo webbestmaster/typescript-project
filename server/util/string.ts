@@ -1,4 +1,4 @@
-import {createHmac} from 'crypto';
+import {createHmac} from 'node:crypto';
 
 import {sha256key} from '../key';
 
