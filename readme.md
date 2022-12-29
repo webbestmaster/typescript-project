@@ -11,6 +11,7 @@
 ![node-current](https://img.shields.io/node/v/typescript-project)
 [![Website](https://img.shields.io/website?url=http%3A%2F%2Fwebbestmaster.github.io%2F)](https://webbestmaster.github.io/)
 ![npm type definitions](https://img.shields.io/npm/types/typescript-project)
+[![dependency-count](https://badgen.net/bundlephobia/dependency-count/typescript-project)](https://badgen.net/bundlephobia/dependency-count/typescript-project)
 [![GitHub stars](https://img.shields.io/github/stars/webbestmaster/typescript-project?style=social)](https://github.com/webbestmaster/typescript-project/)
 
 ## Installation
