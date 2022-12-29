@@ -54,6 +54,7 @@
     "ts-coverage": "npm run front:ts-coverage && npm run back:ts-coverage && npm run storybook:ts-coverage",
     "test:e2e": "jest --config='test-e2e/config/jest.config.js' ./test-e2e/ --runInBand",
     "test:unit": "jest --config='test-unit/config/jest.config.js' ./www/ --runInBand",
+    "test:unit:watch": "jest --config='test-unit/config/jest.config.js' ./www/ --runInBand --watch",
     "backstop:approve": "backstop approve --config=./test-backstop/backstop-config.json",
     "backstop:test": "backstop test --config=./test-backstop/backstop-config.json",
     "pre-commit-hook": "npm run check",
