@@ -7,7 +7,7 @@
 [![Github CI](https://github.com/webbestmaster/typescript-project/actions/workflows/github-ci.yml/badge.svg)](https://github.com/webbestmaster/typescript-project/actions/workflows/github-ci.yml)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/webbestmaster/typescript-project/github-ci.yml)
 ![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/webbestmaster/typescript-project)
-![npm bundle size](https://img.shields.io/bundlephobia/minzip/typescript-project)
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/typescript-project)](https://bundlephobia.com/package/typescript-project)
 ![node-current](https://img.shields.io/node/v/typescript-project)
 [![Website](https://img.shields.io/website?url=http%3A%2F%2Fwebbestmaster.github.io%2F)](https://webbestmaster.github.io/)
 ![npm type definitions](https://img.shields.io/npm/types/typescript-project)
