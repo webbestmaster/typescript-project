@@ -1,18 +1,18 @@
 # \<Project name\>
 
 [![GitHub license](https://img.shields.io/npm/l/typescript-project)](https://github.com/webbestmaster/typescript-project/blob/master/license)
-[![codecov](https://codecov.io/gh/webbestmaster/typescript-project/branch/master/graph/badge.svg?token=X5SNICUPUQ)](https://codecov.io/gh/webbestmaster/typescript-project)
-[![npm version](https://img.shields.io/npm/v/typescript-project.svg?style=flat)](https://www.npmjs.com/package/typescript-project)
+[![codecov](https://codecov.io/gh/webbestmaster/typescript-project/branch/master/graph/badge.svg)](https://codecov.io/gh/webbestmaster/typescript-project)
+[![npm version](https://img.shields.io/npm/v/typescript-project.svg)](https://www.npmjs.com/package/typescript-project)
 [![Known Vulnerabilities](https://snyk.io/test/github/webbestmaster/typescript-project/badge.svg)](https://snyk.io/test/github/webbestmaster/typescript-project)
-[![dependency-count](https://badgen.net/bundlephobia/dependency-count/typescript-project)](https://badgen.net/bundlephobia/dependency-count/typescript-project)
+[![dependency count](https://badgen.net/bundlephobia/dependency-count/typescript-project)](https://badgen.net/bundlephobia/dependency-count/typescript-project)
 [![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/webbestmaster/typescript-project)](https://libraries.io/npm/typescript-project)
 [![npm bundle size](https://img.shields.io/bundlephobia/minzip/typescript-project)](https://bundlephobia.com/package/typescript-project)
-[![node-current](https://img.shields.io/node/v/typescript-project)](https://nodejs.org/en/docs/)
+[![node version](https://img.shields.io/node/v/typescript-project)](https://nodejs.org/en/docs)
 [![Github CI](https://github.com/webbestmaster/typescript-project/actions/workflows/github-ci.yml/badge.svg)](https://github.com/webbestmaster/typescript-project/actions/workflows/github-ci.yml)
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/webbestmaster/typescript-project/github-ci.yml)](https://github.com/webbestmaster/typescript-project/actions/workflows/github-ci.yml)
-[![npm type definitions](https://img.shields.io/npm/types/typescript-project)](https://www.typescriptlang.org/)
+[![type definitions](https://img.shields.io/npm/types/typescript-project)](https://www.typescriptlang.org)
 [![Website](https://img.shields.io/website?url=https://github.com/webbestmaster/typescript-project)](https://github.com/webbestmaster/typescript-project)
-[![GitHub stars](https://img.shields.io/github/stars/webbestmaster/typescript-project?style=social)](https://github.com/webbestmaster/typescript-project/)
+[![GitHub stars](https://img.shields.io/github/stars/webbestmaster/typescript-project?style=social)](https://github.com/webbestmaster/typescript-project)
 
 ## Installation
 
