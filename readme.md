@@ -11,7 +11,7 @@
 [![Github CI](https://github.com/webbestmaster/typescript-project/actions/workflows/github-ci.yml/badge.svg)](https://github.com/webbestmaster/typescript-project/actions/workflows/github-ci.yml)
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/webbestmaster/typescript-project/github-ci.yml)](https://github.com/webbestmaster/typescript-project/actions/workflows/github-ci.yml)
 [![npm type definitions](https://img.shields.io/npm/types/typescript-project)](https://www.typescriptlang.org/)
-[![Website](https://img.shields.io/website?url=http%3A%2F%2Fwebbestmaster.github.io%2F)](https://webbestmaster.github.io/)
+[![Website](https://img.shields.io/website?url=https://github.com/webbestmaster/typescript-project)](https://github.com/webbestmaster/typescript-project)
 [![GitHub stars](https://img.shields.io/github/stars/webbestmaster/typescript-project?style=social)](https://github.com/webbestmaster/typescript-project/)
 
 ## Installation
