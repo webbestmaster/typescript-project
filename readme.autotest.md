@@ -34,15 +34,55 @@ Required libraries:
 
 Jest config `./jest.config.js`
 ```javascript
-// eslint-disable-next-line unicorn/prefer-module
 module.exports = {
+    bail: true, // stop after first failing test
+    collectCoverage: true,
+    errorOnDeprecated: true,
+    injectGlobals: true,
+    maxConcurrency: 1,
+    maxWorkers: 1,
+    moduleNameMapper: {
+        '^\\S+.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
+    },
     modulePathIgnorePatterns: ['<rootDir>/tsc-check/'],
+    passWithNoTests: true,
     preset: 'ts-jest',
-    setupFilesAfterEnv: ['./test-unit/setup-jest.ts'],
-    testEnvironment: 'jsdom', // @testing-library/jest-dom
+    rootDir: '../../',
+    setupFilesAfterEnv: ['./test-unit/config/setup-jest.ts'],
+    silent: true,
+    testEnvironment: 'jsdom', // required - @testing-library/jest-dom, 'node' | 'jsdom'
     testTimeout: 10e3,
 };
 ```
+
+Jest config `./jest.config.ts`
+```typescript
+import type {Config} from 'jest';
+
+const config: Config = {
+    bail: false, // true - stop after first failing test
+    collectCoverage: true,
+    errorOnDeprecated: true,
+    injectGlobals: false,
+    maxConcurrency: 1,
+    maxWorkers: 1,
+    moduleNameMapper: {
+        '^\\S+.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
+    },
+    modulePathIgnorePatterns: ['<rootDir>/tsc-check/'],
+    passWithNoTests: true,
+    preset: 'ts-jest',
+    rootDir: '../../',
+    setupFilesAfterEnv: [],
+    silent: true,
+    testEnvironment: 'node',
+    testTimeout: 10e3,
+};
+
+// eslint-disable-next-line import/no-default-export
+export default config;
+```
+
 
 Running example:
 ```bash
