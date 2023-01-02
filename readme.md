@@ -12,6 +12,7 @@
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/webbestmaster/typescript-project/github-ci.yml)](https://github.com/webbestmaster/typescript-project/actions/workflows/github-ci.yml)
 [![Type definitions](https://img.shields.io/npm/types/typescript-project)](https://www.typescriptlang.org)
 [![Website](https://img.shields.io/website?url=https://github.com/webbestmaster/typescript-project)](https://github.com/webbestmaster/typescript-project)
+[![Package Quality](https://packagequality.com/shield/typescript-project.svg)](https://packagequality.com/#?package=typescript-project)
 [![GitHub stars](https://img.shields.io/github/stars/webbestmaster/typescript-project?style=social)](https://github.com/webbestmaster/typescript-project)
 
 
