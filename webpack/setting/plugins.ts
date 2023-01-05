@@ -1,11 +1,11 @@
-import {Configuration, ContextReplacementPlugin, DefinePlugin} from 'webpack';
+import {Configuration, ContextReplacementPlugin, DefinePlugin, WebpackPluginInstance, Compiler} from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ScriptExtHtmlWebpackPlugin from 'script-ext-html-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import {CleanWebpackPlugin} from 'clean-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CircularDependencyPlugin from 'circular-dependency-plugin';
-// import DuplicatePackageCheckerPlugin from 'duplicate-package-checker-webpack-plugin';
+import DuplicatePackageCheckerPlugin from 'duplicate-package-checker-webpack-plugin';
 
 import {isProduction, isDevelopment, isBuildLibrary} from '../config';
 
@@ -24,23 +24,36 @@ const definePluginParameters: Record<string, string> = {
     // IS_DEVELOPMENT: JSON.stringify(IS_DEVELOPMENT)
 };
 
-const staticFilesSiteList: Array<Record<'from' | 'to', string>> = [
+type StaticFilesDataType = Record<'from' | 'to', string>;
+
+const staticFilesSiteList: Array<StaticFilesDataType> = [
     'favicon.ico',
     'robots.txt',
     'ads.txt',
     'gss-0.9.xsl',
     'manifest.json',
     // 'index-500.html',
-].map<Record<'from' | 'to', string>>(
-    (fileName: string): Record<'from' | 'to', string> => ({
+].map<StaticFilesDataType>(
+    (fileName: string): StaticFilesDataType => ({
         from: `./www/${fileName}`,
         to: `${filePathPrefix}${fileName}`,
     })
 );
 
+const duplicateCheckerPluginInstance: WebpackPluginInstance = Object.assign(
+    {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
+        apply: (compiler: Compiler): void => {
+            // eslint-disable-next-line no-undefined
+            return undefined;
+        },
+    },
+    new DuplicatePackageCheckerPlugin()
+);
+
 const pluginList: Configuration['plugins'] = [
     new CircularDependencyPlugin({exclude: /node_modules/}),
-    // new DuplicatePackageCheckerPlugin(),
+    duplicateCheckerPluginInstance,
     new CleanWebpackPlugin(),
     new DefinePlugin(definePluginParameters),
     new ScriptExtHtmlWebpackPlugin({defaultAttribute: 'defer'}),
@@ -70,7 +83,7 @@ const pluginList: Configuration['plugins'] = [
 
 const pluginBuildLibraryList: Configuration['plugins'] = [
     new CircularDependencyPlugin({exclude: /node_modules/}),
-    // new DuplicatePackageCheckerPlugin(),
+    duplicateCheckerPluginInstance,
     new CleanWebpackPlugin(),
     new DefinePlugin(definePluginParameters),
     // new ScriptExtHtmlWebpackPlugin({defaultAttribute: 'defer'}),
