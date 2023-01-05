@@ -4,8 +4,8 @@ import ScriptExtHtmlWebpackPlugin from 'script-ext-html-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import {CleanWebpackPlugin} from 'clean-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import DuplicatePackageCheckerPlugin from 'duplicate-package-checker-webpack-plugin';
 import CircularDependencyPlugin from 'circular-dependency-plugin';
+// import DuplicatePackageCheckerPlugin from 'duplicate-package-checker-webpack-plugin';
 
 import {isProduction, isDevelopment, isBuildLibrary} from '../config';
 
@@ -40,7 +40,7 @@ const staticFilesSiteList: Array<Record<'from' | 'to', string>> = [
 
 const pluginList: Configuration['plugins'] = [
     new CircularDependencyPlugin({exclude: /node_modules/}),
-    new DuplicatePackageCheckerPlugin(),
+    // new DuplicatePackageCheckerPlugin(),
     new CleanWebpackPlugin(),
     new DefinePlugin(definePluginParameters),
     new ScriptExtHtmlWebpackPlugin({defaultAttribute: 'defer'}),
@@ -70,7 +70,7 @@ const pluginList: Configuration['plugins'] = [
 
 const pluginBuildLibraryList: Configuration['plugins'] = [
     new CircularDependencyPlugin({exclude: /node_modules/}),
-    new DuplicatePackageCheckerPlugin(),
+    // new DuplicatePackageCheckerPlugin(),
     new CleanWebpackPlugin(),
     new DefinePlugin(definePluginParameters),
     // new ScriptExtHtmlWebpackPlugin({defaultAttribute: 'defer'}),
