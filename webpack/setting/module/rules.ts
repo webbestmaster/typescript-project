@@ -1,7 +1,9 @@
-const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+import {Configuration, RuleSetRule} from 'webpack';
 
-const {isProduction, isDevelopment, isTsTranspileOnly, fileRegExp, cwd} = require('./../../config');
+import path from 'node:path';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+
+import {isProduction, isDevelopment, isTsTranspileOnly, fileRegExp, cwd} from './../../config';
 
 const styleLoader = {
     loader: 'style-loader',
@@ -10,7 +12,7 @@ const styleLoader = {
 
 const cssLoader = isProduction ? MiniCssExtractPlugin.loader : styleLoader;
 
-module.exports.rules = [
+export const rules: Array<RuleSetRule> = [
     {
         test: /\.tsx?$/,
         exclude: /node_modules/,

@@ -1,5 +1,7 @@
-const {pathToDist, webpackDevServerPort} = require('./../config');
-const {isBack} = require('../config');
+import {WebpackOptionsNormalized} from 'webpack';
+
+import {pathToDist, webpackDevServerPort} from './../config';
+import {isBack} from '../config';
 
 const serverPort = 3011;
 const host = 'localhost';
@@ -14,7 +16,7 @@ const mainProxyUrlSetting = {
 };
 */
 
-module.exports.devServer = {
+export const devServer: WebpackOptionsNormalized['devServer'] = {
     host,
     port: webpackDevServerPort,
     // contentBase: pathToDist,

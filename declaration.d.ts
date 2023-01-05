@@ -67,6 +67,17 @@ declare module 'webp-converter' {
     export default webpConverter;
 }
 
+declare module 'duplicate-package-checker-webpack-plugin' {
+    // const webpackPlugin: webpack.WebpackPluginInstance;
+    import type {Compiler} from 'webpack';
+
+    declare class WebpackPlugin {
+        apply(compiler: Compiler): void;
+    }
+
+    export default WebpackPlugin;
+}
+
 /*
 declare module '*.scss';
 declare module '*.png';

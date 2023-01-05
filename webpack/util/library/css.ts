@@ -1,19 +1,19 @@
 // there is real dirt workaround, but I do not know way better (((
 
-const path = require('path');
-const {promises: fileSystem} = require('fs');
+import path from 'node:path';
+import fileSystem from 'fs/promises';
 
-const {pathToDist, cwd} = require('../../config');
+import {pathToDist, cwd} from '../../config';
 
 const {name: packageName} = require(path.join(cwd, 'package.json'));
 
-const rootPathToStyle = path.join(pathToDist, '..', 'style.css');
-const rootPathToTyping = path.join(pathToDist, '..', 'library.d.ts');
+const rootPathToStyle: string = path.join(pathToDist, '..', 'style.css');
+const rootPathToTyping: string = path.join(pathToDist, '..', 'library.d.ts');
 
-const pathToStyle = path.join(cwd, rootPathToStyle);
-const pathToTyping = path.join(cwd, rootPathToTyping);
+const pathToStyle: string = path.join(cwd, rootPathToStyle);
+const pathToTyping: string = path.join(cwd, rootPathToTyping);
 
-const styleDeclaration = `
+const styleDeclaration: string = `
 declare module '${packageName}/dist/style.css' {
     type StyleType = Record<string, string>;
 
@@ -24,10 +24,10 @@ declare module '${packageName}/dist/style.css' {
 `;
 
 (async () => {
-    const isStyleFileExists = await fileSystem
+    const isStyleFileExists: boolean = await fileSystem
         .access(pathToStyle)
-        .then(() => true)
-        .catch(() => false);
+        .then((): true => true)
+        .catch((): false => false);
 
     if (!isStyleFileExists) {
         console.log(`[css util] file ${pathToStyle} is not exists.`);
