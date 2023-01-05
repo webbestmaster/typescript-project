@@ -4,7 +4,7 @@ import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 // const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 import TerserPlugin from 'terser-webpack-plugin';
 
-import {isDevelopment} from './../config';
+import {isDevelopment} from '../config';
 
 const optimizationDevelopment: Configuration['optimization'] = {
     removeAvailableModules: false,
@@ -12,61 +12,69 @@ const optimizationDevelopment: Configuration['optimization'] = {
     runtimeChunk: true,
     splitChunks: {
         cacheGroups: {
+            // eslint-disable-next-line sort-keys
             main: {
                 chunks: 'all',
                 name: 'main',
                 priority: -30,
                 reuseExistingChunk: true,
             },
+            // eslint-disable-next-line sort-keys
             assets: {
                 chunks: 'all',
                 name: 'assets',
                 priority: -26,
-                test: /www\/assets/,
                 reuseExistingChunk: true,
+                test: /www\/assets/,
             },
+            // eslint-disable-next-line sort-keys
             util: {
                 chunks: 'all',
                 name: 'util',
                 priority: -25,
-                test: /www\/util/,
                 reuseExistingChunk: true,
+                test: /www\/util/,
             },
+            // eslint-disable-next-line sort-keys
             page: {
                 chunks: 'all',
                 name: 'page',
                 priority: -24,
-                test: /www\/page/,
                 reuseExistingChunk: true,
+                test: /www\/page/,
             },
+            // eslint-disable-next-line sort-keys
             layout: {
                 chunks: 'all',
                 name: 'layout',
                 priority: -23,
-                test: /www\/layout/,
                 reuseExistingChunk: true,
+                test: /www\/layout/,
             },
+            // eslint-disable-next-line sort-keys
             provider: {
                 chunks: 'all',
                 name: 'provider',
                 priority: -22,
-                test: /www\/provider/,
                 reuseExistingChunk: true,
+                test: /www\/provider/,
             },
+            // eslint-disable-next-line sort-keys
             service: {
                 chunks: 'all',
                 name: 'service',
                 priority: -21,
-                test: /www\/service/,
                 reuseExistingChunk: true,
+                test: /www\/service/,
             },
 
+            // eslint-disable-next-line sort-keys
             style: {
                 chunks: 'all',
                 name: 'style',
                 priority: -20,
-                test: /\.s?css$/,
                 reuseExistingChunk: true,
+                test: /\.s?css$/,
             },
             // files: {
             //     chunks: 'all',
@@ -75,12 +83,13 @@ const optimizationDevelopment: Configuration['optimization'] = {
             //     test: fileRegExp,
             //     reuseExistingChunk: true,
             // },
+            // eslint-disable-next-line sort-keys
             vendor: {
                 chunks: 'all',
                 name: 'vendor',
                 priority: -10,
-                test: /node_modules/,
                 reuseExistingChunk: true,
+                test: /node_modules/,
             },
         },
     },
@@ -91,13 +100,13 @@ const optimizationProduction: Configuration['optimization'] = {
     minimizer: [
         new TerserPlugin({
             terserOptions: {
-                output: {
-                    comments: false,
-                    beautify: false,
-                },
                 compress: {
-                    pure_funcs: ['console.log'], // eslint-disable-line camelcase, id-match
                     passes: 3,
+                    pure_funcs: ['console.log'], // eslint-disable-line camelcase, id-match
+                },
+                output: {
+                    beautify: false,
+                    comments: false,
                 },
             },
         }),

@@ -19,13 +19,13 @@ module.exports = {
                 {
                     loader: 'css-loader',
                     options: {
-                        sourceMap: false,
+                        sourceMap: true,
                         modules: {
                             localIdentName: '[local]----[hash:6]',
                         },
                     },
                 },
-                {loader: 'sass-loader', options: {sourceMap: false}},
+                {loader: 'sass-loader', options: {sourceMap: true}},
             ],
         });
 

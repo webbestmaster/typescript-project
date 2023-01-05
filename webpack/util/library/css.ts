@@ -1,19 +1,21 @@
 // there is real dirt workaround, but I do not know way better (((
 
 import path from 'node:path';
-import fileSystem from 'fs/promises';
+import fileSystem from 'node:fs/promises';
 
-import {pathToDist, cwd} from '../../config';
+import {pathToDistribution, cwd} from '../../config';
 
-const {name: packageName} = require(path.join(cwd, 'package.json'));
+// eslint-disable-next-line unicorn/prefer-module, @typescript-eslint/no-var-requires
+const packageJsonData: Record<string, unknown> = require(path.join(cwd, 'package.json'));
+const packageName = String(packageJsonData.name);
 
-const rootPathToStyle: string = path.join(pathToDist, '..', 'style.css');
-const rootPathToTyping: string = path.join(pathToDist, '..', 'library.d.ts');
+const rootPathToStyle: string = path.join(pathToDistribution, '..', 'style.css');
+const rootPathToTyping: string = path.join(pathToDistribution, '..', 'library.d.ts');
 
 const pathToStyle: string = path.join(cwd, rootPathToStyle);
 const pathToTyping: string = path.join(cwd, rootPathToTyping);
 
-const styleDeclaration: string = `
+const styleDeclaration = `
 declare module '${packageName}/dist/style.css' {
     type StyleType = Record<string, string>;
 
@@ -23,6 +25,7 @@ declare module '${packageName}/dist/style.css' {
 }
 `;
 
+// eslint-disable-next-line unicorn/prefer-top-level-await
 (async () => {
     const isStyleFileExists: boolean = await fileSystem
         .access(pathToStyle)

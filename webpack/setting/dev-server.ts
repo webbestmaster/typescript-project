@@ -1,7 +1,6 @@
 import {WebpackOptionsNormalized} from 'webpack';
 
-import {pathToDist, webpackDevServerPort} from './../config';
-import {isBack} from '../config';
+import {webpackDevServerPort} from '../config';
 
 const serverPort = 3011;
 const host = 'localhost';
@@ -17,21 +16,21 @@ const mainProxyUrlSetting = {
 */
 
 export const devServer: WebpackOptionsNormalized['devServer'] = {
-    host,
-    port: webpackDevServerPort,
-    // contentBase: pathToDist,
     historyApiFallback: {
         disableDotRule: true,
     },
+    host,
+    // contentBase: pathToDist,
+    hot: true,
     // writeToDisk: isBack,
     // inline: false,
-    hot: true,
+    port: webpackDevServerPort,
     proxy: {
-        '/api/': {
-            target: `http://127.0.0.1:${serverPort}/`,
-        },
         // TODO: need watch nginx
         '/api-image/': {
+            target: `http://127.0.0.1:${serverPort}/`,
+        },
+        '/api/': {
             target: `http://127.0.0.1:${serverPort}/`,
         },
         // TODO: need watch nginx

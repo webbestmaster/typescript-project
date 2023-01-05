@@ -47,19 +47,19 @@ const pluginList: Configuration['plugins'] = [
     new MiniCssExtractPlugin({
         // Options similar to the same options in webpackOptions.output
         // both options are optional
-        filename: isDevelopment ? '[name].css' : 'style.css',
         chunkFilename: isDevelopment ? '[id].css' : '[id].[hash:6].css',
+        filename: isDevelopment ? '[name].css' : 'style.css',
     }),
     new HtmlWebpackPlugin({
+        filename: filePathPrefix + 'index.html',
+        hash: true,
         minify: {
             collapseWhitespace: isProduction,
-            removeComments: isProduction,
+            keepClosingSlash: true,
             minifyCSS: isProduction,
             minifyJS: isProduction,
-            keepClosingSlash: true,
+            removeComments: isProduction,
         },
-        hash: true,
-        filename: filePathPrefix + 'index.html',
         template: './www/index.html',
     }),
     new CopyWebpackPlugin({
@@ -77,8 +77,8 @@ const pluginBuildLibraryList: Configuration['plugins'] = [
     new MiniCssExtractPlugin({
         // Options similar to the same options in webpackOptions.output
         // both options are optional
-        filename: isDevelopment ? '[name].css' : 'style.css',
         chunkFilename: isDevelopment ? '[id].css' : '[id].[hash:6].css',
+        filename: isDevelopment ? '[name].css' : 'style.css',
     }),
     /*
         new HtmlWebpackPlugin({
