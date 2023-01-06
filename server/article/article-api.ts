@@ -107,8 +107,8 @@ export async function postAdminArticleCreate(
     reply: FastifyReply
 ): Promise<ArticleType | Record<'message', string>> {
     const {body} = request;
-    const parsedData: ArticleType = JSON.parse(String(body || '{}'));
-    const [isValidArticle, modelJsonSchemaValidate] = validateArticle(parsedData);
+    const parsedCreateData: ArticleType = JSON.parse(String(body || '{}'));
+    const [isValidArticle, modelJsonSchemaValidate] = validateArticle(parsedCreateData);
 
     reply.header(...mainResponseHeader);
 
@@ -118,7 +118,7 @@ export async function postAdminArticleCreate(
         return {message: JSON.stringify(modelJsonSchemaValidate.errors)};
     }
 
-    const {id, slug} = parsedData;
+    const {id, slug} = parsedCreateData;
 
     if (id.trim() === '') {
         reply.code(400);
@@ -151,7 +151,7 @@ export async function postAdminArticleCreate(
     const currentDate = new Date().toISOString();
 
     const actualizedArticle: ArticleType = {
-        ...parsedData,
+        ...parsedCreateData,
         createdDate: currentDate,
         updatedDate: currentDate,
     };
@@ -169,8 +169,8 @@ export async function postAdminArticleUpdate(
     reply: FastifyReply
 ): Promise<ArticleType | Record<'message', string>> {
     const {body} = request;
-    const parsedData: ArticleType = JSON.parse(String(body || '{}'));
-    const [isValidArticle, modelJsonSchemaValidate] = validateArticle(parsedData);
+    const parsedUpdateData: ArticleType = JSON.parse(String(body || '{}'));
+    const [isValidArticle, modelJsonSchemaValidate] = validateArticle(parsedUpdateData);
 
     reply.header(...mainResponseHeader);
 
@@ -180,7 +180,7 @@ export async function postAdminArticleUpdate(
         return {message: JSON.stringify(modelJsonSchemaValidate.errors)};
     }
 
-    const {id} = parsedData;
+    const {id} = parsedUpdateData;
 
     if (id.trim() === '') {
         reply.code(400);
@@ -197,7 +197,7 @@ export async function postAdminArticleUpdate(
     }
 
     const actualizedArticle: ArticleType = {
-        ...parsedData,
+        ...parsedUpdateData,
         updatedDate: new Date().toISOString(),
     };
 
