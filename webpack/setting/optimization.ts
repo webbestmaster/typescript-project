@@ -2,7 +2,7 @@ import {Configuration} from 'webpack';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 
 // const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-// import TerserPlugin from 'terser-webpack-plugin';
+import TerserPlugin from 'terser-webpack-plugin';
 
 import {isDevelopment} from '../config';
 
@@ -98,7 +98,6 @@ const optimizationDevelopment: Configuration['optimization'] = {
 const optimizationProduction: Configuration['optimization'] = {
     minimize: true,
     minimizer: [
-        /*
         new TerserPlugin({
             terserOptions: {
                 compress: {
@@ -111,7 +110,6 @@ const optimizationProduction: Configuration['optimization'] = {
                 },
             },
         }),
-*/
         new CssMinimizerPlugin(),
     ],
 };
