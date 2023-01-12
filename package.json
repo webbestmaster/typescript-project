@@ -144,8 +144,6 @@
     "jest-transform-stub": "^2.0.0",
     "mini-css-extract-plugin": "^2.7.2",
     "nodemon": "^2.0.20",
-    "postcss": "^8.4.21",
-    "postcss-scss": "^4.0.6",
     "prettier": "^2.8.2",
     "puppeteer": "^19.5.2",
     "raw-loader": "^4.0.2",
