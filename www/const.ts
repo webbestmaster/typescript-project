@@ -18,6 +18,8 @@ export const openGraphLocaleName = 'en_US';
 export const copyrightName = 'My Best Site Dot Com';
 // special file 1/2
 export const companyLogoPngFileName = 'company-logo.png';
+export const companyLogoPngWidth = 600;
+export const companyLogoPngHeight = 60;
 // special file 2/2
 export const appIconPngFileName = 'app-icon.png';
 export const specialFileNameList: Array<string> = [companyLogoPngFileName, appIconPngFileName];
