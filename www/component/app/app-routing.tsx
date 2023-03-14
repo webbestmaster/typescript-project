@@ -26,15 +26,15 @@ type PropsType = {
 export function AppRouting(props: PropsType): JSX.Element {
     const switchNode = (
         <Routes>
-            <Route element={<ClientHome />} path={appRoute.root.path} />
-            <Route element={<ClientArticle />} path={appRoute.article.path} />
+            <Route Compoent={ClientHome} path={appRoute.root.path} />
+            <Route Compoent={ClientArticle} path={appRoute.article.path} />
 
-            <Route element={<LoginAsync />} path={appRoute.login.path} />
+            <Route Compoent={LoginAsync} path={appRoute.login.path} />
 
-            <Route element={<CmsArticleListAsync />} path={appRoute.articleList.path} />
-            <Route element={<CmsArticleTreeAsync />} path={appRoute.articleTree.path} />
-            <Route element={<CmsArticleCreateAsync />} path={appRoute.articleCreate.path} />
-            <Route element={<CmsArticleEditAsync />} path={appRoute.articleEdit.path} />
+            <Route Compoent={CmsArticleListAsync} path={appRoute.articleList.path} />
+            <Route Compoent={CmsArticleTreeAsync} path={appRoute.articleTree.path} />
+            <Route Compoent={CmsArticleCreateAsync} path={appRoute.articleCreate.path} />
+            <Route Compoent={CmsArticleEditAsync} path={appRoute.articleEdit.path} />
 
             <Route
                 element={
