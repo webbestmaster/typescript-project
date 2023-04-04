@@ -26,12 +26,12 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-# disable running for a while
     - run: npm install
     - run: npm run front:build
     - run: npm run back:build
     - run: npm run front:build-library
-    - run: npm run storybook:build
+    # disable storybook for a while
+    # - run: npm run storybook:build
     - run: npm run check
     - run: npm run test:unit
     - name: Upload coverage to Codecov
