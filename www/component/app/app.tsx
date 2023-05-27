@@ -1,4 +1,3 @@
-import {StrictMode} from 'react';
 import {AudioPlayerControlSprite} from 'react-audio-player-pro';
 
 import {ErrorBoundary} from '../error-boundary/error-boundary';
@@ -24,18 +23,16 @@ export function App(props: AppPropsType): JSX.Element {
     const {url, navigationData, articleData, defaultThemeName} = props;
 
     return (
-        <StrictMode>
-            <ErrorBoundary errorFallBack={<h1>Front-end error</h1>}>
-                <ThemeProvider defaultThemeName={defaultThemeName}>
-                    <AppProvider articleData={articleData} navigationData={navigationData}>
-                        <AppRouting url={url} />
-                        <GdprInfo />
-                    </AppProvider>
+        <ErrorBoundary errorFallBack={<h1>Front-end error</h1>}>
+            <ThemeProvider defaultThemeName={defaultThemeName}>
+                <AppProvider articleData={articleData} navigationData={navigationData}>
+                    <AppRouting url={url} />
+                    <GdprInfo />
+                </AppProvider>
 
-                    <AudioPlayerControlSprite />
-                    <ShareButtonSprite />
-                </ThemeProvider>
-            </ErrorBoundary>
-        </StrictMode>
+                <AudioPlayerControlSprite />
+                <ShareButtonSprite />
+            </ThemeProvider>
+        </ErrorBoundary>
     );
 }

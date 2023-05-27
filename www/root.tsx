@@ -1,5 +1,6 @@
 /* global document */
 
+import {StrictMode} from 'react';
 import {hydrateRoot, createRoot} from 'react-dom/client';
 
 import {selector} from './const';
@@ -19,7 +20,11 @@ console.log(ErrorData, Popup);
 
     const {innerHTML} = nodeWrapper;
 
-    const appNode = <App articleData={null} defaultThemeName={null} navigationData={null} url="" />;
+    const appNode: JSX.Element = (
+        <StrictMode>
+            <App articleData={null} defaultThemeName={null} navigationData={null} url="" />
+        </StrictMode>
+    );
 
     if (innerHTML.trim() === '') {
         console.log('[main]: Render App as SPA');

@@ -47,6 +47,7 @@
         }
     },
     "exclude": [
+        "./stories/",
         "./dist/",
         "./dist-server/",
         "./tsc-check/",

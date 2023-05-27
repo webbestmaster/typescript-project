@@ -1,3 +1,4 @@
+import {StrictMode} from 'react';
 import ReactDOMServer from 'react-dom/server';
 
 import {App} from '../../www/component/app/app';
@@ -45,12 +46,14 @@ export async function getHtmlCallBack(
     const metaTwitterCardSsrReplaceData = getMetaTwitterCardSsrReplaceData(article);
 
     const appStream = ReactDOMServer.renderToStaticNodeStream(
-        <App
-            articleData={articleData}
-            defaultThemeName={ThemeNameEnum.light}
-            navigationData={navigationData}
-            url={url}
-        />
+        <StrictMode>
+            <App
+                articleData={articleData}
+                defaultThemeName={ThemeNameEnum.light}
+                navigationData={navigationData}
+                url={url}
+            />
+        </StrictMode>
     );
 
     const htmlString = await streamToStringServer(appStream);
