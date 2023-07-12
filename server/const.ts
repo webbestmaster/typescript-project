@@ -12,6 +12,7 @@ export const apiUrl = {
     adminFileUpload: '/api/admin/file/upload',
     articleClientUrlListGet: '/api/article-client-list',
     clientArticleContextGet: '/api/client-article/:slug' as const,
+    clientArticleListGetGraphQL: '/api/client-article-list/graphql',
     clientMakePdf: '/api/client-make-pdf',
     clientSearchArticle: '/api/client-article/pagination-pick',
     fileGet: '/static-file/:fileName' as const,

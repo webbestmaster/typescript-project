@@ -38,6 +38,7 @@ import {rootArticleSlug} from './article/article-const';
 import {GetExtraFilesType, removeExtraStaticFiles} from './file/extra-static-files';
 import {makeDirectory, tryToRemoveDirectory} from './file/directory';
 import {PaginationResultType} from './data-base/data-base-type';
+import { getArticleClientListGraphql } from "./article/article-api-graphql";
 
 const cwd = process.cwd();
 // eslint-disable-next-line no-process-env
@@ -107,6 +108,7 @@ const isMakeStaticSite = process.env.MAKE_STATIC_SITE === 'TRUE';
     fastify.get(apiUrl.imageGet, getImage);
     fastify.get(apiUrl.clientArticleContextGet, getClientArticleContextData);
     fastify.get(apiUrl.articleClientUrlListGet, getArticleClientUrlList);
+    fastify.get(apiUrl.clientArticleListGetGraphQL, getArticleClientListGraphql);
     fastify.get(apiUrl.clientSearchArticle, getArticleClientListPaginationPick);
     fastify.post(apiUrl.clientMakePdf, getPdf);
     fastify.get(apiUrl.removeExtraStaticFilesGet, adminOnly<GetExtraFilesType>(removeExtraStaticFiles));
