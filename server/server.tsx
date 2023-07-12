@@ -38,7 +38,7 @@ import {rootArticleSlug} from './article/article-const';
 import {GetExtraFilesType, removeExtraStaticFiles} from './file/extra-static-files';
 import {makeDirectory, tryToRemoveDirectory} from './file/directory';
 import {PaginationResultType} from './data-base/data-base-type';
-import { getArticleClientListGraphql } from "./article/article-api-graphql";
+import {getArticleClientListGraphql} from './article/article-api-graphql';
 
 const cwd = process.cwd();
 // eslint-disable-next-line no-process-env
