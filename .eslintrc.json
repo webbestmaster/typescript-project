@@ -61,7 +61,7 @@
     },
     "rules": {
         "prettier/prettier": "error",
-        "@typescript-eslint/sort-type-union-intersection-members": 2,
+        // "@typescript-eslint/sort-type-union-intersection-members": 2,
         "@typescript-eslint/array-type": [
             "error",
             {

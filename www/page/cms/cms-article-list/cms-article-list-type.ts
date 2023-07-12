@@ -25,5 +25,5 @@ export type KeyForTableListListType = [
     'slug',
     'title',
     'titleImage',
-    'updatedDate'
+    'updatedDate',
 ];
