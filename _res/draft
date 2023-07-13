@@ -1,0 +1,25 @@
+    return graphql({
+        contextValue: {context: 2},
+        rootValue: {
+            root: 'value',
+        },
+        variableValues: {
+            lim: 3,
+            cou: 1,
+        },
+        schema: articleListSchema,
+        source: `
+query MyQuery($lim: Int, $cou: Int) {
+  list(limit: $lim) {
+    articleType
+    title
+    id
+    slug
+    fileList(count: $cou) {
+        name
+        size
+        duration
+    }
+  }
+}
+`,
