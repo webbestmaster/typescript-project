@@ -11,8 +11,8 @@ export const navigationContext = createContext<NavigationContextType>(defaultNav
 const {Provider: NavigationContextProvider} = navigationContext;
 
 type NavigationProviderPropsType = {
-    children: Array<JSX.Element> | JSX.Element;
-    navigationData: NavigationContextType | null;
+    readonly children: Array<JSX.Element> | JSX.Element;
+    readonly navigationData: NavigationContextType | null;
 };
 
 export function NavigationProvider(props: NavigationProviderPropsType): JSX.Element {

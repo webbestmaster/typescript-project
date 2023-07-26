@@ -5,17 +5,17 @@ import {defaultSpinnerSize} from './spinner-const';
 import {SpinnerPositionEnum} from './spinner-type';
 
 type PropsType = {
-    arcColor?: string; // default - $color-border
-    circleColor?: string; // default - $light-gray
-    className?: string; // default = ''
-    isShow?: boolean; // default - true
-    lineWidth?: number; // default - 5px
-    position?: keyof typeof SpinnerPositionEnum; // default - static
-    size?: number; // default - 48px
-    wrapperColor?: string; // default - rgba(255, 255, 255, 0.5)
-    wrapperHeight?: number | string; // default - 100%
-    wrapperPadding?: number | string; // default - 12px
-    wrapperWidth?: number | string; // default - 100%
+    readonly arcColor?: string; // default - $color-border
+    readonly circleColor?: string; // default - $light-gray
+    readonly className?: string; // default = ''
+    readonly isShow?: boolean; // default - true
+    readonly lineWidth?: number; // default - 5px
+    readonly position?: keyof typeof SpinnerPositionEnum; // default - static
+    readonly size?: number; // default - 48px
+    readonly wrapperColor?: string; // default - rgba(255, 255, 255, 0.5)
+    readonly wrapperHeight?: number | string; // default - 100%
+    readonly wrapperPadding?: number | string; // default - 12px
+    readonly wrapperWidth?: number | string; // default - 100%
 };
 
 export function Spinner(props: PropsType): JSX.Element | null {

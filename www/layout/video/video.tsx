@@ -10,22 +10,22 @@ import {classNames} from '../../util/css';
 import videoStyle from './video.scss';
 
 type VideoPropsType = {
-    alt: string;
-    className?: string;
-    duration: number;
-    fileName: string;
-    getPathToFile: GetPathToFileType;
-    getPathToImage: GetPathToImageType;
-    height: number;
-    image?: {
-        className?: string;
-        imgClassName?: string;
+    readonly alt: string;
+    readonly className?: string;
+    readonly duration: number;
+    readonly fileName: string;
+    readonly getPathToFile: GetPathToFileType;
+    readonly getPathToImage: GetPathToImageType;
+    readonly height: number;
+    readonly image?: {
+        readonly className?: string;
+        readonly imgClassName?: string;
     };
-    poster: string;
-    posterLoading: HTMLImageElement['loading'];
-    title: string;
-    videoClassName?: string;
-    width: number;
+    readonly poster: string;
+    readonly posterLoading: HTMLImageElement['loading'];
+    readonly title: string;
+    readonly videoClassName?: string;
+    readonly width: number;
 };
 
 // eslint-disable-next-line complexity

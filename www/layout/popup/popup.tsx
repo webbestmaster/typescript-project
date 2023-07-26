@@ -23,12 +23,12 @@ const containerClassNameMap: Record<PopupVisibleStateEnum, string> = {
 };
 
 type PopupPropsType = {
-    animationDurationMs?: number;
-    children: ReactNode;
-    containerProps?: DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
-    fadeProps?: DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
-    isOpen: boolean;
-    zIndex?: number;
+    readonly animationDurationMs?: number;
+    readonly children: ReactNode;
+    readonly containerProps?: DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
+    readonly fadeProps?: DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
+    readonly isOpen: boolean;
+    readonly zIndex?: number;
 };
 
 // eslint-disable-next-line complexity

@@ -3,8 +3,8 @@ import {classNames} from '../../util/css';
 import spinnerStyle from './spinner.scss';
 
 type PropsType = {
-    className?: string;
-    isShow?: boolean;
+    readonly className?: string;
+    readonly isShow?: boolean;
 };
 
 export function AsciiSpinner(props: PropsType): JSX.Element | null {

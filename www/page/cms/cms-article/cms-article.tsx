@@ -82,9 +82,9 @@ const {Option} = Select;
 const {TextArea} = Input;
 
 type CmsArticlePropsType = {
-    article: ArticleType;
-    mode: CmsArticleModeEnum;
-    onFinish: (article: ArticleType) => void;
+    readonly article: ArticleType;
+    readonly mode: CmsArticleModeEnum;
+    readonly onFinish: (article: ArticleType) => void;
 };
 
 // eslint-disable-next-line complexity, max-statements

@@ -14,8 +14,8 @@ export const articleContext = createContext<ArticleContextType>(defaultArticleCo
 const {Provider: ArticleContextProvider} = articleContext;
 
 type ArticleProviderPropsType = {
-    articleData: ArticleContextType | null;
-    children: Array<JSX.Element> | JSX.Element;
+    readonly articleData: ArticleContextType | null;
+    readonly children: Array<JSX.Element> | JSX.Element;
 };
 
 export function ArticleProvider(props: ArticleProviderPropsType): JSX.Element {

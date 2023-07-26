@@ -8,9 +8,9 @@ import {ArticleProvider} from '../../client-component/article/article-context/ar
 import {ArticleContextType} from '../../client-component/article/article-context/article-context-type';
 
 type PropsType = {
-    articleData: ArticleContextType | null;
-    children: ReactNode;
-    navigationData: NavigationContextType | null;
+    readonly articleData: ArticleContextType | null;
+    readonly children: ReactNode;
+    readonly navigationData: NavigationContextType | null;
 };
 
 export function AppProvider(props: PropsType): JSX.Element {

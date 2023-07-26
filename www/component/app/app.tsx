@@ -13,10 +13,10 @@ import {AppProvider} from './app-provider';
 import {AppRouting} from './app-routing';
 
 export type AppPropsType = {
-    articleData: ArticleContextType | null;
-    defaultThemeName: ThemeNameEnum | null;
-    navigationData: NavigationContextType | null;
-    url: string;
+    readonly articleData: ArticleContextType | null;
+    readonly defaultThemeName: ThemeNameEnum | null;
+    readonly navigationData: NavigationContextType | null;
+    readonly url: string;
 };
 
 export function App(props: AppPropsType): JSX.Element {

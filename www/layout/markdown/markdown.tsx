@@ -12,8 +12,8 @@ import {MarkdownHtmlToReact} from './markdown-html-to-react';
 import markdownStyle from './markdown.scss';
 
 type PropsType = HTMLAttributes<HTMLDivElement> & {
-    articleTitle: string;
-    mdInput: string;
+    readonly articleTitle: string;
+    readonly mdInput: string;
 };
 
 export function Markdown(props: PropsType): JSX.Element {

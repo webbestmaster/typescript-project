@@ -2,7 +2,7 @@ import {useUserContext} from '../../provider/user/user-context';
 import {LoginAsync} from '../../page/service/login/login-async';
 
 type PropsType = {
-    children: JSX.Element;
+    readonly children: JSX.Element;
 };
 
 export function LoginRequired(props: PropsType): JSX.Element {

@@ -6,8 +6,8 @@ import {SearchArticleType} from '../../search-type';
 import searchResultLinkStyle from './search-result-link.scss';
 
 type SearchResultLinkPropsType = {
-    searchArticle: SearchArticleType;
-    searchString: string;
+    readonly searchArticle: SearchArticleType;
+    readonly searchString: string;
 };
 
 export function SearchResultLink(props: SearchResultLinkPropsType) {

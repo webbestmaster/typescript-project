@@ -3,7 +3,7 @@ import {LoginAsync} from '../../page/service/login/login-async';
 import {UserRoleEnum} from '../../provider/user/user-context-type';
 
 type PropsType = {
-    children: JSX.Element;
+    readonly children: JSX.Element;
 };
 
 export function LoginAdminRequired(props: PropsType): JSX.Element {

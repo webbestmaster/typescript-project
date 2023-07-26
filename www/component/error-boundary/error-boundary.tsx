@@ -1,8 +1,8 @@
 import {Component, ReactNode} from 'react';
 
 type PropsType = {
-    children: ReactNode;
-    errorFallBack: ReactNode;
+    readonly children: ReactNode;
+    readonly errorFallBack: ReactNode;
 };
 
 type StateType = {

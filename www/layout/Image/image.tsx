@@ -8,16 +8,16 @@ import {Source} from './source';
 const screenWidthList: Array<number> = [1200, 1024, 912, 820, 768, 540, 425, 414, 412, 390, 375, 360, 320, 280, 128];
 
 type ImagePropsType = {
-    alt: string;
-    className?: string;
-    fileName: string;
-    getPathToFile: GetPathToFileType;
-    getPathToImage: GetPathToImageType;
-    height: number;
-    imgClassName?: string;
-    loading: HTMLImageElement['loading'];
-    title: string;
-    width: number;
+    readonly alt: string;
+    readonly className?: string;
+    readonly fileName: string;
+    readonly getPathToFile: GetPathToFileType;
+    readonly getPathToImage: GetPathToImageType;
+    readonly height: number;
+    readonly imgClassName?: string;
+    readonly loading: HTMLImageElement['loading'];
+    readonly title: string;
+    readonly width: number;
 };
 
 export function Image(props: ImagePropsType): JSX.Element {

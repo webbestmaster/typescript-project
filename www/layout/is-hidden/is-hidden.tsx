@@ -5,9 +5,9 @@ import {classNames} from '../../util/css';
 import isHiddenStyle from './is-hidden.scss';
 
 type PropsType = {
-    children?: ReactNode;
-    className?: string;
-    isHidden: boolean;
+    readonly children?: ReactNode;
+    readonly className?: string;
+    readonly isHidden: boolean;
 };
 
 export function IsHidden(props: PropsType): JSX.Element {

@@ -7,7 +7,7 @@ import {ThemeContextType} from '../../provider/theme/theme-context-type';
 import fontSizeStyle from './font-size.scss';
 
 type FontSizePropsType = {
-    className?: string;
+    readonly className?: string;
 };
 
 export function FontSize(props: FontSizePropsType): JSX.Element {

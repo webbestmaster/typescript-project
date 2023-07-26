@@ -8,11 +8,11 @@ import {sortSearchArticle} from './search-result-helper';
 import {SearchResultLink} from './search-result-link/search-result-link';
 
 type SearchResultPropsType = {
-    className?: string;
-    isLoading: boolean;
-    list: Array<SearchArticleType>;
-    minLetters: number;
-    searchString: string;
+    readonly className?: string;
+    readonly isLoading: boolean;
+    readonly list: Array<SearchArticleType>;
+    readonly minLetters: number;
+    readonly searchString: string;
 };
 
 export function SearchResult(props: SearchResultPropsType): JSX.Element {

@@ -10,8 +10,8 @@ export const ThemeContext = createContext<ThemeContextType>(defaultThemeContext)
 const {Provider: ThemeContextProvider} = ThemeContext;
 
 type ThemeContextPropsType = {
-    children: ReactNode;
-    defaultThemeName: ThemeNameEnum | null;
+    readonly children: ReactNode;
+    readonly defaultThemeName: ThemeNameEnum | null;
 };
 
 export function ThemeProvider(props: ThemeContextPropsType): JSX.Element {

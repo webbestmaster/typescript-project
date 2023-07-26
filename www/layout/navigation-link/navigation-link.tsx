@@ -4,12 +4,12 @@ import {ReactNode} from 'react';
 import {Link, useSearchParams} from 'react-router-dom';
 
 export type NavigationLinkPropsType = {
-    children?: ReactNode;
-    className?: string;
-    isSaveQueries?: boolean;
-    queries?: Record<string, string>;
-    title?: string;
-    to: string;
+    readonly children?: ReactNode;
+    readonly className?: string;
+    readonly isSaveQueries?: boolean;
+    readonly queries?: Record<string, string>;
+    readonly title?: string;
+    readonly to: string;
 };
 
 export function NavigationLink(props: NavigationLinkPropsType): JSX.Element {

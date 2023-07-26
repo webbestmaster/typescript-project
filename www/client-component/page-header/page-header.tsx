@@ -5,7 +5,7 @@ import {FontSize} from '../font-size/font-size';
 import pageHeader from './page-header.scss';
 
 type PageHeaderPropsType = {
-    children: ReactNode;
+    readonly children: ReactNode;
 };
 
 export function PageHeader(props: PageHeaderPropsType): JSX.Element {

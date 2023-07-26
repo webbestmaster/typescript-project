@@ -19,7 +19,7 @@ export function useUserContext(): UserContextType {
 const {Provider: UserContextProvider} = UserContext;
 
 type UserProviderPropsType = {
-    children: ReactNode;
+    readonly children: ReactNode;
 };
 
 export function UserProvider(props: UserProviderPropsType): JSX.Element {

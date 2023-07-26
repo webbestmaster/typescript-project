@@ -1,8 +1,8 @@
 import {ReactNode} from 'react';
 
 type PropsType = {
-    children?: ReactNode;
-    isRender: boolean;
+    readonly children?: ReactNode;
+    readonly isRender: boolean;
 };
 
 export function IsRender(props: PropsType): ReactNode {

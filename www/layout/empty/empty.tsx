@@ -8,9 +8,9 @@ import emptyImageSrc from './image/empty.svg';
 import emptyStyle from './empty.scss';
 
 type PropsType = {
-    className?: string;
-    mainText?: LangKeyType;
-    secondaryText?: LangKeyType;
+    readonly className?: string;
+    readonly mainText?: LangKeyType;
+    readonly secondaryText?: LangKeyType;
 };
 
 export function Empty(props: PropsType): JSX.Element {

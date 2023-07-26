@@ -7,8 +7,8 @@ import {getPathToImage} from '../../../util/path';
 import articlePreviewListStyle from './article-preview.scss';
 
 type ArticlePreviewPropsType = {
-    articlePreview: ArticlePreviewType;
-    previewStyle: SubDocumentListViewTypeEnum;
+    readonly articlePreview: ArticlePreviewType;
+    readonly previewStyle: SubDocumentListViewTypeEnum;
 };
 
 export function ArticlePreview(props: ArticlePreviewPropsType): JSX.Element {

@@ -5,11 +5,11 @@ import {getFullHorizontalPadding} from './image-helper';
 const screenAspectRation: Array<number> = [1, 1.5, 2, 3];
 
 type SourcePropsType = {
-    fileName: string;
-    getPathToImage: GetPathToImageType;
-    height: number;
-    mediaWidth: number;
-    width: number;
+    readonly fileName: string;
+    readonly getPathToImage: GetPathToImageType;
+    readonly height: number;
+    readonly mediaWidth: number;
+    readonly width: number;
 };
 
 export function Source(props: SourcePropsType): JSX.Element | null {

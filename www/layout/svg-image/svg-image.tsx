@@ -1,6 +1,6 @@
 type PropsType = {
-    className: string;
-    imageId: string;
+    readonly className: string;
+    readonly imageId: string;
 };
 
 export function SvgImage(props: PropsType): JSX.Element {

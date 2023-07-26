@@ -6,8 +6,8 @@ import {Locale} from '../../provider/locale/locale-context';
 import errorDataStyle from './error-data.scss';
 
 type PropsType = {
-    className?: string;
-    langKey: LangKeyType;
+    readonly className?: string;
+    readonly langKey: LangKeyType;
 };
 
 export function ErrorData(props: PropsType): JSX.Element {

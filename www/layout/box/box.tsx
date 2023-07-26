@@ -3,15 +3,15 @@ import {ReactNode, ElementType, CSSProperties} from 'react';
 import {makeCssArray} from './box-helper';
 
 type BoxPropsType = {
-    backgroundColor?: string;
-    boxSizing?: 'border-box' | 'content-box' | 'initial';
-    children?: ReactNode;
-    display?: 'block' | 'flex' | 'inline';
-    height?: number | string;
-    margin?: Array<number> | number;
-    padding?: Array<number> | number;
-    tagName?: ElementType;
-    width?: number | string;
+    readonly backgroundColor?: string;
+    readonly boxSizing?: 'border-box' | 'content-box' | 'initial';
+    readonly children?: ReactNode;
+    readonly display?: 'block' | 'flex' | 'inline';
+    readonly height?: number | string;
+    readonly margin?: Array<number> | number;
+    readonly padding?: Array<number> | number;
+    readonly tagName?: ElementType;
+    readonly width?: number | string;
 };
 
 export function Box(props: BoxPropsType): JSX.Element {

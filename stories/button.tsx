@@ -4,19 +4,19 @@ interface ButtonProps {
     /**
      * What background color to use
      */
-    backgroundColor?: string;
+    readonly backgroundColor?: string;
     /**
      * Button contents
      */
-    label: string;
+    readonly label: string;
     /**
      * Is this the principal call to action on the page?
      */
-    primary?: boolean;
+    readonly primary?: boolean;
     /**
      * How large should the button be?
      */
-    size?: 'large' | 'medium' | 'small';
+    readonly size?: 'large' | 'medium' | 'small';
 }
 
 // Primary UI component for user interaction

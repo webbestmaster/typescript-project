@@ -20,7 +20,7 @@ import {Page} from '../../client-component/page/page';
 import {appRoute} from './app-route';
 
 type PropsType = {
-    url: string;
+    readonly url: string;
 };
 
 export function AppRouting(props: PropsType): JSX.Element {

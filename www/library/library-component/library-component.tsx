@@ -3,8 +3,8 @@ import {ReactNode} from 'react';
 import libraryStyle from './library.scss';
 
 export type LibraryPropsType = {
-    children: ReactNode;
-    textContent: string;
+    readonly children: ReactNode;
+    readonly textContent: string;
 };
 
 export function LibraryComponent(props: LibraryPropsType): JSX.Element {

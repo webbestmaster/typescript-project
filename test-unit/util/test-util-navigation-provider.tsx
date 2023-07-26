@@ -1,7 +1,7 @@
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 
 type NavigationProviderPropsType = {
-    component: () => JSX.Element;
+    readonly component: () => JSX.Element;
 };
 
 export function TestUtilNavigationProvider(props: NavigationProviderPropsType): JSX.Element {

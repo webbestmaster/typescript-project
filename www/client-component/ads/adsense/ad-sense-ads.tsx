@@ -11,8 +11,8 @@ import {getNeedUseThirdPartyServices} from '../../../util/url';
 import {loadAdSenseScript} from './ad-sense-helper';
 
 type AdSenseAdsPropsType = {
-    adSlotId: string;
-    className?: string;
+    readonly adSlotId: string;
+    readonly className?: string;
 };
 
 declare global {

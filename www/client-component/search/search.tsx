@@ -16,8 +16,8 @@ import searchStyle from './search.scss';
 import {SearchResult} from './search-result/search-result';
 
 type SearchPropsType = {
-    className?: string;
-    onChangeFocus?: (hasFocus: boolean) => void;
+    readonly className?: string;
+    readonly onChangeFocus?: (hasFocus: boolean) => void;
 };
 
 export function Search(props: SearchPropsType): JSX.Element {

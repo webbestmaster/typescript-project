@@ -53,8 +53,8 @@ function htmlStringToJsx(rawData: StringToJsxRawDataType, markdownItemCounter: M
 }
 
 type PropsType = {
-    articleTitle: string;
-    htmlCode: string;
+    readonly articleTitle: string;
+    readonly htmlCode: string;
 };
 
 export function MarkdownHtmlToReact(props: PropsType): JSX.Element {
