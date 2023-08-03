@@ -38,7 +38,9 @@
         "useUnknownInCatchVariables": true,
         "exactOptionalPropertyTypes": true,
         "emitDecoratorMetadata": false,
-        "sourceMap": true
+        "sourceMap": true,
+        "allowSyntheticDefaultImports": true,
+        "resolveJsonModule": true,
     },
     "ts-node": {
         "compilerOptions": {
