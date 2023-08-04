@@ -90,7 +90,7 @@
         // -=-=-=- Editor Support -=-=-=-
          "disableSizeLimit": true,
         // no defined my config
-        // "plugins": false, !!!!!!!
+        // "plugins": false,
 
         // -=-=-=- Interop Constraints -=-=-=-
         "allowSyntheticDefaultImports": true,
