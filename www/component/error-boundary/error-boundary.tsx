@@ -16,14 +16,14 @@ export class ErrorBoundary extends Component<PropsType, StateType> {
         this.state = {hasError: false};
     }
 
-    componentDidCatch(error: Error, errorInfo: unknown): void {
+    override componentDidCatch(error: Error, errorInfo: unknown): void {
         console.log('[ERROR]:', error);
         console.log('[ERROR-INFO]:', errorInfo);
 
         this.setState({hasError: true});
     }
 
-    render(): ReactNode {
+    override render(): ReactNode {
         const {state, props} = this;
         const {hasError} = state;
         const {children, errorFallBack} = props;

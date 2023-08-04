@@ -30,11 +30,10 @@
         "strictNullChecks": true,
         "strictPropertyInitialization": true,
         "useUnknownInCatchVariables": true,
-        // no defined my config
-        // "noFallthroughCasesInSwitch": false,
-        // "noImplicitOverride": false,
-        // "noPropertyAccessFromIndexSignature": false,
-        // "noUncheckedIndexedAccess": false,
+        "noFallthroughCasesInSwitch": false,
+        "noImplicitOverride": true,
+        "noPropertyAccessFromIndexSignature": false,
+        "noUncheckedIndexedAccess": false,
 
         // -=-=-=- Modules -=-=-=-
         "module": "es2020",
@@ -89,9 +88,9 @@
         // "maxNodeModuleJsDepth": false,
 
         // -=-=-=- Editor Support -=-=-=-
+         "disableSizeLimit": true,
         // no defined my config
-        // "disableSizeLimit": false,
-        // "plugins": false,
+        // "plugins": false, !!!!!!!
 
         // -=-=-=- Interop Constraints -=-=-=-
         "allowSyntheticDefaultImports": true,
@@ -147,22 +146,19 @@
         // "tsBuildInfoFile": false,
 
         // -=-=-=- Output Formatting -=-=-=-
-        // no defined my config
-        // "noErrorTruncation": false,
-        // "preserveWatchOutput": false,
-        // "pretty": false,
+        "pretty": true,
+        "noErrorTruncation": true,
+        "preserveWatchOutput": false,
 
         // -=-=-=- Command Line -=-=-=-
-        // empty is here
+        // no properties yet
 
         // -=-=-=- Completeness -=-=-=-
-        "skipLibCheck": true
-        // no defined my config
-        // "skipDefaultLibCheck": true,
+        "skipLibCheck": true,
+        "skipDefaultLibCheck": true,
 
         // -=-=-=- Watch Options -=-=-=-
-        // no defined my config
-        // "assumeChangesOnlyAffectDirectDependencies": false
+        "assumeChangesOnlyAffectDirectDependencies": false
     },
     "watchOptions": {
         // no defined my config
