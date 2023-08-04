@@ -65,16 +65,16 @@
         "preserveConstEnums": true,
         "removeComments": false,
         "sourceMap": true,
+        "newLine": "lf",
+        "importHelpers": false,
+        "emitBOM": false,
         // no defined my config
         // "declarationDir": false,
         // "declarationMap": false,
-        // "emitBOM": false,
-        // "importHelpers": false,
         // "importsNotUsedAsValues": false,
         // "inlineSourceMap": false,
         // "inlineSources": false,
         // "mapRoot": false,
-        // "newLine": false,
         // "noEmitOnError": false,
         // "outFile": false,
         // "preserveValueImports": false,
@@ -88,7 +88,7 @@
         // "maxNodeModuleJsDepth": false,
 
         // -=-=-=- Editor Support -=-=-=-
-         "disableSizeLimit": true,
+        "disableSizeLimit": true,
         // no defined my config
         // "plugins": false,
 
