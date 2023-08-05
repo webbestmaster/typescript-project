@@ -28,3 +28,13 @@ $width-limiter-phone-side-padding: $ui-unit * 1.5;
     widthLimiterPhoneSidePadding: $width-limiter-phone-side-padding;
     widthLimiterTabletSidePadding: $width-limiter-tablet-side-padding;
 }
+
+$mouse-device: '(hover: hover) and (pointer: fine)';
+// use hover for mouse only
+button {
+    &:hover {
+        @media #{$mouse-device} {
+            background-color: #0c0;
+        }
+    }
+}
