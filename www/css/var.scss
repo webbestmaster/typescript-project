@@ -50,12 +50,14 @@ $width-limiter-phone-side-padding: $ui-unit * 1.5;
 }
 */
 
-$mouse-device: '(hover: hover) and (pointer: fine)';
+/*
 // use hover for mouse only
+$mouse-device: '(hover: hover) and (pointer: fine)';
 button {
     &:hover {
-        @media #{$mouse-device} {
+        @media \#\{$mouse-device} {
             background-color: #0c0;
         }
     }
 }
+*/
