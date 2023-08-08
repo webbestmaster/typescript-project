@@ -1,4 +1,5 @@
 import {FastifyReply, FastifyRequest} from 'fastify';
+import {PetsdbItemType} from 'petsdb';
 
 import {
     graphql,
@@ -132,19 +133,22 @@ const ArticleGraphQLType: GraphQLObjectType<ArticleType, unknown> = new GraphQLO
 
 const ArticleListGraphQLType = new GraphQLList(ArticleGraphQLType);
 
-const ListType: GraphQLFieldConfig<{root: string}, {context: number}, {limit: number}> = {
+const ListType: GraphQLFieldConfig<{root: string}, {context: number}, {limit: number; start: number}> = {
     args: {
         limit: {
+            type: GraphQLInt,
+        },
+        start: {
             type: GraphQLInt,
         },
     },
     resolve(
         // root valur type => "GraphQLObjectType<Record<string, string>"
         rootValue: {root: string},
-        args: {limit: number},
+        args: {limit: number; start: number},
         context: {context: number},
         graphQLType: GraphQLResolveInfo
-    ) {
+    ): Promise<Array<PetsdbItemType<ArticleType>>> {
         console.warn('------------');
         console.warn(rootValue);
         console.warn(args);
@@ -189,7 +193,7 @@ export async function getArticleClientListGraphql(
         },
         schema: articleListSchema,
         source: `{
-  list(limit: 1) {
+  list(limit: 1, start: 2) {
     articleType
     title
     id
