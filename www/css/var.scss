@@ -29,6 +29,27 @@ $width-limiter-phone-side-padding: $ui-unit * 1.5;
     widthLimiterTabletSidePadding: $width-limiter-tablet-side-padding;
 }
 
+// @media(hover: hover) -> hover is existing on device
+// @media(hover: none) -> hover is not existing on device
+
+/*
+// way number one of two
+@media(hover: hover) {
+    button:hover {
+        background-color: #0c0;
+    }
+}
+*/
+
+/*
+// way number two of two
+@media(hover: none) {
+    button:active {
+        background-color: #0c0;
+    }
+}
+*/
+
 $mouse-device: '(hover: hover) and (pointer: fine)';
 // use hover for mouse only
 button {
