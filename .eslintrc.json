@@ -31,6 +31,7 @@
         "console": true
     },
     "plugins": [
+        "@typescript-eslint",
         "prettier",
         "jsx-a11y",
         "no-use-extend-native",
