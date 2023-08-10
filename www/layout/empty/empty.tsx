@@ -2,19 +2,20 @@ import React, {useMemo} from 'react';
 
 import {LangKeyType} from '../../provider/locale/translation/type';
 import {Locale} from '../../provider/locale/locale-context';
-import {classNames} from '../../util/css';
+import {cls} from '../../util/css';
 
 import emptyImageSrc from './image/empty.svg';
 import emptyStyle from './empty.scss';
 
 type PropsType = {
+    // eslint-disable-next-line unicorn/no-keyword-prefix
     readonly className?: string;
     readonly mainText?: LangKeyType;
     readonly secondaryText?: LangKeyType;
 };
 
 export function Empty(props: PropsType): JSX.Element {
-    const {className, mainText, secondaryText} = props;
+    const {className: cssClassName, mainText, secondaryText} = props;
 
     const mainTextNode = useMemo((): JSX.Element | null => {
         if (!mainText) {
@@ -41,7 +42,7 @@ export function Empty(props: PropsType): JSX.Element {
     }, [secondaryText]);
 
     return (
-        <div className={classNames(emptyStyle.empty, className)}>
+        <div className={cls(emptyStyle.empty, cssClassName)}>
             <img alt="" className={emptyStyle.empty__image} src={emptyImageSrc} />
 
             {mainTextNode}

@@ -145,8 +145,8 @@ export async function getImage(
     const rawFileExtension = getFileExtension(fileName);
     const fullFilePath = path.join(uploadFolder, fileName);
 
-    const newFileName: string = 'remove-me-' + getRandomString();
-    const temporaryFilePath: string = path.join(temporaryUploadFolder, `${newFileName}.${rawFileExtension}`);
+    const removedFileName: string = 'remove-me-' + getRandomString();
+    const temporaryFilePath: string = path.join(temporaryUploadFolder, `${removedFileName}.${rawFileExtension}`);
 
     const [rawImageWidth, rawImageHeight] = size.split('x');
     // https://developers.google.com/speed/webp/docs/cwebp, 0 -> means auto

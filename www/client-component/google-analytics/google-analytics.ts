@@ -33,20 +33,20 @@ export function useGoogleAnalytics(config: GoogleAnalyticsType): null {
         return null;
     }
 
-    function setAndSend(newPathname: string) {
+    function setAndSend(updatedPathname: string) {
         const {ga: definedGa} = window;
 
         if (!definedGa) {
             throw new Error('Google Analytics (window.ga) is not defined');
         }
 
-        if (pathnameRef.current === newPathname) {
+        if (pathnameRef.current === updatedPathname) {
             return;
         }
 
-        pathnameRef.current = newPathname;
-        console.info(`%cGoogle Analytics set and send page: ${newPathname}`, 'color: #0c0');
-        definedGa('set', 'page', newPathname);
+        pathnameRef.current = updatedPathname;
+        console.info(`%cGoogle Analytics set and send page: ${updatedPathname}`, 'color: #0c0');
+        definedGa('set', 'page', updatedPathname);
         definedGa('send', 'pageview');
     }
 

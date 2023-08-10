@@ -14,10 +14,10 @@ export function useRefreshId(): UseRefreshApiHookType {
 
 export function useUpdaterInList<ItemType>(
     itemList: Array<ItemType>,
-    setItemList: (newItemList: Array<ItemType>) => void
-): (oldItem: ItemType, newItem: ItemType) => void {
+    setItemList: (updateItemList: Array<ItemType>) => void
+): (oldItem: ItemType, updateItem: ItemType) => void {
     return useCallback(
-        (oldItem: ItemType, newItem: ItemType) => {
+        (oldItem: ItemType, updateItem: ItemType) => {
             const index = itemList.indexOf(oldItem);
 
             if (index === -1) {
@@ -25,11 +25,11 @@ export function useUpdaterInList<ItemType>(
                 return;
             }
 
-            const newItemList = [...itemList];
+            const updateItemList = [...itemList];
 
-            newItemList[index] = newItem;
+            updateItemList[index] = updateItem;
 
-            setItemList(newItemList);
+            setItemList(updateItemList);
         },
         [itemList, setItemList]
     );

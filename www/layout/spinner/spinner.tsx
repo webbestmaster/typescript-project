@@ -1,4 +1,4 @@
-import {classNames} from '../../util/css';
+import {cls} from '../../util/css';
 
 import spinnerStyle from './spinner.scss';
 import {defaultSpinnerSize} from './spinner-const';
@@ -7,6 +7,7 @@ import {SpinnerPositionEnum} from './spinner-type';
 type PropsType = {
     readonly arcColor?: string; // default - $color-border
     readonly circleColor?: string; // default - $light-gray
+    // eslint-disable-next-line unicorn/no-keyword-prefix
     readonly className?: string; // default = ''
     readonly isShow?: boolean; // default - true
     readonly lineWidth?: number; // default - 5px
@@ -30,7 +31,7 @@ export function Spinner(props: PropsType): JSX.Element | null {
         position = SpinnerPositionEnum.static,
         wrapperColor,
         wrapperPadding,
-        className,
+        className: cssClassName,
     } = props;
 
     if (isShow === false) {
@@ -56,11 +57,7 @@ export function Spinner(props: PropsType): JSX.Element | null {
     };
 
     return (
-        <div
-            aria-busy="true"
-            className={classNames(spinnerStyle.spinner_wrapper, className)}
-            style={spinnerWrapperStyle}
-        >
+        <div aria-busy="true" className={cls(spinnerStyle.spinner_wrapper, cssClassName)} style={spinnerWrapperStyle}>
             <div className={spinnerStyle.spinner_image} style={spinnerImageStyle} />
         </div>
     );

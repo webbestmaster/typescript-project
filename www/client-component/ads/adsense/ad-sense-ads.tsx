@@ -3,7 +3,7 @@ import {useState, useRef, useEffect} from 'react';
 import {useLocation} from 'react-router-dom';
 
 import {googleAdSenseId} from '../../../const';
-import {classNames} from '../../../util/css';
+import {cls} from '../../../util/css';
 import {waitForCallback} from '../../../util/time';
 import {getRandomString} from '../../../util/string';
 import {getNeedUseThirdPartyServices} from '../../../util/url';
@@ -12,6 +12,7 @@ import {loadAdSenseScript} from './ad-sense-helper';
 
 type AdSenseAdsPropsType = {
     readonly adSlotId: string;
+    // eslint-disable-next-line unicorn/no-keyword-prefix
     readonly className?: string;
 };
 
@@ -22,7 +23,7 @@ declare global {
 }
 
 export function AdSenseAds(props: AdSenseAdsPropsType): JSX.Element {
-    const {className, adSlotId} = props;
+    const {className: cssClassName, adSlotId} = props;
     const [adNodeId, setAdNodeId] = useState<string>(getRandomString());
     const routerLocation = useLocation();
     const pathnameRef = useRef<string>('');
@@ -46,17 +47,17 @@ export function AdSenseAds(props: AdSenseAdsPropsType): JSX.Element {
         };
     }, [adSlotId]);
 
-    function showAd(newPathname: string, newAdNodeId: string) {
+    function showAd(updatedPathname: string, updatedAdNodeId: string) {
         if (!isNeedUseThirdPartyServices) {
             return;
         }
 
-        if (pathnameRef.current === newPathname + newAdNodeId) {
-            console.info(`%cAdSense, stop extra show ads: ${newPathname}, ${newAdNodeId}`, 'color: #c00');
+        if (pathnameRef.current === updatedPathname + updatedAdNodeId) {
+            console.info(`%cAdSense, stop extra show ads: ${updatedPathname}, ${updatedAdNodeId}`, 'color: #c00');
             return;
         }
 
-        pathnameRef.current = newPathname + newAdNodeId;
+        pathnameRef.current = updatedPathname + updatedAdNodeId;
 
         if (typeof window === 'undefined') {
             return;
@@ -80,7 +81,7 @@ export function AdSenseAds(props: AdSenseAdsPropsType): JSX.Element {
 
     return (
         <ins
-            className={classNames('adsbygoogle', className)}
+            className={cls('adsbygoogle', cssClassName)}
             data-ad-client={googleAdSenseId}
             data-ad-format="auto"
             data-ad-slot={adSlotId}

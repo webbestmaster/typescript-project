@@ -9,6 +9,7 @@ const screenWidthList: Array<number> = [1200, 1024, 912, 820, 768, 540, 425, 414
 
 type ImagePropsType = {
     readonly alt: string;
+    // eslint-disable-next-line unicorn/no-keyword-prefix
     readonly className?: string;
     readonly fileName: string;
     readonly getPathToFile: GetPathToFileType;
@@ -21,8 +22,18 @@ type ImagePropsType = {
 };
 
 export function Image(props: ImagePropsType): JSX.Element {
-    const {className, fileName, getPathToImage, getPathToFile, alt, width, height, title, imgClassName, loading} =
-        props;
+    const {
+        className: cssClassName,
+        fileName,
+        getPathToImage,
+        getPathToFile,
+        alt,
+        width,
+        height,
+        title,
+        imgClassName,
+        loading,
+    } = props;
 
     const sourceTagList: Array<JSX.Element> = screenWidthList.map<JSX.Element>((mediaWidth: number): JSX.Element => {
         return (
@@ -38,7 +49,7 @@ export function Image(props: ImagePropsType): JSX.Element {
     });
 
     return (
-        <picture className={className}>
+        <picture className={cssClassName}>
             {sourceTagList}
             <img
                 alt={alt}

@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import {copyrightName} from '../../const';
 import {appRoute} from '../../component/app/app-route';
 import {Navigation} from '../navigation/navigation';
-import {classNames} from '../../util/css';
+import {cls} from '../../util/css';
 import {Search} from '../search/search';
 import {useLocale} from '../../provider/locale/locale-context';
 
@@ -23,7 +23,7 @@ export function Header(): JSX.Element {
         <>
             <header className={headerStyle.header}>
                 <button
-                    className={classNames({
+                    className={cls({
                         [headerStyle.header__navigation_toggle_button__open]: isNavigationOpen,
                         [headerStyle.header__navigation_toggle_button__closed]: !isNavigationOpen,
                         [headerStyle.header__navigation_toggle_button__search_focused]: hasSearchFocus,
@@ -35,7 +35,7 @@ export function Header(): JSX.Element {
                     &nbsp;
                 </button>
                 <Link
-                    className={classNames(headerStyle.header__home_link, {
+                    className={cls(headerStyle.header__home_link, {
                         [headerStyle.header__header__home_link__search_focused]: hasSearchFocus,
                     })}
                     to={appRoute.root.path}
@@ -48,7 +48,7 @@ export function Header(): JSX.Element {
                     <span className={headerStyle.header__home_text}>{copyrightName}</span>
                 </Link>
                 <div
-                    className={classNames(headerStyle.header__search, {
+                    className={cls(headerStyle.header__search, {
                         [headerStyle.header__search__focused]: hasSearchFocus,
                     })}
                 >
@@ -56,7 +56,7 @@ export function Header(): JSX.Element {
                 </div>
             </header>
             <div
-                className={classNames(headerStyle.header__navigation_wrapper, {
+                className={cls(headerStyle.header__navigation_wrapper, {
                     [headerStyle.header__navigation_wrapper__open]: isNavigationOpen,
                 })}
             >

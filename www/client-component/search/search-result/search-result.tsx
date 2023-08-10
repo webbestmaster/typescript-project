@@ -1,13 +1,14 @@
 import {SearchArticleType} from '../search-type';
 import {Spinner} from '../../../layout/spinner/spinner';
 import {Locale} from '../../../provider/locale/locale-context';
-import {classNames} from '../../../util/css';
+import {cls} from '../../../util/css';
 
 import searchResultStyle from './search-result.scss';
 import {sortSearchArticle} from './search-result-helper';
 import {SearchResultLink} from './search-result-link/search-result-link';
 
 type SearchResultPropsType = {
+    // eslint-disable-next-line unicorn/no-keyword-prefix
     readonly className?: string;
     readonly isLoading: boolean;
     readonly list: Array<SearchArticleType>;
@@ -16,8 +17,8 @@ type SearchResultPropsType = {
 };
 
 export function SearchResult(props: SearchResultPropsType): JSX.Element {
-    const {isLoading, list, searchString, minLetters, className = ''} = props;
-    const fullClassName = classNames(searchResultStyle.search_result_wrapper, className);
+    const {isLoading, list, searchString, minLetters, className: cssClassName} = props;
+    const fullClassName = cls(searchResultStyle.search_result_wrapper, cssClassName);
 
     if (isLoading) {
         return (

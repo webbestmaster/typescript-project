@@ -1,17 +1,18 @@
 import {useCallback, useContext} from 'react';
 
-import {classNames} from '../../util/css';
+import {cls} from '../../util/css';
 import {ThemeContext} from '../../provider/theme/theme-context';
 import {ThemeContextType} from '../../provider/theme/theme-context-type';
 
 import fontSizeStyle from './font-size.scss';
 
 type FontSizePropsType = {
+    // eslint-disable-next-line unicorn/no-keyword-prefix
     readonly className?: string;
 };
 
 export function FontSize(props: FontSizePropsType): JSX.Element {
-    const {className = ''} = props;
+    const {className: cssClassName} = props;
     const {mdFontSize, setMdFontSize} = useContext<ThemeContextType>(ThemeContext);
 
     const memoizedSetFontSizePlus = useCallback(() => {
@@ -23,7 +24,7 @@ export function FontSize(props: FontSizePropsType): JSX.Element {
     }, [setMdFontSize, mdFontSize]);
 
     return (
-        <div className={classNames(fontSizeStyle.font_size, className)}>
+        <div className={cls(fontSizeStyle.font_size, cssClassName)}>
             <button className={fontSizeStyle.font_size__button} onClick={memoizedSetFontSizeMinus} type="button">
                 A&minus;
             </button>

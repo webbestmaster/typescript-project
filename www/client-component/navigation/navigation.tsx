@@ -7,7 +7,7 @@ import {ArticlePreviewType} from '../../../server/article/article-type';
 import {rootArticleSlug} from '../../../server/article/article-const';
 import {ArticleContextType} from '../article/article-context/article-context-type';
 import {articleContext} from '../article/article-context/article-context';
-import {classNames} from '../../util/css';
+import {cls} from '../../util/css';
 
 import {NavigationContextType} from './navigation-context/navigation-context-type';
 import {navigationContext} from './navigation-context/navigation-context';
@@ -28,7 +28,7 @@ export function Navigation(): JSX.Element {
             return (
                 <li className={navigationStyle.navigation_list_item} key={`${slug}-${String(index)}`}>
                     <Link
-                        className={classNames(navigationStyle.navigation_link, {
+                        className={cls(navigationStyle.navigation_link, {
                             [navigationStyle.navigation_link_active]: isActiveLink,
                         })}
                         to={getArticleLinkToViewClient(slug)}
@@ -46,7 +46,7 @@ export function Navigation(): JSX.Element {
             <ul className={navigationStyle.navigation_list}>
                 <li className={navigationStyle.navigation_list_item}>
                     <Link
-                        className={classNames(navigationStyle.navigation_link, {
+                        className={cls(navigationStyle.navigation_link, {
                             [navigationStyle.navigation_link_active]: currentArticleSlug === rootArticleSlug,
                         })}
                         to={getArticleLinkToViewClient(rootArticleSlug)}

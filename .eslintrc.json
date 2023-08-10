@@ -33,9 +33,8 @@
         "plugin:import/typescript",
         "plugin:promise/recommended",
         "plugin:sonarjs/recommended",
-        "plugin:unicorn/recommended"
-        // TODO: try to uncomment
-        // "plugin:unicorn/all",
+        "plugin:unicorn/recommended",
+        "plugin:unicorn/all"
     ],
     "globals": {
         "JSX": true,
@@ -78,7 +77,9 @@
         "jest/require-hook": [
             "error",
             {
-                "allowedFunctionCalls": ["innerInitialization"]
+                "allowedFunctionCalls": [
+                    "innerInitialization"
+                ]
             }
         ],
         "prettier/prettier": "error",

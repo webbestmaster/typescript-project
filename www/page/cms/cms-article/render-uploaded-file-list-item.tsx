@@ -13,7 +13,7 @@ type UploadedFileListItemPropsType = {
     file: UploadFile<unknown>;
     fileInfo: ArticleFileType | void;
     originNode: JSX.Element;
-    setFileTitle: (newFileTitle: string) => void;
+    setFileTitle: (updateFileTitle: string) => void;
     // uploadedFileList: Array<UploadFile<unknown>>,
     // actions: { download: () => void; preview: () => void; remove: () => void }
 };

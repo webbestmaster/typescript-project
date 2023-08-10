@@ -6,7 +6,7 @@ import {PaginationResultType} from '../../../server/data-base/data-base-type';
 import {noop, useMakeExecutableState} from '../../util/function';
 import {getArticleClientListPaginationPick} from '../../service/article/article-api';
 import {useLocale} from '../../provider/locale/locale-context';
-import {classNames} from '../../util/css';
+import {cls} from '../../util/css';
 import {useHotKey} from '../../util/hot-key';
 import {makeSafeRegExp} from '../../util/regexp';
 
@@ -16,12 +16,13 @@ import searchStyle from './search.scss';
 import {SearchResult} from './search-result/search-result';
 
 type SearchPropsType = {
+    // eslint-disable-next-line unicorn/no-keyword-prefix
     readonly className?: string;
     readonly onChangeFocus?: (hasFocus: boolean) => void;
 };
 
 export function Search(props: SearchPropsType): JSX.Element {
-    const {className = '', onChangeFocus = noop} = props;
+    const {className: cssClassName, onChangeFocus = noop} = props;
     const wrapperRef = useRef<HTMLDivElement>(null);
     const {getLocalizedString} = useLocale();
     const [hasFocus, setHasFocus] = useState<boolean>(false);
@@ -85,7 +86,7 @@ export function Search(props: SearchPropsType): JSX.Element {
     }, [hasFocus, onChangeFocus]);
 
     return (
-        <div className={classNames(searchStyle.search_wrapper, className)} ref={wrapperRef}>
+        <div className={cls(searchStyle.search_wrapper, cssClassName)} ref={wrapperRef}>
             <input
                 className={searchStyle.search_input}
                 defaultValue={searchString}
@@ -97,7 +98,7 @@ export function Search(props: SearchPropsType): JSX.Element {
             />
 
             <button
-                className={classNames(searchStyle.search_icon, {[searchStyle.search_icon__focused]: hasFocus})}
+                className={cls(searchStyle.search_icon, {[searchStyle.search_icon__focused]: hasFocus})}
                 onClick={forceBlur}
                 title={getLocalizedString('UI__SEARCH_BUTTON')}
                 type="button"

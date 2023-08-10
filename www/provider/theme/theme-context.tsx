@@ -20,11 +20,11 @@ export function ThemeProvider(props: ThemeContextPropsType): JSX.Element {
     const [themeName, setThemeName] = useState<ThemeNameEnum>(defaultThemeName || defaultThemeContext.themeName);
     const [mdFontSize, setMdFontSize] = useState<number>(defaultThemeContext.mdFontSize);
 
-    const setMdFontSizeMemoized = useCallback((newFontSize: number) => {
-        if (newFontSize > maxFontSize || newFontSize < minFontSize) {
+    const setMdFontSizeMemoized = useCallback((updatedFontSize: number) => {
+        if (updatedFontSize > maxFontSize || updatedFontSize < minFontSize) {
             return;
         }
-        setMdFontSize(newFontSize);
+        setMdFontSize(updatedFontSize);
     }, []);
 
     useEffect(() => {

@@ -1,4 +1,4 @@
-import {classNames} from '../../util/css';
+import {cls} from '../../util/css';
 
 import {LangKeyType} from '../../provider/locale/translation/type';
 import {Locale} from '../../provider/locale/locale-context';
@@ -6,15 +6,16 @@ import {Locale} from '../../provider/locale/locale-context';
 import errorDataStyle from './error-data.scss';
 
 type PropsType = {
+    // eslint-disable-next-line unicorn/no-keyword-prefix
     readonly className?: string;
     readonly langKey: LangKeyType;
 };
 
 export function ErrorData(props: PropsType): JSX.Element {
-    const {langKey, className} = props;
+    const {langKey, className: cssClassName} = props;
 
     return (
-        <div className={classNames(errorDataStyle.error_data, className)}>
+        <div className={cls(errorDataStyle.error_data, cssClassName)}>
             <p className={errorDataStyle.error_data__text}>
                 <Locale stringKey={langKey} />
             </p>

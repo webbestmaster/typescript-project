@@ -40,12 +40,16 @@ export async function makeDataBaseBackUp(dataBaseInfo: CrudConfigOnChangeArgumen
     const {dataBaseFileName, dataBasePath, dataBaseId} = dataBaseInfo;
     const zip = new JSZip();
     const fileNamePrefix = new Date().toISOString().replace(/[:tz]+/gi, '-');
-    const newFileName = path.join(dataBaseBackUpPathAbsolute, dataBaseId, `${fileNamePrefix}${dataBaseFileName}.zip`);
+    const backupFileName = path.join(
+        dataBaseBackUpPathAbsolute,
+        dataBaseId,
+        `${fileNamePrefix}${dataBaseFileName}.zip`
+    );
 
     await new Promise((resolve: PromiseResolveType<void>, reject: PromiseResolveType<Error>) => {
         zip.file(dataBaseFileName, createReadStream(dataBasePath))
             .generateNodeStream({compression: 'DEFLATE', streamFiles: true})
-            .pipe(createWriteStream(newFileName))
+            .pipe(createWriteStream(backupFileName))
             .on('close', resolve)
             .on('error', reject);
     });

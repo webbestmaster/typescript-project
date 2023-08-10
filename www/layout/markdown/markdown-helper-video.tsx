@@ -34,6 +34,7 @@ export function getVideoFromHtml(
             getPathToFile={getPathToFile}
             getPathToImage={getPathToImage}
             height={Number.parseInt(heightAsString.trim(), 10)}
+            // eslint-disable-next-line unicorn/no-keyword-prefix
             image={{className: markdownStyle.markdown_picture, imgClassName: markdownStyle.markdown_image}}
             poster={posterAsString.trim()}
             posterLoading={markdownItemCounter.getLoadingImageType()}

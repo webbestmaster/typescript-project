@@ -1,9 +1,10 @@
 /* global HTMLDivElement */
 
 import {HTMLAttributes, useContext} from 'react';
+// eslint-disable-next-line unicorn/no-keyword-prefix
 import {markdown, classNameMdPro, classNameMdProThemeLight} from 'markdown-pro';
 
-import {classNames} from '../../util/css';
+import {cls} from '../../util/css';
 import {ThemeContextType} from '../../provider/theme/theme-context-type';
 import {ThemeContext} from '../../provider/theme/theme-context';
 
@@ -19,9 +20,9 @@ type PropsType = HTMLAttributes<HTMLDivElement> & {
 export function Markdown(props: PropsType): JSX.Element {
     const {mdFontSize} = useContext<ThemeContextType>(ThemeContext);
     const {mdInput, articleTitle, ...divAttributes} = props;
-    const {className} = divAttributes;
+    const {className: cssClassName} = divAttributes;
     const htmlCodeClean = markdown(mdInput, {useLineBreak: true, useWrapper: false});
-    const fullClassName = classNames(markdownStyle.markdown, classNameMdPro, classNameMdProThemeLight, className);
+    const fullClassName = cls(markdownStyle.markdown, classNameMdPro, classNameMdProThemeLight, cssClassName);
 
     return (
         <div

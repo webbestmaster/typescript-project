@@ -4,7 +4,7 @@ import {useEffect, useState, useCallback, useContext} from 'react';
 import {useLocation} from 'react-router-dom';
 
 import {debounce} from '../../util/function';
-import {classNames} from '../../util/css';
+import {cls} from '../../util/css';
 import {ArticleContextType} from '../article/article-context/article-context-type';
 import {articleContext} from '../article/article-context/article-context';
 import {useLocale} from '../../provider/locale/locale-context';
@@ -54,7 +54,7 @@ export function ReactScrollRestoration(): JSX.Element {
 
     return (
         <button
-            className={classNames(scrollRestorationStyle.scroll_restoration__scroll_to_top_button, {
+            className={cls(scrollRestorationStyle.scroll_restoration__scroll_to_top_button, {
                 [scrollRestorationStyle.scroll_restoration__scroll_to_top_button__visible]:
                     scrollTop > topScrollPositionToShowToTopButton,
             })}

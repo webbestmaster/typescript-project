@@ -5,12 +5,13 @@ import {useRef, useState, useCallback} from 'react';
 import {GetPathToFileType, GetPathToImageType} from '../../util/path';
 import {Image} from '../Image/image';
 import {secondsToHuman} from '../../util/time';
-import {classNames} from '../../util/css';
+import {cls} from '../../util/css';
 
 import videoStyle from './video.scss';
 
 type VideoPropsType = {
     readonly alt: string;
+    // eslint-disable-next-line unicorn/no-keyword-prefix
     readonly className?: string;
     readonly duration: number;
     readonly fileName: string;
@@ -18,6 +19,7 @@ type VideoPropsType = {
     readonly getPathToImage: GetPathToImageType;
     readonly height: number;
     readonly image?: {
+        // eslint-disable-next-line unicorn/no-keyword-prefix
         readonly className?: string;
         readonly imgClassName?: string;
     };
@@ -64,7 +66,7 @@ export function Video(props: VideoPropsType): JSX.Element {
         getPathToImage,
         height,
         getPathToFile,
-        className,
+        className: cssClassName,
         videoClassName,
         poster,
         duration,
@@ -73,7 +75,7 @@ export function Video(props: VideoPropsType): JSX.Element {
 
     return (
         <div
-            className={`${videoStyle.video} ${className || ''}`.trim()}
+            className={`${videoStyle.video} ${cssClassName || ''}`.trim()}
             style={{display: 'block', height: 'auto', maxHeight: `${height}px`, maxWidth: `${width}px`}}
         >
             <svg
@@ -106,7 +108,7 @@ export function Video(props: VideoPropsType): JSX.Element {
 
             {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
             <video
-                className={classNames(videoStyle.video__tag, videoClassName, {
+                className={cls(videoStyle.video__tag, videoClassName, {
                     [videoStyle.video__tag__started]: isStarted,
                 })}
                 controls

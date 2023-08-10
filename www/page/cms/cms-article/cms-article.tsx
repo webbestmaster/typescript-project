@@ -296,10 +296,10 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                             file,
                             fileInfo: titleImage,
                             originNode,
-                            setFileTitle: (newFileTitle: string) => {
+                            setFileTitle: (updatedFileTitle: string) => {
                                 setTitleImage({
                                     ...titleImage,
-                                    title: newFileTitle,
+                                    title: updatedFileTitle,
                                 });
                             },
                         });
@@ -428,9 +428,9 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                             file,
                             fileInfo,
                             originNode,
-                            setFileTitle: (newFileTitle: string) => {
+                            setFileTitle: (updatedFileTitle: string) => {
                                 if (fileInfo) {
-                                    fileInfo.title = newFileTitle;
+                                    fileInfo.title = updatedFileTitle;
                                     setFileList([...fileList]);
                                 }
                             },

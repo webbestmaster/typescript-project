@@ -2,30 +2,30 @@ type ClassNamesArgumentValueType = string | null | void;
 
 type ClassNamesArgumentType = ClassNamesArgumentValueType | {[key: string]: ClassNamesArgumentValueType | boolean};
 
-// eslint-disable-next-line complexity
-export function classNames(...argumentList: Array<ClassNamesArgumentType>): string {
-    const classNameList: Array<string> = [];
+// eslint-disable-next-line complexity, unicorn/no-keyword-prefix
+export function cls(...argumentList: Array<ClassNamesArgumentType>): string {
+    const cssClassNameList: Array<string> = [];
 
     // eslint-disable-next-line no-loops/no-loops
-    for (const classNameData of argumentList) {
-        if (!classNameData) {
+    for (const cssClassNameData of argumentList) {
+        if (!cssClassNameData) {
             // eslint-disable-next-line no-continue
             continue;
         }
 
-        if (typeof classNameData === 'string') {
-            classNameList.push(classNameData);
+        if (typeof cssClassNameData === 'string') {
+            cssClassNameList.push(cssClassNameData);
             // eslint-disable-next-line no-continue
             continue;
         }
 
         // eslint-disable-next-line no-loops/no-loops
-        for (const key in classNameData) {
-            if (classNameData[key]) {
-                classNameList.push(key);
+        for (const key in cssClassNameData) {
+            if (cssClassNameData[key]) {
+                cssClassNameList.push(key);
             }
         }
     }
 
-    return classNameList.join(' ');
+    return cssClassNameList.join(' ');
 }

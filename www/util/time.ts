@@ -98,7 +98,7 @@ export async function waitForCallback(
     return waitForCallback(callBack, maxCount - 1, timeOutMs);
 }
 
-export function logTakenTime(prefix: string, className: string) {
+export function logTakenTime(prefix: string, ContextClassName: string) {
     return (target: unknown, memberName: string, propertyDescriptor: PropertyDescriptor) => {
         return {
             get() {
@@ -108,7 +108,7 @@ export function logTakenTime(prefix: string, className: string) {
                 async function wrapperFunction(): Promise<void> {
                     const {log, time, timeLog} = console;
 
-                    const fullLabel = `${prefix} [${className}] ${memberName}`.trim();
+                    const fullLabel = `${prefix} [${ContextClassName}] ${memberName}`.trim();
 
                     log(`${fullLabel}: begin`);
                     time(fullLabel);

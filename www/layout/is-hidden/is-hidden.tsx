@@ -1,18 +1,19 @@
 import {ReactNode} from 'react';
 
-import {classNames} from '../../util/css';
+import {cls} from '../../util/css';
 
 import isHiddenStyle from './is-hidden.scss';
 
 type PropsType = {
     readonly children?: ReactNode;
+    // eslint-disable-next-line unicorn/no-keyword-prefix
     readonly className?: string;
     readonly isHidden: boolean;
 };
 
 export function IsHidden(props: PropsType): JSX.Element {
-    const {isHidden, children, className} = props;
-    const fullClassName = classNames(isHiddenStyle.is_hidden, {[isHiddenStyle.is_hidden__hidden]: isHidden}, className);
+    const {isHidden, children, className: cssClassName} = props;
+    const fullClassName = cls(isHiddenStyle.is_hidden, {[isHiddenStyle.is_hidden__hidden]: isHidden}, cssClassName);
 
     return <div className={fullClassName}>{children}</div>;
 }

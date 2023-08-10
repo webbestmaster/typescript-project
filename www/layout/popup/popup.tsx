@@ -3,7 +3,7 @@
 import {ReactNode, useEffect, useRef, useState, DetailedHTMLProps, HTMLAttributes} from 'react';
 import {createPortal} from 'react-dom';
 
-import {classNames} from '../../util/css';
+import {cls} from '../../util/css';
 
 import popupStyle from './popup.scss';
 import {PopupVisibleStateEnum} from './popup-const';
@@ -54,10 +54,12 @@ export function Popup(props: PopupPropsType): JSX.Element | null {
         return isOpen ? PopupVisibleStateEnum.opening : PopupVisibleStateEnum.closing;
     })();
 
-    fadeProps.className = classNames(popupStyle.popup__fade, fadeClassNameMap[visibleState], fadeProps.className);
+    // eslint-disable-next-line unicorn/no-keyword-prefix
+    fadeProps.className = cls(popupStyle.popup__fade, fadeClassNameMap[visibleState], fadeProps.className);
     fadeProps.style = {...fadeProps.style, ...mainStyle};
 
-    containerProps.className = classNames(
+    // eslint-disable-next-line unicorn/no-keyword-prefix
+    containerProps.className = cls(
         popupStyle.popup__container,
         containerClassNameMap[visibleState],
         containerProps.className
