@@ -1,16 +1,14 @@
 /* global HTMLElement */
-
-import assert from 'node:assert/strict';
-
 import {render, screen} from '@testing-library/react';
-import {describe, test} from '@jest/globals';
+import {describe, it, expect} from '@jest/globals';
 
 import {LibraryComponent} from './library-component';
 
-describe('LibraryComponent', () => {
-    test('default state', () => {
+describe('libraryComponent', () => {
+    it('default state', () => {
+        expect.assertions(1);
         render(<LibraryComponent textContent="some text">child node</LibraryComponent>);
 
-        assert.equal(screen.getByText('child node') instanceof HTMLElement, true);
+        expect(screen.getByText('child node') instanceof HTMLElement).toBe(true);
     });
 });

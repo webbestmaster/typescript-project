@@ -1,6 +1,4 @@
-import assert from 'node:assert/strict';
-
-import {describe, test} from '@jest/globals';
+import {describe, it, expect} from '@jest/globals';
 
 import {waitForTime} from '../../test-unit/util/test-util-time';
 
@@ -8,18 +6,21 @@ import {TaskRunner, TaskRunnerOnTaskDoneArgumentType} from './task-runner';
 
 const defaultTimeOut = 50;
 
-describe('TaskRunner', () => {
-    test('Constructor', () => {
+describe('test TaskRunner', () => {
+    it('constructor', () => {
+        expect.assertions(1);
         const taskRunner = new TaskRunner({maxWorkerCount: 2});
 
-        assert.equal(taskRunner instanceof TaskRunner, true);
+        expect(taskRunner instanceof TaskRunner).toBe(true);
     });
 
-    test('Constructor with wrong parameters', () => {
-        assert.throws(() => new TaskRunner({maxWorkerCount: -0.5}));
+    it('constructor with wrong parameters', () => {
+        expect.assertions(1);
+        expect(() => new TaskRunner({maxWorkerCount: -0.5})).toThrow('[TaskRunner]: maxWorkerCount should be >= 1.');
     });
 
-    test('Add task', async () => {
+    it('add task', async () => {
+        expect.assertions(1);
         const taskRunner = new TaskRunner({maxWorkerCount: 1});
 
         let increaseMe = 0;
@@ -29,10 +30,11 @@ describe('TaskRunner', () => {
             increaseMe += 1;
         });
 
-        assert.equal(increaseMe, 1);
+        expect(increaseMe).toBe(1);
     });
 
-    test('Check queue order', async () => {
+    it('check queue order', async () => {
+        expect.assertions(2);
         const taskRunner = new TaskRunner({maxWorkerCount: 1});
 
         let increaseMe = 0;
@@ -43,16 +45,17 @@ describe('TaskRunner', () => {
         });
 
         await taskRunner.add(async () => {
-            assert.equal(increaseMe, 1);
+            expect(increaseMe).toBe(1);
 
             await waitForTime(defaultTimeOut);
             increaseMe += 1;
         });
 
-        assert.equal(increaseMe, 2);
+        expect(increaseMe).toBe(2);
     });
 
-    test('Add task with known/regular Error', async () => {
+    it('add task with known/regular Error', async () => {
+        expect.assertions(3);
         const taskRunner = new TaskRunner({maxWorkerCount: 1});
 
         let increaseMe = 0;
@@ -69,7 +72,8 @@ describe('TaskRunner', () => {
                 throw new Error('I am the ERROR!');
             });
         } catch (error: unknown) {
-            assert.equal(error instanceof Error ? error?.message : '', 'I am the ERROR!');
+            // eslint-disable-next-line jest/no-conditional-in-test, jest/no-conditional-expect
+            expect(error instanceof Error ? error?.message : '').toBe('I am the ERROR!');
             isErrorCaught = true;
         }
 
@@ -78,11 +82,12 @@ describe('TaskRunner', () => {
             increaseMe += 1;
         });
 
-        assert.equal(increaseMe, 2);
-        assert.equal(isErrorCaught, true);
+        expect(increaseMe).toBe(2);
+        expect(isErrorCaught).toBe(true);
     });
 
-    test('Add task with unknown Error', async () => {
+    it('add task with unknown Error', async () => {
+        expect.assertions(3);
         const taskRunner = new TaskRunner({maxWorkerCount: 1});
 
         let increaseMe = 0;
@@ -100,7 +105,8 @@ describe('TaskRunner', () => {
                 throw 'I am an ERROR!';
             });
         } catch (error: unknown) {
-            assert.equal(error instanceof Error && error?.message.toString().startsWith('[TaskRunner]:'), true);
+            // eslint-disable-next-line jest/no-conditional-in-test, jest/no-conditional-expect
+            expect(error instanceof Error && error?.message.toString().startsWith('[TaskRunner]:')).toBe(true);
             isErrorCaught = true;
         }
 
@@ -109,11 +115,12 @@ describe('TaskRunner', () => {
             increaseMe += 1;
         });
 
-        assert.equal(increaseMe, 2);
-        assert.equal(isErrorCaught, true);
+        expect(increaseMe).toBe(2);
+        expect(isErrorCaught).toBe(true);
     });
 
-    test('Add several tasks and with different time of execution, maxWorkerCount: 1', async () => {
+    it('add several tasks and with different time of execution, maxWorkerCount: 1', async () => {
+        expect.assertions(1);
         const taskRunner = new TaskRunner({maxWorkerCount: 1});
 
         const listOfTime: Array<number> = [];
@@ -133,10 +140,11 @@ describe('TaskRunner', () => {
             }),
         ]);
 
-        assert.deepEqual(listOfTime, [200, 100, 10]);
+        expect(listOfTime).toStrictEqual([200, 100, 10]);
     });
 
-    test('Add several tasks and with different time of execution, maxWorkerCount: 2', async () => {
+    it('add several tasks and with different time of execution, maxWorkerCount: 2', async () => {
+        expect.assertions(1);
         const taskRunner = new TaskRunner({maxWorkerCount: 2});
 
         const listOfTime: Array<number> = [];
@@ -156,10 +164,11 @@ describe('TaskRunner', () => {
             }),
         ]);
 
-        assert.deepEqual(listOfTime, [100, 10, 200]);
+        expect(listOfTime).toStrictEqual([100, 10, 200]);
     });
 
-    test('Add several tasks and with different time of execution, maxWorkerCount: 3', async () => {
+    it('add several tasks and with different time of execution, maxWorkerCount: 3', async () => {
+        expect.assertions(1);
         const taskRunner = new TaskRunner({maxWorkerCount: 3});
 
         const listOfTime: Array<number> = [];
@@ -179,10 +188,11 @@ describe('TaskRunner', () => {
             }),
         ]);
 
-        assert.deepEqual(listOfTime, [10, 100, 200]);
+        expect(listOfTime).toStrictEqual([10, 100, 200]);
     });
 
-    test('OnTaskEnd', async () => {
+    it('onTaskEnd', async () => {
+        expect.assertions(2);
         const taskRunnerDataList: Array<TaskRunnerOnTaskDoneArgumentType> = [];
 
         const taskRunner = new TaskRunner({
@@ -213,8 +223,8 @@ describe('TaskRunner', () => {
             }),
         ]);
 
-        assert.deepEqual(listOfTime, [10, 100, 200, 300]);
-        assert.deepEqual(taskRunnerDataList, [
+        expect(listOfTime).toStrictEqual([10, 100, 200, 300]);
+        expect(taskRunnerDataList).toStrictEqual([
             {restTaskCount: 1, taskInProgressCount: 2},
             {restTaskCount: 0, taskInProgressCount: 2},
             {restTaskCount: 0, taskInProgressCount: 1},

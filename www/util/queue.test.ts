@@ -1,6 +1,4 @@
-import assert from 'node:assert/strict';
-
-import {describe, test} from '@jest/globals';
+import {describe, it, expect} from '@jest/globals';
 
 import {waitForTime} from '../../test-unit/util/test-util-time';
 
@@ -8,14 +6,16 @@ import {Queue} from './queue';
 
 const defaultTimeOut = 50;
 
-describe('Queue', () => {
-    test('Constructor', () => {
+describe('queue', () => {
+    it('constructor', () => {
+        expect.assertions(1);
         const queue = new Queue();
 
-        assert.equal(queue instanceof Queue, true);
+        expect(queue instanceof Queue).toBe(true);
     });
 
-    test('Add task', async () => {
+    it('add task', async () => {
+        expect.assertions(1);
         const queue = new Queue();
 
         let increaseMe = 0;
@@ -25,10 +25,11 @@ describe('Queue', () => {
             increaseMe += 1;
         });
 
-        assert.equal(increaseMe, 1);
+        expect(increaseMe).toBe(1);
     });
 
-    test('Check queue order', async () => {
+    it('check queue order', async () => {
+        expect.assertions(2);
         const queue = new Queue();
 
         let increaseMe = 0;
@@ -39,16 +40,17 @@ describe('Queue', () => {
         });
 
         await queue.add(async () => {
-            assert.equal(increaseMe, 1);
+            expect(increaseMe).toBe(1);
 
             await waitForTime(defaultTimeOut);
             increaseMe += 1;
         });
 
-        assert.equal(increaseMe, 2);
+        expect(increaseMe).toBe(2);
     });
 
-    test('Add task with known/regular Error', async () => {
+    it('add task with known/regular Error', async () => {
+        expect.assertions(3);
         const queue = new Queue();
 
         let increaseMe = 0;
@@ -65,7 +67,8 @@ describe('Queue', () => {
                 throw new Error('I am the ERROR!');
             });
         } catch (error: unknown) {
-            assert.equal(error instanceof Error ? error?.message : '', 'I am the ERROR!');
+            // eslint-disable-next-line jest/no-conditional-in-test, jest/no-conditional-expect
+            expect(error instanceof Error ? error?.message : '').toBe('I am the ERROR!');
             isErrorCaught = true;
         }
 
@@ -74,11 +77,12 @@ describe('Queue', () => {
             increaseMe += 1;
         });
 
-        assert.equal(increaseMe, 2);
-        assert.equal(isErrorCaught, true);
+        expect(increaseMe).toBe(2);
+        expect(isErrorCaught).toBe(true);
     });
 
-    test('Add task with unknown Error', async () => {
+    it('add task with unknown Error', async () => {
+        expect.assertions(3);
         const queue = new Queue();
 
         let increaseMe = 0;
@@ -96,7 +100,8 @@ describe('Queue', () => {
                 throw 'I am an ERROR!';
             });
         } catch (error: unknown) {
-            assert.equal(error instanceof Error && error?.message.toString().startsWith('[Queue]:'), true);
+            // eslint-disable-next-line jest/no-conditional-in-test, jest/no-conditional-expect
+            expect(error instanceof Error && error?.message.toString().startsWith('[Queue]:')).toBe(true);
             isErrorCaught = true;
         }
 
@@ -105,7 +110,7 @@ describe('Queue', () => {
             increaseMe += 1;
         });
 
-        assert.equal(increaseMe, 2);
-        assert.equal(isErrorCaught, true);
+        expect(increaseMe).toBe(2);
+        expect(isErrorCaught).toBe(true);
     });
 });

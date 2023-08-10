@@ -7,15 +7,14 @@ import {defaultPageGoToOption, pageFullUrl} from './util/const';
 
 let browser: Browser | null = null;
 
-beforeAll(async () => {
-    browser = await createBrowser();
-});
-
-afterAll(async () => {
-    await browser?.close();
-});
-
 describe('Reviews', () => {
+    beforeAll(async () => {
+        browser = await createBrowser();
+    });
+
+    afterAll(async () => {
+        await browser?.close();
+    });
     let page: Page | null = null;
 
     beforeEach(async () => {
