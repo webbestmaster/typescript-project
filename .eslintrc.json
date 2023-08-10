@@ -4,6 +4,8 @@
 {
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
+        // TODO: try to uncomment
+        // "project": ["./tsconfig.json"], // + "plugin:@typescript-eslint/recommended-requiring-type-checking",
         "ecmaVersion": 2020,
         "sourceType": "module",
         "ecmaFeatures": {
@@ -11,11 +13,19 @@
         }
     },
     "extends": [
+        "prettier",
         "eslint:recommended",
+        // TODO: try to uncomment
+        // "eslint:all",
+        "plugin:prettier/recommended",
         "plugin:@typescript-eslint/recommended",
+        // TODO: try to uncomment
+        // "plugin:@typescript-eslint/recommended-requiring-type-checking", // + "project": ["./tsconfig.json"],
         "plugin:typescript-sort-keys/recommended",
         "plugin:jsx-a11y/recommended",
         "plugin:react/all",
+        // TODO: try to uncomment
+        // "plugin:jest/recommended",
         "plugin:import/errors",
         "plugin:import/warnings",
         "plugin:promise/recommended",
@@ -31,8 +41,9 @@
         "console": true
     },
     "plugins": [
-        "@typescript-eslint",
         "prettier",
+        "@typescript-eslint",
+        "jest",
         "jsx-a11y",
         "no-use-extend-native",
         "import",
