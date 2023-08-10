@@ -12,7 +12,7 @@ import {noop} from '../../util/function';
 import {ArticleContextType} from '../article/article-context/article-context-type';
 import {articleContext} from '../article/article-context/article-context';
 import {getArticleLinkToViewClient} from '../article/article-helper';
-import {ScrollRestoration} from '../scroll-restoration/scroll-restoration';
+import {ReactScrollRestoration} from '../scroll-restoration/react-scroll-restoration';
 
 import pageStyle from './page.scss';
 
@@ -50,7 +50,7 @@ export function Page(props: PagePropsType): JSX.Element {
             <div className={pageStyle.page_children}>{children}</div>
 
             <Footer />
-            <ScrollRestoration />
+            <ReactScrollRestoration />
         </div>
     );
 }

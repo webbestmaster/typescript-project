@@ -77,7 +77,7 @@ import {
 import {ArticleForValidationType} from './cms-article-type';
 import {renderUploadedFileListItem} from './render-uploaded-file-list-item';
 
-const {Text, Title} = Typography;
+const {Text: TypographyText, Title} = Typography;
 const {Option} = Select;
 const {TextArea} = Input;
 
@@ -249,16 +249,16 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             </IsRender>
 
             <Box padding={[8, 0]}>
-                <Text>
+                <TypographyText>
                     Article:&nbsp;
                     <Link to={getArticleLinkToViewClient(slug)}>{title}</Link>
                     &nbsp;|&nbsp;
                     <Link to={getArticleLinkToEdit(id)}>{slug}</Link>
-                </Text>
+                </TypographyText>
             </Box>
 
             <Box padding={[8, 0, 16]}>
-                <Text>Parents:&nbsp;{renderParentList(article, savedArticleList)}</Text>
+                <TypographyText>Parents:&nbsp;{renderParentList(article, savedArticleList)}</TypographyText>
             </Box>
 
             <Form.Item hidden initialValue={id} label={`Article id: ${id}`} name="id">

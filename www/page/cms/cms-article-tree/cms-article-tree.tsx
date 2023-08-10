@@ -23,7 +23,7 @@ import {
     makeArticleTree,
 } from './cms-article-tree-helper';
 
-const {Title, Text} = Typography;
+const {Title, Text: TypographyText} = Typography;
 const {Item: ListItem} = List;
 
 export function CmsArticleTree(): JSX.Element {
@@ -54,14 +54,14 @@ export function CmsArticleTree(): JSX.Element {
 
             return (
                 <ListItem>
-                    <Text>{index + 1}.&nbsp;</Text>
+                    <TypographyText>{index + 1}.&nbsp;</TypographyText>
                     <Link to={getArticleLinkToViewClient(slug)}>{title}</Link>
                     {' | '}
                     <Link to={getArticleLinkToEdit(articleId)}>{slug}</Link>
                     {' | '}
-                    <Text>
+                    <TypographyText>
                         {articleType}&nbsp;{getTickCross(isActive)}
-                    </Text>
+                    </TypographyText>
                 </ListItem>
             );
         },
@@ -78,16 +78,16 @@ export function CmsArticleTree(): JSX.Element {
 
             return (
                 <ListItem>
-                    <Text>{index + 1}.&nbsp;</Text>
+                    <TypographyText>{index + 1}.&nbsp;</TypographyText>
                     <Link to={getArticleLinkToViewClient(slug)}>{title}</Link>
                     {' | '}
                     <Link to={getArticleLinkToEdit(articleId)}>{slug}</Link>
                     {' | '}
-                    <Text>
+                    <TypographyText>
                         {articleType} {getTickCross(isActive)}
-                    </Text>
+                    </TypographyText>
                     {' | '}
-                    <Text type="danger">Ids:&nbsp;{lostIdList}</Text>
+                    <TypographyText type="danger">Ids:&nbsp;{lostIdList}</TypographyText>
                 </ListItem>
             );
         },

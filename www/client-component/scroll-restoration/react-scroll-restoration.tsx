@@ -12,7 +12,7 @@ import {useLocale} from '../../provider/locale/locale-context';
 import {getAbsoluteScrollTop, getRelativeScrollTop, smoothScrollToTop} from './scroll-restoration-helper';
 import scrollRestorationStyle from './scroll-restoration.scss';
 
-export function ScrollRestoration(): JSX.Element {
+export function ReactScrollRestoration(): JSX.Element {
     const topScrollPositionToShowToTopButton = 100;
     const {getLocalizedString} = useLocale();
     const {pathname} = useLocation();

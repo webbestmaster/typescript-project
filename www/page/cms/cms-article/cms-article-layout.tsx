@@ -11,7 +11,7 @@ import {ArticleForValidationType} from './cms-article-type';
 import {getArticleLinkToEdit, getIsImage} from './cms-article-helper';
 
 const {Option} = Select;
-const {Text} = Typography;
+const {Text: TypographyText} = Typography;
 
 export function makeFileListItem(fileInfo: ArticleFileType): UploadFile<unknown> {
     const {name: fileInfoName} = fileInfo;
@@ -58,12 +58,12 @@ export function renderParentList(
             const {id, title, slug} = savedArticle;
 
             return (
-                <Text key={id}>
+                <TypographyText key={id}>
                     {index > 0 ? ', ' : null}
                     <Link to={getArticleLinkToViewClient(slug)}>{title}</Link>
                     &nbsp;|&nbsp;
                     <Link to={getArticleLinkToEdit(id)}>{slug}</Link>
-                </Text>
+                </TypographyText>
             );
         }
     );
@@ -72,7 +72,7 @@ export function renderParentList(
         return parentList;
     }
 
-    return [<Text key="no-parents">no parents</Text>];
+    return [<TypographyText key="no-parents">no parents</TypographyText>];
 }
 
 export function UploadButton(): JSX.Element {

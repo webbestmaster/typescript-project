@@ -9,7 +9,7 @@ import {getArticleLinkToViewClient} from '../../../client-component/article/arti
 
 import {ArticleForTreeType} from './cms-article-tree-type';
 
-const {Text} = Typography;
+const {Text: TypographyText} = Typography;
 
 export function getArticleForTreeById(
     articleList: Array<ArticleForTreeType>,
@@ -46,7 +46,7 @@ function getChildList(parentArticleId: string, articleList: Array<ArticleForTree
                 key: articleId,
                 title: (
                     <Link to={urlToEdit}>
-                        <Text type="danger">[ERROR]: can NOT find article by id: {articleId}</Text>
+                        <TypographyText type="danger">[ERROR]: can NOT find article by id: {articleId}</TypographyText>
                     </Link>
                 ),
             };
@@ -60,9 +60,9 @@ function getChildList(parentArticleId: string, articleList: Array<ArticleForTree
                 {' | '}
                 <Link to={urlToEdit}>{slug}</Link>
                 {' | '}
-                <Text>
+                <TypographyText>
                     {articleType} {getTickCross(isActive)}
-                </Text>
+                </TypographyText>
             </>
         );
 

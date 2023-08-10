@@ -4,8 +4,9 @@
 {
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
-        // TODO: try to uncomment
-        // "project": ["./tsconfig.json"], // + "plugin:@typescript-eslint/recommended-requiring-type-checking",
+        "project": [
+            "./tsconfig.json"
+        ],
         "ecmaVersion": 2020,
         "sourceType": "module",
         "ecmaFeatures": {
@@ -109,7 +110,12 @@
                 "hoist": "all"
             }
         ],
-        "@typescript-eslint/no-unused-vars": [2, { "varsIgnorePattern": "[iI]gnored" }],
+        "@typescript-eslint/no-unused-vars": [
+            2,
+            {
+                "varsIgnorePattern": "[iI]gnored"
+            }
+        ],
         "@typescript-eslint/no-use-before-define": 2,
         "promise/always-return": 0,
         "unicorn/prefer-string-replace-all": 0,
@@ -146,7 +152,8 @@
                     "single"
                 ],
         */
-        "babel/quotes": [2,
+        "babel/quotes": [
+            2,
             "single"
         ],
         "babel/semi": 2,
@@ -270,7 +277,12 @@
         "no-return-await": 2,
         "no-console": 0,
         "no-warning-comments": 0,
-        "no-unused-vars": [2, { "varsIgnorePattern": "[iI]gnored" }],
+        "no-unused-vars": [
+            2,
+            {
+                "varsIgnorePattern": "[iI]gnored"
+            }
+        ],
         "consistent-this": 2,
         "no-inline-comments": 0,
         "no-ternary": 0,
