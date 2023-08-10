@@ -1,3 +1,5 @@
+/* eslint jest/no-hooks: ["error", { "allow": ["beforeAll", "beforeEach", "afterEach", "afterAll"] }] */
+
 import {describe, it, afterEach, beforeEach, afterAll, beforeAll, expect} from '@jest/globals';
 
 import {Browser, Page} from 'puppeteer';
