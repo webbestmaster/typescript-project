@@ -1,22 +1,18 @@
-import {describe, it, afterEach, beforeEach, afterAll, beforeAll} from '@jest/globals';
+import {describe, it, afterEach, beforeEach, afterAll, beforeAll, expect} from '@jest/globals';
 
 import {Browser, Page} from 'puppeteer';
 
 import {createBrowser, makeLogin} from './util/util';
 import {defaultPageGoToOption, pageFullUrl} from './util/const';
 
-let browser: Browser | null = null;
-
-beforeAll(async () => {
-    browser = await createBrowser();
-});
-
-afterAll(async () => {
-    await browser?.close();
-});
-
 describe('my companies', () => {
     let page: Page | null = null;
+
+    let browser: Browser | null = null;
+
+    beforeAll(async () => {
+        browser = await createBrowser();
+    });
 
     beforeEach(async () => {
         page = (await browser?.newPage()) || null;
@@ -27,7 +23,12 @@ describe('my companies', () => {
         await page?.close();
     });
 
+    afterAll(async () => {
+        await browser?.close();
+    });
+
     it('main table', async () => {
+        expect.assertions(0);
         await page?.goto(pageFullUrl.myCompanies, defaultPageGoToOption);
 
         // wait for table's pagination, .ant-pagination-options - item for page selector

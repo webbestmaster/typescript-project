@@ -1,21 +1,16 @@
-import {describe, it, afterEach, beforeEach, afterAll, beforeAll} from '@jest/globals';
+import {describe, it, afterEach, beforeEach, afterAll, beforeAll, expect} from '@jest/globals';
 
 import {Browser, Page} from 'puppeteer';
 
 import {createBrowser, makeLogin} from './util/util';
 
-let browser: Browser | null = null;
-
-beforeAll(async () => {
-    browser = await createBrowser();
-});
-
-afterAll(async () => {
-    await browser?.close();
-});
-
 describe('auth', () => {
+    let browser: Browser | null = null;
     let page: Page | null = null;
+
+    beforeAll(async () => {
+        browser = await createBrowser();
+    });
 
     beforeEach(async () => {
         page = (await browser?.newPage()) || null;
@@ -25,7 +20,12 @@ describe('auth', () => {
         await page?.close();
     });
 
+    afterAll(async () => {
+        await browser?.close();
+    });
+
     it('login', async () => {
+        expect.assertions(0);
         await makeLogin(page);
     });
 });
