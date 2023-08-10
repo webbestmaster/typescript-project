@@ -1,4 +1,4 @@
-import {describe, test, afterEach, beforeEach, afterAll, beforeAll} from '@jest/globals';
+import {describe, it, afterEach, beforeEach, afterAll, beforeAll} from '@jest/globals';
 
 import {Browser, Page} from 'puppeteer';
 
@@ -7,7 +7,7 @@ import {defaultPageGoToOption, pageFullUrl} from './util/const';
 
 let browser: Browser | null = null;
 
-describe('Reviews', () => {
+describe('reviews', () => {
     beforeAll(async () => {
         browser = await createBrowser();
     });
@@ -26,7 +26,7 @@ describe('Reviews', () => {
         await page?.close();
     });
 
-    test('Review list', async () => {
+    it('review list', async () => {
         await page?.goto(pageFullUrl.reviewsManagementReviews, defaultPageGoToOption);
 
         // review should contain at least one review, main ul li svg[fill=currentColor] - rating selector

@@ -1,4 +1,4 @@
-import {describe, test, afterEach, beforeEach, afterAll, beforeAll} from '@jest/globals';
+import {describe, it, afterEach, beforeEach, afterAll, beforeAll} from '@jest/globals';
 
 import {Browser, Page} from 'puppeteer';
 
@@ -14,7 +14,7 @@ afterAll(async () => {
     await browser?.close();
 });
 
-describe('Auth', () => {
+describe('auth', () => {
     let page: Page | null = null;
 
     beforeEach(async () => {
@@ -25,7 +25,7 @@ describe('Auth', () => {
         await page?.close();
     });
 
-    test('Login', async () => {
+    it('login', async () => {
         await makeLogin(page);
     });
 });

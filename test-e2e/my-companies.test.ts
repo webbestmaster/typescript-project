@@ -1,4 +1,4 @@
-import {describe, test, afterEach, beforeEach, afterAll, beforeAll} from '@jest/globals';
+import {describe, it, afterEach, beforeEach, afterAll, beforeAll} from '@jest/globals';
 
 import {Browser, Page} from 'puppeteer';
 
@@ -15,7 +15,7 @@ afterAll(async () => {
     await browser?.close();
 });
 
-describe('My companies', () => {
+describe('my companies', () => {
     let page: Page | null = null;
 
     beforeEach(async () => {
@@ -27,7 +27,7 @@ describe('My companies', () => {
         await page?.close();
     });
 
-    test('Main table', async () => {
+    it('main table', async () => {
         await page?.goto(pageFullUrl.myCompanies, defaultPageGoToOption);
 
         // wait for table's pagination, .ant-pagination-options - item for page selector
