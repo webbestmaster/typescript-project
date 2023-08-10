@@ -15,25 +15,28 @@
     },
     "extends": [
         "prettier",
+        // TODO: try to uncomment
+        // "plugin:jest/all",
         "eslint:recommended",
         // TODO: try to uncomment
         // "eslint:all",
         "plugin:prettier/recommended",
         "plugin:@typescript-eslint/recommended",
+        // "plugin:@typescript-eslint/all",
         // TODO: try to uncomment
         // "plugin:@typescript-eslint/recommended-requiring-type-checking", // + "project": ["./tsconfig.json"],
         "plugin:typescript-sort-keys/recommended",
         "plugin:jsx-a11y/recommended",
         "plugin:react/all",
-        // TODO: try to uncomment
-        // "plugin:jest/recommended",
         "plugin:import/errors",
         "plugin:import/warnings",
+        "plugin:import/recommended",
+        "plugin:import/typescript",
         "plugin:promise/recommended",
         "plugin:sonarjs/recommended",
-        "plugin:unicorn/recommended",
-        "plugin:import/recommended",
-        "plugin:import/typescript"
+        "plugin:unicorn/recommended"
+        // TODO: try to uncomment
+        // "plugin:unicorn/all",
     ],
     "globals": {
         "JSX": true,
