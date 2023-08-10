@@ -1,8 +1,9 @@
+import {cwd} from 'node:process';
 import path from 'node:path';
 
 import type {Configuration} from 'webpack';
 import type {StorybookConfig} from '@storybook/react-webpack5';
-import {cwd, isProduction} from '../webpack/config';
+import {isProduction} from '../webpack/config';
 
 const styleLoader = {
     loader: 'style-loader',
@@ -52,8 +53,8 @@ const config: StorybookConfig = {
                         loader: 'ts-loader',
                         options: {
                             configFile: isProduction
-                                ? path.join(cwd, 'tsconfig.json')
-                                : path.join(cwd, 'tsconfig.dev.json'),
+                                ? path.join(cwd(), 'tsconfig.json')
+                                : path.join(cwd(), 'tsconfig.dev.json'),
                             // disable type checker for building
                             // transpileOnly: true,
                         },
