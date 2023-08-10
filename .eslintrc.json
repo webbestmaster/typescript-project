@@ -15,8 +15,7 @@
     },
     "extends": [
         "prettier",
-        // TODO: try to uncomment
-        // "plugin:jest/all",
+        "plugin:jest/all",
         "eslint:recommended",
         // TODO: try to uncomment
         // "eslint:all",
@@ -76,6 +75,12 @@
         }
     },
     "rules": {
+        "jest/require-hook": [
+            "error",
+            {
+                "allowedFunctionCalls": ["innerInitialization"]
+            }
+        ],
         "prettier/prettier": "error",
         // "@typescript-eslint/sort-type-union-intersection-members": 2,
         "@typescript-eslint/array-type": [

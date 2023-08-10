@@ -1,3 +1,4 @@
+import {cwd} from 'node:process';
 import path from 'node:path';
 
 import {Configuration} from 'webpack';
@@ -20,7 +21,6 @@ import {
     isDevelopment,
     // isProduction,
     pathToDistribution,
-    cwd,
     nodeEnvironment,
     isBuildLibrary,
     isFront,
@@ -45,7 +45,7 @@ const configFront: Configuration = {
             : 'build-asset/[hash:6][ext][query]',
         chunkFilename: isDevelopment ? '[name].chunk.js' : '[name].[hash:6].chunk.js',
         filename: isDevelopment ? '[name].js' : 'index.js',
-        path: path.join(cwd, pathToDistribution),
+        path: path.join(cwd(), pathToDistribution),
         pathinfo: false,
         publicPath: isDevelopment ? '/' : pathToStaticFileFolder,
     },
@@ -75,7 +75,7 @@ const configLibraryFront: Configuration = {
     output: {
         filename: 'index.js',
         libraryTarget: 'commonjs2',
-        path: path.join(cwd, 'dist'),
+        path: path.join(cwd(), 'dist'),
         pathinfo: false,
         publicPath: '',
     },

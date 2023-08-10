@@ -1,9 +1,10 @@
+import {cwd} from 'node:process';
 import path from 'node:path';
 
 import {RuleSetRule} from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-import {isProduction, isDevelopment, isTsTranspileOnly, fileRegExp, cwd} from '../../config';
+import {isProduction, isDevelopment, isTsTranspileOnly, fileRegExp} from '../../config';
 
 const styleLoader = {
     loader: 'style-loader',
@@ -23,7 +24,9 @@ export const rules: Array<RuleSetRule> = [
             {
                 loader: 'ts-loader',
                 options: {
-                    configFile: isProduction ? path.join(cwd, 'tsconfig.json') : path.join(cwd, 'tsconfig.dev.json'),
+                    configFile: isProduction
+                        ? path.join(cwd(), 'tsconfig.json')
+                        : path.join(cwd(), 'tsconfig.dev.json'),
                     // disable type checker for building
                     transpileOnly: isTsTranspileOnly || isProduction,
                 },

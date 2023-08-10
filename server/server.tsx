@@ -1,5 +1,6 @@
-/* global Buffer, process */
+/* global Buffer */
 
+import {cwd, env} from 'node:process';
 import path from 'node:path';
 
 import {fastifyCors} from '@fastify/cors';
@@ -40,12 +41,10 @@ import {makeDirectory, tryToRemoveDirectory} from './file/directory';
 import {PaginationResultType} from './data-base/data-base-type';
 import {getArticleClientListGraphql} from './article/article-api-graphql';
 
-const cwd = process.cwd();
-// eslint-disable-next-line no-process-env
-const isMakeStaticSite = process.env.MAKE_STATIC_SITE === 'TRUE';
+const isMakeStaticSite = env.MAKE_STATIC_SITE === 'TRUE';
 
-// eslint-disable-next-line max-statements, unicorn/prefer-top-level-await
-(async () => {
+// eslint-disable-next-line max-statements
+async function innerInitialization() {
     await tryToRemoveDirectory(temporaryUploadFolder);
     await makeDirectory(temporaryUploadFolder);
 
@@ -72,7 +71,7 @@ const isMakeStaticSite = process.env.MAKE_STATIC_SITE === 'TRUE';
     await fastify.register(fastifyStatic, {
         decorateReply: false, // the reply decorator has been added by the first plugin registration
         prefix: '/', // optional: default '/'
-        root: path.join(cwd, 'dist'),
+        root: path.join(cwd(), 'dist'),
         setHeaders: (response: {setHeader: (header: string, value: string) => void}) => {
             console.info('[ERROR] using fastifyStaticServer: html, css...');
             response.setHeader('x-warning-get-file', 'need-use-nginx');
@@ -223,4 +222,7 @@ const isMakeStaticSite = process.env.MAKE_STATIC_SITE === 'TRUE';
             console.info(`> Server on port: ${serverPort} has been closed`);
         }
     });
-})();
+}
+
+// eslint-disable-next-line unicorn/prefer-top-level-await
+innerInitialization();

@@ -22,7 +22,11 @@ import {red} from '@ant-design/colors';
 import dayjs, {Dayjs} from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 
-dayjs.extend(utc);
+function innerInitialization() {
+    dayjs.extend(utc);
+}
+
+innerInitialization();
 
 import {
     ArticleFileType,

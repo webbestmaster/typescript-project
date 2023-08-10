@@ -24,7 +24,7 @@ export const companyLogoPngHeight = 60;
 export const appIconPngFileName = 'app-icon.png';
 export const specialFileNameList: Array<string> = [companyLogoPngFileName, appIconPngFileName];
 
-function sayHi() {
+function innerInitialization() {
     const {log} = console;
 
     // http://patorjk.com/software/taag/#p=display&f=ANSI%20Shadow&t=Empty
@@ -50,4 +50,4 @@ function sayHi() {
     log('===================\n');
 }
 
-sayHi();
+innerInitialization();

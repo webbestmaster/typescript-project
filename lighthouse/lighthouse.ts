@@ -31,6 +31,7 @@ const threshold: Record<CategoryNameEnum, number> = {
 const siteUrl = 'http://localhost:3011';
 
 const categoryNameList: Array<CategoryNameEnum> = Object.values(CategoryNameEnum);
+
 // const categoryNameList: Array<CategoryNameEnum> = [CategoryNameEnum.bestPractices];
 
 async function makeReport(config: MakeReportArgumentType): Promise<void> {
@@ -112,8 +113,7 @@ const urlList: Array<string> = [
     '/article/vi-ar-nummer-ett',
 ];
 
-// eslint-disable-next-line unicorn/prefer-top-level-await
-(async () => {
+async function innerInitialization() {
     const chrome = await launch({chromeFlags: ['--headless']});
 
     // eslint-disable-next-line no-loops/no-loops
@@ -131,7 +131,10 @@ const urlList: Array<string> = [
     }
 
     await chrome.kill();
-})();
+}
+
+// eslint-disable-next-line unicorn/prefer-top-level-await
+innerInitialization();
 
 /*
 

@@ -1,5 +1,4 @@
-/* global process */
-
+import {cwd} from 'node:process';
 import path from 'node:path';
 import fileSystem from 'node:fs/promises';
 
@@ -14,8 +13,6 @@ import {getIsFileInArticle} from '../article/article-util';
 
 import {uploadFileFolder} from './file-const';
 
-const cwd = process.cwd();
-
 export type GetExtraFilesType = {
     actualSpecialFileList: Array<string>;
     expectedSpecialFileList: Array<string>;
@@ -26,7 +23,7 @@ export async function removeExtraStaticFiles(request: FastifyRequest, reply: Fas
     const articleList: Array<ArticleType> = await articleCrud.findMany({});
 
     const actualSpecialFileList: Array<string> = [];
-    const fileNameList: Array<string> = await fileSystem.readdir(path.join(cwd, uploadFileFolder));
+    const fileNameList: Array<string> = await fileSystem.readdir(path.join(cwd(), uploadFileFolder));
     const extraFileList: Array<string> = [];
 
     fileNameList.forEach((fileName: string) => {

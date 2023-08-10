@@ -1,4 +1,5 @@
-/* global process, fetch, Response, Buffer */
+/* global fetch, Response, Buffer */
+import {cwd as getCwd} from 'node:process';
 import {createWriteStream} from 'node:fs';
 import fileSystem from 'node:fs/promises';
 import path from 'node:path';
@@ -24,7 +25,7 @@ import {makeDirectory, tryToMakeDirectorySilent} from './file/directory';
 const staticSiteFolderName = 'static-site';
 const mainUrl = `http://127.0.0.1:${serverPort}`;
 
-const cwd = process.cwd();
+const cwd: string = getCwd();
 const maxWorkerCount = 8;
 
 type StaticPageType = Readonly<{

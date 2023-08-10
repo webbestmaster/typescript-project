@@ -9,9 +9,10 @@ import {App} from './component/app/app';
 import {ErrorData} from './layout/error-data/error-data';
 import {Popup} from './layout/popup/popup';
 
-console.log(ErrorData, Popup);
-
+// eslint-disable-next-line jest/require-hook
 (function main() {
+    console.log(ErrorData, Popup);
+
     const nodeWrapper = document.querySelector(selector.appWrapper);
 
     if (!nodeWrapper) {
