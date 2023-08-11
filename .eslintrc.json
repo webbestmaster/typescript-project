@@ -17,8 +17,6 @@
         "prettier",
         "plugin:prettier/recommended",
         "plugin:jest/all",
-        // "eslint:recommended",
-        // TODO: try to uncomment
         "eslint:all",
         "plugin:@typescript-eslint/recommended",
         // TODO: try to uncomment
