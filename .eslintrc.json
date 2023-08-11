@@ -21,12 +21,14 @@
         // TODO: try to uncomment
         // "plugin:@typescript-eslint/all",
 
+        // typescript begin
         "plugin:@typescript-eslint/recommended",
         "plugin:@typescript-eslint/recommended-type-checked",
         "plugin:@typescript-eslint/strict",
         "plugin:@typescript-eslint/strict-type-checked",
         "plugin:@typescript-eslint/stylistic",
         "plugin:@typescript-eslint/stylistic-type-checked",
+        // typescript end
 
         "plugin:typescript-sort-keys/recommended",
         "plugin:jsx-a11y/recommended",
@@ -78,24 +80,24 @@
     },
     "rules": {
         "jest/require-hook": [
-            "error",
+            2,
             {
                 "allowedFunctionCalls": [
                     "innerInitialization"
                 ]
             }
         ],
-        "prettier/prettier": "error",
+        "prettier/prettier": 2,
         // "@typescript-eslint/sort-type-union-intersection-members": 2,
         "@typescript-eslint/array-type": [
-            "error",
+            2,
             {
                 "default": "generic"
             }
         ],
         "@typescript-eslint/ban-ts-comment": 1,
         "@typescript-eslint/naming-convention": [
-            "error",
+            2,
             {
                 "selector": "typeAlias",
                 "format": [
@@ -130,7 +132,7 @@
         ],
         "@typescript-eslint/no-use-before-define": 2,
         "@typescript-eslint/no-misused-promises": [
-            "error",
+            2,
             {
                 "checksVoidReturn": {
                     "arguments": true,
@@ -177,11 +179,6 @@
         "babel/new-cap": 2,
         "babel/no-invalid-this": 2,
         "babel/object-curly-spacing": 2,
-        /*
-                "babel/quotes": [2,
-                    "single"
-                ],
-        */
         "babel/quotes": [
             2,
             "single"
@@ -285,8 +282,8 @@
         //        "react/destructuring-assignment": [2, "never"],
         "react/state-in-constructor": 0,
         "react/no-set-state": 0,
-        "react-hooks/rules-of-hooks": "error",
-        "react-hooks/exhaustive-deps": "error",
+        "react-hooks/rules-of-hooks": 2,
+        "react-hooks/exhaustive-deps": 2,
         "function-call-argument-newline": [
             2,
             "consistent"
@@ -321,7 +318,7 @@
         ],
         "function-paren-newline": 0,
         "capitalized-comments": [
-            "error",
+            2,
             "always",
             {
                 "ignorePattern": "ignored|webpackChunkName",
@@ -334,7 +331,7 @@
         ],
         "prefer-named-capture-group": 0,
         "prefer-destructuring": [
-            "error",
+            2,
             {
                 "VariableDeclarator": {
                     "array": true,
@@ -402,12 +399,7 @@
         "no-empty": 2,
         "no-ex-assign": 2,
         "no-extra-boolean-cast": 2,
-        /*
-                "no-extra-parens": [2,
-                    "all"
-                ],
-        */
-        "no-extra-parens": "off",
+        "no-extra-parens": 0,
         "no-extra-semi": 2,
         "no-func-assign": 2,
         "no-inner-declarations": [
@@ -628,31 +620,7 @@
                 ]
             }
         ],
-        /*
-                "indent": [2,
-                    4,
-                    {
-                        "SwitchCase": 2,
-                        "VariableDeclarator": 2,
-                        "outerIIFEBody": 2,
-                        "MemberExpression": 2,
-                        "FunctionDeclaration": {
-                            "body": 2,
-                            "parameters": "first"
-                        },
-                        "FunctionExpression": {
-                            "body": 2,
-                            "parameters": "first"
-                        },
-                        "CallExpression": {
-                            "arguments": 1
-                        },
-                        "ArrayExpression": 2,
-                        "ObjectExpression": 1
-                    }
-                ],
-        */
-        "indent": "off",
+        "indent": 0,
         "key-spacing": [
             2,
             {
@@ -667,19 +635,7 @@
                 "after": true
             }
         ],
-        /*
-                "lines-around-comment": [2,
-                    {
-                        "beforeBlockComment": true,
-                        "afterBlockComment": false,
-                        "beforeLineComment": false,
-                        "afterLineComment": false,
-                        "allowBlockStart": false,
-                        "allowBlockEnd": false
-                    }
-                ],
-        */
-        "lines-around-comment": "off",
+        "lines-around-comment": 0,
         "linebreak-style": [
             2,
             "unix"
@@ -730,12 +686,7 @@
             2,
             "always"
         ],
-        /*
-                "operator-linebreak": [2,
-                    "before"
-                ],
-        */
-        "operator-linebreak": "off",
+        "operator-linebreak": 0,
         "padded-blocks": [
             2,
             {
