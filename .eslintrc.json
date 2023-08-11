@@ -21,9 +21,9 @@
         // "eslint:all",
         "plugin:prettier/recommended",
         "plugin:@typescript-eslint/recommended",
-        // "plugin:@typescript-eslint/all",
         // TODO: try to uncomment
-        // "plugin:@typescript-eslint/recommended-requiring-type-checking", // + "project": ["./tsconfig.json"],
+        // "plugin:@typescript-eslint/all",
+        // "plugin:@typescript-eslint/recommended-requiring-type-checking",
         "plugin:typescript-sort-keys/recommended",
         "plugin:jsx-a11y/recommended",
         "plugin:react/all",
@@ -126,6 +126,20 @@
             }
         ],
         "@typescript-eslint/no-use-before-define": 2,
+        /*
+                "@typescript-eslint/no-misused-promises": [
+                    "warn",
+                    {
+                        "checksVoidReturn": {
+                            "arguments": true,
+                            "attributes": true,
+                            "properties": true,
+                            "returns": true,
+                            "variables": true
+                        }
+                    }
+                ],
+        */
         "promise/always-return": 0,
         "unicorn/prefer-string-replace-all": 0,
         "unicorn/prefer-node-protocol": 2,
