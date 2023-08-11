@@ -13,7 +13,8 @@ type ArticleXmlImgDataType = {
     url: string;
 };
 
-const findImageRegExpGlobal = /!\[([\S\s]*?)]\((\S+?)(?:\s+"([\S\s]+?)")?\)/gu;
+// eslint-disable-next-line require-unicode-regexp
+const findImageRegExpGlobal = /!\[([\S\s]*?)]\((\S+?)(?:\s+"([\S\s]+?)")?\)/g;
 
 export function getImageListFromArticle(article: ArticleType): ArticleXmlImgDataType {
     const {titleImage, content, title, slug} = article;
