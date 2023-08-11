@@ -36,6 +36,7 @@ export function generatePath<PathType extends string>(
     rawPath: PathType,
     pathData: ExtractPathDataType<PathType>
 ): string {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const pathDataForRouter: RouterPathDataType<PathType> = JSON.parse(JSON.stringify(pathData));
 
     return reactRouterGeneratePath(rawPath, pathDataForRouter);

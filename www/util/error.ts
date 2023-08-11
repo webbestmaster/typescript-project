@@ -1,6 +1,7 @@
 export class NeverError extends Error {
     // If it comes to calling a constructor with a parameter, typescript throws an error
     constructor(value: never) {
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         super(`Unreachable statement: ${value}`);
         this.name = 'NeverError';
     }

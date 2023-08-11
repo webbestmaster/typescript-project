@@ -18,6 +18,7 @@ type NavigationProviderPropsType = {
 export function NavigationProvider(props: NavigationProviderPropsType): JSX.Element {
     const {children, navigationData} = props;
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const ssrNavigationData: NavigationContextType | null =
         typeof NAVIGATION_DATA === 'string'
             ? JSON.parse(decodeURIComponent(NAVIGATION_DATA))

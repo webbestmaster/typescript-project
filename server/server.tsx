@@ -1,4 +1,4 @@
-/* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
+/* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style, @typescript-eslint/no-floating-promises */
 
 /* global Buffer */
 
@@ -204,6 +204,7 @@ async function innerInitialization() {
         return html;
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     fastify.listen({host: '0.0.0.0', port: serverPort}, async (error: Error | null): Promise<void> => {
         if (error) {
             console.log(error);
@@ -220,5 +221,5 @@ async function innerInitialization() {
     });
 }
 
-// eslint-disable-next-line unicorn/prefer-top-level-await
+// eslint-disable-next-line unicorn/prefer-top-level-await, @typescript-eslint/no-floating-promises
 innerInitialization();

@@ -125,10 +125,12 @@ export function makeArticleSchemaPick<KeyOfArticle extends keyof ArticleType>(
     fieldList: Array<KeyOfArticle>
 ): JSONSchemaType<Pick<ArticleType, KeyOfArticle>> {
     const articlePickedSchema: JSONSchemaType<Pick<ArticleType, KeyOfArticle>> = makeArticleSchema();
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const {properties} = articlePickedSchema;
 
     const pickedProperties: Record<string, unknown> = fieldList.reduce<Record<string, unknown>>(
         (accumulator: Record<string, unknown>, propertyName: KeyOfArticle) => {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
             return {...accumulator, [propertyName]: properties[propertyName]};
         },
         {}

@@ -29,7 +29,7 @@ export function setCookie(name: string, value: string, rawOptions: SetCookieOpti
         const optionValue = options[optionKey];
 
         if (optionValue !== true) {
-            updatedCookie += `=${optionValue}`;
+            updatedCookie += `=${String(optionValue)}`;
         }
     });
 

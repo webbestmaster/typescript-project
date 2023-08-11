@@ -150,8 +150,8 @@ export function makeSlugValidator(data: MakeSlugValidatorArgumentType): Array<Ru
         },
         {
             message: 'Please-enter-slug-properly.',
-            // eslint-disable-next-line require-await
-            validator: async (rule: RuleObject, value: string) => {
+            // eslint-disable-next-line require-await, @typescript-eslint/require-await
+            validator: async (rule: RuleObject, value: string): Promise<void> => {
                 if (textToSlug(value) !== value) {
                     throw new Error('Slug is not formatted.');
                 }
@@ -159,8 +159,8 @@ export function makeSlugValidator(data: MakeSlugValidatorArgumentType): Array<Ru
         },
         {
             message: 'Please enter another slug. This slug already exists.',
-            // eslint-disable-next-line complexity, require-await
-            validator: async (rule: RuleObject, value: string) => {
+            // eslint-disable-next-line complexity, require-await, @typescript-eslint/require-await
+            validator: async (rule: RuleObject, value: string): Promise<void> => {
                 const savedArticleBySlugList: Array<ArticleForValidationType> = savedArticleList.filter(
                     (savedArticle: ArticleForValidationType): boolean => {
                         return savedArticle.slug === value;
@@ -201,8 +201,8 @@ export function makeHtmlValidator(): Array<Rule> {
     return [
         {
             message: 'Invalid HTML.',
-            // eslint-disable-next-line require-await
-            validator: async (rule: RuleObject, value: string) => {
+            // eslint-disable-next-line require-await, @typescript-eslint/require-await
+            validator: async (rule: RuleObject, value: string): Promise<void> => {
                 if (typeof document === 'undefined') {
                     return;
                 }

@@ -184,8 +184,9 @@ export async function getArticleClientListGraphql(
         }),
     });
 
-    console.warn(articleListSchema.toString());
+    console.warn(articleListSchema);
 
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     reply.code(200).header(...mainResponseHeader);
 
     return graphql({

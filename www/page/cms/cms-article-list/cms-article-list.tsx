@@ -38,6 +38,7 @@ export function CmsArticleList(): JSX.Element {
     });
 
     useEffect(() => {
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         executeArticleList(paginationArticleList.query, paginationArticleList.pageConfig, keyForTableListList);
     }, [executeArticleList, paginationArticleList]);
 
@@ -47,6 +48,7 @@ export function CmsArticleList(): JSX.Element {
                 currentPagination: PaginationQueryType<ArticleForTableListType>
             ): PaginationQueryType<ArticleForTableListType> => {
                 const rawDirection = String({...currentPagination.pageConfig.sort}[String(searchedColumn)]);
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
                 const sortDirection = rawDirection === SortDirectionEnum.descend ? -1 : 1;
                 const {pageSize} = currentPagination.pageConfig;
 

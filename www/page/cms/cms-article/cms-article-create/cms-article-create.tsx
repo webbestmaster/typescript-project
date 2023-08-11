@@ -29,9 +29,11 @@ export function CmsArticleCreate(): JSX.Element {
 
                 navigate(getArticleLinkToEdit(article.id));
 
+                // eslint-disable-next-line @typescript-eslint/no-floating-promises
                 message.success('Article has been created!');
             })
             .catch((requestError: Error) => {
+                // eslint-disable-next-line @typescript-eslint/no-floating-promises
                 message.error(`ERROR: ${requestError.message}`);
             });
     }

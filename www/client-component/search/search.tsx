@@ -73,6 +73,7 @@ export function Search(props: SearchPropsType): JSX.Element {
 
     useEffect(() => {
         if (searchString.length >= minLetters) {
+            // eslint-disable-next-line @typescript-eslint/no-floating-promises
             executeArticleList(
                 {title: makeSafeRegExp(searchString, 'gi').toString()},
                 {

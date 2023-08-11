@@ -157,6 +157,7 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
         console.info(`Structure self check for ${dataBaseId} finished`);
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     (async () => {
         await dataBase.run();
         await makeBackUpFolder(dataBaseId);

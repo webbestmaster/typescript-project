@@ -26,6 +26,7 @@ export function CmsArticleEdit(): JSX.Element {
     );
 
     useEffect(() => {
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         articleById(
             {id: articleId || ''},
             {
@@ -45,10 +46,10 @@ export function CmsArticleEdit(): JSX.Element {
         updateArticle(article)
             .then((savedArticle: ArticleType) => {
                 console.log(savedArticle);
-                message.success('Article has been updated!');
+                return message.success('Article has been updated!');
             })
             .catch((requestError: Error) => {
-                message.error(`ERROR: ${requestError.message}`);
+                return message.error(`ERROR: ${requestError.message}`);
             });
     }
 

@@ -129,6 +129,7 @@ function getFile(request: FastifyRequest<{Params: {fileName?: string}}>, reply: 
     const {params} = request;
     const fileName = getStringFromUnknown(params, 'fileName');
 
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     reply.header('x-warning-get-file', 'need-use-nginx');
 
     return createReadStream(path.join(uploadFolder, fileName));
@@ -142,6 +143,7 @@ export async function getImage(
     const fileName = getStringFromUnknown(params, 'fileName');
     const size = getStringFromUnknown(params, 'size');
 
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     reply.header('x-warning-get-file', 'need-use-nginx');
 
     const rawFileExtension = getFileExtension(fileName);

@@ -6,7 +6,7 @@ import fileSystem from 'node:fs/promises';
 
 import {pathToDistribution} from '../../config';
 
-// eslint-disable-next-line unicorn/prefer-module, @typescript-eslint/no-var-requires
+// eslint-disable-next-line unicorn/prefer-module, @typescript-eslint/no-var-requires, @typescript-eslint/no-unsafe-assignment
 const packageJsonData: Record<string, unknown> = require(path.join(cwd(), 'package.json'));
 const packageName = String(packageJsonData.name);
 
@@ -49,5 +49,5 @@ async function innerInitialization() {
     console.log('[css util] declaration for css has been added.');
 }
 
-// eslint-disable-next-line unicorn/prefer-top-level-await
+// eslint-disable-next-line unicorn/prefer-top-level-await, @typescript-eslint/no-floating-promises
 innerInitialization();

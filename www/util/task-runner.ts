@@ -1,5 +1,5 @@
 export type PromiseResolveType<Result> = (result: Result) => unknown;
-export type QueueRunningTaskType = () => Promise<unknown> | unknown;
+export type QueueRunningTaskType = () => Promise<unknown>;
 
 type QueueTaskType = {
     reject: PromiseResolveType<Error>;
@@ -57,6 +57,7 @@ export class TaskRunner {
             this.taskList.push({reject, resolve, task: runningTask});
 
             if (this.getHasFreeWorkers()) {
+                // eslint-disable-next-line @typescript-eslint/no-floating-promises
                 this.run();
             }
         });

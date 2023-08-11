@@ -21,6 +21,7 @@ type ArticleProviderPropsType = {
 export function ArticleProvider(props: ArticleProviderPropsType): JSX.Element {
     const {children, articleData: passedArticleData} = props;
     const [articleData, setArticleData] = useState<ArticleContextType>(
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         typeof ARTICLE_DATA === 'string' ? JSON.parse(decodeURIComponent(ARTICLE_DATA)) : defaultArticleContextData
     );
     const [slug, setSlug] = useState<string>(articleData.article.slug);

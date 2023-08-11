@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import {FastifyReply, FastifyRequest} from 'fastify';
 
 import {LoginResponseType} from '../../www/service/auth/auth-type';
@@ -14,6 +15,7 @@ export async function postAuthLogin(
 ): Promise<LoginResponseType> {
     const {body, session} = request;
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const parsedData: Record<string, unknown> = JSON.parse(String(body || '{}'));
 
     const {login, password} = parsedData;

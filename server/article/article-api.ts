@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
+
 import {FastifyReply, FastifyRequest} from 'fastify';
 import type {PetsdbQueryType, PetsdbReadPageConfigType} from 'petsdb';
 
@@ -26,7 +28,9 @@ export async function getArticleListPagination(
         },
         request.query
     );
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const pageConfigParsed: PetsdbReadPageConfigType<ArticleType> = JSON.parse(decodeURIComponent(pageConfig));
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const queryParsed: PetsdbQueryType<ArticleType> = JSON.parse(decodeURIComponent(query));
 
     // eslint-disable-next-line no-loops/no-loops, guard-for-in
@@ -43,6 +47,7 @@ export async function getArticleListPagination(
         pageConfigParsed
     );
 
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     reply.code(200).header(...mainResponseHeader);
 
     return articleListPagination;
@@ -58,8 +63,11 @@ function parseRequestQuery(request: FastifyRequest): ParsedRequestQueryType {
         },
         request.query
     );
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const pageConfigParsed: PetsdbReadPageConfigType<ArticleType> = JSON.parse(decodeURIComponent(pageConfig));
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const pickParsed: Array<keyof ArticleType> = JSON.parse(decodeURIComponent(pick));
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const queryParsed: PetsdbQueryType<ArticleType> = JSON.parse(decodeURIComponent(query));
 
     // eslint-disable-next-line no-loops/no-loops, guard-for-in
@@ -110,6 +118,7 @@ export async function postAdminArticleCreate(
     reply: FastifyReply
 ): Promise<ArticleType | Record<'message', string>> {
     const {body} = request;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const parsedCreateData: ArticleType = JSON.parse(String(body || '{}'));
     const [isValidArticle, modelJsonSchemaValidate] = validateArticle(parsedCreateData);
 
@@ -172,6 +181,7 @@ export async function postAdminArticleUpdate(
     reply: FastifyReply
 ): Promise<ArticleType | Record<'message', string>> {
     const {body} = request;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const parsedUpdateData: ArticleType = JSON.parse(String(body || '{}'));
     const [isValidArticle, modelJsonSchemaValidate] = validateArticle(parsedUpdateData);
 

@@ -21,7 +21,7 @@
         "plugin:@typescript-eslint/recommended",
         // TODO: try to uncomment
         // "plugin:@typescript-eslint/all",
-        // "plugin:@typescript-eslint/recommended-requiring-type-checking",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking",
         "plugin:typescript-sort-keys/recommended",
         "plugin:jsx-a11y/recommended",
         "plugin:react/all",
@@ -123,20 +123,24 @@
             }
         ],
         "@typescript-eslint/no-use-before-define": 2,
-        /*
-                "@typescript-eslint/no-misused-promises": [
-                    "warn",
-                    {
-                        "checksVoidReturn": {
-                            "arguments": true,
-                            "attributes": true,
-                            "properties": true,
-                            "returns": true,
-                            "variables": true
-                        }
-                    }
-                ],
-        */
+        "@typescript-eslint/no-misused-promises": [
+            "error",
+            {
+                "checksVoidReturn": {
+                    "arguments": true,
+                    "attributes": true,
+                    "properties": true,
+                    "returns": true,
+                    "variables": true
+                }
+            }
+        ],
+        "@typescript-eslint/no-floating-promises": [
+            2,
+            {
+                "ignoreIIFE": true
+            }
+        ],
         "promise/always-return": 0,
         "unicorn/prefer-string-replace-all": 0,
         "unicorn/prefer-node-protocol": 2,
@@ -277,18 +281,38 @@
         "react/no-set-state": 0,
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "error",
-        "function-call-argument-newline": [2, "consistent"],
-        "array-element-newline": [2, "consistent"],
-        "object-property-newline": [2, {"allowAllPropertiesOnSameLine": true}],
+        "function-call-argument-newline": [
+            2,
+            "consistent"
+        ],
+        "array-element-newline": [
+            2,
+            "consistent"
+        ],
+        "object-property-newline": [
+            2,
+            {
+                "allowAllPropertiesOnSameLine": true
+            }
+        ],
         "multiline-ternary": 0,
-        "max-lines": [2, 1000],
-        "max-lines-per-function": [2, 600],
+        "max-lines": [
+            2,
+            1000
+        ],
+        "max-lines-per-function": [
+            2,
+            600
+        ],
         "no-magic-numbers": 0,
         "sort-keys": 2,
         "sort-imports": 0,
-        "newline-per-chained-call": [2, {
-            "ignoreChainWithDepth": 4
-        }],
+        "newline-per-chained-call": [
+            2,
+            {
+                "ignoreChainWithDepth": 4
+            }
+        ],
         "function-paren-newline": 0,
         "capitalized-comments": [
             "error",
@@ -298,7 +322,10 @@
                 "ignoreInlineComments": true
             }
         ],
-        "arrow-body-style": [2, "always"],
+        "arrow-body-style": [
+            2,
+            "always"
+        ],
         "prefer-named-capture-group": 0,
         "prefer-destructuring": [
             "error",

@@ -134,10 +134,10 @@ async function innerInitialization() {
         });
     }
 
-    await chrome.kill();
+    chrome.kill();
 }
 
-// eslint-disable-next-line unicorn/prefer-top-level-await
+// eslint-disable-next-line unicorn/prefer-top-level-await, @typescript-eslint/no-floating-promises
 innerInitialization();
 
 /*

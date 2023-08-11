@@ -36,6 +36,7 @@ describe('queue', () => {
 
         let increaseMe = 0;
 
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         queue.add(async () => {
             await waitForTime(defaultTimeOut);
             increaseMe += 1;
@@ -58,6 +59,7 @@ describe('queue', () => {
         let increaseMe = 0;
         let isErrorCaught = false;
 
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         queue.add(async () => {
             await waitForTime(defaultTimeOut);
             increaseMe += 1;
@@ -90,6 +92,7 @@ describe('queue', () => {
         let increaseMe = 0;
         let isErrorCaught = false;
 
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         queue.add(async () => {
             await waitForTime(defaultTimeOut);
             increaseMe += 1;

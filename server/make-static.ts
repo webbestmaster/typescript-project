@@ -190,7 +190,7 @@ class StaticSite {
             articlePreviewKeyList
         );
 
-        const apiPath = `${apiUrl.clientSearchArticle}?${querySearchParameters}`;
+        const apiPath = `${apiUrl.clientSearchArticle}?${querySearchParameters.toString()}`;
 
         const data = await this.getTextFromUrl(mainUrl + apiPath);
 

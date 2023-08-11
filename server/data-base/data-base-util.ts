@@ -11,6 +11,7 @@ export function getPartialData<FullModelType extends Record<string, unknown>>(
     data: FullModelType,
     requiredPropertyList: Array<keyof FullModelType>
 ): Partial<FullModelType> {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return Object.assign(
         {},
         ...requiredPropertyList.map<Record<string, FullModelType[keyof FullModelType]>>(

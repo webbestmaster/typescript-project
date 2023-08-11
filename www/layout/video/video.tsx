@@ -44,6 +44,7 @@ export function Video(props: VideoPropsType): JSX.Element {
             return;
         }
 
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         videoTag.play();
     }, [videoRef]);
 
@@ -54,6 +55,7 @@ export function Video(props: VideoPropsType): JSX.Element {
             return;
         }
 
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         videoTag.play();
     }, [isStarted]);
 
