@@ -4,7 +4,7 @@ export function smoothScrollToTop() {
     window.scrollTo({behavior: 'smooth', top: 0});
 }
 
-// get scroll top position in 0..1
+// Get scroll top position in 0..1
 export function getRelativeScrollTop(): number {
     const fullBodyHeight: number = document.body.clientHeight;
     const viewPortHeight: number = document.documentElement.clientHeight;
@@ -21,7 +21,7 @@ export function getRelativeScrollTop(): number {
     return relativeScrollPosition;
 }
 
-// get scroll top position in pixels
+// Get scroll top position in pixels
 export function getAbsoluteScrollTop(relativeScrollPosition: number): number {
     if (relativeScrollPosition === 0) {
         return 0;

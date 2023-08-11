@@ -18,7 +18,7 @@ export function ShareButtonTelegram(props: ShareButtonPropsType): JSX.Element {
             onClick={handleClick}
             type="button"
         >
-            <SvgImage className={shareButtonStyle.share_button__image} imageId={'#' + shareButtonName.telegram} />
+            <SvgImage className={shareButtonStyle.share_button__image} imageId={`#${shareButtonName.telegram}`} />
         </button>
     );
 }

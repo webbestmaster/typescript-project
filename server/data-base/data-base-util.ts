@@ -1,3 +1,5 @@
+/* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
+
 // import {PromiseResolveType} from '../../www/util/promise';
 // import {extractFromUnknown} from '../../www/util/type';
 import {makeDirectory} from '../file/directory';

@@ -6,10 +6,10 @@ import {getVideoFromHtml} from './markdown-helper-video';
 import {getIsEmptyHtml, StringToJsxRawDataType} from './markdown-helper';
 import {MarkdownItemCounter} from './markdown-item-counter';
 
-const markdownVideoRegExp = /<video [^>]+\/>/gi;
-const markdownAudioRegExp = /<audio [^>]+\/>/gi;
-const markdownImageRegExp = /<img [^>]+\/>/gi;
-const markdownReplaceRegExp = /<video [^>]+\/>|<audio [^>]+\/>|<img [^>]+\/>/gi;
+const markdownVideoRegExp = /<video [^>]+\/>/giu;
+const markdownAudioRegExp = /<audio [^>]+\/>/giu;
+const markdownImageRegExp = /<img [^>]+\/>/giu;
+const markdownReplaceRegExp = /<video [^>]+\/>|<audio [^>]+\/>|<img [^>]+\/>/giu;
 
 function getIsVideoHtmlCode(htmlString: string): boolean {
     return htmlString.search(markdownVideoRegExp) >= 0;
@@ -27,7 +27,7 @@ function htmlStringToJsx(rawData: StringToJsxRawDataType, markdownItemCounter: M
     const {htmlString} = rawData;
 
     if (getIsVideoHtmlCode(htmlString)) {
-        // add image and video cause every video has image as poster
+        // Add image and video cause every video has image as poster
         markdownItemCounter.increaseImage();
         markdownItemCounter.increaseVideo();
 
@@ -47,7 +47,7 @@ function htmlStringToJsx(rawData: StringToJsxRawDataType, markdownItemCounter: M
     }
 
     console.error('[htmlStringToJsx] Can not parse html string');
-    console.log('||--' + htmlString + '--||');
+    console.log(`||--${htmlString}--||`);
     // eslint-disable-next-line react/no-danger, id-match
     return <div dangerouslySetInnerHTML={{__html: htmlString}} />;
 }

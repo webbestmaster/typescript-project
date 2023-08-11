@@ -1,3 +1,5 @@
+/* eslint-disable no-magic-numbers */
+
 import {describe, it, expect} from '@jest/globals';
 
 import {waitForTime} from '../../test-unit/util/test-util-time';
@@ -16,7 +18,9 @@ describe('test TaskRunner', () => {
 
     it('constructor with wrong parameters', () => {
         expect.assertions(1);
-        expect(() => new TaskRunner({maxWorkerCount: -0.5})).toThrow('[TaskRunner]: maxWorkerCount should be >= 1.');
+        expect(() => {
+            return new TaskRunner({maxWorkerCount: -0.5});
+        }).toThrow('[TaskRunner]: maxWorkerCount should be >= 1.');
     });
 
     it('add task', async () => {

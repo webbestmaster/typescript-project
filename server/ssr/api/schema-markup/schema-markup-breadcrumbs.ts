@@ -1,5 +1,6 @@
-// reference - https://developers.google.com/search/docs/data-types/breadcrumb
-// used - JSON-LD (recommended)
+// Reference - https://developers.google.com/search/docs/data-types/breadcrumb
+
+// Used - JSON-LD (recommended)
 
 import {ArticlePreviewType, ArticleType} from '../../../article/article-type';
 import {SsrReplaceDataType} from '../ssr-helper/ssr-helper-type';
@@ -49,7 +50,7 @@ export function getSchemaMarkupBreadcrumbsSsrReplaceData(
                 "@type": "BreadcrumbList",
                 "itemListElement": ${JSON.stringify([...itemListElement, schemaBreadcrumbItemLast])}
             }
-        </script>`.replace(/\s+/gi, ' ');
+        </script>`.replace(/\s+/giu, ' ');
 
     return {selector, value};
 }

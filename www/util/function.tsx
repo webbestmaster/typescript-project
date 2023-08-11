@@ -4,9 +4,8 @@ import {useCallback, useMemo, useState} from 'react';
 
 import {convertToError} from './error';
 
-export function noop(): unknown {
-    return;
-}
+// eslint-disable-next-line no-empty-function
+export function noop(): void {}
 
 export function debounce<ArgsType extends Array<unknown>>(
     wrappedFunction: (...args: ArgsType) => unknown,

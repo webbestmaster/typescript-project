@@ -1,9 +1,4 @@
-import {
-    BrowserRouter,
-    Route,
-    Routes,
-    // useParams, generatePath
-} from 'react-router-dom';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {StaticRouter} from 'react-router-dom/server';
 
 import {isBrowser} from '../../util/system';

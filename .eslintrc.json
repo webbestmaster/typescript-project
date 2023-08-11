@@ -15,11 +15,11 @@
     },
     "extends": [
         "prettier",
-        "plugin:jest/all",
-        "eslint:recommended",
-        // TODO: try to uncomment
-        // "eslint:all",
         "plugin:prettier/recommended",
+        "plugin:jest/all",
+        // "eslint:recommended",
+        // TODO: try to uncomment
+        "eslint:all",
         "plugin:@typescript-eslint/recommended",
         // TODO: try to uncomment
         // "plugin:@typescript-eslint/all",
@@ -280,7 +280,29 @@
         "react/no-set-state": 0,
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "error",
+        "function-call-argument-newline": [2, "consistent"],
+        "array-element-newline": [2, "consistent"],
+        "object-property-newline": [2, {"allowAllPropertiesOnSameLine": true}],
+        "multiline-ternary": 0,
+        "max-lines": [2, 1000],
+        "max-lines-per-function": [2, 600],
+        "no-magic-numbers": 0,
         "sort-keys": 2,
+        "sort-imports": 0,
+        "newline-per-chained-call": [2, {
+            "ignoreChainWithDepth": 4
+        }],
+        "function-paren-newline": 0,
+        "capitalized-comments": [
+            "error",
+            "always",
+            {
+                "ignorePattern": "ignored|webpackChunkName",
+                "ignoreInlineComments": true
+            }
+        ],
+        "arrow-body-style": [2, "always"],
+        "prefer-named-capture-group": 0,
         "prefer-destructuring": [
             "error",
             {

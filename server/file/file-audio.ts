@@ -21,7 +21,11 @@ async function getAudioFileBitrate(fullFilePath: string): Promise<BitrateType> {
 
     const kiloBytesPerSecond: number = Math.ceil(Math.round(kiloBytes / durationInSeconds) / 16) * 16;
 
-    return bitRateList.find((bitRate: BitrateType): boolean => bitRate === kiloBytesPerSecond) || maxKiloBytesPerSecond;
+    return (
+        bitRateList.find((bitRate: BitrateType): boolean => {
+            return bitRate === kiloBytesPerSecond;
+        }) || maxKiloBytesPerSecond
+    );
 }
 
 export async function makeAudioFile(fullFilePath: string): Promise<string> {

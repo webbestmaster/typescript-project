@@ -1,6 +1,7 @@
 /* global localStorage */
 const fontSizeSavedKey = 'md-font-size';
-const defaultFontSize = 16; // 16px is default font-size for markdown-pro
+// 16px is default font-size for markdown-pro
+const defaultFontSize = 16;
 
 export const maxFontSize = 24;
 export const minFontSize = 12;

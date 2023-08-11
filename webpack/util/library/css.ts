@@ -1,4 +1,4 @@
-// there is real dirt workaround, but I do not know way better (((
+// There is real dirt workaround, but I do not know way better (((
 
 import {cwd} from 'node:process';
 import path from 'node:path';
@@ -29,15 +29,19 @@ declare module '${packageName}/dist/style.css' {
 async function innerInitialization() {
     const isStyleFileExists: boolean = await fileSystem
         .access(pathToStyle)
-        .then((): true => true)
-        .catch((): false => false);
+        .then((): true => {
+            return true;
+        })
+        .catch((): false => {
+            return false;
+        });
 
     if (!isStyleFileExists) {
         console.log(`[css util] file ${pathToStyle} is not exists.`);
         return;
     }
 
-    // if library.d.ts is not exists -> throw error
+    // If library.d.ts is not exists -> throw error
     await fileSystem.access(pathToTyping);
 
     await fileSystem.appendFile(pathToTyping, styleDeclaration);

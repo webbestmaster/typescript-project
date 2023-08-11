@@ -4,10 +4,13 @@ import {FetchMethodEnum} from '../../util/fetch';
 import {apiUrl} from '../../../server/const';
 
 export async function makePdf(html: string, fileName: string): Promise<void> {
-    // return fetchX<File>(apiUrl.clientMakePdf, fileSchema, {
-    //     body: decodeURIComponent(html),
-    //     method: FetchMethodEnum.post,
-    // });
+    /**
+     * So
+     * return fetchX<File>(apiUrl.clientMakePdf, fileSchema, {
+     *     body: decodeURIComponent(html),
+     *     method: FetchMethodEnum.post,
+     * });
+     */
 
     const response: Response = await fetch(apiUrl.clientMakePdf, {
         body: encodeURIComponent(html),

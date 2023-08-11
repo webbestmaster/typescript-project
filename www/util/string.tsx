@@ -2,7 +2,6 @@ import {LocaleNameEnum} from '../provider/locale/locale-context-type';
 
 import {makeSafeRegExpPatter} from './regexp';
 
-/*
 export function getHash(data: Array<unknown> | Record<string, unknown> | string): string {
     let result = 0;
     const fullString: string = typeof data === 'string' ? data : JSON.stringify(data, null, 0);
@@ -15,7 +14,6 @@ export function getHash(data: Array<unknown> | Record<string, unknown> | string)
 
     return result.toString(32);
 }
-*/
 
 export function getRandomString(): string {
     const fromRandom = Math.random().toString(32).replace('0.', '');
@@ -28,8 +26,8 @@ export function findString(input: string, searchQuery: string, flags: '' | 'g' |
     const result: Array<string> = [];
     const searchQueryLength = searchQuery.length;
 
-    const splitRegExp = new RegExp('(?=' + makeSafeRegExpPatter(searchQuery) + ')', flags);
-    const equalRegExp = new RegExp('^' + makeSafeRegExpPatter(searchQuery), flags);
+    const splitRegExp = new RegExp(`(?=${makeSafeRegExpPatter(searchQuery)})`, flags);
+    const equalRegExp = new RegExp(`^${makeSafeRegExpPatter(searchQuery)}`, flags);
 
     const splitLeftList: Array<string> = input.split(splitRegExp);
 
@@ -76,11 +74,11 @@ export function formatProgress(current: number, max: number): string {
 
 export function convertStringForHtml(value: string): string {
     return value
-        .replace(/&/g, '&amp;')
-        .replace(/>/g, '&gt;')
-        .replace(/</g, '&lt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;')
-        .replace(/\//g, '&#47;')
-        .replace(/\\/g, '&#92;');
+        .replace(/&/gu, '&amp;')
+        .replace(/>/gu, '&gt;')
+        .replace(/</gu, '&lt;')
+        .replace(/"/gu, '&quot;')
+        .replace(/'/gu, '&#039;')
+        .replace(/\//gu, '&#47;')
+        .replace(/\\/gu, '&#92;');
 }

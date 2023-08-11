@@ -14,5 +14,5 @@ export async function clearCacheHtmlFileFolder(): Promise<void> {
 }
 
 export function makeCacheFile(slug: string, page: string): Promise<void> {
-    return writeStringToFile(path.join(absolutePathHtmlFileFolder, slug + '.html'), page);
+    return writeStringToFile(path.join(absolutePathHtmlFileFolder, `${slug}.html`), page);
 }

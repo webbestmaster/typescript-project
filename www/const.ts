@@ -16,19 +16,18 @@ export const siteDomain = 'my-best-site.com';
 export const httpsSiteDomain = `https://${siteDomain}`;
 export const openGraphLocaleName = 'en_US';
 export const copyrightName = 'My Best Site Dot Com';
-// special file 1/2
+// Special file 1/2
 export const companyLogoPngFileName = 'company-logo.png';
 export const companyLogoPngWidth = 600;
 export const companyLogoPngHeight = 60;
-// special file 2/2
+// Special file 2/2
 export const appIconPngFileName = 'app-icon.png';
 export const specialFileNameList: Array<string> = [companyLogoPngFileName, appIconPngFileName];
 
 function innerInitialization() {
     const {log} = console;
 
-    // http://patorjk.com/software/taag/#p=display&f=ANSI%20Shadow&t=Empty
-    // Font: ANSI Shadow
+    // Look here: http://patorjk.com/software/taag/#p=display&f=ANSI%20Shadow&t=Empty, Font: ANSI Shadow
     const hiString = `
 
 

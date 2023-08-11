@@ -1,6 +1,7 @@
+/* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
+
 import Ajv, {JSONSchemaType} from 'ajv';
-import {Petsdb} from 'petsdb';
-import type {PetsdbItemType, PetsdbQueryType, PetsdbReadPageConfigType} from 'petsdb';
+import {Petsdb, type PetsdbItemType, type PetsdbQueryType, type PetsdbReadPageConfigType} from 'petsdb';
 
 import {getPartialData, makeBackUpFolder} from './data-base-util';
 import {CrudConfigOnChangeArgumentType, CrudConfigType, CrudType, PaginationResultType} from './data-base-type';
@@ -15,7 +16,7 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
 ): CrudType<ModelType> {
     const {dataBaseId, onChange, onInit} = crudConfig;
     const dataBaseFileName = `data-base.${dataBaseId}.db`;
-    const dataBasePath = dataBaseFolderPath + '/' + dataBaseFileName;
+    const dataBasePath = `${dataBaseFolderPath}/${dataBaseFileName}`;
     const onChangeData: CrudConfigOnChangeArgumentType = {dataBaseFileName, dataBaseId, dataBasePath};
 
     async function handleDataBaseUpdate(): Promise<void> {
@@ -43,7 +44,7 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
         return dataBase.read(query);
     }
 
-    async function findManyPagination(
+    function findManyPagination(
         query: PetsdbQueryType<ModelType>,
         pageConfig: PetsdbReadPageConfigType<ModelType>
     ): Promise<PaginationResultType<ModelType>> {
@@ -68,7 +69,7 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
         );
     }
 
-    // throw error if smth wrong
+    // Throw error if smth wrong
     async function createOne(modelData: ModelType): Promise<null> {
         const modelJsonSchemaValidate = ajv.compile<ModelType>(modelJsonSchema);
         const isValid = modelJsonSchemaValidate(modelData);
@@ -165,13 +166,13 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
     })();
 
     return {
-        // count,
+        // ignored count,
         createOne,
         deleteOne,
         findMany,
         findManyPagination,
         findManyPaginationPartial,
-        // findManyPartial,
+        // ignored findManyPartial,
         findOne,
         updateOne,
     };

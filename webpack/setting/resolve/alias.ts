@@ -13,6 +13,6 @@ export const alias: Record<string, string> = duplicateList.reduce(
 );
 
 if (isProduction && isFront) {
-    // remove ajv from build for prod
+    // Remove ajv from build for prod
     alias.ajv = path.resolve(cwd(), 'www', 'util', 'ajv-fake');
 }

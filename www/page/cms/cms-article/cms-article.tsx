@@ -102,14 +102,14 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
         description,
         descriptionShort,
         fileList: defaultFileList,
-        hasMetaRobotsNoFollowSeo, // Add/combine <meta name="robots" content="nofollow"/>
-        hasMetaRobotsNoIndexSeo, // Add/combine <meta name="robots" content="noindex"/> and add X-Robots-Tag: noindex
+        hasMetaRobotsNoFollowSeo,
+        hasMetaRobotsNoIndexSeo,
         id,
-        isActive, // actually temporary "removed"
-        isInSiteMapXmlSeo, // has sitemap.xml link to article or not
-        metaDescriptionSeo, // tag <meta name="description" content="....." />
-        metaKeyWordsSeo, // tag <meta name="keywords" content="....." />
-        metaSeo, // actually any html code
+        isActive,
+        isInSiteMapXmlSeo,
+        metaDescriptionSeo,
+        metaKeyWordsSeo,
+        metaSeo,
         publishDate: defaultPublishDate,
         slug,
         staffArtistList,
@@ -121,7 +121,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
         subDocumentIdList,
         subDocumentListViewType,
         tagList,
-        tagTitleSeo, // tag <title>....</title>
+        tagTitleSeo,
         title,
         titleImage: defaultTitleImage,
         updatedDate,
@@ -146,7 +146,9 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
     useEffect(() => {
         executeArticleListPaginationPick({}, {pageIndex: 0, pageSize: 0, sort: {title: 1}}, keyForValidationList)
-            .then((data: PaginationResultType<ArticleForValidationType>) => setSavedArticleList(data.list))
+            .then((data: PaginationResultType<ArticleForValidationType>) => {
+                return setSavedArticleList(data.list);
+            })
             .catch((error: Error) => {
                 console.log(error);
                 message.error('Can not fetch article list.');
@@ -168,7 +170,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             title: humanNormalizeString(rawValues.title),
             titleImage,
         };
-        // validate form
+        // Validate form
         const [isValidArticle, validateFunction] = validateArticle(values);
 
         console.info('validateFunction.errors');
@@ -208,7 +210,9 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
         if (file.status === 'removed') {
             setFileList((currentFileList: Array<ArticleFileType>): Array<ArticleFileType> => {
-                return currentFileList.filter((fileInfo: ArticleFileType): boolean => fileInfo.name !== file.name);
+                return currentFileList.filter((fileInfo: ArticleFileType): boolean => {
+                    return fileInfo.name !== file.name;
+                });
             });
         }
 
@@ -287,7 +291,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                             setIsFileLoading(false);
                         }
 
-                        // just prevent extra request to our server
+                        // Just prevent extra request to our server
                         return 'https://dev.null/dev/null';
                     }}
                     fileList={titleImage.size > 0 ? [titleImage].map(makeFileListItem) : []}
@@ -395,7 +399,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
             <Form.Item label={`Files (image to 16MB, other to 75MB): ${fileList.length}`}>
                 <Upload<unknown>
-                    // accept={fileAccept}
+                    // ignored accept={fileAccept}
                     action={async (file: File): Promise<string> => {
                         try {
                             setIsFileLoading(true);
@@ -414,15 +418,15 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                             setIsFileLoading(false);
                         }
 
-                        // just prevent extra request to our server
+                        // Just prevent extra request to our server
                         return 'https://dev.null/dev/null';
                     }}
                     fileList={fileList.map(makeFileListItem)}
-                    // itemRender={renderUploadedFileListItem}
+                    // ignored itemRender={renderUploadedFileListItem}
                     itemRender={(originNode: JSX.Element, file: UploadFile<unknown>): JSX.Element => {
-                        const fileInfo = fileList.find(
-                            (fileInfoIList: ArticleFileType): boolean => fileInfoIList.name === file.name
-                        );
+                        const fileInfo = fileList.find((fileInfoIList: ArticleFileType): boolean => {
+                            return fileInfoIList.name === file.name;
+                        });
 
                         return renderUploadedFileListItem({
                             file,
@@ -444,11 +448,16 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             </Form.Item>
 
             <Form.Item initialValue={dayjs.utc(publishDate)} label="Publish date UTC-0:" name="publishDate">
-                <DatePicker onOk={(date: Dayjs): void => setPublishDate(date.toISOString())} showTime />
+                <DatePicker
+                    onOk={(date: Dayjs): void => {
+                        return setPublishDate(date.toISOString());
+                    }}
+                    showTime
+                />
             </Form.Item>
 
             <Form.Item
-                // set on server
+                // Set on server
                 initialValue={createdDate || noDateUTC}
                 label="Created date UTC-0:"
                 name="createdDate"
@@ -457,7 +466,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             </Form.Item>
 
             <Form.Item
-                // set on server
+                // Set on server
                 initialValue={updatedDate || noDateUTC}
                 label="Updated date UTC-0:"
                 name="updatedDate"
@@ -603,7 +612,9 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                         disabled={isDisableToDelete}
                         icon={<QuestionCircleOutlined style={{color: red.primary}} />}
                         okText="Delete"
-                        onConfirm={() => handleDeleteArticle(id)}
+                        onConfirm={() => {
+                            return handleDeleteArticle(id);
+                        }}
                         title="Are you sure to delete the article？"
                     >
                         <Button disabled={isDisableToDelete} htmlType="button" type="default">

@@ -13,7 +13,11 @@ export function findInArray<ItemType extends Record<string, unknown>>(
     list: Array<ItemType>,
     query: Partial<ItemType>
 ): ItemType | null {
-    return list.find((item: ItemType): boolean => isObjectInclude(item, query)) || null;
+    return (
+        list.find((item: ItemType): boolean => {
+            return isObjectInclude(item, query);
+        }) || null
+    );
 }
 
 export function findInArrayEnsure<ItemType extends Record<string, unknown>>(
@@ -24,12 +28,21 @@ export function findInArrayEnsure<ItemType extends Record<string, unknown>>(
     return findInArray<ItemType>(list, query) || defaultValue;
 }
 
-// export function findManyInArray<ItemType>(list: Array<ItemType>, query: Record<string, unknown>): Array<ItemType> {
-//     return list.filter((item: ItemType): boolean => isObjectInclude<ItemType>(item, query));
-// }
+export function findManyInArray<ItemType extends Record<string, unknown>>(
+    list: Array<ItemType>,
+    query: Record<string, unknown>
+): Array<ItemType> {
+    return list.filter((item: ItemType): boolean => {
+        return isObjectInclude(item, query);
+    });
+}
 
 export function findInArrayByValue<ItemType>(list: Array<ItemType>, value: unknown): ItemType | null {
-    return list.find((item: ItemType): boolean => item === value) || null;
+    return (
+        list.find((item: ItemType): boolean => {
+            return item === value;
+        }) || null
+    );
 }
 
 export function findInArrayByValueEnsure<ItemType>(

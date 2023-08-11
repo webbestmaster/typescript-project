@@ -1,4 +1,4 @@
-// import {useSystem} from 'react-system-hook';
+// ignored import {useSystem} from 'react-system-hook';
 import {useContext} from 'react';
 
 import {ArticleContextType} from '../../../client-component/article/article-context/article-context-type';

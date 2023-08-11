@@ -1,3 +1,5 @@
+/* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
+
 import {launch} from 'chrome-launcher';
 
 enum CategoryNameEnum {
@@ -118,11 +120,13 @@ async function innerInitialization() {
 
     // eslint-disable-next-line no-loops/no-loops
     for (const url of urlList) {
+        // eslint-disable-next-line no-await-in-loop
         await makeReport({
             formFactor: FormFactorEnum.mobile,
             port: chrome.port,
             url,
         });
+        // eslint-disable-next-line no-await-in-loop
         await makeReport({
             formFactor: FormFactorEnum.desktop,
             port: chrome.port,

@@ -16,7 +16,7 @@ async function htmlToPdf(html: string): Promise<Buffer> {
 
     await page.setJavaScriptEnabled(false);
 
-    await page.setContent(html, {waitUntil: 'networkidle0'}); // 4
+    await page.setContent(html, {waitUntil: 'networkidle0'});
 
     const pdf = await page.pdf({
         preferCSSPageSize: true,
@@ -32,6 +32,7 @@ async function htmlToPdf(html: string): Promise<Buffer> {
     return pdf;
 }
 
+// eslint-disable-next-line require-await
 export async function getPdf(request: FastifyRequest<{Body?: string}>): Promise<Buffer> {
     const {body} = request;
 

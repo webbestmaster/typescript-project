@@ -10,7 +10,8 @@ export function waitForTime(timeInMs: number): Promise<void> {
 
 export function requestIdleCallbackPolyfill(...args: Parameters<typeof requestIdleCallback>): void {
     const [callback, option = {}] = args;
-    const {timeout = 0} = option;
+    const defaultTimeout = 0;
+    const {timeout = defaultTimeout} = option;
 
     if (typeof requestIdleCallback !== 'function') {
         setTimeout(callback, timeout);

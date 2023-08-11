@@ -63,7 +63,13 @@ export function AdSenseAds(props: AdSenseAdsPropsType): JSX.Element {
             return;
         }
 
-        waitForCallback((): boolean => Boolean(window.adsbygoogle), 10, 100)
+        waitForCallback(
+            (): boolean => {
+                return Boolean(window.adsbygoogle);
+            },
+            10,
+            100
+        )
             .then(() => {
                 console.info(`%cAdSense, show ads, adSlotId: ${adSlotId}`, 'color: #c00');
 

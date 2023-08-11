@@ -13,19 +13,26 @@ export const enum FetchMethodEnum {
 }
 
 type OptionsType = {
-    body?: File | FormData | string; // body data type must match "Content-Type" header
-    credentials?: 'include' | 'omit' | 'same-origin'; // include, same-origin, omit (default: same-origin)
+    // Body data type must match "Content-Type" header
+    body?: File | FormData | string;
+    // Options: include, same-origin, omit (default: same-origin)
+    credentials?: 'include' | 'omit' | 'same-origin';
     headers?: HeadersInit;
-    method?: FetchMethodEnum; // GET, POST, PUT, DELETE, etc. (default: GET)
-    mode?: 'cors' | 'no-cors' | 'same-origin'; // no-cors, cors, same-origin (default: same-origin)
-    // cache?: 'default'; // default, no-cache, reload, force-cache, only-if-cached (default: default)
-    // headers?: {
-    //     'Access-Control-Allow-Headers'?: '*',
-    //     Accept?: 'application/json, text/javascript, */*; q=0.01',
-    //     'Content-Type'?: 'application/x-www-form-urlencoded; charset=UTF-8',
-    // },
-    // redirect?: 'follow'; // manual, follow, error (default: follow)
-    // referrer?: 'no-referrer'; // no-referrer, client (default: client)
+    // Options: GET, POST, PUT, DELETE, etc. (default: GET)
+    method?: FetchMethodEnum;
+    // Options: no-cors, cors, same-origin (default: same-origin)
+    mode?: 'cors' | 'no-cors' | 'same-origin';
+    /**
+     * Additional option
+     * cache?: 'default'; // default, no-cache, reload, force-cache, only-if-cached (default: default)
+     *  headers?: {
+     *      'Access-Control-Allow-Headers'?: '*',
+     *      Accept?: 'application/json, text/javascript, *!/!*; q=0.01',
+     *      'Content-Type'?: 'application/x-www-form-urlencoded; charset=UTF-8',
+     *  },
+     *  redirect?: 'follow'; // manual, follow, error (default: follow)
+     *  referrer?: 'no-referrer'; // no-referrer, client (default: client)
+     */
 };
 
 type FetchCacheType = Record<string, Promise<unknown> | null>;
@@ -45,7 +52,8 @@ function invalidateCache(options?: OptionsType) {
 }
 
 function fetchEndCallBack(fetchBeginTimeStamp: number, url: string) {
-    const maxFetchingTime = 2e3; // 2 seconds
+    // 2 seconds
+    const maxFetchingTime = 2e3;
     const fetchEndTimeStamp = Date.now();
     const fetchingTime = fetchEndTimeStamp - fetchBeginTimeStamp;
 
@@ -72,7 +80,9 @@ export function fetchX<ExpectedResponseType>(
         );
 
         return savedPromiseResult
-            .then((data: unknown): ExpectedResponseType => getExpectedStructure<ExpectedResponseType>(data, jsonSchema))
+            .then((data: unknown): ExpectedResponseType => {
+                return getExpectedStructure<ExpectedResponseType>(data, jsonSchema);
+            })
             .catch((error: Error) => {
                 fetchCache[cacheProperty] = null;
                 console.error(error);
@@ -84,7 +94,9 @@ export function fetchX<ExpectedResponseType>(
     const fetchBeginTimeStamp = Date.now();
 
     const fetchResult: Promise<ExpectedResponseType> = fetch(url, options)
-        .then((response: Response): Promise<unknown> => response.json())
+        .then((response: Response): Promise<unknown> => {
+            return response.json();
+        })
         .then((data: unknown): ExpectedResponseType => {
             const checkedData: ExpectedResponseType = getExpectedStructure<ExpectedResponseType>(data, jsonSchema);
 

@@ -14,7 +14,7 @@ export function TopAdsWrapper(): JSX.Element {
         <div className={bottomAdsWrapperStyle.bottom_ads_wrapper__wrapper}>
             <AdSenseAds
                 adSlotId={googleAdSenseTopAdId}
-                // className={topAdsWrapperStyle.top_ads_wrapper}
+                // ignored className={topAdsWrapperStyle.top_ads_wrapper}
                 key={`slug:${routerLocation.pathname + googleAdSenseTopAdId}-screen-width:${screenWidth}`}
             />
         </div>

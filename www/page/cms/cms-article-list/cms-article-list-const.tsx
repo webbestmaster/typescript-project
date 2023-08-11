@@ -1,7 +1,6 @@
 /* global HTMLInputElement, setTimeout */
 import {SyntheticEvent, useEffect, useRef} from 'react';
-import {Input} from 'antd';
-import type {InputRef} from 'antd';
+import {Input, type InputRef} from 'antd';
 import {ColumnType, FilterDropdownProps} from 'antd/es/table/interface';
 import {SearchOutlined} from '@ant-design/icons';
 import {Link} from 'react-router-dom';
@@ -31,15 +30,6 @@ export function getArticleTableColumnList(
     const {setSearchedColumn, setSearchText} = data;
 
     const articleTableColumnList: Array<ColumnType<ArticleForTableListType>> = [
-        /*
-        {
-            dataIndex: 'id',
-            defaultSortOrder: null,
-            key: 'id',
-            sorter: () => 0,
-            title: 'Id',
-        },
-    */
         {
             dataIndex: 'title',
             defaultSortOrder: SortDirectionEnum.ascend,
@@ -52,7 +42,7 @@ export function getArticleTableColumnList(
                 // eslint-disable-next-line react-hooks/rules-of-hooks
                 useEffect(() => {
                     if (visible) {
-                        // wait until the input appears
+                        // Wait until the input appears
                         setTimeout(() => {
                             inputRef.current?.focus({cursor: 'start'});
                         }, 100);
@@ -80,7 +70,9 @@ export function getArticleTableColumnList(
                     </Link>
                 );
             },
-            sorter: () => 0,
+            sorter: () => {
+                return 0;
+            },
             title: 'Title',
         },
         {
@@ -95,7 +87,7 @@ export function getArticleTableColumnList(
                 // eslint-disable-next-line react-hooks/rules-of-hooks
                 useEffect(() => {
                     if (visible) {
-                        // wait until the input appears
+                        // Wait until the input appears
                         setTimeout(() => {
                             inputRef.current?.focus({cursor: 'start'});
                         }, 100);
@@ -123,14 +115,18 @@ export function getArticleTableColumnList(
                     </Link>
                 );
             },
-            sorter: () => 0,
+            sorter: () => {
+                return 0;
+            },
             title: 'Slug/edit',
         },
         {
             dataIndex: 'articleType',
             defaultSortOrder: null,
             key: 'articleType',
-            sorter: () => 0,
+            sorter: () => {
+                return 0;
+            },
             title: 'Type',
         },
         {
@@ -140,11 +136,13 @@ export function getArticleTableColumnList(
             key: 'isActive',
             render(
                 isActive: boolean
-                // article: ArticleForTableListType
+                // ignored article: ArticleForTableListType
             ) {
                 return getTickCross(isActive);
             },
-            sorter: () => 0,
+            sorter: () => {
+                return 0;
+            },
             title: 'Is active',
         },
         {
@@ -163,7 +161,9 @@ export function getArticleTableColumnList(
                     />
                 );
             },
-            sorter: () => 0,
+            sorter: () => {
+                return 0;
+            },
             title: 'Image',
         },
         {
@@ -172,7 +172,9 @@ export function getArticleTableColumnList(
             defaultSortOrder: null,
             key: 'createdDate',
             render: dateIsoToHumanView,
-            sorter: () => 0,
+            sorter: () => {
+                return 0;
+            },
             title: 'Created UTC-0',
             width: 120,
         },
@@ -182,7 +184,9 @@ export function getArticleTableColumnList(
             defaultSortOrder: null,
             key: 'updatedDate',
             render: dateIsoToHumanView,
-            sorter: () => 0,
+            sorter: () => {
+                return 0;
+            },
             title: 'Updated UTC-0',
             width: 120,
         },
@@ -192,7 +196,9 @@ export function getArticleTableColumnList(
             defaultSortOrder: null,
             key: 'publishDate',
             render: dateIsoToHumanView,
-            sorter: () => 0,
+            sorter: () => {
+                return 0;
+            },
             title: 'Publish UTC-0',
             width: 120,
         },

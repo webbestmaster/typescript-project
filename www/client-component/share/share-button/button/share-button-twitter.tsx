@@ -21,7 +21,7 @@ export function ShareButtonTwitter(props: ShareButtonPropsType): JSX.Element {
             onClick={handleClick}
             type="button"
         >
-            <SvgImage className={shareButtonStyle.share_button__image} imageId={'#' + shareButtonName.twitter} />
+            <SvgImage className={shareButtonStyle.share_button__image} imageId={`#${shareButtonName.twitter}`} />
         </button>
     );
 }

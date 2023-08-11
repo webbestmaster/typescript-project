@@ -15,27 +15,32 @@ export type GetDateTimeDifferenceOptionType = {
 export function getDateTimeHumanSize(option: GetDateTimeDifferenceOptionType): string {
     const {milliseconds, sliceSize, localeName, formatOption} = option;
 
-    const minuteSize = 60; // 60 seconds
-    const hourSize = 60; // 60 minutes
-    const daySize = 24; // 24 hours
-    const monthSize = 30; // 30 days
-    const yearSize = 12; // 12 months
+    // 1000 milliseconds
+    const secondSize = 1000;
+    // 60 seconds
+    const minuteSize = 60;
+    // 60 minutes
+    const hourSize = 60;
+    // 24 hours
+    const daySize = 24;
+    // 30 days
+    const monthSize = 30;
+    // 12 months
+    const yearSize = 12;
 
-    const seconds = milliseconds / 1e3;
+    const seconds = milliseconds / secondSize;
     const minutes = seconds / minuteSize;
     const hours = minutes / hourSize;
     const days = hours / daySize;
-    // const weeks = days / 7;
     const months = days / monthSize;
     const years = months / yearSize;
 
     const yearPart = Math.floor(years);
     const monthPart = Math.floor(months) % yearSize;
-    // const weekPart = Math.floor(weeks);
     const dayPart = Math.floor(days) % monthSize;
     const hourPart = Math.floor(hours) % daySize;
-    const minutePart = (Math.floor(minutes) % 24) % hourSize;
-    const secondPart = ((Math.floor(seconds) % 24) % 60) % minuteSize;
+    const minutePart = (Math.floor(minutes) % daySize) % hourSize;
+    const secondPart = ((Math.floor(seconds) % daySize) % hourSize) % minuteSize;
 
     return [
         {count: yearPart, unitType: TimeSizeEnum.year},
@@ -45,9 +50,13 @@ export function getDateTimeHumanSize(option: GetDateTimeDifferenceOptionType): s
         {count: minutePart, unitType: TimeSizeEnum.minute},
         {count: secondPart, unitType: TimeSizeEnum.second},
     ]
-        .filter((timeItem: TimeItemType): boolean => timeItem.count >= 1)
+        .filter((timeItem: TimeItemType): boolean => {
+            return timeItem.count >= 1;
+        })
         .slice(0, sliceSize)
-        .filter((timeItem: TimeItemType): boolean => timeItem.count >= 1)
+        .filter((timeItem: TimeItemType): boolean => {
+            return timeItem.count >= 1;
+        })
         .map((timeItem: TimeItemType): string => {
             const {count, unitType} = timeItem;
 
@@ -69,7 +78,7 @@ export function secondsToHuman(seconds: number): string {
 }
 
 export function dateIsoToHumanView(dateIso: string): string {
-    return dateIso.replace('T', ' ').replace(/\.\S+/, '');
+    return dateIso.replace('T', ' ').replace(/\.\S+/u, '');
 }
 
 export function waitForTime(timeInMs: number): Promise<void> {
@@ -100,7 +109,8 @@ export async function waitForCallback(
 
 export function logTakenTime(prefix: string, ContextClassName: string) {
     return (target: unknown, memberName: string, propertyDescriptor: PropertyDescriptor) => {
-        return {
+        // eslint-disable-next-line sonarjs/prefer-immediate-return
+        const result = {
             get() {
                 // eslint-disable-next-line consistent-this, @typescript-eslint/no-this-alias, unicorn/no-this-assignment
                 const context: unknown = this;
@@ -135,5 +145,7 @@ export function logTakenTime(prefix: string, ContextClassName: string) {
                 return wrapperFunction;
             },
         };
+
+        return result;
     };
 }

@@ -1,3 +1,5 @@
+/* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
+
 /* global Buffer */
 
 import {cwd, env} from 'node:process';
@@ -50,14 +52,12 @@ async function innerInitialization() {
 
     const fastify = fastifyConstructor({logger: false});
 
-    // //////////////
     // Services
-    // //////////////
     await fastify.register(fastifyCors);
     await fastify.register(fastifyCompress);
     await fastify.register(fastifyMultipart);
 
-    // first of two fastifyStaticServer plugin
+    // First of two fastifyStaticServer plugin
     await fastify.register(fastifyStatic, {
         prefix: `/${uploadFileFolder}/`,
         root: uploadFolder,
@@ -67,7 +67,7 @@ async function innerInitialization() {
         },
     });
 
-    // second of two fastifyStaticServer plugin
+    // Second of two fastifyStaticServer plugin
     await fastify.register(fastifyStatic, {
         decorateReply: false, // the reply decorator has been added by the first plugin registration
         prefix: '/', // optional: default '/'
@@ -78,7 +78,7 @@ async function innerInitialization() {
         },
     });
 
-    // options for setCookie, see https://github.com/fastify/fastify-cookie
+    // Options for setCookie, see https://github.com/fastify/fastify-cookie
     await fastify.register(fastifySecureSession, {
         // the name of the session cookie, defaults to 'session'
         cookie: {
@@ -90,9 +90,7 @@ async function innerInitialization() {
         key: Buffer.from(secretKey, 'base64').subarray(0, 32),
     });
 
-    // //////////////
     // API
-    // //////////////
     fastify.post(apiUrl.login, postAuthLogin);
     fastify.get(apiUrl.getUser, getAutoAuthLogin);
     fastify.get(
@@ -181,9 +179,7 @@ async function innerInitialization() {
         });
     });
 
-    // //////////////
     // 4xx & 5xx
-    // //////////////
     fastify.setErrorHandler(
         async (error: FastifyError, request: FastifyRequest, reply: FastifyReply): Promise<string> => {
             request.log.warn(error);

@@ -22,7 +22,7 @@ export function NavigationProvider(props: NavigationProviderPropsType): JSX.Elem
         typeof NAVIGATION_DATA === 'string'
             ? JSON.parse(decodeURIComponent(NAVIGATION_DATA))
             : defaultNavigationContextData;
-    // typeof NAVIGATION_DATA === 'string' ? JSON.parse(decodeURIComponent(NAVIGATION_DATA)) : null;;
+    // Typeof NAVIGATION_DATA === 'string' ? JSON.parse(decodeURIComponent(NAVIGATION_DATA)) : null;;
 
     const resultData: NavigationContextType =
         (isBrowser ? ssrNavigationData : navigationData) || defaultNavigationContextData;

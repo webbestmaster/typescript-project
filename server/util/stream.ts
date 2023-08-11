@@ -6,8 +6,14 @@ export function streamToStringServer(stream: NodeJS.ReadableStream): Promise<str
     const chunks: Array<string> = [];
 
     return new Promise((resolve: PromiseResolveType<string>, reject: PromiseResolveType<Error>) => {
-        stream.on('data', (chunk: string): unknown => chunks.push(chunk));
-        stream.on('error', (error: Error): unknown => reject(error));
-        stream.on('end', (): unknown => resolve(chunks.join('')));
+        stream.on('data', (chunk: string): unknown => {
+            return chunks.push(chunk);
+        });
+        stream.on('error', (error: Error): unknown => {
+            return reject(error);
+        });
+        stream.on('end', (): unknown => {
+            return resolve(chunks.join(''));
+        });
     });
 }

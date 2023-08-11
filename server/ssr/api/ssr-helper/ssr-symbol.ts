@@ -1,9 +1,9 @@
 export function replaceSpecialSymbols(text: string): string {
     return (
         text
-            // replace "'" - single quote
-            .replace(/'/g, '&#39;')
-            // replace "`" - backtick
-            .replace(/`/g, '&#96;')
+            // Replace "'" - single quote
+            .replace(/'/gu, '&#39;')
+            // Replace "`" - backtick
+            .replace(/`/gu, '&#96;')
     );
 }

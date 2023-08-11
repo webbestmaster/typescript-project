@@ -18,7 +18,7 @@ export function ShareButtonWhatsApp(props: ShareButtonPropsType): JSX.Element {
             onClick={handleClick}
             type="button"
         >
-            <SvgImage className={shareButtonStyle.share_button__image} imageId={'#' + shareButtonName.whatsApp} />
+            <SvgImage className={shareButtonStyle.share_button__image} imageId={`#${shareButtonName.whatsApp}`} />
         </button>
     );
 }

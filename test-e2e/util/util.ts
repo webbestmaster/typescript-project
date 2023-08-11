@@ -1,3 +1,5 @@
+/* eslint-disable multiline-comment-style, capitalized-comments */
+
 import puppeteer, {
     Browser,
     BrowserConnectOptions,

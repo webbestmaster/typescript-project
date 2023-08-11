@@ -13,9 +13,9 @@ import {getPathToFile} from '../../../util/path';
 export function ArticleAudioSingle(): JSX.Element {
     const {article} = useContext<ArticleContextType>(articleContext);
     const {content, titleImage, title, fileList, slug} = article;
-    const firstAudioFile = fileList.find(
-        (fileInfo: ArticleFileType): boolean => fileInfo.type === ArticleFileTypeEnum.audio
-    );
+    const firstAudioFile = fileList.find((fileInfo: ArticleFileType): boolean => {
+        return fileInfo.type === ArticleFileTypeEnum.audio;
+    });
 
     return (
         <>

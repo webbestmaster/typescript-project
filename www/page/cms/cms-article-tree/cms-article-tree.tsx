@@ -37,7 +37,9 @@ export function CmsArticleTree(): JSX.Element {
 
     useEffect(() => {
         executeArticleListPaginationPick({}, {pageIndex: 0, pageSize: 0, sort: {title: 1}}, keyForTreeList)
-            .then((data: PaginationResultType<ArticleForTreeType>) => setSavedArticleList(data.list))
+            .then((data: PaginationResultType<ArticleForTreeType>) => {
+                return setSavedArticleList(data.list);
+            })
             .catch((error: Error) => {
                 console.log(error);
                 message.error('Can not fetch article list.');
@@ -73,7 +75,9 @@ export function CmsArticleTree(): JSX.Element {
             const {title, slug, isActive, articleType, id: articleId, subDocumentIdList} = articleWithLostChild;
 
             const lostIdList = subDocumentIdList
-                .filter((lostId: string): boolean => !getArticleForTreeById(savedArticleList, lostId))
+                .filter((lostId: string): boolean => {
+                    return !getArticleForTreeById(savedArticleList, lostId);
+                })
                 .join(', ');
 
             return (

@@ -94,6 +94,8 @@ export function getArticleWithLostChildList(articleList: Array<ArticleForTreeTyp
     return articleList.filter((articleCandidate: ArticleForTreeType): boolean => {
         const {subDocumentIdList} = articleCandidate;
 
-        return subDocumentIdList.some((articleId: string): boolean => !getArticleForTreeById(articleList, articleId));
+        return subDocumentIdList.some((articleId: string): boolean => {
+            return !getArticleForTreeById(articleList, articleId);
+        });
     });
 }

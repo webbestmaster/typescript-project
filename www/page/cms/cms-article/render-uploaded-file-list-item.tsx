@@ -6,7 +6,6 @@ const {Title} = Typography;
 
 import {ArticleFileType} from '../../../../server/article/article-type';
 import {Box} from '../../../layout/box/box';
-
 import {getFileMarkdownByFullInfo} from '../../../layout/markdown/markdown-helper';
 
 type UploadedFileListItemPropsType = {
@@ -14,8 +13,10 @@ type UploadedFileListItemPropsType = {
     fileInfo: ArticleFileType | void;
     originNode: JSX.Element;
     setFileTitle: (updateFileTitle: string) => void;
-    // uploadedFileList: Array<UploadFile<unknown>>,
-    // actions: { download: () => void; preview: () => void; remove: () => void }
+
+    // ignored uploadedFileList: Array<UploadFile<unknown>>,
+
+    // ignored actions: { download: () => void; preview: () => void; remove: () => void }
 };
 
 export function renderUploadedFileListItem(props: UploadedFileListItemPropsType): JSX.Element {

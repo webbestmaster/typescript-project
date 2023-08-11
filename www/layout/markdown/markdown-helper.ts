@@ -45,5 +45,5 @@ export function getFileMarkdownByFullInfo(
 }
 
 export function getIsEmptyHtml(htmlChunk: string): boolean {
-    return htmlChunk.replace(/<br\/>/gi, '').trim().length === 0;
+    return htmlChunk.replace(/<br\/>/giu, '').trim().length === 0;
 }

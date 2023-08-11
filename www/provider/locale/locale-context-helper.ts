@@ -22,22 +22,6 @@ export function getSavedLocaleName(): LocaleNameEnum {
     }
 
     return defaultLocaleName;
-
-    /*
-    const navigatorLanguages = navigator.languages;
-
-    // eslint-disable-next-line no-loops/no-loops
-    for (const deviceLocaleName of navigatorLanguages) {
-        // eslint-disable-next-line no-loops/no-loops
-        for (const localeNameInList of localeNameList) {
-            if (deviceLocaleName === localeNameInList) {
-                return localeNameInList;
-            }
-        }
-    }
-
-    return defaultLocaleName;
-*/
 }
 
 export function saveLocaleName<LocaleName extends string>(localeName: LocaleName): LocaleName {
@@ -46,15 +30,3 @@ export function saveLocaleName<LocaleName extends string>(localeName: LocaleName
 
     return localeName;
 }
-
-/*
-export function getShortLocaleName(localeName: LocaleNameEnum): ShortLocaleNameEnum {
-    const [mayBeShortLocaleName] = localeName.split('-');
-
-    return getEnumValueEnsure<ShortLocaleNameEnum>(
-        ShortLocaleNameEnum,
-        mayBeShortLocaleName,
-        localeConst.defaults.shortLocaleName
-    );
-}
-*/

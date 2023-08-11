@@ -44,9 +44,9 @@ export function getParentList(
 ): Array<ArticleForValidationType> {
     const {id: articleId} = article;
 
-    return savedArticleList.filter((savedArticle: ArticleForValidationType): boolean =>
-        savedArticle.subDocumentIdList.includes(articleId)
-    );
+    return savedArticleList.filter((savedArticle: ArticleForValidationType): boolean => {
+        return savedArticle.subDocumentIdList.includes(articleId);
+    });
 }
 
 export function renderParentList(

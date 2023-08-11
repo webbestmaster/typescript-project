@@ -1,3 +1,5 @@
+/* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
+
 import type {PetsdbItemType, PetsdbQueryType, PetsdbReadPageConfigType} from 'petsdb';
 
 export type CrudConfigOnChangeArgumentType = {

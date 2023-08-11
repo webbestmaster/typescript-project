@@ -1,3 +1,5 @@
+/* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position */
+
 import {cwd} from 'node:process';
 import path from 'node:path';
 
@@ -65,7 +67,8 @@ const configBack: Configuration = {
 };
 
 const configLibraryFront: Configuration = {
-    devtool: 'source-map', // isServerProdBuild ? false : 'source-map',
+    // isServerProdBuild ? false : 'source-map',
+    devtool: 'source-map',
     entry: ['./www/library/library.ts'],
     externals,
     externalsPresets,

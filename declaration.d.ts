@@ -1,4 +1,4 @@
-/* eslint-disable import/no-default-export, init-declarations */
+/* eslint-disable import/no-default-export, init-declarations, multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
 
 declare module '*.svg' {
     const content: string;

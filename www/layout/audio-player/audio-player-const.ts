@@ -5,7 +5,7 @@ import {appIconPngFileName} from '../../const';
 
 export const defaultMediaMetadata: MediaMetadataInit = {
     artwork: [
-        // check with manifest.json
+        // Check with manifest.json
         {
             sizes: '48x48',
             src: getPathToImage(appIconPngFileName, {height: 48, width: 48}),

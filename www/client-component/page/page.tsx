@@ -30,7 +30,7 @@ export function Page(props: PagePropsType): JSX.Element {
     useEffect(() => {
         const trimmedSlug = slug.trim();
 
-        // check for /article/<slug>
+        // Check for /article/<slug>
         if (trimmedSlug && pathname === getArticleLinkToViewClient(trimmedSlug)) {
             setSlug(trimmedSlug);
             return;

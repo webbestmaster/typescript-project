@@ -8,7 +8,9 @@ export function ShareButtonViber(props: ShareButtonPropsType): JSX.Element {
     const {url, title} = props;
 
     function handleClick() {
-        share(`viber://forward?text=${encodeURIComponent(title + ' ' + url)}`, title);
+        const titleUrl = `${title} ${url}`;
+
+        share(`viber://forward?text=${encodeURIComponent(titleUrl)}`, title);
     }
 
     return (
@@ -18,7 +20,7 @@ export function ShareButtonViber(props: ShareButtonPropsType): JSX.Element {
             onClick={handleClick}
             type="button"
         >
-            <SvgImage className={shareButtonStyle.share_button__image} imageId={'#' + shareButtonName.viber} />
+            <SvgImage className={shareButtonStyle.share_button__image} imageId={`#${shareButtonName.viber}`} />
         </button>
     );
 }

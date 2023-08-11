@@ -1,3 +1,5 @@
+/* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
+
 import {constants as fileSystemConstants, ReadStream, Stats, createWriteStream, createReadStream} from 'node:fs';
 import fileSystem from 'node:fs/promises';
 import path from 'node:path';
@@ -145,7 +147,7 @@ export async function getImage(
     const rawFileExtension = getFileExtension(fileName);
     const fullFilePath = path.join(uploadFolder, fileName);
 
-    const removedFileName: string = 'remove-me-' + getRandomString();
+    const removedFileName: string = `remove-me-${getRandomString()}`;
     const temporaryFilePath: string = path.join(temporaryUploadFolder, `${removedFileName}.${rawFileExtension}`);
 
     const [rawImageWidth, rawImageHeight] = size.split('x');

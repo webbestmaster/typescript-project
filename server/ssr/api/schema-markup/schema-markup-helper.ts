@@ -13,7 +13,7 @@ export function fitTextTo(fullString: string, maxSize: number): string {
         return resultString;
     }
 
-    const resultWordList = resultString.split(/\s/g);
+    const resultWordList = resultString.split(/\s/gu);
 
     resultWordList.pop();
 
@@ -21,5 +21,5 @@ export function fitTextTo(fullString: string, maxSize: number): string {
 }
 
 export function timeTo0000(isoString: string): string {
-    return isoString.replace(/\.\d{3}Z/, '+00:00');
+    return isoString.replace(/\.\d{3}Z/u, '+00:00');
 }

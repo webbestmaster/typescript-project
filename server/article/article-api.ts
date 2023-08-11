@@ -18,6 +18,7 @@ export async function getArticleListPagination(
     request: FastifyRequest,
     reply: FastifyReply
 ): Promise<PaginationResultType<ArticleType>> {
+    // eslint-disable-next-line prefer-object-spread
     const {pageConfig, query} = Object.assign(
         {
             pageConfig: encodeURIComponent(JSON.stringify(defaultPaginationQuery)),
@@ -48,6 +49,7 @@ export async function getArticleListPagination(
 }
 
 function parseRequestQuery(request: FastifyRequest): ParsedRequestQueryType {
+    // eslint-disable-next-line prefer-object-spread
     const {pageConfig, pick, query} = Object.assign(
         {
             pageConfig: encodeURIComponent(JSON.stringify(defaultPaginationQuery)),
@@ -241,9 +243,9 @@ export async function getClientArticleContextData(
 
 export async function getArticleClientUrlList(request: FastifyRequest, reply: FastifyReply): Promise<Array<string>> {
     const articleList: Array<ArticleType> = await articleCrud.findMany({isActive: true});
-    const urlList: Array<string> = articleList.map<string>((article: ArticleType): string =>
-        getArticleLinkToViewClient(article.slug)
-    );
+    const urlList: Array<string> = articleList.map<string>((article: ArticleType): string => {
+        return getArticleLinkToViewClient(article.slug);
+    });
 
     reply.code(200).header(...mainResponseHeader);
 

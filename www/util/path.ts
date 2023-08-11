@@ -18,5 +18,7 @@ export const getPathToImage: GetPathToImageType = (
 
 // eslint-disable-next-line func-style
 export const getPathToFile: GetPathToFileType = (uniqueFileName: string): string => {
-    return apiUrl.fileGet.replace(':fileName', uniqueFileName);
+    const pathToFile: string = apiUrl.fileGet.replace(':fileName', uniqueFileName);
+
+    return pathToFile;
 };

@@ -22,7 +22,13 @@ export function fetchImage(pathToImage: string): Promise<HTMLImageElement> {
 
     return new Promise<HTMLImageElement>(
         (resolve: PromiseResolveType<HTMLImageElement>, reject: PromiseResolveType<unknown>) => {
-            image.addEventListener('load', () => resolve(image), false);
+            image.addEventListener(
+                'load',
+                () => {
+                    return resolve(image);
+                },
+                false
+            );
 
             image.addEventListener('error', reject, false);
 
@@ -36,7 +42,13 @@ export function fetchAudio(pathToAudio: string): Promise<HTMLAudioElement> {
 
     return new Promise<HTMLAudioElement>(
         (resolve: PromiseResolveType<HTMLAudioElement>, reject: PromiseResolveType<unknown>) => {
-            audio.addEventListener('loadedmetadata', () => resolve(audio), false);
+            audio.addEventListener(
+                'loadedmetadata',
+                () => {
+                    return resolve(audio);
+                },
+                false
+            );
 
             audio.addEventListener('error', reject, false);
 
@@ -51,7 +63,13 @@ export function fetchVideo(pathToVideo: string): Promise<HTMLVideoElement> {
 
     return new Promise<HTMLVideoElement>(
         (resolve: PromiseResolveType<HTMLVideoElement>, reject: PromiseResolveType<unknown>) => {
-            video.addEventListener('loadedmetadata', () => resolve(video), false);
+            video.addEventListener(
+                'loadedmetadata',
+                () => {
+                    return resolve(video);
+                },
+                false
+            );
 
             video.addEventListener('error', reject, false);
 
@@ -132,6 +150,7 @@ export function makeSlugValidator(data: MakeSlugValidatorArgumentType): Array<Ru
         },
         {
             message: 'Please-enter-slug-properly.',
+            // eslint-disable-next-line require-await
             validator: async (rule: RuleObject, value: string) => {
                 if (textToSlug(value) !== value) {
                     throw new Error('Slug is not formatted.');
@@ -140,7 +159,7 @@ export function makeSlugValidator(data: MakeSlugValidatorArgumentType): Array<Ru
         },
         {
             message: 'Please enter another slug. This slug already exists.',
-            // eslint-disable-next-line complexity
+            // eslint-disable-next-line complexity, require-await
             validator: async (rule: RuleObject, value: string) => {
                 const savedArticleBySlugList: Array<ArticleForValidationType> = savedArticleList.filter(
                     (savedArticle: ArticleForValidationType): boolean => {
@@ -182,6 +201,7 @@ export function makeHtmlValidator(): Array<Rule> {
     return [
         {
             message: 'Invalid HTML.',
+            // eslint-disable-next-line require-await
             validator: async (rule: RuleObject, value: string) => {
                 if (typeof document === 'undefined') {
                     return;
@@ -233,27 +253,6 @@ export function getIsVideo(fileName: string): boolean {
     return ['mp4'].includes(fileExtension);
 }
 
-/*
-export async function getFileMarkdownByName(fileName: string): Promise<string> {
-    const pathToFile = getPathToFile(fileName);
-
-    if (getIsImage(fileName)) {
-        const pathToImage = getPathToImage(fileName, {height: 320, width: 320});
-        const {naturalHeight, naturalWidth} = await fetchImage(pathToFile);
-
-        return `![THE ALT](${pathToImage} "THE TITLE" height="${naturalHeight}" width="${naturalWidth}")`;
-    }
-
-    if (getIsAudio(fileName)) {
-        const {duration} = await fetchAudio(pathToFile);
-
-        return `<audio data-duration="${duration}" data-download="" src="${pathToFile}"></audio>`;
-    }
-
-    return `<a href="${pathToFile}" target="_blank" download="${fileName}">${fileName}</a>`;
-}
-*/
-
 export function getAbsentIdList(
     subDocumentIdList: Array<string>,
     savedArticleList: Array<ArticleForValidationType>
@@ -263,12 +262,16 @@ export function getAbsentIdList(
     }
 
     return subDocumentIdList.filter((id: string): boolean => {
-        return !savedArticleList.some((article: ArticleForValidationType): boolean => article.id === id);
+        return !savedArticleList.some((article: ArticleForValidationType): boolean => {
+            return article.id === id;
+        });
     });
 }
 
 export function handleDeleteArticle(articleId: string): Promise<unknown> {
     return deleteArticle(articleId)
-        .then((): unknown => location.reload())
+        .then((): unknown => {
+            return location.reload();
+        })
         .catch(console.error);
 }

@@ -1,3 +1,5 @@
+/* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
+
 import {makeCrud} from '../data-base/data-base';
 import {CrudConfigOnChangeArgumentType} from '../data-base/data-base-type';
 

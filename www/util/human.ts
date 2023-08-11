@@ -1,6 +1,8 @@
 const textToLatinMap: Record<string, string> = {
-    // Транслитерация ГОСТ 7.79-2000
-    // https://transliteration.ru/gost-7-79-2000/
+    /**
+     * Транслитерация ГОСТ 7.79-2000*
+     * https://transliteration.ru/gost-7-79-2000/
+     */
     /* eslint-disable id-length, sort-keys, id-match */
     а: 'a',
     б: 'b',
@@ -35,7 +37,7 @@ const textToLatinMap: Record<string, string> = {
     э: 'e',
     ю: 'yu',
     я: 'ya',
-    // additional
+    // Additional
     å: 'a',
     ä: 'a',
     ö: 'o',
@@ -53,7 +55,7 @@ function textToLatin(text: string): string {
 }
 
 export function humanNormalizeString(text: string): string {
-    return text.trim().replace(/\s+/gi, ' ');
+    return text.trim().replace(/\s+/giu, ' ');
 }
 
 export function stringToArrayByComma(texts: Array<string> | string): Array<string> {
@@ -73,15 +75,17 @@ export function arrayToStringByComma(texts: Array<string> | string): string {
 }
 
 export function textToSlug(test: string): string {
-    return [...textToLatin(test.trim().toLowerCase().replace(/\s+/gi, wordSeparator))]
+    return [...textToLatin(test.trim().toLowerCase().replace(/\s+/giu, wordSeparator))]
         .filter<string>((char: string): char is string => {
-            return char === wordSeparator || /[\da-z]/gi.test(char);
+            return char === wordSeparator || /[\da-z]/giu.test(char);
         })
         .join('');
 }
 
 export function makeTagsPreview(tagList: Array<string> | string): string {
     return stringToArrayByComma(tagList)
-        .map((tag: string): string => `[ ${tag} ]`)
+        .map((tag: string): string => {
+            return `[ ${tag} ]`;
+        })
         .join(' ');
 }

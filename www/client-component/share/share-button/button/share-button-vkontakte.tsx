@@ -19,7 +19,7 @@ export function ShareButtonVkontakte(props: ShareButtonPropsType): JSX.Element {
             onClick={handleClick}
             type="button"
         >
-            <SvgImage className={shareButtonStyle.share_button__image} imageId={'#' + shareButtonName.vkontakte} />
+            <SvgImage className={shareButtonStyle.share_button__image} imageId={`#${shareButtonName.vkontakte}`} />
         </button>
     );
 }

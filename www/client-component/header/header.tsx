@@ -14,7 +14,9 @@ export function Header(): JSX.Element {
     const {getLocalizedString} = useLocale();
     const [isNavigationOpen, setIsNavigationOpen] = useState<boolean>(false);
     const toggleNavigation = useCallback(() => {
-        setIsNavigationOpen((isOpen: boolean): boolean => !isOpen);
+        setIsNavigationOpen((isOpen: boolean): boolean => {
+            return !isOpen;
+        });
     }, []);
 
     const [hasSearchFocus, setHasSearchFocus] = useState<boolean>(false);

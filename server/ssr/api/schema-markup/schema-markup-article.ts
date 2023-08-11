@@ -1,5 +1,6 @@
-// https://developers.google.com/search/docs/advanced/structured-data/article
-// used - JSON-LD (recommended)
+// Reference - https://developers.google.com/search/docs/advanced/structured-data/article
+
+// Used - JSON-LD (recommended)
 
 import {ArticleType} from '../../../article/article-type';
 import {SsrReplaceDataType} from '../ssr-helper/ssr-helper-type';
@@ -23,7 +24,9 @@ export function getSchemaMarkupArticleSsrReplaceData(article: ArticleType): SsrR
     const selector = '<script data-ssr="article" type="application/ld+json"></script>';
 
     const articleImageList: Array<string> = getImageListFromArticle(article).imageList.map<string>(
-        (imageData: ArticleImageDataType): string => imageData.src
+        (imageData: ArticleImageDataType): string => {
+            return imageData.src;
+        }
     );
 
     const companyLogo =
@@ -58,7 +61,7 @@ export function getSchemaMarkupArticleSsrReplaceData(article: ArticleType): SsrR
                 },
                 "description": "${convertStringForHtml(fitTextTo(descriptionShort || title, 300))}"
             }
-        </script>`.replace(/\s+/gi, ' ');
+        </script>`.replace(/\s+/giu, ' ');
 
     return {selector, value};
 }

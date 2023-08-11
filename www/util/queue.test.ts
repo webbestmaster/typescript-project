@@ -1,3 +1,5 @@
+/* eslint-disable no-magic-numbers */
+
 import {describe, it, expect} from '@jest/globals';
 
 import {waitForTime} from '../../test-unit/util/test-util-time';

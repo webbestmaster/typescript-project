@@ -7,7 +7,7 @@ import {getPathToFile} from '../../util/path';
 import markdownStyle from './markdown.scss';
 import {StringToJsxRawDataType} from './markdown-helper';
 
-export const markdownAudioRegExp = /<audio[\S\s]+?<\/audio>/gi;
+export const markdownAudioRegExp = /<audio[\S\s]+?<\/audio>/giu;
 
 export type AudioTagDataType = {
     duration: number;
@@ -16,9 +16,9 @@ export type AudioTagDataType = {
 };
 
 export function parseAudioTag(audioTag: string): AudioTagDataType {
-    const [ignoredFullSrcString, srcAsString = ''] = audioTag.match(/src="([^"]*?)"/) || ['', ''];
-    const [ignoredFullDurationString, durationAsString = ''] = audioTag.match(/data-duration="([^"]*?)"/) || ['', ''];
-    const [ignoredFullTitleString, titleAsString = ''] = audioTag.match(/data-title="([^"]*?)"/) || ['', ''];
+    const [ignoredFullSrcString, srcAsString = ''] = audioTag.match(/src="([^"]*?)"/u) || ['', ''];
+    const [ignoredFullDurationString, durationAsString = ''] = audioTag.match(/data-duration="([^"]*?)"/u) || ['', ''];
+    const [ignoredFullTitleString, titleAsString = ''] = audioTag.match(/data-title="([^"]*?)"/u) || ['', ''];
     const durationAsNumber = Number.parseFloat(durationAsString) || 0;
 
     return {

@@ -17,7 +17,9 @@ export function ReactScrollRestoration(): JSX.Element {
     const {getLocalizedString} = useLocale();
     const {pathname} = useLocation();
     const [scrollTop, setScrollTop] = useState<number>(0);
-    const getItemKey = useCallback((): string => 'ScrollRestoration:' + pathname, [pathname]);
+    const getItemKey = useCallback((): string => {
+        return `ScrollRestoration:${pathname}`;
+    }, [pathname]);
     const {isInProgressArticle} = useContext<ArticleContextType>(articleContext);
 
     useEffect(() => {

@@ -1,3 +1,5 @@
+/* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
+
 /* global fetch, Response, Buffer */
 import {cwd as getCwd} from 'node:process';
 import {createWriteStream} from 'node:fs';
@@ -41,6 +43,7 @@ type ImageUrlType = Readonly<{
 class StaticSite {
     private readonly pageList: Array<StaticPageType> = [];
 
+    // eslint-disable-next-line class-methods-use-this
     @logTakenTime('>>', 'StaticSite')
     private async copyStaticFileFolder(): Promise<void> {
         await makeDirectory(cwd, staticSiteFolderName);
@@ -106,8 +109,9 @@ class StaticSite {
         const taskPromiseList: Array<Promise<unknown>> = this.pageList.map<Promise<unknown>>(
             (page: StaticPageType): Promise<unknown> => {
                 return taskRunner.add(async () => {
-                    const htmlPath =
-                        generatePath<typeof appRoute.article.path>(appRoute.article.path, {slug: page.slug}) + '.html';
+                    const htmlPath = `${generatePath<typeof appRoute.article.path>(appRoute.article.path, {
+                        slug: page.slug,
+                    })}.html`;
 
                     await fileSystem.writeFile(path.join(cwd, staticSiteFolderName, htmlPath), page.html);
                 });
@@ -121,11 +125,12 @@ class StaticSite {
     private async makeServicePages(): Promise<void> {
         await makeDirectory(cwd, staticSiteFolderName);
 
-        const html404 = await this.getTextFromUrl(mainUrl + '/404');
+        const html404 = await this.getTextFromUrl(`${mainUrl}/404`);
 
         await fileSystem.writeFile(path.join(cwd, staticSiteFolderName, '404.html'), html404);
     }
 
+    // eslint-disable-next-line class-methods-use-this
     private async getTextFromUrl(fullUrl: string): Promise<string> {
         const response = await fetch(fullUrl);
 
@@ -195,6 +200,7 @@ class StaticSite {
         );
     }
 
+    // eslint-disable-next-line class-methods-use-this
     @logTakenTime('>>', 'StaticSite')
     private async makeIcons(): Promise<void> {
         const {log} = console;
@@ -203,8 +209,10 @@ class StaticSite {
 
         const appIconSizeList: Array<number> = [
             // manifest.json, check in manifest.json
+            // eslint-disable-next-line array-element-newline
             36, 48, 72, 96, 144, 192, 512, 1024, 2048,
             // apple icon, check in index.html
+            // eslint-disable-next-line array-element-newline
             57, 60, 72, 76, 114, 120, 144, 152, 180,
         ];
 
@@ -240,6 +248,7 @@ class StaticSite {
         await Promise.all(taskPromiseList);
     }
 
+    // eslint-disable-next-line class-methods-use-this
     @logTakenTime('>>', 'StaticSite')
     private async makeCompanyLogo(): Promise<void> {
         await makeDirectory(cwd, staticSiteFolderName, 'api-image');
@@ -267,7 +276,7 @@ class StaticSite {
 
         this.pageList.forEach((page: StaticPageType) => {
             const {html, slug} = page;
-            const urlList: Array<string> = html.match(/\/api-image\/[^\s"]+/gi) || [];
+            const urlList: Array<string> = html.match(/\/api-image\/[^\s"]+/giu) || [];
 
             urlList.forEach((url: string) => {
                 imageUrlList.push({slug, url});
@@ -318,6 +327,7 @@ class StaticSite {
         await Promise.all(taskPromiseList);
     }
 
+    // eslint-disable-next-line class-methods-use-this
     @logTakenTime('>>', 'StaticSite')
     private async copyDistributionFolder(): Promise<void> {
         await makeDirectory(cwd, staticSiteFolderName);

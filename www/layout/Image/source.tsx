@@ -18,7 +18,7 @@ export function Source(props: SourcePropsType): JSX.Element | null {
     const imageWidth = mediaWidth - getFullHorizontalPadding(mediaWidth);
     const imageHeight = Math.round(imageWidth / imageAspect);
 
-    // prevent extra large image source
+    // Prevent extra large image source
     if (imageWidth > width) {
         return null;
     }

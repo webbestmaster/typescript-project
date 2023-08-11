@@ -1,3 +1,5 @@
+/* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
+
 import {FastifyReply, FastifyRequest} from 'fastify';
 import {PetsdbItemType} from 'petsdb';
 
@@ -160,7 +162,7 @@ const ListType: GraphQLFieldConfig<{root: string}, {context: number}, {limit: nu
     type: ArticleListGraphQLType,
 };
 
-// eslint-disable-next-line id-length
+// eslint-disable-next-line id-length, require-await
 export async function getArticleClientListGraphql(
     request: FastifyRequest,
     reply: FastifyReply

@@ -28,7 +28,7 @@ export async function tryToMakeDirectorySilent(...args: Array<string>): Promise<
     try {
         await fileSystem.mkdir(pathToFolder);
     } catch {
-        // console.log('[ERROR]: tryToMkDir: can not create folder:', path.join(...args));
+        // ignored console.log('[ERROR]: tryToMkDir: can not create folder:', path.join(...args));
     }
 }
 
@@ -36,6 +36,6 @@ export async function tryToRemoveDirectory(...args: Array<string>): Promise<void
     try {
         await fileSystem.rmdir(path.join(...args), {recursive: true});
     } catch {
-        // console.log('[ERROR]: tryToRmDir: can not create folder:', path.join(...args));
+        // ignored  console.log('[ERROR]: tryToRmDir: can not create folder:', path.join(...args));
     }
 }

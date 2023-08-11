@@ -11,7 +11,8 @@ function getLastmodTagContent(article: ArticleType): string {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
 function getChangefreqTagContent(article: ArticleType): string {
-    return 'weekly'; // always, hourly, daily, weekly, monthly, yearly, never
+    // Optionss: always, hourly, daily, weekly, monthly, yearly, never
+    return 'weekly';
 }
 
 function getPriorityTagContent(article: ArticleType): string {

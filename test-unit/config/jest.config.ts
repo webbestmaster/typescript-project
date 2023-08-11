@@ -1,7 +1,8 @@
 import type {Config} from 'jest';
 
 export const jestTestUnitConfig: Config = {
-    bail: false, // true - stop after first failing test
+    // Use true - stop after first failing test
+    bail: false,
     collectCoverage: true,
     errorOnDeprecated: true,
     injectGlobals: false,
@@ -16,7 +17,8 @@ export const jestTestUnitConfig: Config = {
     rootDir: '../../',
     setupFilesAfterEnv: [],
     silent: true,
-    testEnvironment: 'jsdom', // @testing-library/jest-dom
+    // Use @testing-library/jest-dom
+    testEnvironment: 'jsdom',
     testTimeout: 10e3,
 };
 

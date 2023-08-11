@@ -18,9 +18,8 @@ export type TaskRunnerConfigType = {
     onTaskEnd?: TaskRunnerOnTaskDoneType;
 };
 
-function noop() {
-    return;
-}
+// eslint-disable-next-line no-empty-function
+function noop(): void {}
 
 export class TaskRunner {
     private readonly taskList: Array<QueueTaskType> = [];

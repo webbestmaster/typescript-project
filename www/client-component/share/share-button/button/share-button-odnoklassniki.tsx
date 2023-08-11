@@ -18,7 +18,7 @@ export function ShareButtonOdnoklassniki(props: ShareButtonPropsType): JSX.Eleme
             onClick={handleClick}
             type="button"
         >
-            <SvgImage className={shareButtonStyle.share_button__image} imageId={'#' + shareButtonName.odnoklassniki} />
+            <SvgImage className={shareButtonStyle.share_button__image} imageId={`#${shareButtonName.odnoklassniki}`} />
         </button>
     );
 }

@@ -12,11 +12,11 @@ export function getImageFromHtml(
 ): JSX.Element {
     const {htmlString, articleTitle} = rawData;
 
-    const [ignoredFullWidthString, widthAsString = ''] = htmlString.match(/width="(\d+)"/) || ['', '0'];
-    const [ignoredFullHeightString, heightAsString = ''] = htmlString.match(/height="(\d+)"/) || ['', '0'];
-    const [ignoredFullSrcString, srcAsString = ''] = htmlString.match(/src="([^"]*?)"/) || ['', ''];
-    const [ignoredFullAltString, altAsString = ''] = htmlString.match(/alt="([^"]*?)"/) || ['', ''];
-    const [ignoredFullTitleString, titleAsString = ''] = htmlString.match(/title="([^"]*?)"/) || ['', ''];
+    const [ignoredFullWidthString, widthAsString = ''] = htmlString.match(/width="(\d+)"/u) || ['', '0'];
+    const [ignoredFullHeightString, heightAsString = ''] = htmlString.match(/height="(\d+)"/u) || ['', '0'];
+    const [ignoredFullSrcString, srcAsString = ''] = htmlString.match(/src="([^"]*?)"/u) || ['', ''];
+    const [ignoredFullAltString, altAsString = ''] = htmlString.match(/alt="([^"]*?)"/u) || ['', ''];
+    const [ignoredFullTitleString, titleAsString = ''] = htmlString.match(/title="([^"]*?)"/u) || ['', ''];
 
     return (
         <Image

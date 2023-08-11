@@ -33,7 +33,7 @@ describe('my companies', () => {
         expect.assertions(0);
         await page?.goto(pageFullUrl.myCompanies, defaultPageGoToOption);
 
-        // wait for table's pagination, .ant-pagination-options - item for page selector
+        // Wait for table's pagination, .ant-pagination-options - item for page selector
         await page?.waitForSelector('.ant-pagination-options', {timeout: 5e3});
     });
 });

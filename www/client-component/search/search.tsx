@@ -27,8 +27,12 @@ export function Search(props: SearchPropsType): JSX.Element {
     const {getLocalizedString} = useLocale();
     const [hasFocus, setHasFocus] = useState<boolean>(false);
     const minLetters = 3;
-    const forceBlur = useCallback(() => setHasFocus(false), []);
-    const forceFocus = useCallback(() => setHasFocus(true), []);
+    const forceBlur = useCallback(() => {
+        return setHasFocus(false);
+    }, []);
+    const forceFocus = useCallback(() => {
+        return setHasFocus(true);
+    }, []);
     const [searchString, setSearchString] = useState<string>('');
 
     useHotKey([], 'Escape', forceBlur);

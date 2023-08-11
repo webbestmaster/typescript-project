@@ -13,7 +13,7 @@ type ArticleXmlImgDataType = {
     url: string;
 };
 
-const findImageRegExpGlobal = /!\[([\S\s]*?)]\((\S+?)(?:\s+"([\S\s]+?)")?\)/g;
+const findImageRegExpGlobal = /!\[([\S\s]*?)]\((\S+?)(?:\s+"([\S\s]+?)")?\)/gu;
 
 export function getImageListFromArticle(article: ArticleType): ArticleXmlImgDataType {
     const {titleImage, content, title, slug} = article;
@@ -45,10 +45,15 @@ function articleImageDataToString(articleImageData: ArticleImageDataType): strin
     return [
         '<image:image>',
         `<image:loc>${src}</image:loc>`,
+
         // -- `            <image:caption>${getLastmodTagContent(mongoDocument)}</image:caption>`,
+
         // -- `            <image:geo_location>${getLastmodTagContent(mongoDocument)}</image:geo_location>`,
+
         `<image:title>${alt}</image:title>`,
+
         // -- `            <image:license>${getLastmodTagContent(mongoDocument)}</image:license>`,
+
         '</image:image>',
     ].join('');
 }

@@ -1,3 +1,5 @@
+/* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
+
 import {ArticlePreviewType, ArticleType} from './article-type';
 import {articleCrud} from './article';
 
@@ -41,6 +43,7 @@ export function getArticleListByIdList(idList: Array<string>): Promise<Array<Art
     return Promise.all(idList.map(getArticleById));
 }
 
+// eslint-disable-next-line require-await
 export async function getArticleListByIdListFiltered(idList: Array<string>): Promise<Array<ArticleType>> {
     return getArticleListByIdList(idList).then((data: Array<ArticleType | null>): Array<ArticleType> => {
         return data.filter<ArticleType>((mayBeArticle: ArticleType | null): mayBeArticle is ArticleType => {
@@ -66,6 +69,7 @@ export async function getArticleBreadcrumbListById(id: string): Promise<Array<Ar
     // eslint-disable-next-line no-loops/no-loops
     do {
         deep -= 1;
+        // eslint-disable-next-line no-await-in-loop
         parent = await articleCrud.findOne({subDocumentIdList: [childId]});
 
         if (parent) {
@@ -89,13 +93,15 @@ export async function getSiblingListById(articleId: string): Promise<Array<Artic
 
     const idListRaw: Array<string> = [];
 
-    parentList.forEach((article: ArticleType): unknown => idListRaw.push(...article.subDocumentIdList));
+    parentList.forEach((article: ArticleType): void => {
+        idListRaw.push(...article.subDocumentIdList);
+    });
 
     const idSet = new Set<string>(idListRaw);
 
-    const idList = [...idSet].filter<string>(
-        (siblingArticleId: string): siblingArticleId is string => siblingArticleId !== articleId
-    );
+    const idList = [...idSet].filter<string>((siblingArticleId: string): siblingArticleId is string => {
+        return siblingArticleId !== articleId;
+    });
 
     return getArticleListByIdListFiltered(idList);
 }

@@ -1,6 +1,6 @@
 /* global URLSearchParams, location */
-import {generatePath as reactRouterGeneratePath} from 'react-router-dom';
 import type {PetsdbQueryType, PetsdbReadPageConfigType} from 'petsdb';
+import {generatePath as reactRouterGeneratePath} from 'react-router-dom';
 
 import {ArticleType} from '../../server/article/article-type';
 
@@ -40,19 +40,6 @@ export function generatePath<PathType extends string>(
 
     return reactRouterGeneratePath(rawPath, pathDataForRouter);
 }
-
-/*
-// eslint-disable-next-line id-length
-export function urlSearchParametersToPaginationQuery<DataType>(
-    urlSearchParameters: URLSearchParams
-): {pagination: PaginationQueryType<DataType>} {
-    const pagination = urlSearchParameters.get('pagination') || encodeURIComponent(JSON.stringify({}));
-
-    const result: PaginationQueryType<DataType> = JSON.parse(decodeURIComponent(pagination));
-
-    return result;
-}
-*/
 
 export function getNeedUseThirdPartyServices(): boolean {
     if (typeof location === 'undefined') {

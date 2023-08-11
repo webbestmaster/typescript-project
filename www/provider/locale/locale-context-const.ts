@@ -20,7 +20,8 @@ export const localeConst: LocaleConstType = {
     },
     key: {
         localStorage: {
-            localeName: 'my-locale-name-v.1.0', // PROJECT_ID + 'my-locale-name-v.1.0'
+            // PROJECT_ID + 'my-locale-name-v.1.0'
+            localeName: 'my-locale-name-v.1.0',
         },
     },
 };

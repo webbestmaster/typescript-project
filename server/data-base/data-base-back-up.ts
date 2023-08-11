@@ -1,3 +1,5 @@
+/* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
+
 import {createReadStream, createWriteStream} from 'node:fs';
 import fileSystem from 'node:fs/promises';
 import path from 'node:path';
@@ -39,7 +41,7 @@ export async function makeDataBaseBackUp(dataBaseInfo: CrudConfigOnChangeArgumen
 
     const {dataBaseFileName, dataBasePath, dataBaseId} = dataBaseInfo;
     const zip = new JSZip();
-    const fileNamePrefix = new Date().toISOString().replace(/[:tz]+/gi, '-');
+    const fileNamePrefix = new Date().toISOString().replace(/[:tz]+/giu, '-');
     const backupFileName = path.join(
         dataBaseBackUpPathAbsolute,
         dataBaseId,

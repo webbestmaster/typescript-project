@@ -30,7 +30,9 @@ export function Box(props: BoxPropsType): JSX.Element {
     const [marginTop, marginRight, marginBottom, marginLeft, paddingTop, paddingRight, paddingBottom, paddingLeft] = [
         ...makeCssArray(margin),
         ...makeCssArray(padding),
-    ].map((value: number): string => `${value}px`);
+    ].map((value: number): string => {
+        return `${value}px`;
+    });
 
     const style: CSSProperties = {
         backgroundColor,

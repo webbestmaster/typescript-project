@@ -1,4 +1,4 @@
-// import pngImageSrc from '../../page/client/client-home/image/marker-icon-2x.png';
+// You can import pngImageSrc from '../../page/client/client-home/image/marker-icon-2x.png';
 
 /* eslint-disable max-len */
 export const htmlToPdfString = `

@@ -1,4 +1,5 @@
 // REF: https://developers.google.com/analytics/devguides/collection/analyticsjs/#the_google_analytics_tag
+
 // REF: https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications
 
 /* global window, document, setInterval */
@@ -62,7 +63,7 @@ export function useGoogleAnalytics(config: GoogleAnalyticsType): null {
     loadGoogleAnalyticsScript(googleAnalyticsId);
 
     // eslint-disable-next-line unicorn/consistent-destructuring
-    window.dataLayer = window.dataLayer || [];
+    window.dataLayer ||= [];
 
     // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
     function gtag(...argumentList: Array<unknown>) {
@@ -76,7 +77,13 @@ export function useGoogleAnalytics(config: GoogleAnalyticsType): null {
     gtag('config', googleAnalyticsId);
 
     // eslint-disable-next-line unicorn/consistent-destructuring
-    waitForCallback((): boolean => Boolean(window.ga), 10, 200)
+    waitForCallback(
+        (): boolean => {
+            return Boolean(window.ga);
+        },
+        10,
+        200
+    )
         .then((): void => {
             // eslint-disable-next-line id-length
             const {ga} = window;
@@ -92,8 +99,10 @@ export function useGoogleAnalytics(config: GoogleAnalyticsType): null {
 
             setAndSend(pathname);
 
-            // fix pokazatel' otkazov
-            setInterval((): unknown => ga('send', 'event', 'nobouncy', '15sec'), 15e3);
+            // Fix pokazatel' otkazov
+            setInterval((): unknown => {
+                return ga('send', 'event', 'nobouncy', '15sec');
+            }, 15e3);
         })
         .catch(console.error);
 

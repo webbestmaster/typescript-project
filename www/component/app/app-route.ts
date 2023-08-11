@@ -5,37 +5,38 @@ export type AppRoutType = {
 };
 
 export const appRoute = {
-    // client
+    // Client
     root: {
         path: '/',
     },
 
-    // client
+    // Client
     article: {
         path: '/article/:slug' as const,
     },
 
-    // cms
+    // CMS
     articleList: {
         path: '/cms/article-list',
     },
 
-    // cms
+    // CMS
     articleTree: {
         path: '/cms/article-tree',
     },
 
-    // cms
+    // CMS
     articleCreate: {
         path: '/cms/article-create',
     },
 
-    // cms
+    // CMS
     articleEdit: {
-        path: '/cms/article-edit/:articleId' as const, // `as const` is required for TS validation of useParams and generatePath of react-router-dom
+        // `as const` is required for TS validation of useParams and generatePath of react-router-dom
+        path: '/cms/article-edit/:articleId' as const,
     },
 
-    // service
+    // Service
     login: {
         path: '/login',
     },

@@ -18,7 +18,7 @@ export function CmsArticleList(): JSX.Element {
     const [searchedColumn, setSearchedColumn] = useState<ArticleForTableListKeysType>('title');
     const [searchText, setSearchText] = useState<string>('');
 
-    // article for table
+    // Article for table
     const {
         execute: executeArticleList,
         result: resultArticleList,
