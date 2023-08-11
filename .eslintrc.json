@@ -31,7 +31,6 @@
         "plugin:import/typescript",
         "plugin:promise/recommended",
         "plugin:sonarjs/recommended",
-        "plugin:unicorn/recommended",
         "plugin:unicorn/all"
     ],
     "globals": {
