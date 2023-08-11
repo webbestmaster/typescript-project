@@ -4,7 +4,7 @@ export type UnknownObjectType = Record<string, unknown>;
 
 export type LazyResultType<ComponentPropsType> = {default: ComponentType<ComponentPropsType>};
 
-export function getStringFromUnknown(data: Record<string, unknown>, requiredKey: string): string {
+export function getStringFromUnknown(data: Record<string, unknown> | undefined | null, requiredKey: string): string {
     if (!data) {
         return '';
     }
