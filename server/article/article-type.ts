@@ -21,7 +21,7 @@ export enum ArticleFileTypeEnum {
     video = 'video',
 }
 
-export type ArticleFileType = {
+export interface ArticleFileType {
     duration: number; // in seconds
     height: number; // original height
     name: string; // name of file
@@ -29,8 +29,9 @@ export type ArticleFileType = {
     title: string; // human read able title
     type: ArticleFileTypeEnum; // audio, image, etc.
     width: number; // original width
-};
+}
 
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export type ArticleType = {
     articleType: ArticleTypeEnum;
     content: string;
@@ -68,8 +69,8 @@ export type ArticlePreviewType = Pick<
     'articleType' | 'fileList' | 'isActive' | 'slug' | 'title' | 'titleImage'
 >;
 
-export type ParsedRequestQueryType = {
+export interface ParsedRequestQueryType {
     pageConfig: PetsdbReadPageConfigType<ArticleType>;
     pick: Array<keyof ArticleType>;
     query: PetsdbQueryType<ArticleType>;
-};
+}

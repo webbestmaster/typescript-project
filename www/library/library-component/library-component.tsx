@@ -2,10 +2,10 @@ import {ReactNode} from 'react';
 
 import libraryStyle from './library.scss';
 
-export type LibraryPropsType = {
+export interface LibraryPropsType {
     readonly children: ReactNode;
     readonly textContent: string;
-};
+}
 
 export function LibraryComponent(props: LibraryPropsType): JSX.Element {
     const {children, textContent} = props;

@@ -3,15 +3,15 @@ import {getPathToImage} from '../../www/util/path';
 import {httpsSiteDomain} from '../../www/const';
 import {getClientArticleLinkWithDomain} from '../../www/client-component/article/article-helper';
 
-export type ArticleImageDataType = {
+export interface ArticleImageDataType {
     alt: string;
     src: string;
-};
+}
 
-type ArticleXmlImgDataType = {
+interface ArticleXmlImgDataType {
     imageList: Array<ArticleImageDataType>;
     url: string;
-};
+}
 
 // eslint-disable-next-line require-unicode-regexp
 const findImageRegExpGlobal = /!\[([\S\s]*?)]\((\S+?)(?:\s+"([\S\s]+?)")?\)/g;

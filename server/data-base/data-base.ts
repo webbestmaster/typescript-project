@@ -74,8 +74,8 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
         const modelJsonSchemaValidate = ajv.compile<ModelType>(modelJsonSchema);
         const isValid = modelJsonSchemaValidate(modelData);
 
-        if (isValid !== true) {
-            throw new Error(JSON.stringify(modelJsonSchemaValidate.errors || ''));
+        if (isValid) {
+            throw new Error(JSON.stringify(modelJsonSchemaValidate.errors ?? ''));
         }
 
         await dataBase.create(modelData);
@@ -88,8 +88,8 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
         const modelJsonSchemaValidate = ajv.compile<ModelType>(modelJsonSchema);
         const isValid = modelJsonSchemaValidate(modelData);
 
-        if (isValid !== true) {
-            throw new Error(JSON.stringify(modelJsonSchemaValidate.errors || ''));
+        if (isValid) {
+            throw new Error(JSON.stringify(modelJsonSchemaValidate.errors ?? ''));
         }
 
         await dataBase.update(query, modelData);
@@ -130,7 +130,7 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
             console.error('[ERROR]: makeCrud: model data');
             console.error(modelData);
             console.error('[ERROR]: makeCrud: errors:');
-            console.error(modelJsonSchemaValidate.errors || '');
+            console.error(modelJsonSchemaValidate.errors ?? '');
 
             /*
                 await updateOne({slug:modelData.slug}, {
@@ -148,6 +148,7 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
             */
         });
 
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         if (hasError) {
             console.error(`[ERROR]: makeCrud: ${dataBaseId} has wrong data!`);
         } else {

@@ -276,7 +276,7 @@ class StaticSite {
 
         this.pageList.forEach((page: StaticPageType) => {
             const {html, slug} = page;
-            const urlList: Array<string> = html.match(/\/api-image\/[^\s"]+/giu) || [];
+            const urlList: Array<string> = html.match(/\/api-image\/[^\s"]+/giu) ?? [];
 
             urlList.forEach((url: string) => {
                 imageUrlList.push({slug, url});

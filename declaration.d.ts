@@ -29,9 +29,9 @@ declare const IS_PRODUCTION: unknown;
 declare const BUILD_DATE_H: unknown;
 
 // SSR
-declare const NAVIGATION_DATA: string | void;
+declare const NAVIGATION_DATA: string | undefined;
 
-declare const ARTICLE_DATA: string | void;
+declare const ARTICLE_DATA: string | undefined;
 
 declare module 'webp-converter' {
     declare type LoggingOptionType =
@@ -58,9 +58,9 @@ declare module 'webp-converter' {
         loggingFlags: LoggingOptionType
     ) => Promise<void>;
 
-    declare type CebpConverterType = {
+    declare interface CebpConverterType {
         cwebp: CwebpType;
-    };
+    }
 
     const webpConverter: CebpConverterType;
 

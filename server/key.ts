@@ -10,8 +10,8 @@ innerInitialization();
 
 const {SHA_256_KEY, SECRET_KEY} = env;
 
-export const sha256key: string = String(SHA_256_KEY || '').trim();
-export const secretKey: string = String(SECRET_KEY || '').trim();
+export const sha256key: string = String(SHA_256_KEY ?? '').trim();
+export const secretKey: string = String(SECRET_KEY ?? '').trim();
 
 if (sha256key === '') {
     console.error('[ERROR]: auth - sha256key is not define!');

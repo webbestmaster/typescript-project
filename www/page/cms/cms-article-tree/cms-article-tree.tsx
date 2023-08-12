@@ -38,7 +38,7 @@ export function CmsArticleTree(): JSX.Element {
     useEffect(() => {
         executeArticleListPaginationPick({}, {pageIndex: 0, pageSize: 0, sort: {title: 1}}, keyForTreeList)
             .then((data: PaginationResultType<ArticleForTreeType>) => {
-                return setSavedArticleList(data.list);
+                setSavedArticleList(data.list);
             })
             .catch((error: Error) => {
                 console.log(error);

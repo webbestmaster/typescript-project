@@ -2,7 +2,9 @@ import {ComponentType} from 'react';
 
 export type UnknownObjectType = Record<string, unknown>;
 
-export type LazyResultType<ComponentPropsType> = {default: ComponentType<ComponentPropsType>};
+export interface LazyResultType<ComponentPropsType> {
+    default: ComponentType<ComponentPropsType>;
+}
 
 export function getStringFromUnknown(data: Record<string, unknown> | undefined | null, requiredKey: string): string {
     if (!data) {

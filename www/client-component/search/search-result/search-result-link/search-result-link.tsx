@@ -5,10 +5,10 @@ import {SearchArticleType} from '../../search-type';
 
 import searchResultLinkStyle from './search-result-link.scss';
 
-type SearchResultLinkPropsType = {
+interface SearchResultLinkPropsType {
     readonly searchArticle: SearchArticleType;
     readonly searchString: string;
-};
+}
 
 export function SearchResultLink(props: SearchResultLinkPropsType) {
     const {searchArticle, searchString} = props;

@@ -24,7 +24,7 @@ async function getAudioFileBitrate(fullFilePath: string): Promise<BitrateType> {
     return (
         bitRateList.find((bitRate: BitrateType): boolean => {
             return bitRate === kiloBytesPerSecond;
-        }) || maxKiloBytesPerSecond
+        }) ?? maxKiloBytesPerSecond
     );
 }
 

@@ -3,14 +3,14 @@ export enum UserRoleEnum {
     user = 'user',
 }
 
-export type UserType = {
+export interface UserType {
     id: string;
     login: string;
     role: UserRoleEnum;
-};
+}
 
-export type UserContextType = {
+export interface UserContextType {
     isInProgressAutoLogin: boolean;
     setUser: (user: UserType) => void;
     user: UserType;
-};
+}

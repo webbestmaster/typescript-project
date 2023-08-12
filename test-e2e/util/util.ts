@@ -11,10 +11,10 @@ import puppeteer, {
 
 import {defaultPageGoToOption, pageFullUrl, user} from './const';
 
-type AdditionalBrowserOptionsType = {
+interface AdditionalBrowserOptionsType {
     extraPrefsFirefox?: Record<string, unknown>;
     product?: Product;
-};
+}
 
 // eslint-disable-next-line max-len
 type PuppeteerLaunchOptionsType = AdditionalBrowserOptionsType &

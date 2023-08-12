@@ -1,6 +1,6 @@
 import {useCallback, useMemo, useState} from 'react';
 
-type StateHooksType<DataType> = {
+interface StateHooksType<DataType> {
     isInProgress: boolean;
     processError: Error | null;
     reset: () => void;
@@ -8,7 +8,7 @@ type StateHooksType<DataType> = {
     setIsInProgress: (isInProgress: boolean) => void;
     setProcessError: (processError: Error | null) => void;
     setResult: (result: DataType | null) => void;
-};
+}
 
 export function useApiHooks<DataType>(): StateHooksType<DataType> {
     const [isInProgress, setIsInProgress] = useState<boolean>(false);

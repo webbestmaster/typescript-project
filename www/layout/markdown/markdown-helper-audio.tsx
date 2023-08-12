@@ -9,16 +9,16 @@ import {StringToJsxRawDataType} from './markdown-helper';
 
 export const markdownAudioRegExp = /<audio[\S\s]+?<\/audio>/giu;
 
-export type AudioTagDataType = {
+export interface AudioTagDataType {
     duration: number;
     fileName: string;
     title: string;
-};
+}
 
 export function parseAudioTag(audioTag: string): AudioTagDataType {
-    const [ignoredFullSrcString, srcAsString = ''] = audioTag.match(/src="([^"]*?)"/u) || ['', ''];
-    const [ignoredFullDurationString, durationAsString = ''] = audioTag.match(/data-duration="([^"]*?)"/u) || ['', ''];
-    const [ignoredFullTitleString, titleAsString = ''] = audioTag.match(/data-title="([^"]*?)"/u) || ['', ''];
+    const [ignoredFullSrcString, srcAsString = ''] = audioTag.match(/src="([^"]*?)"/u) ?? ['', ''];
+    const [ignoredFullDurationString, durationAsString = ''] = audioTag.match(/data-duration="([^"]*?)"/u) ?? ['', ''];
+    const [ignoredFullTitleString, titleAsString = ''] = audioTag.match(/data-title="([^"]*?)"/u) ?? ['', ''];
     const durationAsNumber = Number.parseFloat(durationAsString) || 0;
 
     return {

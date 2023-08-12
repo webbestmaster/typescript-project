@@ -5,10 +5,10 @@ import {Markdown} from '../markdown/markdown';
 
 import markdownInputWrapperStyle from './markdown-input-wrapper.scss';
 
-type MarkdownInputWrapperPropsType = {
+interface MarkdownInputWrapperPropsType {
     readonly children: JSX.Element;
     readonly mdInput: string;
-};
+}
 
 export function MarkdownInputWrapper(props: MarkdownInputWrapperPropsType): JSX.Element {
     const {mdInput, children} = props;

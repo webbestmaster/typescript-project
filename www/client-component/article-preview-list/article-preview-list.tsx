@@ -3,10 +3,10 @@ import {ArticlePreviewType, SubDocumentListViewTypeEnum} from '../../../server/a
 import articlePreviewListStyle from './article-preview-list.scss';
 import {ArticlePreview} from './article-preview/article-preview';
 
-type ChildListPropsType = {
+interface ChildListPropsType {
     readonly childList: Array<ArticlePreviewType>;
     readonly previewStyle: SubDocumentListViewTypeEnum;
-};
+}
 
 export function ArticlePreviewList(props: ChildListPropsType): JSX.Element {
     const {childList, previewStyle} = props;

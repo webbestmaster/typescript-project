@@ -7,10 +7,6 @@ export function loadAdSenseScript(googleAdSenseId: string): void {
 
     const {head} = document;
 
-    if (!head) {
-        return;
-    }
-
     const src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
 
     if (document.querySelector(`script[src="${src}"]`)) {

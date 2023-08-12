@@ -1,4 +1,4 @@
-export type ShareButtonPropsType = {
+export interface ShareButtonPropsType {
     title: string;
     url: string;
-};
+}

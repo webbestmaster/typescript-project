@@ -12,7 +12,7 @@ export const enum FetchMethodEnum {
     put = 'PUT',
 }
 
-type OptionsType = {
+interface OptionsType {
     // Body data type must match "Content-Type" header
     body?: File | FormData | string;
     // Options: include, same-origin, omit (default: same-origin)
@@ -33,14 +33,14 @@ type OptionsType = {
      *  redirect?: 'follow'; // manual, follow, error (default: follow)
      *  referrer?: 'no-referrer'; // no-referrer, client (default: client)
      */
-};
+}
 
 type FetchCacheType = Record<string, Promise<unknown> | null>;
 
 const fetchCache: FetchCacheType = {};
 
 function invalidateCache(options?: OptionsType) {
-    const {method} = options || {};
+    const {method} = options ?? {};
 
     if (!method || method === FetchMethodEnum.get) {
         return;
@@ -69,13 +69,13 @@ export function fetchX<ExpectedResponseType>(
 ): Promise<ExpectedResponseType> {
     invalidateCache(options);
 
-    const cacheProperty = `${url} - ${JSON.stringify(options || '[empty]')}`;
+    const cacheProperty = `${url} - ${JSON.stringify(options ?? '[empty]')}`;
 
     const savedPromiseResult: Promise<unknown> | null = fetchCache[cacheProperty];
 
     if (savedPromiseResult) {
         console.log(
-            `%c[fetchX]: [CACHE]\n> url: ${url},\n> options: ${JSON.stringify(options || '[empty]')}`,
+            `%c[fetchX]: [CACHE]\n> url: ${url},\n> options: ${JSON.stringify(options ?? '[empty]')}`,
             'color: #0a0'
         );
 

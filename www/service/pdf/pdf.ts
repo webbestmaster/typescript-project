@@ -26,7 +26,7 @@ export async function makePdf(html: string, fileName: string): Promise<void> {
     link.style.zIndex = '1000000';
     link.style.opacity = '0';
 
-    document.body?.append(link);
+    document.body.append(link);
 
     link.href = objectUrl;
     link.download = `${fileName}.pdf`;

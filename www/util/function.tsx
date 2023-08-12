@@ -4,7 +4,7 @@ import {useCallback, useMemo, useState} from 'react';
 
 import {convertToError} from './error';
 
-// eslint-disable-next-line no-empty-function
+// eslint-disable-next-line no-empty-function, @typescript-eslint/no-empty-function
 export function noop(): void {}
 
 export function debounce<ArgsType extends Array<unknown>>(
@@ -40,12 +40,12 @@ export function throttle<ArgsType extends Array<unknown>>(
     };
 }
 
-type FunctionStateType<ArgsType extends Array<unknown>, ResultType> = {
+interface FunctionStateType<ArgsType extends Array<unknown>, ResultType> {
     error: Error | null;
     execute: (...args: ArgsType) => Promise<ResultType>;
     isInProgress: boolean;
     result: ResultType | null;
-};
+}
 
 export function useMakeExecutableState<ArgsType extends Array<unknown>, ResultType>(
     wrappedFunction: (...args: ArgsType) => Promise<ResultType>

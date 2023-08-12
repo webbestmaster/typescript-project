@@ -28,7 +28,7 @@ export function ReactScrollRestoration(): JSX.Element {
         }
 
         requestAnimationFrame(() => {
-            const relativeScrollTop = Number.parseFloat(sessionStorage.getItem(getItemKey()) || '0') || 0;
+            const relativeScrollTop = Number.parseFloat(sessionStorage.getItem(getItemKey()) ?? '0') || 0;
             const absoluteScrollTop = getAbsoluteScrollTop(relativeScrollTop);
 
             document.documentElement.scrollTop = absoluteScrollTop;

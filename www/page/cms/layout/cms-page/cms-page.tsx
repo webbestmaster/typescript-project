@@ -9,9 +9,7 @@ import {appRoute} from '../../../../component/app/app-route';
 
 const {Content} = Layout;
 
-type CmsPagePropsType = {
-    readonly children: ReactNode;
-};
+type CmsPagePropsType = Record<'children', ReactNode>;
 
 export function CmsPage(props: CmsPagePropsType): JSX.Element {
     const {children} = props;

@@ -28,7 +28,7 @@ export function CmsArticleEdit(): JSX.Element {
     useEffect(() => {
         // eslint-disable-next-line @typescript-eslint/no-floating-promises
         articleById(
-            {id: articleId || ''},
+            {id: articleId ?? ''},
             {
                 pageIndex: 0,
                 pageSize: 1,
@@ -53,7 +53,7 @@ export function CmsArticleEdit(): JSX.Element {
             });
     }
 
-    const articleToEdit: ArticleType | null = articleByIdResult?.list[0] || null;
+    const articleToEdit: ArticleType | null = articleByIdResult?.list[0] ?? null;
 
     if (articleToEdit === null) {
         return (

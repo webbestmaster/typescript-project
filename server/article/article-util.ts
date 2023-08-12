@@ -26,7 +26,7 @@ export async function getActiveArticleBySlugEnsure(slug: string, defaultArticle:
         return defaultArticle;
     }
 
-    return (await getActiveArticleBySlug(slug)) || defaultArticle;
+    return (await getActiveArticleBySlug(slug)) ?? defaultArticle;
 }
 
 export function articleToArticlePreview(article: ArticleType): ArticlePreviewType {

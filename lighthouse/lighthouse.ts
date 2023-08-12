@@ -15,11 +15,11 @@ enum FormFactorEnum {
     mobile = 'mobile',
 }
 
-type MakeReportArgumentType = {
+interface MakeReportArgumentType {
     formFactor: FormFactorEnum;
     port: number;
     url: string;
-};
+}
 
 const threshold: Record<CategoryNameEnum, number> = {
     [CategoryNameEnum.accessibility]: 1,

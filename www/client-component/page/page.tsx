@@ -16,9 +16,9 @@ import {ReactScrollRestoration} from '../scroll-restoration/react-scroll-restora
 
 import pageStyle from './page.scss';
 
-type PagePropsType = {
+interface PagePropsType {
     readonly children: ReactNode;
-};
+}
 
 export function Page(props: PagePropsType): JSX.Element {
     const {children} = props;

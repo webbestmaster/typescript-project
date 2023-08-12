@@ -18,9 +18,7 @@ export function useUserContext(): UserContextType {
 
 const {Provider: UserContextProvider} = UserContext;
 
-type UserProviderPropsType = {
-    readonly children: ReactNode;
-};
+type UserProviderPropsType = Record<'children', ReactNode>;
 
 export function UserProvider(props: UserProviderPropsType): JSX.Element {
     const {children} = props;
@@ -36,7 +34,7 @@ export function UserProvider(props: UserProviderPropsType): JSX.Element {
     }, [isInProgressAutoLogin, user]);
 
     useEffect(() => {
-        if (typeof location === 'object' && location.pathname?.includes('/cms/')) {
+        if (typeof location === 'object' && location.pathname.includes('/cms/')) {
             executeAutoLogin()
                 .then((loginResponse: LoginResponseType) => {
                     setUser(loginResponse.user);

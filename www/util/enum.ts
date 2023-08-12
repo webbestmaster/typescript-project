@@ -13,5 +13,5 @@ export function getEnumValueEnsure<EnumType>(
 ): EnumType {
     const enumValue: EnumType | null = getEnumValue<EnumType>(enumData, value);
 
-    return enumValue === null ? defaultValue : enumValue;
+    return enumValue ?? defaultValue;
 }

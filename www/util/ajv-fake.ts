@@ -2,9 +2,9 @@ function returnTrue(): true {
     return true;
 }
 
-type AjvFakeType = {
+interface AjvFakeType {
     compile: () => typeof returnTrue;
-};
+}
 
 const ajvFakeInstance: AjvFakeType = {
     compile: function compile() {

@@ -15,11 +15,11 @@ export function getArticleForTreeById(
     articleList: Array<ArticleForTreeType>,
     articleId: string
 ): ArticleForTreeType | null {
-    const foundedArticle: ArticleForTreeType | void = articleList.find((article: ArticleForTreeType): boolean => {
+    const foundedArticle: ArticleForTreeType | undefined = articleList.find((article: ArticleForTreeType): boolean => {
         return article.id === articleId;
     });
 
-    return foundedArticle || null;
+    return foundedArticle ?? null;
 }
 
 function getChildList(parentArticleId: string, articleList: Array<ArticleForTreeType>, deep: number): Array<DataNode> {

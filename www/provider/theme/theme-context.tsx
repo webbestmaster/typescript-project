@@ -9,15 +9,15 @@ export const ThemeContext = createContext<ThemeContextType>(defaultThemeContext)
 
 const {Provider: ThemeContextProvider} = ThemeContext;
 
-type ThemeContextPropsType = {
+interface ThemeContextPropsType {
     readonly children: ReactNode;
     readonly defaultThemeName: ThemeNameEnum | null;
-};
+}
 
 export function ThemeProvider(props: ThemeContextPropsType): JSX.Element {
     const {children, defaultThemeName} = props;
 
-    const [themeName, setThemeName] = useState<ThemeNameEnum>(defaultThemeName || defaultThemeContext.themeName);
+    const [themeName, setThemeName] = useState<ThemeNameEnum>(defaultThemeName ?? defaultThemeContext.themeName);
     const [mdFontSize, setMdFontSize] = useState<number>(defaultThemeContext.mdFontSize);
 
     const setMdFontSizeMemoized = useCallback((updatedFontSize: number) => {

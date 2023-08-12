@@ -10,10 +10,10 @@ export const navigationContext = createContext<NavigationContextType>(defaultNav
 
 const {Provider: NavigationContextProvider} = navigationContext;
 
-type NavigationProviderPropsType = {
+interface NavigationProviderPropsType {
     readonly children: Array<JSX.Element> | JSX.Element;
     readonly navigationData: NavigationContextType | null;
-};
+}
 
 export function NavigationProvider(props: NavigationProviderPropsType): JSX.Element {
     const {children, navigationData} = props;
@@ -26,7 +26,7 @@ export function NavigationProvider(props: NavigationProviderPropsType): JSX.Elem
     // Typeof NAVIGATION_DATA === 'string' ? JSON.parse(decodeURIComponent(NAVIGATION_DATA)) : null;;
 
     const resultData: NavigationContextType =
-        (isBrowser ? ssrNavigationData : navigationData) || defaultNavigationContextData;
+        (isBrowser ? ssrNavigationData : navigationData) ?? defaultNavigationContextData;
 
     return <NavigationContextProvider value={resultData}>{children}</NavigationContextProvider>;
 }

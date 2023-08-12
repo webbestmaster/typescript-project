@@ -19,10 +19,10 @@ import {
     SortDirectionEnum,
 } from './cms-article-list-type';
 
-type GetArticleTableColumnListArgumentType = {
+interface GetArticleTableColumnListArgumentType {
     setSearchText: (searchText: string) => void;
     setSearchedColumn: (dataIndex: ArticleForTableListKeysType) => void;
-};
+}
 
 export function getArticleTableColumnList(
     data: GetArticleTableColumnListArgumentType

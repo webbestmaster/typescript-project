@@ -23,7 +23,7 @@ export function Navigation(): JSX.Element {
     const renderNavigationListItem = useCallback(
         (menuItem: ArticlePreviewType, index: number): JSX.Element => {
             const {slug, title} = menuItem;
-            const isActiveLink = currentArticleSlug === slug || sectionItem?.slug === slug;
+            const isActiveLink = currentArticleSlug === slug || sectionItem.slug === slug;
 
             return (
                 <li className={navigationStyle.navigation_list_item} key={`${slug}-${String(index)}`}>

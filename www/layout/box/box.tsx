@@ -2,7 +2,7 @@ import {ReactNode, ElementType, CSSProperties} from 'react';
 
 import {makeCssArray} from './box-helper';
 
-type BoxPropsType = {
+interface BoxPropsType {
     readonly backgroundColor?: string;
     readonly boxSizing?: 'border-box' | 'content-box' | 'initial';
     readonly children?: ReactNode;
@@ -12,7 +12,7 @@ type BoxPropsType = {
     readonly padding?: Array<number> | number;
     readonly tagName?: ElementType;
     readonly width?: number | string;
-};
+}
 
 export function Box(props: BoxPropsType): JSX.Element {
     const {

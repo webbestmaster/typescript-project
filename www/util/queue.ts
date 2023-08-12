@@ -1,11 +1,11 @@
 export type PromiseResolveType<Result> = (result: Result) => unknown;
 export type QueueRunningTaskType = () => Promise<unknown>;
 
-type QueueTaskType = {
+interface QueueTaskType {
     reject: PromiseResolveType<Error>;
     resolve: PromiseResolveType<void>;
     task: QueueRunningTaskType;
-};
+}
 
 export class Queue {
     private taskList: Array<QueueTaskType> = [];
@@ -31,7 +31,7 @@ export class Queue {
     private async run() {
         this.isWorking = true;
 
-        const [fistTask] = this.taskList;
+        const fistTask = this.taskList.at(0);
 
         this.taskList.splice(0, 1);
 

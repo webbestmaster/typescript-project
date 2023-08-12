@@ -5,9 +5,9 @@ export enum ThemeNameEnum {
     twilight = 'twilight',
 }
 
-export type ThemeContextType = {
+export interface ThemeContextType {
     mdFontSize: number;
     setMdFontSize: (mdFontSize: number) => void;
     setThemeName: (themeName: ThemeNameEnum) => void;
     themeName: ThemeNameEnum;
-};
+}

@@ -6,7 +6,7 @@ import spinnerStyle from './spinner.scss';
 import {defaultSpinnerSize} from './spinner-const';
 import {SpinnerPositionEnum} from './spinner-type';
 
-type PropsType = {
+interface PropsType {
     readonly arcColor?: string; // default - $color-border
     readonly circleColor?: string; // default - $light-gray
     // eslint-disable-next-line unicorn/no-keyword-prefix
@@ -19,7 +19,7 @@ type PropsType = {
     readonly wrapperHeight?: number | string; // default - 100%
     readonly wrapperPadding?: number | string; // default - 12px
     readonly wrapperWidth?: number | string; // default - 100%
-};
+}
 
 export function Spinner(props: PropsType): JSX.Element | null {
     const {

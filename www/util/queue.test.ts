@@ -72,7 +72,7 @@ describe('queue', () => {
             });
         } catch (error: unknown) {
             // eslint-disable-next-line jest/no-conditional-in-test, jest/no-conditional-expect
-            expect(error instanceof Error ? error?.message : '').toBe('I am the ERROR!');
+            expect(error instanceof Error ? error.message : '').toBe('I am the ERROR!');
             isErrorCaught = true;
         }
 
@@ -90,7 +90,6 @@ describe('queue', () => {
         const queue = new Queue();
 
         let increaseMe = 0;
-        let isErrorCaught = false;
 
         // eslint-disable-next-line @typescript-eslint/no-floating-promises
         queue.add(async () => {
@@ -98,17 +97,21 @@ describe('queue', () => {
             increaseMe += 1;
         });
 
-        try {
+        await expect(async () => {
             await queue.add(async () => {
                 await waitForTime(defaultTimeOut);
-                // eslint-disable-next-line no-throw-literal
+                // eslint-disable-next-line no-throw-literal, sonarjs/no-duplicate-string
+                throw new Error('I am an ERROR!');
+            });
+        }).rejects.toThrow('I am an ERROR!');
+
+        await expect(async () => {
+            await queue.add(async () => {
+                await waitForTime(defaultTimeOut);
+                // eslint-disable-next-line no-throw-literal, @typescript-eslint/no-throw-literal
                 throw 'I am an ERROR!';
             });
-        } catch (error: unknown) {
-            // eslint-disable-next-line jest/no-conditional-in-test, jest/no-conditional-expect
-            expect(error instanceof Error && error?.message.toString().startsWith('[Queue]:')).toBe(true);
-            isErrorCaught = true;
-        }
+        }).rejects.toThrow('[Queue]: Task running with error!');
 
         await queue.add(async () => {
             await waitForTime(defaultTimeOut);
@@ -116,6 +119,5 @@ describe('queue', () => {
         });
 
         expect(increaseMe).toBe(2);
-        expect(isErrorCaught).toBe(true);
     });
 });

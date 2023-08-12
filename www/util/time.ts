@@ -3,14 +3,17 @@ import {LocaleNameEnum} from '../provider/locale/locale-context-type';
 
 import {getFormattedNumber, NumberFormatOptionsType, TimeSizeEnum} from './format';
 
-export type TimeItemType = {count: number; unitType: TimeSizeEnum};
+export interface TimeItemType {
+    count: number;
+    unitType: TimeSizeEnum;
+}
 
-export type GetDateTimeDifferenceOptionType = {
+export interface GetDateTimeDifferenceOptionType {
     formatOption?: NumberFormatOptionsType;
     localeName: LocaleNameEnum;
     milliseconds: number;
     sliceSize: number;
-};
+}
 
 export function getDateTimeHumanSize(option: GetDateTimeDifferenceOptionType): string {
     const {milliseconds, sliceSize, localeName, formatOption} = option;

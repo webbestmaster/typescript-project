@@ -232,7 +232,7 @@ export function getFileExtension(fileName: string): string {
         return '';
     }
 
-    return (fileName.split('.').pop() || '').toLowerCase();
+    return (fileName.split('.').pop() ?? '').toLowerCase();
 }
 
 export function getIsImage(fileName: string): boolean {
@@ -270,8 +270,8 @@ export function getAbsentIdList(
 
 export function handleDeleteArticle(articleId: string): Promise<unknown> {
     return deleteArticle(articleId)
-        .then((): unknown => {
-            return location.reload();
+        .then(() => {
+            location.reload();
         })
         .catch(console.error);
 }

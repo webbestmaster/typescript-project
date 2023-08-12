@@ -2,33 +2,33 @@
 
 import type {PetsdbItemType, PetsdbQueryType, PetsdbReadPageConfigType} from 'petsdb';
 
-export type CrudConfigOnChangeArgumentType = {
+export interface CrudConfigOnChangeArgumentType {
     dataBaseFileName: string;
     dataBaseId: string;
     dataBasePath: string;
-};
+}
 
-export type CrudConfigType = {
+export interface CrudConfigType {
     dataBaseId: string;
     onChange: (data: CrudConfigOnChangeArgumentType) => Promise<void>;
     onInit: (data: CrudConfigOnChangeArgumentType) => Promise<void>;
-};
+}
 
-export type RegExpQueryType = {
+export interface RegExpQueryType {
     $regex: string; // Operators ($lt, $lte, $gt, $gte, $in, $nin, $ne, $exists, $regex)
     $regexFlag: string; // 'g' | 'gi' | 'i';
-};
+}
 
-export type PaginationResultType<ModelType extends Record<string, unknown>> = {
+export interface PaginationResultType<ModelType extends Record<string, unknown>> {
     list: Array<ModelType>;
     pageIndex: number;
     pageSize: number;
     sort: Record<string, unknown>;
     totalItemCount: number;
     totalPageCount: number;
-};
+}
 
-export type CrudType<ModelType extends Record<string, unknown>> = {
+export interface CrudType<ModelType extends Record<string, unknown>> {
     createOne: (model: ModelType) => Promise<null>; // throw error if smth wrong
     deleteOne: (query: PetsdbQueryType<ModelType>) => Promise<null>; // throw error if smth wrong
     findMany: (query: PetsdbQueryType<ModelType>) => Promise<Array<PetsdbItemType<ModelType>>>;
@@ -43,7 +43,7 @@ export type CrudType<ModelType extends Record<string, unknown>> = {
     ) => Promise<PaginationResultType<Partial<ModelType>>>;
     findOne: (query: PetsdbQueryType<ModelType>) => Promise<PetsdbItemType<ModelType> | null>;
     updateOne: (query: PetsdbQueryType<ModelType>, model: ModelType) => Promise<null>; // throw error if smth wrong
-};
+}
 
 /*
 export enum SortDirectionEnum {
@@ -69,10 +69,10 @@ export type GetListPaginationResultType<ItemType> = GetListPaginationArgumentTyp
 };
 */
 
-export type PaginationQueryType<ModelType extends Record<string, unknown>> = {
+export interface PaginationQueryType<ModelType extends Record<string, unknown>> {
     pageConfig: PetsdbReadPageConfigType<ModelType>;
     query: PetsdbQueryType<ModelType>;
-};
+}
 
 /*
 export type PaginationResultType<ModelType> = {

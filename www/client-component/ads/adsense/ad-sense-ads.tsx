@@ -10,11 +10,11 @@ import {getNeedUseThirdPartyServices} from '../../../util/url';
 
 import {loadAdSenseScript} from './ad-sense-helper';
 
-type AdSenseAdsPropsType = {
+interface AdSenseAdsPropsType {
     readonly adSlotId: string;
     // eslint-disable-next-line unicorn/no-keyword-prefix
     readonly className?: string;
-};
+}
 
 declare global {
     interface Window {

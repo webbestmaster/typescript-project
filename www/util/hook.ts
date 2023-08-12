@@ -8,7 +8,7 @@ export function useRefreshId(): UseRefreshApiHookType {
     const [refreshId, setRefreshId] = useState<string>('initial-refresh-id');
 
     const refresh = useCallback(() => {
-        return setRefreshId(getRandomString());
+        setRefreshId(getRandomString());
     }, [setRefreshId]);
 
     return useMemo(() => {

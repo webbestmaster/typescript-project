@@ -1,6 +1,6 @@
-type ClassNamesArgumentValueType = string | null | void;
+type ClassNamesArgumentValueType = string | null | undefined;
 
-type ClassNamesArgumentType = ClassNamesArgumentValueType | {[key: string]: ClassNamesArgumentValueType | boolean};
+type ClassNamesArgumentType = ClassNamesArgumentValueType | Record<string, ClassNamesArgumentValueType | boolean>;
 
 // eslint-disable-next-line complexity, unicorn/no-keyword-prefix
 export function cls(...argumentList: Array<ClassNamesArgumentType>): string {

@@ -7,10 +7,6 @@ export function loadGoogleAnalyticsScript(googleAnalyticsId: string): void {
 
     const {head} = document;
 
-    if (!head) {
-        return;
-    }
-
     const src = `https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`;
 
     if (document.querySelector(`script[src="${src}"]`)) {

@@ -15,11 +15,11 @@ import {SearchArticleType} from './search-type';
 import searchStyle from './search.scss';
 import {SearchResult} from './search-result/search-result';
 
-type SearchPropsType = {
+interface SearchPropsType {
     // eslint-disable-next-line unicorn/no-keyword-prefix
     readonly className?: string;
     readonly onChangeFocus?: (hasFocus: boolean) => void;
-};
+}
 
 export function Search(props: SearchPropsType): JSX.Element {
     const {className: cssClassName, onChangeFocus = noop} = props;
@@ -28,10 +28,10 @@ export function Search(props: SearchPropsType): JSX.Element {
     const [hasFocus, setHasFocus] = useState<boolean>(false);
     const minLetters = 3;
     const forceBlur = useCallback(() => {
-        return setHasFocus(false);
+        setHasFocus(false);
     }, []);
     const forceFocus = useCallback(() => {
-        return setHasFocus(true);
+        setHasFocus(true);
     }, []);
     const [searchString, setSearchString] = useState<string>('');
 
@@ -113,7 +113,7 @@ export function Search(props: SearchPropsType): JSX.Element {
                 <div className={searchStyle.result_wrapper}>
                     <SearchResult
                         isLoading={isInProgressArticleList}
-                        list={(resultArticleList?.list || []).filter(
+                        list={(resultArticleList?.list ?? []).filter(
                             (searchArticle: SearchArticleType): searchArticle is SearchArticleType => {
                                 return searchArticle.title.toLowerCase().includes(searchString.toLowerCase());
                             }

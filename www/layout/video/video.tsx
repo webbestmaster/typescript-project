@@ -9,7 +9,7 @@ import {cls} from '../../util/css';
 
 import videoStyle from './video.scss';
 
-type VideoPropsType = {
+interface VideoPropsType {
     readonly alt: string;
     // eslint-disable-next-line unicorn/no-keyword-prefix
     readonly className?: string;
@@ -28,7 +28,7 @@ type VideoPropsType = {
     readonly title: string;
     readonly videoClassName?: string;
     readonly width: number;
-};
+}
 
 // eslint-disable-next-line complexity
 export function Video(props: VideoPropsType): JSX.Element {
@@ -77,7 +77,7 @@ export function Video(props: VideoPropsType): JSX.Element {
 
     return (
         <div
-            className={`${videoStyle.video} ${cssClassName || ''}`.trim()}
+            className={`${videoStyle.video} ${cssClassName ?? ''}`.trim()}
             style={{display: 'block', height: 'auto', maxHeight: `${height}px`, maxWidth: `${width}px`}}
         >
             <svg
@@ -97,12 +97,12 @@ export function Video(props: VideoPropsType): JSX.Element {
 
             <Image
                 alt={alt}
-                className={`${videoStyle.video__image} ${image?.className || ''}`.trim()}
+                className={`${videoStyle.video__image} ${image?.className ?? ''}`.trim()}
                 fileName={poster}
                 getPathToFile={getPathToFile}
                 getPathToImage={getPathToImage}
                 height={height}
-                imgClassName={`${videoStyle.video__image_tag} ${image?.imgClassName || ''}`.trim()}
+                imgClassName={`${videoStyle.video__image_tag} ${image?.imgClassName ?? ''}`.trim()}
                 loading={posterLoading}
                 title={title}
                 width={width}

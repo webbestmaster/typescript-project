@@ -1,24 +1,25 @@
 export type PromiseResolveType<Result> = (result: Result) => unknown;
 export type QueueRunningTaskType = () => Promise<unknown>;
 
-type QueueTaskType = {
+interface QueueTaskType {
     reject: PromiseResolveType<Error>;
     resolve: PromiseResolveType<void>;
     task: QueueRunningTaskType;
-};
+}
 
-export type TaskRunnerOnTaskDoneArgumentType = {
+export interface TaskRunnerOnTaskDoneArgumentType {
     restTaskCount: number;
     taskInProgressCount: number;
-};
+}
+
 type TaskRunnerOnTaskDoneType = (taskRunnerData: TaskRunnerOnTaskDoneArgumentType) => void;
 
-export type TaskRunnerConfigType = {
+export interface TaskRunnerConfigType {
     maxWorkerCount: number;
     onTaskEnd?: TaskRunnerOnTaskDoneType;
-};
+}
 
-// eslint-disable-next-line no-empty-function
+// eslint-disable-next-line no-empty-function, @typescript-eslint/no-empty-function
 function noop(): void {}
 
 export class TaskRunner {
@@ -37,7 +38,7 @@ export class TaskRunner {
         this.taskList = [];
         this.maxWorkerCount = maxWorkerCount;
         this.currentWorkerCount = 0;
-        this.onTaskEnd = onTaskEnd || noop;
+        this.onTaskEnd = onTaskEnd ?? noop;
     }
 
     private getCurrentWorkerCount(): number {
@@ -64,7 +65,7 @@ export class TaskRunner {
     }
 
     private async run() {
-        const [fistTask] = this.taskList;
+        const fistTask = this.taskList.at(0);
 
         this.taskList.splice(0, 1);
 

@@ -10,11 +10,11 @@ import {ShareButtonWhatsApp} from '../../share-button/button/share-button-whats-
 
 import shareButtonListContentStyle from './share-button-list-content.scss';
 
-type ShareButtonListContentPropsType = {
+interface ShareButtonListContentPropsType {
     readonly listHeader: ReactNode;
     readonly title: string;
     readonly url: string;
-};
+}
 
 export function ShareButtonListContent(props: ShareButtonListContentPropsType): JSX.Element {
     const {url, title, listHeader} = props;

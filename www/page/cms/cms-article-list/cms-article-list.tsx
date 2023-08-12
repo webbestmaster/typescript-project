@@ -71,7 +71,9 @@ export function CmsArticleList(): JSX.Element {
         sorter: Array<SorterResult<ArticleForTableListType>> | SorterResult<ArticleForTableListType>,
         extra: TableCurrentDataSource<ArticleForTableListType>
     ) {
-        const firstSorter: SorterResult<ArticleForTableListType> | void = Array.isArray(sorter) ? sorter[0] : sorter;
+        const firstSorter: SorterResult<ArticleForTableListType> | undefined = Array.isArray(sorter)
+            ? sorter.at(0)
+            : sorter;
 
         if (!firstSorter) {
             console.warn('handleTableChange - NO firstSorter');
@@ -81,8 +83,8 @@ export function CmsArticleList(): JSX.Element {
         const {column, order, field, columnKey} = firstSorter;
         const sortDirection = order === SortDirectionEnum.descend ? -1 : 1;
 
-        const pageIndex = (pagination.current || 1) - 1;
-        const pageSize = pagination.pageSize || defaultPageSize;
+        const pageIndex = (pagination.current ?? 1) - 1;
+        const pageSize = pagination.pageSize ?? defaultPageSize;
 
         setPaginationArticleList((): PaginationQueryType<ArticleForTableListType> => {
             return {
@@ -115,7 +117,7 @@ export function CmsArticleList(): JSX.Element {
 
             <Table<ArticleForTableListType>
                 columns={getArticleTableColumnList({setSearchText, setSearchedColumn})}
-                dataSource={resultArticleList?.list || []}
+                dataSource={resultArticleList?.list ?? []}
                 loading={isInProgressArticleList}
                 onChange={handleTableChange}
                 pagination={{
@@ -125,7 +127,7 @@ export function CmsArticleList(): JSX.Element {
                     pageSize: paginationArticleList.pageConfig.pageSize,
                     pageSizeOptions: [defaultPageSize, 50, 100, 500, 1000, 2000, 5000],
                     showSizeChanger: true,
-                    total: resultArticleList?.totalItemCount || 0,
+                    total: resultArticleList?.totalItemCount ?? 0,
                 }}
                 rowKey="id"
             />

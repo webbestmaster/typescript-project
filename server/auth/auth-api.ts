@@ -16,7 +16,7 @@ export async function postAuthLogin(
     const {body, session} = request;
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const parsedData: Record<string, unknown> = JSON.parse(String(body || '{}'));
+    const parsedData: Record<string, unknown> = JSON.parse(String(body ?? '{}'));
 
     const {login, password} = parsedData;
 

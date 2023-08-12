@@ -21,6 +21,6 @@ export const fileRegExp = /\.(svg|webp|png|jpg|jpeg|gif|otf|ttf|woff|woff2|eot|m
 const pathToDistributionFront: string | null = isFront ? `/dist${pathToStaticFileFolder}` : null;
 const pathToDistributionBack: string | null = isBack ? '/dist-server/dist/' : null;
 
-export const pathToDistribution: string = pathToDistributionFront || pathToDistributionBack || 'NO PATH DEFINED!!!';
+export const pathToDistribution: string = pathToDistributionFront ?? pathToDistributionBack ?? 'NO PATH DEFINED!!!';
 
 export const webpackDevServerPort = 9090;

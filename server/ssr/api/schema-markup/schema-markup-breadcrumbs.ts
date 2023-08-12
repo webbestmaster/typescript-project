@@ -7,18 +7,18 @@ import {SsrReplaceDataType} from '../ssr-helper/ssr-helper-type';
 import {getClientArticleLinkWithDomain} from '../../../../www/client-component/article/article-helper';
 import {convertStringForHtml} from '../../../../www/util/string';
 
-type SchemaBreadcrumbItemType = {
+interface SchemaBreadcrumbItemType {
     '@type': 'ListItem';
     item: string;
     name: string;
     position: number;
-};
+}
 
-type SchemaBreadcrumbItemLastType = {
+interface SchemaBreadcrumbItemLastType {
     '@type': 'ListItem';
     name: string;
     position: number;
-};
+}
 
 // eslint-disable-next-line id-length
 export function getSchemaMarkupBreadcrumbsSsrReplaceData(

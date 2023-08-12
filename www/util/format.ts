@@ -31,7 +31,7 @@ export function getFormattedNumber(
 
 type FormatMainType = '2-digit' | 'numeric';
 
-export type DateTimeFormatOptionsType = {
+export interface DateTimeFormatOptionsType {
     [TimeSizeEnum.year]?: FormatMainType;
     [TimeSizeEnum.month]?: FormatMainType | 'long' | 'narrow' | 'short';
     [TimeSizeEnum.day]?: FormatMainType;
@@ -39,7 +39,7 @@ export type DateTimeFormatOptionsType = {
     [TimeSizeEnum.minute]?: FormatMainType;
     [TimeSizeEnum.second]?: FormatMainType;
     timeZone?: string;
-};
+}
 
 export function getFormattedDateTime(
     localeName: LocaleNameEnum,

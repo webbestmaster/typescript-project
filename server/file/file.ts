@@ -21,7 +21,7 @@ import {makeAudioFile} from './file-audio';
 
 // eslint-disable-next-line max-statements, complexity
 export async function uploadFile(request: FastifyRequest): Promise<ArticleFileType> {
-    const fileData: MultipartFile | void = await request.file({
+    const fileData: MultipartFile | undefined = await request.file({
         limits: {fileSize: fileSizeLimit, files: 1},
     });
 
@@ -149,7 +149,7 @@ export async function getImage(
     const rawFileExtension = getFileExtension(fileName);
     const fullFilePath = path.join(uploadFolder, fileName);
 
-    const removedFileName: string = `remove-me-${getRandomString()}`;
+    const removedFileName = `remove-me-${getRandomString()}`;
     const temporaryFilePath: string = path.join(temporaryUploadFolder, `${removedFileName}.${rawFileExtension}`);
 
     const [rawImageWidth, rawImageHeight] = size.split('x');

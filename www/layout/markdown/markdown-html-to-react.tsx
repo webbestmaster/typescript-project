@@ -52,15 +52,15 @@ function htmlStringToJsx(rawData: StringToJsxRawDataType, markdownItemCounter: M
     return <div dangerouslySetInnerHTML={{__html: htmlString}} />;
 }
 
-type PropsType = {
+interface PropsType {
     readonly articleTitle: string;
     readonly htmlCode: string;
-};
+}
 
 export function MarkdownHtmlToReact(props: PropsType): JSX.Element {
     const {htmlCode, articleTitle} = props;
     const splitTextList: Array<string> = htmlCode.split(markdownReplaceRegExp);
-    const replaceList: Array<string> = htmlCode.match(markdownReplaceRegExp) || [];
+    const replaceList: Array<string> = htmlCode.match(markdownReplaceRegExp) ?? [];
     const markdownItemCounter = new MarkdownItemCounter();
 
     const jsxList: Array<JSX.Element> = splitTextList.map((htmlChunk: string, index: number): JSX.Element => {

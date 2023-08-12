@@ -22,14 +22,14 @@ const containerClassNameMap: Record<PopupVisibleStateEnum, string> = {
     [PopupVisibleStateEnum.closing]: popupStyle.popup__container__closing,
 };
 
-type PopupPropsType = {
+interface PopupPropsType {
     readonly animationDurationMs?: number;
     readonly children: ReactNode;
     readonly containerProps?: DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
     readonly fadeProps?: DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
     readonly isOpen: boolean;
     readonly zIndex?: number;
-};
+}
 
 // eslint-disable-next-line complexity
 export function Popup(props: PopupPropsType): JSX.Element | null {
@@ -99,7 +99,7 @@ export function Popup(props: PopupPropsType): JSX.Element | null {
         return null;
     }
 
-    if (typeof document === 'undefined' || isMounted === false) {
+    if (typeof document === 'undefined' || !isMounted) {
         return null;
     }
 

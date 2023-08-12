@@ -6,10 +6,10 @@ import {ThemeContextType} from '../../provider/theme/theme-context-type';
 
 import fontSizeStyle from './font-size.scss';
 
-type FontSizePropsType = {
+interface FontSizePropsType {
     // eslint-disable-next-line unicorn/no-keyword-prefix
     readonly className?: string;
-};
+}
 
 export function FontSize(props: FontSizePropsType): JSX.Element {
     const {className: cssClassName} = props;

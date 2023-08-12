@@ -13,11 +13,11 @@ import {getIsFileInArticle} from '../article/article-util';
 
 import {uploadFileFolder} from './file-const';
 
-export type GetExtraFilesType = {
+export interface GetExtraFilesType {
     actualSpecialFileList: Array<string>;
     expectedSpecialFileList: Array<string>;
     extraFileList: Array<string>;
-};
+}
 
 export async function removeExtraStaticFiles(request: FastifyRequest, reply: FastifyReply): Promise<GetExtraFilesType> {
     const articleList: Array<ArticleType> = await articleCrud.findMany({});

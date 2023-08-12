@@ -1,13 +1,13 @@
 import {Component, ReactNode} from 'react';
 
-type PropsType = {
+interface PropsType {
     readonly children: ReactNode;
     readonly errorFallBack: ReactNode;
-};
+}
 
-type StateType = {
+interface StateType {
     hasError: boolean;
-};
+}
 
 export class ErrorBoundary extends Component<PropsType, StateType> {
     constructor(props: PropsType) {

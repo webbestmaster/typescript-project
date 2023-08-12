@@ -2,11 +2,11 @@ import {cls} from '../../util/css';
 
 import spinnerStyle from './spinner.scss';
 
-type PropsType = {
+interface PropsType {
     // eslint-disable-next-line unicorn/no-keyword-prefix
     readonly className?: string;
     readonly isShow?: boolean;
-};
+}
 
 export function AsciiSpinner(props: PropsType): JSX.Element | null {
     const {isShow = true, className: cssClassName} = props;

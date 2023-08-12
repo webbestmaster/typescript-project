@@ -16,7 +16,7 @@ export function findInArray<ItemType extends Record<string, unknown>>(
     return (
         list.find((item: ItemType): boolean => {
             return isObjectInclude(item, query);
-        }) || null
+        }) ?? null
     );
 }
 
@@ -25,7 +25,7 @@ export function findInArrayEnsure<ItemType extends Record<string, unknown>>(
     query: Partial<ItemType>,
     defaultValue: ItemType
 ): ItemType {
-    return findInArray<ItemType>(list, query) || defaultValue;
+    return findInArray<ItemType>(list, query) ?? defaultValue;
 }
 
 export function findManyInArray<ItemType extends Record<string, unknown>>(
@@ -41,7 +41,7 @@ export function findInArrayByValue<ItemType>(list: Array<ItemType>, value: unkno
     return (
         list.find((item: ItemType): boolean => {
             return item === value;
-        }) || null
+        }) ?? null
     );
 }
 
@@ -52,7 +52,7 @@ export function findInArrayByValueEnsure<ItemType>(
 ): ItemType {
     const findResult = findInArrayByValue<ItemType>(list, value);
 
-    return findResult === null ? defaultValue : findResult;
+    return findResult ?? defaultValue;
 }
 
 export function getUniqueListByKey<ItemType>(list: Array<ItemType>, keyName: keyof ItemType): Array<ItemType> {

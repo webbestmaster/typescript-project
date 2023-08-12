@@ -9,7 +9,7 @@ export function getHash(data: Array<unknown> | Record<string, unknown> | string)
 
     // eslint-disable-next-line no-loops/no-loops
     for (let index = 0; index < stringLength; index += 1) {
-        result = Math.trunc(Math.imul(31, result) + (fullString.codePointAt(index) || 0));
+        result = Math.trunc(Math.imul(31, result) + (fullString.codePointAt(index) ?? 0));
     }
 
     return result.toString(32);

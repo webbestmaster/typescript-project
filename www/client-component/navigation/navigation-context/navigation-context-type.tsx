@@ -1,5 +1,5 @@
 import {ArticlePreviewType} from '../../../../server/article/article-type';
 
-export type NavigationContextType = {
+export interface NavigationContextType {
     itemList: Array<ArticlePreviewType>;
-};
+}

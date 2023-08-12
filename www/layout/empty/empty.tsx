@@ -7,12 +7,12 @@ import {cls} from '../../util/css';
 import emptyImageSrc from './image/empty.svg';
 import emptyStyle from './empty.scss';
 
-type PropsType = {
+interface PropsType {
     // eslint-disable-next-line unicorn/no-keyword-prefix
     readonly className?: string;
     readonly mainText?: LangKeyType;
     readonly secondaryText?: LangKeyType;
-};
+}
 
 export function Empty(props: PropsType): JSX.Element {
     const {className: cssClassName, mainText, secondaryText} = props;

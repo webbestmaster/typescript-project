@@ -17,7 +17,7 @@ describe('my companies', () => {
     });
 
     beforeEach(async () => {
-        page = (await browser?.newPage()) || null;
+        page = (await browser?.newPage()) ?? null;
         await makeLogin(page);
     });
 

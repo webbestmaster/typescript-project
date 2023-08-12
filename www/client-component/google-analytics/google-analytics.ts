@@ -11,10 +11,10 @@ import {getNeedUseThirdPartyServices} from '../../util/url';
 
 import {loadGoogleAnalyticsScript} from './google-analytics-helper';
 
-type GoogleAnalyticsType = {
+interface GoogleAnalyticsType {
     googleAnalyticsId: string;
     pathname: string;
-};
+}
 
 declare global {
     interface Window {
@@ -62,7 +62,7 @@ export function useGoogleAnalytics(config: GoogleAnalyticsType): null {
 
     loadGoogleAnalyticsScript(googleAnalyticsId);
 
-    // eslint-disable-next-line unicorn/consistent-destructuring
+    // eslint-disable-next-line unicorn/consistent-destructuring, @typescript-eslint/no-unnecessary-condition
     window.dataLayer ||= [];
 
     // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
@@ -100,8 +100,8 @@ export function useGoogleAnalytics(config: GoogleAnalyticsType): null {
             setAndSend(pathname);
 
             // Fix pokazatel' otkazov
-            setInterval((): unknown => {
-                return ga('send', 'event', 'nobouncy', '15sec');
+            setInterval(() => {
+                ga('send', 'event', 'nobouncy', '15sec');
             }, 15e3);
         })
         .catch(console.error);

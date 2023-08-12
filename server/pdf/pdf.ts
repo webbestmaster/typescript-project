@@ -36,7 +36,7 @@ async function htmlToPdf(html: string): Promise<Buffer> {
 export async function getPdf(request: FastifyRequest<{Body?: string}>): Promise<Buffer> {
     const {body} = request;
 
-    const rawHtml = String(body || '');
+    const rawHtml = String(body ?? '');
 
     const html = decodeURIComponent(rawHtml);
 

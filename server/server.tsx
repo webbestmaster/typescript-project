@@ -171,7 +171,7 @@ async function innerInitialization() {
     ].forEach((cmsPath: string): void => {
         // [cms articleList]
         fastify.get(cmsPath, async (request: FastifyRequest, reply: FastifyReply): Promise<string> => {
-            const {html} = await getHtmlCallBack({slug: '', url: request.raw.url || ''});
+            const {html} = await getHtmlCallBack({slug: '', url: request.raw.url ?? ''});
 
             reply.type('text/html');
 
@@ -184,7 +184,7 @@ async function innerInitialization() {
         async (error: FastifyError, request: FastifyRequest, reply: FastifyReply): Promise<string> => {
             request.log.warn(error);
 
-            const {html} = await getHtmlCallBack({slug: '', url: request.raw.url || ''});
+            const {html} = await getHtmlCallBack({slug: '', url: request.raw.url ?? ''});
 
             reply.code(500);
             reply.type('text/html');
@@ -196,7 +196,7 @@ async function innerInitialization() {
     fastify.setNotFoundHandler(async (request: FastifyRequest, reply: FastifyReply): Promise<string> => {
         request.log.warn(request);
 
-        const {html} = await getHtmlCallBack({slug: '', url: request.raw.url || ''});
+        const {html} = await getHtmlCallBack({slug: '', url: request.raw.url ?? ''});
 
         reply.code(404);
         reply.type('text/html');

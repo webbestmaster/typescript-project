@@ -79,7 +79,7 @@ describe('test TaskRunner', () => {
             });
         } catch (error: unknown) {
             // eslint-disable-next-line jest/no-conditional-in-test, jest/no-conditional-expect
-            expect(error instanceof Error ? error?.message : '').toBe('I am the ERROR!');
+            expect(error instanceof Error ? error.message : '').toBe('I am the ERROR!');
             isErrorCaught = true;
         }
 
@@ -97,7 +97,6 @@ describe('test TaskRunner', () => {
         const taskRunner = new TaskRunner({maxWorkerCount: 1});
 
         let increaseMe = 0;
-        let isErrorCaught = false;
 
         // eslint-disable-next-line @typescript-eslint/no-floating-promises
         taskRunner.add(async () => {
@@ -105,17 +104,21 @@ describe('test TaskRunner', () => {
             increaseMe += 1;
         });
 
-        try {
+        await expect(async () => {
             await taskRunner.add(async () => {
                 await waitForTime(defaultTimeOut);
-                // eslint-disable-next-line no-throw-literal
+                // eslint-disable-next-line no-throw-literal, sonarjs/no-duplicate-string
+                throw new Error('I am an ERROR!');
+            });
+        }).rejects.toThrow('I am an ERROR!');
+
+        await expect(async () => {
+            await taskRunner.add(async () => {
+                await waitForTime(defaultTimeOut);
+                // eslint-disable-next-line no-throw-literal, @typescript-eslint/no-throw-literal
                 throw 'I am an ERROR!';
             });
-        } catch (error: unknown) {
-            // eslint-disable-next-line jest/no-conditional-in-test, jest/no-conditional-expect
-            expect(error instanceof Error && error?.message.toString().startsWith('[TaskRunner]:')).toBe(true);
-            isErrorCaught = true;
-        }
+        }).rejects.toThrow('[TaskRunner]: Task running with error!');
 
         await taskRunner.add(async () => {
             await waitForTime(defaultTimeOut);
@@ -123,7 +126,6 @@ describe('test TaskRunner', () => {
         });
 
         expect(increaseMe).toBe(2);
-        expect(isErrorCaught).toBe(true);
     });
 
     it('add several tasks and with different time of execution, maxWorkerCount: 1', async () => {

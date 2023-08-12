@@ -12,7 +12,7 @@ export function getSavedFontSize(): number {
         return defaultFontSize;
     }
 
-    const rawSavedFontSize: string = localStorage.getItem(fontSizeSavedKey) || defaultFontSize.toString(10);
+    const rawSavedFontSize: string = localStorage.getItem(fontSizeSavedKey) ?? defaultFontSize.toString(10);
     const savedFontSize: number = Number.parseInt(rawSavedFontSize, 10) || defaultFontSize;
 
     if (savedFontSize > maxFontSize) {

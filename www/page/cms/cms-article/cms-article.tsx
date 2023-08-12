@@ -85,11 +85,11 @@ const {Text: TypographyText, Title} = Typography;
 const {Option} = Select;
 const {TextArea} = Input;
 
-type CmsArticlePropsType = {
+interface CmsArticlePropsType {
     readonly article: ArticleType;
     readonly mode: CmsArticleModeEnum;
     readonly onFinish: (article: ArticleType) => void;
-};
+}
 
 // eslint-disable-next-line complexity, max-statements
 export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
@@ -147,7 +147,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
     useEffect(() => {
         executeArticleListPaginationPick({}, {pageIndex: 0, pageSize: 0, sort: {title: 1}}, keyForValidationList)
             .then((data: PaginationResultType<ArticleForValidationType>) => {
-                return setSavedArticleList(data.list);
+                setSavedArticleList(data.list);
             })
             .catch((error: Error): void => {
                 console.log(error);
@@ -453,8 +453,8 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
             <Form.Item initialValue={dayjs.utc(publishDate)} label="Publish date UTC-0:" name="publishDate">
                 <DatePicker
-                    onOk={(date: Dayjs): void => {
-                        return setPublishDate(date.toISOString());
+                    onOk={(date: Dayjs) => {
+                        setPublishDate(date.toISOString());
                     }}
                     showTime
                 />

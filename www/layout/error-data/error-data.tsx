@@ -5,11 +5,11 @@ import {Locale} from '../../provider/locale/locale-context';
 
 import errorDataStyle from './error-data.scss';
 
-type PropsType = {
+interface PropsType {
     // eslint-disable-next-line unicorn/no-keyword-prefix
     readonly className?: string;
     readonly langKey: LangKeyType;
-};
+}
 
 export function ErrorData(props: PropsType): JSX.Element {
     const {langKey, className: cssClassName} = props;

@@ -7,7 +7,7 @@ import {GetHtmlCallBackRequestType} from './ssr-type';
 export function getHtmlCallBackRequest(request: FastifyRequest<{Params: {slug?: string}}>): GetHtmlCallBackRequestType {
     const {params, raw} = request;
     const slug = getStringFromUnknown(params, 'slug');
-    const url = raw.url || '';
+    const url = raw.url ?? '';
 
     return {slug, url};
 }

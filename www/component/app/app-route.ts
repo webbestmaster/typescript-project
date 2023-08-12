@@ -1,8 +1,8 @@
 /* eslint-disable sort-keys */
 
-export type AppRoutType = {
+export interface AppRoutType {
     path: string;
-};
+}
 
 export const appRoute = {
     // Client

@@ -12,12 +12,12 @@ import {ThemeNameEnum} from '../../provider/theme/theme-context-type';
 import {AppProvider} from './app-provider';
 import {AppRouting} from './app-routing';
 
-export type AppPropsType = {
+export interface AppPropsType {
     readonly articleData: ArticleContextType | null;
     readonly defaultThemeName: ThemeNameEnum | null;
     readonly navigationData: NavigationContextType | null;
     readonly url: string;
-};
+}
 
 export function App(props: AppPropsType): JSX.Element {
     const {url, navigationData, articleData, defaultThemeName} = props;

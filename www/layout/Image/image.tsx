@@ -7,7 +7,7 @@ import {Source} from './source';
 // Max website width is 1200
 const screenWidthList: Array<number> = [1200, 1024, 912, 820, 768, 540, 425, 414, 412, 390, 375, 360, 320, 280, 128];
 
-type ImagePropsType = {
+interface ImagePropsType {
     readonly alt: string;
     // eslint-disable-next-line unicorn/no-keyword-prefix
     readonly className?: string;
@@ -19,7 +19,7 @@ type ImagePropsType = {
     readonly loading: HTMLImageElement['loading'];
     readonly title: string;
     readonly width: number;
-};
+}
 
 export function Image(props: ImagePropsType): JSX.Element {
     const {

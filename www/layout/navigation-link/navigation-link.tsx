@@ -3,7 +3,7 @@
 import {ReactNode} from 'react';
 import {Link, useSearchParams} from 'react-router-dom';
 
-export type NavigationLinkPropsType = {
+export interface NavigationLinkPropsType {
     readonly children?: ReactNode;
     // eslint-disable-next-line unicorn/no-keyword-prefix
     readonly className?: string;
@@ -11,7 +11,7 @@ export type NavigationLinkPropsType = {
     readonly queries?: Record<string, string>;
     readonly title?: string;
     readonly to: string;
-};
+}
 
 export function NavigationLink(props: NavigationLinkPropsType): JSX.Element {
     const {className: cssClassName, to, children, isSaveQueries = true, title, queries: passedQueries = {}} = props;

@@ -7,11 +7,11 @@ import {NavigationContextType} from '../../client-component/navigation/navigatio
 import {ArticleProvider} from '../../client-component/article/article-context/article-context';
 import {ArticleContextType} from '../../client-component/article/article-context/article-context-type';
 
-type PropsType = {
+interface PropsType {
     readonly articleData: ArticleContextType | null;
     readonly children: ReactNode;
     readonly navigationData: NavigationContextType | null;
-};
+}
 
 export function AppProvider(props: PropsType): JSX.Element {
     const {children, navigationData, articleData} = props;

@@ -15,7 +15,7 @@ describe('auth', () => {
     });
 
     beforeEach(async () => {
-        page = (await browser?.newPage()) || null;
+        page = (await browser?.newPage()) ?? null;
     });
 
     afterEach(async () => {
