@@ -149,6 +149,7 @@
                 "ignoreIIFE": true
             }
         ],
+        "@typescript-eslint/no-unnecessary-boolean-literal-compare": 0,
         "promise/always-return": 0,
         "unicorn/prefer-string-replace-all": 0,
         "unicorn/prefer-node-protocol": 2,
