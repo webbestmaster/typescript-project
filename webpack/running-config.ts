@@ -32,12 +32,7 @@ import {
 
 const configFront: Configuration = {
     devtool: 'source-map', // isDevelopment ? 'source-map' : false,
-    entry: [
-        './www/css/root.scss',
-        'markdown-pro/dist/style.css',
-        'react-audio-player-pro/dist/style.css',
-        './www/root.tsx',
-    ],
+    entry: ['./www/css/root.scss', './www/root.tsx'],
     mode: nodeEnvironment,
     module: {rules},
     // optimization,

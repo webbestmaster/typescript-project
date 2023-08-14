@@ -18,12 +18,12 @@ export function Navigation(): JSX.Element {
     const {article, breadcrumbs} = useContext<ArticleContextType>(articleContext);
     const {slug: currentArticleSlug} = article;
     const {itemList} = navigationContextData;
-    const [ignoredHomeItem, sectionItem] = breadcrumbs;
+    const sectionItem = breadcrumbs.at(1);
 
     const renderNavigationListItem = useCallback(
         (menuItem: ArticlePreviewType, index: number): JSX.Element => {
             const {slug, title} = menuItem;
-            const isActiveLink = currentArticleSlug === slug || sectionItem.slug === slug;
+            const isActiveLink = currentArticleSlug === slug || sectionItem?.slug === slug;
 
             return (
                 <li className={navigationStyle.navigation_list_item} key={`${slug}-${String(index)}`}>

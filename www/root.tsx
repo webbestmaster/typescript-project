@@ -1,5 +1,8 @@
 /* global document */
 
+import 'markdown-pro/dist/style.css';
+import 'react-audio-player-pro/dist/style.css';
+
 import {StrictMode} from 'react';
 import {hydrateRoot, createRoot} from 'react-dom/client';
 
