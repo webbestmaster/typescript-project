@@ -1,3 +1,5 @@
+/* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
+
 import {Configuration} from 'webpack';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 
@@ -67,7 +69,6 @@ const optimizationDevelopment: Configuration['optimization'] = {
                 reuseExistingChunk: true,
                 test: /www\/service/u,
             },
-
             // eslint-disable-next-line sort-keys
             style: {
                 chunks: 'all',
@@ -76,6 +77,13 @@ const optimizationDevelopment: Configuration['optimization'] = {
                 reuseExistingChunk: true,
                 test: /\.s?css$/u,
             },
+            // files: {
+            //     chunks: 'all',
+            //     name: 'files',
+            //     priority: -15,
+            //     test: fileRegExp,
+            //     reuseExistingChunk: true,
+            // },
             // eslint-disable-next-line sort-keys
             vendor: {
                 chunks: 'all',
