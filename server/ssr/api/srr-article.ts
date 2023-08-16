@@ -1,4 +1,4 @@
-import {ArticleContextType} from '../../../www/client-component/article/article-context/article-context-type';
+import type {ArticleContextType} from '../../../www/client-component/article/article-context/article-context-type';
 import {makeDefaultArticle} from '../../article/article-helper';
 import {
     getActiveArticleBySlugEnsure,
@@ -7,7 +7,7 @@ import {
     getIsActiveArticlePreview,
     getSiblingPreviewListById,
 } from '../../article/article-util';
-import {ArticlePreviewType, ArticleType} from '../../article/article-type';
+import type {ArticlePreviewType, ArticleType} from '../../article/article-type';
 import {articleSsrFieldName} from '../../../www/client-component/article/article-const';
 
 import {replaceSpecialSymbols} from './ssr-helper/ssr-symbol';

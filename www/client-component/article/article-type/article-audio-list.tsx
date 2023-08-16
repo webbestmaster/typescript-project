@@ -1,7 +1,7 @@
 import {useContext} from 'react';
-import {AudioPlayer, TrackType} from 'react-audio-player-pro';
+import {AudioPlayer, type TrackType} from 'react-audio-player-pro';
 
-import {ArticleContextType} from '../article-context/article-context-type';
+import type {ArticleContextType} from '../article-context/article-context-type';
 import {articleContext} from '../article-context/article-context';
 import {Markdown} from '../../../layout/markdown/markdown';
 import {markdownAudioRegExp, parseAudioTag} from '../../../layout/markdown/markdown-helper-audio';

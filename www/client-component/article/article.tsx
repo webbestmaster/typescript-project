@@ -3,7 +3,7 @@ import {useContext} from 'react';
 import {ArticleTypeEnum} from '../../../server/article/article-type';
 import {NeverError} from '../../util/error';
 
-import {ArticleContextType} from './article-context/article-context-type';
+import type {ArticleContextType} from './article-context/article-context-type';
 import {articleContext} from './article-context/article-context';
 
 import {ArticleArticle} from './article-type/article-article';

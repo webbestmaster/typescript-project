@@ -1,11 +1,11 @@
 import {useContext} from 'react';
 import {Audio} from 'react-audio-player-pro';
 
-import {ArticleContextType} from '../article-context/article-context-type';
+import type {ArticleContextType} from '../article-context/article-context-type';
 import {articleContext} from '../article-context/article-context';
 import {Markdown} from '../../../layout/markdown/markdown';
 import {getFileMarkdownByFullInfo} from '../../../layout/markdown/markdown-helper';
-import {ArticleFileType, ArticleFileTypeEnum} from '../../../../server/article/article-type';
+import {type ArticleFileType, ArticleFileTypeEnum} from '../../../../server/article/article-type';
 import {defaultMediaMetadata} from '../../../layout/audio-player/audio-player-const';
 import articleStyle from '../article.scss';
 import {getPathToFile} from '../../../util/path';

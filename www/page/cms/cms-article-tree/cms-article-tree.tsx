@@ -1,12 +1,12 @@
 import {useState, useEffect, useCallback} from 'react';
 import {Tree, Typography, List, Divider, message} from 'antd';
-import {DataNode} from 'rc-tree/lib/interface';
+import type {DataNode} from 'rc-tree/lib/interface';
 import {DownOutlined} from '@ant-design/icons';
 import {Link} from 'react-router-dom';
 
 import {CmsPage} from '../layout/cms-page/cms-page';
 import {useMakeExecutableState} from '../../../util/function';
-import {PaginationResultType} from '../../../../server/data-base/data-base-type';
+import type {PaginationResultType} from '../../../../server/data-base/data-base-type';
 import {getArticleListPaginationPick} from '../../../service/article/article-api';
 import {Spinner} from '../../../layout/spinner/spinner';
 import {Box} from '../../../layout/box/box';
@@ -14,7 +14,7 @@ import {getTickCross} from '../../../util/string';
 import {getArticleLinkToEdit} from '../cms-article/cms-article-helper';
 import {getArticleLinkToViewClient} from '../../../client-component/article/article-helper';
 
-import {ArticleForTreeType} from './cms-article-tree-type';
+import type {ArticleForTreeType} from './cms-article-tree-type';
 import {keyForTreeList} from './cms-article-tree-const';
 import {
     getArticleForTreeById,

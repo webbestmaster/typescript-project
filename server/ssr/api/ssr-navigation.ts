@@ -1,5 +1,5 @@
 // eslint-disable-next-line max-len
-import {NavigationContextType} from '../../../www/client-component/navigation/navigation-context/navigation-context-type';
+import type {NavigationContextType} from '../../../www/client-component/navigation/navigation-context/navigation-context-type';
 import {navigationSsrFieldName} from '../../../www/client-component/navigation/navigation-const';
 import {
     articleToArticlePreview,
@@ -7,7 +7,7 @@ import {
     getIsActiveArticlePreview,
 } from '../../article/article-util';
 import {rootArticleId} from '../../article/article-const';
-import {ArticlePreviewType} from '../../article/article-type';
+import type {ArticlePreviewType} from '../../article/article-type';
 
 import {replaceSpecialSymbols} from './ssr-helper/ssr-symbol';
 

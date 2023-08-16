@@ -1,8 +1,8 @@
 /* eslint-disable react/no-multi-comp, react/jsx-props-no-spreading */
-import {lazy, Suspense, ComponentType} from 'react';
-import {AudioPropsType, AudioPlayerPropsType, PlayListProviderPropsType} from 'react-audio-player-pro';
+import {lazy, Suspense, type ComponentType} from 'react';
+import type {AudioPropsType, AudioPlayerPropsType, PlayListProviderPropsType} from 'react-audio-player-pro';
 
-import {LazyResultType} from '../../util/type';
+import type {LazyResultType} from '../../util/type';
 import {AsciiSpinner} from '../spinner/ascii-spinner';
 
 import audioPlayerStyle from './audio-player.scss';

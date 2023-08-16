@@ -2,9 +2,9 @@ import {cwd} from 'node:process';
 import path from 'node:path';
 import fileSystem from 'node:fs/promises';
 
-import {FastifyReply, FastifyRequest} from 'fastify';
+import type {FastifyReply, FastifyRequest} from 'fastify';
 
-import {ArticleType} from '../article/article-type';
+import type {ArticleType} from '../article/article-type';
 import {articleCrud} from '../article/article';
 
 import {specialFileNameList} from '../../www/const';

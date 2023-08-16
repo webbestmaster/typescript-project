@@ -8,7 +8,7 @@ import {TopAdsWrapper} from '../../../client-component/ads/top-ads-wrapper/top-a
 import {BottomAdsWrapper} from '../../../client-component/ads/bottom-ads-wrapper/bottom-ads-wrapper';
 import {Page} from '../../../client-component/page/page';
 import {PageHeader} from '../../../client-component/page-header/page-header';
-import {ArticleContextType} from '../../../client-component/article/article-context/article-context-type';
+import type {ArticleContextType} from '../../../client-component/article/article-context/article-context-type';
 import {articleContext} from '../../../client-component/article/article-context/article-context';
 import {Error404} from '../../service/error-404/error-404';
 import {Spinner} from '../../../layout/spinner/spinner';

@@ -1,6 +1,6 @@
-import React, {useMemo} from 'react';
+import {useMemo} from 'react';
 
-import {LangKeyType} from '../../provider/locale/translation/type';
+import type {LangKeyType} from '../../provider/locale/translation/type';
 import {Locale} from '../../provider/locale/locale-context';
 import {cls} from '../../util/css';
 

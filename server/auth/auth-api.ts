@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import {FastifyReply, FastifyRequest} from 'fastify';
+import type {FastifyReply, FastifyRequest} from 'fastify';
 
-import {LoginResponseType} from '../../www/service/auth/auth-type';
+import type {LoginResponseType} from '../../www/service/auth/auth-type';
 import {getSha256HashServer} from '../util/string';
 import {UserRoleEnum} from '../../www/provider/user/user-context-type';
 import {mainResponseHeader} from '../const';

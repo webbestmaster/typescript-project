@@ -2,8 +2,8 @@
 
 // Used - JSON-LD (recommended)
 
-import {ArticleType} from '../../../article/article-type';
-import {SsrReplaceDataType} from '../ssr-helper/ssr-helper-type';
+import type {ArticleType} from '../../../article/article-type';
+import type {SsrReplaceDataType} from '../ssr-helper/ssr-helper-type';
 import {getPathToImage} from '../../../../www/util/path';
 import {
     companyLogoPngFileName,
@@ -12,7 +12,7 @@ import {
     copyrightName,
     httpsSiteDomain,
 } from '../../../../www/const';
-import {ArticleImageDataType, getImageListFromArticle} from '../../../sitemap/sitemap-img-xml';
+import {type ArticleImageDataType, getImageListFromArticle} from '../../../sitemap/sitemap-img-xml';
 import {getClientArticleLinkWithDomain} from '../../../../www/client-component/article/article-helper';
 import {convertStringForHtml} from '../../../../www/util/string';
 

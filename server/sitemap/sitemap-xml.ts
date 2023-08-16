@@ -1,4 +1,4 @@
-import {ArticleType, ArticleTypeEnum} from '../article/article-type';
+import {type ArticleType, ArticleTypeEnum} from '../article/article-type';
 import {rootArticleSlug} from '../article/article-const';
 import {getClientArticleLinkWithDomain} from '../../www/client-component/article/article-helper';
 

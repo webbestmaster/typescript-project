@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 
-import {ArticlePreviewType, SubDocumentListViewTypeEnum} from '../../../../server/article/article-type';
+import {type ArticlePreviewType, SubDocumentListViewTypeEnum} from '../../../../server/article/article-type';
 import {getArticleLinkToViewClient} from '../../article/article-helper';
 import {getPathToImage} from '../../../util/path';
 

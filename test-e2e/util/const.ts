@@ -1,4 +1,4 @@
-import {WaitForOptions} from 'puppeteer';
+import type {WaitForOptions} from 'puppeteer';
 
 const domain = 'https://mvp0.mememe.io';
 // ignored const domain = 'http://localhost:9090';

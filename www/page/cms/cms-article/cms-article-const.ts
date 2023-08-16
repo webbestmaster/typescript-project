@@ -1,4 +1,4 @@
-import {KeyForValidationListType} from './cms-article-type';
+import type {KeyForValidationListType} from './cms-article-type';
 
 export const enum CmsArticleModeEnum {
     create = 'create',

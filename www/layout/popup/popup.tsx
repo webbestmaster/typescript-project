@@ -1,6 +1,6 @@
 /* global document, setTimeout, clearTimeout, NodeJS, HTMLDivElement */
 
-import {ReactNode, useEffect, useRef, useState, DetailedHTMLProps, HTMLAttributes} from 'react';
+import {type ReactNode, useEffect, useRef, useState, type DetailedHTMLProps, type HTMLAttributes} from 'react';
 import {createPortal} from 'react-dom';
 
 import {cls} from '../../util/css';

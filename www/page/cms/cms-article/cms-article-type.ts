@@ -1,6 +1,6 @@
-import {ArticleType} from '../../../../server/article/article-type';
+import type {ArticleType} from '../../../../server/article/article-type';
 
-import {CmsArticleModeEnum} from './cms-article-const';
+import type {CmsArticleModeEnum} from './cms-article-const';
 
 export type ArticleForValidationKeysType = 'id' | 'slug' | 'subDocumentIdList' | 'title';
 export type ArticleForValidationType = Pick<ArticleType, ArticleForValidationKeysType>;

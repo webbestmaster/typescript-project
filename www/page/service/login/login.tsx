@@ -1,9 +1,9 @@
 /* global HTMLFormElement, HTMLInputElement */
-import {SyntheticEvent, useCallback, useState} from 'react';
+import {type SyntheticEvent, useCallback, useState} from 'react';
 
 import {useUserContext} from '../../../provider/user/user-context';
 import {useMakeExecutableState} from '../../../util/function';
-import {LoginResponseType} from '../../../service/auth/auth-type';
+import type {LoginResponseType} from '../../../service/auth/auth-type';
 import {loginUser} from '../../../service/auth/auth-api';
 import {throwError} from '../../../util/error';
 import {apiUrl} from '../../../../server/const';

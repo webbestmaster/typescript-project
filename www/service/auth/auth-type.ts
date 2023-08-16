@@ -1,4 +1,4 @@
-import {UserRoleEnum} from '../../provider/user/user-context-type';
+import type {UserRoleEnum} from '../../provider/user/user-context-type';
 
 export interface LoginResponseType {
     user: {

@@ -2,7 +2,7 @@
 
 import {useRef, useState, useCallback} from 'react';
 
-import {GetPathToFileType, GetPathToImageType} from '../../util/path';
+import type {GetPathToFileType, GetPathToImageType} from '../../util/path';
 import {Image} from '../Image/image';
 import {secondsToHuman} from '../../util/time';
 import {cls} from '../../util/css';

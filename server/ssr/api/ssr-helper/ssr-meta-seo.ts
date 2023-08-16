@@ -1,6 +1,6 @@
-import {ArticleType} from '../../../article/article-type';
+import type {ArticleType} from '../../../article/article-type';
 
-import {SsrReplaceDataType} from './ssr-helper-type';
+import type {SsrReplaceDataType} from './ssr-helper-type';
 
 export function getMetaSeoSsrReplaceData(article: ArticleType): SsrReplaceDataType {
     const {metaSeo} = article;

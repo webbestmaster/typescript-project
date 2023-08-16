@@ -3,13 +3,13 @@ import {Link} from 'react-router-dom';
 
 import {Locale} from '../../provider/locale/locale-context';
 import {getArticleLinkToViewClient} from '../article/article-helper';
-import {ArticlePreviewType} from '../../../server/article/article-type';
+import type {ArticlePreviewType} from '../../../server/article/article-type';
 import {rootArticleSlug} from '../../../server/article/article-const';
-import {ArticleContextType} from '../article/article-context/article-context-type';
+import type {ArticleContextType} from '../article/article-context/article-context-type';
 import {articleContext} from '../article/article-context/article-context';
 import {cls} from '../../util/css';
 
-import {NavigationContextType} from './navigation-context/navigation-context-type';
+import type {NavigationContextType} from './navigation-context/navigation-context-type';
 import {navigationContext} from './navigation-context/navigation-context';
 import navigationStyle from './navigation.scss';
 

@@ -1,6 +1,6 @@
-import {JSONSchemaType} from 'ajv';
+import type {JSONSchemaType} from 'ajv';
 
-import {LoginResponseType} from './auth-type';
+import type {LoginResponseType} from './auth-type';
 
 export const loginResponseSchema: JSONSchemaType<LoginResponseType> = {
     additionalProperties: false,

@@ -4,7 +4,7 @@ import {describe, it, expect} from '@jest/globals';
 
 import {waitForTime} from '../../test-unit/util/test-util-time';
 
-import {TaskRunner, TaskRunnerOnTaskDoneArgumentType} from './task-runner';
+import {TaskRunner, type TaskRunnerOnTaskDoneArgumentType} from './task-runner';
 
 const defaultTimeOut = 50;
 

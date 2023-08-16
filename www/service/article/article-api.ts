@@ -1,7 +1,7 @@
 import type {PetsdbQueryType, PetsdbReadPageConfigType} from 'petsdb';
 
-import {PaginationResultType} from '../../../server/data-base/data-base-type';
-import {ArticleType} from '../../../server/article/article-type';
+import type {PaginationResultType} from '../../../server/data-base/data-base-type';
+import type {ArticleType} from '../../../server/article/article-type';
 import {FetchMethodEnum, fetchX} from '../../util/fetch';
 import {
     makeArticlePaginationSchema,
@@ -10,8 +10,8 @@ import {
 } from '../../../server/article/article-validation';
 import {apiUrl} from '../../../server/const';
 import {paginationQueryToURLSearchParameters} from '../../util/url';
-import {UnknownObjectType} from '../../util/type';
-import {ArticleContextType} from '../../client-component/article/article-context/article-context-type';
+import type {UnknownObjectType} from '../../util/type';
+import type {ArticleContextType} from '../../client-component/article/article-context/article-context-type';
 import {articleContextDataSchema} from '../../client-component/article/article-context/article-context-const';
 
 // eslint-disable-next-line require-await

@@ -1,4 +1,4 @@
-import {SearchArticleType} from '../search-type';
+import type {SearchArticleType} from '../search-type';
 import {Spinner} from '../../../layout/spinner/spinner';
 import {Locale} from '../../../provider/locale/locale-context';
 import {cls} from '../../../util/css';

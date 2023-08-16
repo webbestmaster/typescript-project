@@ -1,4 +1,4 @@
-import {Stats} from 'node:fs';
+import type {Stats} from 'node:fs';
 import fileSystem from 'node:fs/promises';
 import path from 'node:path';
 

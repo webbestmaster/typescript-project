@@ -13,12 +13,12 @@ import {appIconPngFileName, companyLogoPngFileName, companyLogoPngHeight, compan
 import {getPathToImage} from '../www/util/path';
 import {articlePreviewKeyList} from '../www/client-component/search/search-const';
 // import {takeTimeLog} from '../www/util/time';
-import {TaskRunner, TaskRunnerOnTaskDoneArgumentType} from '../www/util/task-runner';
+import {TaskRunner, type TaskRunnerOnTaskDoneArgumentType} from '../www/util/task-runner';
 import {formatProgress} from '../www/util/string';
 import {logTakenTime} from '../www/util/time';
 
 import {articleCrud} from './article/article';
-import {ArticleType} from './article/article-type';
+import type {ArticleType} from './article/article-type';
 import {uploadFileFolder} from './file/file-const';
 import {apiUrl, serverPort} from './const';
 import {rootArticleSlug} from './article/article-const';

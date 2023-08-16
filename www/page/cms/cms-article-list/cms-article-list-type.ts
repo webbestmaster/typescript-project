@@ -1,4 +1,4 @@
-import {ArticleType} from '../../../../server/article/article-type';
+import type {ArticleType} from '../../../../server/article/article-type';
 
 export const enum SortDirectionEnum {
     ascend = 'ascend',

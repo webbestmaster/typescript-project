@@ -2,7 +2,7 @@
 import type {PetsdbQueryType, PetsdbReadPageConfigType} from 'petsdb';
 import {generatePath as reactRouterGeneratePath} from 'react-router-dom';
 
-import {ArticleType} from '../../server/article/article-type';
+import type {ArticleType} from '../../server/article/article-type';
 
 // eslint-disable-next-line id-length
 export function paginationQueryToURLSearchParameters<DataType extends Record<string, unknown>>(

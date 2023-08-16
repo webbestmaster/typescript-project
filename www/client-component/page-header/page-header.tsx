@@ -1,4 +1,4 @@
-import {ReactNode} from 'react';
+import type {ReactNode} from 'react';
 
 import {FontSize} from '../font-size/font-size';
 

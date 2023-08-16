@@ -1,6 +1,6 @@
 /* global fetch, HeadersInit, FormData, Response, File */
 
-import {JSONSchemaType} from 'ajv';
+import type {JSONSchemaType} from 'ajv';
 
 import {getExpectedStructure} from './object';
 

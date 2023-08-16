@@ -1,4 +1,4 @@
-import {ReactNode} from 'react';
+import type {ReactNode} from 'react';
 
 import {ShareButtonVkontakte} from '../../share-button/button/share-button-vkontakte';
 import {ShareButtonFacebook} from '../../share-button/button/share-button-facebook';

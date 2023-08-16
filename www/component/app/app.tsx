@@ -2,12 +2,12 @@ import {AudioPlayerControlSprite} from 'react-audio-player-pro';
 
 import {ErrorBoundary} from '../error-boundary/error-boundary';
 
-import {NavigationContextType} from '../../client-component/navigation/navigation-context/navigation-context-type';
-import {ArticleContextType} from '../../client-component/article/article-context/article-context-type';
+import type {NavigationContextType} from '../../client-component/navigation/navigation-context/navigation-context-type';
+import type {ArticleContextType} from '../../client-component/article/article-context/article-context-type';
 import {ShareButtonSprite} from '../../client-component/share/share-button/share-button-sprite';
 import {ThemeProvider} from '../../provider/theme/theme-context';
 import {GdprInfo} from '../../layout/gdpr-info/gdpr-info';
-import {ThemeNameEnum} from '../../provider/theme/theme-context-type';
+import type {ThemeNameEnum} from '../../provider/theme/theme-context-type';
 
 import {AppProvider} from './app-provider';
 import {AppRouting} from './app-routing';

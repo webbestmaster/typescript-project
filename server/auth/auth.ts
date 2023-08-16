@@ -1,9 +1,9 @@
 /* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
 
 import {makeCrud} from '../data-base/data-base';
-import {CrudConfigOnChangeArgumentType} from '../data-base/data-base-type';
+import type {CrudConfigOnChangeArgumentType} from '../data-base/data-base-type';
 
-import {AuthUserType} from './auth-type';
+import type {AuthUserType} from './auth-type';
 import {authUserSchema} from './auth-validation';
 
 export const authCrud = makeCrud<AuthUserType>(

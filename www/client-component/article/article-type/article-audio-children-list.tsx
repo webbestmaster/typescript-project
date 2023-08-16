@@ -1,12 +1,16 @@
 import {useContext} from 'react';
-import {TrackType, AudioPlayer} from 'react-audio-player-pro';
+import {type TrackType, AudioPlayer} from 'react-audio-player-pro';
 import {Link} from 'react-router-dom';
 
-import {ArticleContextType} from '../article-context/article-context-type';
+import type {ArticleContextType} from '../article-context/article-context-type';
 import {articleContext} from '../article-context/article-context';
 import {Markdown} from '../../../layout/markdown/markdown';
 import {getFileMarkdownByFullInfo} from '../../../layout/markdown/markdown-helper';
-import {ArticleFileType, ArticleFileTypeEnum, ArticlePreviewType} from '../../../../server/article/article-type';
+import {
+    type ArticleFileType,
+    ArticleFileTypeEnum,
+    type ArticlePreviewType,
+} from '../../../../server/article/article-type';
 import {getArticleLinkToViewClient} from '../article-helper';
 import {defaultMediaMetadata} from '../../../layout/audio-player/audio-player-const';
 import audioPlayerStyle from '../../../layout/audio-player/audio-player.scss';

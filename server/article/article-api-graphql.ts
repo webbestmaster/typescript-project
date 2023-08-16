@@ -1,7 +1,7 @@
 /* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
 
-import {FastifyReply, FastifyRequest} from 'fastify';
-import {PetsdbItemType} from 'petsdb';
+import type {FastifyReply, FastifyRequest} from 'fastify';
+import type {PetsdbItemType} from 'petsdb';
 
 import {
     graphql,
@@ -11,21 +11,21 @@ import {
     GraphQLInt,
     GraphQLFloat,
     GraphQLList,
-    ExecutionResult,
+    type ExecutionResult,
     // GraphQLNonNull,
     GraphQLEnumType,
     GraphQLBoolean,
-    GraphQLResolveInfo,
-    GraphQLFieldConfig,
+    type GraphQLResolveInfo,
+    type GraphQLFieldConfig,
 } from 'graphql';
 
 import {mainResponseHeader} from '../const';
 
 import {articleCrud} from './article';
 import {
-    ArticleFileType,
+    type ArticleFileType,
     ArticleFileTypeEnum,
-    ArticleType,
+    type ArticleType,
     ArticleTypeEnum,
     SubDocumentListViewTypeEnum,
 } from './article-type';

@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom';
 import {CmsArticle} from '../cms-article';
 import {makeDefaultArticle} from '../../../../../server/article/article-helper';
 import {CmsArticleModeEnum} from '../cms-article-const';
-import {ArticleType} from '../../../../../server/article/article-type';
+import type {ArticleType} from '../../../../../server/article/article-type';
 import {postArticleCreate} from '../../../../service/article/article-api';
 import {useMakeExecutableState} from '../../../../util/function';
 import {getRandomString} from '../../../../util/string';

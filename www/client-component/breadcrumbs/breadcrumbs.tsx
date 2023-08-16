@@ -1,9 +1,9 @@
 import {useContext, useCallback} from 'react';
 import {Link} from 'react-router-dom';
 
-import {ArticleContextType} from '../article/article-context/article-context-type';
+import type {ArticleContextType} from '../article/article-context/article-context-type';
 import {articleContext} from '../article/article-context/article-context';
-import {ArticlePreviewType} from '../../../server/article/article-type';
+import type {ArticlePreviewType} from '../../../server/article/article-type';
 import {getArticleLinkToViewClient} from '../article/article-helper';
 
 import breadcrumbsStyle from './breadcrumbs.scss';

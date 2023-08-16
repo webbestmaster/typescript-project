@@ -10,8 +10,8 @@ import {fastifyStatic} from '@fastify/static';
 import {fastifyCompress} from '@fastify/compress';
 import {fastifyMultipart} from '@fastify/multipart';
 import {fastifySecureSession} from '@fastify/secure-session';
-import {FastifyError} from '@fastify/error';
-import fastifyConstructor, {FastifyRequest, FastifyReply} from 'fastify';
+import type {FastifyError} from '@fastify/error';
+import fastifyConstructor, {type FastifyRequest, type FastifyReply} from 'fastify';
 
 import {appRoute} from '../www/component/app/app-route';
 
@@ -33,14 +33,14 @@ import {getImage, uploadFile} from './file/file';
 import {adminOnly} from './auth/auth-helper';
 import {makeCacheFile} from './article/article-cache';
 import {getPdf} from './pdf/pdf';
-import {ArticleFileType, ArticleType} from './article/article-type';
+import type {ArticleFileType, ArticleType} from './article/article-type';
 import {makeStatic} from './make-static';
 import {temporaryUploadFolder, uploadFileFolder, uploadFolder} from './file/file-const';
 import {getHtmlCallBackRequest} from './ssr/ssr-helper';
 import {rootArticleSlug} from './article/article-const';
-import {GetExtraFilesType, removeExtraStaticFiles} from './file/extra-static-files';
+import {type GetExtraFilesType, removeExtraStaticFiles} from './file/extra-static-files';
 import {makeDirectory, tryToRemoveDirectory} from './file/directory';
-import {PaginationResultType} from './data-base/data-base-type';
+import type {PaginationResultType} from './data-base/data-base-type';
 import {getArticleClientListGraphql} from './article/article-api-graphql';
 
 const isMakeStaticSite = env.MAKE_STATIC_SITE === 'TRUE';

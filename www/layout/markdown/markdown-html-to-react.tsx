@@ -3,7 +3,7 @@ import {Fragment} from 'react';
 import {getAudioFromHtml} from './markdown-helper-audio';
 import {getImageFromHtml} from './markdown-helper-image';
 import {getVideoFromHtml} from './markdown-helper-video';
-import {getIsEmptyHtml, StringToJsxRawDataType} from './markdown-helper';
+import {getIsEmptyHtml, type StringToJsxRawDataType} from './markdown-helper';
 import {MarkdownItemCounter} from './markdown-item-counter';
 
 const markdownVideoRegExp = /<video [^>]+\/>/giu;

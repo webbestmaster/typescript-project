@@ -1,10 +1,10 @@
 /* global HTMLInputElement */
-import {SyntheticEvent} from 'react';
+import type {SyntheticEvent} from 'react';
 import {Typography, Input, Col, Row} from 'antd';
-import {UploadFile} from 'antd/es/upload/interface';
+import type {UploadFile} from 'antd/es/upload/interface';
 const {Title} = Typography;
 
-import {ArticleFileType} from '../../../../server/article/article-type';
+import type {ArticleFileType} from '../../../../server/article/article-type';
 import {Box} from '../../../layout/box/box';
 import {getFileMarkdownByFullInfo} from '../../../layout/markdown/markdown-helper';
 

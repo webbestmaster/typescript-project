@@ -14,12 +14,12 @@ import {
     Typography,
     Upload,
 } from 'antd';
-import {FieldData, ValidateErrorEntity} from 'rc-field-form/lib/interface';
-import {UploadChangeParam, UploadFile} from 'antd/es/upload/interface';
+import type {FieldData, ValidateErrorEntity} from 'rc-field-form/lib/interface';
+import type {UploadChangeParam, UploadFile} from 'antd/es/upload/interface';
 import {Link} from 'react-router-dom';
 import {QuestionCircleOutlined} from '@ant-design/icons';
 import {red} from '@ant-design/colors';
-import dayjs, {Dayjs} from 'dayjs';
+import dayjs, {type Dayjs} from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 
 function innerInitialization() {
@@ -29,8 +29,8 @@ function innerInitialization() {
 innerInitialization();
 
 import {
-    ArticleFileType,
-    ArticleType,
+    type ArticleFileType,
+    type ArticleType,
     ArticleTypeEnum,
     SubDocumentListViewTypeEnum,
 } from '../../../../server/article/article-type';
@@ -43,7 +43,7 @@ import {
     textToSlug,
 } from '../../../util/human';
 import {useMakeExecutableState} from '../../../util/function';
-import {PaginationResultType} from '../../../../server/data-base/data-base-type';
+import type {PaginationResultType} from '../../../../server/data-base/data-base-type';
 import {getArticleListPaginationPick} from '../../../service/article/article-api';
 import {MarkdownInputWrapper} from '../../../layout/markdown-input-wrapper/markdown-input-wrapper';
 import {IsRender} from '../../../layout/is-render/is-render';
@@ -78,7 +78,7 @@ import {
     keyForValidationList,
     noDateUTC,
 } from './cms-article-const';
-import {ArticleForValidationType} from './cms-article-type';
+import type {ArticleForValidationType} from './cms-article-type';
 import {renderUploadedFileListItem} from './render-uploaded-file-list-item';
 
 const {Text: TypographyText, Title} = Typography;

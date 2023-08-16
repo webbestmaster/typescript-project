@@ -1,4 +1,4 @@
-import {AudioPlayer, AudioPlayerControlSprite, TrackType} from 'react-audio-player-pro';
+import {AudioPlayer, AudioPlayerControlSprite, type TrackType} from 'react-audio-player-pro';
 
 import {Markdown} from '../../layout/markdown/markdown';
 import {demoUrl} from '../../const';

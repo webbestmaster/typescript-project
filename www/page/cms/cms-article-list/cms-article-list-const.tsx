@@ -1,7 +1,7 @@
 /* global HTMLInputElement, setTimeout */
-import {SyntheticEvent, useEffect, useRef} from 'react';
+import {type SyntheticEvent, useEffect, useRef} from 'react';
 import {Input, type InputRef} from 'antd';
-import {ColumnType, FilterDropdownProps} from 'antd/es/table/interface';
+import type {ColumnType, FilterDropdownProps} from 'antd/es/table/interface';
 import {SearchOutlined} from '@ant-design/icons';
 import {Link} from 'react-router-dom';
 
@@ -9,13 +9,13 @@ import {getArticleLinkToEdit} from '../cms-article/cms-article-helper';
 import {getTickCross} from '../../../util/string';
 import {dateIsoToHumanView} from '../../../util/time';
 import {getArticleLinkToViewClient} from '../../../client-component/article/article-helper';
-import {ArticleFileType} from '../../../../server/article/article-type';
+import type {ArticleFileType} from '../../../../server/article/article-type';
 import {getPathToImage} from '../../../util/path';
 
 import {
-    ArticleForTableListKeysType,
-    ArticleForTableListType,
-    KeyForTableListListType,
+    type ArticleForTableListKeysType,
+    type ArticleForTableListType,
+    type KeyForTableListListType,
     SortDirectionEnum,
 } from './cms-article-list-type';
 

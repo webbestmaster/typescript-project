@@ -3,8 +3,8 @@ import {ruRu} from './translation/ru-ru/data';
 import {svSe} from './translation/sv-se/data';
 import {zhCn} from './translation/zh-cn/data';
 import {zhTw} from './translation/zh-tw/data';
-import {LocaleDictionaryType} from './translation/type';
-import {LocaleConstType, LocaleNameEnum} from './locale-context-type';
+import type {LocaleDictionaryType} from './translation/type';
+import {type LocaleConstType, LocaleNameEnum} from './locale-context-type';
 
 export const allLocalesData: Record<LocaleNameEnum, LocaleDictionaryType> = {
     [LocaleNameEnum.enUs]: enUs,

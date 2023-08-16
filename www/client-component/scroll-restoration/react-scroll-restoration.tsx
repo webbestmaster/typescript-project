@@ -5,7 +5,7 @@ import {useLocation} from 'react-router-dom';
 
 import {debounce} from '../../util/function';
 import {cls} from '../../util/css';
-import {ArticleContextType} from '../article/article-context/article-context-type';
+import type {ArticleContextType} from '../article/article-context/article-context-type';
 import {articleContext} from '../article/article-context/article-context';
 import {useLocale} from '../../provider/locale/locale-context';
 

@@ -1,9 +1,9 @@
 import {cwd} from 'node:process';
 import path from 'node:path';
 
-import {ArticleType} from '../article/article-type';
+import type {ArticleType} from '../article/article-type';
 
-import {PaginationQueryType} from './data-base-type';
+import type {PaginationQueryType} from './data-base-type';
 
 export const dataBaseFolderPath = './db';
 export const dataBaseBackUpFolderPath = '/db/back-up';

@@ -1,4 +1,4 @@
-import Ajv, {JSONSchemaType} from 'ajv';
+import Ajv, {type JSONSchemaType} from 'ajv';
 
 export function isObjectInclude(object: Record<string, unknown>, query: Record<string, unknown>): boolean {
     return Object.keys(query).every((queryKey: string): boolean => {

@@ -1,10 +1,10 @@
-import {ArticleType} from '../../../article/article-type';
+import type {ArticleType} from '../../../article/article-type';
 import {getPathToImage} from '../../../../www/util/path';
 import {httpsSiteDomain, openGraphLocaleName} from '../../../../www/const';
 import {getClientArticleLinkWithDomain} from '../../../../www/client-component/article/article-helper';
 import {convertStringForHtml} from '../../../../www/util/string';
 
-import {SsrReplaceDataType} from './ssr-helper-type';
+import type {SsrReplaceDataType} from './ssr-helper-type';
 
 export function getMetaOpenGraphSsrReplaceData(article: ArticleType): SsrReplaceDataType {
     const {title, descriptionShort, titleImage, slug} = article;

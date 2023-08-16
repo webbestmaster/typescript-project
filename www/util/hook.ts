@@ -1,6 +1,6 @@
 import {useCallback, useMemo, useState} from 'react';
 
-import {UseRefreshApiHookType} from '../service/api-hook/api-hook-type';
+import type {UseRefreshApiHookType} from '../service/api-hook/api-hook-type';
 
 import {getRandomString} from './string';
 

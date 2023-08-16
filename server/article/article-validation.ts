@@ -1,14 +1,14 @@
 /* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
 
-import Ajv, {JSONSchemaType, ValidateFunction} from 'ajv';
+import Ajv, {type JSONSchemaType, type ValidateFunction} from 'ajv';
 
-import {PaginationResultType} from '../data-base/data-base-type';
+import type {PaginationResultType} from '../data-base/data-base-type';
 
 import {
-    ArticleFileType,
+    type ArticleFileType,
     ArticleFileTypeEnum,
-    ArticlePreviewType,
-    ArticleType,
+    type ArticlePreviewType,
+    type ArticleType,
     ArticleTypeEnum,
     SubDocumentListViewTypeEnum,
 } from './article-type';

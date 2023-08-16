@@ -1,10 +1,10 @@
 /* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
 
-import Ajv, {JSONSchemaType} from 'ajv';
+import Ajv, {type JSONSchemaType} from 'ajv';
 import {Petsdb, type PetsdbItemType, type PetsdbQueryType, type PetsdbReadPageConfigType} from 'petsdb';
 
 import {getPartialData, makeBackUpFolder} from './data-base-util';
-import {CrudConfigOnChangeArgumentType, CrudConfigType, CrudType, PaginationResultType} from './data-base-type';
+import type {CrudConfigOnChangeArgumentType, CrudConfigType, CrudType, PaginationResultType} from './data-base-type';
 import {makeDataBaseBackUp} from './data-base-back-up';
 import {dataBaseFolderPath} from './data-base-const';
 

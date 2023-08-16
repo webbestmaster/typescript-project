@@ -1,6 +1,6 @@
 /* global NodeJS */
 
-import {PromiseResolveType} from '../../www/util/promise';
+import type {PromiseResolveType} from '../../www/util/promise';
 
 export function streamToStringServer(stream: NodeJS.ReadableStream): Promise<string> {
     const chunks: Array<string> = [];

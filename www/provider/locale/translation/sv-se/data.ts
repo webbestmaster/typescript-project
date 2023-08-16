@@ -1,4 +1,4 @@
-import {LocaleDictionaryType} from '../type';
+import type {LocaleDictionaryType} from '../type';
 import {enUs} from '../en-us/data';
 
 export const svSe: LocaleDictionaryType = {

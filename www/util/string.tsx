@@ -1,4 +1,4 @@
-import {LocaleNameEnum} from '../provider/locale/locale-context-type';
+import type {LocaleNameEnum} from '../provider/locale/locale-context-type';
 
 import {makeSafeRegExpPatter} from './regexp';
 

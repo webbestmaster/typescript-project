@@ -1,7 +1,7 @@
-import {ArticleType} from '../../../article/article-type';
+import type {ArticleType} from '../../../article/article-type';
 import {convertStringForHtml} from '../../../../www/util/string';
 
-import {SsrReplaceDataType} from './ssr-helper-type';
+import type {SsrReplaceDataType} from './ssr-helper-type';
 
 export function getMetaDescriptionSsrReplaceData(article: ArticleType): SsrReplaceDataType {
     const {metaDescriptionSeo} = article;

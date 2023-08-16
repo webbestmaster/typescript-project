@@ -1,5 +1,5 @@
 import {enUs} from '../en-us/data';
-import {LocaleDictionaryType} from '../type';
+import type {LocaleDictionaryType} from '../type';
 
 export const zhTw: LocaleDictionaryType = {
     ...enUs,

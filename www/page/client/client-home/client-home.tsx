@@ -1,7 +1,7 @@
 // ignored import {useSystem} from 'react-system-hook';
 import {useContext} from 'react';
 
-import {ArticleContextType} from '../../../client-component/article/article-context/article-context-type';
+import type {ArticleContextType} from '../../../client-component/article/article-context/article-context-type';
 import {articleContext} from '../../../client-component/article/article-context/article-context';
 import {Page} from '../../../client-component/page/page';
 import {ArticlePreviewList} from '../../../client-component/article-preview-list/article-preview-list';

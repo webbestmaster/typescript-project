@@ -1,6 +1,6 @@
 /* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
 
-import {Configuration} from 'webpack';
+import type {Configuration} from 'webpack';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 
 // ignored const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');

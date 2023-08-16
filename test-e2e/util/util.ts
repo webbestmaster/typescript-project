@@ -1,12 +1,12 @@
 /* eslint-disable multiline-comment-style, capitalized-comments */
 
 import puppeteer, {
-    Browser,
-    BrowserConnectOptions,
-    BrowserLaunchArgumentOptions,
-    LaunchOptions,
-    Page,
-    Product,
+    type Browser,
+    type BrowserConnectOptions,
+    type BrowserLaunchArgumentOptions,
+    type LaunchOptions,
+    type Page,
+    type Product,
 } from 'puppeteer';
 
 import {defaultPageGoToOption, pageFullUrl, user} from './const';

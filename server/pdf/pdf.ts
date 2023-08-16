@@ -2,7 +2,7 @@
 
 import puppeteer from 'puppeteer';
 
-import {FastifyRequest} from 'fastify';
+import type {FastifyRequest} from 'fastify';
 
 async function htmlToPdf(html: string): Promise<Buffer> {
     const browser = await puppeteer.launch({

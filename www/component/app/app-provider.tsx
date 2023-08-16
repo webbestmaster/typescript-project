@@ -1,11 +1,11 @@
-import {ReactNode} from 'react';
+import type {ReactNode} from 'react';
 
 import {LocalizationProvider} from '../../provider/locale/locale-context';
 import {UserProvider} from '../../provider/user/user-context';
 import {NavigationProvider} from '../../client-component/navigation/navigation-context/navigation-context';
-import {NavigationContextType} from '../../client-component/navigation/navigation-context/navigation-context-type';
+import type {NavigationContextType} from '../../client-component/navigation/navigation-context/navigation-context-type';
 import {ArticleProvider} from '../../client-component/article/article-context/article-context';
-import {ArticleContextType} from '../../client-component/article/article-context/article-context-type';
+import type {ArticleContextType} from '../../client-component/article/article-context/article-context-type';
 
 interface PropsType {
     readonly articleData: ArticleContextType | null;

@@ -1,7 +1,7 @@
 /* global setTimeout */
-import {LocaleNameEnum} from '../provider/locale/locale-context-type';
+import type {LocaleNameEnum} from '../provider/locale/locale-context-type';
 
-import {getFormattedNumber, NumberFormatOptionsType, TimeSizeEnum} from './format';
+import {getFormattedNumber, type NumberFormatOptionsType, TimeSizeEnum} from './format';
 
 export interface TimeItemType {
     count: number;

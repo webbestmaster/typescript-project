@@ -1,9 +1,9 @@
-import {JSONSchemaType} from 'ajv';
+import type {JSONSchemaType} from 'ajv';
 
 import {makeDefaultArticle} from '../../../../server/article/article-helper';
 import {makeArticlePreviewSchema, makeArticleSchema} from '../../../../server/article/article-validation';
 
-import {ArticleContextType} from './article-context-type';
+import type {ArticleContextType} from './article-context-type';
 
 export const defaultArticleContextData: ArticleContextType = {
     article: makeDefaultArticle(),

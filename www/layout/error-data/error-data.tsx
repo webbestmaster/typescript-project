@@ -1,6 +1,6 @@
 import {cls} from '../../util/css';
 
-import {LangKeyType} from '../../provider/locale/translation/type';
+import type {LangKeyType} from '../../provider/locale/translation/type';
 import {Locale} from '../../provider/locale/locale-context';
 
 import errorDataStyle from './error-data.scss';

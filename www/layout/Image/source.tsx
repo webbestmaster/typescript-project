@@ -1,4 +1,4 @@
-import {GetPathToImageType} from '../../util/path';
+import type {GetPathToImageType} from '../../util/path';
 
 import {getFullHorizontalPadding} from './image-helper';
 

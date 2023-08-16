@@ -5,7 +5,7 @@ import {textToSlug} from '../../util/human';
 import {getPathToFile} from '../../util/path';
 
 import markdownStyle from './markdown.scss';
-import {StringToJsxRawDataType} from './markdown-helper';
+import type {StringToJsxRawDataType} from './markdown-helper';
 
 export const markdownAudioRegExp = /<audio[\S\s]+?<\/audio>/giu;
 

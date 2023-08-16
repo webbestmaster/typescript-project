@@ -1,4 +1,4 @@
-import {ArticleType} from '../article/article-type';
+import type {ArticleType} from '../article/article-type';
 import {getPathToImage} from '../../www/util/path';
 import {httpsSiteDomain} from '../../www/const';
 import {getClientArticleLinkWithDomain} from '../../www/client-component/article/article-helper';

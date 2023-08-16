@@ -1,19 +1,25 @@
 /* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
 
-import {constants as fileSystemConstants, ReadStream, Stats, createWriteStream, createReadStream} from 'node:fs';
+import {
+    constants as fileSystemConstants,
+    type ReadStream,
+    type Stats,
+    createWriteStream,
+    createReadStream,
+} from 'node:fs';
 import fileSystem from 'node:fs/promises';
 import path from 'node:path';
 
 // import sharp from 'sharp';
-import {FastifyReply, FastifyRequest} from 'fastify';
-import {MultipartFile} from '@fastify/multipart';
+import type {FastifyReply, FastifyRequest} from 'fastify';
+import type {MultipartFile} from '@fastify/multipart';
 import webpConverter from 'webp-converter';
 
-import {PromiseResolveType} from '../../www/util/promise';
+import type {PromiseResolveType} from '../../www/util/promise';
 import {getRandomString} from '../../www/util/string';
 import {getStringFromUnknown} from '../../www/util/type';
 import {getFileExtension, getIsAudio, getIsImage, getIsVideo} from '../../www/page/cms/cms-article/cms-article-helper';
-import {ArticleFileType, ArticleFileTypeEnum} from '../article/article-type';
+import {type ArticleFileType, ArticleFileTypeEnum} from '../article/article-type';
 import {fileSizeLimit} from '../../www/page/cms/cms-article/cms-article-const';
 
 import {temporaryUploadFolder, uploadFolder} from './file-const';

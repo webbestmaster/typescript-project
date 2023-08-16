@@ -7,10 +7,10 @@ import path from 'node:path';
 import JSZip from 'jszip';
 
 import {sortStringCallbackReverse} from '../../www/util/string';
-import {PromiseResolveType} from '../../www/util/promise';
+import type {PromiseResolveType} from '../../www/util/promise';
 
 import {dataBaseBackUpPathAbsolute} from './data-base-const';
-import {CrudConfigOnChangeArgumentType} from './data-base-type';
+import type {CrudConfigOnChangeArgumentType} from './data-base-type';
 
 async function removeOldDataBaseBackUp(dataBaseInfo: CrudConfigOnChangeArgumentType): Promise<void> {
     const {dataBaseId} = dataBaseInfo;

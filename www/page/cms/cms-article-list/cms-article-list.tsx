@@ -1,15 +1,19 @@
 import {useEffect, useState} from 'react';
 import {Table, Typography} from 'antd';
-import {TablePaginationConfig, FilterValue, SorterResult, TableCurrentDataSource} from 'antd/es/table/interface';
+import type {TablePaginationConfig, FilterValue, SorterResult, TableCurrentDataSource} from 'antd/es/table/interface';
 
 import {useMakeExecutableState} from '../../../util/function';
-import {PaginationQueryType, PaginationResultType} from '../../../../server/data-base/data-base-type';
+import type {PaginationQueryType, PaginationResultType} from '../../../../server/data-base/data-base-type';
 import {getArticleListPaginationPick} from '../../../service/article/article-api';
 import {CmsPage} from '../layout/cms-page/cms-page';
 import {makeSafeRegExp} from '../../../util/regexp';
 
 import {getArticleTableColumnList, keyForTableListList} from './cms-article-list-const';
-import {ArticleForTableListKeysType, ArticleForTableListType, SortDirectionEnum} from './cms-article-list-type';
+import {
+    type ArticleForTableListKeysType,
+    type ArticleForTableListType,
+    SortDirectionEnum,
+} from './cms-article-list-type';
 
 const {Title} = Typography;
 

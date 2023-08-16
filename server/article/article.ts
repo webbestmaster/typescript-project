@@ -1,8 +1,8 @@
 import {makeCrud} from '../data-base/data-base';
-import {CrudConfigOnChangeArgumentType} from '../data-base/data-base-type';
+import type {CrudConfigOnChangeArgumentType} from '../data-base/data-base-type';
 import {updateSiteMapXml} from '../sitemap/sitemap';
 
-import {ArticleType} from './article-type';
+import type {ArticleType} from './article-type';
 import {makeArticleSchema} from './article-validation';
 import {clearCacheHtmlFileFolder} from './article-cache';
 

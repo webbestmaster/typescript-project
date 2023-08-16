@@ -5,7 +5,7 @@ import {App} from '../../www/component/app/app';
 import {streamToStringServer} from '../util/stream';
 import {navigationReplaceSelector} from '../../www/client-component/navigation/navigation-const';
 import {articleReplaceSelector} from '../../www/client-component/article/article-const';
-import {ArticleType} from '../article/article-type';
+import type {ArticleType} from '../article/article-type';
 import {ThemeNameEnum} from '../../www/provider/theme/theme-context-type';
 
 import {getNavigationContextData} from './api/ssr-navigation';
@@ -21,7 +21,7 @@ import {getMetaOpenGraphSsrReplaceData} from './api/ssr-helper/ssr-meta-open-gra
 import {getMetaTwitterCardSsrReplaceData} from './api/ssr-helper/ssr-meta-twitter-card';
 import {getSchemaMarkupArticleSsrReplaceData} from './api/schema-markup/schema-markup-article';
 import {getSchemaMarkupBreadcrumbsSsrReplaceData} from './api/schema-markup/schema-markup-breadcrumbs';
-import {GetHtmlCallBackRequestType} from './ssr-type';
+import type {GetHtmlCallBackRequestType} from './ssr-type';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars, max-statements
 export async function getHtmlCallBack(

@@ -1,4 +1,4 @@
-import {DataNode} from 'rc-tree/lib/interface';
+import type {DataNode} from 'rc-tree/lib/interface';
 import {Typography} from 'antd';
 import {Link} from 'react-router-dom';
 
@@ -7,7 +7,7 @@ import {getArticleLinkToEdit} from '../cms-article/cms-article-helper';
 import {getTickCross} from '../../../util/string';
 import {getArticleLinkToViewClient} from '../../../client-component/article/article-helper';
 
-import {ArticleForTreeType} from './cms-article-tree-type';
+import type {ArticleForTreeType} from './cms-article-tree-type';
 
 const {Text: TypographyText} = Typography;
 

@@ -1,4 +1,4 @@
-import {LocaleDictionaryType} from '../type';
+import type {LocaleDictionaryType} from '../type';
 
 export const ruRu: LocaleDictionaryType = {
     /* eslint-disable id-match, id-length, max-len, sonarjs/no-duplicate-string, sort-keys */

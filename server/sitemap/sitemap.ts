@@ -1,9 +1,9 @@
 import {cwd} from 'node:process';
 import path from 'node:path';
 
-import {ArticleType} from '../article/article-type';
+import type {ArticleType} from '../article/article-type';
 import {writeStringToFile} from '../util/file';
-import {CrudType} from '../data-base/data-base-type';
+import type {CrudType} from '../data-base/data-base-type';
 
 import {getSiteMapXml} from './sitemap-xml';
 import {getSiteMapImgXml} from './sitemap-img-xml';

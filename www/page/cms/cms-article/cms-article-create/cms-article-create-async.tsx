@@ -1,8 +1,8 @@
-import {lazy, Suspense, ComponentType} from 'react';
+import {lazy, Suspense, type ComponentType} from 'react';
 
 import {Spinner} from '../../../../layout/spinner/spinner';
 import {LoginAdminRequired} from '../../../../layout/login-admin-required/login-admin-required';
-import {LazyResultType} from '../../../../util/type';
+import type {LazyResultType} from '../../../../util/type';
 
 const AsyncLazy = lazy<ComponentType<unknown>>(async (): Promise<LazyResultType<unknown>> => {
     const {CmsArticleCreate} = await import(

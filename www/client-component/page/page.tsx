@@ -1,15 +1,15 @@
-import {ReactNode, useContext, useEffect} from 'react';
+import {type ReactNode, useContext, useEffect} from 'react';
 import {useParams, useLocation} from 'react-router-dom';
 
 import {Header} from '../header/header';
 import {Footer} from '../footer/footer';
 import {useGoogleAnalytics} from '../google-analytics/google-analytics';
 import {googleAnalyticsId} from '../../const';
-import {ExtractPathKeysType} from '../../util/url';
+import type {ExtractPathKeysType} from '../../util/url';
 import {appRoute} from '../../component/app/app-route';
 import {rootArticleSlug} from '../../../server/article/article-const';
 import {noop} from '../../util/function';
-import {ArticleContextType} from '../article/article-context/article-context-type';
+import type {ArticleContextType} from '../article/article-context/article-context-type';
 import {articleContext} from '../article/article-context/article-context';
 import {getArticleLinkToViewClient} from '../article/article-helper';
 import {ReactScrollRestoration} from '../scroll-restoration/react-scroll-restoration';

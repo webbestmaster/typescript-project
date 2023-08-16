@@ -2,7 +2,7 @@
 
 import {describe, it, afterEach, beforeEach, afterAll, beforeAll, expect} from '@jest/globals';
 
-import {Browser, Page} from 'puppeteer';
+import type {Browser, Page} from 'puppeteer';
 
 import {createBrowser, makeLogin} from './util/util';
 

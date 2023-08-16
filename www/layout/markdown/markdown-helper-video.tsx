@@ -3,8 +3,8 @@ import {appIconPngFileName} from '../../const';
 import {Video} from '../video/video';
 
 import markdownStyle from './markdown.scss';
-import {StringToJsxRawDataType} from './markdown-helper';
-import {MarkdownItemCounter} from './markdown-item-counter';
+import type {StringToJsxRawDataType} from './markdown-helper';
+import type {MarkdownItemCounter} from './markdown-item-counter';
 
 // eslint-disable-next-line complexity
 export function getVideoFromHtml(

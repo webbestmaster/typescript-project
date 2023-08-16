@@ -1,9 +1,9 @@
 /* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
 
 import {
-    ArticleFileType,
+    type ArticleFileType,
     ArticleFileTypeEnum,
-    ArticleType,
+    type ArticleType,
     ArticleTypeEnum,
     SubDocumentListViewTypeEnum,
 } from './article-type';

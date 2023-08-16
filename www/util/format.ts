@@ -1,6 +1,6 @@
 /* global Intl */
 
-import {LocaleNameEnum} from '../provider/locale/locale-context-type';
+import type {LocaleNameEnum} from '../provider/locale/locale-context-type';
 
 export const enum TimeSizeEnum {
     day = 'day',

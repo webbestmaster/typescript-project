@@ -2,7 +2,7 @@ import {ArticleTypeEnum} from '../../../../server/article/article-type';
 
 import {makeDefaultArticleFile} from '../../../../server/article/article-helper';
 
-import {NavigationContextType} from './navigation-context-type';
+import type {NavigationContextType} from './navigation-context-type';
 
 export const defaultNavigationContextData: NavigationContextType = {
     itemList: [

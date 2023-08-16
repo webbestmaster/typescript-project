@@ -2,7 +2,7 @@ import {useCallback, useContext} from 'react';
 
 import {cls} from '../../util/css';
 import {ThemeContext} from '../../provider/theme/theme-context';
-import {ThemeContextType} from '../../provider/theme/theme-context-type';
+import type {ThemeContextType} from '../../provider/theme/theme-context-type';
 
 import fontSizeStyle from './font-size.scss';
 

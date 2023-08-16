@@ -1,8 +1,8 @@
 /* global HTMLInputElement, document, MouseEvent, HTMLDivElement */
 
-import {SyntheticEvent, useCallback, useEffect, useRef, useState} from 'react';
+import {type SyntheticEvent, useCallback, useEffect, useRef, useState} from 'react';
 
-import {PaginationResultType} from '../../../server/data-base/data-base-type';
+import type {PaginationResultType} from '../../../server/data-base/data-base-type';
 import {noop, useMakeExecutableState} from '../../util/function';
 import {getArticleClientListPaginationPick} from '../../service/article/article-api';
 import {useLocale} from '../../provider/locale/locale-context';
@@ -11,7 +11,7 @@ import {useHotKey} from '../../util/hot-key';
 import {makeSafeRegExp} from '../../util/regexp';
 
 import {articlePreviewKeyList} from './search-const';
-import {SearchArticleType} from './search-type';
+import type {SearchArticleType} from './search-type';
 import searchStyle from './search.scss';
 import {SearchResult} from './search-result/search-result';
 

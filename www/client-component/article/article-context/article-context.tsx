@@ -5,7 +5,7 @@ import {isBrowser} from '../../../util/system';
 import {getArticleContextBySlug} from '../../../service/article/article-api';
 import {useMakeExecutableState} from '../../../util/function';
 
-import {ArticleContextType} from './article-context-type';
+import type {ArticleContextType} from './article-context-type';
 import {defaultArticleContextData} from './article-context-const';
 import {articleContextDom} from './article-context-dom';
 

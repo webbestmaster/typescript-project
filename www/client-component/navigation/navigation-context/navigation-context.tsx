@@ -3,7 +3,7 @@ import {createContext} from 'react';
 
 import {isBrowser} from '../../../util/system';
 
-import {NavigationContextType} from './navigation-context-type';
+import type {NavigationContextType} from './navigation-context-type';
 import {defaultNavigationContextData} from './navigation-context-const';
 
 export const navigationContext = createContext<NavigationContextType>(defaultNavigationContextData);

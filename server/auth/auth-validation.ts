@@ -1,8 +1,8 @@
-import {JSONSchemaType} from 'ajv';
+import type {JSONSchemaType} from 'ajv';
 
 import {UserRoleEnum} from '../../www/provider/user/user-context-type';
 
-import {AuthUserType} from './auth-type';
+import type {AuthUserType} from './auth-type';
 
 export const authUserSchema: JSONSchemaType<AuthUserType> = {
     additionalProperties: false,

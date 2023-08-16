@@ -1,6 +1,6 @@
 /* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
 
-import {ArticlePreviewType, ArticleType} from './article-type';
+import type {ArticlePreviewType, ArticleType} from './article-type';
 import {articleCrud} from './article';
 
 export function getIsActiveArticlePreview(article: ArticlePreviewType): article is ArticlePreviewType {

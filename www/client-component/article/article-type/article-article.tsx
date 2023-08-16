@@ -1,6 +1,6 @@
 import {useContext} from 'react';
 
-import {ArticleContextType} from '../article-context/article-context-type';
+import type {ArticleContextType} from '../article-context/article-context-type';
 import {articleContext} from '../article-context/article-context';
 import {Markdown} from '../../../layout/markdown/markdown';
 

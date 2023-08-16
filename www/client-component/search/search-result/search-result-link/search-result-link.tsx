@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom';
 
 import {getArticleLinkToViewClient} from '../../../article/article-helper';
-import {SearchArticleType} from '../../search-type';
+import type {SearchArticleType} from '../../search-type';
 
 import searchResultLinkStyle from './search-result-link.scss';
 

@@ -1,3 +1,3 @@
-import {KeyForTreeType} from './cms-article-tree-type';
+import type {KeyForTreeType} from './cms-article-tree-type';
 
 export const keyForTreeList: KeyForTreeType = ['articleType', 'id', 'isActive', 'slug', 'subDocumentIdList', 'title'];

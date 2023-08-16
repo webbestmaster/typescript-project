@@ -2,8 +2,8 @@
 
 // Used - JSON-LD (recommended)
 
-import {ArticlePreviewType, ArticleType} from '../../../article/article-type';
-import {SsrReplaceDataType} from '../ssr-helper/ssr-helper-type';
+import type {ArticlePreviewType, ArticleType} from '../../../article/article-type';
+import type {SsrReplaceDataType} from '../ssr-helper/ssr-helper-type';
 import {getClientArticleLinkWithDomain} from '../../../../www/client-component/article/article-helper';
 import {convertStringForHtml} from '../../../../www/util/string';
 
