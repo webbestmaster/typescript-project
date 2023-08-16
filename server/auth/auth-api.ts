@@ -53,7 +53,7 @@ export async function postAuthLogin(
 export async function getAutoAuthLogin(request: FastifyRequest, reply: FastifyReply): Promise<LoginResponseType> {
     const defaultLoginResponse: LoginResponseType = {user: {id: '', login: '', role: UserRoleEnum.user}};
     const {session} = request;
-    const userId = String(session.get(cookieFieldUserId) || '');
+    const userId = String(session.get(cookieFieldUserId) ?? '');
 
     reply.header(...mainResponseHeader);
 

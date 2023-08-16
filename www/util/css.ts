@@ -8,6 +8,7 @@ export function cls(...argumentList: Array<ClassNamesArgumentType>): string {
 
     // eslint-disable-next-line no-loops/no-loops
     for (const cssClassNameData of argumentList) {
+        // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
         if (!cssClassNameData) {
             // eslint-disable-next-line no-continue
             continue;
@@ -21,6 +22,7 @@ export function cls(...argumentList: Array<ClassNamesArgumentType>): string {
 
         // eslint-disable-next-line no-loops/no-loops
         for (const key in cssClassNameData) {
+            // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
             if (cssClassNameData[key]) {
                 cssClassNameList.push(key);
             }

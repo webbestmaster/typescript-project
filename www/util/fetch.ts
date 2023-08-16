@@ -40,9 +40,9 @@ type FetchCacheType = Record<string, Promise<unknown> | null>;
 const fetchCache: FetchCacheType = {};
 
 function invalidateCache(options?: OptionsType) {
-    const {method} = options ?? {};
+    const {method = FetchMethodEnum.get} = options ?? {};
 
-    if (!method || method === FetchMethodEnum.get) {
+    if (method === FetchMethodEnum.get) {
         return;
     }
 

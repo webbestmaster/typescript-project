@@ -21,7 +21,7 @@ export function makeDefaultAuthUser(): AuthUserType {
 async function getIsAdmin(request: FastifyRequest): Promise<boolean> {
     const {session} = request;
 
-    const user = await authCrud.findOne({id: String(session.get(cookieFieldUserId) || '')});
+    const user = await authCrud.findOne({id: String(session.get(cookieFieldUserId) ?? '')});
 
     return Boolean(user && user.role === UserRoleEnum.admin);
 }

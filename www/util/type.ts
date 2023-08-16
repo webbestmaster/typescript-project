@@ -11,17 +11,13 @@ export function getStringFromUnknown(data: Record<string, unknown> | undefined |
         return '';
     }
 
-    return String(data[requiredKey] || '');
+    return String(data[requiredKey] ?? '');
 }
 
 export function extractFromUnknown<ExtractType extends Record<string, boolean | number | string | null>>(
-    unknownData: unknown,
+    unknownData: Record<string, boolean | number | string | null>,
     resultData: ExtractType
 ): ExtractType | null {
-    if (!unknownData || typeof unknownData !== 'object') {
-        return null;
-    }
-
     const requiredKeyList: Array<string> = Object.keys(resultData);
     const existedKeyList: Array<string> = Object.keys(unknownData);
 
