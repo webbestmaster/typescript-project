@@ -1,7 +1,7 @@
 /* global HTMLImageElement */
 
 export class MarkdownItemCounter {
-    private static ImageToLoadCount = 2;
+    private static readonly ImageToLoadCount = 2;
 
     private audio: number;
     private image: number;

@@ -24,7 +24,7 @@ function noop(): void {}
 
 export class TaskRunner {
     private readonly taskList: Array<QueueTaskType> = [];
-    private maxWorkerCount = 1;
+    private readonly maxWorkerCount: number = 1;
     private currentWorkerCount = 0;
     private readonly onTaskEnd: TaskRunnerOnTaskDoneType = noop;
 
