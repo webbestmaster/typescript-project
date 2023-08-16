@@ -77,7 +77,7 @@ class StaticSite {
         });
 
         const taskPromiseList: Array<Promise<unknown>> = slugList.map<Promise<unknown>>(
-            (slug: string): Promise<unknown> => {
+            async (slug: string): Promise<unknown> => {
                 return taskRunner.add(async () => {
                     pageList.push(await this.getStaticPage(slug));
                 });
@@ -108,7 +108,7 @@ class StaticSite {
 
         // write html files
         const taskPromiseList: Array<Promise<unknown>> = this.pageList.map<Promise<unknown>>(
-            (page: StaticPageType): Promise<unknown> => {
+            async (page: StaticPageType): Promise<unknown> => {
                 return taskRunner.add(async () => {
                     const htmlPath = `${generatePath<typeof appRoute.article.path>(appRoute.article.path, {
                         slug: page.slug,
@@ -159,7 +159,7 @@ class StaticSite {
 
         // write html files
         const taskPromiseList: Array<Promise<unknown>> = this.pageList.map<Promise<unknown>>(
-            (page: StaticPageType): Promise<unknown> => {
+            async (page: StaticPageType): Promise<unknown> => {
                 return taskRunner.add(async () => {
                     const apiPath = generatePath<typeof apiUrl.clientArticleContextGet>(
                         apiUrl.clientArticleContextGet,
@@ -231,7 +231,7 @@ class StaticSite {
         });
 
         const taskPromiseList: Array<Promise<unknown>> = appIconSizeList.map<Promise<unknown>>(
-            (iconSize: number): Promise<unknown> => {
+            async (iconSize: number): Promise<unknown> => {
                 return taskRunner.add(async () => {
                     const sizeFolderName = `${iconSize}x${iconSize}`;
 
@@ -298,7 +298,7 @@ class StaticSite {
         });
 
         const taskPromiseList: Array<Promise<unknown>> = imageUrlList.map<Promise<unknown>>(
-            (imageUrl: ImageUrlType): Promise<unknown> => {
+            async (imageUrl: ImageUrlType): Promise<unknown> => {
                 return taskRunner.add(async () => {
                     const imageUrlChunks = imageUrl.url.split('/');
                     const [ignoredSpace, ignoredImageApiString, imageSize, imageName] = imageUrlChunks;

@@ -13,6 +13,6 @@ export async function clearCacheHtmlFileFolder(): Promise<void> {
     await makeDirectory(absolutePathHtmlFileFolder);
 }
 
-export function makeCacheFile(slug: string, page: string): Promise<void> {
+export async function makeCacheFile(slug: string, page: string): Promise<void> {
     return writeStringToFile(path.join(absolutePathHtmlFileFolder, `${slug}.html`), page);
 }

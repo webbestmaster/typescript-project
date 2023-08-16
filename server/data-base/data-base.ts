@@ -36,22 +36,22 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
     }
 */
 
-    function findOne(query: PetsdbQueryType<ModelType>): Promise<PetsdbItemType<ModelType> | null> {
+    async function findOne(query: PetsdbQueryType<ModelType>): Promise<PetsdbItemType<ModelType> | null> {
         return dataBase.readOne(query);
     }
 
-    function findMany(query: PetsdbQueryType<ModelType>): Promise<Array<PetsdbItemType<ModelType>>> {
+    async function findMany(query: PetsdbQueryType<ModelType>): Promise<Array<PetsdbItemType<ModelType>>> {
         return dataBase.read(query);
     }
 
-    function findManyPagination(
+    async function findManyPagination(
         query: PetsdbQueryType<ModelType>,
         pageConfig: PetsdbReadPageConfigType<ModelType>
     ): Promise<PaginationResultType<ModelType>> {
         return dataBase.readPage(query, pageConfig);
     }
 
-    function findManyPaginationPartial(
+    async function findManyPaginationPartial(
         query: PetsdbQueryType<ModelType>,
         pageConfig: PetsdbReadPageConfigType<ModelType>,
         requiredPropertyList: Array<keyof ModelType>

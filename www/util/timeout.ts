@@ -1,6 +1,6 @@
 /* global requestIdleCallback, setTimeout */
 
-export function waitForTime(timeInMs: number): Promise<void> {
+export async function waitForTime(timeInMs: number): Promise<void> {
     return new Promise<void>((resolve: () => void) => {
         setTimeout(() => {
             resolve();

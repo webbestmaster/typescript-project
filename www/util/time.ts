@@ -84,7 +84,7 @@ export function dateIsoToHumanView(dateIso: string): string {
     return dateIso.replace('T', ' ').replace(/\.\S+/u, '');
 }
 
-export function waitForTime(timeInMs: number): Promise<void> {
+export async function waitForTime(timeInMs: number): Promise<void> {
     return new Promise<void>((resolve: () => void) => {
         setTimeout(resolve, timeInMs);
     });

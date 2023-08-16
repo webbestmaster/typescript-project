@@ -26,7 +26,7 @@ async function removeOldDataBaseBackUp(dataBaseInfo: CrudConfigOnChangeArgumentT
     const extraFileNameList = sortedFileNameList.slice(maxBackUpCount);
 
     await Promise.all(
-        extraFileNameList.map((fileNameToRemove: string): Promise<void> => {
+        extraFileNameList.map(async (fileNameToRemove: string): Promise<void> => {
             const pathToFile = path.join(dataBaseBackUpPathAbsolute, dataBaseId, fileNameToRemove);
 
             return fileSystem.unlink(pathToFile);

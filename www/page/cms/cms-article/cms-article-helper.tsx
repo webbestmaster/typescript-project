@@ -17,7 +17,7 @@ import {getPathToFile} from '../../../util/path';
 import type {ArticleForValidationType, MakeSlugValidatorArgumentType} from './cms-article-type';
 import {CmsArticleModeEnum} from './cms-article-const';
 
-export function fetchImage(pathToImage: string): Promise<HTMLImageElement> {
+export async function fetchImage(pathToImage: string): Promise<HTMLImageElement> {
     const image = new Image();
 
     return new Promise<HTMLImageElement>(
@@ -37,7 +37,7 @@ export function fetchImage(pathToImage: string): Promise<HTMLImageElement> {
     );
 }
 
-export function fetchAudio(pathToAudio: string): Promise<HTMLAudioElement> {
+export async function fetchAudio(pathToAudio: string): Promise<HTMLAudioElement> {
     const audio = new Audio();
 
     return new Promise<HTMLAudioElement>(
@@ -58,7 +58,7 @@ export function fetchAudio(pathToAudio: string): Promise<HTMLAudioElement> {
     );
 }
 
-export function fetchVideo(pathToVideo: string): Promise<HTMLVideoElement> {
+export async function fetchVideo(pathToVideo: string): Promise<HTMLVideoElement> {
     const video: HTMLVideoElement = document.createElement('video');
 
     return new Promise<HTMLVideoElement>(
@@ -268,7 +268,7 @@ export function getAbsentIdList(
     });
 }
 
-export function handleDeleteArticle(articleId: string): Promise<unknown> {
+export async function handleDeleteArticle(articleId: string): Promise<unknown> {
     return deleteArticle(articleId)
         .then(() => {
             location.reload();

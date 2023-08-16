@@ -45,7 +45,7 @@ const defaultBrowserOptions: PuppeteerLaunchOptionsType = {
     // timeout: 10e3,
 };
 
-export function createBrowser(
+export async function createBrowser(
     puppeteerLaunchOptions: Partial<PuppeteerLaunchOptionsType> = defaultBrowserOptions
 ): Promise<Browser> {
     const fullBrowserOptions: PuppeteerLaunchOptionsType = {

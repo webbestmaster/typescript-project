@@ -2,7 +2,7 @@
 
 import type {PromiseResolveType} from '../../www/util/promise';
 
-export function streamToStringServer(stream: NodeJS.ReadableStream): Promise<string> {
+export async function streamToStringServer(stream: NodeJS.ReadableStream): Promise<string> {
     const chunks: Array<string> = [];
 
     return new Promise((resolve: PromiseResolveType<string>, reject: PromiseResolveType<Error>) => {

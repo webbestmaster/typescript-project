@@ -144,13 +144,13 @@ const ListType: GraphQLFieldConfig<{root: string}, {context: number}, {limit: nu
             type: GraphQLInt,
         },
     },
-    resolve(
+    resolve: async (
         // root valur type => "GraphQLObjectType<Record<string, string>"
         rootValue: {root: string},
         args: {limit: number; start: number},
         context: {context: number},
         graphQLType: GraphQLResolveInfo
-    ): Promise<Array<PetsdbItemType<ArticleType>>> {
+    ): Promise<Array<PetsdbItemType<ArticleType>>> => {
         console.warn('------------');
         console.warn(rootValue);
         console.warn(args);

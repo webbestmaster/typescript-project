@@ -7,7 +7,7 @@ export function getIsActiveArticlePreview(article: ArticlePreviewType): article 
     return article.isActive;
 }
 
-export function getArticleById(id: string): Promise<ArticleType | null> {
+export async function getArticleById(id: string): Promise<ArticleType | null> {
     return articleCrud.findOne({id});
 }
 
@@ -17,7 +17,7 @@ export function getArticleBySlug(slug: string): Promise<ArticleType | null> {
 }
 */
 
-function getActiveArticleBySlug(slug: string): Promise<ArticleType | null> {
+async function getActiveArticleBySlug(slug: string): Promise<ArticleType | null> {
     return articleCrud.findOne({isActive: true, slug});
 }
 
@@ -35,11 +35,11 @@ export function articleToArticlePreview(article: ArticleType): ArticlePreviewTyp
     return {articleType, fileList, isActive, slug, title, titleImage};
 }
 
-export function getArticleParentListById(articleId: string): Promise<Array<ArticleType>> {
+export async function getArticleParentListById(articleId: string): Promise<Array<ArticleType>> {
     return articleCrud.findMany({subDocumentIdList: [articleId]});
 }
 
-export function getArticleListByIdList(idList: Array<string>): Promise<Array<ArticleType | null>> {
+export async function getArticleListByIdList(idList: Array<string>): Promise<Array<ArticleType | null>> {
     return Promise.all(idList.map(getArticleById));
 }
 
@@ -112,7 +112,7 @@ export async function getSiblingPreviewListById(articleId: string): Promise<Arra
     return articleList.map<ArticlePreviewType>(articleToArticlePreview);
 }
 
-export function getSubDocumentListFiltered(article: ArticleType): Promise<Array<ArticleType>> {
+export async function getSubDocumentListFiltered(article: ArticleType): Promise<Array<ArticleType>> {
     const {subDocumentIdList} = article;
 
     return getArticleListByIdListFiltered(subDocumentIdList);

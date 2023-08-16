@@ -53,7 +53,7 @@ export class TaskRunner {
         return this.getCurrentWorkerCount() < this.maxWorkerCount;
     }
 
-    add(runningTask: QueueRunningTaskType): Promise<void> {
+    async add(runningTask: QueueRunningTaskType): Promise<void> {
         return new Promise<void>((resolve: PromiseResolveType<void>, reject: PromiseResolveType<Error>): void => {
             this.taskList.push({reject, resolve, task: runningTask});
 

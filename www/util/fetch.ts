@@ -62,7 +62,7 @@ function fetchEndCallBack(fetchBeginTimeStamp: number, url: string) {
     }
 }
 
-export function fetchX<ExpectedResponseType>(
+export async function fetchX<ExpectedResponseType>(
     url: string,
     jsonSchema: JSONSchemaType<ExpectedResponseType>,
     options?: OptionsType
@@ -94,7 +94,7 @@ export function fetchX<ExpectedResponseType>(
     const fetchBeginTimeStamp = Date.now();
 
     const fetchResult: Promise<ExpectedResponseType> = fetch(url, options)
-        .then((response: Response): Promise<unknown> => {
+        .then(async (response: Response): Promise<unknown> => {
             return response.json();
         })
         .then((data: unknown): ExpectedResponseType => {
