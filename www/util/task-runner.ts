@@ -41,6 +41,17 @@ export class TaskRunner {
         this.onTaskEnd = onTaskEnd ?? noop;
     }
 
+    async add(runningTask: QueueRunningTaskType): Promise<void> {
+        return new Promise<void>((resolve: PromiseResolveType<void>, reject: PromiseResolveType<Error>): void => {
+            this.taskList.push({reject, resolve, task: runningTask});
+
+            if (this.getHasFreeWorkers()) {
+                // eslint-disable-next-line @typescript-eslint/no-floating-promises
+                this.run();
+            }
+        });
+    }
+
     private getCurrentWorkerCount(): number {
         return this.currentWorkerCount;
     }
@@ -51,17 +62,6 @@ export class TaskRunner {
 
     private getHasFreeWorkers(): boolean {
         return this.getCurrentWorkerCount() < this.maxWorkerCount;
-    }
-
-    async add(runningTask: QueueRunningTaskType): Promise<void> {
-        return new Promise<void>((resolve: PromiseResolveType<void>, reject: PromiseResolveType<Error>): void => {
-            this.taskList.push({reject, resolve, task: runningTask});
-
-            if (this.getHasFreeWorkers()) {
-                // eslint-disable-next-line @typescript-eslint/no-floating-promises
-                this.run();
-            }
-        });
     }
 
     private async run() {

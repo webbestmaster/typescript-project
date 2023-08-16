@@ -44,98 +44,29 @@ class StaticSite {
     private readonly pageList: Array<StaticPageType> = [];
 
     // eslint-disable-next-line class-methods-use-this
-    @logTakenTime('>>', 'StaticSite')
-    // eslint-disable-next-line @typescript-eslint/class-methods-use-this
-    private async copyStaticFileFolder(): Promise<void> {
-        await makeDirectory(cwd, staticSiteFolderName);
+    @logTakenTime('>', 'StaticSite')
+    public async makeStatic(): Promise<void> {
+        await this.copyStaticFileFolder();
 
-        await fileSystem.cp(path.join(cwd, uploadFileFolder), path.join(cwd, staticSiteFolderName, uploadFileFolder), {
-            recursive: true,
-        });
-    }
+        await this.collectHtmlPages();
 
-    @logTakenTime('>>', 'StaticSite')
-    private async collectHtmlPages(): Promise<void> {
-        const {log} = console;
-        const articleList: Array<ArticleType> = await articleCrud.findMany({isActive: true, isInSiteMapXmlSeo: true});
+        await this.makeHtmlPages();
 
-        const slugList = articleList.map<string>((article: ArticleType): string => {
-            return article.slug;
-        });
+        await this.makeServicePages();
 
-        const pageList: Array<StaticPageType> = [];
+        await this.makeApiArticle();
 
-        const progressCounterMax: number = slugList.length;
-        const taskRunner = new TaskRunner({
-            maxWorkerCount,
-            onTaskEnd: (taskRunnerData: TaskRunnerOnTaskDoneArgumentType) => {
-                const {restTaskCount, taskInProgressCount} = taskRunnerData;
-                const progressCount = progressCounterMax - restTaskCount - taskInProgressCount;
+        await this.makeApiArticleSearch();
 
-                log(`>> >> [makeStatic]: collectHtmlPages: ${formatProgress(progressCount, progressCounterMax)}`);
-            },
-        });
+        await this.makeIcons();
 
-        const taskPromiseList: Array<Promise<unknown>> = slugList.map<Promise<unknown>>(
-            async (slug: string): Promise<unknown> => {
-                return taskRunner.add(async () => {
-                    pageList.push(await this.getStaticPage(slug));
-                });
-            }
-        );
+        await this.makeCompanyLogo();
 
-        await Promise.all(taskPromiseList);
+        await this.makeImages();
 
-        this.pageList.push(...pageList);
-    }
+        await this.copyDistributionFolder();
 
-    @logTakenTime('>>', 'StaticSite')
-    private async makeHtmlPages(): Promise<void> {
-        const {log} = console;
-
-        await makeDirectory(cwd, staticSiteFolderName, 'article');
-
-        const progressCounterMax: number = this.pageList.length;
-        const taskRunner = new TaskRunner({
-            maxWorkerCount,
-            onTaskEnd: (taskRunnerData: TaskRunnerOnTaskDoneArgumentType) => {
-                const {restTaskCount, taskInProgressCount} = taskRunnerData;
-                const progressCount = progressCounterMax - restTaskCount - taskInProgressCount;
-
-                log(`>> >> [makeStatic]: makeHtmlPages: ${formatProgress(progressCount, progressCounterMax)}`);
-            },
-        });
-
-        // write html files
-        const taskPromiseList: Array<Promise<unknown>> = this.pageList.map<Promise<unknown>>(
-            async (page: StaticPageType): Promise<unknown> => {
-                return taskRunner.add(async () => {
-                    const htmlPath = `${generatePath<typeof appRoute.article.path>(appRoute.article.path, {
-                        slug: page.slug,
-                    })}.html`;
-
-                    await fileSystem.writeFile(path.join(cwd, staticSiteFolderName, htmlPath), page.html);
-                });
-            }
-        );
-
-        await Promise.all(taskPromiseList);
-    }
-
-    @logTakenTime('>>', 'StaticSite')
-    private async makeServicePages(): Promise<void> {
-        await makeDirectory(cwd, staticSiteFolderName);
-
-        const html404 = await this.getTextFromUrl(`${mainUrl}/404`);
-
-        await fileSystem.writeFile(path.join(cwd, staticSiteFolderName, '404.html'), html404);
-    }
-
-    // eslint-disable-next-line class-methods-use-this, @typescript-eslint/class-methods-use-this
-    private async getTextFromUrl(fullUrl: string): Promise<string> {
-        const response = await fetch(fullUrl);
-
-        return response.text();
+        await this.makeIndexHtml();
     }
 
     @logTakenTime('>>', 'StaticSite')
@@ -352,36 +283,105 @@ class StaticSite {
         await fileSystem.writeFile(path.join(cwd, staticSiteFolderName, 'index.html'), rootArticle.html);
     }
 
+    @logTakenTime('>>', 'StaticSite')
+    // eslint-disable-next-line @typescript-eslint/class-methods-use-this
+    private async copyStaticFileFolder(): Promise<void> {
+        await makeDirectory(cwd, staticSiteFolderName);
+
+        await fileSystem.cp(path.join(cwd, uploadFileFolder), path.join(cwd, staticSiteFolderName, uploadFileFolder), {
+            recursive: true,
+        });
+    }
+
+    @logTakenTime('>>', 'StaticSite')
+    private async collectHtmlPages(): Promise<void> {
+        const {log} = console;
+        const articleList: Array<ArticleType> = await articleCrud.findMany({isActive: true, isInSiteMapXmlSeo: true});
+
+        const slugList = articleList.map<string>((article: ArticleType): string => {
+            return article.slug;
+        });
+
+        const pageList: Array<StaticPageType> = [];
+
+        const progressCounterMax: number = slugList.length;
+        const taskRunner = new TaskRunner({
+            maxWorkerCount,
+            onTaskEnd: (taskRunnerData: TaskRunnerOnTaskDoneArgumentType) => {
+                const {restTaskCount, taskInProgressCount} = taskRunnerData;
+                const progressCount = progressCounterMax - restTaskCount - taskInProgressCount;
+
+                log(`>> >> [makeStatic]: collectHtmlPages: ${formatProgress(progressCount, progressCounterMax)}`);
+            },
+        });
+
+        const taskPromiseList: Array<Promise<unknown>> = slugList.map<Promise<unknown>>(
+            async (slug: string): Promise<unknown> => {
+                return taskRunner.add(async () => {
+                    pageList.push(await this.getStaticPage(slug));
+                });
+            }
+        );
+
+        await Promise.all(taskPromiseList);
+
+        this.pageList.push(...pageList);
+    }
+
+    @logTakenTime('>>', 'StaticSite')
+    private async makeHtmlPages(): Promise<void> {
+        const {log} = console;
+
+        await makeDirectory(cwd, staticSiteFolderName, 'article');
+
+        const progressCounterMax: number = this.pageList.length;
+        const taskRunner = new TaskRunner({
+            maxWorkerCount,
+            onTaskEnd: (taskRunnerData: TaskRunnerOnTaskDoneArgumentType) => {
+                const {restTaskCount, taskInProgressCount} = taskRunnerData;
+                const progressCount = progressCounterMax - restTaskCount - taskInProgressCount;
+
+                log(`>> >> [makeStatic]: makeHtmlPages: ${formatProgress(progressCount, progressCounterMax)}`);
+            },
+        });
+
+        // write html files
+        const taskPromiseList: Array<Promise<unknown>> = this.pageList.map<Promise<unknown>>(
+            async (page: StaticPageType): Promise<unknown> => {
+                return taskRunner.add(async () => {
+                    const htmlPath = `${generatePath<typeof appRoute.article.path>(appRoute.article.path, {
+                        slug: page.slug,
+                    })}.html`;
+
+                    await fileSystem.writeFile(path.join(cwd, staticSiteFolderName, htmlPath), page.html);
+                });
+            }
+        );
+
+        await Promise.all(taskPromiseList);
+    }
+
+    @logTakenTime('>>', 'StaticSite')
+    private async makeServicePages(): Promise<void> {
+        await makeDirectory(cwd, staticSiteFolderName);
+
+        const html404 = await this.getTextFromUrl(`${mainUrl}/404`);
+
+        await fileSystem.writeFile(path.join(cwd, staticSiteFolderName, '404.html'), html404);
+    }
+
+    // eslint-disable-next-line class-methods-use-this, @typescript-eslint/class-methods-use-this
+    private async getTextFromUrl(fullUrl: string): Promise<string> {
+        const response = await fetch(fullUrl);
+
+        return response.text();
+    }
+
     private async getStaticPage(slug: string): Promise<StaticPageType> {
         const fullPageUrl = mainUrl + getArticleLinkToViewClient(slug);
         const html = await this.getTextFromUrl(fullPageUrl);
 
         return {html, slug};
-    }
-
-    @logTakenTime('>', 'StaticSite')
-    public async makeStatic(): Promise<void> {
-        await this.copyStaticFileFolder();
-
-        await this.collectHtmlPages();
-
-        await this.makeHtmlPages();
-
-        await this.makeServicePages();
-
-        await this.makeApiArticle();
-
-        await this.makeApiArticleSearch();
-
-        await this.makeIcons();
-
-        await this.makeCompanyLogo();
-
-        await this.makeImages();
-
-        await this.copyDistributionFolder();
-
-        await this.makeIndexHtml();
     }
 }
 
