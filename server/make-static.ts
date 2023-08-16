@@ -45,6 +45,7 @@ class StaticSite {
 
     // eslint-disable-next-line class-methods-use-this
     @logTakenTime('>>', 'StaticSite')
+    // eslint-disable-next-line @typescript-eslint/class-methods-use-this
     private async copyStaticFileFolder(): Promise<void> {
         await makeDirectory(cwd, staticSiteFolderName);
 
@@ -130,7 +131,7 @@ class StaticSite {
         await fileSystem.writeFile(path.join(cwd, staticSiteFolderName, '404.html'), html404);
     }
 
-    // eslint-disable-next-line class-methods-use-this
+    // eslint-disable-next-line class-methods-use-this, @typescript-eslint/class-methods-use-this
     private async getTextFromUrl(fullUrl: string): Promise<string> {
         const response = await fetch(fullUrl);
 
@@ -202,6 +203,7 @@ class StaticSite {
 
     // eslint-disable-next-line class-methods-use-this
     @logTakenTime('>>', 'StaticSite')
+    // eslint-disable-next-line @typescript-eslint/class-methods-use-this
     private async makeIcons(): Promise<void> {
         const {log} = console;
 
@@ -250,6 +252,7 @@ class StaticSite {
 
     // eslint-disable-next-line class-methods-use-this
     @logTakenTime('>>', 'StaticSite')
+    // eslint-disable-next-line @typescript-eslint/class-methods-use-this
     private async makeCompanyLogo(): Promise<void> {
         await makeDirectory(cwd, staticSiteFolderName, 'api-image');
         await makeDirectory(cwd, staticSiteFolderName, 'api-image', `${companyLogoPngWidth}x${companyLogoPngHeight}`);
@@ -329,6 +332,7 @@ class StaticSite {
 
     // eslint-disable-next-line class-methods-use-this
     @logTakenTime('>>', 'StaticSite')
+    // eslint-disable-next-line @typescript-eslint/class-methods-use-this
     private async copyDistributionFolder(): Promise<void> {
         await makeDirectory(cwd, staticSiteFolderName);
 
