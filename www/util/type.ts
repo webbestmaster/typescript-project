@@ -6,7 +6,7 @@ export interface LazyResultType<ComponentPropsType> {
     default: ComponentType<ComponentPropsType>;
 }
 
-export function getStringFromUnknown(data: Record<string, unknown> | undefined | null, requiredKey: string): string {
+export function getStringFromUnknown(data: Record<string, unknown> | null | undefined, requiredKey: string): string {
     if (!data) {
         return '';
     }
