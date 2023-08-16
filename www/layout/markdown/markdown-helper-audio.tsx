@@ -16,9 +16,9 @@ export interface AudioTagDataType {
 }
 
 export function parseAudioTag(audioTag: string): AudioTagDataType {
-    const [ignoredFullSrcString, srcAsString = ''] = audioTag.match(/src="([^"]*?)"/u) ?? ['', ''];
-    const [ignoredFullDurationString, durationAsString = ''] = audioTag.match(/data-duration="([^"]*?)"/u) ?? ['', ''];
-    const [ignoredFullTitleString, titleAsString = ''] = audioTag.match(/data-title="([^"]*?)"/u) ?? ['', ''];
+    const [ignoredFullSrcString, srcAsString = ''] = /src="([^"]*?)"/u.exec(audioTag) ?? ['', ''];
+    const [ignoredFullDurationString, durationAsString = ''] = /data-duration="([^"]*?)"/u.exec(audioTag) ?? ['', ''];
+    const [ignoredFullTitleString, titleAsString = ''] = /data-title="([^"]*?)"/u.exec(audioTag) ?? ['', ''];
     const durationAsNumber = Number.parseFloat(durationAsString) || 0;
 
     return {

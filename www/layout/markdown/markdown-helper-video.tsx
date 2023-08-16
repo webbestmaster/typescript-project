@@ -12,18 +12,18 @@ export function getVideoFromHtml(
     markdownItemCounter: MarkdownItemCounter
 ): JSX.Element {
     const {htmlString, articleTitle} = rawData;
-    const [ignoredFullWidthString, widthAsString = ''] = htmlString.match(/width="(\d+)"/u) ?? ['', '0'];
-    const [ignoredFullHeightString, heightAsString = ''] = htmlString.match(/height="(\d+)"/u) ?? ['', '0'];
-    const [ignoredFullPosterString, posterAsString = ''] = htmlString.match(/poster="([^"]*?)"/u) ?? [
+    const [ignoredFullWidthString, widthAsString = ''] = /width="(\d+)"/u.exec(htmlString) ?? ['', '0'];
+    const [ignoredFullHeightString, heightAsString = ''] = /height="(\d+)"/u.exec(htmlString) ?? ['', '0'];
+    const [ignoredFullPosterString, posterAsString = ''] = /poster="([^"]*?)"/u.exec(htmlString) ?? [
         '',
         appIconPngFileName,
     ];
-    const [ignoredFullDurationString, durationAsString = ''] = htmlString.match(/data-duration="([^"]*?)"/u) ?? [
+    const [ignoredFullDurationString, durationAsString = ''] = /data-duration="([^"]*?)"/u.exec(htmlString) ?? [
         '',
         '0',
     ];
-    const [ignoredFullTitleString, titleAsString = ''] = htmlString.match(/title="([^"]*?)"/u) ?? ['', 'THE TITLE'];
-    const [ignoredFullSrcString, srcAsString = ''] = htmlString.match(/src="([^"]*?)"/u) ?? ['', ''];
+    const [ignoredFullTitleString, titleAsString = ''] = /title="([^"]*?)"/u.exec(htmlString) ?? ['', 'THE TITLE'];
+    const [ignoredFullSrcString, srcAsString = ''] = /src="([^"]*?)"/u.exec(htmlString) ?? ['', ''];
 
     return (
         <Video

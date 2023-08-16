@@ -5,7 +5,7 @@ import {makeSafeRegExpPatter} from './regexp';
 type SetCookieOptionsType = Record<string, Date | boolean | number | string | null>;
 
 export function getCookie(name: string): string | null {
-    const matches = document.cookie.match(new RegExp(`(?:^|; )${makeSafeRegExpPatter(name)}=([^;]*)`, 'u'));
+    const matches = new RegExp(`(?:^|; )${makeSafeRegExpPatter(name)}=([^;]*)`, 'u').exec(document.cookie);
 
     return matches ? decodeURIComponent(matches[1]) : null;
 }
