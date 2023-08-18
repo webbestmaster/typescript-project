@@ -1,17 +1,17 @@
-import {useCallback, useContext} from 'react';
-import {Link} from 'react-router-dom';
+import {useCallback, useContext} from "react";
+import {Link} from "react-router-dom";
 
-import {Locale} from '../../provider/locale/locale-context';
-import {getArticleLinkToViewClient} from '../article/article-helper';
-import type {ArticlePreviewType} from '../../../server/article/article-type';
-import {rootArticleSlug} from '../../../server/article/article-const';
-import type {ArticleContextType} from '../article/article-context/article-context-type';
-import {articleContext} from '../article/article-context/article-context';
-import {cls} from '../../util/css';
+import {Locale} from "../../provider/locale/locale-context";
+import {getArticleLinkToViewClient} from "../article/article-helper";
+import type {ArticlePreviewType} from "../../../server/article/article-type";
+import {rootArticleSlug} from "../../../server/article/article-const";
+import type {ArticleContextType} from "../article/article-context/article-context-type";
+import {articleContext} from "../article/article-context/article-context";
+import {cls} from "../../util/css";
 
-import type {NavigationContextType} from './navigation-context/navigation-context-type';
-import {navigationContext} from './navigation-context/navigation-context';
-import navigationStyle from './navigation.scss';
+import type {NavigationContextType} from "./navigation-context/navigation-context-type";
+import {navigationContext} from "./navigation-context/navigation-context";
+import navigationStyle from "./navigation.scss";
 
 export function Navigation(): JSX.Element {
     const navigationContextData = useContext<NavigationContextType>(navigationContext);

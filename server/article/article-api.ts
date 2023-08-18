@@ -1,20 +1,20 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 
-import type {FastifyReply, FastifyRequest} from 'fastify';
-import type {PetsdbQueryType, PetsdbReadPageConfigType} from 'petsdb';
+import type {FastifyReply, FastifyRequest} from "fastify";
+import type {PetsdbQueryType, PetsdbReadPageConfigType} from "petsdb";
 
-import {mainResponseHeader} from '../const';
-import {defaultPaginationQuery} from '../data-base/data-base-const';
-import {makeClientArticleContextData} from '../ssr/api/srr-article';
-import {getStringFromUnknown} from '../../www/util/type';
-import type {ArticleContextType} from '../../www/client-component/article/article-context/article-context-type';
-import type {PaginationResultType} from '../data-base/data-base-type';
-import {getArticleLinkToViewClient} from '../../www/client-component/article/article-helper';
+import {mainResponseHeader} from "../const";
+import {defaultPaginationQuery} from "../data-base/data-base-const";
+import {makeClientArticleContextData} from "../ssr/api/srr-article";
+import {getStringFromUnknown} from "../../www/util/type";
+import type {ArticleContextType} from "../../www/client-component/article/article-context/article-context-type";
+import type {PaginationResultType} from "../data-base/data-base-type";
+import {getArticleLinkToViewClient} from "../../www/client-component/article/article-helper";
 
-import {articleCrud} from './article';
-import type {ArticleType, ParsedRequestQueryType} from './article-type';
-import {validateArticle} from './article-validation';
-import {tryQueryStringToRegExp} from './article-util';
+import {articleCrud} from "./article";
+import type {ArticleType, ParsedRequestQueryType} from "./article-type";
+import {validateArticle} from "./article-validation";
+import {tryQueryStringToRegExp} from "./article-util";
 
 export async function getArticleListPagination(
     request: FastifyRequest,
@@ -37,7 +37,7 @@ export async function getArticleListPagination(
     for (const queryKey in queryParsed) {
         const queryValue = {...queryParsed}[queryKey];
 
-        if (typeof queryValue === 'string') {
+        if (typeof queryValue === "string") {
             Object.assign(queryParsed, {[queryKey]: tryQueryStringToRegExp(queryValue)});
         }
     }
@@ -74,7 +74,7 @@ function parseRequestQuery(request: FastifyRequest): ParsedRequestQueryType {
     for (const queryKey in queryParsed) {
         const queryValue = {...queryParsed}[queryKey];
 
-        if (typeof queryValue === 'string') {
+        if (typeof queryValue === "string") {
             Object.assign(queryParsed, {[queryKey]: tryQueryStringToRegExp(queryValue)});
         }
     }
@@ -116,10 +116,10 @@ export async function getArticleClientListPaginationPick(
 export async function postAdminArticleCreate(
     request: FastifyRequest<{Body?: string}>,
     reply: FastifyReply
-): Promise<ArticleType | Record<'message', string>> {
+): Promise<ArticleType | Record<"message", string>> {
     const {body} = request;
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const parsedCreateData: ArticleType = JSON.parse(String(body ?? '{}'));
+    const parsedCreateData: ArticleType = JSON.parse(String(body ?? "{}"));
     const [isValidArticle, modelJsonSchemaValidate] = validateArticle(parsedCreateData);
 
     reply.header(...mainResponseHeader);
@@ -132,16 +132,16 @@ export async function postAdminArticleCreate(
 
     const {id, slug} = parsedCreateData;
 
-    if (id.trim() === '') {
+    if (id.trim() === "") {
         reply.code(400);
 
-        return {message: 'Id Should exists.'};
+        return {message: "Id Should exists."};
     }
 
-    if (slug.trim() === '') {
+    if (slug.trim() === "") {
         reply.code(400);
 
-        return {message: 'Slug should exists.'};
+        return {message: "Slug should exists."};
     }
 
     const existedArticleById = await articleCrud.findOne({id});
@@ -179,10 +179,10 @@ export async function postAdminArticleCreate(
 export async function postAdminArticleUpdate(
     request: FastifyRequest<{Body?: string}>,
     reply: FastifyReply
-): Promise<ArticleType | Record<'message', string>> {
+): Promise<ArticleType | Record<"message", string>> {
     const {body} = request;
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const parsedUpdateData: ArticleType = JSON.parse(String(body ?? '{}'));
+    const parsedUpdateData: ArticleType = JSON.parse(String(body ?? "{}"));
     const [isValidArticle, modelJsonSchemaValidate] = validateArticle(parsedUpdateData);
 
     reply.header(...mainResponseHeader);
@@ -195,10 +195,10 @@ export async function postAdminArticleUpdate(
 
     const {id} = parsedUpdateData;
 
-    if (id.trim() === '') {
+    if (id.trim() === "") {
         reply.code(400);
 
-        return {message: 'Id Should exists.'};
+        return {message: "Id Should exists."};
     }
 
     const existedArticleById = await articleCrud.findOne({id});
@@ -224,9 +224,9 @@ export async function postAdminArticleUpdate(
 export async function deleteAdminArticleDelete(
     request: FastifyRequest<{Params: {articleId?: string}}>,
     reply: FastifyReply
-): Promise<Record<'articleId', string>> {
+): Promise<Record<"articleId", string>> {
     const {params} = request;
-    const articleId = getStringFromUnknown(params, 'articleId');
+    const articleId = getStringFromUnknown(params, "articleId");
 
     await articleCrud.deleteOne({id: articleId});
 
@@ -240,11 +240,11 @@ export async function getClientArticleContextData(
     reply: FastifyReply
 ): Promise<ArticleContextType> {
     const {params} = request;
-    const slug = getStringFromUnknown(params, 'slug');
+    const slug = getStringFromUnknown(params, "slug");
 
     const [clientArticleData] = await makeClientArticleContextData(slug);
 
-    const status = clientArticleData.article.id === '' ? 404 : 200;
+    const status = clientArticleData.article.id === "" ? 404 : 200;
 
     reply.code(status).header(...mainResponseHeader);
 

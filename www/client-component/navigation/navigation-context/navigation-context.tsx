@@ -1,10 +1,10 @@
 /* global NAVIGATION_DATA */
-import {createContext} from 'react';
+import {createContext} from "react";
 
-import {isBrowser} from '../../../util/system';
+import {isBrowser} from "../../../util/system";
 
-import type {NavigationContextType} from './navigation-context-type';
-import {defaultNavigationContextData} from './navigation-context-const';
+import type {NavigationContextType} from "./navigation-context-type";
+import {defaultNavigationContextData} from "./navigation-context-const";
 
 export const navigationContext = createContext<NavigationContextType>(defaultNavigationContextData);
 
@@ -20,7 +20,7 @@ export function NavigationProvider(props: NavigationProviderPropsType): JSX.Elem
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const ssrNavigationData: NavigationContextType | null =
-        typeof NAVIGATION_DATA === 'string'
+        typeof NAVIGATION_DATA === "string"
             ? JSON.parse(decodeURIComponent(NAVIGATION_DATA))
             : defaultNavigationContextData;
     // Typeof NAVIGATION_DATA === 'string' ? JSON.parse(decodeURIComponent(NAVIGATION_DATA)) : null;;

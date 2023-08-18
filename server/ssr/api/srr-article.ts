@@ -1,16 +1,16 @@
-import type {ArticleContextType} from '../../../www/client-component/article/article-context/article-context-type';
-import {makeDefaultArticle} from '../../article/article-helper';
+import type {ArticleContextType} from "../../../www/client-component/article/article-context/article-context-type";
+import {makeDefaultArticle} from "../../article/article-helper";
 import {
     getActiveArticleBySlugEnsure,
     getArticlePreviewBreadcrumbListById,
     getArticlePreviewListByIdListFiltered,
     getIsActiveArticlePreview,
     getSiblingPreviewListById,
-} from '../../article/article-util';
-import type {ArticlePreviewType, ArticleType} from '../../article/article-type';
-import {articleSsrFieldName} from '../../../www/client-component/article/article-const';
+} from "../../article/article-util";
+import type {ArticlePreviewType, ArticleType} from "../../article/article-type";
+import {articleSsrFieldName} from "../../../www/client-component/article/article-const";
 
-import {replaceSpecialSymbols} from './ssr-helper/ssr-symbol';
+import {replaceSpecialSymbols} from "./ssr-helper/ssr-symbol";
 
 export async function makeClientArticleContextData(slug: string): Promise<[ArticleContextType, string]> {
     const article: ArticleType = await getActiveArticleBySlugEnsure(slug, makeDefaultArticle());
@@ -32,10 +32,10 @@ export async function makeClientArticleContextData(slug: string): Promise<[Artic
     };
 
     const articleDataHtmlString: string = [
-        '<script>',
+        "<script>",
         `window.${articleSsrFieldName} = '${replaceSpecialSymbols(encodeURIComponent(JSON.stringify(articleData)))}'`,
-        '</script>',
-    ].join('');
+        "</script>",
+    ].join("");
 
     return [articleData, articleDataHtmlString];
 }

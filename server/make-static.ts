@@ -1,30 +1,30 @@
 /* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
 
 /* global fetch, Response, Buffer */
-import {cwd as getCwd} from 'node:process';
-import {createWriteStream} from 'node:fs';
-import fileSystem from 'node:fs/promises';
-import path from 'node:path';
+import {cwd as getCwd} from "node:process";
+import {createWriteStream} from "node:fs";
+import fileSystem from "node:fs/promises";
+import path from "node:path";
 
-import {getArticleLinkToViewClient} from '../www/client-component/article/article-helper';
-import {generatePath, paginationQueryToURLSearchParameters} from '../www/util/url';
-import {appRoute} from '../www/component/app/app-route';
-import {appIconPngFileName, companyLogoPngFileName, companyLogoPngHeight, companyLogoPngWidth} from '../www/const';
-import {getPathToImage} from '../www/util/path';
-import {articlePreviewKeyList} from '../www/client-component/search/search-const';
+import {getArticleLinkToViewClient} from "../www/client-component/article/article-helper";
+import {generatePath, paginationQueryToURLSearchParameters} from "../www/util/url";
+import {appRoute} from "../www/component/app/app-route";
+import {appIconPngFileName, companyLogoPngFileName, companyLogoPngHeight, companyLogoPngWidth} from "../www/const";
+import {getPathToImage} from "../www/util/path";
+import {articlePreviewKeyList} from "../www/client-component/search/search-const";
 // import {takeTimeLog} from '../www/util/time';
-import {TaskRunner, type TaskRunnerOnTaskDoneArgumentType} from '../www/util/task-runner';
-import {formatProgress} from '../www/util/string';
-import {logTakenTime} from '../www/util/time';
+import {TaskRunner, type TaskRunnerOnTaskDoneArgumentType} from "../www/util/task-runner";
+import {formatProgress} from "../www/util/string";
+import {logTakenTime} from "../www/util/time";
 
-import {articleCrud} from './article/article';
-import type {ArticleType} from './article/article-type';
-import {uploadFileFolder} from './file/file-const';
-import {apiUrl, serverPort} from './const';
-import {rootArticleSlug} from './article/article-const';
-import {makeDirectory, tryToMakeDirectorySilent} from './file/directory';
+import {articleCrud} from "./article/article";
+import type {ArticleType} from "./article/article-type";
+import {uploadFileFolder} from "./file/file-const";
+import {apiUrl, serverPort} from "./const";
+import {rootArticleSlug} from "./article/article-const";
+import {makeDirectory, tryToMakeDirectorySilent} from "./file/directory";
 
-const staticSiteFolderName = 'static-site';
+const staticSiteFolderName = "static-site";
 const mainUrl = `http://127.0.0.1:${serverPort}`;
 
 const cwd: string = getCwd();
@@ -44,7 +44,7 @@ class StaticSite {
     private readonly pageList: Array<StaticPageType> = [];
 
     // eslint-disable-next-line class-methods-use-this
-    @logTakenTime('>', 'StaticSite')
+    @logTakenTime(">", "StaticSite")
     public async makeStatic(): Promise<void> {
         await this.copyStaticFileFolder();
 
@@ -69,13 +69,13 @@ class StaticSite {
         await this.makeIndexHtml();
     }
 
-    @logTakenTime('>>', 'StaticSite')
+    @logTakenTime(">>", "StaticSite")
     private async makeApiArticle(): Promise<void> {
         const {log} = console;
 
-        await makeDirectory(cwd, staticSiteFolderName, 'api');
+        await makeDirectory(cwd, staticSiteFolderName, "api");
         // eslint-disable-next-line sonarjs/no-duplicate-string
-        await makeDirectory(cwd, staticSiteFolderName, 'api', 'client-article');
+        await makeDirectory(cwd, staticSiteFolderName, "api", "client-article");
 
         const progressCounterMax: number = this.pageList.length;
         const taskRunner = new TaskRunner({
@@ -101,7 +101,7 @@ class StaticSite {
                     const data = await this.getTextFromUrl(mainUrl + apiPath);
 
                     await fileSystem.writeFile(
-                        path.join(cwd, staticSiteFolderName, 'api', 'client-article', page.slug),
+                        path.join(cwd, staticSiteFolderName, "api", "client-article", page.slug),
                         data
                     );
                 });
@@ -111,10 +111,10 @@ class StaticSite {
         await Promise.all(taskPromiseList);
     }
 
-    @logTakenTime('>>', 'StaticSite')
+    @logTakenTime(">>", "StaticSite")
     private async makeApiArticleSearch() {
-        await makeDirectory(cwd, staticSiteFolderName, 'api');
-        await makeDirectory(cwd, staticSiteFolderName, 'api', 'client-article');
+        await makeDirectory(cwd, staticSiteFolderName, "api");
+        await makeDirectory(cwd, staticSiteFolderName, "api", "client-article");
 
         const querySearchParameters = paginationQueryToURLSearchParameters<ArticleType>(
             {},
@@ -127,18 +127,18 @@ class StaticSite {
         const data = await this.getTextFromUrl(mainUrl + apiPath);
 
         await fileSystem.writeFile(
-            path.join(cwd, staticSiteFolderName, 'api', 'client-article', 'pagination-pick'),
+            path.join(cwd, staticSiteFolderName, "api", "client-article", "pagination-pick"),
             data
         );
     }
 
     // eslint-disable-next-line class-methods-use-this
-    @logTakenTime('>>', 'StaticSite')
+    @logTakenTime(">>", "StaticSite")
     // eslint-disable-next-line @typescript-eslint/class-methods-use-this
     private async makeIcons(): Promise<void> {
         const {log} = console;
 
-        await makeDirectory(cwd, staticSiteFolderName, 'api-image');
+        await makeDirectory(cwd, staticSiteFolderName, "api-image");
 
         const appIconSizeList: Array<number> = [
             // manifest.json, check in manifest.json
@@ -166,7 +166,7 @@ class StaticSite {
                 return taskRunner.add(async () => {
                     const sizeFolderName = `${iconSize}x${iconSize}`;
 
-                    await tryToMakeDirectorySilent(cwd, staticSiteFolderName, 'api-image', sizeFolderName);
+                    await tryToMakeDirectorySilent(cwd, staticSiteFolderName, "api-image", sizeFolderName);
 
                     const iconImagePath = getPathToImage(appIconPngFileName, {height: iconSize, width: iconSize});
                     const responseIcon: Response = await fetch(mainUrl + iconImagePath);
@@ -182,11 +182,11 @@ class StaticSite {
     }
 
     // eslint-disable-next-line class-methods-use-this
-    @logTakenTime('>>', 'StaticSite')
+    @logTakenTime(">>", "StaticSite")
     // eslint-disable-next-line @typescript-eslint/class-methods-use-this
     private async makeCompanyLogo(): Promise<void> {
-        await makeDirectory(cwd, staticSiteFolderName, 'api-image');
-        await makeDirectory(cwd, staticSiteFolderName, 'api-image', `${companyLogoPngWidth}x${companyLogoPngHeight}`);
+        await makeDirectory(cwd, staticSiteFolderName, "api-image");
+        await makeDirectory(cwd, staticSiteFolderName, "api-image", `${companyLogoPngWidth}x${companyLogoPngHeight}`);
 
         const companyLogoPath = getPathToImage(companyLogoPngFileName, {
             height: companyLogoPngHeight,
@@ -200,11 +200,11 @@ class StaticSite {
     }
 
     // eslint-disable-next-line max-statements
-    @logTakenTime('>>', 'StaticSite')
+    @logTakenTime(">>", "StaticSite")
     private async makeImages(): Promise<void> {
         const {log} = console;
 
-        await makeDirectory(cwd, staticSiteFolderName, 'api-image');
+        await makeDirectory(cwd, staticSiteFolderName, "api-image");
 
         const imageUrlList: Array<ImageUrlType> = [];
 
@@ -231,21 +231,21 @@ class StaticSite {
         const taskPromiseList: Array<Promise<unknown>> = imageUrlList.map<Promise<unknown>>(
             async (imageUrl: ImageUrlType): Promise<unknown> => {
                 return taskRunner.add(async () => {
-                    const imageUrlChunks = imageUrl.url.split('/');
+                    const imageUrlChunks = imageUrl.url.split("/");
                     const [ignoredSpace, ignoredImageApiString, imageSize, imageName] = imageUrlChunks;
 
                     if (!imageName || !imageSize) {
-                        log('----------------------------------------');
+                        log("----------------------------------------");
                         log(`[ERROR]: makeImages: wrong image url, slug / url: ${imageUrl.slug} / ${imageUrl.url}`);
                         return;
                     }
 
-                    await tryToMakeDirectorySilent(cwd, staticSiteFolderName, 'api-image', imageSize);
+                    await tryToMakeDirectorySilent(cwd, staticSiteFolderName, "api-image", imageSize);
 
                     const imageResponse: Response = await fetch(mainUrl + imageUrl.url);
 
                     if (!imageResponse.ok) {
-                        log('----------------------------------------');
+                        log("----------------------------------------");
                         log(`[ERROR]: makeImages: can not get slug / url: ${imageUrl.slug} / ${imageUrl.url}`);
                         return;
                     }
@@ -262,15 +262,15 @@ class StaticSite {
     }
 
     // eslint-disable-next-line class-methods-use-this
-    @logTakenTime('>>', 'StaticSite')
+    @logTakenTime(">>", "StaticSite")
     // eslint-disable-next-line @typescript-eslint/class-methods-use-this
     private async copyDistributionFolder(): Promise<void> {
         await makeDirectory(cwd, staticSiteFolderName);
 
-        await fileSystem.cp(path.join(cwd, 'dist'), path.join(cwd, staticSiteFolderName), {recursive: true});
+        await fileSystem.cp(path.join(cwd, "dist"), path.join(cwd, staticSiteFolderName), {recursive: true});
     }
 
-    @logTakenTime('>>', 'StaticSite')
+    @logTakenTime(">>", "StaticSite")
     private async makeIndexHtml(): Promise<void> {
         const rootArticle = this.pageList.find((article: StaticPageType): boolean => {
             return article.slug === rootArticleSlug;
@@ -280,10 +280,10 @@ class StaticSite {
             throw new Error(`[ERROR]: makeIndexHtml: can not find root article, slug: ${rootArticleSlug}`);
         }
 
-        await fileSystem.writeFile(path.join(cwd, staticSiteFolderName, 'index.html'), rootArticle.html);
+        await fileSystem.writeFile(path.join(cwd, staticSiteFolderName, "index.html"), rootArticle.html);
     }
 
-    @logTakenTime('>>', 'StaticSite')
+    @logTakenTime(">>", "StaticSite")
     // eslint-disable-next-line @typescript-eslint/class-methods-use-this
     private async copyStaticFileFolder(): Promise<void> {
         await makeDirectory(cwd, staticSiteFolderName);
@@ -293,7 +293,7 @@ class StaticSite {
         });
     }
 
-    @logTakenTime('>>', 'StaticSite')
+    @logTakenTime(">>", "StaticSite")
     private async collectHtmlPages(): Promise<void> {
         const {log} = console;
         const articleList: Array<ArticleType> = await articleCrud.findMany({isActive: true, isInSiteMapXmlSeo: true});
@@ -328,11 +328,11 @@ class StaticSite {
         this.pageList.push(...pageList);
     }
 
-    @logTakenTime('>>', 'StaticSite')
+    @logTakenTime(">>", "StaticSite")
     private async makeHtmlPages(): Promise<void> {
         const {log} = console;
 
-        await makeDirectory(cwd, staticSiteFolderName, 'article');
+        await makeDirectory(cwd, staticSiteFolderName, "article");
 
         const progressCounterMax: number = this.pageList.length;
         const taskRunner = new TaskRunner({
@@ -361,13 +361,13 @@ class StaticSite {
         await Promise.all(taskPromiseList);
     }
 
-    @logTakenTime('>>', 'StaticSite')
+    @logTakenTime(">>", "StaticSite")
     private async makeServicePages(): Promise<void> {
         await makeDirectory(cwd, staticSiteFolderName);
 
         const html404 = await this.getTextFromUrl(`${mainUrl}/404`);
 
-        await fileSystem.writeFile(path.join(cwd, staticSiteFolderName, '404.html'), html404);
+        await fileSystem.writeFile(path.join(cwd, staticSiteFolderName, "404.html"), html404);
     }
 
     // eslint-disable-next-line class-methods-use-this, @typescript-eslint/class-methods-use-this

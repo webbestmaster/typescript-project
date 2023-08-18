@@ -1,7 +1,7 @@
 /* global fetch, document, URL, Response, Blob */
 
-import {FetchMethodEnum} from '../../util/fetch';
-import {apiUrl} from '../../../server/const';
+import {FetchMethodEnum} from "../../util/fetch";
+import {apiUrl} from "../../../server/const";
 
 export async function makePdf(html: string, fileName: string): Promise<void> {
     /**
@@ -20,11 +20,11 @@ export async function makePdf(html: string, fileName: string): Promise<void> {
     const blob: Blob = await response.blob();
 
     const objectUrl = URL.createObjectURL(blob);
-    const link = document.createElement('a');
+    const link = document.createElement("a");
 
-    link.style.position = 'absolute';
-    link.style.zIndex = '1000000';
-    link.style.opacity = '0';
+    link.style.position = "absolute";
+    link.style.zIndex = "1000000";
+    link.style.opacity = "0";
 
     document.body.append(link);
 

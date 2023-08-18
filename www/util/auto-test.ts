@@ -16,10 +16,10 @@ function productionGetTestNodeData(): string | null {
 }
 
 export function developmentGetTestNodeData(data: Record<string, string> | string): string | null {
-    return typeof data === 'string' ? data : JSON.stringify(data);
+    return typeof data === "string" ? data : JSON.stringify(data);
 }
 
-const isProduction = Boolean(typeof IS_PRODUCTION === 'boolean' && IS_PRODUCTION);
+const isProduction = Boolean(typeof IS_PRODUCTION === "boolean" && IS_PRODUCTION);
 
 export const getTestNodeId: GetTestNodeIdType = isProduction ? productionGetTestNodeId : developmentGetTestNodeId;
 export const getTestNodeData: GetTestNodeDataType = isProduction

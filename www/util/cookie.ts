@@ -1,11 +1,11 @@
 /* global document */
 
-import {makeSafeRegExpPatter} from './regexp';
+import {makeSafeRegExpPatter} from "./regexp";
 
 type SetCookieOptionsType = Record<string, Date | boolean | number | string | null>;
 
 export function getCookie(name: string): string | null {
-    const matches = new RegExp(`(?:^|; )${makeSafeRegExpPatter(name)}=([^;]*)`, 'u').exec(document.cookie);
+    const matches = new RegExp(`(?:^|; )${makeSafeRegExpPatter(name)}=([^;]*)`, "u").exec(document.cookie);
 
     return matches ? decodeURIComponent(matches[1]) : null;
 }
@@ -36,5 +36,5 @@ export function setCookie(name: string, value: string, rawOptions: SetCookieOpti
 }
 
 export function deleteCookie(name: string): void {
-    setCookie(name, '', {'max-age': -1});
+    setCookie(name, "", {"max-age": -1});
 }

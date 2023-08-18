@@ -1,9 +1,9 @@
 /* global document */
 
-import type {ArticleContextType} from './article-context-type';
+import type {ArticleContextType} from "./article-context-type";
 
 export function articleContextDom(articleData: ArticleContextType) {
-    if (typeof document === 'undefined') {
+    if (typeof document === "undefined") {
         return;
     }
 

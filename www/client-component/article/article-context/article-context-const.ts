@@ -1,9 +1,9 @@
-import type {JSONSchemaType} from 'ajv';
+import type {JSONSchemaType} from "ajv";
 
-import {makeDefaultArticle} from '../../../../server/article/article-helper';
-import {makeArticlePreviewSchema, makeArticleSchema} from '../../../../server/article/article-validation';
+import {makeDefaultArticle} from "../../../../server/article/article-helper";
+import {makeArticlePreviewSchema, makeArticleSchema} from "../../../../server/article/article-validation";
 
-import type {ArticleContextType} from './article-context-type';
+import type {ArticleContextType} from "./article-context-type";
 
 export const defaultArticleContextData: ArticleContextType = {
     article: makeDefaultArticle(),
@@ -19,24 +19,24 @@ export const articleContextDataSchema: JSONSchemaType<ArticleContextType> = {
         article: makeArticleSchema(),
         breadcrumbs: {
             items: makeArticlePreviewSchema(),
-            type: 'array',
+            type: "array",
         },
         childList: {
             items: makeArticlePreviewSchema(),
-            type: 'array',
+            type: "array",
         },
         isInProgressArticle: {
-            type: 'boolean',
+            type: "boolean",
         },
         setSlug: {
             nullable: true,
-            type: 'object',
+            type: "object",
         },
         siblingList: {
             items: makeArticlePreviewSchema(),
-            type: 'array',
+            type: "array",
         },
     },
-    required: ['article', 'breadcrumbs', 'childList', 'isInProgressArticle', 'siblingList'],
-    type: 'object',
+    required: ["article", "breadcrumbs", "childList", "isInProgressArticle", "siblingList"],
+    type: "object",
 };

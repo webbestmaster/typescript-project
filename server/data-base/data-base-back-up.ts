@@ -1,16 +1,16 @@
 /* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
 
-import {createReadStream, createWriteStream} from 'node:fs';
-import fileSystem from 'node:fs/promises';
-import path from 'node:path';
+import {createReadStream, createWriteStream} from "node:fs";
+import fileSystem from "node:fs/promises";
+import path from "node:path";
 
-import JSZip from 'jszip';
+import JSZip from "jszip";
 
-import {sortStringCallbackReverse} from '../../www/util/string';
-import type {PromiseResolveType} from '../../www/util/promise';
+import {sortStringCallbackReverse} from "../../www/util/string";
+import type {PromiseResolveType} from "../../www/util/promise";
 
-import {dataBaseBackUpPathAbsolute} from './data-base-const';
-import type {CrudConfigOnChangeArgumentType} from './data-base-type';
+import {dataBaseBackUpPathAbsolute} from "./data-base-const";
+import type {CrudConfigOnChangeArgumentType} from "./data-base-type";
 
 async function removeOldDataBaseBackUp(dataBaseInfo: CrudConfigOnChangeArgumentType): Promise<void> {
     const {dataBaseId} = dataBaseInfo;
@@ -32,7 +32,7 @@ async function removeOldDataBaseBackUp(dataBaseInfo: CrudConfigOnChangeArgumentT
             return fileSystem.unlink(pathToFile);
         })
     ).catch((error: Error): void => {
-        console.log('[ERROR]: removeOldDataBaseBackUp:', error.message);
+        console.log("[ERROR]: removeOldDataBaseBackUp:", error.message);
     });
 }
 
@@ -41,7 +41,7 @@ export async function makeDataBaseBackUp(dataBaseInfo: CrudConfigOnChangeArgumen
 
     const {dataBaseFileName, dataBasePath, dataBaseId} = dataBaseInfo;
     const zip = new JSZip();
-    const fileNamePrefix = new Date().toISOString().replace(/[:tz]+/giu, '-');
+    const fileNamePrefix = new Date().toISOString().replace(/[:tz]+/giu, "-");
     const backupFileName = path.join(
         dataBaseBackUpPathAbsolute,
         dataBaseId,
@@ -50,10 +50,10 @@ export async function makeDataBaseBackUp(dataBaseInfo: CrudConfigOnChangeArgumen
 
     await new Promise((resolve: PromiseResolveType<void>, reject: PromiseResolveType<Error>) => {
         zip.file(dataBaseFileName, createReadStream(dataBasePath))
-            .generateNodeStream({compression: 'DEFLATE', streamFiles: true})
+            .generateNodeStream({compression: "DEFLATE", streamFiles: true})
             .pipe(createWriteStream(backupFileName))
-            .on('close', resolve)
-            .on('error', reject);
+            .on("close", resolve)
+            .on("error", reject);
     });
 
     console.info(`[ OK ]: makeDataBaseBackUp - done, data base id: ${dataBaseId}`);

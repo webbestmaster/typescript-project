@@ -1,9 +1,9 @@
-import {cls} from '../../util/css';
+import {cls} from "../../util/css";
 
-import type {LangKeyType} from '../../provider/locale/translation/type';
-import {Locale} from '../../provider/locale/locale-context';
+import type {LangKeyType} from "../../provider/locale/translation/type";
+import {Locale} from "../../provider/locale/locale-context";
 
-import errorDataStyle from './error-data.scss';
+import errorDataStyle from "./error-data.scss";
 
 interface PropsType {
     // eslint-disable-next-line unicorn/no-keyword-prefix

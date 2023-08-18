@@ -1,16 +1,16 @@
 /* global HTMLDivElement */
 
-import {type HTMLAttributes, useContext} from 'react';
+import {type HTMLAttributes, useContext} from "react";
 // eslint-disable-next-line unicorn/no-keyword-prefix
-import {markdown, classNameMdPro, classNameMdProThemeLight} from 'markdown-pro';
+import {markdown, classNameMdPro, classNameMdProThemeLight} from "markdown-pro";
 
-import {cls} from '../../util/css';
-import type {ThemeContextType} from '../../provider/theme/theme-context-type';
-import {ThemeContext} from '../../provider/theme/theme-context';
+import {cls} from "../../util/css";
+import type {ThemeContextType} from "../../provider/theme/theme-context-type";
+import {ThemeContext} from "../../provider/theme/theme-context";
 
-import {MarkdownHtmlToReact} from './markdown-html-to-react';
+import {MarkdownHtmlToReact} from "./markdown-html-to-react";
 
-import markdownStyle from './markdown.scss';
+import markdownStyle from "./markdown.scss";
 
 type PropsType = HTMLAttributes<HTMLDivElement> & {
     readonly articleTitle: string;

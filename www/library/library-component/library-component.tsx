@@ -1,6 +1,6 @@
-import type {ReactNode} from 'react';
+import type {ReactNode} from "react";
 
-import libraryStyle from './library.scss';
+import libraryStyle from "./library.scss";
 
 export interface LibraryPropsType {
     readonly children: ReactNode;

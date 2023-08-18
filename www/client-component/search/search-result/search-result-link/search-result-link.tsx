@@ -1,9 +1,9 @@
-import {Link} from 'react-router-dom';
+import {Link} from "react-router-dom";
 
-import {getArticleLinkToViewClient} from '../../../article/article-helper';
-import type {SearchArticleType} from '../../search-type';
+import {getArticleLinkToViewClient} from "../../../article/article-helper";
+import type {SearchArticleType} from "../../search-type";
 
-import searchResultLinkStyle from './search-result-link.scss';
+import searchResultLinkStyle from "./search-result-link.scss";
 
 interface SearchResultLinkPropsType {
     readonly searchArticle: SearchArticleType;
@@ -14,7 +14,7 @@ export function SearchResultLink(props: SearchResultLinkPropsType) {
     const {searchArticle, searchString} = props;
     const {slug, title} = searchArticle;
 
-    const [leftText = '', rightText = ''] = title.toLowerCase().split(searchString.toLowerCase());
+    const [leftText = "", rightText = ""] = title.toLowerCase().split(searchString.toLowerCase());
     const leftMarkIndex = leftText.length;
     const rightMarkIndex = leftText.length + searchString.length;
 

@@ -4,18 +4,18 @@ import {
     DefinePlugin,
     type WebpackPluginInstance,
     type Compiler,
-} from 'webpack';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import ScriptExtHtmlWebpackPlugin from 'script-ext-html-webpack-plugin';
-import CopyWebpackPlugin from 'copy-webpack-plugin';
-import {CleanWebpackPlugin} from 'clean-webpack-plugin';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import CircularDependencyPlugin from 'circular-dependency-plugin';
-import DuplicatePackageCheckerPlugin from 'duplicate-package-checker-webpack-plugin';
+} from "webpack";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import ScriptExtHtmlWebpackPlugin from "script-ext-html-webpack-plugin";
+import CopyWebpackPlugin from "copy-webpack-plugin";
+import {CleanWebpackPlugin} from "clean-webpack-plugin";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import CircularDependencyPlugin from "circular-dependency-plugin";
+import DuplicatePackageCheckerPlugin from "duplicate-package-checker-webpack-plugin";
 
-import {isProduction, isDevelopment, isBuildLibrary} from '../config';
+import {isProduction, isDevelopment, isBuildLibrary} from "../config";
 
-const filePathPrefix = isProduction ? './../' : './';
+const filePathPrefix = isProduction ? "./../" : "./";
 
 const date = new Date();
 
@@ -32,14 +32,14 @@ const definePluginParameters: Record<string, string> = {
      */
 };
 
-type StaticFilesDataType = Record<'from' | 'to', string>;
+type StaticFilesDataType = Record<"from" | "to", string>;
 
 const staticFilesSiteList: Array<StaticFilesDataType> = [
-    'favicon.ico',
-    'robots.txt',
-    'ads.txt',
-    'gss-0.9.xsl',
-    'manifest.json',
+    "favicon.ico",
+    "robots.txt",
+    "ads.txt",
+    "gss-0.9.xsl",
+    "manifest.json",
     // 'index-500.html',
 ].map<StaticFilesDataType>((fileName: string): StaticFilesDataType => {
     return {
@@ -57,16 +57,16 @@ const duplicateCheckerPluginInstance: WebpackPluginInstance = {
     ...new DuplicatePackageCheckerPlugin(),
 };
 
-const pluginList: Configuration['plugins'] = [
+const pluginList: Configuration["plugins"] = [
     new CircularDependencyPlugin({exclude: /node_modules/u}),
     duplicateCheckerPluginInstance,
     new CleanWebpackPlugin(),
     new DefinePlugin(definePluginParameters),
-    new ScriptExtHtmlWebpackPlugin({defaultAttribute: 'defer'}),
+    new ScriptExtHtmlWebpackPlugin({defaultAttribute: "defer"}),
     new MiniCssExtractPlugin({
         // Options similar to the same options in webpackOptions.output, both options are optional
-        chunkFilename: isDevelopment ? '[id].css' : '[id].[hash:6].css',
-        filename: isDevelopment ? '[name].css' : 'style.css',
+        chunkFilename: isDevelopment ? "[id].css" : "[id].[hash:6].css",
+        filename: isDevelopment ? "[name].css" : "style.css",
     }),
     new HtmlWebpackPlugin({
         filename: `${filePathPrefix}index.html`,
@@ -78,7 +78,7 @@ const pluginList: Configuration['plugins'] = [
             minifyJS: isProduction,
             removeComments: isProduction,
         },
-        template: './www/index.html',
+        template: "./www/index.html",
     }),
     new CopyWebpackPlugin({
         patterns: staticFilesSiteList,
@@ -86,7 +86,7 @@ const pluginList: Configuration['plugins'] = [
     new ContextReplacementPlugin(/moment[/\\]locale$/u, /en|ru/u),
 ];
 
-const pluginBuildLibraryList: Configuration['plugins'] = [
+const pluginBuildLibraryList: Configuration["plugins"] = [
     new CircularDependencyPlugin({exclude: /node_modules/u}),
     duplicateCheckerPluginInstance,
     new CleanWebpackPlugin(),
@@ -94,8 +94,8 @@ const pluginBuildLibraryList: Configuration['plugins'] = [
     // ignored new ScriptExtHtmlWebpackPlugin({defaultAttribute: 'defer'}),
     new MiniCssExtractPlugin({
         // Options similar to the same options in webpackOptions.output, both options are optional
-        chunkFilename: isDevelopment ? '[id].css' : '[id].[hash:6].css',
-        filename: isDevelopment ? '[name].css' : 'style.css',
+        chunkFilename: isDevelopment ? "[id].css" : "[id].[hash:6].css",
+        filename: isDevelopment ? "[name].css" : "style.css",
     }),
     new ContextReplacementPlugin(/moment[/\\]locale$/u, /en|ru/u),
 ];

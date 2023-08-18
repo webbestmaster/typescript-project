@@ -1,12 +1,12 @@
 /* global Buffer */
 
-import puppeteer from 'puppeteer';
+import puppeteer from "puppeteer";
 
-import type {FastifyRequest} from 'fastify';
+import type {FastifyRequest} from "fastify";
 
 async function htmlToPdf(html: string): Promise<Buffer> {
     const browser = await puppeteer.launch({
-        args: ['--disable-gpu', '--disable-dev-shm-usage', '--disable-setuid-sandbox', '--no-sandbox'],
+        args: ["--disable-gpu", "--disable-dev-shm-usage", "--disable-setuid-sandbox", "--no-sandbox"],
         headless: true,
     });
 
@@ -16,7 +16,7 @@ async function htmlToPdf(html: string): Promise<Buffer> {
 
     await page.setJavaScriptEnabled(false);
 
-    await page.setContent(html, {waitUntil: 'networkidle0'});
+    await page.setContent(html, {waitUntil: "networkidle0"});
 
     const pdf = await page.pdf({
         preferCSSPageSize: true,
@@ -36,7 +36,7 @@ async function htmlToPdf(html: string): Promise<Buffer> {
 export async function getPdf(request: FastifyRequest<{Body?: string}>): Promise<Buffer> {
     const {body} = request;
 
-    const rawHtml = String(body ?? '');
+    const rawHtml = String(body ?? "");
 
     const html = decodeURIComponent(rawHtml);
 

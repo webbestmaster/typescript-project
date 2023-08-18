@@ -1,7 +1,7 @@
-import type {ArticleType} from '../article/article-type';
-import {getPathToImage} from '../../www/util/path';
-import {httpsSiteDomain} from '../../www/const';
-import {getClientArticleLinkWithDomain} from '../../www/client-component/article/article-helper';
+import type {ArticleType} from "../article/article-type";
+import {getPathToImage} from "../../www/util/path";
+import {httpsSiteDomain} from "../../www/const";
+import {getClientArticleLinkWithDomain} from "../../www/client-component/article/article-helper";
 
 export interface ArticleImageDataType {
     alt: string;
@@ -24,14 +24,14 @@ export function getImageListFromArticle(article: ArticleType): ArticleXmlImgData
     if (titleImage.size > 0) {
         imageList.push({
             alt: title,
-            src: httpsSiteDomain + getPathToImage(titleImage.name, {height: '-', width: 1024}),
+            src: httpsSiteDomain + getPathToImage(titleImage.name, {height: "-", width: 1024}),
         });
     }
 
     content.replace(findImageRegExpGlobal, (matchedString: string, alt: string, src: string): string => {
         imageList.push({alt, src: httpsSiteDomain + src});
 
-        return '';
+        return "";
     });
 
     return {
@@ -44,7 +44,7 @@ function articleImageDataToString(articleImageData: ArticleImageDataType): strin
     const {alt, src} = articleImageData;
 
     return [
-        '<image:image>',
+        "<image:image>",
         `<image:loc>${src}</image:loc>`,
 
         // -- `            <image:caption>${getLastmodTagContent(mongoDocument)}</image:caption>`,
@@ -55,18 +55,18 @@ function articleImageDataToString(articleImageData: ArticleImageDataType): strin
 
         // -- `            <image:license>${getLastmodTagContent(mongoDocument)}</image:license>`,
 
-        '</image:image>',
-    ].join('');
+        "</image:image>",
+    ].join("");
 }
 
 function articleXmlImgDataToString(articleXmlImg: ArticleXmlImgDataType): string {
     const {imageList, url} = articleXmlImg;
 
     if (imageList.length > 0) {
-        return ['<url>', `<loc>${url}</loc>`, ...imageList.map(articleImageDataToString), '</url>'].join('');
+        return ["<url>", `<loc>${url}</loc>`, ...imageList.map(articleImageDataToString), "</url>"].join("");
     }
 
-    return '';
+    return "";
 }
 
 export function getSiteMapImgXml(articleList: Array<ArticleType>): string {
@@ -81,6 +81,6 @@ export function getSiteMapImgXml(articleList: Array<ArticleType>): string {
         '<?xml version="1.0" encoding="UTF-8"?>',
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">',
         ...imageDataList.map(articleXmlImgDataToString),
-        '</urlset>',
-    ].join('');
+        "</urlset>",
+    ].join("");
 }

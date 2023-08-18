@@ -1,10 +1,10 @@
-import {useLocation} from 'react-router-dom';
-import {useScreenWidth} from 'react-system-hook';
+import {useLocation} from "react-router-dom";
+import {useScreenWidth} from "react-system-hook";
 
-import {AdSenseAds} from '../adsense/ad-sense-ads';
-import {googleAdSenseTopAdId} from '../../../const';
+import {AdSenseAds} from "../adsense/ad-sense-ads";
+import {googleAdSenseTopAdId} from "../../../const";
 
-import bottomAdsWrapperStyle from '../bottom-ads-wrapper/bottom-ads-wrapper.scss';
+import bottomAdsWrapperStyle from "../bottom-ads-wrapper/bottom-ads-wrapper.scss";
 
 export function TopAdsWrapper(): JSX.Element {
     const routerLocation = useLocation();

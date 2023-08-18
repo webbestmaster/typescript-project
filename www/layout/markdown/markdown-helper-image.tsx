@@ -1,9 +1,9 @@
-import {getPathToFile, getPathToImage} from '../../util/path';
-import {Image} from '../Image/image';
+import {getPathToFile, getPathToImage} from "../../util/path";
+import {Image} from "../Image/image";
 
-import markdownStyle from './markdown.scss';
-import type {StringToJsxRawDataType} from './markdown-helper';
-import type {MarkdownItemCounter} from './markdown-item-counter';
+import markdownStyle from "./markdown.scss";
+import type {StringToJsxRawDataType} from "./markdown-helper";
+import type {MarkdownItemCounter} from "./markdown-item-counter";
 
 // eslint-disable-next-line complexity
 export function getImageFromHtml(
@@ -12,11 +12,11 @@ export function getImageFromHtml(
 ): JSX.Element {
     const {htmlString, articleTitle} = rawData;
 
-    const [ignoredFullWidthString, widthAsString = ''] = /width="(\d+)"/u.exec(htmlString) ?? ['', '0'];
-    const [ignoredFullHeightString, heightAsString = ''] = /height="(\d+)"/u.exec(htmlString) ?? ['', '0'];
-    const [ignoredFullSrcString, srcAsString = ''] = /src="([^"]*?)"/u.exec(htmlString) ?? ['', ''];
-    const [ignoredFullAltString, altAsString = ''] = /alt="([^"]*?)"/u.exec(htmlString) ?? ['', ''];
-    const [ignoredFullTitleString, titleAsString = ''] = /title="([^"]*?)"/u.exec(htmlString) ?? ['', ''];
+    const [ignoredFullWidthString, widthAsString = ""] = /width="(\d+)"/u.exec(htmlString) ?? ["", "0"];
+    const [ignoredFullHeightString, heightAsString = ""] = /height="(\d+)"/u.exec(htmlString) ?? ["", "0"];
+    const [ignoredFullSrcString, srcAsString = ""] = /src="([^"]*?)"/u.exec(htmlString) ?? ["", ""];
+    const [ignoredFullAltString, altAsString = ""] = /alt="([^"]*?)"/u.exec(htmlString) ?? ["", ""];
+    const [ignoredFullTitleString, titleAsString = ""] = /title="([^"]*?)"/u.exec(htmlString) ?? ["", ""];
 
     return (
         <Image

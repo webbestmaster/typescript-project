@@ -1,24 +1,24 @@
 /* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
 
-import type {PetsdbQueryType, PetsdbReadPageConfigType} from 'petsdb';
+import type {PetsdbQueryType, PetsdbReadPageConfigType} from "petsdb";
 export enum ArticleTypeEnum {
-    article = 'article', // usual article
-    audioChildrenList = 'audio-children-list', // get all *.mp3 files from every child and makes play list from it
-    audioList = 'audio-list', // get all *.mp3 files from file list
-    audioSingle = 'audio-single', // get first *.mp3 file from file list
-    container = 'container', // show children as [subDocumentListViewType: SubDocumentListViewTypeEnum]
+    article = "article", // usual article
+    audioChildrenList = "audio-children-list", // get all *.mp3 files from every child and makes play list from it
+    audioList = "audio-list", // get all *.mp3 files from file list
+    audioSingle = "audio-single", // get first *.mp3 file from file list
+    container = "container", // show children as [subDocumentListViewType: SubDocumentListViewTypeEnum]
 }
 
 export enum SubDocumentListViewTypeEnum {
-    header = 'header', // just header
-    headerImage = 'header-image', // header + image
+    header = "header", // just header
+    headerImage = "header-image", // header + image
 }
 
 export enum ArticleFileTypeEnum {
-    audio = 'audio',
-    image = 'image',
-    unknown = 'unknown',
-    video = 'video',
+    audio = "audio",
+    image = "image",
+    unknown = "unknown",
+    video = "video",
 }
 
 export interface ArticleFileType {
@@ -66,7 +66,7 @@ export type ArticleType = {
 
 export type ArticlePreviewType = Pick<
     ArticleType,
-    'articleType' | 'fileList' | 'isActive' | 'slug' | 'title' | 'titleImage'
+    "articleType" | "fileList" | "isActive" | "slug" | "title" | "titleImage"
 >;
 
 export interface ParsedRequestQueryType {

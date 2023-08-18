@@ -1,10 +1,10 @@
-import type {Config} from 'jest';
+import type {Config} from "jest";
 
-import {jestTestUnitConfig} from '../../test-unit/config/jest.config';
+import {jestTestUnitConfig} from "../../test-unit/config/jest.config";
 
 const jestTestEndToEndConfig: Config = {
     ...jestTestUnitConfig,
-    testEnvironment: 'node',
+    testEnvironment: "node",
     testTimeout: 10e3,
 };
 

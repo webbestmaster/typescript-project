@@ -1,7 +1,7 @@
-import {noop} from '../../util/function';
+import {noop} from "../../util/function";
 
-import {type ThemeContextType, ThemeNameEnum} from './theme-context-type';
-import {getSavedFontSize} from './font-size-helper';
+import {type ThemeContextType, ThemeNameEnum} from "./theme-context-type";
+import {getSavedFontSize} from "./font-size-helper";
 
 export const defaultThemeContext: ThemeContextType = {
     mdFontSize: getSavedFontSize(),

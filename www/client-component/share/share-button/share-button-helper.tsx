@@ -1,7 +1,7 @@
 /* global window, screen */
 
 export function share(url: string, title: string) {
-    if (typeof window === 'undefined' || typeof screen === 'undefined') {
+    if (typeof window === "undefined" || typeof screen === "undefined") {
         return;
     }
 

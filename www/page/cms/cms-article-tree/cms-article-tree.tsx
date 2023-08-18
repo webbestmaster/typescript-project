@@ -1,27 +1,27 @@
-import {useState, useEffect, useCallback} from 'react';
-import {Tree, Typography, List, Divider, message} from 'antd';
-import type {DataNode} from 'rc-tree/lib/interface';
-import {DownOutlined} from '@ant-design/icons';
-import {Link} from 'react-router-dom';
+import {useState, useEffect, useCallback} from "react";
+import {Tree, Typography, List, Divider, message} from "antd";
+import type {DataNode} from "rc-tree/lib/interface";
+import {DownOutlined} from "@ant-design/icons";
+import {Link} from "react-router-dom";
 
-import {CmsPage} from '../layout/cms-page/cms-page';
-import {useMakeExecutableState} from '../../../util/function';
-import type {PaginationResultType} from '../../../../server/data-base/data-base-type';
-import {getArticleListPaginationPick} from '../../../service/article/article-api';
-import {Spinner} from '../../../layout/spinner/spinner';
-import {Box} from '../../../layout/box/box';
-import {getTickCross} from '../../../util/string';
-import {getArticleLinkToEdit} from '../cms-article/cms-article-helper';
-import {getArticleLinkToViewClient} from '../../../client-component/article/article-helper';
+import {CmsPage} from "../layout/cms-page/cms-page";
+import {useMakeExecutableState} from "../../../util/function";
+import type {PaginationResultType} from "../../../../server/data-base/data-base-type";
+import {getArticleListPaginationPick} from "../../../service/article/article-api";
+import {Spinner} from "../../../layout/spinner/spinner";
+import {Box} from "../../../layout/box/box";
+import {getTickCross} from "../../../util/string";
+import {getArticleLinkToEdit} from "../cms-article/cms-article-helper";
+import {getArticleLinkToViewClient} from "../../../client-component/article/article-helper";
 
-import type {ArticleForTreeType} from './cms-article-tree-type';
-import {keyForTreeList} from './cms-article-tree-const';
+import type {ArticleForTreeType} from "./cms-article-tree-type";
+import {keyForTreeList} from "./cms-article-tree-const";
 import {
     getArticleForTreeById,
     getArticleWithLostChildList,
     getArticleWithoutParentList,
     makeArticleTree,
-} from './cms-article-tree-helper';
+} from "./cms-article-tree-helper";
 
 const {Title, Text: TypographyText} = Typography;
 const {Item: ListItem} = List;
@@ -43,7 +43,7 @@ export function CmsArticleTree(): JSX.Element {
             .catch((error: Error) => {
                 console.log(error);
                 // eslint-disable-next-line @typescript-eslint/no-floating-promises
-                message.error('Can not fetch article list.');
+                message.error("Can not fetch article list.");
             });
     }, [executeArticleListPaginationPick]);
 
@@ -59,9 +59,9 @@ export function CmsArticleTree(): JSX.Element {
                 <ListItem>
                     <TypographyText>{index + 1}.&nbsp;</TypographyText>
                     <Link to={getArticleLinkToViewClient(slug)}>{title}</Link>
-                    {' | '}
+                    {" | "}
                     <Link to={getArticleLinkToEdit(articleId)}>{slug}</Link>
-                    {' | '}
+                    {" | "}
                     <TypographyText>
                         {articleType}&nbsp;{getTickCross(isActive)}
                     </TypographyText>
@@ -79,19 +79,19 @@ export function CmsArticleTree(): JSX.Element {
                 .filter((lostId: string): boolean => {
                     return !getArticleForTreeById(savedArticleList, lostId);
                 })
-                .join(', ');
+                .join(", ");
 
             return (
                 <ListItem>
                     <TypographyText>{index + 1}.&nbsp;</TypographyText>
                     <Link to={getArticleLinkToViewClient(slug)}>{title}</Link>
-                    {' | '}
+                    {" | "}
                     <Link to={getArticleLinkToEdit(articleId)}>{slug}</Link>
-                    {' | '}
+                    {" | "}
                     <TypographyText>
                         {articleType} {getTickCross(isActive)}
                     </TypographyText>
-                    {' | '}
+                    {" | "}
                     <TypographyText type="danger">Ids:&nbsp;{lostIdList}</TypographyText>
                 </ListItem>
             );
@@ -99,7 +99,7 @@ export function CmsArticleTree(): JSX.Element {
         [savedArticleList]
     );
 
-    console.log('%c[WARNING]: Article tree (does not work into <StrictMode/>)', 'color: #fff; background-color: #c00;');
+    console.log("%c[WARNING]: Article tree (does not work into <StrictMode/>)", "color: #fff; background-color: #c00;");
 
     return (
         <CmsPage>

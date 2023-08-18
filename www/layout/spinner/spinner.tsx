@@ -1,10 +1,10 @@
 /* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position */
 
-import {cls} from '../../util/css';
+import {cls} from "../../util/css";
 
-import spinnerStyle from './spinner.scss';
-import {defaultSpinnerSize} from './spinner-const';
-import {SpinnerPositionEnum} from './spinner-type';
+import spinnerStyle from "./spinner.scss";
+import {defaultSpinnerSize} from "./spinner-const";
+import {SpinnerPositionEnum} from "./spinner-type";
 
 interface PropsType {
     readonly arcColor?: string; // default - $color-border

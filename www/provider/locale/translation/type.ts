@@ -1,4 +1,4 @@
-import type {enUs} from './en-us/data';
+import type {enUs} from "./en-us/data";
 
 export type LangKeyType = keyof typeof enUs;
 

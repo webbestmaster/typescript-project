@@ -1,8 +1,8 @@
-import shareButtonStyle from '../share-button.scss';
-import type {ShareButtonPropsType} from '../share-button-type';
-import {share} from '../share-button-helper';
-import {SvgImage} from '../../../../layout/svg-image/svg-image';
-import {shareButtonName} from '../share-button-const';
+import shareButtonStyle from "../share-button.scss";
+import type {ShareButtonPropsType} from "../share-button-type";
+import {share} from "../share-button-helper";
+import {SvgImage} from "../../../../layout/svg-image/svg-image";
+import {shareButtonName} from "../share-button-const";
 
 export function ShareButtonOdnoklassniki(props: ShareButtonPropsType): JSX.Element {
     const {url, title} = props;

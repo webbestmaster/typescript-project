@@ -1,10 +1,10 @@
-import type {LocaleNameEnum} from '../provider/locale/locale-context-type';
+import type {LocaleNameEnum} from "../provider/locale/locale-context-type";
 
-import {makeSafeRegExpPatter} from './regexp';
+import {makeSafeRegExpPatter} from "./regexp";
 
 export function getHash(data: Array<unknown> | Record<string, unknown> | string): string {
     let result = 0;
-    const fullString: string = typeof data === 'string' ? data : JSON.stringify(data, null, 0);
+    const fullString: string = typeof data === "string" ? data : JSON.stringify(data, null, 0);
     const stringLength = fullString.length;
 
     // eslint-disable-next-line no-loops/no-loops
@@ -16,13 +16,13 @@ export function getHash(data: Array<unknown> | Record<string, unknown> | string)
 }
 
 export function getRandomString(): string {
-    const fromRandom = Math.random().toString(32).replace('0.', '');
+    const fromRandom = Math.random().toString(32).replace("0.", "");
     const fromTime = Date.now().toString(32);
 
     return `${fromRandom}${fromTime}`.toLowerCase();
 }
 
-export function findString(input: string, searchQuery: string, flags: '' | 'g' | 'gi' = 'gi'): Array<string> {
+export function findString(input: string, searchQuery: string, flags: "" | "g" | "gi" = "gi"): Array<string> {
     const result: Array<string> = [];
     const searchQueryLength = searchQuery.length;
 
@@ -48,7 +48,7 @@ export function sortCompare(shortLocaleName: LocaleNameEnum, stringA: string, st
 }
 
 export function toTrimmedString(value: unknown): string {
-    return String(value ?? '').trim();
+    return String(value ?? "").trim();
 }
 
 export function sortStringCallback(stringA: string, stringB: string): number {
@@ -60,25 +60,25 @@ export function sortStringCallbackReverse(stringA: string, stringB: string): num
 }
 
 export function getTickCross(isEnable: boolean): string {
-    return isEnable ? '✔' : '❌';
+    return isEnable ? "✔" : "❌";
 }
 
 export function formatProgress(current: number, max: number): string {
     const partCount = 20;
     const currentPart = Math.floor((current / max) * partCount);
-    const progressString = ''.padEnd(currentPart, '/').padEnd(partCount, '.');
-    const currentString = current.toString(10).padStart(max.toString(10).length, ' ');
+    const progressString = "".padEnd(currentPart, "/").padEnd(partCount, ".");
+    const currentString = current.toString(10).padStart(max.toString(10).length, " ");
 
     return `[${progressString}] ${currentString} / ${max}`;
 }
 
 export function convertStringForHtml(value: string): string {
     return value
-        .replace(/&/gu, '&amp;')
-        .replace(/>/gu, '&gt;')
-        .replace(/</gu, '&lt;')
-        .replace(/"/gu, '&quot;')
-        .replace(/'/gu, '&#039;')
-        .replace(/\//gu, '&#47;')
-        .replace(/\\/gu, '&#92;');
+        .replace(/&/gu, "&amp;")
+        .replace(/>/gu, "&gt;")
+        .replace(/</gu, "&lt;")
+        .replace(/"/gu, "&quot;")
+        .replace(/'/gu, "&#039;")
+        .replace(/\//gu, "&#47;")
+        .replace(/\\/gu, "&#92;");
 }

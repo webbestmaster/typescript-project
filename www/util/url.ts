@@ -1,8 +1,8 @@
 /* global URLSearchParams, location */
-import type {PetsdbQueryType, PetsdbReadPageConfigType} from 'petsdb';
-import {generatePath as reactRouterGeneratePath} from 'react-router-dom';
+import type {PetsdbQueryType, PetsdbReadPageConfigType} from "petsdb";
+import {generatePath as reactRouterGeneratePath} from "react-router-dom";
 
-import type {ArticleType} from '../../server/article/article-type';
+import type {ArticleType} from "../../server/article/article-type";
 
 // eslint-disable-next-line id-length
 export function paginationQueryToURLSearchParameters<DataType extends Record<string, unknown>>(
@@ -43,12 +43,12 @@ export function generatePath<PathType extends string>(
 }
 
 export function getNeedUseThirdPartyServices(): boolean {
-    if (typeof location === 'undefined') {
+    if (typeof location === "undefined") {
         return false;
     }
 
     // eslint-disable-next-line sonarjs/prefer-single-boolean-return
-    if (location.hostname === 'localhost') {
+    if (location.hostname === "localhost") {
         return false;
     }
 

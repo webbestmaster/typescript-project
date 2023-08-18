@@ -1,22 +1,22 @@
 /* eslint-disable no-magic-numbers */
 
-import {describe, it, expect} from '@jest/globals';
+import {describe, it, expect} from "@jest/globals";
 
-import {waitForTime} from '../../test-unit/util/test-util-time';
+import {waitForTime} from "../../test-unit/util/test-util-time";
 
-import {Queue} from './queue';
+import {Queue} from "./queue";
 
 const defaultTimeOut = 50;
 
-describe('queue', () => {
-    it('constructor', () => {
+describe("queue", () => {
+    it("constructor", () => {
         expect.assertions(1);
         const queue = new Queue();
 
         expect(queue instanceof Queue).toBe(true);
     });
 
-    it('add task', async () => {
+    it("add task", async () => {
         expect.assertions(1);
         const queue = new Queue();
 
@@ -30,7 +30,7 @@ describe('queue', () => {
         expect(increaseMe).toBe(1);
     });
 
-    it('check queue order', async () => {
+    it("check queue order", async () => {
         expect.assertions(2);
         const queue = new Queue();
 
@@ -52,7 +52,7 @@ describe('queue', () => {
         expect(increaseMe).toBe(2);
     });
 
-    it('add task with known/regular Error', async () => {
+    it("add task with known/regular Error", async () => {
         expect.assertions(3);
         const queue = new Queue();
 
@@ -68,11 +68,11 @@ describe('queue', () => {
         try {
             await queue.add(async () => {
                 await waitForTime(defaultTimeOut);
-                throw new Error('I am the ERROR!');
+                throw new Error("I am the ERROR!");
             });
         } catch (error: unknown) {
             // eslint-disable-next-line jest/no-conditional-in-test, jest/no-conditional-expect
-            expect(error instanceof Error ? error.message : '').toBe('I am the ERROR!');
+            expect(error instanceof Error ? error.message : "").toBe("I am the ERROR!");
             isErrorCaught = true;
         }
 
@@ -85,7 +85,7 @@ describe('queue', () => {
         expect(isErrorCaught).toBe(true);
     });
 
-    it('add task with unknown Error', async () => {
+    it("add task with unknown Error", async () => {
         expect.assertions(3);
         const queue = new Queue();
 
@@ -101,17 +101,17 @@ describe('queue', () => {
             await queue.add(async () => {
                 await waitForTime(defaultTimeOut);
                 // eslint-disable-next-line no-throw-literal, sonarjs/no-duplicate-string
-                throw new Error('I am an ERROR!');
+                throw new Error("I am an ERROR!");
             });
-        }).rejects.toThrow('I am an ERROR!');
+        }).rejects.toThrow("I am an ERROR!");
 
         await expect(async () => {
             await queue.add(async () => {
                 await waitForTime(defaultTimeOut);
                 // eslint-disable-next-line no-throw-literal, @typescript-eslint/no-throw-literal
-                throw 'I am an ERROR!';
+                throw "I am an ERROR!";
             });
-        }).rejects.toThrow('[Queue]: Task running with error!');
+        }).rejects.toThrow("[Queue]: Task running with error!");
 
         await queue.add(async () => {
             await waitForTime(defaultTimeOut);

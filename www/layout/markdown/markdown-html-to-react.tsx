@@ -1,10 +1,10 @@
-import {Fragment} from 'react';
+import {Fragment} from "react";
 
-import {getAudioFromHtml} from './markdown-helper-audio';
-import {getImageFromHtml} from './markdown-helper-image';
-import {getVideoFromHtml} from './markdown-helper-video';
-import {getIsEmptyHtml, type StringToJsxRawDataType} from './markdown-helper';
-import {MarkdownItemCounter} from './markdown-item-counter';
+import {getAudioFromHtml} from "./markdown-helper-audio";
+import {getImageFromHtml} from "./markdown-helper-image";
+import {getVideoFromHtml} from "./markdown-helper-video";
+import {getIsEmptyHtml, type StringToJsxRawDataType} from "./markdown-helper";
+import {MarkdownItemCounter} from "./markdown-item-counter";
 
 const markdownVideoRegExp = /<video [^>]+\/>/giu;
 const markdownAudioRegExp = /<audio [^>]+\/>/giu;
@@ -46,7 +46,7 @@ function htmlStringToJsx(rawData: StringToJsxRawDataType, markdownItemCounter: M
         return getImageFromHtml(rawData, markdownItemCounter);
     }
 
-    console.error('[htmlStringToJsx] Can not parse html string');
+    console.error("[htmlStringToJsx] Can not parse html string");
     console.log(`||--${htmlString}--||`);
     // eslint-disable-next-line react/no-danger, id-match
     return <div dangerouslySetInnerHTML={{__html: htmlString}} />;

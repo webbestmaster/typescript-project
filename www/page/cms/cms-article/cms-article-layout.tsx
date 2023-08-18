@@ -1,14 +1,14 @@
-import {Typography, Select, Button} from 'antd';
-import {PlusOutlined} from '@ant-design/icons';
-import type {UploadFile} from 'antd/es/upload/interface';
-import {Link} from 'react-router-dom';
+import {Typography, Select, Button} from "antd";
+import {PlusOutlined} from "@ant-design/icons";
+import type {UploadFile} from "antd/es/upload/interface";
+import {Link} from "react-router-dom";
 
-import type {ArticleFileType, ArticleType} from '../../../../server/article/article-type';
-import {getArticleLinkToViewClient} from '../../../client-component/article/article-helper';
-import {getPathToImage, getPathToFile} from '../../../util/path';
+import type {ArticleFileType, ArticleType} from "../../../../server/article/article-type";
+import {getArticleLinkToViewClient} from "../../../client-component/article/article-helper";
+import {getPathToImage, getPathToFile} from "../../../util/path";
 
-import type {ArticleForValidationType} from './cms-article-type';
-import {getArticleLinkToEdit, getIsImage} from './cms-article-helper';
+import type {ArticleForValidationType} from "./cms-article-type";
+import {getArticleLinkToEdit, getIsImage} from "./cms-article-helper";
 
 const {Option} = Select;
 const {Text: TypographyText} = Typography;
@@ -22,7 +22,7 @@ export function makeFileListItem(fileInfo: ArticleFileType): UploadFile<unknown>
 
     return {
         name: fileInfoName,
-        status: 'done',
+        status: "done",
         uid: fileInfoName,
         url,
     };
@@ -59,7 +59,7 @@ export function renderParentList(
 
             return (
                 <TypographyText key={id}>
-                    {index > 0 ? ', ' : null}
+                    {index > 0 ? ", " : null}
                     <Link to={getArticleLinkToViewClient(slug)}>{title}</Link>
                     &nbsp;|&nbsp;
                     <Link to={getArticleLinkToEdit(id)}>{slug}</Link>

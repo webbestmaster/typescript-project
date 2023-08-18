@@ -1,26 +1,26 @@
-import {useEffect, useState} from 'react';
-import {Table, Typography} from 'antd';
-import type {TablePaginationConfig, FilterValue, SorterResult, TableCurrentDataSource} from 'antd/es/table/interface';
+import {useEffect, useState} from "react";
+import {Table, Typography} from "antd";
+import type {TablePaginationConfig, FilterValue, SorterResult, TableCurrentDataSource} from "antd/es/table/interface";
 
-import {useMakeExecutableState} from '../../../util/function';
-import type {PaginationQueryType, PaginationResultType} from '../../../../server/data-base/data-base-type';
-import {getArticleListPaginationPick} from '../../../service/article/article-api';
-import {CmsPage} from '../layout/cms-page/cms-page';
-import {makeSafeRegExp} from '../../../util/regexp';
+import {useMakeExecutableState} from "../../../util/function";
+import type {PaginationQueryType, PaginationResultType} from "../../../../server/data-base/data-base-type";
+import {getArticleListPaginationPick} from "../../../service/article/article-api";
+import {CmsPage} from "../layout/cms-page/cms-page";
+import {makeSafeRegExp} from "../../../util/regexp";
 
-import {getArticleTableColumnList, keyForTableListList} from './cms-article-list-const';
+import {getArticleTableColumnList, keyForTableListList} from "./cms-article-list-const";
 import {
     type ArticleForTableListKeysType,
     type ArticleForTableListType,
     SortDirectionEnum,
-} from './cms-article-list-type';
+} from "./cms-article-list-type";
 
 const {Title} = Typography;
 
 export function CmsArticleList(): JSX.Element {
     const defaultPageSize = 10;
-    const [searchedColumn, setSearchedColumn] = useState<ArticleForTableListKeysType>('title');
-    const [searchText, setSearchText] = useState<string>('');
+    const [searchedColumn, setSearchedColumn] = useState<ArticleForTableListKeysType>("title");
+    const [searchText, setSearchText] = useState<string>("");
 
     // Article for table
     const {
@@ -62,7 +62,7 @@ export function CmsArticleList(): JSX.Element {
                         pageSize,
                         sort: {[String(searchedColumn)]: sortDirection},
                     },
-                    query: {[searchedColumn]: makeSafeRegExp(searchText, 'i').toString()},
+                    query: {[searchedColumn]: makeSafeRegExp(searchText, "i").toString()},
                 };
             }
         );
@@ -80,7 +80,7 @@ export function CmsArticleList(): JSX.Element {
             : sorter;
 
         if (!firstSorter) {
-            console.warn('handleTableChange - NO firstSorter');
+            console.warn("handleTableChange - NO firstSorter");
             return;
         }
 
@@ -97,22 +97,22 @@ export function CmsArticleList(): JSX.Element {
                     pageSize,
                     sort: {[String(field)]: sortDirection},
                 },
-                query: {[searchedColumn]: makeSafeRegExp(searchText, 'i').toString()},
+                query: {[searchedColumn]: makeSafeRegExp(searchText, "i").toString()},
             };
         });
 
-        console.log('handleTableChange');
-        console.log('pagination:', pagination);
-        console.log('filters:', filters);
-        console.log('column:', column);
-        console.log('sorter:', sorter);
-        console.log('order:', order);
-        console.log('columnKey:', columnKey);
-        console.log('extra:', extra);
-        console.log('///');
+        console.log("handleTableChange");
+        console.log("pagination:", pagination);
+        console.log("filters:", filters);
+        console.log("column:", column);
+        console.log("sorter:", sorter);
+        console.log("order:", order);
+        console.log("columnKey:", columnKey);
+        console.log("extra:", extra);
+        console.log("///");
         console.log(searchedColumn);
         console.log(searchText);
-        console.log('///');
+        console.log("///");
     }
 
     return (

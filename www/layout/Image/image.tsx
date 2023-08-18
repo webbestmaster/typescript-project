@@ -1,8 +1,8 @@
 /* global HTMLImageElement */
 
-import type {GetPathToFileType, GetPathToImageType} from '../../util/path';
+import type {GetPathToFileType, GetPathToImageType} from "../../util/path";
 
-import {Source} from './source';
+import {Source} from "./source";
 
 // Max website width is 1200
 const screenWidthList: Array<number> = [1200, 1024, 912, 820, 768, 540, 425, 414, 412, 390, 375, 360, 320, 280, 128];
@@ -16,7 +16,7 @@ interface ImagePropsType {
     readonly getPathToImage: GetPathToImageType;
     readonly height: number;
     readonly imgClassName?: string;
-    readonly loading: HTMLImageElement['loading'];
+    readonly loading: HTMLImageElement["loading"];
     readonly title: string;
     readonly width: number;
 }

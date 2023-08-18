@@ -1,17 +1,17 @@
 /* global HTMLFormElement, HTMLInputElement */
-import {type SyntheticEvent, useCallback, useState} from 'react';
+import {type SyntheticEvent, useCallback, useState} from "react";
 
-import {useUserContext} from '../../../provider/user/user-context';
-import {useMakeExecutableState} from '../../../util/function';
-import type {LoginResponseType} from '../../../service/auth/auth-type';
-import {loginUser} from '../../../service/auth/auth-api';
-import {throwError} from '../../../util/error';
-import {apiUrl} from '../../../../server/const';
+import {useUserContext} from "../../../provider/user/user-context";
+import {useMakeExecutableState} from "../../../util/function";
+import type {LoginResponseType} from "../../../service/auth/auth-type";
+import {loginUser} from "../../../service/auth/auth-api";
+import {throwError} from "../../../util/error";
+import {apiUrl} from "../../../../server/const";
 
 export function Login(): JSX.Element {
     const userContext = useUserContext();
-    const [login, setLogin] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
+    const [login, setLogin] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
     const loginHook = useMakeExecutableState<Parameters<typeof loginUser>, LoginResponseType>(loginUser);
 
     const onSubmit = useCallback(
@@ -56,7 +56,7 @@ export function Login(): JSX.Element {
                 />
             </label>
 
-            {loginHook.error ? <h3>ERROR login</h3> : '???'}
+            {loginHook.error ? <h3>ERROR login</h3> : "???"}
 
             <br />
 

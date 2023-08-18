@@ -1,7 +1,7 @@
 /* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
 
-import type {FastifyReply, FastifyRequest} from 'fastify';
-import type {PetsdbItemType} from 'petsdb';
+import type {FastifyReply, FastifyRequest} from "fastify";
+import type {PetsdbItemType} from "petsdb";
 
 import {
     graphql,
@@ -17,18 +17,18 @@ import {
     GraphQLBoolean,
     type GraphQLResolveInfo,
     type GraphQLFieldConfig,
-} from 'graphql';
+} from "graphql";
 
-import {mainResponseHeader} from '../const';
+import {mainResponseHeader} from "../const";
 
-import {articleCrud} from './article';
+import {articleCrud} from "./article";
 import {
     type ArticleFileType,
     ArticleFileTypeEnum,
     type ArticleType,
     ArticleTypeEnum,
     SubDocumentListViewTypeEnum,
-} from './article-type';
+} from "./article-type";
 
 const articleTypeEnumValueMap: Record<keyof typeof ArticleTypeEnum, {value: ArticleTypeEnum}> = {
     article: {value: ArticleTypeEnum.article},
@@ -39,7 +39,7 @@ const articleTypeEnumValueMap: Record<keyof typeof ArticleTypeEnum, {value: Arti
 };
 
 const ArticleTypeEnumGraphQLType = new GraphQLEnumType({
-    name: 'ArticleTypeEnum',
+    name: "ArticleTypeEnum",
     values: articleTypeEnumValueMap,
 });
 
@@ -58,7 +58,7 @@ const subDocumentListViewTypeEnumValueMap: Record<
 
 // eslint-disable-next-line id-length
 const SubDocumentListViewTypeEnumGraphQLType = new GraphQLEnumType({
-    name: 'SubDocumentListViewTypeEnum',
+    name: "SubDocumentListViewTypeEnum",
     values: subDocumentListViewTypeEnumValueMap,
 });
 
@@ -78,7 +78,7 @@ const articleFileTypeEnumValueMap: Record<keyof typeof ArticleFileTypeEnum, {val
 };
 
 const ArticleFileTypeEnumGraphQLType = new GraphQLEnumType({
-    name: 'ArticleFileTypeEnum',
+    name: "ArticleFileTypeEnum",
     values: articleFileTypeEnumValueMap,
 });
 
@@ -95,7 +95,7 @@ const ArticleFileGraphQLType: GraphQLObjectType<ArticleFileType, unknown> = new 
         type: {type: ArticleFileTypeEnumGraphQLType}, // audio, image, etc.
         width: {type: GraphQLInt}, // original width
     },
-    name: 'ArticleFileGraphQLType',
+    name: "ArticleFileGraphQLType",
 });
 
 const ArticleGraphQLType: GraphQLObjectType<ArticleType, unknown> = new GraphQLObjectType<ArticleType, unknown>({
@@ -130,7 +130,7 @@ const ArticleGraphQLType: GraphQLObjectType<ArticleType, unknown> = new GraphQLO
         titleImage: {type: ArticleFileGraphQLType},
         updatedDate: {type: GraphQLString},
     },
-    name: 'ArticleGraphQLType',
+    name: "ArticleGraphQLType",
 });
 
 const ArticleListGraphQLType = new GraphQLList(ArticleGraphQLType);
@@ -151,7 +151,7 @@ const ListType: GraphQLFieldConfig<{root: string}, {context: number}, {limit: nu
         context: {context: number},
         graphQLType: GraphQLResolveInfo
     ): Promise<Array<PetsdbItemType<ArticleType>>> => {
-        console.warn('------------');
+        console.warn("------------");
         console.warn(rootValue);
         console.warn(args);
         console.warn(context);
@@ -180,7 +180,7 @@ export async function getArticleClientListGraphql(
             fields: {
                 list: ListType,
             },
-            name: 'ArticleListQueryType',
+            name: "ArticleListQueryType",
         }),
     });
 
@@ -192,7 +192,7 @@ export async function getArticleClientListGraphql(
     return graphql({
         contextValue: {context: 2},
         rootValue: {
-            root: 'value',
+            root: "value",
         },
         schema: articleListSchema,
         source: `{

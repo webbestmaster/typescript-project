@@ -1,4 +1,4 @@
-import {Component, type ReactNode} from 'react';
+import {Component, type ReactNode} from "react";
 
 interface PropsType {
     readonly children: ReactNode;
@@ -17,8 +17,8 @@ export class ErrorBoundary extends Component<PropsType, StateType> {
     }
 
     override componentDidCatch(error: Error, errorInfo: unknown): void {
-        console.log('[ERROR]:', error);
-        console.log('[ERROR-INFO]:', errorInfo);
+        console.log("[ERROR]:", error);
+        console.log("[ERROR-INFO]:", errorInfo);
 
         this.setState({hasError: true});
     }

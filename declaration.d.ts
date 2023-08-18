@@ -1,24 +1,24 @@
 /* eslint-disable import/no-default-export, init-declarations, multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
 
-declare module '*.svg' {
+declare module "*.svg" {
     const content: string;
 
     export default content;
 }
 
-declare module '*.png' {
+declare module "*.png" {
     const content: string;
 
     export default content;
 }
 
-declare module '*.md' {
+declare module "*.md" {
     const content: string;
 
     export default content;
 }
 
-declare module '*.txt' {
+declare module "*.txt" {
     const content: string;
 
     export default content;
@@ -33,22 +33,22 @@ declare const NAVIGATION_DATA: string | undefined;
 
 declare const ARTICLE_DATA: string | undefined;
 
-declare module 'webp-converter' {
+declare module "webp-converter" {
     declare type LoggingOptionType =
         // eslint-disable-next-line max-len
-        | '-map 1'
-        | '-map 2'
-        | '-map 3'
-        | '-map 4'
-        | '-map 5'
-        | '-map 6'
-        | '-print_lsim'
-        | '-print_psnr'
-        | '-print_ssim'
-        | '-progress'
-        | '-quiet'
-        | '-short'
-        | '-v';
+        | "-map 1"
+        | "-map 2"
+        | "-map 3"
+        | "-map 4"
+        | "-map 5"
+        | "-map 6"
+        | "-print_lsim"
+        | "-print_psnr"
+        | "-print_ssim"
+        | "-progress"
+        | "-quiet"
+        | "-short"
+        | "-v";
 
     declare type CwebpType = (
         sourcePath: string,

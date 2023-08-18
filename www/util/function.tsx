@@ -1,8 +1,8 @@
 /* global NodeJS, setTimeout, clearTimeout */
 
-import {useCallback, useMemo, useState} from 'react';
+import {useCallback, useMemo, useState} from "react";
 
-import {convertToError} from './error';
+import {convertToError} from "./error";
 
 // eslint-disable-next-line no-empty-function, @typescript-eslint/no-empty-function
 export function noop(): void {}

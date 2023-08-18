@@ -1,4 +1,4 @@
-import type {ComponentType} from 'react';
+import type {ComponentType} from "react";
 
 export type UnknownObjectType = Record<string, unknown>;
 
@@ -8,10 +8,10 @@ export interface LazyResultType<ComponentPropsType> {
 
 export function getStringFromUnknown(data: Record<string, unknown> | null | undefined, requiredKey: string): string {
     if (!data) {
-        return '';
+        return "";
     }
 
-    return String(data[requiredKey] ?? '');
+    return String(data[requiredKey] ?? "");
 }
 
 export function extractFromUnknown<ExtractType extends Record<string, boolean | number | string | null>>(

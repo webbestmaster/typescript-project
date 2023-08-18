@@ -1,6 +1,6 @@
-import fileSystem from 'node:fs/promises';
-import path from 'node:path';
-import {constants} from 'node:fs';
+import fileSystem from "node:fs/promises";
+import path from "node:path";
+import {constants} from "node:fs";
 
 export async function getHasAccessToDirectory(...args: Array<string>): Promise<boolean> {
     try {

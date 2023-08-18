@@ -1,16 +1,16 @@
 /* global window, document, requestAnimationFrame, sessionStorage */
 
-import {useEffect, useState, useCallback, useContext} from 'react';
-import {useLocation} from 'react-router-dom';
+import {useEffect, useState, useCallback, useContext} from "react";
+import {useLocation} from "react-router-dom";
 
-import {debounce} from '../../util/function';
-import {cls} from '../../util/css';
-import type {ArticleContextType} from '../article/article-context/article-context-type';
-import {articleContext} from '../article/article-context/article-context';
-import {useLocale} from '../../provider/locale/locale-context';
+import {debounce} from "../../util/function";
+import {cls} from "../../util/css";
+import type {ArticleContextType} from "../article/article-context/article-context-type";
+import {articleContext} from "../article/article-context/article-context";
+import {useLocale} from "../../provider/locale/locale-context";
 
-import {getAbsoluteScrollTop, getRelativeScrollTop, smoothScrollToTop} from './scroll-restoration-helper';
-import scrollRestorationStyle from './scroll-restoration.scss';
+import {getAbsoluteScrollTop, getRelativeScrollTop, smoothScrollToTop} from "./scroll-restoration-helper";
+import scrollRestorationStyle from "./scroll-restoration.scss";
 
 export function ReactScrollRestoration(): JSX.Element {
     const topScrollPositionToShowToTopButton = 100;
@@ -28,7 +28,7 @@ export function ReactScrollRestoration(): JSX.Element {
         }
 
         requestAnimationFrame(() => {
-            const relativeScrollTop = Number.parseFloat(sessionStorage.getItem(getItemKey()) ?? '0') || 0;
+            const relativeScrollTop = Number.parseFloat(sessionStorage.getItem(getItemKey()) ?? "0") || 0;
             const absoluteScrollTop = getAbsoluteScrollTop(relativeScrollTop);
 
             document.documentElement.scrollTop = absoluteScrollTop;
@@ -44,13 +44,13 @@ export function ReactScrollRestoration(): JSX.Element {
             setScrollTop(documentElement.scrollTop);
         }, 150);
 
-        window.addEventListener('scroll', debouncedChangeScrollTopPosition, {
+        window.addEventListener("scroll", debouncedChangeScrollTopPosition, {
             capture: false,
             passive: true,
         });
 
         return () => {
-            window.removeEventListener('scroll', debouncedChangeScrollTopPosition);
+            window.removeEventListener("scroll", debouncedChangeScrollTopPosition);
         };
     }, [getItemKey]);
 
@@ -61,7 +61,7 @@ export function ReactScrollRestoration(): JSX.Element {
                     scrollTop > topScrollPositionToShowToTopButton,
             })}
             onClick={smoothScrollToTop}
-            title={getLocalizedString('UI__TO_TOP')}
+            title={getLocalizedString("UI__TO_TOP")}
             type="button"
         >
             <span className={scrollRestorationStyle.scroll_restoration__scroll_to_top_button__arrow} />

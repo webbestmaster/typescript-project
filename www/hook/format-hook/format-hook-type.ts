@@ -1,4 +1,4 @@
-import type {DateTimeFormatOptionsType, NumberFormatOptionsType} from '../../util/format';
+import type {DateTimeFormatOptionsType, NumberFormatOptionsType} from "../../util/format";
 
 export interface UseFormatHookType {
     getFormattedDateTime: (date: Date | number, options?: DateTimeFormatOptionsType) => string;

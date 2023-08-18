@@ -1,7 +1,7 @@
 /* global window, document */
 
 export function smoothScrollToTop() {
-    window.scrollTo({behavior: 'smooth', top: 0});
+    window.scrollTo({behavior: "smooth", top: 0});
 }
 
 // Get scroll top position in 0..1

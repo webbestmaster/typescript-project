@@ -1,16 +1,16 @@
-import {Typography, message} from 'antd';
-import {useNavigate} from 'react-router-dom';
+import {Typography, message} from "antd";
+import {useNavigate} from "react-router-dom";
 
-import {CmsArticle} from '../cms-article';
-import {makeDefaultArticle} from '../../../../../server/article/article-helper';
-import {CmsArticleModeEnum} from '../cms-article-const';
-import type {ArticleType} from '../../../../../server/article/article-type';
-import {postArticleCreate} from '../../../../service/article/article-api';
-import {useMakeExecutableState} from '../../../../util/function';
-import {getRandomString} from '../../../../util/string';
-import {Spinner} from '../../../../layout/spinner/spinner';
-import {CmsPage} from '../../layout/cms-page/cms-page';
-import {getArticleLinkToEdit} from '../cms-article-helper';
+import {CmsArticle} from "../cms-article";
+import {makeDefaultArticle} from "../../../../../server/article/article-helper";
+import {CmsArticleModeEnum} from "../cms-article-const";
+import type {ArticleType} from "../../../../../server/article/article-type";
+import {postArticleCreate} from "../../../../service/article/article-api";
+import {useMakeExecutableState} from "../../../../util/function";
+import {getRandomString} from "../../../../util/string";
+import {Spinner} from "../../../../layout/spinner/spinner";
+import {CmsPage} from "../../layout/cms-page/cms-page";
+import {getArticleLinkToEdit} from "../cms-article-helper";
 
 const {Title} = Typography;
 
@@ -30,7 +30,7 @@ export function CmsArticleCreate(): JSX.Element {
                 navigate(getArticleLinkToEdit(article.id));
 
                 // eslint-disable-next-line @typescript-eslint/no-floating-promises
-                message.success('Article has been created!');
+                message.success("Article has been created!");
             })
             .catch((requestError: Error) => {
                 // eslint-disable-next-line @typescript-eslint/no-floating-promises

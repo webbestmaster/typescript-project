@@ -1,16 +1,16 @@
-import {useContext} from 'react';
+import {useContext} from "react";
 
-import {ArticleTypeEnum} from '../../../server/article/article-type';
-import {NeverError} from '../../util/error';
+import {ArticleTypeEnum} from "../../../server/article/article-type";
+import {NeverError} from "../../util/error";
 
-import type {ArticleContextType} from './article-context/article-context-type';
-import {articleContext} from './article-context/article-context';
+import type {ArticleContextType} from "./article-context/article-context-type";
+import {articleContext} from "./article-context/article-context";
 
-import {ArticleArticle} from './article-type/article-article';
-import {ArticleContainer} from './article-type/article-container';
-import {ArticleAudioChildrenList} from './article-type/article-audio-children-list';
-import {ArticleAudioSingle} from './article-type/article-audio-single';
-import {ArticleAudioList} from './article-type/article-audio-list';
+import {ArticleArticle} from "./article-type/article-article";
+import {ArticleContainer} from "./article-type/article-container";
+import {ArticleAudioChildrenList} from "./article-type/article-audio-children-list";
+import {ArticleAudioSingle} from "./article-type/article-audio-single";
+import {ArticleAudioList} from "./article-type/article-audio-list";
 
 // eslint-disable-next-line complexity
 export function Article(): JSX.Element {

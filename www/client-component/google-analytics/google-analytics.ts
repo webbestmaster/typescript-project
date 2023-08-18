@@ -4,12 +4,12 @@
 
 /* global window, document, setInterval */
 
-import {useRef} from 'react';
+import {useRef} from "react";
 
-import {waitForCallback} from '../../util/time';
-import {getNeedUseThirdPartyServices} from '../../util/url';
+import {waitForCallback} from "../../util/time";
+import {getNeedUseThirdPartyServices} from "../../util/url";
 
-import {loadGoogleAnalyticsScript} from './google-analytics-helper';
+import {loadGoogleAnalyticsScript} from "./google-analytics-helper";
 
 interface GoogleAnalyticsType {
     googleAnalyticsId: string;
@@ -20,14 +20,14 @@ declare global {
     interface Window {
         dataLayer?: Array<unknown>;
         ga?: (key: string, valueA: string, valueB?: string, valueC?: string) => void;
-        gtag?: (key: 'config' | 'js', value: Date | string) => void;
+        gtag?: (key: "config" | "js", value: Date | string) => void;
     }
 }
 
 // eslint-disable-next-line complexity, max-statements
 export function useGoogleAnalytics(config: GoogleAnalyticsType): null {
     const {googleAnalyticsId, pathname} = config;
-    const pathnameRef = useRef<string>('');
+    const pathnameRef = useRef<string>("");
     const isNeedUseThirdPartyServices = getNeedUseThirdPartyServices();
 
     if (!isNeedUseThirdPartyServices) {
@@ -38,7 +38,7 @@ export function useGoogleAnalytics(config: GoogleAnalyticsType): null {
         const {ga: definedGa} = window;
 
         if (!definedGa) {
-            throw new Error('Google Analytics (window.ga) is not defined');
+            throw new Error("Google Analytics (window.ga) is not defined");
         }
 
         if (pathnameRef.current === updatedPathname) {
@@ -46,12 +46,12 @@ export function useGoogleAnalytics(config: GoogleAnalyticsType): null {
         }
 
         pathnameRef.current = updatedPathname;
-        console.info(`%cGoogle Analytics set and send page: ${updatedPathname}`, 'color: #0c0');
-        definedGa('set', 'page', updatedPathname);
-        definedGa('send', 'pageview');
+        console.info(`%cGoogle Analytics set and send page: ${updatedPathname}`, "color: #0c0");
+        definedGa("set", "page", updatedPathname);
+        definedGa("send", "pageview");
     }
 
-    if (typeof document === 'undefined' || typeof window === 'undefined') {
+    if (typeof document === "undefined" || typeof window === "undefined") {
         return null;
     }
 
@@ -73,8 +73,8 @@ export function useGoogleAnalytics(config: GoogleAnalyticsType): null {
 
     window.gtag = gtag;
 
-    gtag('js', new Date());
-    gtag('config', googleAnalyticsId);
+    gtag("js", new Date());
+    gtag("config", googleAnalyticsId);
 
     // eslint-disable-next-line unicorn/consistent-destructuring
     waitForCallback(
@@ -89,19 +89,19 @@ export function useGoogleAnalytics(config: GoogleAnalyticsType): null {
             const {ga} = window;
 
             if (!ga) {
-                console.error('[ERROR]: ga is not define');
+                console.error("[ERROR]: ga is not define");
                 return;
             }
 
-            ga('create', googleAnalyticsId, 'auto');
+            ga("create", googleAnalyticsId, "auto");
 
-            console.info('Google Analytics is initialized');
+            console.info("Google Analytics is initialized");
 
             setAndSend(pathname);
 
             // Fix pokazatel' otkazov
             setInterval(() => {
-                ga('send', 'event', 'nobouncy', '15sec');
+                ga("send", "event", "nobouncy", "15sec");
             }, 15e3);
         })
         .catch(console.error);

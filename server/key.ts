@@ -1,6 +1,6 @@
-import {env} from 'node:process';
+import {env} from "node:process";
 
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 
 function innerInitialization() {
     dotenv.config();
@@ -10,13 +10,13 @@ innerInitialization();
 
 const {SHA_256_KEY, SECRET_KEY} = env;
 
-export const sha256key: string = String(SHA_256_KEY ?? '').trim();
-export const secretKey: string = String(SECRET_KEY ?? '').trim();
+export const sha256key: string = String(SHA_256_KEY ?? "").trim();
+export const secretKey: string = String(SECRET_KEY ?? "").trim();
 
-if (sha256key === '') {
-    console.error('[ERROR]: auth - sha256key is not define!');
+if (sha256key === "") {
+    console.error("[ERROR]: auth - sha256key is not define!");
 }
 
-if (secretKey === '') {
-    console.error('[ERROR]: auth - sha256key is not define!');
+if (secretKey === "") {
+    console.error("[ERROR]: auth - sha256key is not define!");
 }

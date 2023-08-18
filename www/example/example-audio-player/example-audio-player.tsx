@@ -1,10 +1,10 @@
-import {AudioPlayer, AudioPlayerControlSprite, type TrackType} from 'react-audio-player-pro';
+import {AudioPlayer, AudioPlayerControlSprite, type TrackType} from "react-audio-player-pro";
 
-import {Markdown} from '../../layout/markdown/markdown';
-import {demoUrl} from '../../const';
+import {Markdown} from "../../layout/markdown/markdown";
+import {demoUrl} from "../../const";
 
-import exampleAudioPlayer from './example-audio-player.md';
-import {CustomContent} from './custom-content';
+import exampleAudioPlayer from "./example-audio-player.md";
+import {CustomContent} from "./custom-content";
 
 const icon64 = `${demoUrl}/image-file/react-icon-64.png`;
 const icon128 = `${demoUrl}/image-file/react-icon-128.png`;
@@ -19,58 +19,58 @@ const theGhostInYourPiano = `${demoUrl}/audio-file/the-ghost-in-your-piano-climb
 const audioDataList: Array<TrackType> = [
     {
         mediaMetadata: {
-            album: 'Ability to Break ~ Energetic Tracks',
-            artist: 'J. Syreus Bach',
+            album: "Ability to Break ~ Energetic Tracks",
+            artist: "J. Syreus Bach",
             artwork: [
-                {sizes: '64x64', src: icon64, type: 'image/png'},
-                {sizes: '128x128', src: icon128, type: 'image/png'},
-                {sizes: '256x256', src: icon256, type: 'image/png'},
-                {sizes: '512x512', src: icon512, type: 'image/png'},
+                {sizes: "64x64", src: icon64, type: "image/png"},
+                {sizes: "128x128", src: icon128, type: "image/png"},
+                {sizes: "256x256", src: icon256, type: "image/png"},
+                {sizes: "512x512", src: icon512, type: "image/png"},
             ],
-            title: 'Lesser Faith',
+            title: "Lesser Faith",
         },
         src: lesserFaith,
     },
     {
         content: <CustomContent />,
         mediaMetadata: {
-            album: 'Perpetual Peace',
-            artist: 'Dee Yan-Key',
+            album: "Perpetual Peace",
+            artist: "Dee Yan-Key",
             artwork: [
-                {sizes: '64x64', src: icon64, type: 'image/png'},
-                {sizes: '128x128', src: icon128, type: 'image/png'},
-                {sizes: '256x256', src: icon256, type: 'image/png'},
-                {sizes: '512x512', src: icon512, type: 'image/png'},
+                {sizes: "64x64", src: icon64, type: "image/png"},
+                {sizes: "128x128", src: icon128, type: "image/png"},
+                {sizes: "256x256", src: icon256, type: "image/png"},
+                {sizes: "512x512", src: icon512, type: "image/png"},
             ],
-            title: 'World of Brothers (Allegretto)',
+            title: "World of Brothers (Allegretto)",
         },
         src: brothersAllegretto,
     },
     {
         mediaMetadata: {
-            album: 'Everywhere Outside ~ World Music',
-            artist: 'Mid-Air Machine',
+            album: "Everywhere Outside ~ World Music",
+            artist: "Mid-Air Machine",
             artwork: [
-                {sizes: '64x64', src: icon64, type: 'image/png'},
-                {sizes: '128x128', src: icon128, type: 'image/png'},
-                {sizes: '256x256', src: icon256, type: 'image/png'},
-                {sizes: '512x512', src: icon512, type: 'image/png'},
+                {sizes: "64x64", src: icon64, type: "image/png"},
+                {sizes: "128x128", src: icon128, type: "image/png"},
+                {sizes: "256x256", src: icon256, type: "image/png"},
+                {sizes: "512x512", src: icon512, type: "image/png"},
             ],
-            title: 'At Least It Is',
+            title: "At Least It Is",
         },
         src: atLeastItIs,
     },
     {
         mediaMetadata: {
-            album: 'The Ghost in Your Piano',
-            artist: 'The Ghost in Your Piano',
+            album: "The Ghost in Your Piano",
+            artist: "The Ghost in Your Piano",
             artwork: [
-                {sizes: '64x64', src: icon64, type: 'image/png'},
-                {sizes: '128x128', src: icon128, type: 'image/png'},
-                {sizes: '256x256', src: icon256, type: 'image/png'},
-                {sizes: '512x512', src: icon512, type: 'image/png'},
+                {sizes: "64x64", src: icon64, type: "image/png"},
+                {sizes: "128x128", src: icon128, type: "image/png"},
+                {sizes: "256x256", src: icon256, type: "image/png"},
+                {sizes: "512x512", src: icon512, type: "image/png"},
             ],
-            title: 'Climb',
+            title: "Climb",
         },
         src: theGhostInYourPiano,
     },
@@ -87,7 +87,7 @@ export function ExamplePlayer(): JSX.Element {
                     isMuted: false,
                     isShuffleOn: false,
                     isTrackListOpen: true,
-                    repeatingState: 'none',
+                    repeatingState: "none",
                 }}
                 trackList={audioDataList}
             />

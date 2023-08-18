@@ -1,11 +1,11 @@
-import {Audio} from 'react-audio-player-pro';
+import {Audio} from "react-audio-player-pro";
 
-import {defaultMediaMetadata} from '../audio-player/audio-player-const';
-import {textToSlug} from '../../util/human';
-import {getPathToFile} from '../../util/path';
+import {defaultMediaMetadata} from "../audio-player/audio-player-const";
+import {textToSlug} from "../../util/human";
+import {getPathToFile} from "../../util/path";
 
-import markdownStyle from './markdown.scss';
-import type {StringToJsxRawDataType} from './markdown-helper';
+import markdownStyle from "./markdown.scss";
+import type {StringToJsxRawDataType} from "./markdown-helper";
 
 export const markdownAudioRegExp = /<audio[\S\s]+?<\/audio>/giu;
 
@@ -16,9 +16,9 @@ export interface AudioTagDataType {
 }
 
 export function parseAudioTag(audioTag: string): AudioTagDataType {
-    const [ignoredFullSrcString, srcAsString = ''] = /src="([^"]*?)"/u.exec(audioTag) ?? ['', ''];
-    const [ignoredFullDurationString, durationAsString = ''] = /data-duration="([^"]*?)"/u.exec(audioTag) ?? ['', ''];
-    const [ignoredFullTitleString, titleAsString = ''] = /data-title="([^"]*?)"/u.exec(audioTag) ?? ['', ''];
+    const [ignoredFullSrcString, srcAsString = ""] = /src="([^"]*?)"/u.exec(audioTag) ?? ["", ""];
+    const [ignoredFullDurationString, durationAsString = ""] = /data-duration="([^"]*?)"/u.exec(audioTag) ?? ["", ""];
+    const [ignoredFullTitleString, titleAsString = ""] = /data-title="([^"]*?)"/u.exec(audioTag) ?? ["", ""];
     const durationAsNumber = Number.parseFloat(durationAsString) || 0;
 
     return {
@@ -42,7 +42,7 @@ export function getAudioFromHtml(rawData: StringToJsxRawDataType): JSX.Element {
             downloadFileName={downloadFileName}
             duration={duration}
             mediaMetadata={{...defaultMediaMetadata, title: endTitle}}
-            preload={duration ? 'none' : 'metadata'}
+            preload={duration ? "none" : "metadata"}
             src={getPathToFile(fileName)}
             useRepeatButton
         />

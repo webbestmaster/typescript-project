@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import type {FastifyReply, FastifyRequest} from 'fastify';
+import type {FastifyReply, FastifyRequest} from "fastify";
 
-import type {LoginResponseType} from '../../www/service/auth/auth-type';
-import {getSha256HashServer} from '../util/string';
-import {UserRoleEnum} from '../../www/provider/user/user-context-type';
-import {mainResponseHeader} from '../const';
+import type {LoginResponseType} from "../../www/service/auth/auth-type";
+import {getSha256HashServer} from "../util/string";
+import {UserRoleEnum} from "../../www/provider/user/user-context-type";
+import {mainResponseHeader} from "../const";
 
-import {authCrud} from './auth';
-import {cookieFieldUserId} from './auth-const';
+import {authCrud} from "./auth";
+import {cookieFieldUserId} from "./auth-const";
 
 export async function postAuthLogin(
     request: FastifyRequest<{Body?: string}>,
@@ -16,14 +16,14 @@ export async function postAuthLogin(
     const {body, session} = request;
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const parsedData: Record<string, unknown> = JSON.parse(String(body ?? '{}'));
+    const parsedData: Record<string, unknown> = JSON.parse(String(body ?? "{}"));
 
     const {login, password} = parsedData;
 
-    if (typeof login !== 'string' || typeof password !== 'string') {
+    if (typeof login !== "string" || typeof password !== "string") {
         reply.code(400);
 
-        throw new Error('Login or password is not define.');
+        throw new Error("Login or password is not define.");
     }
 
     const user = await authCrud.findOne({login, password: getSha256HashServer(password)});
@@ -31,7 +31,7 @@ export async function postAuthLogin(
     if (!user) {
         reply.code(400);
 
-        throw new Error('User Not Found.');
+        throw new Error("User Not Found.");
     }
 
     session.set(cookieFieldUserId, user.id);
@@ -51,9 +51,9 @@ export async function postAuthLogin(
 }
 
 export async function getAutoAuthLogin(request: FastifyRequest, reply: FastifyReply): Promise<LoginResponseType> {
-    const defaultLoginResponse: LoginResponseType = {user: {id: '', login: '', role: UserRoleEnum.user}};
+    const defaultLoginResponse: LoginResponseType = {user: {id: "", login: "", role: UserRoleEnum.user}};
     const {session} = request;
-    const userId = String(session.get(cookieFieldUserId) ?? '');
+    const userId = String(session.get(cookieFieldUserId) ?? "");
 
     reply.header(...mainResponseHeader);
 

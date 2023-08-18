@@ -1,23 +1,23 @@
 /* global HTMLInputElement, setTimeout */
-import {type SyntheticEvent, useEffect, useRef} from 'react';
-import {Input, type InputRef} from 'antd';
-import type {ColumnType, FilterDropdownProps} from 'antd/es/table/interface';
-import {SearchOutlined} from '@ant-design/icons';
-import {Link} from 'react-router-dom';
+import {type SyntheticEvent, useEffect, useRef} from "react";
+import {Input, type InputRef} from "antd";
+import type {ColumnType, FilterDropdownProps} from "antd/es/table/interface";
+import {SearchOutlined} from "@ant-design/icons";
+import {Link} from "react-router-dom";
 
-import {getArticleLinkToEdit} from '../cms-article/cms-article-helper';
-import {getTickCross} from '../../../util/string';
-import {dateIsoToHumanView} from '../../../util/time';
-import {getArticleLinkToViewClient} from '../../../client-component/article/article-helper';
-import type {ArticleFileType} from '../../../../server/article/article-type';
-import {getPathToImage} from '../../../util/path';
+import {getArticleLinkToEdit} from "../cms-article/cms-article-helper";
+import {getTickCross} from "../../../util/string";
+import {dateIsoToHumanView} from "../../../util/time";
+import {getArticleLinkToViewClient} from "../../../client-component/article/article-helper";
+import type {ArticleFileType} from "../../../../server/article/article-type";
+import {getPathToImage} from "../../../util/path";
 
 import {
     type ArticleForTableListKeysType,
     type ArticleForTableListType,
     type KeyForTableListListType,
     SortDirectionEnum,
-} from './cms-article-list-type';
+} from "./cms-article-list-type";
 
 interface GetArticleTableColumnListArgumentType {
     setSearchText: (searchText: string) => void;
@@ -31,7 +31,7 @@ export function getArticleTableColumnList(
 
     const articleTableColumnList: Array<ColumnType<ArticleForTableListType>> = [
         {
-            dataIndex: 'title',
+            dataIndex: "title",
             defaultSortOrder: SortDirectionEnum.ascend,
             // eslint-disable-next-line react/no-multi-comp
             filterDropdown: (filterProps: FilterDropdownProps): JSX.Element => {
@@ -44,7 +44,7 @@ export function getArticleTableColumnList(
                     if (visible) {
                         // Wait until the input appears
                         setTimeout(() => {
-                            inputRef.current?.focus({cursor: 'start'});
+                            inputRef.current?.focus({cursor: "start"});
                         }, 100);
                     }
                 }, [visible]);
@@ -53,7 +53,7 @@ export function getArticleTableColumnList(
                     <Input
                         key="title"
                         onInput={(evt: SyntheticEvent<HTMLInputElement>) => {
-                            setSearchedColumn('title');
+                            setSearchedColumn("title");
                             setSearchText(evt.currentTarget.value.trim());
                         }}
                         placeholder="Search..."
@@ -62,7 +62,7 @@ export function getArticleTableColumnList(
                 );
             },
             filterIcon: <SearchOutlined />,
-            key: 'title',
+            key: "title",
             render(title: string, article: ArticleForTableListType) {
                 return (
                     <Link key={article.id} to={getArticleLinkToViewClient(article.slug)}>
@@ -73,10 +73,10 @@ export function getArticleTableColumnList(
             sorter: () => {
                 return 0;
             },
-            title: 'Title',
+            title: "Title",
         },
         {
-            dataIndex: 'slug',
+            dataIndex: "slug",
             defaultSortOrder: null,
             // eslint-disable-next-line react/no-multi-comp
             filterDropdown: (filterProps: FilterDropdownProps): JSX.Element => {
@@ -89,7 +89,7 @@ export function getArticleTableColumnList(
                     if (visible) {
                         // Wait until the input appears
                         setTimeout(() => {
-                            inputRef.current?.focus({cursor: 'start'});
+                            inputRef.current?.focus({cursor: "start"});
                         }, 100);
                     }
                 }, [visible]);
@@ -98,7 +98,7 @@ export function getArticleTableColumnList(
                     <Input
                         key="slug"
                         onInput={(evt: SyntheticEvent<HTMLInputElement>) => {
-                            setSearchedColumn('slug');
+                            setSearchedColumn("slug");
                             setSearchText(evt.currentTarget.value);
                         }}
                         placeholder="Search..."
@@ -107,7 +107,7 @@ export function getArticleTableColumnList(
                 );
             },
             filterIcon: <SearchOutlined />,
-            key: 'slug',
+            key: "slug",
             render(slug: string, article: ArticleForTableListType) {
                 return (
                     <Link key={article.id} to={getArticleLinkToEdit(article.id)}>
@@ -118,22 +118,22 @@ export function getArticleTableColumnList(
             sorter: () => {
                 return 0;
             },
-            title: 'Slug/edit',
+            title: "Slug/edit",
         },
         {
-            dataIndex: 'articleType',
+            dataIndex: "articleType",
             defaultSortOrder: null,
-            key: 'articleType',
+            key: "articleType",
             sorter: () => {
                 return 0;
             },
-            title: 'Type',
+            title: "Type",
         },
         {
-            align: 'center',
-            dataIndex: 'isActive',
+            align: "center",
+            dataIndex: "isActive",
             defaultSortOrder: null,
-            key: 'isActive',
+            key: "isActive",
             render(
                 isActive: boolean
                 // ignored article: ArticleForTableListType
@@ -143,20 +143,20 @@ export function getArticleTableColumnList(
             sorter: () => {
                 return 0;
             },
-            title: 'Is active',
+            title: "Is active",
         },
         {
-            align: 'center',
-            dataIndex: 'titleImage',
+            align: "center",
+            dataIndex: "titleImage",
             defaultSortOrder: null,
-            key: 'titleImage',
+            key: "titleImage",
             render(imageFile: ArticleFileType) {
                 return (
                     <img
                         alt={imageFile.name}
                         height="64px"
                         src={getPathToImage(imageFile.name, {height: 64, width: 64})}
-                        style={{objectFit: 'contain'}}
+                        style={{objectFit: "contain"}}
                         width="64px"
                     />
                 );
@@ -164,42 +164,42 @@ export function getArticleTableColumnList(
             sorter: () => {
                 return 0;
             },
-            title: 'Image',
+            title: "Image",
         },
         {
-            align: 'right',
-            dataIndex: 'createdDate',
+            align: "right",
+            dataIndex: "createdDate",
             defaultSortOrder: null,
-            key: 'createdDate',
+            key: "createdDate",
             render: dateIsoToHumanView,
             sorter: () => {
                 return 0;
             },
-            title: 'Created UTC-0',
+            title: "Created UTC-0",
             width: 120,
         },
         {
-            align: 'right',
-            dataIndex: 'updatedDate',
+            align: "right",
+            dataIndex: "updatedDate",
             defaultSortOrder: null,
-            key: 'updatedDate',
+            key: "updatedDate",
             render: dateIsoToHumanView,
             sorter: () => {
                 return 0;
             },
-            title: 'Updated UTC-0',
+            title: "Updated UTC-0",
             width: 120,
         },
         {
-            align: 'right',
-            dataIndex: 'publishDate',
+            align: "right",
+            dataIndex: "publishDate",
             defaultSortOrder: null,
-            key: 'publishDate',
+            key: "publishDate",
             render: dateIsoToHumanView,
             sorter: () => {
                 return 0;
             },
-            title: 'Publish UTC-0',
+            title: "Publish UTC-0",
             width: 120,
         },
     ];
@@ -208,13 +208,13 @@ export function getArticleTableColumnList(
 }
 
 export const keyForTableListList: KeyForTableListListType = [
-    'articleType',
-    'createdDate',
-    'id',
-    'isActive',
-    'publishDate',
-    'slug',
-    'title',
-    'titleImage',
-    'updatedDate',
+    "articleType",
+    "createdDate",
+    "id",
+    "isActive",
+    "publishDate",
+    "slug",
+    "title",
+    "titleImage",
+    "updatedDate",
 ];

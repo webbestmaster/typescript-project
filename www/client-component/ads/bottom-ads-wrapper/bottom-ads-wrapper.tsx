@@ -1,10 +1,10 @@
-import {useLocation} from 'react-router-dom';
-import {useScreenWidth} from 'react-system-hook';
+import {useLocation} from "react-router-dom";
+import {useScreenWidth} from "react-system-hook";
 
-import {AdSenseAds} from '../adsense/ad-sense-ads';
-import {googleAdSenseBottomAdId} from '../../../const';
+import {AdSenseAds} from "../adsense/ad-sense-ads";
+import {googleAdSenseBottomAdId} from "../../../const";
 
-import bottomAdsWrapperStyle from './bottom-ads-wrapper.scss';
+import bottomAdsWrapperStyle from "./bottom-ads-wrapper.scss";
 
 // eslint-disable-next-line react/prefer-stateless-function
 export function BottomAdsWrapper(): JSX.Element {

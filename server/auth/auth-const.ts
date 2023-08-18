@@ -1,1 +1,1 @@
-export const cookieFieldUserId = 'user-id';
+export const cookieFieldUserId = "user-id";

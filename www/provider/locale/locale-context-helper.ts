@@ -1,14 +1,14 @@
 /* global localStorage, navigator */
 
-import {localeConst} from './locale-context-const';
-import {LocaleNameEnum} from './locale-context-type';
+import {localeConst} from "./locale-context-const";
+import {LocaleNameEnum} from "./locale-context-type";
 
 // eslint-disable-next-line complexity
 export function getSavedLocaleName(): LocaleNameEnum {
     const localeNameList = Object.values(LocaleNameEnum);
     const defaultLocaleName = localeConst.defaults.localeName;
 
-    if (typeof localStorage === 'undefined' || typeof navigator === 'undefined') {
+    if (typeof localStorage === "undefined" || typeof navigator === "undefined") {
         return defaultLocaleName;
     }
 
@@ -25,7 +25,7 @@ export function getSavedLocaleName(): LocaleNameEnum {
 }
 
 export function saveLocaleName<LocaleName extends string>(localeName: LocaleName): LocaleName {
-    console.log('---> save localeName localStorage:', localeConst.key.localStorage.localeName, localeName);
+    console.log("---> save localeName localStorage:", localeConst.key.localStorage.localeName, localeName);
     localStorage.setItem(localeConst.key.localStorage.localeName, localeName);
 
     return localeName;

@@ -1,14 +1,14 @@
 /* global window, setInterval, clearInterval */
-import {useState, useRef, useEffect} from 'react';
-import {useLocation} from 'react-router-dom';
+import {useState, useRef, useEffect} from "react";
+import {useLocation} from "react-router-dom";
 
-import {googleAdSenseId} from '../../../const';
-import {cls} from '../../../util/css';
-import {waitForCallback} from '../../../util/time';
-import {getRandomString} from '../../../util/string';
-import {getNeedUseThirdPartyServices} from '../../../util/url';
+import {googleAdSenseId} from "../../../const";
+import {cls} from "../../../util/css";
+import {waitForCallback} from "../../../util/time";
+import {getRandomString} from "../../../util/string";
+import {getNeedUseThirdPartyServices} from "../../../util/url";
 
-import {loadAdSenseScript} from './ad-sense-helper';
+import {loadAdSenseScript} from "./ad-sense-helper";
 
 interface AdSenseAdsPropsType {
     readonly adSlotId: string;
@@ -26,7 +26,7 @@ export function AdSenseAds(props: AdSenseAdsPropsType): JSX.Element {
     const {className: cssClassName, adSlotId} = props;
     const [adNodeId, setAdNodeId] = useState<string>(getRandomString());
     const routerLocation = useLocation();
-    const pathnameRef = useRef<string>('');
+    const pathnameRef = useRef<string>("");
     const isNeedUseThirdPartyServices = getNeedUseThirdPartyServices();
 
     if (isNeedUseThirdPartyServices) {
@@ -53,13 +53,13 @@ export function AdSenseAds(props: AdSenseAdsPropsType): JSX.Element {
         }
 
         if (pathnameRef.current === updatedPathname + updatedAdNodeId) {
-            console.info(`%cAdSense, stop extra show ads: ${updatedPathname}, ${updatedAdNodeId}`, 'color: #c00');
+            console.info(`%cAdSense, stop extra show ads: ${updatedPathname}, ${updatedAdNodeId}`, "color: #c00");
             return;
         }
 
         pathnameRef.current = updatedPathname + updatedAdNodeId;
 
-        if (typeof window === 'undefined') {
+        if (typeof window === "undefined") {
             return;
         }
 
@@ -71,12 +71,12 @@ export function AdSenseAds(props: AdSenseAdsPropsType): JSX.Element {
             100
         )
             .then(() => {
-                console.info(`%cAdSense, show ads, adSlotId: ${adSlotId}`, 'color: #c00');
+                console.info(`%cAdSense, show ads, adSlotId: ${adSlotId}`, "color: #c00");
 
                 window.adsbygoogle?.push({
-                    // eslint-disable-next-line camelcase, id-match
+                    // eslint-disable-next-line camelcase, id-match, babel/camelcase
                     google_ad_client: googleAdSenseId,
-                    // eslint-disable-next-line camelcase, id-match
+                    // eslint-disable-next-line camelcase, id-match, babel/camelcase
                     google_ad_slot: adSlotId,
                 });
             })
@@ -87,14 +87,14 @@ export function AdSenseAds(props: AdSenseAdsPropsType): JSX.Element {
 
     return (
         <ins
-            className={cls('adsbygoogle', cssClassName)}
+            className={cls("adsbygoogle", cssClassName)}
             data-ad-client={googleAdSenseId}
             data-ad-format="auto"
             data-ad-slot={adSlotId}
             data-custom-ad-node-id={adNodeId}
             data-full-width-responsive="true"
             key={adNodeId}
-            style={{display: 'block'}}
+            style={{display: "block"}}
         />
     );
 }

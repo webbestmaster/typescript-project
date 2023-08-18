@@ -1,10 +1,10 @@
-import {useCallback, useContext} from 'react';
+import {useCallback, useContext} from "react";
 
-import {cls} from '../../util/css';
-import {ThemeContext} from '../../provider/theme/theme-context';
-import type {ThemeContextType} from '../../provider/theme/theme-context-type';
+import {cls} from "../../util/css";
+import {ThemeContext} from "../../provider/theme/theme-context";
+import type {ThemeContextType} from "../../provider/theme/theme-context-type";
 
-import fontSizeStyle from './font-size.scss';
+import fontSizeStyle from "./font-size.scss";
 
 interface FontSizePropsType {
     // eslint-disable-next-line unicorn/no-keyword-prefix

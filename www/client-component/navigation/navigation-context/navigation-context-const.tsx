@@ -1,8 +1,8 @@
-import {ArticleTypeEnum} from '../../../../server/article/article-type';
+import {ArticleTypeEnum} from "../../../../server/article/article-type";
 
-import {makeDefaultArticleFile} from '../../../../server/article/article-helper';
+import {makeDefaultArticleFile} from "../../../../server/article/article-helper";
 
-import type {NavigationContextType} from './navigation-context-type';
+import type {NavigationContextType} from "./navigation-context-type";
 
 export const defaultNavigationContextData: NavigationContextType = {
     itemList: [
@@ -10,24 +10,24 @@ export const defaultNavigationContextData: NavigationContextType = {
             articleType: ArticleTypeEnum.article,
             fileList: [],
             isActive: true,
-            slug: 'header-1',
-            title: 'Header 1',
+            slug: "header-1",
+            title: "Header 1",
             titleImage: makeDefaultArticleFile(),
         },
         {
             articleType: ArticleTypeEnum.article,
             fileList: [],
             isActive: true,
-            slug: 'header-2',
-            title: 'Header 2',
+            slug: "header-2",
+            title: "Header 2",
             titleImage: makeDefaultArticleFile(),
         },
         {
             articleType: ArticleTypeEnum.article,
             fileList: [],
             isActive: true,
-            slug: 'header-3',
-            title: 'Header 3',
+            slug: "header-3",
+            title: "Header 3",
             titleImage: makeDefaultArticleFile(),
         },
     ],

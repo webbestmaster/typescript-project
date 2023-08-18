@@ -1,21 +1,21 @@
-import {useEffect} from 'react';
-import {Typography, message} from 'antd';
-import {useParams} from 'react-router-dom';
+import {useEffect} from "react";
+import {Typography, message} from "antd";
+import {useParams} from "react-router-dom";
 
-import {CmsArticle} from '../cms-article';
-import {CmsArticleModeEnum} from '../cms-article-const';
-import type {ArticleType} from '../../../../../server/article/article-type';
-import {getArticleListPagination, postArticleUpdate} from '../../../../service/article/article-api';
-import {useMakeExecutableState} from '../../../../util/function';
-import {Spinner} from '../../../../layout/spinner/spinner';
-import {CmsPage} from '../../layout/cms-page/cms-page';
-import type {PaginationResultType} from '../../../../../server/data-base/data-base-type';
-import {IsRender} from '../../../../layout/is-render/is-render';
+import {CmsArticle} from "../cms-article";
+import {CmsArticleModeEnum} from "../cms-article-const";
+import type {ArticleType} from "../../../../../server/article/article-type";
+import {getArticleListPagination, postArticleUpdate} from "../../../../service/article/article-api";
+import {useMakeExecutableState} from "../../../../util/function";
+import {Spinner} from "../../../../layout/spinner/spinner";
+import {CmsPage} from "../../layout/cms-page/cms-page";
+import type {PaginationResultType} from "../../../../../server/data-base/data-base-type";
+import {IsRender} from "../../../../layout/is-render/is-render";
 
 const {Title} = Typography;
 
 export function CmsArticleEdit(): JSX.Element {
-    const {articleId} = useParams<'articleId'>();
+    const {articleId} = useParams<"articleId">();
 
     const {
         execute: articleById,
@@ -28,7 +28,7 @@ export function CmsArticleEdit(): JSX.Element {
     useEffect(() => {
         // eslint-disable-next-line @typescript-eslint/no-floating-promises
         articleById(
-            {id: articleId ?? ''},
+            {id: articleId ?? ""},
             {
                 pageIndex: 0,
                 pageSize: 1,
@@ -46,7 +46,7 @@ export function CmsArticleEdit(): JSX.Element {
         updateArticle(article)
             .then((savedArticle: ArticleType) => {
                 console.log(savedArticle);
-                return message.success('Article has been updated!');
+                return message.success("Article has been updated!");
             })
             .catch((requestError: Error) => {
                 return message.error(`ERROR: ${requestError.message}`);

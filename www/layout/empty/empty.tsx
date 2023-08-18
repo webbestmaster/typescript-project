@@ -1,11 +1,11 @@
-import {useMemo} from 'react';
+import {useMemo} from "react";
 
-import type {LangKeyType} from '../../provider/locale/translation/type';
-import {Locale} from '../../provider/locale/locale-context';
-import {cls} from '../../util/css';
+import type {LangKeyType} from "../../provider/locale/translation/type";
+import {Locale} from "../../provider/locale/locale-context";
+import {cls} from "../../util/css";
 
-import emptyImageSrc from './image/empty.svg';
-import emptyStyle from './empty.scss';
+import emptyImageSrc from "./image/empty.svg";
+import emptyStyle from "./empty.scss";
 
 interface PropsType {
     // eslint-disable-next-line unicorn/no-keyword-prefix

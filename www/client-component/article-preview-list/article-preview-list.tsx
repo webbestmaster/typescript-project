@@ -1,7 +1,7 @@
-import type {ArticlePreviewType, SubDocumentListViewTypeEnum} from '../../../server/article/article-type';
+import type {ArticlePreviewType, SubDocumentListViewTypeEnum} from "../../../server/article/article-type";
 
-import articlePreviewListStyle from './article-preview-list.scss';
-import {ArticlePreview} from './article-preview/article-preview';
+import articlePreviewListStyle from "./article-preview-list.scss";
+import {ArticlePreview} from "./article-preview/article-preview";
 
 interface ChildListPropsType {
     readonly childList: Array<ArticlePreviewType>;

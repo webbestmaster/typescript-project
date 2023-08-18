@@ -1,6 +1,6 @@
-import type {ArticleType} from '../../../article/article-type';
+import type {ArticleType} from "../../../article/article-type";
 
-import type {SsrReplaceDataType} from './ssr-helper-type';
+import type {SsrReplaceDataType} from "./ssr-helper-type";
 
 export function getMetaRobotsSsrReplaceData(article: ArticleType): SsrReplaceDataType {
     const {hasMetaRobotsNoFollowSeo, hasMetaRobotsNoIndexSeo} = article;
@@ -18,5 +18,5 @@ export function getMetaRobotsSsrReplaceData(article: ArticleType): SsrReplaceDat
         return {selector, value: '<meta name="robots" content="noindex"/>'};
     }
 
-    return {selector, value: ''};
+    return {selector, value: ""};
 }

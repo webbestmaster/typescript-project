@@ -29,7 +29,7 @@ export class MarkdownItemCounter {
         return this.image > MarkdownItemCounter.ImageToLoadCount;
     }
 
-    getLoadingImageType(): HTMLImageElement['loading'] {
-        return this.getIsLazyImage() ? 'lazy' : 'eager';
+    getLoadingImageType(): HTMLImageElement["loading"] {
+        return this.getIsLazyImage() ? "lazy" : "eager";
     }
 }

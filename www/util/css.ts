@@ -14,7 +14,7 @@ export function cls(...argumentList: Array<ClassNamesArgumentType>): string {
             continue;
         }
 
-        if (typeof cssClassNameData === 'string') {
+        if (typeof cssClassNameData === "string") {
             cssClassNameList.push(cssClassNameData);
             // eslint-disable-next-line no-continue
             continue;
@@ -29,5 +29,5 @@ export function cls(...argumentList: Array<ClassNamesArgumentType>): string {
         }
     }
 
-    return cssClassNameList.join(' ');
+    return cssClassNameList.join(" ");
 }

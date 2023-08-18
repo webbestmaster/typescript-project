@@ -13,7 +13,7 @@ export function requestIdleCallbackPolyfill(...args: Parameters<typeof requestId
     const defaultTimeout = 0;
     const {timeout = defaultTimeout} = option;
 
-    if (typeof requestIdleCallback !== 'function') {
+    if (typeof requestIdleCallback !== "function") {
         setTimeout(callback, timeout);
         return;
     }

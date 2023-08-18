@@ -1,4 +1,4 @@
-export const shareIconIdPrefix = 'share-button--';
+export const shareIconIdPrefix = "share-button--";
 
 export const shareButtonName = {
     facebook: `${shareIconIdPrefix}facebook`,

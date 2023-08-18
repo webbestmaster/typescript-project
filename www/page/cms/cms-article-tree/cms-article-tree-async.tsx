@@ -1,16 +1,16 @@
-import {lazy, Suspense, type ComponentType} from 'react';
+import {lazy, Suspense, type ComponentType} from "react";
 
-import {Spinner} from '../../../layout/spinner/spinner';
-import {LoginAdminRequired} from '../../../layout/login-admin-required/login-admin-required';
-import type {LazyResultType} from '../../../util/type';
+import {Spinner} from "../../../layout/spinner/spinner";
+import {LoginAdminRequired} from "../../../layout/login-admin-required/login-admin-required";
+import type {LazyResultType} from "../../../util/type";
 
 const AsyncLazy = lazy<ComponentType<unknown>>(async (): Promise<LazyResultType<unknown>> => {
     const {CmsArticleTree} = await import(
         /* webpackChunkName: 'page-cms-article-tree' */
-        './cms-article-tree'
+        "./cms-article-tree"
     );
 
-    return {'default': CmsArticleTree};
+    return {"default": CmsArticleTree};
 });
 
 export function CmsArticleTreeAsync() {

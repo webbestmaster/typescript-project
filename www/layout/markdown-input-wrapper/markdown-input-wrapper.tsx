@@ -1,9 +1,9 @@
-import {Row, Col} from 'antd';
+import {Row, Col} from "antd";
 
-import {Box} from '../box/box';
-import {Markdown} from '../markdown/markdown';
+import {Box} from "../box/box";
+import {Markdown} from "../markdown/markdown";
 
-import markdownInputWrapperStyle from './markdown-input-wrapper.scss';
+import markdownInputWrapperStyle from "./markdown-input-wrapper.scss";
 
 interface MarkdownInputWrapperPropsType {
     readonly children: JSX.Element;

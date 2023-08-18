@@ -4,58 +4,58 @@ const textToLatinMap: Record<string, string> = {
      * https://transliteration.ru/gost-7-79-2000/
      */
     /* eslint-disable id-length, sort-keys, id-match */
-    а: 'a',
-    б: 'b',
-    в: 'v',
-    г: 'g',
-    д: 'd',
-    е: 'e',
-    ё: 'yo',
-    ж: 'zh',
-    з: 'z',
-    и: 'i',
-    й: 'j',
-    к: 'k',
-    л: 'l',
-    м: 'm',
-    н: 'n',
-    о: 'o',
-    п: 'p',
-    р: 'r',
-    с: 's',
-    т: 't',
-    у: 'u',
-    ф: 'f',
-    х: 'h',
-    ц: 'cz',
-    ч: 'ch',
-    ш: 'sh',
-    щ: 'shh',
-    ъ: '',
-    ы: 'y',
-    ь: '',
-    э: 'e',
-    ю: 'yu',
-    я: 'ya',
+    а: "a",
+    б: "b",
+    в: "v",
+    г: "g",
+    д: "d",
+    е: "e",
+    ё: "yo",
+    ж: "zh",
+    з: "z",
+    и: "i",
+    й: "j",
+    к: "k",
+    л: "l",
+    м: "m",
+    н: "n",
+    о: "o",
+    п: "p",
+    р: "r",
+    с: "s",
+    т: "t",
+    у: "u",
+    ф: "f",
+    х: "h",
+    ц: "cz",
+    ч: "ch",
+    ш: "sh",
+    щ: "shh",
+    ъ: "",
+    ы: "y",
+    ь: "",
+    э: "e",
+    ю: "yu",
+    я: "ya",
     // Additional
-    å: 'a',
-    ä: 'a',
-    ö: 'o',
+    å: "a",
+    ä: "a",
+    ö: "o",
     /* eslint-enable id-length, sort-keys, id-match */
 };
 
-const wordSeparator = '-';
+const wordSeparator = "-";
 
 function charToLatin(char: string): string {
     return char in textToLatinMap ? textToLatinMap[char] : char;
 }
 
 function textToLatin(text: string): string {
-    return [...text].map(charToLatin).join('');
+    return [...text].map(charToLatin).join("");
 }
 
 export function humanNormalizeString(text: string): string {
-    return text.trim().replace(/\s+/giu, ' ');
+    return text.trim().replace(/\s+/giu, " ");
 }
 
 export function stringToArrayByComma(texts: Array<string> | string): Array<string> {
@@ -63,12 +63,12 @@ export function stringToArrayByComma(texts: Array<string> | string): Array<strin
         return texts;
     }
 
-    return texts.split(',').map(humanNormalizeString).filter(Boolean);
+    return texts.split(",").map(humanNormalizeString).filter(Boolean);
 }
 
 export function arrayToStringByComma(texts: Array<string> | string): string {
     if (Array.isArray(texts)) {
-        return texts.map(humanNormalizeString).filter(Boolean).join(', ');
+        return texts.map(humanNormalizeString).filter(Boolean).join(", ");
     }
 
     return texts;
@@ -79,7 +79,7 @@ export function textToSlug(test: string): string {
         .filter<string>((char: string): char is string => {
             return char === wordSeparator || /[\da-z]/giu.test(char);
         })
-        .join('');
+        .join("");
 }
 
 export function makeTagsPreview(tagList: Array<string> | string): string {
@@ -87,5 +87,5 @@ export function makeTagsPreview(tagList: Array<string> | string): string {
         .map((tag: string): string => {
             return `[ ${tag} ]`;
         })
-        .join(' ');
+        .join(" ");
 }

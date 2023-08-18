@@ -1,8 +1,8 @@
 export enum ThemeNameEnum {
-    dark = 'dark',
-    light = 'light',
-    neon = 'neon',
-    twilight = 'twilight',
+    dark = "dark",
+    light = "light",
+    neon = "neon",
+    twilight = "twilight",
 }
 
 export interface ThemeContextType {

@@ -1,16 +1,16 @@
 /* global document */
 
-import 'markdown-pro/dist/style.css';
-import 'react-audio-player-pro/dist/style.css';
+import "markdown-pro/dist/style.css";
+import "react-audio-player-pro/dist/style.css";
 
-import {StrictMode} from 'react';
-import {hydrateRoot, createRoot} from 'react-dom/client';
+import {StrictMode} from "react";
+import {hydrateRoot, createRoot} from "react-dom/client";
 
-import {selector} from './const';
-import {App} from './component/app/app';
+import {selector} from "./const";
+import {App} from "./component/app/app";
 
-import {ErrorData} from './layout/error-data/error-data';
-import {Popup} from './layout/popup/popup';
+import {ErrorData} from "./layout/error-data/error-data";
+import {Popup} from "./layout/popup/popup";
 
 // eslint-disable-next-line jest/require-hook
 (function main() {
@@ -19,7 +19,7 @@ import {Popup} from './layout/popup/popup';
     const nodeWrapper = document.querySelector(selector.appWrapper);
 
     if (!nodeWrapper) {
-        throw new Error('[main]: Can not find appWrapper');
+        throw new Error("[main]: Can not find appWrapper");
     }
 
     const {innerHTML} = nodeWrapper;
@@ -30,12 +30,12 @@ import {Popup} from './layout/popup/popup';
         </StrictMode>
     );
 
-    if (innerHTML.trim() === '') {
-        console.log('[main]: Render App as SPA');
+    if (innerHTML.trim() === "") {
+        console.log("[main]: Render App as SPA");
         createRoot(nodeWrapper).render(appNode);
         return;
     }
 
-    console.log('[main]: Render App as SSR');
+    console.log("[main]: Render App as SSR");
     hydrateRoot(nodeWrapper, appNode);
 })();

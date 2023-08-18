@@ -1,13 +1,13 @@
 /* global HTMLVideoElement, HTMLImageElement */
 
-import {useRef, useState, useCallback} from 'react';
+import {useRef, useState, useCallback} from "react";
 
-import type {GetPathToFileType, GetPathToImageType} from '../../util/path';
-import {Image} from '../Image/image';
-import {secondsToHuman} from '../../util/time';
-import {cls} from '../../util/css';
+import type {GetPathToFileType, GetPathToImageType} from "../../util/path";
+import {Image} from "../Image/image";
+import {secondsToHuman} from "../../util/time";
+import {cls} from "../../util/css";
 
-import videoStyle from './video.scss';
+import videoStyle from "./video.scss";
 
 interface VideoPropsType {
     readonly alt: string;
@@ -24,7 +24,7 @@ interface VideoPropsType {
         readonly imgClassName?: string;
     };
     readonly poster: string;
-    readonly posterLoading: HTMLImageElement['loading'];
+    readonly posterLoading: HTMLImageElement["loading"];
     readonly title: string;
     readonly videoClassName?: string;
     readonly width: number;
@@ -77,12 +77,12 @@ export function Video(props: VideoPropsType): JSX.Element {
 
     return (
         <div
-            className={`${videoStyle.video} ${cssClassName ?? ''}`.trim()}
-            style={{display: 'block', height: 'auto', maxHeight: `${height}px`, maxWidth: `${width}px`}}
+            className={`${videoStyle.video} ${cssClassName ?? ""}`.trim()}
+            style={{display: "block", height: "auto", maxHeight: `${height}px`, maxWidth: `${width}px`}}
         >
             <svg
                 height={height}
-                style={{display: 'block', height: 'auto', maxHeight: `${height}px`, maxWidth: '100%'}}
+                style={{display: "block", height: "auto", maxHeight: `${height}px`, maxWidth: "100%"}}
                 viewBox={`0 0 ${width} ${height}`}
                 width={width}
             />
@@ -97,12 +97,12 @@ export function Video(props: VideoPropsType): JSX.Element {
 
             <Image
                 alt={alt}
-                className={`${videoStyle.video__image} ${image?.className ?? ''}`.trim()}
+                className={`${videoStyle.video__image} ${image?.className ?? ""}`.trim()}
                 fileName={poster}
                 getPathToFile={getPathToFile}
                 getPathToImage={getPathToImage}
                 height={height}
-                imgClassName={`${videoStyle.video__image_tag} ${image?.imgClassName ?? ''}`.trim()}
+                imgClassName={`${videoStyle.video__image_tag} ${image?.imgClassName ?? ""}`.trim()}
                 loading={posterLoading}
                 title={title}
                 width={width}

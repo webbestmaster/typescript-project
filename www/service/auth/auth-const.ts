@@ -1,20 +1,20 @@
-import type {JSONSchemaType} from 'ajv';
+import type {JSONSchemaType} from "ajv";
 
-import type {LoginResponseType} from './auth-type';
+import type {LoginResponseType} from "./auth-type";
 
 export const loginResponseSchema: JSONSchemaType<LoginResponseType> = {
     additionalProperties: false,
     properties: {
         user: {
             properties: {
-                id: {type: 'string'},
-                login: {type: 'string'},
-                role: {type: 'string'},
+                id: {type: "string"},
+                login: {type: "string"},
+                role: {type: "string"},
             },
-            required: ['id', 'login', 'role'],
-            type: 'object',
+            required: ["id", "login", "role"],
+            type: "object",
         },
     },
-    required: ['user'],
-    type: 'object',
+    required: ["user"],
+    type: "object",
 };

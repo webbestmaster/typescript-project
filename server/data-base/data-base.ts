@@ -1,12 +1,12 @@
 /* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
 
-import Ajv, {type JSONSchemaType} from 'ajv';
-import {Petsdb, type PetsdbItemType, type PetsdbQueryType, type PetsdbReadPageConfigType} from 'petsdb';
+import Ajv, {type JSONSchemaType} from "ajv";
+import {Petsdb, type PetsdbItemType, type PetsdbQueryType, type PetsdbReadPageConfigType} from "petsdb";
 
-import {getPartialData, makeBackUpFolder} from './data-base-util';
-import type {CrudConfigOnChangeArgumentType, CrudConfigType, CrudType, PaginationResultType} from './data-base-type';
-import {makeDataBaseBackUp} from './data-base-back-up';
-import {dataBaseFolderPath} from './data-base-const';
+import {getPartialData, makeBackUpFolder} from "./data-base-util";
+import type {CrudConfigOnChangeArgumentType, CrudConfigType, CrudType, PaginationResultType} from "./data-base-type";
+import {makeDataBaseBackUp} from "./data-base-back-up";
+import {dataBaseFolderPath} from "./data-base-const";
 
 const ajv = new Ajv();
 
@@ -75,7 +75,7 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
         const isValid = modelJsonSchemaValidate(modelData);
 
         if (isValid) {
-            throw new Error(JSON.stringify(modelJsonSchemaValidate.errors ?? ''));
+            throw new Error(JSON.stringify(modelJsonSchemaValidate.errors ?? ""));
         }
 
         await dataBase.create(modelData);
@@ -89,7 +89,7 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
         const isValid = modelJsonSchemaValidate(modelData);
 
         if (isValid) {
-            throw new Error(JSON.stringify(modelJsonSchemaValidate.errors ?? ''));
+            throw new Error(JSON.stringify(modelJsonSchemaValidate.errors ?? ""));
         }
 
         await dataBase.update(query, modelData);
@@ -126,11 +126,11 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
 
             hasError = true;
 
-            console.error('[ERROR]: makeCrud:');
-            console.error('[ERROR]: makeCrud: model data');
+            console.error("[ERROR]: makeCrud:");
+            console.error("[ERROR]: makeCrud: model data");
             console.error(modelData);
-            console.error('[ERROR]: makeCrud: errors:');
-            console.error(modelJsonSchemaValidate.errors ?? '');
+            console.error("[ERROR]: makeCrud: errors:");
+            console.error(modelJsonSchemaValidate.errors ?? "");
 
             /*
                 await updateOne({slug:modelData.slug}, {

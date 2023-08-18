@@ -1,10 +1,10 @@
-import {cwd} from 'node:process';
-import path from 'node:path';
+import {cwd} from "node:process";
+import path from "node:path";
 
-import {writeStringToFile} from '../util/file';
-import {makeDirectory, tryToRemoveDirectory} from '../file/directory';
+import {writeStringToFile} from "../util/file";
+import {makeDirectory, tryToRemoveDirectory} from "../file/directory";
 
-const cacheHtmlFileFolder = 'article-cache';
+const cacheHtmlFileFolder = "article-cache";
 
 const absolutePathHtmlFileFolder = path.join(cwd(), cacheHtmlFileFolder);
 

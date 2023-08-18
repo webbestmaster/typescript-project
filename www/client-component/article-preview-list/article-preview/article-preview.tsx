@@ -1,10 +1,10 @@
-import {Link} from 'react-router-dom';
+import {Link} from "react-router-dom";
 
-import {type ArticlePreviewType, SubDocumentListViewTypeEnum} from '../../../../server/article/article-type';
-import {getArticleLinkToViewClient} from '../../article/article-helper';
-import {getPathToImage} from '../../../util/path';
+import {type ArticlePreviewType, SubDocumentListViewTypeEnum} from "../../../../server/article/article-type";
+import {getArticleLinkToViewClient} from "../../article/article-helper";
+import {getPathToImage} from "../../../util/path";
 
-import articlePreviewListStyle from './article-preview.scss';
+import articlePreviewListStyle from "./article-preview.scss";
 
 interface ArticlePreviewPropsType {
     readonly articlePreview: ArticlePreviewType;
@@ -24,12 +24,12 @@ export function ArticlePreview(props: ArticlePreviewPropsType): JSX.Element {
                 <img
                     alt={title}
                     className={articlePreviewListStyle.article_preview__header_image__back_image}
-                    src={getPathToImage(titleImage.name, {height: '-', width: 300})}
+                    src={getPathToImage(titleImage.name, {height: "-", width: 300})}
                 />
                 <img
                     alt={title}
                     className={articlePreviewListStyle.article_preview___header_image_image}
-                    src={getPathToImage(titleImage.name, {height: '-', width: 300})}
+                    src={getPathToImage(titleImage.name, {height: "-", width: 300})}
                 />
                 <p className={articlePreviewListStyle.article_preview__header_image__title}>{title}</p>
             </Link>

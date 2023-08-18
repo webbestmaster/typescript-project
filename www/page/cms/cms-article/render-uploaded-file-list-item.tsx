@@ -1,12 +1,12 @@
 /* global HTMLInputElement */
-import type {SyntheticEvent} from 'react';
-import {Typography, Input, Col, Row} from 'antd';
-import type {UploadFile} from 'antd/es/upload/interface';
+import type {SyntheticEvent} from "react";
+import {Typography, Input, Col, Row} from "antd";
+import type {UploadFile} from "antd/es/upload/interface";
 const {Title} = Typography;
 
-import type {ArticleFileType} from '../../../../server/article/article-type';
-import {Box} from '../../../layout/box/box';
-import {getFileMarkdownByFullInfo} from '../../../layout/markdown/markdown-helper';
+import type {ArticleFileType} from "../../../../server/article/article-type";
+import {Box} from "../../../layout/box/box";
+import {getFileMarkdownByFullInfo} from "../../../layout/markdown/markdown-helper";
 
 interface UploadedFileListItemPropsType {
     file: UploadFile<unknown>;
@@ -44,7 +44,7 @@ export function renderUploadedFileListItem(props: UploadedFileListItemPropsType)
                     />
                 </Col>
                 <Col span={12}>
-                    <Input readOnly value={getFileMarkdownByFullInfo(fileInfo, {alt: '', poster: ''})} />
+                    <Input readOnly value={getFileMarkdownByFullInfo(fileInfo, {alt: "", poster: ""})} />
                 </Col>
             </Row>
         </Box>

@@ -1,18 +1,18 @@
-import type {PetsdbQueryType, PetsdbReadPageConfigType} from 'petsdb';
+import type {PetsdbQueryType, PetsdbReadPageConfigType} from "petsdb";
 
-import type {PaginationResultType} from '../../../server/data-base/data-base-type';
-import type {ArticleType} from '../../../server/article/article-type';
-import {FetchMethodEnum, fetchX} from '../../util/fetch';
+import type {PaginationResultType} from "../../../server/data-base/data-base-type";
+import type {ArticleType} from "../../../server/article/article-type";
+import {FetchMethodEnum, fetchX} from "../../util/fetch";
 import {
     makeArticlePaginationSchema,
     makeArticlePaginationSchemaPick,
     makeArticleSchema,
-} from '../../../server/article/article-validation';
-import {apiUrl} from '../../../server/const';
-import {paginationQueryToURLSearchParameters} from '../../util/url';
-import type {UnknownObjectType} from '../../util/type';
-import type {ArticleContextType} from '../../client-component/article/article-context/article-context-type';
-import {articleContextDataSchema} from '../../client-component/article/article-context/article-context-const';
+} from "../../../server/article/article-validation";
+import {apiUrl} from "../../../server/const";
+import {paginationQueryToURLSearchParameters} from "../../util/url";
+import type {UnknownObjectType} from "../../util/type";
+import type {ArticleContextType} from "../../client-component/article/article-context/article-context-type";
+import {articleContextDataSchema} from "../../client-component/article/article-context/article-context-const";
 
 // eslint-disable-next-line require-await
 export async function getArticleListPagination(
@@ -25,7 +25,7 @@ export async function getArticleListPagination(
         `${apiUrl.adminArticleListPagination}?${urlSearchParameters.toString()}`,
         makeArticlePaginationSchema(),
         {
-            credentials: 'include',
+            credentials: "include",
             method: FetchMethodEnum.get,
         }
     );
@@ -43,7 +43,7 @@ export async function getArticleListPaginationPick<Keys extends keyof ArticleTyp
         `${apiUrl.adminArticleListPaginationPick}?${urlSearchParameters.toString()}`,
         makeArticlePaginationSchemaPick<Keys>(pick),
         {
-            credentials: 'include',
+            credentials: "include",
             method: FetchMethodEnum.get,
         }
     );
@@ -70,7 +70,7 @@ export async function getArticleClientListPaginationPick<Keys extends keyof Arti
 export async function postArticleCreate(article: ArticleType): Promise<ArticleType> {
     return fetchX<ArticleType>(apiUrl.adminArticleCreate, makeArticleSchema(), {
         body: JSON.stringify(article),
-        credentials: 'include',
+        credentials: "include",
         method: FetchMethodEnum.post,
     });
 }
@@ -79,7 +79,7 @@ export async function postArticleCreate(article: ArticleType): Promise<ArticleTy
 export async function postArticleUpdate(article: ArticleType): Promise<ArticleType> {
     return fetchX<ArticleType>(apiUrl.adminArticleUpdate, makeArticleSchema(), {
         body: JSON.stringify(article),
-        credentials: 'include',
+        credentials: "include",
         method: FetchMethodEnum.post,
     });
 }
@@ -87,13 +87,13 @@ export async function postArticleUpdate(article: ArticleType): Promise<ArticleTy
 // eslint-disable-next-line require-await
 export async function deleteArticle(articleId: string): Promise<UnknownObjectType> {
     return fetchX<UnknownObjectType>(
-        apiUrl.adminArticleDelete.replace(':articleId', articleId),
+        apiUrl.adminArticleDelete.replace(":articleId", articleId),
         {
             required: [],
-            type: 'object',
+            type: "object",
         },
         {
-            credentials: 'include',
+            credentials: "include",
             method: FetchMethodEnum.delete,
         }
     );
@@ -101,8 +101,8 @@ export async function deleteArticle(articleId: string): Promise<UnknownObjectTyp
 
 // eslint-disable-next-line require-await
 export async function getArticleContextBySlug(slug: string): Promise<ArticleContextType> {
-    return fetchX<ArticleContextType>(apiUrl.clientArticleContextGet.replace(':slug', slug), articleContextDataSchema, {
-        credentials: 'include',
+    return fetchX<ArticleContextType>(apiUrl.clientArticleContextGet.replace(":slug", slug), articleContextDataSchema, {
+        credentials: "include",
         method: FetchMethodEnum.get,
     });
 }

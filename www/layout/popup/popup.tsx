@@ -1,12 +1,12 @@
 /* global document, setTimeout, clearTimeout, NodeJS, HTMLDivElement */
 
-import {type ReactNode, useEffect, useRef, useState, type DetailedHTMLProps, type HTMLAttributes} from 'react';
-import {createPortal} from 'react-dom';
+import {type ReactNode, useEffect, useRef, useState, type DetailedHTMLProps, type HTMLAttributes} from "react";
+import {createPortal} from "react-dom";
 
-import {cls} from '../../util/css';
+import {cls} from "../../util/css";
 
-import popupStyle from './popup.scss';
-import {PopupVisibleStateEnum} from './popup-const';
+import popupStyle from "./popup.scss";
+import {PopupVisibleStateEnum} from "./popup-const";
 
 const fadeClassNameMap: Record<PopupVisibleStateEnum, string> = {
     [PopupVisibleStateEnum.closed]: popupStyle.popup__fade__closed,
@@ -70,9 +70,9 @@ export function Popup(props: PopupPropsType): JSX.Element | null {
         `Popup - isOpen: ${String(isOpen)}`,
         `Popup - isSelfOpen: ${String(isSelfOpen)}`,
         `Popup - visibleState: ${String(visibleState)}`,
-    ].join('\n');
+    ].join("\n");
 
-    console.info(`%c${infoState}`, 'font-size: 24px');
+    console.info(`%c${infoState}`, "font-size: 24px");
 
     useEffect(() => {
         setIsMounted(true);
@@ -99,7 +99,7 @@ export function Popup(props: PopupPropsType): JSX.Element | null {
         return null;
     }
 
-    if (typeof document === 'undefined' || !isMounted) {
+    if (typeof document === "undefined" || !isMounted) {
         return null;
     }
 

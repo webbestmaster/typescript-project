@@ -1,12 +1,12 @@
-import type {ReactNode, ElementType, CSSProperties} from 'react';
+import type {ReactNode, ElementType, CSSProperties} from "react";
 
-import {makeCssArray} from './box-helper';
+import {makeCssArray} from "./box-helper";
 
 interface BoxPropsType {
     readonly backgroundColor?: string;
-    readonly boxSizing?: 'border-box' | 'content-box' | 'initial';
+    readonly boxSizing?: "border-box" | "content-box" | "initial";
     readonly children?: ReactNode;
-    readonly display?: 'block' | 'flex' | 'inline';
+    readonly display?: "block" | "flex" | "inline";
     readonly height?: number | string;
     readonly margin?: Array<number> | number;
     readonly padding?: Array<number> | number;
@@ -16,7 +16,7 @@ interface BoxPropsType {
 
 export function Box(props: BoxPropsType): JSX.Element {
     const {
-        tagName: TagName = 'div',
+        tagName: TagName = "div",
         children,
         margin,
         padding,

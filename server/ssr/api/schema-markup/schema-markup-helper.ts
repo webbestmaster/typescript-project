@@ -1,4 +1,4 @@
-import {humanNormalizeString} from '../../../../www/util/human';
+import {humanNormalizeString} from "../../../../www/util/human";
 
 export function fitTextTo(fullString: string, maxSize: number): string {
     const cleanString = humanNormalizeString(fullString);
@@ -9,7 +9,7 @@ export function fitTextTo(fullString: string, maxSize: number): string {
 
     const resultString = cleanString.slice(0, maxSize);
 
-    if (cleanString[maxSize] === ' ') {
+    if (cleanString[maxSize] === " ") {
         return resultString;
     }
 
@@ -17,9 +17,9 @@ export function fitTextTo(fullString: string, maxSize: number): string {
 
     resultWordList.pop();
 
-    return resultWordList.join(' ');
+    return resultWordList.join(" ");
 }
 
 export function timeTo0000(isoString: string): string {
-    return isoString.replace(/\.\d{3}Z/u, '+00:00');
+    return isoString.replace(/\.\d{3}Z/u, "+00:00");
 }

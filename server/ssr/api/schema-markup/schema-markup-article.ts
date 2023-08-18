@@ -2,21 +2,21 @@
 
 // Used - JSON-LD (recommended)
 
-import type {ArticleType} from '../../../article/article-type';
-import type {SsrReplaceDataType} from '../ssr-helper/ssr-helper-type';
-import {getPathToImage} from '../../../../www/util/path';
+import type {ArticleType} from "../../../article/article-type";
+import type {SsrReplaceDataType} from "../ssr-helper/ssr-helper-type";
+import {getPathToImage} from "../../../../www/util/path";
 import {
     companyLogoPngFileName,
     companyLogoPngHeight,
     companyLogoPngWidth,
     copyrightName,
     httpsSiteDomain,
-} from '../../../../www/const';
-import {type ArticleImageDataType, getImageListFromArticle} from '../../../sitemap/sitemap-img-xml';
-import {getClientArticleLinkWithDomain} from '../../../../www/client-component/article/article-helper';
-import {convertStringForHtml} from '../../../../www/util/string';
+} from "../../../../www/const";
+import {type ArticleImageDataType, getImageListFromArticle} from "../../../sitemap/sitemap-img-xml";
+import {getClientArticleLinkWithDomain} from "../../../../www/client-component/article/article-helper";
+import {convertStringForHtml} from "../../../../www/util/string";
 
-import {fitTextTo, timeTo0000} from './schema-markup-helper';
+import {fitTextTo, timeTo0000} from "./schema-markup-helper";
 
 // eslint-disable-next-line id-length
 export function getSchemaMarkupArticleSsrReplaceData(article: ArticleType): SsrReplaceDataType {
@@ -48,7 +48,7 @@ export function getSchemaMarkupArticleSsrReplaceData(article: ArticleType): SsrR
                 "dateModified": "${timeTo0000(updatedDate)}",
                 "author": {
                     "@type": "Person",
-                    "name": "${convertStringForHtml(staffAuthorList.join(', ')) || 'N/A'}",
+                    "name": "${convertStringForHtml(staffAuthorList.join(", ")) || "N/A"}",
                     "url": "${httpsSiteDomain}"
                 },
                 "publisher": {
@@ -61,7 +61,7 @@ export function getSchemaMarkupArticleSsrReplaceData(article: ArticleType): SsrR
                 },
                 "description": "${convertStringForHtml(fitTextTo(descriptionShort || title, 300))}"
             }
-        </script>`.replace(/\s+/giu, ' ');
+        </script>`.replace(/\s+/giu, " ");
 
     return {selector, value};
 }

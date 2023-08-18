@@ -1,14 +1,14 @@
-import {useCallback} from 'react';
+import {useCallback} from "react";
 
-import {useLocale} from '../../provider/locale/locale-context';
+import {useLocale} from "../../provider/locale/locale-context";
 import {
     type DateTimeFormatOptionsType,
     getFormattedDateTime,
     getFormattedNumber,
     type NumberFormatOptionsType,
-} from '../../util/format';
+} from "../../util/format";
 
-import type {UseFormatHookType} from './format-hook-type';
+import type {UseFormatHookType} from "./format-hook-type";
 
 export function useFormat(): UseFormatHookType {
     const {localeName} = useLocale();

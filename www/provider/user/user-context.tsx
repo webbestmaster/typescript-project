@@ -1,14 +1,14 @@
 /* global location */
 
-import {createContext, useMemo, useState, useContext, useEffect, type ReactNode} from 'react';
+import {createContext, useMemo, useState, useContext, useEffect, type ReactNode} from "react";
 
-import {getAutoAuthLogin} from '../../service/auth/auth-api';
-import {useMakeExecutableState} from '../../util/function';
-import type {LoginResponseType} from '../../service/auth/auth-type';
-import {throwError} from '../../util/error';
+import {getAutoAuthLogin} from "../../service/auth/auth-api";
+import {useMakeExecutableState} from "../../util/function";
+import type {LoginResponseType} from "../../service/auth/auth-type";
+import {throwError} from "../../util/error";
 
-import {defaultUserContext} from './user-context-const';
-import type {UserContextType, UserType} from './user-context-type';
+import {defaultUserContext} from "./user-context-const";
+import type {UserContextType, UserType} from "./user-context-type";
 
 export const UserContext = createContext<UserContextType>(defaultUserContext);
 
@@ -18,7 +18,7 @@ export function useUserContext(): UserContextType {
 
 const {Provider: UserContextProvider} = UserContext;
 
-type UserProviderPropsType = Record<'children', ReactNode>;
+type UserProviderPropsType = Record<"children", ReactNode>;
 
 export function UserProvider(props: UserProviderPropsType): JSX.Element {
     const {children} = props;
@@ -34,7 +34,7 @@ export function UserProvider(props: UserProviderPropsType): JSX.Element {
     }, [isInProgressAutoLogin, user]);
 
     useEffect(() => {
-        if (typeof location === 'object' && location.pathname.includes('/cms/')) {
+        if (typeof location === "object" && location.pathname.includes("/cms/")) {
             executeAutoLogin()
                 .then((loginResponse: LoginResponseType) => {
                     setUser(loginResponse.user);

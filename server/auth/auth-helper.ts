@@ -1,17 +1,17 @@
-import type {FastifyReply, FastifyRequest} from 'fastify';
+import type {FastifyReply, FastifyRequest} from "fastify";
 
-import {UserRoleEnum} from '../../www/provider/user/user-context-type';
-import {mainResponseHeader} from '../const';
+import {UserRoleEnum} from "../../www/provider/user/user-context-type";
+import {mainResponseHeader} from "../const";
 
-import {authCrud} from './auth';
-import {cookieFieldUserId} from './auth-const';
-import type {AuthUserType} from './auth-type';
+import {authCrud} from "./auth";
+import {cookieFieldUserId} from "./auth-const";
+import type {AuthUserType} from "./auth-type";
 
 export function makeDefaultAuthUser(): AuthUserType {
     const defaultUserData: AuthUserType = {
-        id: '',
-        login: '',
-        password: '',
+        id: "",
+        login: "",
+        password: "",
         role: UserRoleEnum.user,
     };
 
@@ -21,7 +21,7 @@ export function makeDefaultAuthUser(): AuthUserType {
 async function getIsAdmin(request: FastifyRequest): Promise<boolean> {
     const {session} = request;
 
-    const user = await authCrud.findOne({id: String(session.get(cookieFieldUserId) ?? '')});
+    const user = await authCrud.findOne({id: String(session.get(cookieFieldUserId) ?? "")});
 
     return Boolean(user && user.role === UserRoleEnum.admin);
 }
@@ -45,6 +45,6 @@ export function adminOnly<ResponseType>(
         // eslint-disable-next-line @typescript-eslint/no-floating-promises
         reply.code(403).header(...mainResponseHeader);
 
-        throw new Error('403 Forbidden');
+        throw new Error("403 Forbidden");
     };
 }

@@ -1,13 +1,13 @@
 /* global ARTICLE_DATA */
-import {createContext, useEffect, useState} from 'react';
+import {createContext, useEffect, useState} from "react";
 
-import {isBrowser} from '../../../util/system';
-import {getArticleContextBySlug} from '../../../service/article/article-api';
-import {useMakeExecutableState} from '../../../util/function';
+import {isBrowser} from "../../../util/system";
+import {getArticleContextBySlug} from "../../../service/article/article-api";
+import {useMakeExecutableState} from "../../../util/function";
 
-import type {ArticleContextType} from './article-context-type';
-import {defaultArticleContextData} from './article-context-const';
-import {articleContextDom} from './article-context-dom';
+import type {ArticleContextType} from "./article-context-type";
+import {defaultArticleContextData} from "./article-context-const";
+import {articleContextDom} from "./article-context-dom";
 
 export const articleContext = createContext<ArticleContextType>(defaultArticleContextData);
 
@@ -22,7 +22,7 @@ export function ArticleProvider(props: ArticleProviderPropsType): JSX.Element {
     const {children, articleData: passedArticleData} = props;
     const [articleData, setArticleData] = useState<ArticleContextType>(
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-        typeof ARTICLE_DATA === 'string' ? JSON.parse(decodeURIComponent(ARTICLE_DATA)) : defaultArticleContextData
+        typeof ARTICLE_DATA === "string" ? JSON.parse(decodeURIComponent(ARTICLE_DATA)) : defaultArticleContextData
     );
     const [slug, setSlug] = useState<string>(articleData.article.slug);
 
@@ -32,7 +32,7 @@ export function ArticleProvider(props: ArticleProviderPropsType): JSX.Element {
     >(getArticleContextBySlug);
 
     useEffect(() => {
-        console.log('fetch data about article, slug:', slug);
+        console.log("fetch data about article, slug:", slug);
         if (slug === articleData.article.slug) {
             // eslint-disable-next-line promise/catch-or-return
             return;

@@ -1,12 +1,12 @@
 /* eslint jest/no-hooks: ["error", { "allow": ["beforeAll", "beforeEach", "afterEach", "afterAll"] }] */
 
-import {describe, it, afterEach, beforeEach, afterAll, beforeAll, expect} from '@jest/globals';
+import {describe, it, afterEach, beforeEach, afterAll, beforeAll, expect} from "@jest/globals";
 
-import type {Browser, Page} from 'puppeteer';
+import type {Browser, Page} from "puppeteer";
 
-import {createBrowser, makeLogin} from './util/util';
+import {createBrowser, makeLogin} from "./util/util";
 
-describe('auth', () => {
+describe("auth", () => {
     let browser: Browser | null = null;
     let page: Page | null = null;
 
@@ -26,7 +26,7 @@ describe('auth', () => {
         await browser?.close();
     });
 
-    it('login', async () => {
+    it("login", async () => {
         expect.assertions(0);
         await makeLogin(page);
     });

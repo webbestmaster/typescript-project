@@ -1,19 +1,19 @@
 /* global HTMLInputElement, document, MouseEvent, HTMLDivElement */
 
-import {type SyntheticEvent, useCallback, useEffect, useRef, useState} from 'react';
+import {type SyntheticEvent, useCallback, useEffect, useRef, useState} from "react";
 
-import type {PaginationResultType} from '../../../server/data-base/data-base-type';
-import {noop, useMakeExecutableState} from '../../util/function';
-import {getArticleClientListPaginationPick} from '../../service/article/article-api';
-import {useLocale} from '../../provider/locale/locale-context';
-import {cls} from '../../util/css';
-import {useHotKey} from '../../util/hot-key';
-import {makeSafeRegExp} from '../../util/regexp';
+import type {PaginationResultType} from "../../../server/data-base/data-base-type";
+import {noop, useMakeExecutableState} from "../../util/function";
+import {getArticleClientListPaginationPick} from "../../service/article/article-api";
+import {useLocale} from "../../provider/locale/locale-context";
+import {cls} from "../../util/css";
+import {useHotKey} from "../../util/hot-key";
+import {makeSafeRegExp} from "../../util/regexp";
 
-import {articlePreviewKeyList} from './search-const';
-import type {SearchArticleType} from './search-type';
-import searchStyle from './search.scss';
-import {SearchResult} from './search-result/search-result';
+import {articlePreviewKeyList} from "./search-const";
+import type {SearchArticleType} from "./search-type";
+import searchStyle from "./search.scss";
+import {SearchResult} from "./search-result/search-result";
 
 interface SearchPropsType {
     // eslint-disable-next-line unicorn/no-keyword-prefix
@@ -33,9 +33,9 @@ export function Search(props: SearchPropsType): JSX.Element {
     const forceFocus = useCallback(() => {
         setHasFocus(true);
     }, []);
-    const [searchString, setSearchString] = useState<string>('');
+    const [searchString, setSearchString] = useState<string>("");
 
-    useHotKey([], 'Escape', forceBlur);
+    useHotKey([], "Escape", forceBlur);
 
     useEffect(() => {
         function handleBodyOnClick(evt: MouseEvent) {
@@ -48,10 +48,10 @@ export function Search(props: SearchPropsType): JSX.Element {
             forceBlur();
         }
 
-        document.body.addEventListener('click', handleBodyOnClick, false);
+        document.body.addEventListener("click", handleBodyOnClick, false);
 
         return () => {
-            document.body.removeEventListener('click', handleBodyOnClick, false);
+            document.body.removeEventListener("click", handleBodyOnClick, false);
         };
     }, [forceBlur]);
 
@@ -75,7 +75,7 @@ export function Search(props: SearchPropsType): JSX.Element {
         if (searchString.length >= minLetters) {
             // eslint-disable-next-line @typescript-eslint/no-floating-promises
             executeArticleList(
-                {title: makeSafeRegExp(searchString, 'gi').toString()},
+                {title: makeSafeRegExp(searchString, "gi").toString()},
                 {
                     pageIndex: 0,
                     pageSize: 0,
@@ -97,15 +97,15 @@ export function Search(props: SearchPropsType): JSX.Element {
                 defaultValue={searchString}
                 onFocus={forceFocus}
                 onInput={handleInput}
-                placeholder={getLocalizedString('UI__SEARCH_PLACEHOLDER')}
-                title={getLocalizedString('UI__SEARCH_INPUT')}
+                placeholder={getLocalizedString("UI__SEARCH_PLACEHOLDER")}
+                title={getLocalizedString("UI__SEARCH_INPUT")}
                 type="text"
             />
 
             <button
                 className={cls(searchStyle.search_icon, {[searchStyle.search_icon__focused]: hasFocus})}
                 onClick={forceBlur}
-                title={getLocalizedString('UI__SEARCH_BUTTON')}
+                title={getLocalizedString("UI__SEARCH_BUTTON")}
                 type="button"
             />
 

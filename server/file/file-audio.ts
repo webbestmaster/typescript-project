@@ -1,13 +1,13 @@
-import type {Stats} from 'node:fs';
-import fileSystem from 'node:fs/promises';
-import path from 'node:path';
+import type {Stats} from "node:fs";
+import fileSystem from "node:fs/promises";
+import path from "node:path";
 
-import {Lame} from 'node-lame';
-import {getAudioDurationInSeconds} from 'get-audio-duration';
+import {Lame} from "node-lame";
+import {getAudioDurationInSeconds} from "get-audio-duration";
 
-import {getRandomString} from '../../www/util/string';
+import {getRandomString} from "../../www/util/string";
 
-import {uploadFolder} from './file-const';
+import {uploadFolder} from "./file-const";
 
 type BitrateType = 8 | 16 | 24 | 32 | 40 | 48 | 56 | 64 | 80 | 96 | 112 | 128 | 144 | 160 | 192 | 224 | 256 | 320;
 const bitRateList: Array<BitrateType> = [8, 16, 24, 32, 40, 48, 56, 64, 80, 96, 112, 128, 144, 160, 192, 224, 256, 320];

@@ -1,6 +1,6 @@
 // eslint-disable-next-line complexity
 export function makeCssArray(value?: Array<number> | number): [number, number, number, number] {
-    if (typeof value === 'number') {
+    if (typeof value === "number") {
         return [value, value, value, value];
     }
 
@@ -27,7 +27,7 @@ export function makeCssArray(value?: Array<number> | number): [number, number, n
             return [value[0], value[1], value[2], value[3]];
         }
         default: {
-            console.error('makeCssArray: too big array');
+            console.error("makeCssArray: too big array");
             return [value[0], value[1], value[2], value[3]];
         }
     }

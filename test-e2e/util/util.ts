@@ -7,9 +7,9 @@ import puppeteer, {
     type LaunchOptions,
     type Page,
     type Product,
-} from 'puppeteer';
+} from "puppeteer";
 
-import {defaultPageGoToOption, pageFullUrl, user} from './const';
+import {defaultPageGoToOption, pageFullUrl, user} from "./const";
 
 interface AdditionalBrowserOptionsType {
     extraPrefsFirefox?: Record<string, unknown>;
@@ -34,7 +34,7 @@ const defaultBrowserOptions: PuppeteerLaunchOptionsType = {
         // '--disable-gpu',
         // '--app=' + domain,
         // '--enable-automation',
-        '--start-maximized',
+        "--start-maximized",
         // '--disable-infobars',
         // '--hide-scrollbars',
         // `--window-size=${1200},${800}`,
@@ -58,19 +58,19 @@ export async function createBrowser(
 
 export async function makeLogin(page: Page | null): Promise<void> {
     if (!page) {
-        throw new Error('[makeLogin]: ERROR: page in not define');
+        throw new Error("[makeLogin]: ERROR: page in not define");
     }
     await page.goto(pageFullUrl.login, defaultPageGoToOption);
 
-    await page.focus('input[type=email]');
+    await page.focus("input[type=email]");
     await page.keyboard.type(user.login);
-    await page.focus('input[type=password]');
+    await page.focus("input[type=password]");
     await page.keyboard.type(user.password);
-    await page.click('button[type=submit]');
+    await page.click("button[type=submit]");
 
     // after success login should navigate to company
     await page.waitForNavigation({timeout: 5e3});
 
     // footer exists only on logged required pages
-    await page.waitForSelector('footer');
+    await page.waitForSelector("footer");
 }

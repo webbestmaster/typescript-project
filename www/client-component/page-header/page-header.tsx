@@ -1,8 +1,8 @@
-import type {ReactNode} from 'react';
+import type {ReactNode} from "react";
 
-import {FontSize} from '../font-size/font-size';
+import {FontSize} from "../font-size/font-size";
 
-import pageHeader from './page-header.scss';
+import pageHeader from "./page-header.scss";
 
 interface PageHeaderPropsType {
     readonly children: ReactNode;

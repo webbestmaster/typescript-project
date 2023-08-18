@@ -1,6 +1,6 @@
 /* global File */
 
-import {useEffect, useState} from 'react';
+import {useEffect, useState} from "react";
 import {
     Button,
     Checkbox,
@@ -13,14 +13,14 @@ import {
     Select,
     Typography,
     Upload,
-} from 'antd';
-import type {FieldData, ValidateErrorEntity} from 'rc-field-form/lib/interface';
-import type {UploadChangeParam, UploadFile} from 'antd/es/upload/interface';
-import {Link} from 'react-router-dom';
-import {QuestionCircleOutlined} from '@ant-design/icons';
-import {red} from '@ant-design/colors';
-import dayjs, {type Dayjs} from 'dayjs';
-import utc from 'dayjs/plugin/utc';
+} from "antd";
+import type {FieldData, ValidateErrorEntity} from "rc-field-form/lib/interface";
+import type {UploadChangeParam, UploadFile} from "antd/es/upload/interface";
+import {Link} from "react-router-dom";
+import {QuestionCircleOutlined} from "@ant-design/icons";
+import {red} from "@ant-design/colors";
+import dayjs, {type Dayjs} from "dayjs";
+import utc from "dayjs/plugin/utc";
 
 function innerInitialization() {
     dayjs.extend(utc);
@@ -33,26 +33,26 @@ import {
     type ArticleType,
     ArticleTypeEnum,
     SubDocumentListViewTypeEnum,
-} from '../../../../server/article/article-type';
-import {validateArticle} from '../../../../server/article/article-validation';
+} from "../../../../server/article/article-type";
+import {validateArticle} from "../../../../server/article/article-validation";
 import {
     arrayToStringByComma,
     humanNormalizeString,
     makeTagsPreview,
     stringToArrayByComma,
     textToSlug,
-} from '../../../util/human';
-import {useMakeExecutableState} from '../../../util/function';
-import type {PaginationResultType} from '../../../../server/data-base/data-base-type';
-import {getArticleListPaginationPick} from '../../../service/article/article-api';
-import {MarkdownInputWrapper} from '../../../layout/markdown-input-wrapper/markdown-input-wrapper';
-import {IsRender} from '../../../layout/is-render/is-render';
-import {rootArticleId} from '../../../../server/article/article-const';
-import {getArticleLinkToViewClient} from '../../../client-component/article/article-helper';
-import {Box} from '../../../layout/box/box';
-import {HotKeyModifierEnum, useHotKey} from '../../../util/hot-key';
-import {makeDefaultArticleFile} from '../../../../server/article/article-helper';
-import {Spinner} from '../../../layout/spinner/spinner';
+} from "../../../util/human";
+import {useMakeExecutableState} from "../../../util/function";
+import type {PaginationResultType} from "../../../../server/data-base/data-base-type";
+import {getArticleListPaginationPick} from "../../../service/article/article-api";
+import {MarkdownInputWrapper} from "../../../layout/markdown-input-wrapper/markdown-input-wrapper";
+import {IsRender} from "../../../layout/is-render/is-render";
+import {rootArticleId} from "../../../../server/article/article-const";
+import {getArticleLinkToViewClient} from "../../../client-component/article/article-helper";
+import {Box} from "../../../layout/box/box";
+import {HotKeyModifierEnum, useHotKey} from "../../../util/hot-key";
+import {makeDefaultArticleFile} from "../../../../server/article/article-helper";
+import {Spinner} from "../../../layout/spinner/spinner";
 
 import {
     getAbsentIdList,
@@ -62,14 +62,14 @@ import {
     makeHtmlValidator,
     makeSlugValidator,
     uploadFile,
-} from './cms-article-helper';
+} from "./cms-article-helper";
 import {
     getParentList,
     makeFileListItem,
     makeSubDocumentOption,
     renderParentList,
     UploadButton,
-} from './cms-article-layout';
+} from "./cms-article-layout";
 import {
     CmsArticleModeEnum,
     fileSizeLimit,
@@ -77,9 +77,9 @@ import {
     imageFileSizeLimit,
     keyForValidationList,
     noDateUTC,
-} from './cms-article-const';
-import type {ArticleForValidationType} from './cms-article-type';
-import {renderUploadedFileListItem} from './render-uploaded-file-list-item';
+} from "./cms-article-const";
+import type {ArticleForValidationType} from "./cms-article-type";
+import {renderUploadedFileListItem} from "./render-uploaded-file-list-item";
 
 const {Text: TypographyText, Title} = Typography;
 const {Option} = Select;
@@ -135,7 +135,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
     const [currentArticleState, setCurrentArticleState] = useState<ArticleType>(article);
     const [isFileLoading, setIsFileLoading] = useState<boolean>(false);
 
-    useHotKey([HotKeyModifierEnum.ctrl], 's', form.submit);
+    useHotKey([HotKeyModifierEnum.ctrl], "s", form.submit);
 
     const {execute: executeArticleListPaginationPick} = useMakeExecutableState<
         Parameters<typeof getArticleListPaginationPick<keyof ArticleForValidationType>>,
@@ -152,7 +152,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             .catch((error: Error): void => {
                 console.log(error);
                 // eslint-disable-next-line @typescript-eslint/no-floating-promises
-                message.error('Can not fetch article list.');
+                message.error("Can not fetch article list.");
             });
     }, [executeArticleListPaginationPick]);
 
@@ -174,11 +174,11 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
         // Validate form
         const [isValidArticle, validateFunction] = validateArticle(values);
 
-        console.info('validateFunction.errors');
+        console.info("validateFunction.errors");
         console.info(validateFunction.errors);
-        console.log('onFinishForm, is valid -', isValidArticle);
-        console.log('---> onFinishForm, values -', values);
-        console.log('---> onFinishForm, fileList -', fileList);
+        console.log("onFinishForm, is valid -", isValidArticle);
+        console.log("---> onFinishForm, values -", values);
+        console.log("---> onFinishForm, fileList -", fileList);
 
         if (isValidArticle) {
             onFinish(values);
@@ -192,26 +192,26 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
     function onFinishFailedForm(errorInfo: ValidateErrorEntity<ArticleType>) {
         // eslint-disable-next-line @typescript-eslint/no-floating-promises
         message.error(JSON.stringify(errorInfo.errorFields));
-        console.log('onFinishFailedForm:', errorInfo);
-        console.log('onFinishFailedForm:', article);
+        console.log("onFinishFailedForm:", errorInfo);
+        console.log("onFinishFailedForm:", article);
     }
 
     function onValuesChangeForm(changedValues: unknown, values: ArticleType) {
         setRecommendedSlug(textToSlug(values.title));
         setCurrentArticleState(values);
-        console.log('onValuesChangeForm:', changedValues, values);
-        console.log('onValuesChangeForm:', article);
+        console.log("onValuesChangeForm:", changedValues, values);
+        console.log("onValuesChangeForm:", article);
     }
 
     function onFieldsChangeForm(changedFields: Array<FieldData>, allFields: Array<FieldData>) {
-        console.log('onFieldsChangeForm:', changedFields, allFields);
-        console.log('onFieldsChangeForm:', article);
+        console.log("onFieldsChangeForm:", changedFields, allFields);
+        console.log("onFieldsChangeForm:", article);
     }
 
     function handleChangeFileList(info: UploadChangeParam<UploadFile<unknown>>) {
         const {file} = info;
 
-        if (file.status === 'removed') {
+        if (file.status === "removed") {
             setFileList((currentFileList: Array<ArticleFileType>): Array<ArticleFileType> => {
                 return currentFileList.filter((fileInfo: ArticleFileType): boolean => {
                     return fileInfo.name !== file.name;
@@ -219,19 +219,19 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             });
         }
 
-        console.log('handleChangeFileList:', info);
-        console.log('handleChangeFileList:', article);
+        console.log("handleChangeFileList:", info);
+        console.log("handleChangeFileList:", article);
     }
 
     function handleChangeTitleImage(info: UploadChangeParam<UploadFile<unknown>>) {
         const {file} = info;
 
-        if (file.status === 'removed') {
+        if (file.status === "removed") {
             setTitleImage(makeDefaultArticleFile());
         }
 
-        console.log('handleChangeTitleImage:', info);
-        console.log('handleChangeTitleImage:', article);
+        console.log("handleChangeTitleImage:", info);
+        console.log("handleChangeTitleImage:", article);
     }
 
     const absentIdList = getAbsentIdList(subDocumentIdList, savedArticleList);
@@ -255,7 +255,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             <Spinner isShow={isFileLoading} position="fixed" />
             <IsRender isRender={absentIdList.length > 0}>
                 <Title level={4} type="danger">
-                    Document has missing children, children Id:&nbsp;{absentIdList.join(', ')}
+                    Document has missing children, children Id:&nbsp;{absentIdList.join(", ")}
                 </Title>
             </IsRender>
 
@@ -287,7 +287,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
                             setTitleImage(uploadedFileInfo);
                         } catch (error: unknown) {
-                            const errorMessage = error instanceof Error ? error.message : 'Too big file';
+                            const errorMessage = error instanceof Error ? error.message : "Too big file";
 
                             await message.error(errorMessage);
                         } finally {
@@ -295,7 +295,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                         }
 
                         // Just prevent extra request to our server
-                        return 'https://dev.null/dev/null';
+                        return "https://dev.null/dev/null";
                     }}
                     fileList={titleImage.size > 0 ? [titleImage].map(makeFileListItem) : []}
                     itemRender={(originNode: JSX.Element, file: UploadFile<unknown>): JSX.Element => {
@@ -323,7 +323,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 initialValue={title}
                 label="Title:"
                 name="title"
-                rules={[{message: 'Required!', required: true}]}
+                rules={[{message: "Required!", required: true}]}
             >
                 <Input placeholder="Title" />
             </Form.Item>
@@ -414,7 +414,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                                 return [...currentFileList, uploadedFileInfo];
                             });
                         } catch (error: unknown) {
-                            const errorMessage = error instanceof Error ? error.message : 'Too big file';
+                            const errorMessage = error instanceof Error ? error.message : "Too big file";
 
                             // eslint-disable-next-line @typescript-eslint/no-floating-promises
                             message.error(errorMessage);
@@ -423,7 +423,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                         }
 
                         // Just prevent extra request to our server
-                        return 'https://dev.null/dev/null';
+                        return "https://dev.null/dev/null";
                     }}
                     fileList={fileList.map(makeFileListItem)}
                     // ignored itemRender={renderUploadedFileListItem}
@@ -520,7 +520,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
             <Form.Item
                 initialValue={metaDescriptionSeo}
-                label={'Meta Description, tag <meta name="description" content="..." />:'}
+                label="Meta Description, tag <meta name=description content=<...> />:"
                 name="metaDescriptionSeo"
             >
                 <Input placeholder="Description..." />
@@ -528,7 +528,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
             <Form.Item
                 initialValue={metaKeyWordsSeo}
-                label={'Meta KeyWords, tag <meta name="keywords" content="..." />:'}
+                label="Meta KeyWords, tag <meta name=keywords content=<...> />:"
                 name="metaKeyWordsSeo"
             >
                 <Input placeholder="KeyWords..." />
@@ -623,7 +623,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                         title="Are you sure to delete the article？"
                     >
                         <Button disabled={isDisableToDelete} htmlType="button" type="default">
-                            {isDisableToDelete ? 'Can NOT delete, article has parent' : 'Delete'}
+                            {isDisableToDelete ? "Can NOT delete, article has parent" : "Delete"}
                         </Button>
                     </Popconfirm>
                 </IsRender>

@@ -1,13 +1,13 @@
 /* eslint jest/no-hooks: ["error", { "allow": ["beforeAll", "beforeEach", "afterEach", "afterAll"] }] */
 
-import {describe, it, afterEach, beforeEach, afterAll, beforeAll, expect} from '@jest/globals';
+import {describe, it, afterEach, beforeEach, afterAll, beforeAll, expect} from "@jest/globals";
 
-import type {Browser, Page} from 'puppeteer';
+import type {Browser, Page} from "puppeteer";
 
-import {createBrowser, makeLogin} from './util/util';
-import {defaultPageGoToOption, pageFullUrl} from './util/const';
+import {createBrowser, makeLogin} from "./util/util";
+import {defaultPageGoToOption, pageFullUrl} from "./util/const";
 
-describe('my companies', () => {
+describe("my companies", () => {
     let page: Page | null = null;
 
     let browser: Browser | null = null;
@@ -29,11 +29,11 @@ describe('my companies', () => {
         await browser?.close();
     });
 
-    it('main table', async () => {
+    it("main table", async () => {
         expect.assertions(0);
         await page?.goto(pageFullUrl.myCompanies, defaultPageGoToOption);
 
         // Wait for table's pagination, .ant-pagination-options - item for page selector
-        await page?.waitForSelector('.ant-pagination-options', {timeout: 5e3});
+        await page?.waitForSelector(".ant-pagination-options", {timeout: 5e3});
     });
 });

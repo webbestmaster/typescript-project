@@ -1,7 +1,7 @@
-import {type ArticleFileType, ArticleFileTypeEnum} from '../../../server/article/article-type';
-import {getPathToFile} from '../../util/path';
-import {textToSlug} from '../../util/human';
-import {NeverError} from '../../util/error';
+import {type ArticleFileType, ArticleFileTypeEnum} from "../../../server/article/article-type";
+import {getPathToFile} from "../../util/path";
+import {textToSlug} from "../../util/human";
+import {NeverError} from "../../util/error";
 
 export interface StringToJsxRawDataType {
     articleTitle: string;
@@ -11,15 +11,15 @@ export interface StringToJsxRawDataType {
 // eslint-disable-next-line complexity
 export function getFileMarkdownByFullInfo(
     fullFileInfo: ArticleFileType,
-    additionalInfo: Record<'alt' | 'poster', string>
+    additionalInfo: Record<"alt" | "poster", string>
 ): string {
     const {duration, name, width, height, type, title} = fullFileInfo;
     const {alt, poster} = additionalInfo;
     const pathToFile = getPathToFile(name);
 
-    const htmlTitle = title || 'THE TITLE';
+    const htmlTitle = title || "THE TITLE";
     const htmlAlt = alt || title;
-    const htmlPoster = poster || '';
+    const htmlPoster = poster || "";
 
     switch (type) {
         case ArticleFileTypeEnum.image: {
@@ -45,5 +45,5 @@ export function getFileMarkdownByFullInfo(
 }
 
 export function getIsEmptyHtml(htmlChunk: string): boolean {
-    return htmlChunk.replace(/<br\/>/giu, '').trim().length === 0;
+    return htmlChunk.replace(/<br\/>/giu, "").trim().length === 0;
 }

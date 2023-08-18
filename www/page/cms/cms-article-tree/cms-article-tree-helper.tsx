@@ -1,13 +1,13 @@
-import type {DataNode} from 'rc-tree/lib/interface';
-import {Typography} from 'antd';
-import {Link} from 'react-router-dom';
+import type {DataNode} from "rc-tree/lib/interface";
+import {Typography} from "antd";
+import {Link} from "react-router-dom";
 
-import {rootArticleId} from '../../../../server/article/article-const';
-import {getArticleLinkToEdit} from '../cms-article/cms-article-helper';
-import {getTickCross} from '../../../util/string';
-import {getArticleLinkToViewClient} from '../../../client-component/article/article-helper';
+import {rootArticleId} from "../../../../server/article/article-const";
+import {getArticleLinkToEdit} from "../cms-article/cms-article-helper";
+import {getTickCross} from "../../../util/string";
+import {getArticleLinkToViewClient} from "../../../client-component/article/article-helper";
 
-import type {ArticleForTreeType} from './cms-article-tree-type';
+import type {ArticleForTreeType} from "./cms-article-tree-type";
 
 const {Text: TypographyText} = Typography;
 
@@ -24,7 +24,7 @@ export function getArticleForTreeById(
 
 function getChildList(parentArticleId: string, articleList: Array<ArticleForTreeType>, deep: number): Array<DataNode> {
     if (deep === 0) {
-        console.error('[ERROR]: populateChildren: limit exceeded');
+        console.error("[ERROR]: populateChildren: limit exceeded");
         return [];
     }
 
@@ -57,9 +57,9 @@ function getChildList(parentArticleId: string, articleList: Array<ArticleForTree
         const titleNode = (
             <>
                 <Link to={getArticleLinkToViewClient(slug)}>{title}</Link>
-                {' | '}
+                {" | "}
                 <Link to={urlToEdit}>{slug}</Link>
-                {' | '}
+                {" | "}
                 <TypographyText>
                     {articleType} {getTickCross(isActive)}
                 </TypographyText>

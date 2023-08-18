@@ -1,15 +1,15 @@
 /* eslint jest/no-hooks: ["error", { "allow": ["beforeAll", "beforeEach", "afterEach", "afterAll"] }] */
 
-import {describe, it, afterEach, beforeEach, afterAll, beforeAll, expect} from '@jest/globals';
+import {describe, it, afterEach, beforeEach, afterAll, beforeAll, expect} from "@jest/globals";
 
-import type {Browser, Page} from 'puppeteer';
+import type {Browser, Page} from "puppeteer";
 
-import {createBrowser, makeLogin} from './util/util';
-import {defaultPageGoToOption, pageFullUrl} from './util/const';
+import {createBrowser, makeLogin} from "./util/util";
+import {defaultPageGoToOption, pageFullUrl} from "./util/const";
 
 let browser: Browser | null = null;
 
-describe('reviews', () => {
+describe("reviews", () => {
     let page: Page | null = null;
 
     beforeAll(async () => {
@@ -29,11 +29,11 @@ describe('reviews', () => {
         await browser?.close();
     });
 
-    it('review list', async () => {
+    it("review list", async () => {
         expect.assertions(0);
         await page?.goto(pageFullUrl.reviewsManagementReviews, defaultPageGoToOption);
 
         // Review should contain at least one review, main ul li svg[fill=currentColor] - rating selector
-        await page?.waitForSelector('main ul li svg[fill=currentColor]', {timeout: 5e3});
+        await page?.waitForSelector("main ul li svg[fill=currentColor]", {timeout: 5e3});
     });
 });

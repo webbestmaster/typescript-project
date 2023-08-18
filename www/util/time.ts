@@ -1,7 +1,7 @@
 /* global setTimeout */
-import type {LocaleNameEnum} from '../provider/locale/locale-context-type';
+import type {LocaleNameEnum} from "../provider/locale/locale-context-type";
 
-import {getFormattedNumber, type NumberFormatOptionsType, TimeSizeEnum} from './format';
+import {getFormattedNumber, type NumberFormatOptionsType, TimeSizeEnum} from "./format";
 
 export interface TimeItemType {
     count: number;
@@ -64,13 +64,13 @@ export function getDateTimeHumanSize(option: GetDateTimeDifferenceOptionType): s
             const {count, unitType} = timeItem;
 
             return getFormattedNumber(localeName, count, {
-                style: 'unit',
+                style: "unit",
                 unit: unitType,
-                unitDisplay: 'long',
+                unitDisplay: "long",
                 ...formatOption,
             });
         })
-        .join(' ');
+        .join(" ");
 }
 
 export function secondsToHuman(seconds: number): string {
@@ -81,7 +81,7 @@ export function secondsToHuman(seconds: number): string {
 }
 
 export function dateIsoToHumanView(dateIso: string): string {
-    return dateIso.replace('T', ' ').replace(/\.\S+/u, '');
+    return dateIso.replace("T", " ").replace(/\.\S+/u, "");
 }
 
 export async function waitForTime(timeInMs: number): Promise<void> {
@@ -96,7 +96,7 @@ export async function waitForCallback(
     timeOutMs: number
 ): Promise<boolean> {
     if (maxCount === 0) {
-        throw new Error('waitForCallback, timeout');
+        throw new Error("waitForCallback, timeout");
     }
 
     const isDone = await callBack();
@@ -126,16 +126,16 @@ export function logTakenTime(prefix: string, ContextClassName: string) {
                     log(`${fullLabel}: begin`);
                     time(fullLabel);
 
-                    const name = 'value';
+                    const name = "value";
                     const mayBeFunction: unknown = propertyDescriptor[name];
 
-                    if (typeof mayBeFunction === 'function') {
+                    if (typeof mayBeFunction === "function") {
                         await Reflect.apply(mayBeFunction, context, []);
                     } else {
                         throw new TypeError(`[logTakenTime]: ${memberName} is not a function`);
                     }
 
-                    timeLog(fullLabel, 'done');
+                    timeLog(fullLabel, "done");
                 }
 
                 // eslint-disable-next-line prefer-reflect

@@ -1,5 +1,5 @@
 /* global localStorage */
-const fontSizeSavedKey = 'md-font-size';
+const fontSizeSavedKey = "md-font-size";
 // 16px is default font-size for markdown-pro
 const defaultFontSize = 16;
 
@@ -8,7 +8,7 @@ export const minFontSize = 12;
 
 // eslint-disable-next-line complexity
 export function getSavedFontSize(): number {
-    if (typeof localStorage === 'undefined') {
+    if (typeof localStorage === "undefined") {
         return defaultFontSize;
     }
 

@@ -1,7 +1,7 @@
-import type {ArticleType} from '../../../article/article-type';
-import {convertStringForHtml} from '../../../../www/util/string';
+import type {ArticleType} from "../../../article/article-type";
+import {convertStringForHtml} from "../../../../www/util/string";
 
-import type {SsrReplaceDataType} from './ssr-helper-type';
+import type {SsrReplaceDataType} from "./ssr-helper-type";
 
 export function getMetaKeywordsSsrReplaceData(article: ArticleType): SsrReplaceDataType {
     const {metaKeyWordsSeo} = article;
@@ -11,5 +11,5 @@ export function getMetaKeywordsSsrReplaceData(article: ArticleType): SsrReplaceD
         return {selector, value: `<meta name="keywords" content="${convertStringForHtml(metaKeyWordsSeo)}"/>`};
     }
 
-    return {selector, value: ''};
+    return {selector, value: ""};
 }

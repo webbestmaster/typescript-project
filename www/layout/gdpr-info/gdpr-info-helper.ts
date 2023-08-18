@@ -1,11 +1,11 @@
 /* global document */
 
-import {getCookie} from '../../util/cookie';
+import {getCookie} from "../../util/cookie";
 
-const gdprCookieKey = 'gdpr-cookie';
+const gdprCookieKey = "gdpr-cookie";
 
 export function applyGdpr() {
-    if (typeof document === 'undefined') {
+    if (typeof document === "undefined") {
         return;
     }
 
@@ -14,11 +14,11 @@ export function applyGdpr() {
 }
 
 function getIsGdprApplied(): boolean {
-    return typeof getCookie(gdprCookieKey) === 'string';
+    return typeof getCookie(gdprCookieKey) === "string";
 }
 
 export function getDefaultIsVisible(): boolean {
-    if (typeof document === 'undefined') {
+    if (typeof document === "undefined") {
         return false;
     }
 

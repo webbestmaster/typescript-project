@@ -2,10 +2,10 @@
 
 // import {PromiseResolveType} from '../../www/util/promise';
 // import {extractFromUnknown} from '../../www/util/type';
-import {makeDirectory} from '../file/directory';
+import {makeDirectory} from "../file/directory";
 
 // import {CrudSearchQueryType, RegExpQueryType} from './data-base-type';
-import {dataBaseBackUpPathAbsolute} from './data-base-const';
+import {dataBaseBackUpPathAbsolute} from "./data-base-const";
 
 export function getPartialData<FullModelType extends Record<string, unknown>>(
     data: FullModelType,

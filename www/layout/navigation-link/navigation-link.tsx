@@ -1,7 +1,7 @@
 /* global URLSearchParams */
 
-import type {ReactNode} from 'react';
-import {Link, useSearchParams} from 'react-router-dom';
+import type {ReactNode} from "react";
+import {Link, useSearchParams} from "react-router-dom";
 
 export interface NavigationLinkPropsType {
     readonly children?: ReactNode;

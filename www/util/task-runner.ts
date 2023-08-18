@@ -32,7 +32,7 @@ export class TaskRunner {
         const {maxWorkerCount, onTaskEnd} = config;
 
         if (maxWorkerCount < 1) {
-            throw new Error('[TaskRunner]: maxWorkerCount should be >= 1.');
+            throw new Error("[TaskRunner]: maxWorkerCount should be >= 1.");
         }
 
         this.taskList = [];
@@ -79,7 +79,7 @@ export class TaskRunner {
                 if (error instanceof Error) {
                     fistTask.reject(error);
                 } else {
-                    fistTask.reject(new Error('[TaskRunner]: Task running with error!'));
+                    fistTask.reject(new Error("[TaskRunner]: Task running with error!"));
                 }
             }
 

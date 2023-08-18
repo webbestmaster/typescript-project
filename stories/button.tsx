@@ -1,4 +1,4 @@
-import './button.css';
+import "./button.css";
 
 interface ButtonProps {
     /**
@@ -16,16 +16,16 @@ interface ButtonProps {
     /**
      * How large should the button be?
      */
-    readonly size?: 'large' | 'medium' | 'small';
+    readonly size?: "large" | "medium" | "small";
 }
 
 // Primary UI component for user interaction
-export function Button({primary = false, size = 'medium', backgroundColor, label}: ButtonProps) {
-    const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
+export function Button({primary = false, size = "medium", backgroundColor, label}: ButtonProps) {
+    const mode = primary ? "storybook-button--primary" : "storybook-button--secondary";
 
     return (
         <button
-            className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
+            className={["storybook-button", `storybook-button--${size}`, mode].join(" ")}
             style={{backgroundColor}}
             type="button"
         >

@@ -1,11 +1,11 @@
-import {useContext} from 'react';
+import {useContext} from "react";
 
-import type {ArticleContextType} from '../../article/article-context/article-context-type';
-import {articleContext} from '../../article/article-context/article-context';
-import {Locale} from '../../../provider/locale/locale-context';
-import {getClientArticleLinkWithDomain} from '../../article/article-helper';
+import type {ArticleContextType} from "../../article/article-context/article-context-type";
+import {articleContext} from "../../article/article-context/article-context";
+import {Locale} from "../../../provider/locale/locale-context";
+import {getClientArticleLinkWithDomain} from "../../article/article-helper";
 
-import {ShareButtonListContent} from './share-button-list-content/share-button-list-content';
+import {ShareButtonListContent} from "./share-button-list-content/share-button-list-content";
 
 export function ShareButtonList(): JSX.Element {
     const {article} = useContext<ArticleContextType>(articleContext);

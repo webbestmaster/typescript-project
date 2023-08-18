@@ -1,18 +1,18 @@
 /* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
 
-import {launch} from 'chrome-launcher';
+import {launch} from "chrome-launcher";
 
 enum CategoryNameEnum {
-    accessibility = 'accessibility',
-    bestPractices = 'best-practices',
-    performance = 'performance',
-    pwa = 'pwa',
-    seo = 'seo',
+    accessibility = "accessibility",
+    bestPractices = "best-practices",
+    performance = "performance",
+    pwa = "pwa",
+    seo = "seo",
 }
 
 enum FormFactorEnum {
-    desktop = 'desktop',
-    mobile = 'mobile',
+    desktop = "desktop",
+    mobile = "mobile",
 }
 
 interface MakeReportArgumentType {
@@ -30,7 +30,7 @@ const threshold: Record<CategoryNameEnum, number> = {
 };
 
 // const siteUrl = 'https://herrdima.github.io';
-const siteUrl = 'http://localhost:3011';
+const siteUrl = "http://localhost:3011";
 
 const categoryNameList: Array<CategoryNameEnum> = Object.values(CategoryNameEnum);
 
@@ -38,14 +38,14 @@ const categoryNameList: Array<CategoryNameEnum> = Object.values(CategoryNameEnum
 
 async function makeReport(config: MakeReportArgumentType): Promise<void> {
     const {url, port, formFactor} = config;
-    const {'default': lighthouse} = await import('lighthouse');
+    const {"default": lighthouse} = await import("lighthouse");
 
     // const options = {logLevel: 'info', output: 'html', port: chrome.port} as const;
     const options = {
         // logLevel?: 'silent'|'error'|'warn'|'info'|'verbose';
-        logLevel: 'warn',
+        logLevel: "warn",
         onlyCategories: categoryNameList,
-        output: 'json',
+        output: "json",
         port,
         settings: {formFactor},
     } as const;
@@ -62,8 +62,8 @@ async function makeReport(config: MakeReportArgumentType): Promise<void> {
         const {score, title} = categories[categoryName];
         const minimalScore = threshold[categoryName];
 
-        if (typeof score !== 'number') {
-            throw new TypeError('[checkResultItem]: score is NOT a number');
+        if (typeof score !== "number") {
+            throw new TypeError("[checkResultItem]: score is NOT a number");
         }
 
         if (score < minimalScore) {
@@ -93,30 +93,30 @@ async function makeReport(config: MakeReportArgumentType): Promise<void> {
 }
 
 const urlList: Array<string> = [
-    '/article/lille-katt',
-    '/article/hej-sa-petronella',
-    '/article/en-elefant-balanserade',
-    '/article/har-du-sett-min-lilla-katt',
-    '/article/den-olydiga-ballongens-visa',
-    '/article/dar-gaddan-simmar',
-    '/article/donkey-kong',
-    '/article/hooja',
-    '/article/gar-det-bra',
-    '/article/miss-li',
-    '/article/musikband',
-    '/article/sanger-for-barn',
-    '/article/x',
-    '/article/sverige',
-    '/article/svenska-nationalsangen-du-gamla-du-fria',
-    '/',
-    '/article/sanger-och-texter',
-    '/article/banan-melon-kiwi-och-citron',
-    '/article/levererar',
-    '/article/vi-ar-nummer-ett',
+    "/article/lille-katt",
+    "/article/hej-sa-petronella",
+    "/article/en-elefant-balanserade",
+    "/article/har-du-sett-min-lilla-katt",
+    "/article/den-olydiga-ballongens-visa",
+    "/article/dar-gaddan-simmar",
+    "/article/donkey-kong",
+    "/article/hooja",
+    "/article/gar-det-bra",
+    "/article/miss-li",
+    "/article/musikband",
+    "/article/sanger-for-barn",
+    "/article/x",
+    "/article/sverige",
+    "/article/svenska-nationalsangen-du-gamla-du-fria",
+    "/",
+    "/article/sanger-och-texter",
+    "/article/banan-melon-kiwi-och-citron",
+    "/article/levererar",
+    "/article/vi-ar-nummer-ett",
 ];
 
 async function innerInitialization() {
-    const chrome = await launch({chromeFlags: ['--headless']});
+    const chrome = await launch({chromeFlags: ["--headless"]});
 
     // eslint-disable-next-line no-loops/no-loops
     for (const url of urlList) {

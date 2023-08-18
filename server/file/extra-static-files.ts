@@ -1,17 +1,17 @@
-import {cwd} from 'node:process';
-import path from 'node:path';
-import fileSystem from 'node:fs/promises';
+import {cwd} from "node:process";
+import path from "node:path";
+import fileSystem from "node:fs/promises";
 
-import type {FastifyReply, FastifyRequest} from 'fastify';
+import type {FastifyReply, FastifyRequest} from "fastify";
 
-import type {ArticleType} from '../article/article-type';
-import {articleCrud} from '../article/article';
+import type {ArticleType} from "../article/article-type";
+import {articleCrud} from "../article/article";
 
-import {specialFileNameList} from '../../www/const';
-import {mainResponseHeader} from '../const';
-import {getIsFileInArticle} from '../article/article-util';
+import {specialFileNameList} from "../../www/const";
+import {mainResponseHeader} from "../const";
+import {getIsFileInArticle} from "../article/article-util";
 
-import {uploadFileFolder} from './file-const';
+import {uploadFileFolder} from "./file-const";
 
 export interface GetExtraFilesType {
     actualSpecialFileList: Array<string>;
@@ -40,7 +40,7 @@ export async function removeExtraStaticFiles(request: FastifyRequest, reply: Fas
             return;
         }
 
-        console.warn('[WARNING] >>> to remove file, uncomment next line');
+        console.warn("[WARNING] >>> to remove file, uncomment next line");
         // ignored fileSystem.unlink(path.join(cwd, uploadFileFolder, fileName));
 
         extraFileList.push(fileName);

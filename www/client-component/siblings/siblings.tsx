@@ -1,13 +1,13 @@
-import {useContext} from 'react';
-import {Link} from 'react-router-dom';
+import {useContext} from "react";
+import {Link} from "react-router-dom";
 
-import {Locale} from '../../provider/locale/locale-context';
-import type {ArticleContextType} from '../article/article-context/article-context-type';
-import {articleContext} from '../article/article-context/article-context';
-import type {ArticlePreviewType} from '../../../server/article/article-type';
-import {getArticleLinkToViewClient} from '../article/article-helper';
+import {Locale} from "../../provider/locale/locale-context";
+import type {ArticleContextType} from "../article/article-context/article-context-type";
+import {articleContext} from "../article/article-context/article-context";
+import type {ArticlePreviewType} from "../../../server/article/article-type";
+import {getArticleLinkToViewClient} from "../article/article-helper";
 
-import siblingsStyle from './siblings.scss';
+import siblingsStyle from "./siblings.scss";
 
 export function Siblings(): JSX.Element {
     const {siblingList} = useContext<ArticleContextType>(articleContext);

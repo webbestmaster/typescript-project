@@ -1,15 +1,15 @@
-import {lazy, Suspense, type ComponentType} from 'react';
+import {lazy, Suspense, type ComponentType} from "react";
 
-import {Spinner} from '../../../layout/spinner/spinner';
-import type {LazyResultType} from '../../../util/type';
+import {Spinner} from "../../../layout/spinner/spinner";
+import type {LazyResultType} from "../../../util/type";
 
 const AsyncLazy = lazy<ComponentType<unknown>>(async (): Promise<LazyResultType<unknown>> => {
     const {Login} = await import(
         /* webpackChunkName: 'page-login' */
-        './login'
+        "./login"
     );
 
-    return {'default': Login};
+    return {"default": Login};
 });
 
 export function LoginAsync() {

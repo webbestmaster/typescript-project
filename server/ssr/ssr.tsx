@@ -1,27 +1,27 @@
-import {StrictMode} from 'react';
-import ReactDOMServer from 'react-dom/server';
+import {StrictMode} from "react";
+import ReactDOMServer from "react-dom/server";
 
-import {App} from '../../www/component/app/app';
-import {streamToStringServer} from '../util/stream';
-import {navigationReplaceSelector} from '../../www/client-component/navigation/navigation-const';
-import {articleReplaceSelector} from '../../www/client-component/article/article-const';
-import type {ArticleType} from '../article/article-type';
-import {ThemeNameEnum} from '../../www/provider/theme/theme-context-type';
+import {App} from "../../www/component/app/app";
+import {streamToStringServer} from "../util/stream";
+import {navigationReplaceSelector} from "../../www/client-component/navigation/navigation-const";
+import {articleReplaceSelector} from "../../www/client-component/article/article-const";
+import type {ArticleType} from "../article/article-type";
+import {ThemeNameEnum} from "../../www/provider/theme/theme-context-type";
 
-import {getNavigationContextData} from './api/ssr-navigation';
-import {contentStringBegin, contentStringEnd, contentStringFull, indexHtml} from './ssr-const';
-import {makeClientArticleContextData} from './api/srr-article';
-import {getTitleSsrReplaceData} from './api/ssr-helper/ssr-title';
-import {getMetaRobotsSsrReplaceData} from './api/ssr-helper/ssr-meta-robots';
-import {getMetaKeywordsSsrReplaceData} from './api/ssr-helper/ssr-meta-keywords';
-import {getMetaDescriptionSsrReplaceData} from './api/ssr-helper/ssr-meta-description';
-import {getMetaSeoSsrReplaceData} from './api/ssr-helper/ssr-meta-seo';
-import {getCanonicalLinkSsrReplaceData} from './api/ssr-helper/ssr-meta-canonical';
-import {getMetaOpenGraphSsrReplaceData} from './api/ssr-helper/ssr-meta-open-graph';
-import {getMetaTwitterCardSsrReplaceData} from './api/ssr-helper/ssr-meta-twitter-card';
-import {getSchemaMarkupArticleSsrReplaceData} from './api/schema-markup/schema-markup-article';
-import {getSchemaMarkupBreadcrumbsSsrReplaceData} from './api/schema-markup/schema-markup-breadcrumbs';
-import type {GetHtmlCallBackRequestType} from './ssr-type';
+import {getNavigationContextData} from "./api/ssr-navigation";
+import {contentStringBegin, contentStringEnd, contentStringFull, indexHtml} from "./ssr-const";
+import {makeClientArticleContextData} from "./api/srr-article";
+import {getTitleSsrReplaceData} from "./api/ssr-helper/ssr-title";
+import {getMetaRobotsSsrReplaceData} from "./api/ssr-helper/ssr-meta-robots";
+import {getMetaKeywordsSsrReplaceData} from "./api/ssr-helper/ssr-meta-keywords";
+import {getMetaDescriptionSsrReplaceData} from "./api/ssr-helper/ssr-meta-description";
+import {getMetaSeoSsrReplaceData} from "./api/ssr-helper/ssr-meta-seo";
+import {getCanonicalLinkSsrReplaceData} from "./api/ssr-helper/ssr-meta-canonical";
+import {getMetaOpenGraphSsrReplaceData} from "./api/ssr-helper/ssr-meta-open-graph";
+import {getMetaTwitterCardSsrReplaceData} from "./api/ssr-helper/ssr-meta-twitter-card";
+import {getSchemaMarkupArticleSsrReplaceData} from "./api/schema-markup/schema-markup-article";
+import {getSchemaMarkupBreadcrumbsSsrReplaceData} from "./api/schema-markup/schema-markup-breadcrumbs";
+import type {GetHtmlCallBackRequestType} from "./ssr-type";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars, max-statements
 export async function getHtmlCallBack(
@@ -70,7 +70,7 @@ export async function getHtmlCallBack(
         .replace(schemaBreadcrumbsSsrReplaceData.selector, schemaBreadcrumbsSsrReplaceData.value)
         .replace(schemaArticleSsrReplaceData.selector, schemaArticleSsrReplaceData.value)
 
-        .replace(contentStringFull, [contentStringBegin, htmlString, contentStringEnd].join(''))
+        .replace(contentStringFull, [contentStringBegin, htmlString, contentStringEnd].join(""))
         .replace(navigationReplaceSelector, navigationDataHtmlString)
         /**
          * .replace(/<track([\S\s]+?)\/>/gi, '<track$1>')

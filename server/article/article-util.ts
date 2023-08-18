@@ -1,7 +1,7 @@
 /* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
 
-import type {ArticlePreviewType, ArticleType} from './article-type';
-import {articleCrud} from './article';
+import type {ArticlePreviewType, ArticleType} from "./article-type";
+import {articleCrud} from "./article";
 
 export function getIsActiveArticlePreview(article: ArticlePreviewType): article is ArticlePreviewType {
     return article.isActive;
@@ -134,7 +134,7 @@ export function getIsFileInArticle(fileName: string, article: ArticleType): bool
 }
 
 export function tryQueryStringToRegExp(value: string): RegExp | string {
-    const partList = value.split('/');
+    const partList = value.split("/");
 
     if (partList.length !== 3) {
         return value;
@@ -142,7 +142,7 @@ export function tryQueryStringToRegExp(value: string): RegExp | string {
 
     const [empty, mainValue, flags] = partList;
 
-    if (empty !== '') {
+    if (empty !== "") {
         return value;
     }
 

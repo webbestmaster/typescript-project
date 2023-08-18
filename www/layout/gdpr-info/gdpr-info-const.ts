@@ -1,1 +1,1 @@
-export const gdprLinkAboutCookie = 'https://www.cookiesandyou.com';
+export const gdprLinkAboutCookie = "https://www.cookiesandyou.com";

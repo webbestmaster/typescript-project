@@ -1,10 +1,10 @@
 /* global document, KeyboardEvent */
-import {useEffect} from 'react';
+import {useEffect} from "react";
 
 export const enum HotKeyModifierEnum {
-    alt = 'alt',
-    ctrl = 'ctrl',
-    shift = 'shift',
+    alt = "alt",
+    ctrl = "ctrl",
+    shift = "shift",
 }
 
 export function useHotKey(modifierList: Array<HotKeyModifierEnum>, char: string, handleHotKey: () => unknown) {
@@ -24,10 +24,10 @@ export function useHotKey(modifierList: Array<HotKeyModifierEnum>, char: string,
             }
         }
 
-        document.body.addEventListener('keydown', handleBodyOnKeyPress, false);
+        document.body.addEventListener("keydown", handleBodyOnKeyPress, false);
 
         return () => {
-            document.body.removeEventListener('keydown', handleBodyOnKeyPress, false);
+            document.body.removeEventListener("keydown", handleBodyOnKeyPress, false);
         };
     }, [hasAlt, hasCtrl, hasShift, char, handleHotKey]);
 }

@@ -1,10 +1,10 @@
-import {getPathToFile, getPathToImage} from '../../util/path';
-import {appIconPngFileName} from '../../const';
-import {Video} from '../video/video';
+import {getPathToFile, getPathToImage} from "../../util/path";
+import {appIconPngFileName} from "../../const";
+import {Video} from "../video/video";
 
-import markdownStyle from './markdown.scss';
-import type {StringToJsxRawDataType} from './markdown-helper';
-import type {MarkdownItemCounter} from './markdown-item-counter';
+import markdownStyle from "./markdown.scss";
+import type {StringToJsxRawDataType} from "./markdown-helper";
+import type {MarkdownItemCounter} from "./markdown-item-counter";
 
 // eslint-disable-next-line complexity
 export function getVideoFromHtml(
@@ -12,18 +12,18 @@ export function getVideoFromHtml(
     markdownItemCounter: MarkdownItemCounter
 ): JSX.Element {
     const {htmlString, articleTitle} = rawData;
-    const [ignoredFullWidthString, widthAsString = ''] = /width="(\d+)"/u.exec(htmlString) ?? ['', '0'];
-    const [ignoredFullHeightString, heightAsString = ''] = /height="(\d+)"/u.exec(htmlString) ?? ['', '0'];
-    const [ignoredFullPosterString, posterAsString = ''] = /poster="([^"]*?)"/u.exec(htmlString) ?? [
-        '',
+    const [ignoredFullWidthString, widthAsString = ""] = /width="(\d+)"/u.exec(htmlString) ?? ["", "0"];
+    const [ignoredFullHeightString, heightAsString = ""] = /height="(\d+)"/u.exec(htmlString) ?? ["", "0"];
+    const [ignoredFullPosterString, posterAsString = ""] = /poster="([^"]*?)"/u.exec(htmlString) ?? [
+        "",
         appIconPngFileName,
     ];
-    const [ignoredFullDurationString, durationAsString = ''] = /data-duration="([^"]*?)"/u.exec(htmlString) ?? [
-        '',
-        '0',
+    const [ignoredFullDurationString, durationAsString = ""] = /data-duration="([^"]*?)"/u.exec(htmlString) ?? [
+        "",
+        "0",
     ];
-    const [ignoredFullTitleString, titleAsString = ''] = /title="([^"]*?)"/u.exec(htmlString) ?? ['', 'THE TITLE'];
-    const [ignoredFullSrcString, srcAsString = ''] = /src="([^"]*?)"/u.exec(htmlString) ?? ['', ''];
+    const [ignoredFullTitleString, titleAsString = ""] = /title="([^"]*?)"/u.exec(htmlString) ?? ["", "THE TITLE"];
+    const [ignoredFullSrcString, srcAsString = ""] = /src="([^"]*?)"/u.exec(htmlString) ?? ["", ""];
 
     return (
         <Video

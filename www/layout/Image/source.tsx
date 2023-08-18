@@ -1,6 +1,6 @@
-import type {GetPathToImageType} from '../../util/path';
+import type {GetPathToImageType} from "../../util/path";
 
-import {getFullHorizontalPadding} from './image-helper';
+import {getFullHorizontalPadding} from "./image-helper";
 
 const screenAspectRation: Array<number> = [1, 1.5, 2, 3];
 
@@ -33,10 +33,10 @@ export function Source(props: SourcePropsType): JSX.Element | null {
                 width: multipleImageWidth,
             });
 
-            return multipleImageWidth <= width ? `${imageSrc} ${multiple}x` : '';
+            return multipleImageWidth <= width ? `${imageSrc} ${multiple}x` : "";
         })
         .filter(Boolean)
-        .join(', ');
+        .join(", ");
 
     return (
         <source

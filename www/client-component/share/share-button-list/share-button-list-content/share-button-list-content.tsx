@@ -1,14 +1,14 @@
-import type {ReactNode} from 'react';
+import type {ReactNode} from "react";
 
-import {ShareButtonVkontakte} from '../../share-button/button/share-button-vkontakte';
-import {ShareButtonFacebook} from '../../share-button/button/share-button-facebook';
-import {ShareButtonOdnoklassniki} from '../../share-button/button/share-button-odnoklassniki';
-import {ShareButtonTwitter} from '../../share-button/button/share-button-twitter';
-import {ShareButtonTelegram} from '../../share-button/button/share-button-telegram';
-import {ShareButtonViber} from '../../share-button/button/share-button-viber';
-import {ShareButtonWhatsApp} from '../../share-button/button/share-button-whats-app';
+import {ShareButtonVkontakte} from "../../share-button/button/share-button-vkontakte";
+import {ShareButtonFacebook} from "../../share-button/button/share-button-facebook";
+import {ShareButtonOdnoklassniki} from "../../share-button/button/share-button-odnoklassniki";
+import {ShareButtonTwitter} from "../../share-button/button/share-button-twitter";
+import {ShareButtonTelegram} from "../../share-button/button/share-button-telegram";
+import {ShareButtonViber} from "../../share-button/button/share-button-viber";
+import {ShareButtonWhatsApp} from "../../share-button/button/share-button-whats-app";
 
-import shareButtonListContentStyle from './share-button-list-content.scss';
+import shareButtonListContentStyle from "./share-button-list-content.scss";
 
 interface ShareButtonListContentPropsType {
     readonly listHeader: ReactNode;

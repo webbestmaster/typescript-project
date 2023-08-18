@@ -1,29 +1,29 @@
 /* eslint-disable no-magic-numbers */
 
-import {describe, it, expect} from '@jest/globals';
+import {describe, it, expect} from "@jest/globals";
 
-import {waitForTime} from '../../test-unit/util/test-util-time';
+import {waitForTime} from "../../test-unit/util/test-util-time";
 
-import {TaskRunner, type TaskRunnerOnTaskDoneArgumentType} from './task-runner';
+import {TaskRunner, type TaskRunnerOnTaskDoneArgumentType} from "./task-runner";
 
 const defaultTimeOut = 50;
 
-describe('test TaskRunner', () => {
-    it('constructor', () => {
+describe("test TaskRunner", () => {
+    it("constructor", () => {
         expect.assertions(1);
         const taskRunner = new TaskRunner({maxWorkerCount: 2});
 
         expect(taskRunner instanceof TaskRunner).toBe(true);
     });
 
-    it('constructor with wrong parameters', () => {
+    it("constructor with wrong parameters", () => {
         expect.assertions(1);
         expect(() => {
             return new TaskRunner({maxWorkerCount: -0.5});
-        }).toThrow('[TaskRunner]: maxWorkerCount should be >= 1.');
+        }).toThrow("[TaskRunner]: maxWorkerCount should be >= 1.");
     });
 
-    it('add task', async () => {
+    it("add task", async () => {
         expect.assertions(1);
         const taskRunner = new TaskRunner({maxWorkerCount: 1});
 
@@ -37,7 +37,7 @@ describe('test TaskRunner', () => {
         expect(increaseMe).toBe(1);
     });
 
-    it('check queue order', async () => {
+    it("check queue order", async () => {
         expect.assertions(2);
         const taskRunner = new TaskRunner({maxWorkerCount: 1});
 
@@ -59,7 +59,7 @@ describe('test TaskRunner', () => {
         expect(increaseMe).toBe(2);
     });
 
-    it('add task with known/regular Error', async () => {
+    it("add task with known/regular Error", async () => {
         expect.assertions(3);
         const taskRunner = new TaskRunner({maxWorkerCount: 1});
 
@@ -75,11 +75,11 @@ describe('test TaskRunner', () => {
         try {
             await taskRunner.add(async () => {
                 await waitForTime(defaultTimeOut);
-                throw new Error('I am the ERROR!');
+                throw new Error("I am the ERROR!");
             });
         } catch (error: unknown) {
             // eslint-disable-next-line jest/no-conditional-in-test, jest/no-conditional-expect
-            expect(error instanceof Error ? error.message : '').toBe('I am the ERROR!');
+            expect(error instanceof Error ? error.message : "").toBe("I am the ERROR!");
             isErrorCaught = true;
         }
 
@@ -92,7 +92,7 @@ describe('test TaskRunner', () => {
         expect(isErrorCaught).toBe(true);
     });
 
-    it('add task with unknown Error', async () => {
+    it("add task with unknown Error", async () => {
         expect.assertions(3);
         const taskRunner = new TaskRunner({maxWorkerCount: 1});
 
@@ -108,17 +108,17 @@ describe('test TaskRunner', () => {
             await taskRunner.add(async () => {
                 await waitForTime(defaultTimeOut);
                 // eslint-disable-next-line no-throw-literal, sonarjs/no-duplicate-string
-                throw new Error('I am an ERROR!');
+                throw new Error("I am an ERROR!");
             });
-        }).rejects.toThrow('I am an ERROR!');
+        }).rejects.toThrow("I am an ERROR!");
 
         await expect(async () => {
             await taskRunner.add(async () => {
                 await waitForTime(defaultTimeOut);
                 // eslint-disable-next-line no-throw-literal, @typescript-eslint/no-throw-literal
-                throw 'I am an ERROR!';
+                throw "I am an ERROR!";
             });
-        }).rejects.toThrow('[TaskRunner]: Task running with error!');
+        }).rejects.toThrow("[TaskRunner]: Task running with error!");
 
         await taskRunner.add(async () => {
             await waitForTime(defaultTimeOut);
@@ -128,7 +128,7 @@ describe('test TaskRunner', () => {
         expect(increaseMe).toBe(2);
     });
 
-    it('add several tasks and with different time of execution, maxWorkerCount: 1', async () => {
+    it("add several tasks and with different time of execution, maxWorkerCount: 1", async () => {
         expect.assertions(1);
         const taskRunner = new TaskRunner({maxWorkerCount: 1});
 
@@ -152,7 +152,7 @@ describe('test TaskRunner', () => {
         expect(listOfTime).toStrictEqual([200, 100, 10]);
     });
 
-    it('add several tasks and with different time of execution, maxWorkerCount: 2', async () => {
+    it("add several tasks and with different time of execution, maxWorkerCount: 2", async () => {
         expect.assertions(1);
         const taskRunner = new TaskRunner({maxWorkerCount: 2});
 
@@ -176,7 +176,7 @@ describe('test TaskRunner', () => {
         expect(listOfTime).toStrictEqual([100, 10, 200]);
     });
 
-    it('add several tasks and with different time of execution, maxWorkerCount: 3', async () => {
+    it("add several tasks and with different time of execution, maxWorkerCount: 3", async () => {
         expect.assertions(1);
         const taskRunner = new TaskRunner({maxWorkerCount: 3});
 
@@ -200,7 +200,7 @@ describe('test TaskRunner', () => {
         expect(listOfTime).toStrictEqual([10, 100, 200]);
     });
 
-    it('onTaskEnd', async () => {
+    it("onTaskEnd", async () => {
         expect.assertions(2);
         const taskRunnerDataList: Array<TaskRunnerOnTaskDoneArgumentType> = [];
 

@@ -1,27 +1,27 @@
 /* global fetch, HeadersInit, FormData, Response, File */
 
-import type {JSONSchemaType} from 'ajv';
+import type {JSONSchemaType} from "ajv";
 
-import {getExpectedStructure} from './object';
+import {getExpectedStructure} from "./object";
 
 export const enum FetchMethodEnum {
-    delete = 'DELETE',
-    get = 'GET',
-    patch = 'PATCH',
-    post = 'POST',
-    put = 'PUT',
+    delete = "DELETE",
+    get = "GET",
+    patch = "PATCH",
+    post = "POST",
+    put = "PUT",
 }
 
 interface OptionsType {
     // Body data type must match "Content-Type" header
     body?: File | FormData | string;
     // Options: include, same-origin, omit (default: same-origin)
-    credentials?: 'include' | 'omit' | 'same-origin';
+    credentials?: "include" | "omit" | "same-origin";
     headers?: HeadersInit;
     // Options: GET, POST, PUT, DELETE, etc. (default: GET)
     method?: FetchMethodEnum;
     // Options: no-cors, cors, same-origin (default: same-origin)
-    mode?: 'cors' | 'no-cors' | 'same-origin';
+    mode?: "cors" | "no-cors" | "same-origin";
     /**
      * Additional option
      * cache?: 'default'; // default, no-cache, reload, force-cache, only-if-cached (default: default)
@@ -58,7 +58,7 @@ function fetchEndCallBack(fetchBeginTimeStamp: number, url: string) {
     const fetchingTime = fetchEndTimeStamp - fetchBeginTimeStamp;
 
     if (fetchingTime > maxFetchingTime) {
-        console.log(`%c[WARNING]: "${url}" took %c${fetchingTime / 1e3}s`, 'color: #00c', 'color: #c00');
+        console.log(`%c[WARNING]: "${url}" took %c${fetchingTime / 1e3}s`, "color: #00c", "color: #c00");
     }
 }
 
@@ -69,14 +69,14 @@ export async function fetchX<ExpectedResponseType>(
 ): Promise<ExpectedResponseType> {
     invalidateCache(options);
 
-    const cacheProperty = `${url} - ${JSON.stringify(options ?? '[empty]')}`;
+    const cacheProperty = `${url} - ${JSON.stringify(options ?? "[empty]")}`;
 
     const savedPromiseResult: Promise<unknown> | null = fetchCache[cacheProperty];
 
     if (savedPromiseResult) {
         console.log(
-            `%c[fetchX]: [CACHE]\n> url: ${url},\n> options: ${JSON.stringify(options ?? '[empty]')}`,
-            'color: #0a0'
+            `%c[fetchX]: [CACHE]\n> url: ${url},\n> options: ${JSON.stringify(options ?? "[empty]")}`,
+            "color: #0a0"
         );
 
         return savedPromiseResult

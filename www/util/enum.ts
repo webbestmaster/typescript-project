@@ -1,4 +1,4 @@
-import {findInArrayByValue} from './array';
+import {findInArrayByValue} from "./array";
 
 export function getEnumValue<EnumType>(enumData: Record<string, EnumType>, value: unknown): EnumType | null {
     const valueList: Array<EnumType> = Object.values(enumData);

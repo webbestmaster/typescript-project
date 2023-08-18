@@ -1,7 +1,7 @@
 /* global document */
 
 export function loadGoogleAnalyticsScript(googleAnalyticsId: string): void {
-    if (typeof document === 'undefined') {
+    if (typeof document === "undefined") {
         return;
     }
 
@@ -14,7 +14,7 @@ export function loadGoogleAnalyticsScript(googleAnalyticsId: string): void {
         return;
     }
 
-    const script = document.createElement('script');
+    const script = document.createElement("script");
 
     script.async = true;
     script.src = src;

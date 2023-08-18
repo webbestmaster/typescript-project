@@ -1,4 +1,4 @@
-import {isObjectInclude} from './object';
+import {isObjectInclude} from "./object";
 
 export function arrayMove<ItemType>(list: Array<ItemType>, fromIndex: number, toIndex: number): Array<ItemType> {
     const item = list[fromIndex];

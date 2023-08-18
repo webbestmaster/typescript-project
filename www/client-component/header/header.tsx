@@ -1,14 +1,14 @@
-import {useState, useCallback} from 'react';
-import {Link} from 'react-router-dom';
+import {useState, useCallback} from "react";
+import {Link} from "react-router-dom";
 
-import {copyrightName} from '../../const';
-import {appRoute} from '../../component/app/app-route';
-import {Navigation} from '../navigation/navigation';
-import {cls} from '../../util/css';
-import {Search} from '../search/search';
-import {useLocale} from '../../provider/locale/locale-context';
+import {copyrightName} from "../../const";
+import {appRoute} from "../../component/app/app-route";
+import {Navigation} from "../navigation/navigation";
+import {cls} from "../../util/css";
+import {Search} from "../search/search";
+import {useLocale} from "../../provider/locale/locale-context";
 
-import headerStyle from './header.scss';
+import headerStyle from "./header.scss";
 
 export function Header(): JSX.Element {
     const {getLocalizedString} = useLocale();
@@ -31,7 +31,7 @@ export function Header(): JSX.Element {
                         [headerStyle.header__navigation_toggle_button__search_focused]: hasSearchFocus,
                     })}
                     onClick={toggleNavigation}
-                    title={getLocalizedString('UI__MENU')}
+                    title={getLocalizedString("UI__MENU")}
                     type="button"
                 >
                     &nbsp;

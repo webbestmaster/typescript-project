@@ -1,4 +1,4 @@
-import type {UserRoleEnum} from '../../www/provider/user/user-context-type';
+import type {UserRoleEnum} from "../../www/provider/user/user-context-type";
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export type AuthUserType = {

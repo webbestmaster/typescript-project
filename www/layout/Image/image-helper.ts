@@ -1,4 +1,4 @@
-import {cssVariable} from '../../css/style';
+import {cssVariable} from "../../css/style";
 
 function getFullHorizontalOneSidePadding(mediaWidth: number): number {
     if (mediaWidth <= cssVariable.maxPhoneWidth) {
