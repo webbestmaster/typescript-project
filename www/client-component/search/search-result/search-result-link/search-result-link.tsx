@@ -10,7 +10,7 @@ interface SearchResultLinkPropsType {
     readonly searchString: string;
 }
 
-export function SearchResultLink(props: SearchResultLinkPropsType) {
+export function SearchResultLink(props: SearchResultLinkPropsType): JSX.Element {
     const {searchArticle, searchString} = props;
     const {slug, title} = searchArticle;
 

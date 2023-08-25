@@ -20,7 +20,7 @@ interface ButtonProps {
 }
 
 // Primary UI component for user interaction
-export function Button({primary = false, size = "medium", backgroundColor, label}: ButtonProps) {
+export function Button({primary = false, size = "medium", backgroundColor, label}: ButtonProps): JSX.Element {
     const mode = primary ? "storybook-button--primary" : "storybook-button--secondary";
 
     return (

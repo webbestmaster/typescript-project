@@ -46,12 +46,30 @@ export function getDateTimeHumanSize(option: GetDateTimeDifferenceOptionType): s
     const secondPart = ((Math.floor(seconds) % daySize) % hourSize) % minuteSize;
 
     return [
-        {count: yearPart, unitType: TimeSizeEnum.year},
-        {count: monthPart, unitType: TimeSizeEnum.month},
-        {count: dayPart, unitType: TimeSizeEnum.day},
-        {count: hourPart, unitType: TimeSizeEnum.hour},
-        {count: minutePart, unitType: TimeSizeEnum.minute},
-        {count: secondPart, unitType: TimeSizeEnum.second},
+        {
+            count: yearPart,
+            unitType: TimeSizeEnum.year,
+        },
+        {
+            count: monthPart,
+            unitType: TimeSizeEnum.month,
+        },
+        {
+            count: dayPart,
+            unitType: TimeSizeEnum.day,
+        },
+        {
+            count: hourPart,
+            unitType: TimeSizeEnum.hour,
+        },
+        {
+            count: minutePart,
+            unitType: TimeSizeEnum.minute,
+        },
+        {
+            count: secondPart,
+            unitType: TimeSizeEnum.second,
+        },
     ]
         .filter((timeItem: TimeItemType): boolean => {
             return timeItem.count >= 1;
@@ -110,15 +128,29 @@ export async function waitForCallback(
     return waitForCallback(callBack, maxCount - 1, timeOutMs);
 }
 
-export function logTakenTime(prefix: string, ContextClassName: string) {
-    return (target: unknown, memberName: string, propertyDescriptor: PropertyDescriptor) => {
+interface LogTakenTimeWrapperResultType {
+    readonly get: () => () => Promise<undefined>;
+}
+
+type LogTakenTimeWrapperType = (
+    target: unknown,
+    memberName: string,
+    propertyDescriptor: PropertyDescriptor
+) => LogTakenTimeWrapperResultType;
+
+export function logTakenTime(prefix: string, ContextClassName: string): LogTakenTimeWrapperType {
+    return (
+        target: unknown,
+        memberName: string,
+        propertyDescriptor: Readonly<PropertyDescriptor>
+    ): LogTakenTimeWrapperResultType => {
         // eslint-disable-next-line sonarjs/prefer-immediate-return
-        const result = {
+        const result: LogTakenTimeWrapperResultType = {
             get() {
                 // eslint-disable-next-line consistent-this, @typescript-eslint/no-this-alias, unicorn/no-this-assignment
                 const context: unknown = this;
 
-                async function wrapperFunction(): Promise<void> {
+                async function wrapperFunction(): Promise<undefined> {
                     const {log, time, timeLog} = console;
 
                     const fullLabel = `${prefix} [${ContextClassName}] ${memberName}`.trim();
@@ -139,7 +171,7 @@ export function logTakenTime(prefix: string, ContextClassName: string) {
                 }
 
                 // eslint-disable-next-line prefer-reflect
-                Object.defineProperty(context, memberName, {
+                Object.defineProperty<unknown>(context, memberName, {
                     configurable: true,
                     value: wrapperFunction,
                     writable: true,

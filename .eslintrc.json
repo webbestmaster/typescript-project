@@ -174,7 +174,7 @@
         // "@typescript-eslint/prefer-readonly": 0,
         // use --fix
         // "@typescript-eslint/prefer-regexp-exec": 0,
-        "@typescript-eslint/explicit-module-boundary-types": 0,
+        // "@typescript-eslint/explicit-module-boundary-types": 0,
         // "@typescript-eslint/explicit-member-accessibility": 0,
         // "@typescript-eslint/sort-type-constituents": 0,
         // "@typescript-eslint/member-ordering": 0,

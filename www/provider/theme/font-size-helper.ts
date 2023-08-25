@@ -26,6 +26,6 @@ export function getSavedFontSize(): number {
     return savedFontSize;
 }
 
-export function saveFontSize(fontSizeForSave: number) {
+export function saveFontSize(fontSizeForSave: number): undefined {
     localStorage.setItem(fontSizeSavedKey, fontSizeForSave.toString(10));
 }

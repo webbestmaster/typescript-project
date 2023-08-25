@@ -1,6 +1,6 @@
 /* global document, location, requestAnimationFrame */
 
-export function sendToPrint(htmlCode: string) {
+export function sendToPrint(htmlCode: string): undefined {
     const iframe = document.createElement("iframe");
 
     iframe.src = location.origin;

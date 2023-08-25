@@ -13,15 +13,15 @@ export class MarkdownItemCounter {
         this.video = 0;
     }
 
-    public increaseAudio() {
+    public increaseAudio(): undefined {
         this.audio += 1;
     }
 
-    public increaseImage() {
+    public increaseImage(): undefined {
         this.image += 1;
     }
 
-    public increaseVideo() {
+    public increaseVideo(): undefined {
         this.video += 1;
     }
 

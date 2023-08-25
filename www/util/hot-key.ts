@@ -7,7 +7,11 @@ export const enum HotKeyModifierEnum {
     shift = "shift",
 }
 
-export function useHotKey(modifierList: Array<HotKeyModifierEnum>, char: string, handleHotKey: () => unknown) {
+export function useHotKey(
+    modifierList: Array<HotKeyModifierEnum>,
+    char: string,
+    handleHotKey: () => unknown
+): undefined {
     const hasAlt = modifierList.includes(HotKeyModifierEnum.alt);
     const hasCtrl = modifierList.includes(HotKeyModifierEnum.ctrl);
     const hasShift = modifierList.includes(HotKeyModifierEnum.shift);

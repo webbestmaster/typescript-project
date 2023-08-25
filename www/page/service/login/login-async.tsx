@@ -12,7 +12,7 @@ const AsyncLazy = lazy<ComponentType<unknown>>(async (): Promise<LazyResultType<
     return {"default": Login};
 });
 
-export function LoginAsync() {
+export function LoginAsync(): JSX.Element {
     return (
         <Suspense fallback={<Spinner position="absolute" />}>
             <AsyncLazy />

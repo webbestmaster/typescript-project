@@ -2,7 +2,7 @@
 
 import type {ArticleContextType} from "./article-context-type";
 
-export function articleContextDom(articleData: ArticleContextType) {
+export function articleContextDom(articleData: ArticleContextType): undefined {
     if (typeof document === "undefined") {
         return;
     }

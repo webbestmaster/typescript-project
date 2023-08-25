@@ -13,7 +13,7 @@ const AsyncLazy = lazy<ComponentType<unknown>>(async (): Promise<LazyResultType<
     return {"default": CmsArticleList};
 });
 
-export function CmsArticleListAsync() {
+export function CmsArticleListAsync(): JSX.Element {
     return (
         <LoginAdminRequired>
             <Suspense fallback={<Spinner position="absolute" />}>

@@ -13,7 +13,7 @@ const AsyncLazy = lazy<ComponentType<unknown>>(async (): Promise<LazyResultType<
     return {"default": CmsArticleEdit};
 });
 
-export function CmsArticleEditAsync() {
+export function CmsArticleEditAsync(): JSX.Element {
     return (
         <LoginAdminRequired>
             <Suspense fallback={<Spinner position="absolute" />}>

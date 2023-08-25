@@ -385,7 +385,7 @@ class StaticSite {
     }
 }
 
-export async function makeStatic() {
+export async function makeStatic(): Promise<undefined> {
     const staticSite = new StaticSite();
 
     await staticSite.makeStatic();

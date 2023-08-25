@@ -1,6 +1,6 @@
 /* global window, document */
 
-export function smoothScrollToTop() {
+export function smoothScrollToTop(): undefined {
     window.scrollTo({behavior: "smooth", top: 0});
 }
 

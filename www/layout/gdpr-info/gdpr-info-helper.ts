@@ -4,7 +4,7 @@ import {getCookie} from "../../util/cookie";
 
 const gdprCookieKey = "gdpr-cookie";
 
-export function applyGdpr() {
+export function applyGdpr(): undefined {
     if (typeof document === "undefined") {
         return;
     }

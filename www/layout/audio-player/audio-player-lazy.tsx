@@ -20,7 +20,7 @@ const AudioPlayerControlSpriteLazy = lazy<ComponentType<unknown>>(async (): Prom
     return {"default": AudioPlayerControlSprite};
 });
 
-export function AudioPlayerControlSpriteAsync() {
+export function AudioPlayerControlSpriteAsync(): JSX.Element {
     return (
         <Suspense fallback={null}>
             <AudioPlayerControlSpriteLazy />
@@ -37,7 +37,7 @@ const AudioLazy = lazy<ComponentType<AudioPropsType>>(async (): Promise<LazyResu
     return {"default": Audio};
 });
 
-export function AudioAsync(props: AudioPropsType) {
+export function AudioAsync(props: AudioPropsType): JSX.Element {
     return (
         <Suspense fallback={<AudioPlayerLoading />}>
             <AudioLazy {...props} />
@@ -56,7 +56,7 @@ const AudioPlayerLazy = lazy<ComponentType<AudioPlayerPropsType>>(
     }
 );
 
-export function AudioPlayerAsync(props: AudioPlayerPropsType) {
+export function AudioPlayerAsync(props: AudioPlayerPropsType): JSX.Element {
     return (
         <Suspense fallback={<AudioPlayerLoading />}>
             <AudioPlayerLazy {...props} />
@@ -75,7 +75,7 @@ const PlayListProviderLazy = lazy<ComponentType<PlayListProviderPropsType>>(
     }
 );
 
-export function PlayListProviderAsync(props: PlayListProviderPropsType) {
+export function PlayListProviderAsync(props: PlayListProviderPropsType): JSX.Element {
     return (
         <Suspense fallback={<AudioPlayerLoading />}>
             <PlayListProviderLazy {...props} />
@@ -92,7 +92,7 @@ const PlayListPanelLazy = lazy<ComponentType<unknown>>(async (): Promise<LazyRes
     return {"default": PlayListPanel};
 });
 
-export function PlayListPanelAsync() {
+export function PlayListPanelAsync(): JSX.Element {
     return (
         <Suspense fallback={<AudioPlayerLoading />}>
             <PlayListPanelLazy />
