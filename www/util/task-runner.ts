@@ -28,7 +28,7 @@ export class TaskRunner {
     private currentWorkerCount = 0;
     private readonly onTaskEnd: TaskRunnerOnTaskDoneType = noop;
 
-    constructor(config: TaskRunnerConfigType) {
+    public constructor(config: TaskRunnerConfigType) {
         const {maxWorkerCount, onTaskEnd} = config;
 
         if (maxWorkerCount < 1) {
@@ -41,7 +41,7 @@ export class TaskRunner {
         this.onTaskEnd = onTaskEnd ?? noop;
     }
 
-    async add(runningTask: QueueRunningTaskType): Promise<void> {
+    public async add(runningTask: QueueRunningTaskType): Promise<void> {
         return new Promise<void>((resolve: PromiseResolveType<void>, reject: PromiseResolveType<Error>): void => {
             this.taskList.push({reject, resolve, task: runningTask});
 

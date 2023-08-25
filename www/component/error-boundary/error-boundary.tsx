@@ -10,20 +10,20 @@ interface StateType {
 }
 
 export class ErrorBoundary extends Component<PropsType, StateType> {
-    constructor(props: PropsType) {
+    public constructor(props: PropsType) {
         super(props);
 
         this.state = {hasError: false};
     }
 
-    override componentDidCatch(error: Error, errorInfo: unknown): void {
+    public override componentDidCatch(error: Error, errorInfo: unknown): void {
         console.log("[ERROR]:", error);
         console.log("[ERROR-INFO]:", errorInfo);
 
         this.setState({hasError: true});
     }
 
-    override render(): ReactNode {
+    public override render(): ReactNode {
         const {state, props} = this;
         const {hasError} = state;
         const {children, errorFallBack} = props;

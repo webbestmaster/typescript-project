@@ -7,29 +7,29 @@ export class MarkdownItemCounter {
     private image: number;
     private video: number;
 
-    constructor() {
+    public constructor() {
         this.audio = 0;
         this.image = 0;
         this.video = 0;
     }
 
-    increaseAudio() {
+    public increaseAudio() {
         this.audio += 1;
     }
 
-    increaseImage() {
+    public increaseImage() {
         this.image += 1;
     }
 
-    increaseVideo() {
+    public increaseVideo() {
         this.video += 1;
     }
 
-    getIsLazyImage(): boolean {
-        return this.image > MarkdownItemCounter.ImageToLoadCount;
+    public getLoadingImageType(): HTMLImageElement["loading"] {
+        return this.getIsLazyImage() ? "lazy" : "eager";
     }
 
-    getLoadingImageType(): HTMLImageElement["loading"] {
-        return this.getIsLazyImage() ? "lazy" : "eager";
+    private getIsLazyImage(): boolean {
+        return this.image > MarkdownItemCounter.ImageToLoadCount;
     }
 }

@@ -12,12 +12,12 @@ export class Queue {
 
     private isWorking = false;
 
-    constructor() {
+    public constructor() {
         this.taskList = [];
         this.isWorking = false;
     }
 
-    async add(runningTask: QueueRunningTaskType): Promise<void> {
+    public async add(runningTask: QueueRunningTaskType): Promise<void> {
         return new Promise<void>((resolve: PromiseResolveType<void>, reject: PromiseResolveType<Error>): void => {
             this.taskList.push({reject, resolve, task: runningTask});
 
