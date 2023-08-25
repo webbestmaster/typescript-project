@@ -38,7 +38,7 @@ export function Login(): JSX.Element {
             <label>
                 <p>login</p>
                 <input
-                    onInput={(evt: SyntheticEvent<HTMLInputElement>) => {
+                    onInput={(evt: SyntheticEvent<HTMLInputElement>): undefined => {
                         setLogin(evt.currentTarget.value);
                     }}
                     placeholder="login"
@@ -48,7 +48,7 @@ export function Login(): JSX.Element {
             <label>
                 <p>password</p>
                 <input
-                    onInput={(evt: SyntheticEvent<HTMLInputElement>) => {
+                    onInput={(evt: SyntheticEvent<HTMLInputElement>): undefined => {
                         setPassword(evt.currentTarget.value);
                     }}
                     placeholder="password"

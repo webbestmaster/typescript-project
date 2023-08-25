@@ -13,7 +13,7 @@ import {ErrorData} from "./layout/error-data/error-data";
 import {Popup} from "./layout/popup/popup";
 
 // eslint-disable-next-line jest/require-hook
-(function main() {
+(function main(): undefined {
     console.log(ErrorData, Popup);
 
     const nodeWrapper = document.querySelector(selector.appWrapper);

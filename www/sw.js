@@ -13,6 +13,7 @@ type ServiceWorkerEvent = {
 
 const cacheName = "my-pwa-cache-v.0001";
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 async function updateCache(evt /* :: : ServiceWorkerEvent */) {
     const {request} = evt;
     const cache = await caches.open(cacheName);
@@ -23,7 +24,7 @@ async function updateCache(evt /* :: : ServiceWorkerEvent */) {
     await cache.put(request, response);
 }
 
-// eslint-disable-next-line require-await
+// eslint-disable-next-line require-await, @typescript-eslint/explicit-function-return-type
 async function fetchRespondWith(evt /* :: : ServiceWorkerEvent */) {
     return fetch(evt.request).catch(async (error /* :: : Error */) /* :: : Promise<mixed> */ => {
         console.log("[PWA]: network request Failed. Get content from cache:", error.message);
@@ -41,14 +42,15 @@ async function fetchRespondWith(evt /* :: : ServiceWorkerEvent */) {
 
 const urlStartWithList = ["/static/", "/manifest.json"];
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function isUrlStartWithListContainPathname(pathname /* :: : string */) /* :: : boolean */ {
     return urlStartWithList.some((url /* :: : string */) /* :: : boolean */ => {
         return pathname.startsWith(url);
     });
 }
 
-// eslint-disable-next-line complexity, require-await
-async function fetchCallBack(evt /* :: : ServiceWorkerEvent */) {
+// eslint-disable-next-line complexity, require-await, @typescript-eslint/explicit-function-return-type
+async function fetchCallBack(evt /* :: : ServiceWorkerEvent */) /* :: : Promise<undefined> */ {
     const {request} = evt;
     const {method, url} = request;
 

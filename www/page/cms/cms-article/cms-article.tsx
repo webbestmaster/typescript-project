@@ -22,7 +22,7 @@ import {red} from "@ant-design/colors";
 import dayjs, {type Dayjs} from "dayjs";
 import utc from "dayjs/plugin/utc";
 
-function innerInitialization() {
+function innerInitialization(): undefined {
     dayjs.extend(utc);
 }
 
@@ -145,7 +145,15 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
     const [savedArticleList, setSavedArticleList] = useState<Array<ArticleForValidationType>>([]);
 
     useEffect(() => {
-        executeArticleListPaginationPick({}, {pageIndex: 0, pageSize: 0, sort: {title: 1}}, keyForValidationList)
+        executeArticleListPaginationPick(
+            {},
+            {
+                pageIndex: 0,
+                pageSize: 0,
+                sort: {title: 1},
+            },
+            keyForValidationList
+        )
             .then((data: PaginationResultType<ArticleForValidationType>) => {
                 setSavedArticleList(data.list);
             })
@@ -156,7 +164,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             });
     }, [executeArticleListPaginationPick]);
 
-    function onFinishForm(rawValues: ArticleType) {
+    function onFinishForm(rawValues: ArticleType): undefined {
         const values: ArticleType = {
             ...rawValues,
             fileList,
@@ -189,26 +197,26 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
         message.error(JSON.stringify(validateFunction.errors));
     }
 
-    function onFinishFailedForm(errorInfo: ValidateErrorEntity<ArticleType>) {
+    function onFinishFailedForm(errorInfo: ValidateErrorEntity<ArticleType>): undefined {
         // eslint-disable-next-line @typescript-eslint/no-floating-promises
         message.error(JSON.stringify(errorInfo.errorFields));
         console.log("onFinishFailedForm:", errorInfo);
         console.log("onFinishFailedForm:", article);
     }
 
-    function onValuesChangeForm(changedValues: unknown, values: ArticleType) {
+    function onValuesChangeForm(changedValues: unknown, values: ArticleType): undefined {
         setRecommendedSlug(textToSlug(values.title));
         setCurrentArticleState(values);
         console.log("onValuesChangeForm:", changedValues, values);
         console.log("onValuesChangeForm:", article);
     }
 
-    function onFieldsChangeForm(changedFields: Array<FieldData>, allFields: Array<FieldData>) {
+    function onFieldsChangeForm(changedFields: Array<FieldData>, allFields: Array<FieldData>): undefined {
         console.log("onFieldsChangeForm:", changedFields, allFields);
         console.log("onFieldsChangeForm:", article);
     }
 
-    function handleChangeFileList(info: UploadChangeParam<UploadFile<unknown>>) {
+    function handleChangeFileList(info: UploadChangeParam<UploadFile<unknown>>): undefined {
         const {file} = info;
 
         if (file.status === "removed") {
@@ -223,7 +231,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
         console.log("handleChangeFileList:", article);
     }
 
-    function handleChangeTitleImage(info: UploadChangeParam<UploadFile<unknown>>) {
+    function handleChangeTitleImage(info: UploadChangeParam<UploadFile<unknown>>): undefined {
         const {file} = info;
 
         if (file.status === "removed") {
@@ -323,7 +331,12 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 initialValue={title}
                 label="Title:"
                 name="title"
-                rules={[{message: "Required!", required: true}]}
+                rules={[
+                    {
+                        message: "Required!",
+                        required: true,
+                    },
+                ]}
             >
                 <Input placeholder="Title" />
             </Form.Item>
@@ -333,7 +346,11 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                 label={`Slug, avoid spec symbols, slug from title: ${recommendedSlug}`}
                 name="slug"
                 normalize={textToSlug}
-                rules={makeSlugValidator({id, mode, savedArticleList})}
+                rules={makeSlugValidator({
+                    id,
+                    mode,
+                    savedArticleList,
+                })}
             >
                 <Input disabled={savedArticleList.length === 0} placeholder="slug-is-here" />
             </Form.Item>
@@ -453,7 +470,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
 
             <Form.Item initialValue={dayjs.utc(publishDate)} label="Publish date UTC-0:" name="publishDate">
                 <DatePicker
-                    onOk={(date: Dayjs) => {
+                    onOk={(date: Dayjs): undefined => {
                         setPublishDate(date.toISOString());
                     }}
                     showTime

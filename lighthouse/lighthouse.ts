@@ -115,7 +115,7 @@ const urlList: Array<string> = [
     "/article/vi-ar-nummer-ett",
 ];
 
-async function innerInitialization() {
+async function innerInitialization(): Promise<undefined> {
     const chrome = await launch({chromeFlags: ["--headless"]});
 
     // eslint-disable-next-line no-loops/no-loops

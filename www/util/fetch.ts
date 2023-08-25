@@ -39,7 +39,7 @@ type FetchCacheType = Record<string, Promise<unknown> | null>;
 
 const fetchCache: FetchCacheType = {};
 
-function invalidateCache(options?: OptionsType) {
+function invalidateCache(options?: OptionsType): undefined {
     const {method = FetchMethodEnum.get} = options ?? {};
 
     if (method === FetchMethodEnum.get) {
@@ -51,7 +51,7 @@ function invalidateCache(options?: OptionsType) {
     });
 }
 
-function fetchEndCallBack(fetchBeginTimeStamp: number, url: string) {
+function fetchEndCallBack(fetchBeginTimeStamp: number, url: string): undefined {
     // 2 seconds
     const maxFetchingTime = 2e3;
     const fetchEndTimeStamp = Date.now();

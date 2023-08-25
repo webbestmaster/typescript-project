@@ -3,15 +3,15 @@
 import type {PetsdbItemType, PetsdbQueryType, PetsdbReadPageConfigType} from "petsdb";
 
 export interface CrudConfigOnChangeArgumentType {
-    dataBaseFileName: string;
-    dataBaseId: string;
-    dataBasePath: string;
+    readonly dataBaseFileName: string;
+    readonly dataBaseId: string;
+    readonly dataBasePath: string;
 }
 
 export interface CrudConfigType {
-    dataBaseId: string;
-    onChange: (data: CrudConfigOnChangeArgumentType) => Promise<void>;
-    onInit: (data: CrudConfigOnChangeArgumentType) => Promise<void>;
+    readonly dataBaseId: string;
+    readonly onChange: (data: CrudConfigOnChangeArgumentType) => Promise<void>;
+    readonly onInit: (data: CrudConfigOnChangeArgumentType) => Promise<void>;
 }
 
 export interface RegExpQueryType {

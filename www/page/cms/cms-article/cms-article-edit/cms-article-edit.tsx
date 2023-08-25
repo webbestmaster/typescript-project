@@ -42,7 +42,7 @@ export function CmsArticleEdit(): JSX.Element {
         ArticleType
     >(postArticleUpdate);
 
-    function handleOnFinish(article: ArticleType) {
+    function handleOnFinish(article: ArticleType): undefined {
         updateArticle(article)
             .then((savedArticle: ArticleType) => {
                 console.log(savedArticle);

@@ -7,7 +7,7 @@ import {shareButtonName} from "../share-button-const";
 export function ShareButtonFacebook(props: ShareButtonPropsType): JSX.Element {
     const {url, title} = props;
 
-    function handleClick() {
+    function handleClick(): undefined {
         share(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, title);
     }
 

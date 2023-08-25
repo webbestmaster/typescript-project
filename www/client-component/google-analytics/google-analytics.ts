@@ -34,7 +34,7 @@ export function useGoogleAnalytics(config: GoogleAnalyticsType): null {
         return null;
     }
 
-    function setAndSend(updatedPathname: string) {
+    function setAndSend(updatedPathname: string): undefined {
         const {ga: definedGa} = window;
 
         if (!definedGa) {
@@ -66,7 +66,7 @@ export function useGoogleAnalytics(config: GoogleAnalyticsType): null {
     window.dataLayer ||= [];
 
     // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-    function gtag(...argumentList: Array<unknown>) {
+    function gtag(...argumentList: Array<unknown>): undefined {
         // eslint-disable-next-line prefer-rest-params, unicorn/consistent-destructuring
         window.dataLayer?.push(arguments);
     }

@@ -7,7 +7,7 @@ import {shareButtonName} from "../share-button-const";
 export function ShareButtonTwitter(props: ShareButtonPropsType): JSX.Element {
     const {url, title} = props;
 
-    function handleClick() {
+    function handleClick(): undefined {
         share(
             `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`,
             title

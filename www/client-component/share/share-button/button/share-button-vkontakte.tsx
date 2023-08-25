@@ -7,7 +7,7 @@ import {shareButtonName} from "../share-button-const";
 export function ShareButtonVkontakte(props: ShareButtonPropsType): JSX.Element {
     const {url, title} = props;
 
-    function handleClick() {
+    function handleClick(): undefined {
         share(`http://vk.com/share.php?url=${encodeURIComponent(url)}`, title);
     }
 

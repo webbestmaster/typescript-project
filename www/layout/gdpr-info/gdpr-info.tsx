@@ -10,7 +10,7 @@ export function GdprInfo(): JSX.Element | null {
     const [isVisible, setIsVisible] = useState<boolean>(getDefaultIsVisible());
     const [isVisibleByTimeout, setIsVisibleByTimeout] = useState<boolean>(false);
 
-    function handleApplyGdpr() {
+    function handleApplyGdpr(): undefined {
         setIsVisible(false);
 
         applyGdpr();

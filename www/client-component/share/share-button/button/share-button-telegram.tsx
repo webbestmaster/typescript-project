@@ -7,7 +7,7 @@ import {shareButtonName} from "../share-button-const";
 export function ShareButtonTelegram(props: ShareButtonPropsType): JSX.Element {
     const {url, title} = props;
 
-    function handleClick() {
+    function handleClick(): undefined {
         share(`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${title}`, title);
     }
 

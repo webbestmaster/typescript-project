@@ -37,7 +37,7 @@ export function renderUploadedFileListItem(props: UploadedFileListItemPropsType)
                 <Col span={12}>
                     <Input
                         defaultValue={fileInfo.title}
-                        onInput={(evt: SyntheticEvent<HTMLInputElement>) => {
+                        onInput={(evt: SyntheticEvent<HTMLInputElement>): undefined => {
                             setFileTitle(evt.currentTarget.value.trim());
                         }}
                         placeholder="Title"

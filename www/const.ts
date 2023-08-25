@@ -24,7 +24,7 @@ export const companyLogoPngHeight = 60;
 export const appIconPngFileName = "app-icon.png";
 export const specialFileNameList: Array<string> = [companyLogoPngFileName, appIconPngFileName];
 
-function innerInitialization() {
+function innerInitialization(): undefined {
     const {log} = console;
 
     // Look here: http://patorjk.com/software/taag/#p=display&f=ANSI%20Shadow&t=Empty, Font: ANSI Shadow

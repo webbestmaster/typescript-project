@@ -52,7 +52,7 @@ export function getArticleTableColumnList(
                 return (
                     <Input
                         key="title"
-                        onInput={(evt: SyntheticEvent<HTMLInputElement>) => {
+                        onInput={(evt: SyntheticEvent<HTMLInputElement>): undefined => {
                             setSearchedColumn("title");
                             setSearchText(evt.currentTarget.value.trim());
                         }}
@@ -63,14 +63,14 @@ export function getArticleTableColumnList(
             },
             filterIcon: <SearchOutlined />,
             key: "title",
-            render(title: string, article: ArticleForTableListType) {
+            render(title: string, article: ArticleForTableListType): JSX.Element {
                 return (
                     <Link key={article.id} to={getArticleLinkToViewClient(article.slug)}>
                         {title}
                     </Link>
                 );
             },
-            sorter: () => {
+            sorter: (): number => {
                 return 0;
             },
             title: "Title",
@@ -97,7 +97,7 @@ export function getArticleTableColumnList(
                 return (
                     <Input
                         key="slug"
-                        onInput={(evt: SyntheticEvent<HTMLInputElement>) => {
+                        onInput={(evt: SyntheticEvent<HTMLInputElement>): undefined => {
                             setSearchedColumn("slug");
                             setSearchText(evt.currentTarget.value);
                         }}
@@ -108,14 +108,14 @@ export function getArticleTableColumnList(
             },
             filterIcon: <SearchOutlined />,
             key: "slug",
-            render(slug: string, article: ArticleForTableListType) {
+            render(slug: string, article: ArticleForTableListType): JSX.Element {
                 return (
                     <Link key={article.id} to={getArticleLinkToEdit(article.id)}>
                         {slug}
                     </Link>
                 );
             },
-            sorter: () => {
+            sorter: (): number => {
                 return 0;
             },
             title: "Slug/edit",
@@ -124,7 +124,7 @@ export function getArticleTableColumnList(
             dataIndex: "articleType",
             defaultSortOrder: null,
             key: "articleType",
-            sorter: () => {
+            sorter: (): number => {
                 return 0;
             },
             title: "Type",
@@ -137,10 +137,10 @@ export function getArticleTableColumnList(
             render(
                 isActive: boolean
                 // ignored article: ArticleForTableListType
-            ) {
+            ): string {
                 return getTickCross(isActive);
             },
-            sorter: () => {
+            sorter: (): number => {
                 return 0;
             },
             title: "Is active",
@@ -150,18 +150,21 @@ export function getArticleTableColumnList(
             dataIndex: "titleImage",
             defaultSortOrder: null,
             key: "titleImage",
-            render(imageFile: ArticleFileType) {
+            render(imageFile: ArticleFileType): JSX.Element {
                 return (
                     <img
                         alt={imageFile.name}
                         height="64px"
-                        src={getPathToImage(imageFile.name, {height: 64, width: 64})}
+                        src={getPathToImage(imageFile.name, {
+                            height: 64,
+                            width: 64,
+                        })}
                         style={{objectFit: "contain"}}
                         width="64px"
                     />
                 );
             },
-            sorter: () => {
+            sorter: (): number => {
                 return 0;
             },
             title: "Image",
@@ -172,7 +175,7 @@ export function getArticleTableColumnList(
             defaultSortOrder: null,
             key: "createdDate",
             render: dateIsoToHumanView,
-            sorter: () => {
+            sorter: (): number => {
                 return 0;
             },
             title: "Created UTC-0",
@@ -184,7 +187,7 @@ export function getArticleTableColumnList(
             defaultSortOrder: null,
             key: "updatedDate",
             render: dateIsoToHumanView,
-            sorter: () => {
+            sorter: (): number => {
                 return 0;
             },
             title: "Updated UTC-0",
@@ -196,7 +199,7 @@ export function getArticleTableColumnList(
             defaultSortOrder: null,
             key: "publishDate",
             render: dateIsoToHumanView,
-            sorter: () => {
+            sorter: (): number => {
                 return 0;
             },
             title: "Publish UTC-0",

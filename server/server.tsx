@@ -46,7 +46,7 @@ import {getArticleClientListGraphql} from "./article/article-api-graphql";
 const isMakeStaticSite = env.MAKE_STATIC_SITE === "TRUE";
 
 // eslint-disable-next-line max-statements
-async function innerInitialization() {
+async function innerInitialization(): Promise<undefined> {
     await tryToRemoveDirectory(temporaryUploadFolder);
     await makeDirectory(temporaryUploadFolder);
 

@@ -17,7 +17,7 @@ export function useHotKey(
     const hasShift = modifierList.includes(HotKeyModifierEnum.shift);
 
     useEffect(() => {
-        function handleBodyOnKeyPress(evt: KeyboardEvent) {
+        function handleBodyOnKeyPress(evt: KeyboardEvent): undefined {
             const isModificationKeysMatched =
                 evt.altKey === hasAlt && evt.ctrlKey === hasCtrl && evt.shiftKey === hasShift;
             const isKeyMatched = [`Key${char}`.toLowerCase(), char.toLowerCase()].includes(evt.code.toLowerCase());

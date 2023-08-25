@@ -80,7 +80,7 @@ class StaticSite {
         const progressCounterMax: number = this.pageList.length;
         const taskRunner = new TaskRunner({
             maxWorkerCount,
-            onTaskEnd: (taskRunnerData: TaskRunnerOnTaskDoneArgumentType) => {
+            onTaskEnd: (taskRunnerData: TaskRunnerOnTaskDoneArgumentType): undefined => {
                 const {restTaskCount, taskInProgressCount} = taskRunnerData;
                 const progressCount = progressCounterMax - restTaskCount - taskInProgressCount;
 
@@ -112,7 +112,7 @@ class StaticSite {
     }
 
     @logTakenTime(">>", "StaticSite")
-    private async makeApiArticleSearch() {
+    private async makeApiArticleSearch(): Promise<undefined> {
         await makeDirectory(cwd, staticSiteFolderName, "api");
         await makeDirectory(cwd, staticSiteFolderName, "api", "client-article");
 
@@ -153,7 +153,7 @@ class StaticSite {
 
         const taskRunner = new TaskRunner({
             maxWorkerCount,
-            onTaskEnd: (taskRunnerData: TaskRunnerOnTaskDoneArgumentType) => {
+            onTaskEnd: (taskRunnerData: TaskRunnerOnTaskDoneArgumentType): undefined => {
                 const {restTaskCount, taskInProgressCount} = taskRunnerData;
                 const progressCount = progressCounterMax - restTaskCount - taskInProgressCount;
 
@@ -220,7 +220,7 @@ class StaticSite {
         const progressCounterMax: number = imageUrlList.length;
         const taskRunner = new TaskRunner({
             maxWorkerCount,
-            onTaskEnd: (taskRunnerData: TaskRunnerOnTaskDoneArgumentType) => {
+            onTaskEnd: (taskRunnerData: TaskRunnerOnTaskDoneArgumentType): undefined => {
                 const {restTaskCount, taskInProgressCount} = taskRunnerData;
                 const progressCount = progressCounterMax - restTaskCount - taskInProgressCount;
 
@@ -307,7 +307,7 @@ class StaticSite {
         const progressCounterMax: number = slugList.length;
         const taskRunner = new TaskRunner({
             maxWorkerCount,
-            onTaskEnd: (taskRunnerData: TaskRunnerOnTaskDoneArgumentType) => {
+            onTaskEnd: (taskRunnerData: TaskRunnerOnTaskDoneArgumentType): undefined => {
                 const {restTaskCount, taskInProgressCount} = taskRunnerData;
                 const progressCount = progressCounterMax - restTaskCount - taskInProgressCount;
 
@@ -337,7 +337,7 @@ class StaticSite {
         const progressCounterMax: number = this.pageList.length;
         const taskRunner = new TaskRunner({
             maxWorkerCount,
-            onTaskEnd: (taskRunnerData: TaskRunnerOnTaskDoneArgumentType) => {
+            onTaskEnd: (taskRunnerData: TaskRunnerOnTaskDoneArgumentType): undefined => {
                 const {restTaskCount, taskInProgressCount} = taskRunnerData;
                 const progressCount = progressCounterMax - restTaskCount - taskInProgressCount;
 

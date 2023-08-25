@@ -7,7 +7,7 @@ import {shareButtonName} from "../share-button-const";
 export function ShareButtonOdnoklassniki(props: ShareButtonPropsType): JSX.Element {
     const {url, title} = props;
 
-    function handleClick() {
+    function handleClick(): undefined {
         share(`https://connect.ok.ru/dk?st.cmd=WidgetSharePreview&st.shareUrl=${encodeURIComponent(url)}`, title);
     }
 

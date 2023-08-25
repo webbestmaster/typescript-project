@@ -47,7 +47,7 @@ export function AdSenseAds(props: AdSenseAdsPropsType): JSX.Element {
         };
     }, [adSlotId]);
 
-    function showAd(updatedPathname: string, updatedAdNodeId: string) {
+    function showAd(updatedPathname: string, updatedAdNodeId: string): undefined {
         if (!isNeedUseThirdPartyServices) {
             return;
         }

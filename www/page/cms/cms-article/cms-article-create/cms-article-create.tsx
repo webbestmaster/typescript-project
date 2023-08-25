@@ -22,7 +22,7 @@ export function CmsArticleCreate(): JSX.Element {
         ArticleType
     >(postArticleCreate);
 
-    function handleOnFinish(article: ArticleType) {
+    function handleOnFinish(article: ArticleType): undefined {
         createArticle(article)
             .then((savedArticle: ArticleType) => {
                 console.log(savedArticle);

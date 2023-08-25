@@ -7,7 +7,7 @@ import {shareButtonName} from "../share-button-const";
 export function ShareButtonWhatsApp(props: ShareButtonPropsType): JSX.Element {
     const {title} = props;
 
-    function handleClick() {
+    function handleClick(): undefined {
         share(`https://wa.me/?text=${encodeURIComponent(title)}`, title);
     }
 

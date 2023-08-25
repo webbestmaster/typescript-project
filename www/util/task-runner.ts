@@ -43,7 +43,11 @@ export class TaskRunner {
 
     public async add(runningTask: QueueRunningTaskType): Promise<void> {
         return new Promise<void>((resolve: PromiseResolveType<void>, reject: PromiseResolveType<Error>): void => {
-            this.taskList.push({reject, resolve, task: runningTask});
+            this.taskList.push({
+                reject,
+                resolve,
+                task: runningTask,
+            });
 
             if (this.getHasFreeWorkers()) {
                 // eslint-disable-next-line @typescript-eslint/no-floating-promises
@@ -64,7 +68,7 @@ export class TaskRunner {
         return this.getCurrentWorkerCount() < this.maxWorkerCount;
     }
 
-    private async run() {
+    private async run(): Promise<undefined> {
         const fistTask = this.taskList.at(0);
 
         this.taskList.splice(0, 1);

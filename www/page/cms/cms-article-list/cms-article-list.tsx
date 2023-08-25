@@ -74,7 +74,7 @@ export function CmsArticleList(): JSX.Element {
         filters: Record<string, FilterValue | null>,
         sorter: Array<SorterResult<ArticleForTableListType>> | SorterResult<ArticleForTableListType>,
         extra: TableCurrentDataSource<ArticleForTableListType>
-    ) {
+    ): undefined {
         const firstSorter: SorterResult<ArticleForTableListType> | undefined = Array.isArray(sorter)
             ? sorter.at(0)
             : sorter;

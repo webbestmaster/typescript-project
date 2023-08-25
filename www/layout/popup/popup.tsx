@@ -46,7 +46,7 @@ export function Popup(props: PopupPropsType): JSX.Element | null {
     const [isMounted, setIsMounted] = useState<boolean>(false);
     const timeOutRef = useRef<NodeJS.Timeout | number>(Number.NaN);
 
-    const visibleState: PopupVisibleStateEnum = (() => {
+    const visibleState: PopupVisibleStateEnum = ((): PopupVisibleStateEnum => {
         if (isOpen === isSelfOpen) {
             return isSelfOpen ? PopupVisibleStateEnum.open : PopupVisibleStateEnum.closed;
         }

@@ -7,7 +7,7 @@ import {shareButtonName} from "../share-button-const";
 export function ShareButtonViber(props: ShareButtonPropsType): JSX.Element {
     const {url, title} = props;
 
-    function handleClick() {
+    function handleClick(): undefined {
         const titleUrl = `${title} ${url}`;
 
         share(`viber://forward?text=${encodeURIComponent(titleUrl)}`, title);

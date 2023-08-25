@@ -206,7 +206,7 @@ describe("test TaskRunner", () => {
 
         const taskRunner = new TaskRunner({
             maxWorkerCount: 3,
-            onTaskEnd: (data: TaskRunnerOnTaskDoneArgumentType) => {
+            onTaskEnd: (data: TaskRunnerOnTaskDoneArgumentType): undefined => {
                 taskRunnerDataList.push(data);
             },
         });

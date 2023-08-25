@@ -38,7 +38,7 @@ export function Search(props: SearchPropsType): JSX.Element {
     useHotKey([], "Escape", forceBlur);
 
     useEffect(() => {
-        function handleBodyOnClick(evt: MouseEvent) {
+        function handleBodyOnClick(evt: MouseEvent): undefined {
             const hasWrapperInPath = Boolean(wrapperRef.current && evt.composedPath().includes(wrapperRef.current));
 
             if (hasWrapperInPath) {
