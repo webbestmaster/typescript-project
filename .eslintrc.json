@@ -413,6 +413,19 @@
         "max-params": [
             2,
             5
+        ],
+        "id-length": [
+            2,
+            {
+                "min": 3,
+                "max": 34,
+                "exceptions": [
+                    "id",
+                    "to",
+                    "x",
+                    "y"
+                ]
+            }
         ]
         //        "function-call-argument-newline": [
         //            2,
@@ -698,19 +711,6 @@
         //            "declaration"
         //        ],
         //        "jsx-quotes": 2,
-        //        "id-length": [
-        //            2,
-        //            {
-        //                "min": 3,
-        //                "max": 34,
-        //                "exceptions": [
-        //                    "id",
-        //                    "to",
-        //                    "x",
-        //                    "y"
-        //                ]
-        //            }
-        //        ],
         //        "indent": 0,
         //        "key-spacing": [
         //            2,
