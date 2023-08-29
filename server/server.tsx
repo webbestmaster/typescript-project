@@ -6,7 +6,7 @@ import {cwd, env} from "node:process";
 import path from "node:path";
 
 import {fastifyCors} from "@fastify/cors";
-import {fastifyStatic} from "@fastify/static";
+import {fastifyStatic, type FastifyStaticOptions} from "@fastify/static";
 import {fastifyCompress} from "@fastify/compress";
 import {fastifyMultipart} from "@fastify/multipart";
 import {fastifySecureSession, type SecureSessionPluginOptions} from "@fastify/secure-session";
@@ -57,18 +57,20 @@ async function innerInitialization(): Promise<undefined> {
     await fastify.register(fastifyCompress);
     await fastify.register(fastifyMultipart);
 
-    // First of two fastifyStaticServer plugin
-    await fastify.register(fastifyStatic, {
+    // eslint-disable-next-line id-length
+    const fastifyStaticConfigUploadFileFolder: FastifyStaticOptions = {
         prefix: `/${uploadFileFolder}/`,
         root: uploadFolder,
         setHeaders: (response: {setHeader: (header: string, value: string) => void}) => {
             console.info("[ERROR] using fastifyStaticServer: upload files");
             response.setHeader("x-warning-get-file", "need-use-nginx");
         },
-    });
+    };
 
-    // Second of two fastifyStaticServer plugin
-    await fastify.register(fastifyStatic, {
+    // First of two fastifyStaticServer plugin
+    await fastify.register(fastifyStatic, fastifyStaticConfigUploadFileFolder);
+
+    const fastifyStaticConfigDistribution: FastifyStaticOptions = {
         decorateReply: false, // the reply decorator has been added by the first plugin registration
         prefix: "/", // optional: default '/'
         root: path.join(cwd(), "dist"),
@@ -76,7 +78,10 @@ async function innerInitialization(): Promise<undefined> {
             console.info("[ERROR] using fastifyStaticServer: html, css...");
             response.setHeader("x-warning-get-file", "need-use-nginx");
         },
-    });
+    };
+
+    // Second of two fastifyStaticServer plugin
+    await fastify.register(fastifyStatic, fastifyStaticConfigDistribution);
 
     const fastifySecureSessionConfig: SecureSessionPluginOptions = {
         // the name of the session cookie, defaults to 'session'
