@@ -159,7 +159,7 @@ describe("navigationLink", () => {
 
         const {unmount, container} = render(<TestUtilNavigationProvider component={UseOwnQueriesOnly} />);
 
-        const link = container.querySelector("a[href='use-own-queries-only?foo=bar']");
+        const link = container.querySelector("a[href='/use-own-queries-only?foo=bar']");
 
         expect(link instanceof HTMLElement).toBe(true);
 
