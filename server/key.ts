@@ -14,9 +14,9 @@ export const sha256key: string = String(SHA_256_KEY ?? "").trim();
 export const secretKey: string = String(SECRET_KEY ?? "").trim();
 
 if (sha256key === "") {
-    console.error("[ERROR]: auth - sha256key is not define!");
+    console.error("[ERROR]: auth - sha256key is not defined!");
 }
 
 if (secretKey === "") {
-    console.error("[ERROR]: auth - sha256key is not define!");
+    console.error("[ERROR]: auth - secretKey is not defined!");
 }
