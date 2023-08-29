@@ -9,7 +9,7 @@ import {fastifyCors} from "@fastify/cors";
 import {fastifyStatic} from "@fastify/static";
 import {fastifyCompress} from "@fastify/compress";
 import {fastifyMultipart} from "@fastify/multipart";
-import {fastifySecureSession} from "@fastify/secure-session";
+import {fastifySecureSession, type SecureSessionPluginOptions} from "@fastify/secure-session";
 import type {FastifyError} from "@fastify/error";
 import fastifyConstructor, {type FastifyRequest, type FastifyReply} from "fastify";
 
@@ -78,8 +78,7 @@ async function innerInitialization(): Promise<undefined> {
         },
     });
 
-    // Options for setCookie, see https://github.com/fastify/fastify-cookie
-    await fastify.register(fastifySecureSession, {
+    const fastifySecureSessionConfig: SecureSessionPluginOptions = {
         // the name of the session cookie, defaults to 'session'
         cookie: {
             httpOnly: true, // Use httpOnly for all production purposes
@@ -88,7 +87,10 @@ async function innerInitialization(): Promise<undefined> {
         cookieName: siteCookieKey,
         // adapt this to point to the directory where secret-key is located
         key: Buffer.from(secretKey, "base64").subarray(0, 32),
-    });
+    };
+
+    // Options for setCookie, see https://github.com/fastify/fastify-cookie
+    await fastify.register(fastifySecureSession, fastifySecureSessionConfig);
 
     // API
     fastify.post(apiUrl.login, postAuthLogin);
