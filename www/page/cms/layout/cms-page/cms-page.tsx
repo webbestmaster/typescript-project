@@ -1,6 +1,6 @@
 import type {ReactNode} from "react";
 import {Layout, Menu} from "antd";
-import {Link, useLocation} from "react-router-dom";
+import {Link, useLocation, type Location} from "react-router-dom";
 
 import "antd/dist/reset.css";
 
@@ -13,7 +13,7 @@ type CmsPagePropsType = Record<"children", ReactNode>;
 
 export function CmsPage(props: CmsPagePropsType): JSX.Element {
     const {children} = props;
-    const routerLocation = useLocation();
+    const routerLocation: Location<unknown> = useLocation();
 
     return (
         <Layout>

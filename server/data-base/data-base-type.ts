@@ -19,8 +19,8 @@ export interface RegExpQueryType {
     $regexFlag: string; // 'g' | 'gi' | 'i';
 }
 
-export interface PaginationResultType<ModelType extends Record<string, unknown>> {
-    list: Array<ModelType>;
+export interface PaginationResultType<ModelType extends Readonly<Record<string, unknown>>> {
+    list: ReadonlyArray<ModelType>;
     pageIndex: number;
     pageSize: number;
     sort: Record<string, unknown>;

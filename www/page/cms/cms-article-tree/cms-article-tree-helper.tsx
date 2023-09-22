@@ -12,7 +12,7 @@ import type {ArticleForTreeType} from "./cms-article-tree-type";
 const {Text: TypographyText} = Typography;
 
 export function getArticleForTreeById(
-    articleList: Array<ArticleForTreeType>,
+    articleList: ReadonlyArray<ArticleForTreeType>,
     articleId: string
 ): ArticleForTreeType | null {
     const foundedArticle: ArticleForTreeType | undefined = articleList.find((article: ArticleForTreeType): boolean => {
@@ -22,7 +22,11 @@ export function getArticleForTreeById(
     return foundedArticle ?? null;
 }
 
-function getChildList(parentArticleId: string, articleList: Array<ArticleForTreeType>, deep: number): Array<DataNode> {
+function getChildList(
+    parentArticleId: string,
+    articleList: ReadonlyArray<ArticleForTreeType>,
+    deep: number
+): Array<DataNode> {
     if (deep === 0) {
         console.error("[ERROR]: populateChildren: limit exceeded");
         return [];
@@ -74,7 +78,7 @@ function getChildList(parentArticleId: string, articleList: Array<ArticleForTree
     });
 }
 
-export function makeArticleTree(articleList: Array<ArticleForTreeType>): DataNode {
+export function makeArticleTree(articleList: ReadonlyArray<ArticleForTreeType>): DataNode {
     return {
         children: getChildList(rootArticleId, articleList, 10),
         key: rootArticleId,
@@ -82,7 +86,7 @@ export function makeArticleTree(articleList: Array<ArticleForTreeType>): DataNod
     };
 }
 
-export function getArticleWithoutParentList(articleList: Array<ArticleForTreeType>): Array<ArticleForTreeType> {
+export function getArticleWithoutParentList(articleList: ReadonlyArray<ArticleForTreeType>): Array<ArticleForTreeType> {
     return articleList.filter((articleCandidate: ArticleForTreeType): boolean => {
         return !articleList.some((articleInList: ArticleForTreeType): boolean => {
             return articleInList.subDocumentIdList.includes(articleCandidate.id);
@@ -90,7 +94,7 @@ export function getArticleWithoutParentList(articleList: Array<ArticleForTreeTyp
     });
 }
 
-export function getArticleWithLostChildList(articleList: Array<ArticleForTreeType>): Array<ArticleForTreeType> {
+export function getArticleWithLostChildList(articleList: ReadonlyArray<ArticleForTreeType>): Array<ArticleForTreeType> {
     return articleList.filter((articleCandidate: ArticleForTreeType): boolean => {
         const {subDocumentIdList} = articleCandidate;
 

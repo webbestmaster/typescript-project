@@ -10,14 +10,18 @@ import {dataBaseFolderPath} from "./data-base-const";
 
 const ajv = new Ajv();
 
-export function makeCrud<ModelType extends Record<string, unknown>>(
+export function makeCrud<ModelType extends Readonly<Record<string, Readonly<unknown>>>>(
     crudConfig: CrudConfigType,
     modelJsonSchema: JSONSchemaType<ModelType>
 ): CrudType<ModelType> {
     const {dataBaseId, onChange, onInit} = crudConfig;
     const dataBaseFileName = `data-base.${dataBaseId}.db`;
     const dataBasePath = `${dataBaseFolderPath}/${dataBaseFileName}`;
-    const onChangeData: CrudConfigOnChangeArgumentType = {dataBaseFileName, dataBaseId, dataBasePath};
+    const onChangeData: CrudConfigOnChangeArgumentType = {
+        dataBaseFileName,
+        dataBaseId,
+        dataBasePath,
+    };
 
     async function handleDataBaseUpdate(): Promise<void> {
         await makeDataBaseBackUp(onChangeData);
@@ -108,7 +112,9 @@ export function makeCrud<ModelType extends Record<string, unknown>>(
     async function makeStructureSelfCheck(): Promise<void> {
         console.info(`Structure self check for ${dataBaseId} started`);
 
-        const allRowList: Array<ModelType> = await findMany({});
+        const findAllQuery: Partial<ModelType> = {};
+
+        const allRowList: ReadonlyArray<ModelType> = await findMany(findAllQuery);
 
         let hasError = false;
 

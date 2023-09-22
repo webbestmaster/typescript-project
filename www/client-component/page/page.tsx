@@ -1,5 +1,5 @@
 import {type ReactNode, useContext, useEffect} from "react";
-import {useParams, useLocation} from "react-router-dom";
+import {useParams, useLocation, type Location} from "react-router-dom";
 
 import {Header} from "../header/header";
 import {Footer} from "../footer/footer";
@@ -22,7 +22,7 @@ interface PagePropsType {
 
 export function Page(props: PagePropsType): JSX.Element {
     const {children} = props;
-    const location = useLocation();
+    const location: Location<unknown> = useLocation();
     const {pathname} = location;
     const {slug = ""} = useParams<ExtractPathKeysType<typeof appRoute.article.path>>();
     const {setSlug = noop} = useContext<ArticleContextType>(articleContext);
@@ -41,7 +41,10 @@ export function Page(props: PagePropsType): JSX.Element {
         }
     }, [slug, setSlug, pathname]);
 
-    useGoogleAnalytics({googleAnalyticsId, pathname});
+    useGoogleAnalytics({
+        googleAnalyticsId,
+        pathname,
+    });
 
     return (
         <div className={pageStyle.page}>

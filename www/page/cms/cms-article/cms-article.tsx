@@ -142,7 +142,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
         PaginationResultType<ArticleForValidationType>
     >(getArticleListPaginationPick);
 
-    const [savedArticleList, setSavedArticleList] = useState<Array<ArticleForValidationType>>([]);
+    const [savedArticleList, setSavedArticleList] = useState<ReadonlyArray<ArticleForValidationType>>([]);
 
     useEffect(() => {
         executeArticleListPaginationPick(

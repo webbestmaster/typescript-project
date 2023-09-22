@@ -1,6 +1,6 @@
 /* global window, setInterval, clearInterval */
 import {useState, useRef, useEffect} from "react";
-import {useLocation} from "react-router-dom";
+import {useLocation, type Location} from "react-router-dom";
 
 import {googleAdSenseId} from "../../../const";
 import {cls} from "../../../util/css";
@@ -25,7 +25,7 @@ declare global {
 export function AdSenseAds(props: AdSenseAdsPropsType): JSX.Element {
     const {className: cssClassName, adSlotId} = props;
     const [adNodeId, setAdNodeId] = useState<string>(getRandomString());
-    const routerLocation = useLocation();
+    const routerLocation: Location<unknown> = useLocation();
     const pathnameRef = useRef<string>("");
     const isNeedUseThirdPartyServices = getNeedUseThirdPartyServices();
 

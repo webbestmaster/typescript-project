@@ -254,8 +254,8 @@ export function getIsVideo(fileName: string): boolean {
 }
 
 export function getAbsentIdList(
-    subDocumentIdList: Array<string>,
-    savedArticleList: Array<ArticleForValidationType>
+    subDocumentIdList: ReadonlyArray<string>,
+    savedArticleList: ReadonlyArray<ArticleForValidationType>
 ): Array<string> {
     if (savedArticleList.length === 0) {
         return [];

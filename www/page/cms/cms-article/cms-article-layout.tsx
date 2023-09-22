@@ -40,7 +40,7 @@ export function makeSubDocumentOption(articleForValidation: ArticleForValidation
 
 export function getParentList(
     article: ArticleType,
-    savedArticleList: Array<ArticleForValidationType>
+    savedArticleList: ReadonlyArray<ArticleForValidationType>
 ): Array<ArticleForValidationType> {
     const {id: articleId} = article;
 
@@ -51,7 +51,7 @@ export function getParentList(
 
 export function renderParentList(
     article: ArticleType,
-    savedArticleList: Array<ArticleForValidationType>
+    savedArticleList: ReadonlyArray<ArticleForValidationType>
 ): Array<JSX.Element> {
     const parentList: Array<JSX.Element> = getParentList(article, savedArticleList).map(
         (savedArticle: ArticleForValidationType, index: number): JSX.Element => {

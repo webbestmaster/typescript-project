@@ -8,5 +8,5 @@ export type KeyForValidationListType = ["id", "slug", "subDocumentIdList", "titl
 export interface MakeSlugValidatorArgumentType {
     id: string;
     mode: CmsArticleModeEnum;
-    savedArticleList: Array<ArticleForValidationType>;
+    savedArticleList: ReadonlyArray<ArticleForValidationType>;
 }

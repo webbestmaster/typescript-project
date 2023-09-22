@@ -33,7 +33,7 @@ export function CmsArticleTree(): JSX.Element {
             PaginationResultType<ArticleForTreeType>
         >(getArticleListPaginationPick);
 
-    const [savedArticleList, setSavedArticleList] = useState<Array<ArticleForTreeType>>([]);
+    const [savedArticleList, setSavedArticleList] = useState<ReadonlyArray<ArticleForTreeType>>([]);
 
     useEffect(() => {
         executeArticleListPaginationPick({}, {pageIndex: 0, pageSize: 0, sort: {title: 1}}, keyForTreeList)
