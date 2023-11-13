@@ -68,7 +68,7 @@ export function CmsArticleList(): JSX.Element {
         );
     }, [searchedColumn, searchText]);
 
-    // eslint-disable-next-line complexity, max-statements
+    // eslint-disable-next-line complexity, max-statements, @typescript-eslint/max-params
     function handleTableChange(
         pagination: TablePaginationConfig,
         filters: Record<string, FilterValue | null>,

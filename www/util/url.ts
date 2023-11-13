@@ -20,8 +20,8 @@ export function paginationQueryToURLSearchParameters<DataType extends Record<str
 export type ExtractPathDataType<StringConstType> = StringConstType extends `${string}:${infer KeyNames}/${infer Rest}`
     ? ExtractPathDataType<Rest> & {[key in KeyNames]: string}
     : StringConstType extends `${string}:${infer KeyNames}`
-    ? ExtractPathDataType<string> & {[key in KeyNames]: string}
-    : Record<never, string>;
+      ? ExtractPathDataType<string> & {[key in KeyNames]: string}
+      : Record<never, string>;
 
 export type ExtractPathKeysType<StringConstType> = keyof ExtractPathDataType<StringConstType>;
 
@@ -29,8 +29,8 @@ export type ExtractPathKeysType<StringConstType> = keyof ExtractPathDataType<Str
 type RouterPathDataType<StringConstType> = StringConstType extends `${string}:${infer KeyNames}/${infer Rest}`
     ? ExtractPathDataType<Rest> & {[key in KeyNames]: string}
     : StringConstType extends `${string}:${infer KeyNames}`
-    ? ExtractPathDataType<string> & {[key in KeyNames]: string}
-    : Record<string, string>;
+      ? ExtractPathDataType<string> & {[key in KeyNames]: string}
+      : Record<string, string>;
 
 export function generatePath<PathType extends string>(
     rawPath: PathType,

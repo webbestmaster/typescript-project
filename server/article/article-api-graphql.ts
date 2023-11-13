@@ -144,6 +144,7 @@ const ListType: GraphQLFieldConfig<{root: string}, {context: number}, {limit: nu
             type: GraphQLInt,
         },
     },
+    // eslint-disable-next-line @typescript-eslint/max-params
     resolve: async (
         // root valur type => "GraphQLObjectType<Record<string, string>"
         rootValue: {root: string},
