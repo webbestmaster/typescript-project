@@ -75,6 +75,7 @@
     "stylelint:watch": "npm-watch stylelint",
     "prettier": "prettier --write \"./**/*.(js|ts|tsx)\" --loglevel warn",
     "tsc": "tsc -p ./tsconfig.json",
+    "tsc-init": "npx tsc --init",
     "tsc:watch": "tsc -p ./tsconfig.json --watch",
     "front:tsc-library": "tsc -p ./tsconfig.library.json && npm run front:tsc-library-css",
     "front:tsc-library-css": "cross-env NODE_ENV=production SIDE=front IS_BUILD_LIBRARY=true ts-node --files ./webpack/util/library/css.ts",
