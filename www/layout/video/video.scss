@@ -1,4 +1,3 @@
-//$video-tag-z-index: 1;
 $video-tag-started-z-index: 10;
 $start-video-button-z-index: 6;
 $video-title-z-index: 4;
@@ -47,7 +46,6 @@ $image-preview-z-index: 3;
         max-width: 100%;
         position: absolute;
         top: 0;
-        //z-index: $video-tag-z-index;
     }
 
     .video__tag__started {
