@@ -6,11 +6,11 @@ import type {FastifyRequest} from "fastify";
 
 async function htmlToPdf(html: string): Promise<Buffer> {
     const browser = await puppeteer.launch({
-        args: ["--disable-gpu", "--disable-dev-shm-usage", "--disable-setuid-sandbox", "--no-sandbox"],
+        args: ["--disable-gpu", "--disable-dev-shm-usage", "--disable-setuid-sandbox", "--no-sandbox", "--incognito"],
         headless: true,
     });
 
-    const context = await browser.createIncognitoBrowserContext();
+    const context = await browser.createBrowserContext();
 
     const page = await context.newPage();
 
