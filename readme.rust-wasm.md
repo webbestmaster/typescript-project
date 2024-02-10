@@ -4,7 +4,7 @@
 
 1 - build the wasm for web
 ```bash
-$ wasm-pack build -t web  --release
+$ wasm-pack build -t web --release
 ```
 
 2 - add the pkg to `node_modules`, just copy folder and rename

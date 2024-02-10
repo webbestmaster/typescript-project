@@ -134,4 +134,4 @@ const webpackConfig: Configuration = ((): Configuration => {
 
 // webpackConfig?.plugins?.push(new BundleAnalyzerPlugin());
 
-export const webpackRunningConfig = {...webpackConfig, ...devServer};
+export const webpackRunningConfig = {...webpackConfig, devServer};
