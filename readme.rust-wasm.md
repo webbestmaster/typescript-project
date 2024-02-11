@@ -26,3 +26,46 @@ console.warn(wasmData);
     console.warn(get_available_move_path_list(0, 0, 2, [1, 2, 3, 4, 5].join(","), 2));
 })();
 ```
+
+## Another Way
+
+1 - build the wasm for web
+```bash
+$ wasm-pack build -t web --release
+```
+
+2 - add the pkg to project folder, just copy folder and rename
+
+3 - add package to package.json
+```json
+{
+  "name": "my-project-name",
+  "dependencies": {
+    "rust-wasm": "file:./wasm/rust-wasm"
+  }
+}
+```
+
+4 - install dependencies
+
+```bash
+$ npm i
+```
+
+5 - run code, example
+```typescript
+import initWasm, {get_available_move_path_list} from "rust-wasm";
+import wasmData from "rust-wasm/rust_wasm_bg.wasm";
+
+console.warn(initWasm);
+console.warn(wasmData);
+
+(async () => {
+    const res = await initWasm(wasmData);
+
+    console.warn(res);
+
+    // this function will work after initalisation only
+    console.warn(get_available_move_path_list(0, 0, 2, [1, 2, 3, 4, 5].join(","), 2));
+})();
+```
