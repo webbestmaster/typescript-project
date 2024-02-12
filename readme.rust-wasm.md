@@ -1,5 +1,3 @@
-# DRAFT - need better idea to do it
-
 # RUST-WASM _inline_ front-end
 
 1 - build the wasm for web
