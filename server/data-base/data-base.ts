@@ -78,7 +78,7 @@ export function makeCrud<ModelType extends Readonly<Record<string, Readonly<unkn
         const modelJsonSchemaValidate = ajv.compile<ModelType>(modelJsonSchema);
         const isValid = modelJsonSchemaValidate(modelData);
 
-        if (isValid) {
+        if (!isValid) {
             throw new Error(JSON.stringify(modelJsonSchemaValidate.errors ?? ""));
         }
 
@@ -92,7 +92,7 @@ export function makeCrud<ModelType extends Readonly<Record<string, Readonly<unkn
         const modelJsonSchemaValidate = ajv.compile<ModelType>(modelJsonSchema);
         const isValid = modelJsonSchemaValidate(modelData);
 
-        if (isValid) {
+        if (!isValid) {
             throw new Error(JSON.stringify(modelJsonSchemaValidate.errors ?? ""));
         }
 
