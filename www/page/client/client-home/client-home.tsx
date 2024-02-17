@@ -1,5 +1,5 @@
 // ignored import {useSystem} from 'react-system-hook';
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 
 import type {ArticleContextType} from "../../../client-component/article/article-context/article-context-type";
 import {articleContext} from "../../../client-component/article/article-context/article-context";
@@ -9,11 +9,49 @@ import {Markdown} from "../../../layout/markdown/markdown";
 import {PageHeader} from "../../../client-component/page-header/page-header";
 import {copyrightName} from "../../../const";
 import {SubDocumentListViewTypeEnum} from "../../../../server/article/article-type";
+import {FetchMethodEnum, fetchX} from "../../../util/fetch";
+import type {UnknownObjectType} from "../../../util/type";
+import {apiUrl} from "../../../../server/const";
 
 // eslint-disable-next-line max-statements
 export function ClientHome(): JSX.Element {
     const {article, childList} = useContext<ArticleContextType>(articleContext);
     const {content, title} = article;
+
+    useEffect(() => {
+        (async (): Promise<void> => {
+            const resultQueries: Record<string, string> = {
+                source: `{
+  list(limit: 4, start: 2) {
+    articleType
+    title
+    id
+    slug
+    fileList {
+        name
+        size
+        duration
+    }
+  }
+}`,
+            };
+
+            const queriesAsString: string = new URLSearchParams(resultQueries).toString();
+
+            const data = await fetchX<UnknownObjectType>(
+                `${apiUrl.clientArticleListGetGraphQL}?${queriesAsString}`,
+                {
+                    required: [],
+                    type: "object",
+                },
+                {
+                    credentials: "include",
+                    method: FetchMethodEnum.get,
+                }
+            );
+            console.log(data);
+        })();
+    }, []);
 
     return (
         <Page>

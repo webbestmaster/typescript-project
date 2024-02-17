@@ -135,7 +135,15 @@ const ArticleGraphQLType: GraphQLObjectType<ArticleType, unknown> = new GraphQLO
 
 const ArticleListGraphQLType = new GraphQLList(ArticleGraphQLType);
 
-const ListType: GraphQLFieldConfig<{root: string}, {context: number}, {limit: number; start: number}> = {
+const ListType: GraphQLFieldConfig<
+    {
+        /* root: string */
+    },
+    {
+        /* context: number */
+    },
+    {limit: number; start: number}
+> = {
     args: {
         limit: {
             type: GraphQLInt,
@@ -147,18 +155,27 @@ const ListType: GraphQLFieldConfig<{root: string}, {context: number}, {limit: nu
     // eslint-disable-next-line @typescript-eslint/max-params
     resolve: async (
         // root valur type => "GraphQLObjectType<Record<string, string>"
-        rootValue: {root: string},
+        rootValue: {
+            // root: string
+        },
         args: {limit: number; start: number},
-        context: {context: number},
+        context: {
+            // context: number
+        },
         graphQLType: GraphQLResolveInfo
     ): Promise<Array<PetsdbItemType<ArticleType>>> => {
+        const {start: arrayBegin, limit} = args;
+        const arrayEnd: number = arrayBegin + limit;
+
         console.warn("------------");
         console.warn(rootValue);
         console.warn(args);
         console.warn(context);
         console.warn(graphQLType);
+
         // console.warn(args.length);
-        return articleCrud.findMany({isActive: true});
+        const articleList: Array<PetsdbItemType<ArticleType>> = await articleCrud.findMany({isActive: true});
+        return articleList.slice(arrayBegin, arrayEnd);
     },
     type: ArticleListGraphQLType,
 };
@@ -168,12 +185,8 @@ export async function getArticleClientListGraphql(
     request: FastifyRequest,
     reply: FastifyReply
 ): Promise<ExecutionResult> {
-    /*
-        const {query, pageConfig, pick} = parseRequestQuery(request);
-
-        const articleListPagination: PaginationResultType<Partial<ArticleType>> =
-            await articleCrud.findManyPaginationPartial({...query, isActive: true}, pageConfig, pick);
-    */
+    // eslint-disable-next-line prefer-object-spread
+    const {source} = Object.assign({source: encodeURIComponent(JSON.stringify({}))}, request.query);
 
     // Construct a schema, using GraphQL schema language
     const articleListSchema: GraphQLSchema = new GraphQLSchema({
@@ -185,29 +198,17 @@ export async function getArticleClientListGraphql(
         }),
     });
 
-    console.warn(articleListSchema);
-
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     reply.code(200).header(...mainResponseHeader);
 
     return graphql({
-        contextValue: {context: 2},
+        contextValue: {
+            // context: 2
+        },
         rootValue: {
-            root: "value",
+            // root: "value",
         },
         schema: articleListSchema,
-        source: `{
-  list(limit: 1, start: 2) {
-    articleType
-    title
-    id
-    slug
-    fileList {
-        name
-        size
-        duration
-    }
-  }
-}`,
+        source,
     });
 }
