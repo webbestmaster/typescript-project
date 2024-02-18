@@ -112,8 +112,28 @@ export function ClientHome(): JSX.Element {
             const data = await fetchX<UnknownObjectType>(
                 `${apiUrl.clientArticlePaginationGraphQlGet}?${queriesAsString}`,
                 {
-                    required: [],
                     type: "object",
+                    /*
+                     * Properties: {
+                     *     data: {
+                     *         type: "object",
+                     *         properties: {
+                     *             articlePagination: {
+                     *                 additionalProperties: true,
+                     *                 properties: {
+                     *                     pageIndex: {type: "number"},
+                     *                     pageSize: {type: "number"},
+                     *                     totalItemCount: {type: "number"},
+                     *                     totalPageCount: {type: "number"},
+                     *                 },
+                     *                 required: ["pageIndex", "pageSize", "totalItemCount", "totalPageCount"],
+                     *                 type: "object",
+                     *             },
+                     *         },
+                     *     },
+                     * },
+                     * required: ["data"],
+                     */
                 },
                 {
                     credentials: "include",
