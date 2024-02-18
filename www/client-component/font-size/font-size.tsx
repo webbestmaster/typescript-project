@@ -25,11 +25,21 @@ export function FontSize(props: FontSizePropsType): JSX.Element {
 
     return (
         <div className={cls(fontSizeStyle.font_size, cssClassName)}>
-            <button className={fontSizeStyle.font_size__button} onClick={memoizedSetFontSizeMinus} type="button">
+            <button
+                className={fontSizeStyle.font_size__button}
+                onClick={memoizedSetFontSizeMinus}
+                title={`${mdFontSize - 1}px`}
+                type="button"
+            >
                 A&minus;
             </button>
 
-            <button className={fontSizeStyle.font_size__button} onClick={memoizedSetFontSizePlus} type="button">
+            <button
+                className={fontSizeStyle.font_size__button}
+                onClick={memoizedSetFontSizePlus}
+                title={`${mdFontSize + 1}px`}
+                type="button"
+            >
                 A+
             </button>
         </div>

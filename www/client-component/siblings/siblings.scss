@@ -6,7 +6,7 @@
 
 .siblings_header {
     display: block;
-    font-size: 22px;
+    font-size: 1.375em;
     font-weight: normal;
     line-height: 1.4;
     margin: 0;
@@ -30,6 +30,6 @@
     @extend %link;
 
     display: inline-block;
-    font-size: 16px;
+    font-size: 1em;
     padding: 6px 0;
 }
