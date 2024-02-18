@@ -22,12 +22,12 @@ export function ArticlePreview(props: ArticlePreviewPropsType): JSX.Element {
                 to={getArticleLinkToViewClient(slug)}
             >
                 <img
-                    alt={title}
+                    alt={titleImage.title}
                     className={articlePreviewListStyle.article_preview__header_image__back_image}
                     src={getPathToImage(titleImage.name, {height: "-", width: 300})}
                 />
                 <img
-                    alt={title}
+                    alt={titleImage.title}
                     className={articlePreviewListStyle.article_preview___header_image_image}
                     src={getPathToImage(titleImage.name, {height: "-", width: 300})}
                 />

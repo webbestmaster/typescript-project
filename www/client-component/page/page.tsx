@@ -13,8 +13,6 @@ import type {ArticleContextType} from "../article/article-context/article-contex
 import {articleContext} from "../article/article-context/article-context";
 import {getArticleLinkToViewClient} from "../article/article-helper";
 import {ReactScrollRestoration} from "../scroll-restoration/react-scroll-restoration";
-import type {ThemeContextType} from "../../provider/theme/theme-context-type";
-import {ThemeContext} from "../../provider/theme/theme-context";
 
 import pageStyle from "./page.scss";
 
@@ -28,7 +26,6 @@ export function Page(props: PagePropsType): JSX.Element {
     const {pathname} = location;
     const {slug = ""} = useParams<ExtractPathKeysType<typeof appRoute.article.path>>();
     const {setSlug = noop} = useContext<ArticleContextType>(articleContext);
-    const {mdFontSize} = useContext<ThemeContextType>(ThemeContext);
 
     useEffect(() => {
         const trimmedSlug = slug.trim();
@@ -50,7 +47,7 @@ export function Page(props: PagePropsType): JSX.Element {
     });
 
     return (
-        <div className={pageStyle.page} style={{fontSize: `${mdFontSize}px`}}>
+        <div className={pageStyle.page}>
             <Header />
 
             <div className={pageStyle.page_children}>{children}</div>

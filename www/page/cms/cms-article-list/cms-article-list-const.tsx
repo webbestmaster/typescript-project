@@ -153,7 +153,7 @@ export function getArticleTableColumnList(
             render(imageFile: ArticleFileType): JSX.Element {
                 return (
                     <img
-                        alt={imageFile.name}
+                        alt={imageFile.title}
                         height="64px"
                         src={getPathToImage(imageFile.name, {
                             height: 64,

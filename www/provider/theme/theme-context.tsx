@@ -37,7 +37,11 @@ export function ThemeProvider(props: ThemeContextPropsType): JSX.Element {
 
     return (
         <ThemeContextProvider value={providedData}>
-            <div className={themeContextStyle.theme_context} data-theme-name={themeName}>
+            <div
+                className={themeContextStyle.theme_context}
+                data-theme-name={themeName}
+                style={{fontSize: `${mdFontSize}px`}}
+            >
                 {children}
             </div>
         </ThemeContextProvider>
