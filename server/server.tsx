@@ -12,6 +12,7 @@ import {fastifyMultipart} from "@fastify/multipart";
 import {fastifySecureSession, type SecureSessionPluginOptions} from "@fastify/secure-session";
 import type {FastifyError} from "@fastify/error";
 import fastifyConstructor, {type FastifyRequest, type FastifyReply} from "fastify";
+import type {ExecutionResult} from "graphql";
 
 import {appRoute} from "../www/component/app/app-route";
 
@@ -42,7 +43,7 @@ import {type GetExtraFilesType, removeExtraStaticFiles} from "./file/extra-stati
 import {makeDirectory, tryToRemoveDirectory} from "./file/directory";
 import type {PaginationResultType} from "./data-base/data-base-type";
 import {
-    type ArticlePaginationGraphQlType,
+    // type ArticlePaginationGraphQlType,
     getAdminArticlePaginationGraphQl,
     getClientArticlePaginationGraphQl,
 } from "./article/article-api-graphql";
@@ -118,7 +119,8 @@ async function innerInitialization(): Promise<undefined> {
     fastify.get(apiUrl.articleClientUrlListGet, getArticleClientUrlList);
     fastify.get(
         apiUrl.adminArticlePaginationGraphQlGet,
-        adminOnly<ArticlePaginationGraphQlType>(getAdminArticlePaginationGraphQl)
+        adminOnly<ExecutionResult>(getAdminArticlePaginationGraphQl)
+        // adminOnly<ArticlePaginationGraphQlType>(getAdminArticlePaginationGraphQl)
     );
     fastify.get(apiUrl.clientArticlePaginationGraphQlGet, getClientArticlePaginationGraphQl);
     fastify.get(apiUrl.clientSearchArticle, getArticleClientListPaginationPick);

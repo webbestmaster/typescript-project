@@ -17,6 +17,7 @@ import {
     GraphQLBoolean,
     type GraphQLResolveInfo,
     type GraphQLFieldConfig,
+    type ExecutionResult,
 } from "graphql";
 
 import {mainResponseHeader} from "../const";
@@ -257,7 +258,8 @@ function parseGraphQlRequestQuery(request: FastifyRequest): ParsedGraphQlRequest
 
 async function getArticlePaginationGraphQl(
     parsedGraphQlRequestQuery: ParsedGraphQlRequestQueryType
-): Promise<ArticlePaginationGraphQlType> {
+    // ): Promise<ArticlePaginationGraphQlType> {
+): Promise<ExecutionResult> {
     const {source, query, pagination} = parsedGraphQlRequestQuery;
 
     return graphql({
@@ -270,14 +272,15 @@ async function getArticlePaginationGraphQl(
         },
         schema: articlePaginationSchema,
         source,
-    }) as Promise<ArticlePaginationGraphQlType>;
+    });
 }
 
 // eslint-disable-next-line id-length, require-await
 export async function getAdminArticlePaginationGraphQl(
     request: FastifyRequest,
     reply: FastifyReply
-): Promise<ArticlePaginationGraphQlType> {
+    // ): Promise<ArticlePaginationGraphQlType> {
+): Promise<ExecutionResult> {
     // eslint-disable-next-line prefer-object-spread
     const {source, query, pagination} = parseGraphQlRequestQuery(request);
 
@@ -294,7 +297,8 @@ export async function getAdminArticlePaginationGraphQl(
 export async function getClientArticlePaginationGraphQl(
     request: FastifyRequest,
     reply: FastifyReply
-): Promise<ArticlePaginationGraphQlType> {
+    // ): Promise<ArticlePaginationGraphQlType> {
+): Promise<ExecutionResult> {
     // eslint-disable-next-line prefer-object-spread
     const {source, query, pagination} = parseGraphQlRequestQuery(request);
 
