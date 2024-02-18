@@ -1,7 +1,7 @@
-/* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
+/* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position */
 
 import type {FastifyReply, FastifyRequest} from "fastify";
-import type {PetsdbItemType} from "petsdb";
+import type {PetsdbQueryType, PetsdbReadPageConfigType} from "petsdb";
 
 import {
     graphql,
@@ -11,7 +11,7 @@ import {
     GraphQLInt,
     GraphQLFloat,
     GraphQLList,
-    type ExecutionResult,
+    // type ExecutionResult,
     // GraphQLNonNull,
     GraphQLEnumType,
     GraphQLBoolean,
@@ -20,6 +20,8 @@ import {
 } from "graphql";
 
 import {mainResponseHeader} from "../const";
+import {defaultPaginationQuery} from "../data-base/data-base-const";
+import type {PaginationResultType} from "../data-base/data-base-type";
 
 import {articleCrud} from "./article";
 import {
@@ -27,8 +29,19 @@ import {
     ArticleFileTypeEnum,
     type ArticleType,
     ArticleTypeEnum,
+    type ParsedGraphQlRequestQueryType,
     SubDocumentListViewTypeEnum,
 } from "./article-type";
+import {tryQueryStringToRegExp} from "./article-util";
+
+type ListTypeContextValueType = Record<string, unknown>;
+
+interface ListTypeRootValueType {
+    pagination: ParsedGraphQlRequestQueryType["pagination"];
+    query: ParsedGraphQlRequestQueryType["query"];
+}
+
+type ListTypeArgumentsType = Record<string, unknown>;
 
 const articleTypeEnumValueMap: Record<keyof typeof ArticleTypeEnum, {value: ArticleTypeEnum}> = {
     article: {value: ArticleTypeEnum.article},
@@ -63,18 +76,10 @@ const SubDocumentListViewTypeEnumGraphQLType = new GraphQLEnumType({
 });
 
 const articleFileTypeEnumValueMap: Record<keyof typeof ArticleFileTypeEnum, {value: ArticleFileTypeEnum}> = {
-    audio: {
-        value: ArticleFileTypeEnum.audio,
-    },
-    image: {
-        value: ArticleFileTypeEnum.image,
-    },
-    unknown: {
-        value: ArticleFileTypeEnum.unknown,
-    },
-    video: {
-        value: ArticleFileTypeEnum.video,
-    },
+    audio: {value: ArticleFileTypeEnum.audio},
+    image: {value: ArticleFileTypeEnum.image},
+    unknown: {value: ArticleFileTypeEnum.unknown},
+    video: {value: ArticleFileTypeEnum.video},
 };
 
 const ArticleFileTypeEnumGraphQLType = new GraphQLEnumType({
@@ -133,40 +138,61 @@ const ArticleGraphQLType: GraphQLObjectType<ArticleType, unknown> = new GraphQLO
     name: "ArticleGraphQLType",
 });
 
-const ArticleListGraphQLType = new GraphQLList(ArticleGraphQLType);
+type ArticlePaginationSortType = Record<string, {type: typeof GraphQLInt}>;
 
-const ListType: GraphQLFieldConfig<
-    {
-        /* root: string */
+const ArticlePaginationSortGraphQLType: GraphQLObjectType<ArticlePaginationSortType, unknown> = new GraphQLObjectType<
+    ArticlePaginationSortType,
+    unknown
+>({
+    fields: Object.keys(ArticleGraphQLType.getFields()).reduce<ArticlePaginationSortType>(
+        (accumulator: ArticlePaginationSortType, key: string): ArticlePaginationSortType => {
+            accumulator[key] = {type: GraphQLInt};
+            return accumulator;
+        },
+        {}
+    ),
+    name: "ArticlePaginationSortGraphQLType",
+});
+
+const ArticlePaginationGraphQLType: GraphQLObjectType<
+    PaginationResultType<ArticleType>,
+    unknown
+> = new GraphQLObjectType<PaginationResultType<ArticleType>, unknown>({
+    fields: {
+        list: {type: new GraphQLList(ArticleGraphQLType)},
+        pageIndex: {type: GraphQLInt},
+        pageSize: {type: GraphQLInt},
+        sort: {type: ArticlePaginationSortGraphQLType},
+        totalItemCount: {type: GraphQLInt},
+        totalPageCount: {type: GraphQLInt},
     },
-    {
-        /* context: number */
-    },
-    {limit: number; start: number}
+    name: "ArticlePaginationGraphQLType",
+});
+
+const ArticlePaginationResolver: GraphQLFieldConfig<
+    ListTypeRootValueType,
+    ListTypeContextValueType,
+    ListTypeArgumentsType
 > = {
     args: {
-        limit: {
-            type: GraphQLInt,
-        },
-        start: {
-            type: GraphQLInt,
-        },
+        // limit: {
+        //     type: GraphQLInt,
+        // },
+        // start: {
+        //     type: GraphQLInt,
+        // },
     },
     // eslint-disable-next-line @typescript-eslint/max-params
     resolve: async (
-        // root valur type => "GraphQLObjectType<Record<string, string>"
-        rootValue: {
-            // root: string
-        },
-        args: {limit: number; start: number},
-        context: {
-            // context: number
-        },
+        // root value type => "GraphQLObjectType<Record<string, string>"
+        rootValue: ListTypeRootValueType,
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        args: ListTypeArgumentsType,
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        context: ListTypeContextValueType,
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         graphQLType: GraphQLResolveInfo
-    ): Promise<Array<PetsdbItemType<ArticleType>>> => {
-        const {start: arrayBegin, limit} = args;
-        const arrayEnd: number = arrayBegin + limit;
-
+    ): Promise<PaginationResultType<ArticleType>> => {
         console.warn("------------");
         console.warn(rootValue);
         console.warn(args);
@@ -174,29 +200,65 @@ const ListType: GraphQLFieldConfig<
         console.warn(graphQLType);
 
         // console.warn(args.length);
-        const articleList: Array<PetsdbItemType<ArticleType>> = await articleCrud.findMany({isActive: true});
-        return articleList.slice(arrayBegin, arrayEnd);
+        const articleList: PaginationResultType<ArticleType> = await articleCrud.findManyPagination(
+            rootValue.query,
+            rootValue.pagination
+        );
+
+        return articleList;
     },
-    type: ArticleListGraphQLType,
+    type: ArticlePaginationGraphQLType,
 };
+
+// Construct a schema, using GraphQL schema language
+const articlePaginationSchema: GraphQLSchema = new GraphQLSchema({
+    query: new GraphQLObjectType<ListTypeRootValueType, ListTypeContextValueType>({
+        fields: {
+            articlePagination: ArticlePaginationResolver,
+        },
+        name: "articlePaginationSchema",
+    }),
+});
+
+function parseGraphQlRequestQuery(request: FastifyRequest): ParsedGraphQlRequestQueryType {
+    // eslint-disable-next-line prefer-object-spread
+    const {pagination, source, query} = Object.assign(
+        {
+            pagination: JSON.stringify(defaultPaginationQuery),
+            query: JSON.stringify({}),
+            source: "",
+        },
+        request.query
+    );
+
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const paginationParsed: PetsdbReadPageConfigType<ArticleType> = JSON.parse(pagination);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const queryParsed: PetsdbQueryType<ArticleType> = JSON.parse(query);
+
+    // eslint-disable-next-line no-loops/no-loops, guard-for-in
+    for (const queryKey in queryParsed) {
+        const queryValue = {...queryParsed}[queryKey];
+
+        if (typeof queryValue === "string") {
+            Object.assign(queryParsed, {[queryKey]: tryQueryStringToRegExp(queryValue)});
+        }
+    }
+
+    return {
+        pagination: paginationParsed,
+        query: queryParsed,
+        source,
+    };
+}
 
 // eslint-disable-next-line id-length, require-await
 export async function getArticleClientListGraphql(
     request: FastifyRequest,
     reply: FastifyReply
-): Promise<ExecutionResult> {
+): Promise<{data: {articlePagination: PaginationResultType<Partial<ArticleType>>}}> {
     // eslint-disable-next-line prefer-object-spread
-    const {source} = Object.assign({source: encodeURIComponent(JSON.stringify({}))}, request.query);
-
-    // Construct a schema, using GraphQL schema language
-    const articleListSchema: GraphQLSchema = new GraphQLSchema({
-        query: new GraphQLObjectType<{root: string}, {context: number}>({
-            fields: {
-                list: ListType,
-            },
-            name: "ArticleListQueryType",
-        }),
-    });
+    const {source, query, pagination} = parseGraphQlRequestQuery(request);
 
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     reply.code(200).header(...mainResponseHeader);
@@ -206,9 +268,10 @@ export async function getArticleClientListGraphql(
             // context: 2
         },
         rootValue: {
-            // root: "value",
+            pagination,
+            query,
         },
-        schema: articleListSchema,
+        schema: articlePaginationSchema,
         source,
-    });
+    }) as Promise<{data: {articlePagination: PaginationResultType<Partial<ArticleType>>}}>;
 }

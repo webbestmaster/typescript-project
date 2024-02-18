@@ -74,3 +74,9 @@ export interface ParsedRequestQueryType {
     pick: Array<keyof ArticleType>;
     query: PetsdbQueryType<ArticleType>;
 }
+
+export interface ParsedGraphQlRequestQueryType {
+    pagination: PetsdbReadPageConfigType<ArticleType>;
+    query: PetsdbQueryType<ArticleType>;
+    source: string;
+}

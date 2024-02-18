@@ -21,17 +21,34 @@ export function ClientHome(): JSX.Element {
     useEffect(() => {
         (async (): Promise<void> => {
             const resultQueries: Record<string, string> = {
+                pagination: JSON.stringify({
+                    pageIndex: 0,
+                    pageSize: 100,
+                    sort: {title: 1},
+                }),
+                query: JSON.stringify({
+                    title: /article \d of 2/giu.toString(),
+                }),
                 source: `{
-  list(limit: 4, start: 2) {
-    articleType
-    title
-    id
-    slug
-    fileList {
+  articlePagination {
+    list {
+      articleType
+      title
+      id
+      slug
+      fileList {
         name
         size
         duration
+      }
     }
+    sort {
+      title
+    }
+    pageIndex,
+    pageSize,
+    totalItemCount,
+    totalPageCount,
   }
 }`,
             };
@@ -39,7 +56,7 @@ export function ClientHome(): JSX.Element {
             const queriesAsString: string = new URLSearchParams(resultQueries).toString();
 
             const data = await fetchX<UnknownObjectType>(
-                `${apiUrl.clientArticleListGetGraphQL}?${queriesAsString}`,
+                `${apiUrl.adminArticlePaginationGraphQLGet}?${queriesAsString}`,
                 {
                     required: [],
                     type: "object",

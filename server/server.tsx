@@ -112,7 +112,10 @@ async function innerInitialization(): Promise<undefined> {
     fastify.get(apiUrl.imageGet, getImage);
     fastify.get(apiUrl.clientArticleContextGet, getClientArticleContextData);
     fastify.get(apiUrl.articleClientUrlListGet, getArticleClientUrlList);
-    fastify.get(apiUrl.clientArticleListGetGraphQL, getArticleClientListGraphql);
+    fastify.get(
+        apiUrl.adminArticlePaginationGraphQLGet,
+        adminOnly<{data: {articlePagination: PaginationResultType<Partial<ArticleType>>}}>(getArticleClientListGraphql)
+    );
     fastify.get(apiUrl.clientSearchArticle, getArticleClientListPaginationPick);
     fastify.post(apiUrl.clientMakePdf, getPdf);
     fastify.get(apiUrl.removeExtraStaticFilesGet, adminOnly<GetExtraFilesType>(removeExtraStaticFiles));
