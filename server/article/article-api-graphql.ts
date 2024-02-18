@@ -34,6 +34,10 @@ import {
 } from "./article-type";
 import {tryQueryStringToRegExp} from "./article-util";
 
+export interface ArticlePaginationGraphQlType {
+    data: {articlePagination: PaginationResultType<Partial<ArticleType>>};
+}
+
 type ListTypeContextValueType = Record<string, unknown>;
 
 interface ListTypeRootValueType {
@@ -199,7 +203,6 @@ const ArticlePaginationResolver: GraphQLFieldConfig<
         console.warn(context);
         console.warn(graphQLType);
 
-        // console.warn(args.length);
         const articleList: PaginationResultType<ArticleType> = await articleCrud.findManyPagination(
             rootValue.query,
             rootValue.pagination
@@ -252,16 +255,10 @@ function parseGraphQlRequestQuery(request: FastifyRequest): ParsedGraphQlRequest
     };
 }
 
-// eslint-disable-next-line id-length, require-await
-export async function getArticleClientListGraphql(
-    request: FastifyRequest,
-    reply: FastifyReply
-): Promise<{data: {articlePagination: PaginationResultType<Partial<ArticleType>>}}> {
-    // eslint-disable-next-line prefer-object-spread
-    const {source, query, pagination} = parseGraphQlRequestQuery(request);
-
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    reply.code(200).header(...mainResponseHeader);
+async function getArticlePaginationGraphQl(
+    parsedGraphQlRequestQuery: ParsedGraphQlRequestQueryType
+): Promise<ArticlePaginationGraphQlType> {
+    const {source, query, pagination} = parsedGraphQlRequestQuery;
 
     return graphql({
         contextValue: {
@@ -273,5 +270,40 @@ export async function getArticleClientListGraphql(
         },
         schema: articlePaginationSchema,
         source,
-    }) as Promise<{data: {articlePagination: PaginationResultType<Partial<ArticleType>>}}>;
+    }) as Promise<ArticlePaginationGraphQlType>;
+}
+
+// eslint-disable-next-line id-length, require-await
+export async function getAdminArticlePaginationGraphQl(
+    request: FastifyRequest,
+    reply: FastifyReply
+): Promise<ArticlePaginationGraphQlType> {
+    // eslint-disable-next-line prefer-object-spread
+    const {source, query, pagination} = parseGraphQlRequestQuery(request);
+
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    reply.code(200).header(...mainResponseHeader);
+
+    return getArticlePaginationGraphQl({
+        pagination,
+        query,
+        source,
+    });
+}
+
+export async function getClientArticlePaginationGraphQl(
+    request: FastifyRequest,
+    reply: FastifyReply
+): Promise<ArticlePaginationGraphQlType> {
+    // eslint-disable-next-line prefer-object-spread
+    const {source, query, pagination} = parseGraphQlRequestQuery(request);
+
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    reply.code(200).header(...mainResponseHeader);
+
+    return getArticlePaginationGraphQl({
+        pagination,
+        query: {...query, isActive: true},
+        source,
+    });
 }

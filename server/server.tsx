@@ -41,7 +41,11 @@ import {rootArticleSlug} from "./article/article-const";
 import {type GetExtraFilesType, removeExtraStaticFiles} from "./file/extra-static-files";
 import {makeDirectory, tryToRemoveDirectory} from "./file/directory";
 import type {PaginationResultType} from "./data-base/data-base-type";
-import {getArticleClientListGraphql} from "./article/article-api-graphql";
+import {
+    type ArticlePaginationGraphQlType,
+    getAdminArticlePaginationGraphQl,
+    getClientArticlePaginationGraphQl,
+} from "./article/article-api-graphql";
 
 const isMakeStaticSite = env.MAKE_STATIC_SITE === "TRUE";
 
@@ -113,9 +117,10 @@ async function innerInitialization(): Promise<undefined> {
     fastify.get(apiUrl.clientArticleContextGet, getClientArticleContextData);
     fastify.get(apiUrl.articleClientUrlListGet, getArticleClientUrlList);
     fastify.get(
-        apiUrl.adminArticlePaginationGraphQLGet,
-        adminOnly<{data: {articlePagination: PaginationResultType<Partial<ArticleType>>}}>(getArticleClientListGraphql)
+        apiUrl.adminArticlePaginationGraphQlGet,
+        adminOnly<ArticlePaginationGraphQlType>(getAdminArticlePaginationGraphQl)
     );
+    fastify.get(apiUrl.clientArticlePaginationGraphQlGet, getClientArticlePaginationGraphQl);
     fastify.get(apiUrl.clientSearchArticle, getArticleClientListPaginationPick);
     fastify.post(apiUrl.clientMakePdf, getPdf);
     fastify.get(apiUrl.removeExtraStaticFilesGet, adminOnly<GetExtraFilesType>(removeExtraStaticFiles));

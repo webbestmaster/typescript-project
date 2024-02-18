@@ -27,13 +27,14 @@ export function ClientHome(): JSX.Element {
                     sort: {title: 1},
                 }),
                 query: JSON.stringify({
-                    title: /article \d of 2/giu.toString(),
+                    // Title: /article \d of 2/giu.toString(),
                 }),
                 source: `{
   articlePagination {
     list {
       articleType
       title
+      isActive
       id
       slug
       fileList {
@@ -56,7 +57,60 @@ export function ClientHome(): JSX.Element {
             const queriesAsString: string = new URLSearchParams(resultQueries).toString();
 
             const data = await fetchX<UnknownObjectType>(
-                `${apiUrl.adminArticlePaginationGraphQLGet}?${queriesAsString}`,
+                `${apiUrl.adminArticlePaginationGraphQlGet}?${queriesAsString}`,
+                {
+                    required: [],
+                    type: "object",
+                },
+                {
+                    credentials: "include",
+                    method: FetchMethodEnum.get,
+                }
+            );
+            console.log(data);
+        })();
+    }, []);
+
+    useEffect(() => {
+        (async (): Promise<void> => {
+            const resultQueries: Record<string, string> = {
+                pagination: JSON.stringify({
+                    pageIndex: 0,
+                    pageSize: 100,
+                    sort: {title: 1},
+                }),
+                query: JSON.stringify({
+                    // Title: /article \d of 2/giu.toString(),
+                }),
+                source: `{
+  articlePagination {
+    list {
+      articleType
+      title
+      id
+      slug
+      isActive
+      fileList {
+        name
+        size
+        duration
+      }
+    }
+    sort {
+      title
+    }
+    pageIndex,
+    pageSize,
+    totalItemCount,
+    totalPageCount,
+  }
+}`,
+            };
+
+            const queriesAsString: string = new URLSearchParams(resultQueries).toString();
+
+            const data = await fetchX<UnknownObjectType>(
+                `${apiUrl.clientArticlePaginationGraphQlGet}?${queriesAsString}`,
                 {
                     required: [],
                     type: "object",
