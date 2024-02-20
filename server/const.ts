@@ -20,6 +20,7 @@ export const apiUrl = {
     getUser: "/api/auth/get-user",
     imageGet: "/api-image/:size/:fileName" as const,
     login: "/api/auth/login",
+    logout: "/api/auth/logout",
     removeExtraStaticFilesGet: "/api/remove-extra-static-files",
 };
 

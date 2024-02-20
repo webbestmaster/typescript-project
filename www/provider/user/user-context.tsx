@@ -1,5 +1,3 @@
-/* global location */
-
 import {createContext, useMemo, useState, useContext, useEffect, type ReactNode} from "react";
 
 import {getAutoAuthLogin} from "../../service/auth/auth-api";
@@ -34,13 +32,13 @@ export function UserProvider(props: UserProviderPropsType): JSX.Element {
     }, [isInProgressAutoLogin, user]);
 
     useEffect(() => {
-        if (typeof location === "object" && location.pathname.includes("/cms/")) {
-            executeAutoLogin()
-                .then((loginResponse: LoginResponseType) => {
-                    setUser(loginResponse.user);
-                })
-                .catch(throwError);
-        }
+        // A if ( typeof location === "object" && location.pathname.includes("/cms/")) {
+        executeAutoLogin()
+            .then((loginResponse: LoginResponseType) => {
+                setUser(loginResponse.user);
+            })
+            .catch(throwError);
+        // }
     }, [executeAutoLogin]);
 
     return <UserContextProvider value={providedData}>{children}</UserContextProvider>;

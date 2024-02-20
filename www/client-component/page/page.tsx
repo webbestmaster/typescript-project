@@ -14,6 +14,8 @@ import {articleContext} from "../article/article-context/article-context";
 import {getArticleLinkToViewClient} from "../article/article-helper";
 import {ReactScrollRestoration} from "../scroll-restoration/react-scroll-restoration";
 
+import {LoginForm} from "../auth/login-form/login-form";
+
 import pageStyle from "./page.scss";
 
 interface PagePropsType {
@@ -54,6 +56,8 @@ export function Page(props: PagePropsType): JSX.Element {
 
             <Footer />
             <ReactScrollRestoration />
+
+            <LoginForm />
         </div>
     );
 }

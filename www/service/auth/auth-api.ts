@@ -11,6 +11,13 @@ export async function loginUser(login: string, password: string): Promise<LoginR
     });
 }
 
+export async function logoutUser(): Promise<LoginResponseType> {
+    return fetchX<LoginResponseType>(apiUrl.logout, loginResponseSchema, {
+        body: JSON.stringify({}),
+        method: FetchMethodEnum.post,
+    });
+}
+
 export async function getAutoAuthLogin(): Promise<LoginResponseType> {
     return fetchX<LoginResponseType>(apiUrl.getUser, loginResponseSchema, {
         credentials: "include",

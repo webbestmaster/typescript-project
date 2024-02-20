@@ -16,7 +16,7 @@ import type {ExecutionResult} from "graphql";
 
 import {appRoute} from "../www/component/app/app-route";
 
-import {getAutoAuthLogin, postAuthLogin} from "./auth/auth-api";
+import {getAutoAuthLogin, postAuthLogin, postAuthLogout} from "./auth/auth-api";
 import {getHtmlCallBack} from "./ssr/ssr";
 import {secretKey} from "./key";
 import {apiUrl, serverPort, siteCookieKey} from "./const";
@@ -104,6 +104,7 @@ async function innerInitialization(): Promise<undefined> {
 
     // API
     fastify.post(apiUrl.login, postAuthLogin);
+    fastify.post(apiUrl.logout, postAuthLogout);
     fastify.get(apiUrl.getUser, getAutoAuthLogin);
     fastify.get(
         apiUrl.adminArticleListPagination,

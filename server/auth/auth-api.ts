@@ -86,3 +86,25 @@ export async function getAutoAuthLogin(request: FastifyRequest, reply: FastifyRe
 
     return loginResponse;
 }
+
+// eslint-disable-next-line @typescript-eslint/require-await
+export async function postAuthLogout(
+    request: FastifyRequest<{Body?: string}>,
+    reply: FastifyReply
+): Promise<LoginResponseType> {
+    const {session} = request;
+
+    session.set(cookieFieldUserId, "");
+
+    const loginResponse: LoginResponseType = {
+        user: {
+            id: "",
+            login: "",
+            role: UserRoleEnum.user,
+        },
+    };
+
+    reply.code(200).header(...mainResponseHeader);
+
+    return loginResponse;
+}
