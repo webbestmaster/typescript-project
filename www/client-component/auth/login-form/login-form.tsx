@@ -59,9 +59,13 @@ export function LoginForm(): JSX.Element {
                 .then((loginResponse: LoginResponseType) => {
                     const {user} = loginResponse;
 
+                    console.log(loginResponse);
+
                     userContext.setUser(user);
                 })
-                .catch(throwError);
+                .catch((error: Error) => {
+                    console.log(error);
+                });
         },
         [registerHook, email, login, password, userContext]
     );

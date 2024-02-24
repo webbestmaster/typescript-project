@@ -5,6 +5,23 @@ import type {LoginResponseType} from "./auth-type";
 export const loginResponseSchema: JSONSchemaType<LoginResponseType> = {
     additionalProperties: false,
     properties: {
+        errorList: {
+            items: {
+                properties: {
+                    langKey: {
+                        type: "string",
+                    },
+                    langValue: {
+                        additionalProperties: {type: "string"},
+                        required: [],
+                        type: "object",
+                    },
+                },
+                required: ["langKey", "langValue"],
+                type: "object",
+            },
+            type: "array",
+        },
         user: {
             properties: {
                 id: {type: "string"},
@@ -15,6 +32,6 @@ export const loginResponseSchema: JSONSchemaType<LoginResponseType> = {
             type: "object",
         },
     },
-    required: ["user"],
+    required: ["user", "errorList"],
     type: "object",
 };

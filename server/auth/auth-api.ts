@@ -40,6 +40,7 @@ export async function postAuthLogin(
     session.options({maxAge: 1000 * 60 * 60});
 
     const loginResponse: LoginResponseType = {
+        errorList: [],
         user: {
             id: user.id,
             login: user.login,
@@ -53,7 +54,10 @@ export async function postAuthLogin(
 }
 
 export async function getAutoAuthLogin(request: FastifyRequest, reply: FastifyReply): Promise<LoginResponseType> {
-    const defaultLoginResponse: LoginResponseType = {user: {id: "", login: "", role: UserRoleEnum.user}};
+    const defaultLoginResponse: LoginResponseType = {
+        errorList: [],
+        user: {id: "", login: "", role: UserRoleEnum.user},
+    };
     const {session} = request;
     const userId = String(session.get(cookieFieldUserId) ?? "");
 
@@ -74,6 +78,7 @@ export async function getAutoAuthLogin(request: FastifyRequest, reply: FastifyRe
     }
 
     const loginResponse: LoginResponseType = {
+        errorList: [],
         user: {
             id: user.id,
             login: user.login,
@@ -95,6 +100,7 @@ export function postAuthLogout(request: FastifyRequest<{Body?: string}>, reply: 
     session.set(cookieFieldUserId, "");
 
     const loginResponse: LoginResponseType = {
+        errorList: [],
         user: {
             id: "",
             login: "",
@@ -119,17 +125,39 @@ export async function postAuthRegister(
     const {login, password, email} = parsedData;
 
     if (typeof email !== "string" || typeof login !== "string" || typeof password !== "string") {
-        reply.code(400);
+        reply.code(400).header(...mainResponseHeader);
 
-        throw new Error("Login, email or password is not define.");
+        const registerErrorResponse: LoginResponseType = {
+            errorList: [
+                {
+                    langKey: "SEARCH__NOTHING_FOUND",
+                    langValue: {},
+                },
+            ],
+            user: {
+                id: "",
+                login: "",
+                role: UserRoleEnum.user,
+            },
+        };
+
+        return registerErrorResponse;
+
+        // Throw new Error("Login, email or password is not define.");
     }
 
     const userInDataBase = await authCrud.findOne({login});
 
     if (userInDataBase) {
-        reply.code(400);
+        reply.code(400).header(...mainResponseHeader);
 
         const registerErrorResponse: LoginResponseType = {
+            errorList: [
+                {
+                    langKey: "EMPTY__THERE_IS_NOTHING_HERE_YET",
+                    langValue: {},
+                },
+            ],
             user: {
                 id: "",
                 login: "",
@@ -153,6 +181,7 @@ export async function postAuthRegister(
     session.options({maxAge: 1000 * 60 * 60});
 
     const loginResponse: LoginResponseType = {
+        errorList: [],
         user: {
             id: createdUserId,
             login,
