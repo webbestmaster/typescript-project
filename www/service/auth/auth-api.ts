@@ -4,9 +4,9 @@ import {apiUrl} from "../../../server/const";
 import type {LoginResponseType} from "./auth-type";
 import {loginResponseSchema} from "./auth-const";
 
-export async function loginUser(login: string, password: string): Promise<LoginResponseType> {
+export async function loginUser(userData: Record<"login" | "password", string>): Promise<LoginResponseType> {
     return fetchX<LoginResponseType>(apiUrl.login, loginResponseSchema, {
-        body: JSON.stringify({login, password}),
+        body: JSON.stringify(userData),
         method: FetchMethodEnum.post,
     });
 }
@@ -14,6 +14,15 @@ export async function loginUser(login: string, password: string): Promise<LoginR
 export async function logoutUser(): Promise<LoginResponseType> {
     return fetchX<LoginResponseType>(apiUrl.logout, loginResponseSchema, {
         body: JSON.stringify({}),
+        method: FetchMethodEnum.post,
+    });
+}
+
+export async function registerUser(
+    userData: Record<"email" | "login" | "password", string>
+): Promise<LoginResponseType> {
+    return fetchX<LoginResponseType>(apiUrl.register, loginResponseSchema, {
+        body: JSON.stringify(userData),
         method: FetchMethodEnum.post,
     });
 }

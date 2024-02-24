@@ -21,6 +21,7 @@ export const apiUrl = {
     imageGet: "/api-image/:size/:fileName" as const,
     login: "/api/auth/login",
     logout: "/api/auth/logout",
+    register: "/api/auth/register",
     removeExtraStaticFilesGet: "/api/remove-extra-static-files",
 };
 
