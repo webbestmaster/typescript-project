@@ -5,24 +5,43 @@
 $ wasm-pack build -t web --release
 ```
 
-2 - add the pkg to project folder, just copy folder and rename
+2 - add into webpack config
+```typescript
+import {type Configuration} from "webpack";
 
-3 - add package to package.json
+const webpackConfig: Configuration = {
+    experiments: {
+        asyncWebAssembly: true,
+        syncWebAssembly: true,
+    },
+    module: {
+        rules: [
+            {
+                test: /\.wasm$/u,
+                type: "asset/inline",
+            },
+        ]
+    },
+};
+```
+
+3 - add the pkg to project folder, just copy folder and rename
+
+4 - add package to package.json into `dependencies`
 ```json
 {
-  "name": "my-project-name",
   "dependencies": {
-    "rust-wasm": "file:./wasm/rust-wasm"
+    "rust-wasm": "file:./path/to/rust-wasm-folder"
   }
 }
 ```
 
-4 - install dependencies
+5 - install dependencies
 ```bash
 $ npm i
 ```
 
-5 - run code, example
+6 - run code, example
 ```typescript
 import initWasm, {get_available_move_path_list} from "rust-wasm";
 import wasmData from "rust-wasm/rust_wasm_bg.wasm";
