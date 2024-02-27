@@ -2,7 +2,7 @@
 
 1 - build the wasm for web
 ```bash
-$ wasm-pack build -t web --release
+$ wasm-pack build -t web --out-dir "./get-available-move-path-list" --release
 ```
 
 2 - add into webpack config
