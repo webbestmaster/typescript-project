@@ -106,7 +106,7 @@
     "@fastify/multipart": "^8.1.0",
     "@fastify/secure-session": "^7.1.0",
     "@fastify/static": "^7.0.1",
-    "@types/react": "^18.2.59",
+    "@types/react": "^18.2.60",
     "@types/react-dom": "^18.2.19",
     "@types/sharp": "^0.31.1",
     "ajv": "^8.12.0",
