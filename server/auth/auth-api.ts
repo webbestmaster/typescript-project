@@ -5,7 +5,6 @@ import type {LoginResponseType} from "../../www/service/auth/auth-type";
 import {getSha256HashServer} from "../util/string";
 import {UserRoleEnum} from "../../www/provider/user/user-context-type";
 import {mainResponseHeader} from "../const";
-
 import {getRandomString} from "../../www/util/string";
 
 import {authCrud} from "./auth";
