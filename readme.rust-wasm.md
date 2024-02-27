@@ -43,14 +43,14 @@ $ npm i
 
 6 - run code, example
 ```typescript
-import initWasm, {get_available_move_path_list} from "rust-wasm";
+import wasmInit, {get_available_move_path_list} from "rust-wasm";
 import wasmData from "rust-wasm/rust_wasm_bg.wasm";
 
-console.warn(initWasm);
+console.warn(wasmInit);
 console.warn(wasmData);
 
 (async () => {
-    const res = await initWasm(wasmData);
+    const res = await wasmInit(wasmData);
 
     console.warn(res);
 
