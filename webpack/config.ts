@@ -4,8 +4,8 @@ import {env} from "node:process";
 
 export const pathToStaticFileFolder = "/static/";
 
-const modeDevelopmentName = "development" as const;
-const modeProductionName = "production" as const;
+const modeDevelopmentName = "development";
+const modeProductionName = "production";
 
 export const isDevelopment: boolean = env.NODE_ENV === modeDevelopmentName;
 export const isProduction: boolean = env.NODE_ENV === modeProductionName;

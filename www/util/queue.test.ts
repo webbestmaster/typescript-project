@@ -108,7 +108,7 @@ describe("queue", () => {
         await expect(async () => {
             await queue.add(async () => {
                 await waitForTime(defaultTimeOut);
-                // eslint-disable-next-line no-throw-literal, @typescript-eslint/no-throw-literal
+                // eslint-disable-next-line no-throw-literal, @typescript-eslint/no-throw-literal, @typescript-eslint/only-throw-error
                 throw "I am an ERROR!";
             });
         }).rejects.toThrow("[Queue]: Task running with error!");

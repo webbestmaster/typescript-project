@@ -165,6 +165,7 @@
         "@typescript-eslint/lines-between-class-members": 0,
         "@typescript-eslint/block-spacing": 0,
         "@typescript-eslint/quotes": 0,
+        "@typescript-eslint/use-unknown-in-catch-callback-variable": 0,
         // TODO: enable this
         "@typescript-eslint/prefer-readonly-parameter-types": 0,
 //        "@typescript-eslint/prefer-readonly-parameter-types": [
