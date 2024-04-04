@@ -1,5 +1,7 @@
 import {default as variableStyle} from "./var.scss";
 
+// Use as * for css loader 7.x
+
 export const cssVariable = {
     maxDesktopWidth: Number.parseInt(variableStyle.maxDesktopWidth, 10),
     maxPhoneWidth: Number.parseInt(variableStyle.maxPhoneWidth, 10),
