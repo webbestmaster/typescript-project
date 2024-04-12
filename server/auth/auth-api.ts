@@ -8,7 +8,7 @@ import {mainResponseHeader} from "../const";
 import {getRandomString} from "../../www/util/string";
 
 import {authCrud} from "./auth";
-import {cookieFieldUserId} from "./auth-const";
+import {CookieFieldEnum} from "./auth-const";
 
 export async function postAuthLogin(
     request: FastifyRequest<{Body?: string}>,
@@ -35,7 +35,7 @@ export async function postAuthLogin(
         throw new Error("User Not Found.");
     }
 
-    session.set(cookieFieldUserId, user.id);
+    session.set(CookieFieldEnum.userId, user.id);
     session.options({maxAge: 1000 * 60 * 60});
 
     const loginResponse: LoginResponseType = {
@@ -58,7 +58,7 @@ export async function getAutoAuthLogin(request: FastifyRequest, reply: FastifyRe
         user: {id: "", login: "", role: UserRoleEnum.user},
     };
     const {session} = request;
-    const userId = String(session.get(cookieFieldUserId) ?? "");
+    const userId = String(session.get(CookieFieldEnum.userId) ?? "");
 
     reply.header(...mainResponseHeader);
 
@@ -85,7 +85,7 @@ export async function getAutoAuthLogin(request: FastifyRequest, reply: FastifyRe
         },
     };
 
-    session.set(cookieFieldUserId, user.id);
+    session.set(CookieFieldEnum.userId, user.id);
     session.options({maxAge: 1000 * 60 * 60});
 
     reply.code(200);
@@ -96,7 +96,7 @@ export async function getAutoAuthLogin(request: FastifyRequest, reply: FastifyRe
 export function postAuthLogout(request: FastifyRequest<{Body?: string}>, reply: FastifyReply): LoginResponseType {
     const {session} = request;
 
-    session.set(cookieFieldUserId, "");
+    session.set(CookieFieldEnum.userId, "");
 
     const loginResponse: LoginResponseType = {
         errorList: [],
@@ -176,7 +176,7 @@ export async function postAuthRegister(
         role: UserRoleEnum.user,
     });
 
-    session.set(cookieFieldUserId, createdUserId);
+    session.set(CookieFieldEnum.userId, createdUserId);
     session.options({maxAge: 1000 * 60 * 60});
 
     const loginResponse: LoginResponseType = {

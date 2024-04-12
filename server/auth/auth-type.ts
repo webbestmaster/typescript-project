@@ -1,5 +1,7 @@
 import type {UserRoleEnum} from "../../www/provider/user/user-context-type";
 
+import type {CookieFieldEnum} from "./auth-const";
+
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export type AuthUserType = {
     // eslint-disable-next-line id-match
@@ -9,3 +11,14 @@ export type AuthUserType = {
     password: string;
     role: UserRoleEnum;
 };
+
+declare module "@fastify/secure-session" {
+    /*
+     * Original is below
+     * interface SessionData {
+     *     "user": string;
+     * }
+     */
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    type SessionData = Record<CookieFieldEnum, string>;
+}

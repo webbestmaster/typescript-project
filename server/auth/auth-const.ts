@@ -1,1 +1,3 @@
-export const cookieFieldUserId = "user-id";
+export enum CookieFieldEnum {
+    userId = "user-id",
+}

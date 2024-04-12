@@ -5,7 +5,7 @@ import path from "node:path";
 
 import type {Configuration} from "webpack";
 import nodeExternals from "webpack-node-externals";
-// import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer';
+// import {BundleAnalyzerPlugin} from "webpack-bundle-analyzer";
 
 import {optimization} from "./setting/optimization";
 import {rules} from "./setting/module/rules";
@@ -132,6 +132,6 @@ const webpackConfig: Configuration = ((): Configuration => {
     throw new Error("Can not detect config");
 })();
 
-// webpackConfig?.plugins?.push(new BundleAnalyzerPlugin());
+// webpackConfig.plugins?.push(new BundleAnalyzerPlugin());
 
 export const webpackRunningConfig = {...webpackConfig, devServer};

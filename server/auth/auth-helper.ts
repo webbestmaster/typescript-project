@@ -4,8 +4,8 @@ import {UserRoleEnum} from "../../www/provider/user/user-context-type";
 import {mainResponseHeader} from "../const";
 
 import {authCrud} from "./auth";
-import {cookieFieldUserId} from "./auth-const";
 import type {AuthUserType} from "./auth-type";
+import {CookieFieldEnum} from "./auth-const";
 
 export function makeDefaultAuthUser(): AuthUserType {
     const defaultUserData: AuthUserType = {
@@ -21,7 +21,7 @@ export function makeDefaultAuthUser(): AuthUserType {
 async function getIsAdmin(request: FastifyRequest): Promise<boolean> {
     const {session} = request;
 
-    const user = await authCrud.findOne({id: String(session.get(cookieFieldUserId) ?? "")});
+    const user = await authCrud.findOne({id: String(session.get(CookieFieldEnum.userId) ?? "")});
 
     return Boolean(user && user.role === UserRoleEnum.admin);
 }
