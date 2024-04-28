@@ -30,7 +30,7 @@ export function useHotKey(
 
         document.body.addEventListener("keydown", handleBodyOnKeyPress, false);
 
-        return () => {
+        return (): void => {
             document.body.removeEventListener("keydown", handleBodyOnKeyPress, false);
         };
     }, [hasAlt, hasCtrl, hasShift, char, handleHotKey]);

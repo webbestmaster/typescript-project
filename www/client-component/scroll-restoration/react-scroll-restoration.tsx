@@ -49,7 +49,7 @@ export function ReactScrollRestoration(): JSX.Element {
             passive: true,
         });
 
-        return () => {
+        return (): void => {
             window.removeEventListener("scroll", debouncedChangeScrollTopPosition);
         };
     }, [getItemKey]);

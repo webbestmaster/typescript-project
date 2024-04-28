@@ -116,7 +116,7 @@ export function makeArticleSchema(): JSONSchemaType<ArticleType> {
         properties: articleSchemaProperties,
         required: requiredFieldList,
         type: "object",
-    };
+    } as const;
 
     return articleSchema;
 }
@@ -124,9 +124,11 @@ export function makeArticleSchema(): JSONSchemaType<ArticleType> {
 export function makeArticleSchemaPick<KeyOfArticle extends keyof ArticleType>(
     fieldList: Array<KeyOfArticle>
 ): JSONSchemaType<Pick<ArticleType, KeyOfArticle>> {
-    const articlePickedSchema: JSONSchemaType<Pick<ArticleType, KeyOfArticle>> = makeArticleSchema();
+    const articlePickedSchema: JSONSchemaType<Pick<ArticleType, KeyOfArticle>> & {
+        properties?: Record<string, unknown>;
+    } = makeArticleSchema();
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const {properties} = articlePickedSchema;
+    const {properties = {}} = articlePickedSchema;
 
     const pickedProperties: Record<string, unknown> = fieldList.reduce<Record<string, unknown>>(
         (accumulator: Record<string, unknown>, propertyName: KeyOfArticle) => {

@@ -1,6 +1,7 @@
 /* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
 
 import type {PetsdbQueryType, PetsdbReadPageConfigType} from "petsdb";
+
 export enum ArticleTypeEnum {
     article = "article", // usual article
     audioChildrenList = "audio-children-list", // get all *.mp3 files from every child and makes play list from it
@@ -80,3 +81,7 @@ export interface ParsedGraphQlRequestQueryType {
     query: PetsdbQueryType<ArticleType>;
     source: string;
 }
+//
+// export type JsonSchemaArticleType = JSONSchemaType<ArticleType> & {
+//     properties: JSONSchemaType<ArticleType>["properties"];
+// };

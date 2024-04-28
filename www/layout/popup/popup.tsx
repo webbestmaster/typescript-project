@@ -77,7 +77,7 @@ export function Popup(props: PopupPropsType): JSX.Element | null {
     useEffect(() => {
         setIsMounted(true);
 
-        return () => {
+        return (): void => {
             setIsMounted(false);
             clearTimeout(timeOutRef.current);
         };

@@ -50,7 +50,7 @@ export function Search(props: SearchPropsType): JSX.Element {
 
         document.body.addEventListener("click", handleBodyOnClick, false);
 
-        return () => {
+        return (): void => {
             document.body.removeEventListener("click", handleBodyOnClick, false);
         };
     }, [forceBlur]);

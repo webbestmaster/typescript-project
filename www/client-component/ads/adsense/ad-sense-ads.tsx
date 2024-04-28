@@ -41,7 +41,7 @@ export function AdSenseAds(props: AdSenseAdsPropsType): JSX.Element {
             setAdNodeId(getRandomString());
         }, adsPeriodUpdate);
 
-        return () => {
+        return (): void => {
             console.info(`clear setTimeout for ads, adSlotId: ${adSlotId}`);
             clearInterval(intervalId);
         };
