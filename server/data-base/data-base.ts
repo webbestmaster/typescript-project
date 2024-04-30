@@ -1,6 +1,6 @@
 /* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
 
-import Ajv, {type JSONSchemaType} from "ajv";
+import {type JSONSchemaType, Ajv} from "ajv";
 import {Petsdb, type PetsdbItemType, type PetsdbQueryType, type PetsdbReadPageConfigType} from "petsdb";
 
 import {getPartialData, makeBackUpFolder} from "./data-base-util";
