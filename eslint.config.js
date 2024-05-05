@@ -1,8 +1,21 @@
+const js = require("@eslint/js");
+const eslintConfigPrettier = require("eslint-config-prettier");
+
 // eslint-disable-next-line unicorn/prefer-module
 module.exports = [
+    // js.configs.all,
+    js.configs.recommended,
+    eslintConfigPrettier,
     {
         rules: {
-            curly: ["error", "multi"],
+            "one-var": [
+                2,
+                {
+                    "var": "always",
+                    "let": "never",
+                    "const": "never",
+                },
+            ],
         },
         // eslint-disable-next-line sort-keys
         ignores: [
