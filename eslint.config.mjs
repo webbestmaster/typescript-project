@@ -141,18 +141,18 @@ export default [
             "@typescript-eslint/use-unknown-in-catch-callback-variable": 0,
             // TODO: enable this
             "@typescript-eslint/prefer-readonly-parameter-types": 0,
-//        "@typescript-eslint/prefer-readonly-parameter-types": [
-//            2,
-//            {
-//                "allow": [
-//                    {
-//                        "from": "package",
-//                        "name": "Compiler",
-//                        "package": "webpack"
-//                    }
-//                ]
-//            }
-//        ],
+            // "@typescript-eslint/prefer-readonly-parameter-types": [
+            //    2,
+            //    {
+            //        "allow": [
+            //            {
+            //                "from": "package",
+            //                "name": "Compiler",
+            //                "package": "webpack"
+            //            }
+            //        ]
+            //    }
+            // ],
 
             // Unicorn
             "unicorn/prefer-string-replace-all": 0,
@@ -181,6 +181,7 @@ export default [
                     }
                 }
             ],
+
             // Babel, need to uncomment
             // "babel/new-cap": 2,
             // "babel/camelcase": 2,
