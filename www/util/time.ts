@@ -144,10 +144,8 @@ export function logTakenTime(prefix: string, ContextClassName: string): LogTaken
         memberName: string,
         propertyDescriptor: Readonly<PropertyDescriptor>
     ): LogTakenTimeWrapperResultType => {
-        // -- eslint-disable-next-line sonarjs/prefer-immediate-return
         const result: LogTakenTimeWrapperResultType = {
             get() {
-                // -- eslint-disable-next-line consistent-this, @typescript-eslint/no-this-alias, unicorn/no-this-assignment
                 // eslint-disable-next-line consistent-this, @typescript-eslint/no-this-alias
                 const context: unknown = this;
 
@@ -171,7 +169,6 @@ export function logTakenTime(prefix: string, ContextClassName: string): LogTaken
                     timeLog(fullLabel, "done");
                 }
 
-                // -- eslint-disable-next-line prefer-reflect
                 Object.defineProperty<unknown>(context, memberName, {
                     configurable: true,
                     value: wrapperFunction,

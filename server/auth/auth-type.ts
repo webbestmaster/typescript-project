@@ -4,7 +4,6 @@ import type {CookieFieldEnum} from "./auth-const";
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export type AuthUserType = {
-    // eslint-disable-next-line id-match
     _id?: string;
     id: string;
     login: string;

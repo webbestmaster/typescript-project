@@ -15,7 +15,6 @@ export function ShareButtonVkontakte(props: ShareButtonPropsType): JSX.Element {
         <button
             aria-label="vkontakte"
             className={shareButtonStyle.share_button__vkontakte}
-            // eslint-disable-next-line react/jsx-no-bind
             onClick={handleClick}
             type="button"
         >

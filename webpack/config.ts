@@ -1,4 +1,4 @@
-/* eslint id-match: 0, optimize-regex/optimize-regex: 0, multiline-comment-style: 0, capitalized-comments: 0 */
+/* eslint id-match: 0, multiline-comment-style: 0, capitalized-comments: 0 */
 
 import {env} from "node:process";
 

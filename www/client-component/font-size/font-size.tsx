@@ -7,7 +7,6 @@ import type {ThemeContextType} from "../../provider/theme/theme-context-type";
 import fontSizeStyle from "./font-size.scss";
 
 interface FontSizePropsType {
-    // eslint-disable-next-line unicorn/no-keyword-prefix
     readonly className?: string;
 }
 

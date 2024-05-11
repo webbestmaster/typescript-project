@@ -1,6 +1,5 @@
-/* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
+/* eslint-disable capitalized-comments */
 
-// eslint-disable-next-line import/no-named-as-default
 import Ajv, {type JSONSchemaType} from "ajv";
 import {Petsdb, type PetsdbItemType, type PetsdbQueryType, type PetsdbReadPageConfigType} from "petsdb";
 
@@ -66,7 +65,6 @@ export function makeCrud<ModelType extends Readonly<Record<string, Readonly<unkn
                 return {
                     ...paginationData,
                     list: paginationData.list.map<Partial<ModelType>>((data: ModelType): Partial<ModelType> => {
-                        // eslint-disable-next-line no-underscore-dangle
                         return getPartialData<ModelType>(data, requiredPropertyList);
                     }),
                 };
@@ -165,7 +163,6 @@ export function makeCrud<ModelType extends Readonly<Record<string, Readonly<unkn
         console.info(`Structure self check for ${dataBaseId} finished`);
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     (async (): Promise<undefined> => {
         await dataBase.run();
         await makeBackUpFolder(dataBaseId);

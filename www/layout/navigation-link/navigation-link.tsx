@@ -5,7 +5,6 @@ import {Link, useSearchParams} from "react-router-dom";
 
 export interface NavigationLinkPropsType {
     readonly children?: ReactNode;
-    // -- eslint-disable-next-line unicorn/no-keyword-prefix
     readonly className?: string;
     readonly isSaveQueries?: boolean;
     readonly queries?: Record<string, string>;

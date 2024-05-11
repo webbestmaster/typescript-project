@@ -14,7 +14,6 @@ import type {UnknownObjectType} from "../../util/type";
 import type {ArticleContextType} from "../../client-component/article/article-context/article-context-type";
 import {articleContextDataSchema} from "../../client-component/article/article-context/article-context-const";
 
-// -- eslint-disable-next-line require-await
 export async function getArticleListPagination(
     query: PetsdbQueryType<ArticleType>,
     pageConfig: PetsdbReadPageConfigType<ArticleType>
@@ -31,7 +30,6 @@ export async function getArticleListPagination(
     );
 }
 
-// -- eslint-disable-next-line require-await
 export async function getArticleListPaginationPick<Keys extends keyof ArticleType>(
     query: PetsdbQueryType<ArticleType>,
     pageConfig: PetsdbReadPageConfigType<ArticleType>,
@@ -49,7 +47,6 @@ export async function getArticleListPaginationPick<Keys extends keyof ArticleTyp
     );
 }
 
-// -- eslint-disable-next-line require-await
 export async function getArticleClientListPaginationPick<Keys extends keyof ArticleType>(
     query: PetsdbQueryType<ArticleType>,
     pageConfig: PetsdbReadPageConfigType<ArticleType>,
@@ -66,7 +63,6 @@ export async function getArticleClientListPaginationPick<Keys extends keyof Arti
     );
 }
 
-// -- eslint-disable-next-line require-await
 export async function postArticleCreate(article: ArticleType): Promise<ArticleType> {
     return fetchX<ArticleType>(apiUrl.adminArticleCreate, makeArticleSchema(), {
         body: JSON.stringify(article),
@@ -75,7 +71,6 @@ export async function postArticleCreate(article: ArticleType): Promise<ArticleTy
     });
 }
 
-// -- eslint-disable-next-line require-await
 export async function postArticleUpdate(article: ArticleType): Promise<ArticleType> {
     return fetchX<ArticleType>(apiUrl.adminArticleUpdate, makeArticleSchema(), {
         body: JSON.stringify(article),
@@ -84,7 +79,6 @@ export async function postArticleUpdate(article: ArticleType): Promise<ArticleTy
     });
 }
 
-// -- eslint-disable-next-line require-await
 export async function deleteArticle(articleId: string): Promise<UnknownObjectType> {
     return fetchX<UnknownObjectType>(
         apiUrl.adminArticleDelete.replace(":articleId", articleId),
@@ -99,7 +93,6 @@ export async function deleteArticle(articleId: string): Promise<UnknownObjectTyp
     );
 }
 
-// -- eslint-disable-next-line require-await
 export async function getArticleContextBySlug(slug: string): Promise<ArticleContextType> {
     return fetchX<ArticleContextType>(apiUrl.clientArticleContextGet.replace(":slug", slug), articleContextDataSchema, {
         credentials: "include",

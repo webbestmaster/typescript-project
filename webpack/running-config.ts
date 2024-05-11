@@ -1,4 +1,4 @@
-/* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position */
+/* eslint-disable capitalized-comments, line-comment-position */
 
 import {cwd} from "node:process";
 import path from "node:path";
@@ -111,7 +111,6 @@ const configLibraryFront: Configuration = {
 
 const configLibraryBack: Configuration = {...configLibraryFront};
 
-// eslint-disable-next-line complexity
 const webpackConfig: Configuration = ((): Configuration => {
     if (isBuildLibrary && isFront) {
         return configLibraryFront;

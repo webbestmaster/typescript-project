@@ -33,7 +33,7 @@ export async function getArticleListPagination(
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const queryParsed: PetsdbQueryType<ArticleType> = JSON.parse(decodeURIComponent(query));
 
-    // eslint-disable-next-line no-loops/no-loops, guard-for-in
+    // eslint-disable-next-line guard-for-in
     for (const queryKey in queryParsed) {
         const queryValue = {...queryParsed}[queryKey];
 
@@ -47,7 +47,6 @@ export async function getArticleListPagination(
         pageConfigParsed
     );
 
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     reply.code(200).header(...mainResponseHeader);
 
     return articleListPagination;
@@ -70,7 +69,7 @@ function parseRequestQuery(request: FastifyRequest): ParsedRequestQueryType {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const queryParsed: PetsdbQueryType<ArticleType> = JSON.parse(decodeURIComponent(query));
 
-    // eslint-disable-next-line no-loops/no-loops, guard-for-in
+    // eslint-disable-next-line guard-for-in
     for (const queryKey in queryParsed) {
         const queryValue = {...queryParsed}[queryKey];
 
@@ -82,7 +81,6 @@ function parseRequestQuery(request: FastifyRequest): ParsedRequestQueryType {
     return {pageConfig: pageConfigParsed, pick: pickParsed, query: queryParsed};
 }
 
-// eslint-disable-next-line id-length
 export async function getArticleListPaginationPick(
     request: FastifyRequest,
     reply: FastifyReply
@@ -97,7 +95,6 @@ export async function getArticleListPaginationPick(
     return articleListPagination;
 }
 
-// eslint-disable-next-line id-length
 export async function getArticleClientListPaginationPick(
     request: FastifyRequest,
     reply: FastifyReply
@@ -112,7 +109,7 @@ export async function getArticleClientListPaginationPick(
     return articleListPagination;
 }
 
-// eslint-disable-next-line complexity, max-statements
+// eslint-disable-next-line max-statements
 export async function postAdminArticleCreate(
     request: FastifyRequest<{Body?: string}>,
     reply: FastifyReply
@@ -175,7 +172,6 @@ export async function postAdminArticleCreate(
     return actualizedArticle;
 }
 
-// eslint-disable-next-line complexity, max-statements
 export async function postAdminArticleUpdate(
     request: FastifyRequest<{Body?: string}>,
     reply: FastifyReply

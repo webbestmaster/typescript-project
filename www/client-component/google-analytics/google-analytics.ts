@@ -24,7 +24,6 @@ declare global {
     }
 }
 
-// eslint-disable-next-line complexity, max-statements
 export function useGoogleAnalytics(config: GoogleAnalyticsType): null {
     const {googleAnalyticsId, pathname} = config;
     const pathnameRef = useRef<string>("");
@@ -62,12 +61,12 @@ export function useGoogleAnalytics(config: GoogleAnalyticsType): null {
 
     loadGoogleAnalyticsScript(googleAnalyticsId);
 
-    // eslint-disable-next-line unicorn/consistent-destructuring, @typescript-eslint/no-unnecessary-condition
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     window.dataLayer ||= [];
 
-    // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     function gtag(...argumentList: Array<unknown>): undefined {
-        // eslint-disable-next-line prefer-rest-params, unicorn/consistent-destructuring
+        // eslint-disable-next-line prefer-rest-params
         window.dataLayer?.push(arguments);
     }
 
@@ -76,7 +75,6 @@ export function useGoogleAnalytics(config: GoogleAnalyticsType): null {
     gtag("js", new Date());
     gtag("config", googleAnalyticsId);
 
-    // eslint-disable-next-line unicorn/consistent-destructuring
     waitForCallback(
         (): boolean => {
             return Boolean(window.ga);

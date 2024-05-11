@@ -8,7 +8,6 @@ import emptyImageSrc from "./image/empty.svg";
 import emptyStyle from "./empty.scss";
 
 interface PropsType {
-    // eslint-disable-next-line unicorn/no-keyword-prefix
     readonly className?: string;
     readonly mainText?: LangKeyType;
     readonly secondaryText?: LangKeyType;

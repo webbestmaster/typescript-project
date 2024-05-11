@@ -1,3 +1,4 @@
+/* eslint-disable sort-keys, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment */
 import eslintJs from "@eslint/js";
 import eslintConfigPrettier from "eslint-config-prettier";
 import typescriptEslint from "typescript-eslint";
@@ -7,7 +8,7 @@ import jest from "eslint-plugin-jest";
 
 export default [
     eslintJs.configs.all,
-    // js.configs.recommended,
+    // eslintJs.configs.recommended,
     ...typescriptEslint.configs.all,
     jest.configs["flat/all"],
     // ...jest.configs.all,
@@ -15,26 +16,26 @@ export default [
     eslintConfigPrettier,
     {
         languageOptions: {
-            "parserOptions": {
-                "project": [
+            parserOptions: {
+                project: [
                     "./tsconfig.json",
                 ],
-                "ecmaVersion": 2020,
-                "sourceType": "module",
-                "ecmaFeatures": {
-                    "jsx": true,
+                ecmaVersion: 2020,
+                sourceType: "module",
+                ecmaFeatures: {
+                    jsx: true,
                 },
             },
-            "globals": {
-                "JSX": true,
-                "require": true,
-                "module": true,
-                "console": true,
+            globals: {
+                JSX: true,
+                require: true,
+                module: true,
+                console: true,
             },
         },
         plugins: {
             unicorn: eslintPluginUnicorn,
-            // sonarjs: sonarjs,
+            // Sonarjs: sonarjs,
 
         },
         rules: {
@@ -43,21 +44,21 @@ export default [
             "jest/require-hook": [
                 2,
                 {
-                    "allowedFunctionCalls": [
+                    allowedFunctionCalls: [
                         "innerInitialization",
                     ],
                 },
             ],
 
-            // no-loops, need to uncomment
+            // No-loops, need to uncomment
             // "no-loops/prettier": 2,
             // "no-loops/always-return": 0,
             // "no-loops/no-loops": 2,
 
-            // optimize-regex, need to uncomment
+            // Optimize-regex, need to uncomment
             // "optimize-regex/optimize-regex": 2,
 
-            // no-use-extend-native, need to uncomment
+            // No-use-extend-native, need to uncomment
             // "no-use-extend-native/no-use-extend-native": 2,
 
             // React-hooks, need to uncomment
@@ -75,20 +76,20 @@ export default [
             "@typescript-eslint/naming-convention": [
                 2,
                 {
-                    "selector": "typeAlias",
-                    "format": [
+                    selector: "typeAlias",
+                    format: [
                         "StrictPascalCase",
                     ],
-                    "suffix": [
+                    suffix: [
                         "Type",
                     ],
                 },
                 {
-                    "selector": "enum",
-                    "format": [
+                    selector: "enum",
+                    format: [
                         "StrictPascalCase",
                     ],
-                    "suffix": [
+                    suffix: [
                         "Enum",
                     ],
                 },
@@ -96,33 +97,33 @@ export default [
             "@typescript-eslint/no-shadow": [
                 2,
                 {
-                    "builtinGlobals": false,
-                    "hoist": "all",
+                    builtinGlobals: false,
+                    hoist: "all",
                 },
             ],
             "@typescript-eslint/no-unused-vars": [
                 2,
                 {
-                    "varsIgnorePattern": "[iI]gnored",
+                    varsIgnorePattern: "[iI]gnored",
                 },
             ],
             "@typescript-eslint/no-use-before-define": 2,
             "@typescript-eslint/no-misused-promises": [
                 2,
                 {
-                    "checksVoidReturn": {
-                        "arguments": true,
-                        "attributes": true,
-                        "properties": true,
-                        "returns": true,
-                        "variables": true,
+                    checksVoidReturn: {
+                        arguments: true,
+                        attributes: true,
+                        properties: true,
+                        returns: true,
+                        variables: true,
                     },
                 },
             ],
             "@typescript-eslint/no-floating-promises": [
                 2,
                 {
-                    "ignoreIIFE": true,
+                    ignoreIIFE: true,
                 },
             ],
             "@typescript-eslint/no-unnecessary-boolean-literal-compare": 0,
@@ -164,18 +165,18 @@ export default [
             "unicorn/prevent-abbreviations": [
                 2,
                 {
-                    "replacements": {
-                        "attr": false,
-                        "attrs": false,
-                        "arg": false,
-                        "args": false,
-                        "prop": false,
-                        "props": false,
-                        "prev": false,
-                        "dev": false,
-                        "evt": false,
-                        "src": false,
-                        "ref": false,
+                    replacements: {
+                        attr: false,
+                        attrs: false,
+                        arg: false,
+                        args: false,
+                        prop: false,
+                        props: false,
+                        prev: false,
+                        dev: false,
+                        evt: false,
+                        src: false,
+                        ref: false,
                     },
                 },
             ],
@@ -191,7 +192,7 @@ export default [
             // "babel/valid-typeof": 2,
 
             // JSX-a11y, need to uncomment
-            // deprecated
+            // Deprecated
             // "jsx-a11y/label-has-for": 0,
             // "jsx-a11y/no-access-key": 2,
             // "jsx-a11y/no-autofocus": 2,
@@ -202,7 +203,7 @@ export default [
             // "filenames/match-regex": [
             //     2,
             //     "^[a-z\\.\\-\\d]+$",
-            //     true
+            //     True
             // ],
             // "filenames/match-exported": 0,
 
@@ -294,9 +295,9 @@ export default [
             "padded-blocks": [
                 2,
                 {
-                    "blocks": "never",
-                    "classes": "never",
-                    "switches": "never",
+                    blocks: "never",
+                    classes: "never",
+                    switches: "never",
                 },
             ],
             "func-style": [
@@ -312,20 +313,20 @@ export default [
                 120,
                 4,
                 {
-                    "ignoreComments": true,
-                    "ignoreUrls": true,
+                    ignoreComments: true,
+                    ignoreUrls: true,
                 },
             ],
             "quote-props": [
                 2,
                 "as-needed",
                 {
-                    "keywords": true,
-                    "unnecessary": true,
-                    "numbers": true,
+                    keywords: true,
+                    unnecessary: true,
+                    numbers: true,
                 },
             ],
-            "quotes": 0,
+            quotes: 0,
             "sort-imports": 0,
             "array-element-newline": [
                 2,
@@ -335,7 +336,7 @@ export default [
                 2,
                 {
                     "var": "always",
-                    "let": "never",
+                    let: "never",
                     "const": "never",
                 },
             ],
@@ -358,7 +359,7 @@ export default [
             "object-property-newline": [
                 2,
                 {
-                    "allowAllPropertiesOnSameLine": true,
+                    allowAllPropertiesOnSameLine: true,
                 },
             ],
             "multiline-ternary": 0,
@@ -369,7 +370,7 @@ export default [
             "newline-per-chained-call": [
                 2,
                 {
-                    "ignoreChainWithDepth": 4,
+                    ignoreChainWithDepth: 4,
                 },
             ],
             "function-paren-newline": 0,
@@ -377,8 +378,8 @@ export default [
                 2,
                 "always",
                 {
-                    "ignorePattern": "ignored|webpackChunkName",
-                    "ignoreInlineComments": true,
+                    ignorePattern: "ignored|webpackChunkName",
+                    ignoreInlineComments: true,
                 },
             ],
             "prefer-named-capture-group": 0,
@@ -398,9 +399,9 @@ export default [
             "id-length": [
                 2,
                 {
-                    "min": 3,
-                    "max": 34,
-                    "exceptions": [
+                    min: 3,
+                    max: 34,
+                    exceptions: [
                         "id",
                         "to",
                         "x",

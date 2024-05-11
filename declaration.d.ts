@@ -1,4 +1,4 @@
-/* eslint-disable import/no-default-export, init-declarations, multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
+/* eslint-disable capitalized-comments */
 
 declare module "*.svg" {
     const content: string;
@@ -35,7 +35,6 @@ declare const ARTICLE_DATA: string | undefined;
 
 declare module "webp-converter" {
     declare type LoggingOptionType =
-        // eslint-disable-next-line max-len
         | "-map 1"
         | "-map 2"
         | "-map 3"

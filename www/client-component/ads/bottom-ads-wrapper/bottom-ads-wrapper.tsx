@@ -6,7 +6,6 @@ import {googleAdSenseBottomAdId} from "../../../const";
 
 import bottomAdsWrapperStyle from "./bottom-ads-wrapper.scss";
 
-// eslint-disable-next-line react/prefer-stateless-function
 export function BottomAdsWrapper(): JSX.Element {
     const routerLocation: Location<unknown> = useLocation();
     const screenWidth = useScreenWidth();

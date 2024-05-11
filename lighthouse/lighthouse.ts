@@ -1,4 +1,4 @@
-/* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
+/* eslint-disable capitalized-comments */
 
 import {launch} from "chrome-launcher";
 
@@ -118,7 +118,6 @@ const urlList: Array<string> = [
 async function innerInitialization(): Promise<undefined> {
     const chrome = await launch({chromeFlags: ["--headless"]});
 
-    // -- eslint-disable-next-line no-loops/no-loops
     for (const url of urlList) {
         // eslint-disable-next-line no-await-in-loop
         await makeReport({
@@ -137,7 +136,7 @@ async function innerInitialization(): Promise<undefined> {
     chrome.kill();
 }
 
-// eslint-disable-next-line unicorn/prefer-top-level-await, @typescript-eslint/no-floating-promises
+// eslint-disable-next-line @typescript-eslint/no-floating-promises
 innerInitialization();
 
 /*
@@ -270,7 +269,6 @@ async function getLighthouseResult(
 
     const resultList: Array<RunnerResultItemType> = [];
 
-    // -- eslint-disable-next-line no-loops/no-loops
     for (const url of urlList) {
         const lighthouseResult: Record<FormFactorType, RunnerResult> = await getLighthouseResult({
             port: Number.parseInt(port, 10),

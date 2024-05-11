@@ -1,4 +1,4 @@
-import {default as variableStyle} from "./var.scss";
+import {default as variableStyle} from "./variable.scss";
 
 // Use as * for css loader 7.x
 

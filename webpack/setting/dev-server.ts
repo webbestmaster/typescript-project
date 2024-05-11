@@ -1,4 +1,4 @@
-/* eslint-disable multiline-comment-style, capitalized-comments */
+/* eslint-disable capitalized-comments */
 import type {WebpackOptionsNormalized} from "webpack";
 
 import {webpackDevServerPort} from "../config";

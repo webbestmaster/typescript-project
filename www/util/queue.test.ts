@@ -100,7 +100,6 @@ describe("queue", () => {
         await expect(async () => {
             await queue.add(async () => {
                 await waitForTime(defaultTimeOut);
-                // -- eslint-disable-next-line no-throw-literal, sonarjs/no-duplicate-string
                 // eslint-disable-next-line sonarjs/no-duplicate-string
                 throw new Error("I am an ERROR!");
             });
@@ -109,7 +108,6 @@ describe("queue", () => {
         await expect(async () => {
             await queue.add(async () => {
                 await waitForTime(defaultTimeOut);
-                // -- eslint-disable-next-line no-throw-literal, @typescript-eslint/no-throw-literal, @typescript-eslint/only-throw-error
                 // eslint-disable-next-line @typescript-eslint/only-throw-error
                 throw "I am an ERROR!";
             });

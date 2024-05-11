@@ -16,7 +16,6 @@ import searchStyle from "./search.scss";
 import {SearchResult} from "./search-result/search-result";
 
 interface SearchPropsType {
-    // eslint-disable-next-line unicorn/no-keyword-prefix
     readonly className?: string;
     readonly onChangeFocus?: (hasFocus: boolean) => void;
 }

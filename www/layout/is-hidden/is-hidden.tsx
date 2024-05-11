@@ -6,7 +6,7 @@ import isHiddenStyle from "./is-hidden.scss";
 
 interface PropsType {
     readonly children?: ReactNode;
-    // eslint-disable-next-line unicorn/no-keyword-prefix
+
     readonly className?: string;
     readonly isHidden: boolean;
 }

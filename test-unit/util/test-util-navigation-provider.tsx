@@ -5,6 +5,7 @@ interface NavigationProviderPropsType {
 }
 
 export function TestUtilNavigationProvider(props: NavigationProviderPropsType): JSX.Element {
+    // eslint-disable-next-line no-useless-assignment
     const {component: Page} = props;
 
     return (

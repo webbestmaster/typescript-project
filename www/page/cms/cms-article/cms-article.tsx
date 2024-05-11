@@ -91,10 +91,8 @@ interface CmsArticlePropsType {
     readonly onFinish: (article: ArticleType) => void;
 }
 
-// --eslint-disable-next-line complexity, max-statements
 // eslint-disable-next-line max-statements
 export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
-    // -- eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
     const {article, onFinish, mode} = props;
     const {
         articleType,

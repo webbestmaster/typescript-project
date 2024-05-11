@@ -9,7 +9,6 @@ export function applyGdpr(): undefined {
         return;
     }
 
-    // eslint-disable-next-line unicorn/no-document-cookie
     document.cookie = `${gdprCookieKey}=${gdprCookieKey}; path=/; max-age=36000000;`;
 }
 

@@ -8,7 +8,6 @@ import {sortSearchArticle} from "./search-result-helper";
 import {SearchResultLink} from "./search-result-link/search-result-link";
 
 interface SearchResultPropsType {
-    // eslint-disable-next-line unicorn/no-keyword-prefix
     readonly className?: string;
     readonly isLoading: boolean;
     readonly list: Array<SearchArticleType>;

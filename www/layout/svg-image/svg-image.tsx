@@ -1,5 +1,4 @@
 interface PropsType {
-    // -- eslint-disable-next-line unicorn/no-keyword-prefix
     readonly className: string;
     readonly imageId: string;
 }

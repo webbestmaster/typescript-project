@@ -1,4 +1,4 @@
-/* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position */
+/* eslint-disable capitalized-comments, line-comment-position */
 
 import type {FastifyReply, FastifyRequest} from "fastify";
 import type {PetsdbQueryType, PetsdbReadPageConfigType} from "petsdb";
@@ -191,11 +191,11 @@ const ArticlePaginationResolver: GraphQLFieldConfig<
     resolve: async (
         // root value type => "GraphQLObjectType<Record<string, string>"
         rootValue: ListTypeRootValueType,
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
         args: ListTypeArgumentsType,
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
         context: ListTypeContextValueType,
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
         graphQLType: GraphQLResolveInfo
     ): Promise<PaginationResultType<ArticleType>> => {
         console.warn("------------");
@@ -240,7 +240,7 @@ function parseGraphQlRequestQuery(request: FastifyRequest): ParsedGraphQlRequest
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const queryParsed: PetsdbQueryType<ArticleType> = JSON.parse(query);
 
-    // eslint-disable-next-line no-loops/no-loops, guard-for-in
+    // eslint-disable-next-line guard-for-in
     for (const queryKey in queryParsed) {
         const queryValue = {...queryParsed}[queryKey];
 
@@ -275,13 +275,11 @@ async function getArticlePaginationGraphQl(
     });
 }
 
-// eslint-disable-next-line id-length, require-await
 export async function getAdminArticlePaginationGraphQl(
     request: FastifyRequest,
     reply: FastifyReply
     // ): Promise<ArticlePaginationGraphQlType> {
 ): Promise<ExecutionResult> {
-    // eslint-disable-next-line prefer-object-spread
     const {source, query, pagination} = parseGraphQlRequestQuery(request);
 
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
@@ -299,7 +297,6 @@ export async function getClientArticlePaginationGraphQl(
     reply: FastifyReply
     // ): Promise<ArticlePaginationGraphQlType> {
 ): Promise<ExecutionResult> {
-    // eslint-disable-next-line prefer-object-spread
     const {source, query, pagination} = parseGraphQlRequestQuery(request);
 
     // eslint-disable-next-line @typescript-eslint/no-floating-promises

@@ -31,7 +31,6 @@ export function setCookie(name: string, value: string, rawOptions: SetCookieOpti
         }
     });
 
-    // -- eslint-disable-next-line unicorn/no-document-cookie
     document.cookie = updatedCookie;
 }
 

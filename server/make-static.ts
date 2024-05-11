@@ -1,4 +1,4 @@
-/* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
+/* eslint-disable capitalized-comments */
 
 /* global fetch, Response, Buffer */
 import {cwd as getCwd} from "node:process";
@@ -43,7 +43,6 @@ type ImageUrlType = Readonly<{
 class StaticSite {
     private readonly pageList: Array<StaticPageType> = [];
 
-    // eslint-disable-next-line class-methods-use-this
     @logTakenTime(">", "StaticSite")
     public async makeStatic(): Promise<void> {
         await this.copyStaticFileFolder();
@@ -132,7 +131,6 @@ class StaticSite {
         );
     }
 
-    // eslint-disable-next-line class-methods-use-this
     @logTakenTime(">>", "StaticSite")
     // eslint-disable-next-line @typescript-eslint/class-methods-use-this
     private async makeIcons(): Promise<void> {
@@ -181,7 +179,6 @@ class StaticSite {
         await Promise.all(taskPromiseList);
     }
 
-    // eslint-disable-next-line class-methods-use-this
     @logTakenTime(">>", "StaticSite")
     // eslint-disable-next-line @typescript-eslint/class-methods-use-this
     private async makeCompanyLogo(): Promise<void> {
@@ -199,7 +196,6 @@ class StaticSite {
         createWriteStream(path.join(cwd, staticSiteFolderName, companyLogoPath)).write(responseLogoBuffer);
     }
 
-    // eslint-disable-next-line max-statements
     @logTakenTime(">>", "StaticSite")
     private async makeImages(): Promise<void> {
         const {log} = console;
@@ -261,7 +257,6 @@ class StaticSite {
         await Promise.all(taskPromiseList);
     }
 
-    // eslint-disable-next-line class-methods-use-this
     @logTakenTime(">>", "StaticSite")
     // eslint-disable-next-line @typescript-eslint/class-methods-use-this
     private async copyDistributionFolder(): Promise<void> {
@@ -370,7 +365,7 @@ class StaticSite {
         await fileSystem.writeFile(path.join(cwd, staticSiteFolderName, "404.html"), html404);
     }
 
-    // eslint-disable-next-line class-methods-use-this, @typescript-eslint/class-methods-use-this
+    // eslint-disable-next-line @typescript-eslint/class-methods-use-this
     private async getTextFromUrl(fullUrl: string): Promise<string> {
         const response = await fetch(fullUrl);
 

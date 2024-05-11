@@ -1,4 +1,4 @@
-/* eslint-disable max-len,  react/no-unknown-property */
+/* eslint-disable max-len */
 
 import {IsHidden} from "../../../layout/is-hidden/is-hidden";
 

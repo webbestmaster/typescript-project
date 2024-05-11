@@ -1,4 +1,4 @@
-/* eslint-disable multiline-comment-style, capitalized-comments */
+/* eslint-disable capitalized-comments */
 
 import puppeteer, {
     type Browser,
@@ -16,7 +16,6 @@ interface AdditionalBrowserOptionsType {
     product?: Product;
 }
 
-// eslint-disable-next-line max-len
 type PuppeteerLaunchOptionsType = AdditionalBrowserOptionsType &
     BrowserConnectOptions &
     BrowserLaunchArgumentOptions &

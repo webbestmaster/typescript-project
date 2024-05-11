@@ -6,7 +6,6 @@ import {Locale} from "../../provider/locale/locale-context";
 import errorDataStyle from "./error-data.scss";
 
 interface PropsType {
-    // eslint-disable-next-line unicorn/no-keyword-prefix
     readonly className?: string;
     readonly langKey: LangKeyType;
 }

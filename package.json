@@ -90,8 +90,8 @@
     "_postinstall": "cp ./git-hooks/pre-commit ./.git/hooks",
     "__start-site": "sudo nginx -c ~/user/master-git/db-cms/site/nginx/nginx.site.conf -g 'daemon off;'",
     "lighthouse:run": "ts-node --project ./tsconfig.lighthouse.json --files ./lighthouse/lighthouse.ts",
-    "storybook:start-dev": "storybook dev -p 6006",
-    "storybook:build": "storybook build",
+    "storybook:start-dev": "storybook dev -p 6006 -c storybook",
+    "storybook:build": "storybook build -c storybook",
     "clean-install-windows": "rd .\\node_modules\\ -r; npm i"
   },
   "dependencies": {

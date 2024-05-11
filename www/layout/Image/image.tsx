@@ -9,7 +9,7 @@ const screenWidthList: Array<number> = [1200, 1024, 912, 820, 768, 540, 425, 414
 
 interface ImagePropsType {
     readonly alt: string;
-    // eslint-disable-next-line unicorn/no-keyword-prefix
+
     readonly className?: string;
     readonly fileName: string;
     readonly getPathToFile: GetPathToFileType;

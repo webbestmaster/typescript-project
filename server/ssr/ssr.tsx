@@ -23,7 +23,6 @@ import {getSchemaMarkupArticleSsrReplaceData} from "./api/schema-markup/schema-m
 import {getSchemaMarkupBreadcrumbsSsrReplaceData} from "./api/schema-markup/schema-markup-breadcrumbs";
 import type {GetHtmlCallBackRequestType} from "./ssr-type";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars, max-statements
 export async function getHtmlCallBack(
     options: GetHtmlCallBackRequestType
 ): Promise<{article: ArticleType; html: string}> {

@@ -1,4 +1,4 @@
-/* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
+/* eslint-disable capitalized-comments, line-comment-position */
 
 import type {PetsdbItemType, PetsdbQueryType, PetsdbReadPageConfigType} from "petsdb";
 

@@ -1,4 +1,3 @@
-// eslint-disable-next-line complexity
 export function makeCssArray(value?: Array<number> | number): [number, number, number, number] {
     if (typeof value === "number") {
         return [value, value, value, value];

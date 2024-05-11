@@ -3,7 +3,6 @@ import {cls} from "../../util/css";
 import spinnerStyle from "./spinner.scss";
 
 interface PropsType {
-    // -- eslint-disable-next-line unicorn/no-keyword-prefix
     readonly className?: string;
     readonly isShow?: boolean;
 }

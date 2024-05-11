@@ -34,7 +34,6 @@ export function ArticleProvider(props: ArticleProviderPropsType): JSX.Element {
     useEffect(() => {
         console.log("fetch data about article, slug:", slug);
         if (slug === articleData.article.slug) {
-            // eslint-disable-next-line promise/catch-or-return
             return;
         }
         fetchArticle(slug).then(setArticleData).catch(console.error);

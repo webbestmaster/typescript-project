@@ -7,44 +7,45 @@ import {isProduction} from "../webpack/config";
 
 const styleLoader = {
     loader: "style-loader",
-    options: {attributes: {class: "my-css-module"}},
+    options: {attributes: {"class": "my-css-module"}},
 };
 
 const config: StorybookConfig = {
-    "stories": ["../stories/**/*.stories.mdx", "../stories/**/*.stories.@(js|jsx|ts|tsx)"],
-    "addons": ["@storybook/addon-links", "@storybook/addon-essentials", "@storybook/addon-interactions"],
-    "framework": {
-        "name": "@storybook/react-webpack5",
-        "options": {},
+    addons: ["@storybook/addon-links", "@storybook/addon-essentials", "@storybook/addon-interactions"],
+    core: {
+        builder: "@storybook/builder-webpack5",
     },
-    "core": {
-        "builder": "@storybook/builder-webpack5",
+    docs: {
+        autodocs: "tag",
     },
-    "docs": {
-        "autodocs": "tag",
+    framework: {
+        name: "@storybook/react-webpack5",
+        options: {},
     },
-    webpackFinal: async (config: Configuration): Promise<Configuration> => {
-        config.module?.rules?.push(
+    stories: ["../stories/**/*.stories.mdx", "../stories/**/*.stories.@(js|jsx|ts|tsx)"],
+    // eslint-disable-next-line @typescript-eslint/require-await
+    webpackFinal: async (currentConfig: Configuration): Promise<Configuration> => {
+        currentConfig.module?.rules?.push(
             {
-                test: /\.scss$/,
+                test: /\.scss$/u,
                 use: [
                     styleLoader,
                     "css-modules-typescript-loader",
                     {
                         loader: "css-loader",
                         options: {
-                            sourceMap: true,
                             modules: {
                                 localIdentName: "[local]----[hash:6]",
                             },
+                            sourceMap: true,
                         },
                     },
                     {loader: "sass-loader", options: {sourceMap: true}},
                 ],
             },
             {
-                exclude: /node_modules/,
-                test: /\.tsx?$/,
+                exclude: /node_modules/u,
+                test: /\.tsx?$/u,
                 use: [
                     {
                         loader: "babel-loader",
@@ -55,15 +56,15 @@ const config: StorybookConfig = {
                             configFile: isProduction
                                 ? path.join(cwd(), "tsconfig.json")
                                 : path.join(cwd(), "tsconfig.dev.json"),
-                            // disable type checker for building
-                            // transpileOnly: true,
+                            // Disable type checker for building
+                            // TranspileOnly: true,
                         },
                     },
                 ],
             }
         );
 
-        return config;
+        return currentConfig;
     },
 };
 

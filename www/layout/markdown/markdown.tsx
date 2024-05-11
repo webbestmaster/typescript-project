@@ -1,7 +1,6 @@
 /* global HTMLDivElement */
 
 import {type HTMLAttributes, useContext} from "react";
-// -- eslint-disable-next-line unicorn/no-keyword-prefix
 import {markdown, classNameMdPro, classNameMdProThemeLight} from "markdown-pro";
 
 import {cls} from "../../util/css";
@@ -25,12 +24,7 @@ export function Markdown(props: PropsType): JSX.Element {
     const fullClassName = cls(markdownStyle.markdown, classNameMdPro, classNameMdProThemeLight, cssClassName);
 
     return (
-        <div
-            // -- eslint-disable-next-line react/jsx-props-no-spreading
-            {...divAttributes}
-            className={fullClassName}
-            style={{fontSize: `${mdFontSize}px`}}
-        >
+        <div {...divAttributes} className={fullClassName} style={{fontSize: `${mdFontSize}px`}}>
             <MarkdownHtmlToReact articleTitle={articleTitle} htmlCode={htmlCodeClean} />
         </div>
     );

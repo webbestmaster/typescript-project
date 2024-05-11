@@ -1,4 +1,4 @@
-/* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
+/* eslint-disable capitalized-comments */
 
 import {
     constants as fileSystemConstants,
@@ -25,7 +25,7 @@ import {fileSizeLimit} from "../../www/page/cms/cms-article/cms-article-const";
 import {temporaryUploadFolder, uploadFolder} from "./file-const";
 import {makeAudioFile} from "./file-audio";
 
-// eslint-disable-next-line max-statements, complexity
+// eslint-disable-next-line max-statements
 export async function uploadFile(request: FastifyRequest): Promise<ArticleFileType> {
     const fileData: MultipartFile | undefined = await request.file({
         limits: {fileSize: fileSizeLimit, files: 1},

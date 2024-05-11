@@ -5,7 +5,6 @@ import markdownStyle from "./markdown.scss";
 import type {StringToJsxRawDataType} from "./markdown-helper";
 import type {MarkdownItemCounter} from "./markdown-item-counter";
 
-// -- eslint-disable-next-line complexity
 export function getImageFromHtml(
     rawData: StringToJsxRawDataType,
     markdownItemCounter: MarkdownItemCounter

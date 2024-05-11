@@ -9,7 +9,7 @@ function getLastmodTagContent(article: ArticleType): string {
     return yyyymmdd;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getChangefreqTagContent(article: ArticleType): string {
     // Optionss: always, hourly, daily, weekly, monthly, yearly, never
     return "weekly";

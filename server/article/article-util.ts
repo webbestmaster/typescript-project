@@ -1,4 +1,4 @@
-/* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
+/* eslint-disable capitalized-comments */
 
 import type {ArticlePreviewType, ArticleType} from "./article-type";
 import {articleCrud} from "./article";
@@ -47,7 +47,6 @@ export async function getArticleListByIdList(idList: Array<string>): Promise<Arr
     return Promise.all(idList.map(getArticleById));
 }
 
-// -- eslint-disable-next-line require-await
 export async function getArticleListByIdListFiltered(idList: Array<string>): Promise<Array<ArticleType>> {
     return getArticleListByIdList(idList).then((data: Array<ArticleType | null>): Array<ArticleType> => {
         return data.filter<ArticleType>((mayBeArticle: ArticleType | null): mayBeArticle is ArticleType => {
@@ -66,11 +65,11 @@ export async function getArticlePreviewListByIdListFiltered(idList: Array<string
 export async function getArticleBreadcrumbListById(id: string): Promise<Array<ArticleType>> {
     const articleList: Array<ArticleType> = [];
 
+    // eslint-disable-next-line no-useless-assignment
     let parent: ArticleType | null = null;
     let deep = 10;
     let childId: string = id;
 
-    // -- eslint-disable-next-line no-loops/no-loops
     do {
         deep -= 1;
         // eslint-disable-next-line no-await-in-loop

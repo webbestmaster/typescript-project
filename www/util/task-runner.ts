@@ -19,7 +19,6 @@ export interface TaskRunnerConfigType {
     onTaskEnd?: TaskRunnerOnTaskDoneType;
 }
 
-// -- eslint-disable-next-line no-empty-function, @typescript-eslint/no-empty-function
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 function noop(): void {}
 

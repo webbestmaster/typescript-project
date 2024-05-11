@@ -1,4 +1,4 @@
-/* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style, @typescript-eslint/no-floating-promises */
+/* eslint-disable capitalized-comments, line-comment-position, @typescript-eslint/no-floating-promises */
 
 /* global Buffer */
 
@@ -240,5 +240,4 @@ async function innerInitialization(): Promise<undefined> {
     });
 }
 
-// eslint-disable-next-line unicorn/prefer-top-level-await, @typescript-eslint/no-floating-promises
 innerInitialization();

@@ -12,7 +12,7 @@ import {loadAdSenseScript} from "./ad-sense-helper";
 
 interface AdSenseAdsPropsType {
     readonly adSlotId: string;
-    // eslint-disable-next-line unicorn/no-keyword-prefix
+
     readonly className?: string;
 }
 
@@ -74,9 +74,9 @@ export function AdSenseAds(props: AdSenseAdsPropsType): JSX.Element {
                 console.info(`%cAdSense, show ads, adSlotId: ${adSlotId}`, "color: #c00");
 
                 window.adsbygoogle?.push({
-                    // eslint-disable-next-line camelcase, id-match, babel/camelcase
+                    // eslint-disable-next-line camelcase
                     google_ad_client: googleAdSenseId,
-                    // eslint-disable-next-line camelcase, id-match, babel/camelcase
+                    // eslint-disable-next-line camelcase
                     google_ad_slot: adSlotId,
                 });
             })

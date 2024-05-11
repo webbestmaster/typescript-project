@@ -12,7 +12,6 @@ import {ArticleAudioChildrenList} from "./article-type/article-audio-children-li
 import {ArticleAudioSingle} from "./article-type/article-audio-single";
 import {ArticleAudioList} from "./article-type/article-audio-list";
 
-// eslint-disable-next-line complexity
 export function Article(): JSX.Element {
     const {article} = useContext<ArticleContextType>(articleContext);
     const {articleType} = article;
@@ -38,6 +37,5 @@ export function Article(): JSX.Element {
         }
     }
 
-    // eslint-disable-next-line no-unreachable
     return <ArticleArticle />;
 }

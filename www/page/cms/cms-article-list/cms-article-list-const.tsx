@@ -33,13 +33,10 @@ export function getArticleTableColumnList(
         {
             dataIndex: "title",
             defaultSortOrder: SortDirectionEnum.ascend,
-            // -- eslint-disable-next-line react/no-multi-comp
             filterDropdown: (filterProps: FilterDropdownProps): JSX.Element => {
                 const {visible} = filterProps;
-                // -- eslint-disable-next-line react-hooks/rules-of-hooks
                 const inputRef = useRef<InputRef>(null);
 
-                // -- eslint-disable-next-line react-hooks/rules-of-hooks
                 useEffect(() => {
                     if (visible) {
                         // Wait until the input appears
@@ -78,13 +75,10 @@ export function getArticleTableColumnList(
         {
             dataIndex: "slug",
             defaultSortOrder: null,
-            // -- eslint-disable-next-line react/no-multi-comp
             filterDropdown: (filterProps: FilterDropdownProps): JSX.Element => {
                 const {visible} = filterProps;
-                // -- eslint-disable-next-line react-hooks/rules-of-hooks
                 const inputRef = useRef<InputRef>(null);
 
-                // -- eslint-disable-next-line react-hooks/rules-of-hooks
                 useEffect(() => {
                     if (visible) {
                         // Wait until the input appears

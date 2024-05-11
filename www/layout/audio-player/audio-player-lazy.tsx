@@ -1,4 +1,3 @@
-/* eslint-disable react/no-multi-comp, react/jsx-props-no-spreading */
 import {lazy, Suspense, type ComponentType} from "react";
 import type {AudioPropsType, AudioPlayerPropsType, PlayListProviderPropsType} from "react-audio-player-pro";
 

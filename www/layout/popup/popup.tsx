@@ -31,7 +31,6 @@ interface PopupPropsType {
     readonly zIndex?: number;
 }
 
-// -- eslint-disable-next-line complexity
 export function Popup(props: PopupPropsType): JSX.Element | null {
     const {isOpen = false, children, zIndex = 1000, animationDurationMs = 300} = props;
 
@@ -54,11 +53,9 @@ export function Popup(props: PopupPropsType): JSX.Element | null {
         return isOpen ? PopupVisibleStateEnum.opening : PopupVisibleStateEnum.closing;
     })();
 
-    // -- eslint-disable-next-line unicorn/no-keyword-prefix
     fadeProps.className = cls(popupStyle.popup__fade, fadeClassNameMap[visibleState], fadeProps.className);
     fadeProps.style = {...fadeProps.style, ...mainStyle};
 
-    // -- eslint-disable-next-line unicorn/no-keyword-prefix
     containerProps.className = cls(
         popupStyle.popup__container,
         containerClassNameMap[visibleState],
@@ -105,16 +102,8 @@ export function Popup(props: PopupPropsType): JSX.Element | null {
 
     return createPortal(
         <>
-            <div
-                // -- eslint-disable-next-line react/jsx-props-no-spreading
-                {...fadeProps}
-            />
-            <div
-                // -- eslint-disable-next-line react/jsx-props-no-spreading
-                {...containerProps}
-            >
-                {children}
-            </div>
+            <div {...fadeProps} />
+            <div {...containerProps}>{children}</div>
         </>,
         document.body
     );

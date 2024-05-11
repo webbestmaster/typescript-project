@@ -1,5 +1,4 @@
-/* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
-// eslint-disable-next-line import/no-named-as-default
+/* eslint-disable capitalized-comments, line-comment-position */
 import Ajv, {type JSONSchemaType, type ValidateFunction} from "ajv";
 
 import type {PaginationResultType} from "../data-base/data-base-type";
@@ -46,7 +45,6 @@ export function makeArticleFileSchema(): JSONSchemaType<ArticleFileType> {
 
 export function makeArticleSchema(): JSONSchemaType<ArticleType> {
     const articleSchemaProperties = {
-        // eslint-disable-next-line id-match
         _id: {type: "string"},
         articleType: {"enum": Object.values(ArticleTypeEnum), type: "string"},
         content: {type: "string"},
@@ -127,12 +125,11 @@ export function makeArticleSchemaPick<KeyOfArticle extends keyof ArticleType>(
     const articlePickedSchema: JSONSchemaType<Pick<ArticleType, KeyOfArticle>> & {
         properties?: Record<string, unknown>;
     } = makeArticleSchema();
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
     const {properties = {}} = articlePickedSchema;
 
     const pickedProperties: Record<string, unknown> = fieldList.reduce<Record<string, unknown>>(
         (accumulator: Record<string, unknown>, propertyName: KeyOfArticle) => {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
             return {...accumulator, [propertyName]: properties[propertyName]};
         },
         {}
