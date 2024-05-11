@@ -16,7 +16,7 @@
     "extends": [
         // + "prettier",
         // + "plugin:prettier/recommended",
-        "plugin:jest/all",
+        // + "plugin:jest/all",
         // + "eslint:all",
         // + "plugin:@typescript-eslint/all",
         // typescript begin, no needed
