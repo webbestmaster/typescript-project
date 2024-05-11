@@ -14,19 +14,19 @@
         }
     },
     "extends": [
-        // "prettier",
-        // "plugin:prettier/recommended",
+        // + "prettier",
+        // + "plugin:prettier/recommended",
         "plugin:jest/all",
-        // "eslint:all",
-        "plugin:@typescript-eslint/all",
-        // typescript begin
+        // + "eslint:all",
+        // + "plugin:@typescript-eslint/all",
+        // typescript begin, no needed
         // "plugin:@typescript-eslint/recommended",
         // "plugin:@typescript-eslint/recommended-type-checked",
         // "plugin:@typescript-eslint/strict",
         // "plugin:@typescript-eslint/strict-type-checked",
         // "plugin:@typescript-eslint/stylistic",
         // "plugin:@typescript-eslint/stylistic-type-checked",
-        // typescript end
+        // typescript end, no needed
         "plugin:typescript-sort-keys/recommended",
         "plugin:jsx-a11y/recommended",
         "plugin:react/all",

@@ -1,10 +1,26 @@
 import js from "@eslint/js";
-import  eslintConfigPrettier from "eslint-config-prettier";
+import eslintConfigPrettier from "eslint-config-prettier";
+import tseslint from "typescript-eslint";
 
 export default [
     js.configs.all,
+    ...tseslint.configs.all,
     // js.configs.recommended,
     eslintConfigPrettier,
+    {
+        languageOptions: {
+            "parserOptions": {
+                "project": [
+                    "./tsconfig.json",
+                ],
+                "ecmaVersion": 2020,
+                "sourceType": "module",
+                "ecmaFeatures": {
+                    "jsx": true,
+                },
+            },
+        },
+    },
     {
         rules: {
             // "one-var": [
