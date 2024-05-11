@@ -1,4 +1,5 @@
-/* eslint-disable no-magic-numbers, sonarjs/no-duplicate-string */
+/* -- eslint-disable no-magic-numbers, sonarjs/no-duplicate-string */
+/* eslint-disable sonarjs/no-duplicate-string */
 
 import {describe, it, expect} from "@jest/globals";
 
@@ -114,7 +115,8 @@ describe("test TaskRunner", () => {
         await expect(async () => {
             await taskRunner.add(async () => {
                 await waitForTime(defaultTimeOut);
-                // eslint-disable-next-line no-throw-literal, @typescript-eslint/no-throw-literal, @typescript-eslint/only-throw-error
+                // -- eslint-disable-next-line no-throw-literal, @typescript-eslint/no-throw-literal, @typescript-eslint/only-throw-error
+                // eslint-disable-next-line @typescript-eslint/only-throw-error
                 throw "I am an ERROR!";
             });
         }).rejects.toThrow("[TaskRunner]: Task running with error!");

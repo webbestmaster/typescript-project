@@ -1,4 +1,5 @@
-/* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position */
+/* -- eslint-disable multiline-comment-style, capitalized-comments, line-comment-position */
+/* eslint-disable capitalized-comments, line-comment-position */
 
 import {cls} from "../../util/css";
 
@@ -9,7 +10,7 @@ import {SpinnerPositionEnum} from "./spinner-type";
 interface PropsType {
     readonly arcColor?: string; // default - $color-border
     readonly circleColor?: string; // default - $light-gray
-    // eslint-disable-next-line unicorn/no-keyword-prefix
+    // -- eslint-disable-next-line unicorn/no-keyword-prefix
     readonly className?: string; // default = ''
     readonly isShow?: boolean; // default - true
     readonly lineWidth?: number; // default - 5px

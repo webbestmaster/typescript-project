@@ -118,7 +118,7 @@ const urlList: Array<string> = [
 async function innerInitialization(): Promise<undefined> {
     const chrome = await launch({chromeFlags: ["--headless"]});
 
-    // eslint-disable-next-line no-loops/no-loops
+    // -- eslint-disable-next-line no-loops/no-loops
     for (const url of urlList) {
         // eslint-disable-next-line no-await-in-loop
         await makeReport({
@@ -270,7 +270,7 @@ async function getLighthouseResult(
 
     const resultList: Array<RunnerResultItemType> = [];
 
-    // eslint-disable-next-line no-loops/no-loops
+    // -- eslint-disable-next-line no-loops/no-loops
     for (const url of urlList) {
         const lighthouseResult: Record<FormFactorType, RunnerResult> = await getLighthouseResult({
             port: Number.parseInt(port, 10),

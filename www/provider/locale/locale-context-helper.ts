@@ -3,7 +3,7 @@
 import {localeConst} from "./locale-context-const";
 import {LocaleNameEnum} from "./locale-context-type";
 
-// eslint-disable-next-line complexity
+// -- eslint-disable-next-line complexity
 export function getSavedLocaleName(): LocaleNameEnum {
     const localeNameList = Object.values(LocaleNameEnum);
     const defaultLocaleName = localeConst.defaults.localeName;
@@ -14,7 +14,7 @@ export function getSavedLocaleName(): LocaleNameEnum {
 
     const savedLocaleName = localStorage.getItem(localeConst.key.localStorage.localeName);
 
-    // eslint-disable-next-line no-loops/no-loops
+    // -- eslint-disable-next-line no-loops/no-loops
     for (const localeNameInList of localeNameList) {
         if (localeNameInList === savedLocaleName) {
             return localeNameInList;

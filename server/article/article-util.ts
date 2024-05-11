@@ -47,7 +47,7 @@ export async function getArticleListByIdList(idList: Array<string>): Promise<Arr
     return Promise.all(idList.map(getArticleById));
 }
 
-// eslint-disable-next-line require-await
+// -- eslint-disable-next-line require-await
 export async function getArticleListByIdListFiltered(idList: Array<string>): Promise<Array<ArticleType>> {
     return getArticleListByIdList(idList).then((data: Array<ArticleType | null>): Array<ArticleType> => {
         return data.filter<ArticleType>((mayBeArticle: ArticleType | null): mayBeArticle is ArticleType => {
@@ -70,7 +70,7 @@ export async function getArticleBreadcrumbListById(id: string): Promise<Array<Ar
     let deep = 10;
     let childId: string = id;
 
-    // eslint-disable-next-line no-loops/no-loops
+    // -- eslint-disable-next-line no-loops/no-loops
     do {
         deep -= 1;
         // eslint-disable-next-line no-await-in-loop

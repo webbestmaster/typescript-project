@@ -6,7 +6,7 @@ const defaultFontSize = 16;
 export const maxFontSize = 24;
 export const minFontSize = 12;
 
-// eslint-disable-next-line complexity
+// -- eslint-disable-next-line complexity
 export function getSavedFontSize(): number {
     if (typeof localStorage === "undefined") {
         return defaultFontSize;

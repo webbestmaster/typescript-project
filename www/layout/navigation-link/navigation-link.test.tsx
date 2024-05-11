@@ -13,7 +13,7 @@ describe("navigationLink", () => {
     it("default state", () => {
         expect.assertions(1);
 
-        // eslint-disable-next-line react/no-multi-comp
+        // -- eslint-disable-next-line react/no-multi-comp
         function DefaultState(): JSX.Element {
             return <NavigationLink to="/default-state" />;
         }
@@ -30,7 +30,7 @@ describe("navigationLink", () => {
     it("with props", () => {
         expect.assertions(2);
 
-        // eslint-disable-next-line react/no-multi-comp
+        // -- eslint-disable-next-line react/no-multi-comp
         function WithProps(): JSX.Element {
             return (
                 <NavigationLink className="props-class-name" title="props-title" to="/with-props">
@@ -54,7 +54,7 @@ describe("navigationLink", () => {
     it("use query by default", () => {
         expect.assertions(1);
 
-        // eslint-disable-next-line react/no-multi-comp
+        // -- eslint-disable-next-line react/no-multi-comp
         function UseQuery(): JSX.Element {
             const [ignoredSearch, setSearch] = useSearchParams();
 
@@ -77,7 +77,7 @@ describe("navigationLink", () => {
     it("use query by props", () => {
         expect.assertions(1);
 
-        // eslint-disable-next-line react/no-multi-comp
+        // -- eslint-disable-next-line react/no-multi-comp
         function UseQuery(): JSX.Element {
             const [ignoredSearch, setSearch] = useSearchParams();
 
@@ -100,7 +100,7 @@ describe("navigationLink", () => {
     it("do not use query", () => {
         expect.assertions(1);
 
-        // eslint-disable-next-line react/no-multi-comp
+        // -- eslint-disable-next-line react/no-multi-comp
         function DoNotUseQuery(): JSX.Element {
             const [ignoredSearch, setSearch] = useSearchParams();
 
@@ -123,7 +123,7 @@ describe("navigationLink", () => {
     it("use own queries", () => {
         expect.assertions(1);
 
-        // eslint-disable-next-line react/no-multi-comp
+        // -- eslint-disable-next-line react/no-multi-comp
         function UseOwnQueries(): JSX.Element {
             const [ignoredSearch, setSearch] = useSearchParams();
 
@@ -146,7 +146,7 @@ describe("navigationLink", () => {
     it("use own queries only", () => {
         expect.assertions(1);
 
-        // eslint-disable-next-line react/no-multi-comp
+        // -- eslint-disable-next-line react/no-multi-comp
         function UseOwnQueriesOnly(): JSX.Element {
             const [ignoredSearch, setSearch] = useSearchParams();
 

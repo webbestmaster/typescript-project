@@ -4,7 +4,8 @@ import {useCallback, useMemo, useState} from "react";
 
 import {convertToError} from "./error";
 
-// eslint-disable-next-line no-empty-function, @typescript-eslint/no-empty-function
+// -- eslint-disable-next-line no-empty-function, @typescript-eslint/no-empty-function
+// eslint-disable-next-line @typescript-eslint/no-empty-function
 export function noop(): void {}
 
 export function debounce<ArgsType extends Array<unknown>>(

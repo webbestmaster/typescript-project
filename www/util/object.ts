@@ -1,4 +1,4 @@
-// eslint-disable-next-line import/no-named-as-default
+// -- eslint-disable-next-line import/no-named-as-default
 import Ajv, {type JSONSchemaType} from "ajv";
 
 export function isObjectInclude(object: Record<string, unknown>, query: Record<string, unknown>): boolean {

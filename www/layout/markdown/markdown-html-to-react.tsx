@@ -48,7 +48,7 @@ function htmlStringToJsx(rawData: StringToJsxRawDataType, markdownItemCounter: M
 
     console.error("[htmlStringToJsx] Can not parse html string");
     console.log(`||--${htmlString}--||`);
-    // eslint-disable-next-line react/no-danger, id-match
+    // -- eslint-disable-next-line react/no-danger, id-match
     return <div dangerouslySetInnerHTML={{__html: htmlString}} />;
 }
 
@@ -70,7 +70,7 @@ export function MarkdownHtmlToReact(props: PropsType): JSX.Element {
         return (
             <Fragment key={key}>
                 {getIsEmptyHtml(htmlChunk) ? null : (
-                    // eslint-disable-next-line react/no-danger, id-match
+                    // -- eslint-disable-next-line react/no-danger, id-match
                     <div dangerouslySetInnerHTML={{__html: htmlChunk}} />
                 )}
                 {replacePart ? htmlStringToJsx({articleTitle, htmlString: replacePart}, markdownItemCounter) : null}
@@ -78,6 +78,6 @@ export function MarkdownHtmlToReact(props: PropsType): JSX.Element {
         );
     });
 
-    // eslint-disable-next-line react/jsx-no-useless-fragment
+    // -- eslint-disable-next-line react/jsx-no-useless-fragment
     return <>{jsxList}</>;
 }

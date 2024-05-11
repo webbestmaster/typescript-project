@@ -1,6 +1,6 @@
 type RegExpFlagType = "g" | "gi" | "i";
 
-// eslint-disable-next-line prefer-named-capture-group
+// -- eslint-disable-next-line prefer-named-capture-group
 export const safeReplace = /([$()*+./?[\\\]^{|}])/gu;
 
 export function makeSafeRegExpPatter(pattern: string): string {

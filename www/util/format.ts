@@ -1,5 +1,3 @@
-/* global Intl */
-
 import type {LocaleNameEnum} from "../provider/locale/locale-context-type";
 
 export const enum TimeSizeEnum {

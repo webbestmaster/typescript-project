@@ -1,7 +1,7 @@
 /* global HTMLDivElement */
 
 import {type HTMLAttributes, useContext} from "react";
-// eslint-disable-next-line unicorn/no-keyword-prefix
+// -- eslint-disable-next-line unicorn/no-keyword-prefix
 import {markdown, classNameMdPro, classNameMdProThemeLight} from "markdown-pro";
 
 import {cls} from "../../util/css";
@@ -26,7 +26,7 @@ export function Markdown(props: PropsType): JSX.Element {
 
     return (
         <div
-            // eslint-disable-next-line react/jsx-props-no-spreading
+            // -- eslint-disable-next-line react/jsx-props-no-spreading
             {...divAttributes}
             className={fullClassName}
             style={{fontSize: `${mdFontSize}px`}}

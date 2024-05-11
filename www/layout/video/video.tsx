@@ -11,7 +11,7 @@ import videoStyle from "./video.scss";
 
 interface VideoPropsType {
     readonly alt: string;
-    // eslint-disable-next-line unicorn/no-keyword-prefix
+    // -- eslint-disable-next-line unicorn/no-keyword-prefix
     readonly className?: string;
     readonly duration: number;
     readonly fileName: string;
@@ -19,7 +19,7 @@ interface VideoPropsType {
     readonly getPathToImage: GetPathToImageType;
     readonly height: number;
     readonly image?: {
-        // eslint-disable-next-line unicorn/no-keyword-prefix
+        // -- eslint-disable-next-line unicorn/no-keyword-prefix
         readonly className?: string;
         readonly imgClassName?: string;
     };
@@ -30,7 +30,7 @@ interface VideoPropsType {
     readonly width: number;
 }
 
-// eslint-disable-next-line complexity
+// -- eslint-disable-next-line complexity
 export function Video(props: VideoPropsType): JSX.Element {
     const videoRef = useRef<HTMLVideoElement | null>(null);
     const [isStarted, setIsStarted] = useState<boolean>(false);
@@ -108,7 +108,7 @@ export function Video(props: VideoPropsType): JSX.Element {
                 width={width}
             />
 
-            {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+            {/* -- eslint-disable-next-line jsx-a11y/media-has-caption */}
             <video
                 className={cls(videoStyle.video__tag, videoClassName, {
                     [videoStyle.video__tag__started]: isStarted,

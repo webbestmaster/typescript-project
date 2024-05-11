@@ -1,5 +1,6 @@
 export const enUs = {
-    /* eslint-disable id-match, id-length, max-len, sonarjs/no-duplicate-string, sort-keys */
+    /* -- eslint-disable id-match, id-length, max-len, sonarjs/no-duplicate-string, sort-keys */
+    /* eslint-disable id-length, sort-keys */
     META__LANGUAGE_NAME: "English",
 
     UI__MENU: "Menu",
@@ -72,7 +73,8 @@ export const enUs = {
     SEARCH__REQUEST_TOO_SHORT: "Request too short",
     SEARCH__NOTHING_FOUND: "Nothing found",
 
-    /* eslint-enable id-match, id-length, max-len,sonarjs/no-duplicate-string, sort-keys */
+    /* -- eslint-enable id-match, id-length, max-len,sonarjs/no-duplicate-string, sort-keys */
+    /* eslint-enable id-length, sort-keys */
 };
 
 /**

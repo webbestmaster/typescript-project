@@ -32,7 +32,7 @@ async function htmlToPdf(html: string): Promise<Buffer> {
     return pdf;
 }
 
-// eslint-disable-next-line require-await
+// -- eslint-disable-next-line require-await
 export async function getPdf(request: FastifyRequest<{Body?: string}>): Promise<Buffer> {
     const {body} = request;
 

@@ -6,7 +6,7 @@ import markdownStyle from "./markdown.scss";
 import type {StringToJsxRawDataType} from "./markdown-helper";
 import type {MarkdownItemCounter} from "./markdown-item-counter";
 
-// eslint-disable-next-line complexity
+// -- eslint-disable-next-line complexity
 export function getVideoFromHtml(
     rawData: StringToJsxRawDataType,
     markdownItemCounter: MarkdownItemCounter
@@ -34,7 +34,7 @@ export function getVideoFromHtml(
             getPathToFile={getPathToFile}
             getPathToImage={getPathToImage}
             height={Number.parseInt(heightAsString.trim(), 10)}
-            // eslint-disable-next-line unicorn/no-keyword-prefix
+            // -- eslint-disable-next-line unicorn/no-keyword-prefix
             image={{className: markdownStyle.markdown_picture, imgClassName: markdownStyle.markdown_image}}
             poster={posterAsString.trim()}
             posterLoading={markdownItemCounter.getLoadingImageType()}

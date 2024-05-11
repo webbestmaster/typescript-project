@@ -13,7 +13,7 @@ import {FetchMethodEnum, fetchX} from "../../../util/fetch";
 import type {UnknownObjectType} from "../../../util/type";
 import {apiUrl} from "../../../../server/const";
 
-// eslint-disable-next-line max-statements
+// -- eslint-disable-next-line max-statements
 export function ClientHome(): JSX.Element {
     const {article, childList} = useContext<ArticleContextType>(articleContext);
     const {content, title} = article;

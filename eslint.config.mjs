@@ -408,6 +408,11 @@ export default [
                     ],
                 },
             ],
+
+            // TODO: enable multiline-comment-style
+            "multiline-comment-style": 0,
+            // TODO: enable @typescript-eslint/init-declarations
+            "@typescript-eslint/init-declarations": 0,
         },
     },
     {

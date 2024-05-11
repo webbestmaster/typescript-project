@@ -8,7 +8,7 @@ export interface StringToJsxRawDataType {
     htmlString: string;
 }
 
-// eslint-disable-next-line complexity
+// -- eslint-disable-next-line complexity
 export function getFileMarkdownByFullInfo(
     fullFileInfo: ArticleFileType,
     additionalInfo: Record<"alt" | "poster", string>
@@ -40,7 +40,7 @@ export function getFileMarkdownByFullInfo(
         }
     }
 
-    // eslint-disable-next-line no-unreachable
+    // -- eslint-disable-next-line no-unreachable
     return `<a href="${pathToFile}" target="_blank" download="${name}">${name}</a>`;
 }
 

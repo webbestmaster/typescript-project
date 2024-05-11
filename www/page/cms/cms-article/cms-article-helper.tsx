@@ -79,7 +79,7 @@ export async function fetchVideo(pathToVideo: string): Promise<HTMLVideoElement>
     );
 }
 
-// eslint-disable-next-line complexity
+// -- eslint-disable-next-line complexity
 export async function uploadFile(file: File, fileSizeLimitBytes: number): Promise<ArticleFileType> {
     const formData = new FormData();
 
@@ -136,7 +136,7 @@ export async function uploadFile(file: File, fileSizeLimitBytes: number): Promis
         }
     }
 
-    // eslint-disable-next-line no-unreachable
+    // -- eslint-disable-next-line no-unreachable
     return fileInfo;
 }
 
@@ -150,7 +150,8 @@ export function makeSlugValidator(data: MakeSlugValidatorArgumentType): Array<Ru
         },
         {
             message: "Please-enter-slug-properly.",
-            // eslint-disable-next-line require-await, @typescript-eslint/require-await
+            // -- eslint-disable-next-line require-await, @typescript-eslint/require-await
+            // eslint-disable-next-line @typescript-eslint/require-await
             validator: async (rule: RuleObject, value: string): Promise<void> => {
                 if (textToSlug(value) !== value) {
                     throw new Error("Slug is not formatted.");
@@ -159,7 +160,8 @@ export function makeSlugValidator(data: MakeSlugValidatorArgumentType): Array<Ru
         },
         {
             message: "Please enter another slug. This slug already exists.",
-            // eslint-disable-next-line complexity, require-await, @typescript-eslint/require-await
+            // -- eslint-disable-next-line complexity, require-await, @typescript-eslint/require-await
+            // eslint-disable-next-line @typescript-eslint/require-await
             validator: async (rule: RuleObject, value: string): Promise<void> => {
                 const savedArticleBySlugList: Array<ArticleForValidationType> = savedArticleList.filter(
                     (savedArticle: ArticleForValidationType): boolean => {
@@ -201,7 +203,8 @@ export function makeHtmlValidator(): Array<Rule> {
     return [
         {
             message: "Invalid HTML.",
-            // eslint-disable-next-line require-await, @typescript-eslint/require-await
+            // -- eslint-disable-next-line require-await, @typescript-eslint/require-await
+            // eslint-disable-next-line @typescript-eslint/require-await
             validator: async (rule: RuleObject, value: string): Promise<void> => {
                 if (typeof document === "undefined") {
                     return;

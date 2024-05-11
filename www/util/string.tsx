@@ -7,7 +7,7 @@ export function getHash(data: Array<unknown> | Record<string, unknown> | string)
     const fullString: string = typeof data === "string" ? data : JSON.stringify(data, null, 0);
     const stringLength = fullString.length;
 
-    // eslint-disable-next-line no-loops/no-loops
+    // -- eslint-disable-next-line no-loops/no-loops
     for (let index = 0; index < stringLength; index += 1) {
         result = Math.trunc(Math.imul(31, result) + (fullString.codePointAt(index) ?? 0));
     }
@@ -31,7 +31,7 @@ export function findString(input: string, searchQuery: string, flags: "" | "g" |
 
     const splitLeftList: Array<string> = input.split(splitRegExp);
 
-    // eslint-disable-next-line no-loops/no-loops
+    // -- eslint-disable-next-line no-loops/no-loops
     for (const leftSplitPart of splitLeftList) {
         if (equalRegExp.test(leftSplitPart)) {
             result.push(leftSplitPart.slice(0, searchQueryLength), leftSplitPart.slice(searchQueryLength));
