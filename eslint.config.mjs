@@ -1,12 +1,20 @@
-import js from "@eslint/js";
+import eslintJs from "@eslint/js";
 import eslintConfigPrettier from "eslint-config-prettier";
-import tseslint from "typescript-eslint";
+import typescriptEslint from "typescript-eslint";
+import sonarjs from "eslint-plugin-sonarjs";
 
 export default [
-    js.configs.all,
-    ...tseslint.configs.all,
+    eslintJs.configs.all,
     // js.configs.recommended,
+    ...typescriptEslint.configs.all,
+    // ...jest.configs.all,
+    sonarjs.configs.recommended,
     eslintConfigPrettier,
+    // {
+    //     "plugins": {
+    //         sonarjs: sonarjs,
+    //     }
+    // },
     {
         languageOptions: {
             "parserOptions": {
@@ -18,6 +26,12 @@ export default [
                 "ecmaFeatures": {
                     "jsx": true,
                 },
+            },
+            "globals": {
+                "JSX": true,
+                "require": true,
+                "module": true,
+                "console": true
             },
         },
     },
