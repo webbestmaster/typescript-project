@@ -2,14 +2,14 @@ import eslintJs from "@eslint/js";
 import eslintConfigPrettier from "eslint-config-prettier";
 import typescriptEslint from "typescript-eslint";
 import sonarjs from "eslint-plugin-sonarjs";
-import eslintPluginUnicorn from 'eslint-plugin-unicorn';
-import jest from 'eslint-plugin-jest';
+import eslintPluginUnicorn from "eslint-plugin-unicorn";
+import jest from "eslint-plugin-jest";
 
 export default [
     eslintJs.configs.all,
     // js.configs.recommended,
     ...typescriptEslint.configs.all,
-    jest.configs['flat/all'],
+    jest.configs["flat/all"],
     // ...jest.configs.all,
     sonarjs.configs.recommended,
     eslintConfigPrettier,
@@ -29,7 +29,7 @@ export default [
                 "JSX": true,
                 "require": true,
                 "module": true,
-                "console": true
+                "console": true,
             },
         },
         plugins: {
@@ -37,18 +37,16 @@ export default [
             // sonarjs: sonarjs,
 
         },
-    },
-    {
         rules: {
             // Jest
-            ...jest.configs['flat/all'].rules,
+            ...jest.configs["flat/all"].rules,
             "jest/require-hook": [
                 2,
                 {
                     "allowedFunctionCalls": [
-                        "innerInitialization"
-                    ]
-                }
+                        "innerInitialization",
+                    ],
+                },
             ],
 
             // no-loops, need to uncomment
@@ -70,8 +68,8 @@ export default [
             "@typescript-eslint/array-type": [
                 2,
                 {
-                    "default": "generic"
-                }
+                    "default": "generic",
+                },
             ],
             "@typescript-eslint/ban-ts-comment": 1,
             "@typescript-eslint/naming-convention": [
@@ -79,34 +77,34 @@ export default [
                 {
                     "selector": "typeAlias",
                     "format": [
-                        "StrictPascalCase"
+                        "StrictPascalCase",
                     ],
                     "suffix": [
-                        "Type"
-                    ]
+                        "Type",
+                    ],
                 },
                 {
                     "selector": "enum",
                     "format": [
-                        "StrictPascalCase"
+                        "StrictPascalCase",
                     ],
                     "suffix": [
-                        "Enum"
-                    ]
-                }
+                        "Enum",
+                    ],
+                },
             ],
             "@typescript-eslint/no-shadow": [
                 2,
                 {
                     "builtinGlobals": false,
-                    "hoist": "all"
-                }
+                    "hoist": "all",
+                },
             ],
             "@typescript-eslint/no-unused-vars": [
                 2,
                 {
-                    "varsIgnorePattern": "[iI]gnored"
-                }
+                    "varsIgnorePattern": "[iI]gnored",
+                },
             ],
             "@typescript-eslint/no-use-before-define": 2,
             "@typescript-eslint/no-misused-promises": [
@@ -117,15 +115,15 @@ export default [
                         "attributes": true,
                         "properties": true,
                         "returns": true,
-                        "variables": true
-                    }
-                }
+                        "variables": true,
+                    },
+                },
             ],
             "@typescript-eslint/no-floating-promises": [
                 2,
                 {
-                    "ignoreIIFE": true
-                }
+                    "ignoreIIFE": true,
+                },
             ],
             "@typescript-eslint/no-unnecessary-boolean-literal-compare": 0,
             // Typescript - defined by eslint
@@ -177,9 +175,9 @@ export default [
                         "dev": false,
                         "evt": false,
                         "src": false,
-                        "ref": false
-                    }
-                }
+                        "ref": false,
+                    },
+                },
             ],
 
             // Babel, need to uncomment
@@ -239,9 +237,9 @@ export default [
             //     {
             //         "extensions": [
             //             ".ts",
-            //             ".tsx"
-            //         ]
-            //     }
+            //             ".tsx",
+            //         ],
+            //     },
             // ],
             // "react/no-unused-prop-types": 2,
             // "react/sort-comp": 2,
@@ -252,17 +250,17 @@ export default [
             //         "shorthandLast": false,
             //         "ignoreCase": false,
             //         "callbacksLast": false,
-            //         "noSortAlphabetically": false
-            //     }
+            //         "noSortAlphabetically": false,
+            //     },
             // ],
             // "react/jsx-closing-bracket-location": [
             //     2,
-            //     "line-aligned"
+            //     "line-aligned",
             // ],
             // "react/forbid-component-props": 0,
             // "react/jsx-indent-props": [
             //     2,
-            //     "first"
+            //     "first",
             // ],
             // "react/jsx-no-literals": 0,
             // "react/require-default-props": 0,
@@ -270,8 +268,8 @@ export default [
             // "react/jsx-max-depth": [
             //     2,
             //     {
-            //         "max": 5
-            //     }
+            //         "max": 5,
+            //     },
             // ],
             // "react/jsx-tag-spacing": [
             //     2,
@@ -279,14 +277,14 @@ export default [
             //         "closingSlash": "never",
             //         "beforeSelfClosing": "always",
             //         "afterOpening": "never",
-            //         "beforeClosing": "never"
-            //     }
+            //         "beforeClosing": "never",
+            //     },
             // ],
             // "react/jsx-max-props-per-line": [
             //     2,
             //     {
-            //         "maximum": 5
-            //     }
+            //         "maximum": 5,
+            //     },
             // ],
             // "react/jsx-one-expression-per-line": 0,
             // "react/state-in-constructor": 0,
@@ -298,16 +296,16 @@ export default [
                 {
                     "blocks": "never",
                     "classes": "never",
-                    "switches": "never"
-                }
+                    "switches": "never",
+                },
             ],
             "func-style": [
                 2,
-                "declaration"
+                "declaration",
             ],
             "function-call-argument-newline": [
                 2,
-                "consistent"
+                "consistent",
             ],
             "max-len": [
                 2,
@@ -315,8 +313,8 @@ export default [
                 4,
                 {
                     "ignoreComments": true,
-                    "ignoreUrls": true
-                }
+                    "ignoreUrls": true,
+                },
             ],
             "quote-props": [
                 2,
@@ -324,55 +322,55 @@ export default [
                 {
                     "keywords": true,
                     "unnecessary": true,
-                    "numbers": true
-                }
+                    "numbers": true,
+                },
             ],
             "quotes": 0,
             "sort-imports": 0,
             "array-element-newline": [
                 2,
-                "consistent"
+                "consistent",
             ],
             "one-var": [
                 2,
                 {
                     "var": "always",
                     "let": "never",
-                    "const": "never"
-                }
+                    "const": "never",
+                },
             ],
             "arrow-body-style": [
                 2,
-                "always"
+                "always",
             ],
             "max-statements": [
                 2,
-                20
+                20,
             ],
             "dot-location": [
                 2,
-                "property"
+                "property",
             ],
             "max-lines-per-function": [
                 2,
-                600
+                600,
             ],
             "object-property-newline": [
                 2,
                 {
-                    "allowAllPropertiesOnSameLine": true
-                }
+                    "allowAllPropertiesOnSameLine": true,
+                },
             ],
             "multiline-ternary": 0,
             "max-lines": [
                 2,
-                1000
+                1000,
             ],
             "newline-per-chained-call": [
                 2,
                 {
-                    "ignoreChainWithDepth": 4
-                }
+                    "ignoreChainWithDepth": 4,
+                },
             ],
             "function-paren-newline": 0,
             "capitalized-comments": [
@@ -380,8 +378,8 @@ export default [
                 "always",
                 {
                     "ignorePattern": "ignored|webpackChunkName",
-                    "ignoreInlineComments": true
-                }
+                    "ignoreInlineComments": true,
+                },
             ],
             "prefer-named-capture-group": 0,
             "no-console": 0,
@@ -391,11 +389,11 @@ export default [
             "wrap-regex": 0,
             "wrap-iife": [
                 2,
-                "inside"
+                "inside",
             ],
             "max-params": [
                 2,
-                5
+                5,
             ],
             "id-length": [
                 2,
@@ -406,10 +404,10 @@ export default [
                         "id",
                         "to",
                         "x",
-                        "y"
-                    ]
-                }
-            ]
+                        "y",
+                    ],
+                },
+            ],
         },
     },
     {
