@@ -2,6 +2,7 @@ import eslintJs from "@eslint/js";
 import eslintConfigPrettier from "eslint-config-prettier";
 import typescriptEslint from "typescript-eslint";
 import sonarjs from "eslint-plugin-sonarjs";
+import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 
 export default [
     eslintJs.configs.all,
@@ -33,6 +34,11 @@ export default [
                 "module": true,
                 "console": true
             },
+        },
+        plugins: {
+            unicorn: eslintPluginUnicorn,
+            // sonarjs: sonarjs,
+
         },
     },
     {
