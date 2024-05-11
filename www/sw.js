@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument, multiline-comment-style, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/require-await, @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/require-await, @typescript-eslint/no-unsafe-assignment */
 
 /* global self, caches, fetch, URL */
 
@@ -24,7 +24,7 @@ async function updateCache(evt /* :: : ServiceWorkerEvent */) {
     await cache.put(request, response);
 }
 
-// eslint-disable-next-line require-await, @typescript-eslint/explicit-function-return-type
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 async function fetchRespondWith(evt /* :: : ServiceWorkerEvent */) {
     return fetch(evt.request).catch(async (error /* :: : Error */) /* :: : Promise<mixed> */ => {
         console.log("[PWA]: network request Failed. Get content from cache:", error.message);
@@ -49,7 +49,7 @@ function isUrlStartWithListContainPathname(pathname /* :: : string */) /* :: : b
     });
 }
 
-// eslint-disable-next-line complexity, require-await, @typescript-eslint/explicit-function-return-type
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 async function fetchCallBack(evt /* :: : ServiceWorkerEvent */) /* :: : Promise<undefined> */ {
     const {request} = evt;
     const {method, url} = request;

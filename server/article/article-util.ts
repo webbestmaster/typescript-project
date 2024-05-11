@@ -11,10 +11,14 @@ export async function getArticleById(id: string): Promise<ArticleType | null> {
     return articleCrud.findOne({id});
 }
 
-/*
+/**
+
+
 export function getArticleBySlug(slug: string): Promise<ArticleType | null> {
     return articleCrud.findOne({slug});
 }
+
+
 */
 
 async function getActiveArticleBySlug(slug: string): Promise<ArticleType | null> {

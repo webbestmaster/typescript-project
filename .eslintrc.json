@@ -14,10 +14,10 @@
         }
     },
     "extends": [
-        "prettier",
-        "plugin:prettier/recommended",
+        // "prettier",
+        // "plugin:prettier/recommended",
         "plugin:jest/all",
-        "eslint:all",
+        // "eslint:all",
         "plugin:@typescript-eslint/all",
         // typescript begin
         // "plugin:@typescript-eslint/recommended",

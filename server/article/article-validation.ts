@@ -1,6 +1,6 @@
 /* eslint-disable multiline-comment-style, capitalized-comments, line-comment-position, multiline-comment-style */
-
-import {type JSONSchemaType, type ValidateFunction, Ajv} from "ajv";
+// eslint-disable-next-line import/no-named-as-default
+import Ajv, {type JSONSchemaType, type ValidateFunction} from "ajv";
 
 import type {PaginationResultType} from "../data-base/data-base-type";
 
