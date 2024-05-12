@@ -1,8 +1,11 @@
 import fileSystem from "node:fs";
 import {urlToRequest} from "loader-utils";
 
+type CallbackType = (error: Error | null, source?: string) => undefined;
+
 interface LoaderContextType {
     resourcePath: string;
+    async: () => CallbackType;
 }
 
 function getIsNonEmptyString(line: string): line is string {
@@ -33,14 +36,9 @@ export default cssExport;
 `;
 }
 
-function writeFileCallback(error: NodeJS.ErrnoException | null): undefined {
-    if (error) {
-        console.error(error);
-    }
-}
-
-export default function makeTyping(this: LoaderContextType, source: string): string {
+export default function makeTyping(this: LoaderContextType, source: string): undefined {
     const pathToNewFile = `${urlToRequest(this.resourcePath)}.d.ts`;
+    const callback = this.async();
 
     const exportList: Array<string> = source
         .split("\n")
@@ -54,8 +52,13 @@ export default function makeTyping(this: LoaderContextType, source: string): str
             encoding: "utf8",
             flag: "w+",
         },
-        writeFileCallback
-    );
+        (error: Error | null) => {
+            if (error) {
+                callback(error);
+                return;
+            }
 
-    return source;
+            callback(null, source);
+        }
+    );
 }

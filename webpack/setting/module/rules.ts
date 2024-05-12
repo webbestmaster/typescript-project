@@ -52,7 +52,6 @@ export const rules: Array<RuleSetRule> = [
         use: [
             cssLoader,
             {loader: path.resolve("./webpack/setting/module/css-typescript-loader.ts")},
-            // "css-modules-typescript-loader",
             {
                 loader: "css-loader",
                 options: {
@@ -73,7 +72,7 @@ export const rules: Array<RuleSetRule> = [
         test: /\.css$/u,
         use: [
             cssLoader,
-            // "css-modules-typescript-loader",
+            {loader: path.resolve("./webpack/setting/module/css-typescript-loader.ts")},
             {
                 loader: "css-loader",
                 options: {

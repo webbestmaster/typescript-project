@@ -30,7 +30,7 @@ const config: StorybookConfig = {
                 test: /\.scss$/u,
                 use: [
                     styleLoader,
-                    "css-modules-typescript-loader",
+                    {loader: path.resolve("./webpack/setting/module/css-typescript-loader.ts")},
                     {
                         loader: "css-loader",
                         options: {
