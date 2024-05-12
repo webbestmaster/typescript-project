@@ -141,7 +141,6 @@
     "@testing-library/react": "^15.0.7",
     "@types/circular-dependency-plugin": "^5.0.8",
     "@types/duplicate-package-checker-webpack-plugin": "^2.1.5",
-    "@types/loader-utils": "^2.0.6",
     "@types/script-ext-html-webpack-plugin": "^2.1.6",
     "@types/webpack-bundle-analyzer": "^4.7.0",
     "@types/webpack-node-externals": "^3.0.4",
