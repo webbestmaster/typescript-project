@@ -1,5 +1,4 @@
 import fileSystem from "node:fs";
-import {urlToRequest} from "loader-utils";
 
 type CallbackType = (error: Error | null, source?: string) => undefined;
 
@@ -37,7 +36,7 @@ export default cssExport;
 }
 
 export default function makeTyping(this: LoaderContextType, source: string): undefined {
-    const pathToNewFile = `${urlToRequest(this.resourcePath)}.d.ts`;
+    const pathToNewFile = `${this.resourcePath}.d.ts`;
     const callback = this.async();
 
     const exportList: Array<string> = source
