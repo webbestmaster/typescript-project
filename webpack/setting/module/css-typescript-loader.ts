@@ -45,20 +45,12 @@ export default function makeTyping(this: LoaderContextType, source: string): und
         .map<string>(makeTypingLine)
         .filter<string>(getIsNonEmptyString);
 
-    fileSystem.writeFile(
-        pathToNewFile,
-        makeTypingContent(exportList),
-        {
-            encoding: "utf8",
-            flag: "w+",
-        },
-        (error: Error | null) => {
-            if (error) {
-                callback(error);
-                return;
-            }
-
-            callback(null, source);
+    fileSystem.writeFile(pathToNewFile, makeTypingContent(exportList), (error: Error | null) => {
+        if (error) {
+            callback(error);
+            return;
         }
-    );
+
+        callback(null, source);
+    });
 }
