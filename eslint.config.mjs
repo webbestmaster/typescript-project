@@ -50,20 +50,122 @@ export default [
                 },
             ],
 
-            // No-loops, need to uncomment
-            // "no-loops/prettier": 2,
-            // "no-loops/always-return": 0,
-            // "no-loops/no-loops": 2,
-
-            // Optimize-regex, need to uncomment
-            // "optimize-regex/optimize-regex": 2,
-
-            // No-use-extend-native, need to uncomment
-            // "no-use-extend-native/no-use-extend-native": 2,
+            // React, need to uncomment
+            // "react/jsx-uses-react": 2,
+            // "react/react-in-jsx-scope": 0,
+            // "react/jsx-no-bind": 0,
+            // "react/jsx-newline": 0,
+            // "react/jsx-filename-extension": [
+            //     2,
+            //     {
+            //         "extensions": [
+            //             ".ts",
+            //             ".tsx",
+            //         ],
+            //     },
+            // ],
+            // "react/no-unused-prop-types": 2,
+            // "react/sort-comp": 2,
+            // "react/jsx-sort-props": [
+            //     2,
+            //     {
+            //         "reservedFirst": false,
+            //         "shorthandLast": false,
+            //         "ignoreCase": false,
+            //         "callbacksLast": false,
+            //         "noSortAlphabetically": false,
+            //     },
+            // ],
+            // "react/jsx-closing-bracket-location": [
+            //     2,
+            //     "line-aligned",
+            // ],
+            // "react/forbid-component-props": 0,
+            // "react/jsx-indent-props": [
+            //     2,
+            //     "first",
+            // ],
+            // "react/jsx-no-literals": 0,
+            // "react/require-default-props": 0,
+            // "react/require-optimization": 0,
+            // "react/jsx-max-depth": [
+            //     2,
+            //     {
+            //         "max": 5,
+            //     },
+            // ],
+            // "react/jsx-tag-spacing": [
+            //     2,
+            //     {
+            //         "closingSlash": "never",
+            //         "beforeSelfClosing": "always",
+            //         "afterOpening": "never",
+            //         "beforeClosing": "never",
+            //     },
+            // ],
+            // "react/jsx-max-props-per-line": [
+            //     2,
+            //     {
+            //         "maximum": 5,
+            //     },
+            // ],
+            // "react/jsx-one-expression-per-line": 0,
+            // "react/state-in-constructor": 0,
+            // "react/no-set-state": 0,
 
             // React-hooks, need to uncomment
             // "react-hooks/rules-of-hooks": 2,
             // "react-hooks/exhaustive-deps": 2,
+
+            // Babel, need to uncomment
+            // "babel/new-cap": 2,
+            // "babel/camelcase": 2,
+            // "babel/no-invalid-this": 2,
+            // "babel/object-curly-spacing": 2,
+            // "babel/quotes": 0,
+            // "babel/semi": 2,
+            // "babel/no-unused-expressions": 2,
+            // "babel/valid-typeof": 2,
+
+            // JSX-a11y, need to uncomment
+            // Deprecated
+            // "jsx-a11y/label-has-for": 0,
+            // "jsx-a11y/no-access-key": 2,
+            // "jsx-a11y/no-autofocus": 2,
+            // "jsx-a11y/no-onchange": 2,
+
+            // Filenames, need to uncomment
+            // "filenames/no-index": 2,
+            // "filenames/match-regex": [
+            //     2,
+            //     "^[a-z\\.\\-\\d]+$",
+            //     True
+            // ],
+            // "filenames/match-exported": 0,
+
+            // Import, need to uncomment
+            // "import/no-named-as-default-member": 0,
+            // "import/default": 2,
+            // "import/no-unused-modules": 2,
+            // "import/no-useless-path-segments": 2,
+            // "import/no-default-export": 2,
+            // "import/order": [
+            //     2,
+            //     {
+            //         "newlines-between": "always-and-inside-groups",
+            //         "groups": [
+            //             "builtin",
+            //             "internal",
+            //             "external",
+            //             "parent",
+            //             "sibling",
+            //             "index"
+            //         ]
+            //     }
+            // ],
+
+            // Optimize-regex, need to uncomment
+            // "optimize-regex/optimize-regex": 2,
 
             // Typescript
             "@typescript-eslint/array-type": [
@@ -181,116 +283,6 @@ export default [
                 },
             ],
 
-            // Babel, need to uncomment
-            // "babel/new-cap": 2,
-            // "babel/camelcase": 2,
-            // "babel/no-invalid-this": 2,
-            // "babel/object-curly-spacing": 2,
-            // "babel/quotes": 0,
-            // "babel/semi": 2,
-            // "babel/no-unused-expressions": 2,
-            // "babel/valid-typeof": 2,
-
-            // JSX-a11y, need to uncomment
-            // Deprecated
-            // "jsx-a11y/label-has-for": 0,
-            // "jsx-a11y/no-access-key": 2,
-            // "jsx-a11y/no-autofocus": 2,
-            // "jsx-a11y/no-onchange": 2,
-
-            // Filenames, need to uncomment
-            // "filenames/no-index": 2,
-            // "filenames/match-regex": [
-            //     2,
-            //     "^[a-z\\.\\-\\d]+$",
-            //     True
-            // ],
-            // "filenames/match-exported": 0,
-
-            // Import, need to uncomment
-            // "import/no-named-as-default-member": 0,
-            // "import/default": 2,
-            // "import/no-unused-modules": 2,
-            // "import/no-useless-path-segments": 2,
-            // "import/no-default-export": 2,
-            // "import/order": [
-            //     2,
-            //     {
-            //         "newlines-between": "always-and-inside-groups",
-            //         "groups": [
-            //             "builtin",
-            //             "internal",
-            //             "external",
-            //             "parent",
-            //             "sibling",
-            //             "index"
-            //         ]
-            //     }
-            // ],
-
-            // React, need to uncomment
-            // "react/jsx-uses-react": 2,
-            // "react/react-in-jsx-scope": 0,
-            // "react/jsx-no-bind": 0,
-            // "react/jsx-newline": 0,
-            // "react/jsx-filename-extension": [
-            //     2,
-            //     {
-            //         "extensions": [
-            //             ".ts",
-            //             ".tsx",
-            //         ],
-            //     },
-            // ],
-            // "react/no-unused-prop-types": 2,
-            // "react/sort-comp": 2,
-            // "react/jsx-sort-props": [
-            //     2,
-            //     {
-            //         "reservedFirst": false,
-            //         "shorthandLast": false,
-            //         "ignoreCase": false,
-            //         "callbacksLast": false,
-            //         "noSortAlphabetically": false,
-            //     },
-            // ],
-            // "react/jsx-closing-bracket-location": [
-            //     2,
-            //     "line-aligned",
-            // ],
-            // "react/forbid-component-props": 0,
-            // "react/jsx-indent-props": [
-            //     2,
-            //     "first",
-            // ],
-            // "react/jsx-no-literals": 0,
-            // "react/require-default-props": 0,
-            // "react/require-optimization": 0,
-            // "react/jsx-max-depth": [
-            //     2,
-            //     {
-            //         "max": 5,
-            //     },
-            // ],
-            // "react/jsx-tag-spacing": [
-            //     2,
-            //     {
-            //         "closingSlash": "never",
-            //         "beforeSelfClosing": "always",
-            //         "afterOpening": "never",
-            //         "beforeClosing": "never",
-            //     },
-            // ],
-            // "react/jsx-max-props-per-line": [
-            //     2,
-            //     {
-            //         "maximum": 5,
-            //     },
-            // ],
-            // "react/jsx-one-expression-per-line": 0,
-            // "react/state-in-constructor": 0,
-            // "react/no-set-state": 0,
-
             // eslint
             "padded-blocks": [
                 2,
@@ -386,6 +378,7 @@ export default [
             "no-console": 0,
             "no-warning-comments": 0,
             "no-inline-comments": 0,
+            "multiline-comment-style": 0,
             "no-ternary": 0,
             "wrap-regex": 0,
             "wrap-iife": [
@@ -409,11 +402,6 @@ export default [
                     ],
                 },
             ],
-
-            // TODO: enable multiline-comment-style
-            "multiline-comment-style": 0,
-            // TODO: enable @typescript-eslint/init-declarations
-            "@typescript-eslint/init-declarations": 0,
         },
     },
     {
@@ -422,7 +410,7 @@ export default [
             "dist/*",
             "dist-server/*",
 
-            // Npm
+            // NPM
             "node_modules/*",
 
             // Report
@@ -431,8 +419,8 @@ export default [
             "coverage/*",
 
             // Style's d.ts
-            "*.scss.d.ts",
-            "*.css.d.ts",
+            // eslint-disable-next-line arrow-body-style, @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-unsafe-argument
+            pathToFile => /\S+\.s?css\.d\.ts/u.test(pathToFile),
 
             // Test
             "test-backstop/*",
