@@ -1,4 +1,3 @@
-/* -- eslint-disable multiline-comment-style, capitalized-comments, line-comment-position */
 /* eslint-disable capitalized-comments, line-comment-position */
 
 import {cls} from "../../util/css";

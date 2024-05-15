@@ -1,7 +1,6 @@
 import type {LocaleDictionaryType} from "../type";
 
 export const ruRu: LocaleDictionaryType = {
-    /* -- eslint-disable id-match, id-length, max-len, sonarjs/no-duplicate-string, sort-keys */
     /* eslint-disable id-length, sort-keys */
     META__LANGUAGE_NAME: "Русский",
 
@@ -75,7 +74,6 @@ export const ruRu: LocaleDictionaryType = {
     SEARCH__REQUEST_TOO_SHORT: "Слишком короткий запрос",
     SEARCH__NOTHING_FOUND: "Ничего не найдено",
 
-    /* -- eslint-enable id-match, id-length, max-len,sonarjs/no-duplicate-string, sort-keys */
     /* eslint-enable id-length, sort-keys */
 };
 

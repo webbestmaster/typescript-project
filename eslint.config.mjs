@@ -6,12 +6,21 @@ import sonarjs from "eslint-plugin-sonarjs";
 import eslintPluginUnicorn from "eslint-plugin-unicorn";
 import jest from "eslint-plugin-jest";
 
+/**
+ * List of plugins to add
+ * react
+ * react-hooks
+ * babel - maybe not needed
+ * JSX-a11y
+ * filenames
+ * import
+ * optimize-regex
+ */
+
 export default [
     eslintJs.configs.all,
-    // eslintJs.configs.recommended,
     ...typescriptEslint.configs.all,
     jest.configs["flat/all"],
-    // ...jest.configs.all,
     sonarjs.configs.recommended,
     eslintConfigPrettier,
     {

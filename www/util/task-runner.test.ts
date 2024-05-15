@@ -1,4 +1,3 @@
-/* -- eslint-disable no-magic-numbers, sonarjs/no-duplicate-string */
 /* eslint-disable sonarjs/no-duplicate-string */
 
 import {describe, it, expect} from "@jest/globals";

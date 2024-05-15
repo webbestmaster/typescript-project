@@ -4,7 +4,6 @@ import {enUs} from "../en-us/data";
 export const svSe: LocaleDictionaryType = {
     ...enUs,
 
-    /* -- eslint-disable id-match, id-length, max-len, sonarjs/no-duplicate-string, sort-keys */
     /* eslint-disable id-length, sort-keys */
     META__LANGUAGE_NAME: "Svanska",
 
@@ -17,7 +16,6 @@ export const svSe: LocaleDictionaryType = {
     SHARE__HEADER: "Dela med sig:",
     SEE_ALSO__HEADER: "Se även:",
 
-    /* -- eslint-enable id-match, id-length, max-len,sonarjs/no-duplicate-string, sort-keys */
     /* eslint-enable id-length, sort-keys */
 };
 

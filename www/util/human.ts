@@ -3,7 +3,6 @@ const textToLatinMap: Record<string, string> = {
      * Транслитерация ГОСТ 7.79-2000*
      * https://transliteration.ru/gost-7-79-2000/
      */
-    /* -- eslint-disable id-length, sort-keys, id-match */
     /* eslint-disable id-length, sort-keys */
     а: "a",
     б: "b",
@@ -42,7 +41,6 @@ const textToLatinMap: Record<string, string> = {
     å: "a",
     ä: "a",
     ö: "o",
-    /* -- eslint-enable id-length, sort-keys, id-match */
     /* eslint-enable id-length, sort-keys */
 };
 
