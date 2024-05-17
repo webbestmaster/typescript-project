@@ -7,7 +7,7 @@ import {articleContext} from "../article/article-context/article-context";
 import type {ArticlePreviewType} from "../../../server/article/article-type";
 import {getArticleLinkToViewClient} from "../article/article-helper";
 
-import siblingsStyle from "./siblings.scss";
+import * as siblingsStyle from "./siblings.scss";
 
 export function Siblings(): JSX.Element {
     const {siblingList} = useContext<ArticleContextType>(articleContext);

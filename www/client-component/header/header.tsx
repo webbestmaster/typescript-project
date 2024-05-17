@@ -8,7 +8,7 @@ import {cls} from "../../util/css";
 import {Search} from "../search/search";
 import {useLocale} from "../../provider/locale/locale-context";
 
-import headerStyle from "./header.scss";
+import * as headerStyle from "./header.scss";
 
 export function Header(): JSX.Element {
     const {getLocalizedString} = useLocale();

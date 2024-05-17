@@ -2,7 +2,7 @@ import type {ReactNode} from "react";
 
 import {cls} from "../../util/css";
 
-import isHiddenStyle from "./is-hidden.scss";
+import * as isHiddenStyle from "./is-hidden.scss";
 
 interface PropsType {
     readonly children?: ReactNode;

@@ -3,7 +3,7 @@ import {Spinner} from "../../../layout/spinner/spinner";
 import {Locale} from "../../../provider/locale/locale-context";
 import {cls} from "../../../util/css";
 
-import searchResultStyle from "./search-result.scss";
+import * as searchResultStyle from "./search-result.scss";
 import {sortSearchArticle} from "./search-result-helper";
 import {SearchResultLink} from "./search-result-link/search-result-link";
 

@@ -8,7 +8,7 @@ import {ShareButtonTelegram} from "../../share-button/button/share-button-telegr
 import {ShareButtonViber} from "../../share-button/button/share-button-viber";
 import {ShareButtonWhatsApp} from "../../share-button/button/share-button-whats-app";
 
-import shareButtonListContentStyle from "./share-button-list-content.scss";
+import * as shareButtonListContentStyle from "./share-button-list-content.scss";
 
 interface ShareButtonListContentPropsType {
     readonly listHeader: ReactNode;

@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import {getArticleLinkToViewClient} from "../article/article-helper";
 import {copyrightName} from "../../const";
 
-import footerStyle from "./footer.scss";
+import * as footerStyle from "./footer.scss";
 
 export function Footer(): JSX.Element {
     return (

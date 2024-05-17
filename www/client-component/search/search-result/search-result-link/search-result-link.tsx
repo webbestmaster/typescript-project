@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import {getArticleLinkToViewClient} from "../../../article/article-helper";
 import type {SearchArticleType} from "../../search-type";
 
-import searchResultLinkStyle from "./search-result-link.scss";
+import * as searchResultLinkStyle from "./search-result-link.scss";
 
 interface SearchResultLinkPropsType {
     readonly searchArticle: SearchArticleType;

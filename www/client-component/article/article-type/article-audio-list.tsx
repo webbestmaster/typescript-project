@@ -6,7 +6,7 @@ import {articleContext} from "../article-context/article-context";
 import {Markdown} from "../../../layout/markdown/markdown";
 import {markdownAudioRegExp, parseAudioTag} from "../../../layout/markdown/markdown-helper-audio";
 import {defaultMediaMetadata} from "../../../layout/audio-player/audio-player-const";
-import articleStyle from "../article.scss";
+import * as articleStyle from "../article.scss";
 import {getPathToFile} from "../../../util/path";
 
 export function ArticleAudioList(): JSX.Element {

@@ -16,7 +16,7 @@ import {ReactScrollRestoration} from "../scroll-restoration/react-scroll-restora
 
 import {LoginForm} from "../auth/login-form/login-form";
 
-import pageStyle from "./page.scss";
+import * as pageStyle from "./page.scss";
 
 interface PagePropsType {
     readonly children: ReactNode;

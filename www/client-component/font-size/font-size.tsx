@@ -4,7 +4,7 @@ import {cls} from "../../util/css";
 import {ThemeContext} from "../../provider/theme/theme-context";
 import type {ThemeContextType} from "../../provider/theme/theme-context-type";
 
-import fontSizeStyle from "./font-size.scss";
+import * as fontSizeStyle from "./font-size.scss";
 
 interface FontSizePropsType {
     readonly className?: string;

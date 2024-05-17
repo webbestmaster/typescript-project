@@ -2,7 +2,7 @@ import {getPathToFile, getPathToImage} from "../../util/path";
 import {appIconPngFileName} from "../../const";
 import {Video} from "../video/video";
 
-import markdownStyle from "./markdown.scss";
+import * as markdownStyle from "./markdown.scss";
 import type {StringToJsxRawDataType} from "./markdown-helper";
 import type {MarkdownItemCounter} from "./markdown-item-counter";
 

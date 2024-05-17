@@ -13,9 +13,9 @@ import {
 } from "../../../../server/article/article-type";
 import {getArticleLinkToViewClient} from "../article-helper";
 import {defaultMediaMetadata} from "../../../layout/audio-player/audio-player-const";
-import audioPlayerStyle from "../../../layout/audio-player/audio-player.scss";
+import * as audioPlayerStyle from "../../../layout/audio-player/audio-player.scss";
 import {getPathToFile} from "../../../util/path";
-import articleStyle from "../article.scss";
+import * as articleStyle from "../article.scss";
 
 export function ArticleAudioChildrenList(): JSX.Element {
     const {article, childList} = useContext<ArticleContextType>(articleContext);

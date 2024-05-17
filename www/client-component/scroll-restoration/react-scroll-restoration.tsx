@@ -10,7 +10,7 @@ import {articleContext} from "../article/article-context/article-context";
 import {useLocale} from "../../provider/locale/locale-context";
 
 import {getAbsoluteScrollTop, getRelativeScrollTop, smoothScrollToTop} from "./scroll-restoration-helper";
-import scrollRestorationStyle from "./scroll-restoration.scss";
+import * as scrollRestorationStyle from "./scroll-restoration.scss";
 
 export function ReactScrollRestoration(): JSX.Element {
     const topScrollPositionToShowToTopButton = 100;

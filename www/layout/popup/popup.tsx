@@ -5,7 +5,7 @@ import {createPortal} from "react-dom";
 
 import {cls} from "../../util/css";
 
-import popupStyle from "./popup.scss";
+import * as popupStyle from "./popup.scss";
 import {PopupVisibleStateEnum} from "./popup-const";
 
 const fadeClassNameMap: Record<PopupVisibleStateEnum, string> = {

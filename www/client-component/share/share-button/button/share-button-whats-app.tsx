@@ -1,4 +1,4 @@
-import shareButtonStyle from "../share-button.scss";
+import * as shareButtonStyle from "../share-button.scss";
 import type {ShareButtonPropsType} from "../share-button-type";
 import {share} from "../share-button-helper";
 import {SvgImage} from "../../../../layout/svg-image/svg-image";

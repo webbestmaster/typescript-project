@@ -1,4 +1,4 @@
-/* eslint-disable capitalized-comments, line-comment-position */
+/* eslint-disable capitalized-comments */
 
 import {cwd} from "node:process";
 import path from "node:path";

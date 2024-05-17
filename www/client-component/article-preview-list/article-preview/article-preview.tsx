@@ -4,7 +4,7 @@ import {type ArticlePreviewType, SubDocumentListViewTypeEnum} from "../../../../
 import {getArticleLinkToViewClient} from "../../article/article-helper";
 import {getPathToImage} from "../../../util/path";
 
-import articlePreviewListStyle from "./article-preview.scss";
+import * as articlePreviewListStyle from "./article-preview.scss";
 
 interface ArticlePreviewPropsType {
     readonly articlePreview: ArticlePreviewType;

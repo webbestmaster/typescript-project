@@ -9,7 +9,7 @@ import {ThemeContext} from "../../provider/theme/theme-context";
 
 import {MarkdownHtmlToReact} from "./markdown-html-to-react";
 
-import markdownStyle from "./markdown.scss";
+import * as markdownStyle from "./markdown.scss";
 
 type PropsType = HTMLAttributes<HTMLDivElement> & {
     readonly articleTitle: string;

@@ -1,6 +1,6 @@
 import {cls} from "../../util/css";
 
-import spinnerStyle from "./spinner.scss";
+import * as spinnerStyle from "./spinner.scss";
 
 interface PropsType {
     readonly className?: string;

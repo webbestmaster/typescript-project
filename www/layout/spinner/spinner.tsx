@@ -1,8 +1,8 @@
-/* eslint-disable capitalized-comments, line-comment-position */
+/* eslint-disable capitalized-comments */
 
 import {cls} from "../../util/css";
 
-import spinnerStyle from "./spinner.scss";
+import * as spinnerStyle from "./spinner.scss";
 import {defaultSpinnerSize} from "./spinner-const";
 import {SpinnerPositionEnum} from "./spinner-type";
 

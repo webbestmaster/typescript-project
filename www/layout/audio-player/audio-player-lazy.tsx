@@ -4,7 +4,7 @@ import type {AudioPropsType, AudioPlayerPropsType, PlayListProviderPropsType} fr
 import type {LazyResultType} from "../../util/type";
 import {AsciiSpinner} from "../spinner/ascii-spinner";
 
-import audioPlayerStyle from "./audio-player.scss";
+import * as audioPlayerStyle from "./audio-player.scss";
 
 function AudioPlayerLoading(): JSX.Element {
     return <AsciiSpinner className={audioPlayerStyle.audio_player__spinner} isShow />;

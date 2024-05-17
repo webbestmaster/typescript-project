@@ -1,4 +1,4 @@
-/* eslint-disable capitalized-comments, line-comment-position */
+/* eslint-disable capitalized-comments */
 import Ajv, {type JSONSchemaType, type ValidateFunction} from "ajv";
 
 import type {PaginationResultType} from "../data-base/data-base-type";

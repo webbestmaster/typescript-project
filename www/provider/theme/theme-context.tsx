@@ -2,7 +2,7 @@ import {createContext, useMemo, useState, type ReactNode, useCallback, useEffect
 
 import type {ThemeContextType, ThemeNameEnum} from "./theme-context-type";
 import {defaultThemeContext} from "./theme-context-const";
-import themeContextStyle from "./theme-context.scss";
+import * as themeContextStyle from "./theme-context.scss";
 import {maxFontSize, minFontSize, saveFontSize} from "./font-size-helper";
 
 export const ThemeContext = createContext<ThemeContextType>(defaultThemeContext);

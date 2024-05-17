@@ -5,7 +5,7 @@ import {Locale} from "../../provider/locale/locale-context";
 import {cls} from "../../util/css";
 
 import emptyImageSrc from "./image/empty.svg";
-import emptyStyle from "./empty.scss";
+import * as emptyStyle from "./empty.scss";
 
 interface PropsType {
     readonly className?: string;

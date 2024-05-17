@@ -11,7 +11,7 @@ import {cls} from "../../util/css";
 
 import type {NavigationContextType} from "./navigation-context/navigation-context-type";
 import {navigationContext} from "./navigation-context/navigation-context";
-import navigationStyle from "./navigation.scss";
+import * as navigationStyle from "./navigation.scss";
 
 export function Navigation(): JSX.Element {
     const navigationContextData = useContext<NavigationContextType>(navigationContext);

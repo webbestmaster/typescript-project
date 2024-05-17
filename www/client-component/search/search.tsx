@@ -12,7 +12,7 @@ import {makeSafeRegExp} from "../../util/regexp";
 
 import {articlePreviewKeyList} from "./search-const";
 import type {SearchArticleType} from "./search-type";
-import searchStyle from "./search.scss";
+import * as searchStyle from "./search.scss";
 import {SearchResult} from "./search-result/search-result";
 
 interface SearchPropsType {

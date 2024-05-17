@@ -1,7 +1,7 @@
 import {getPathToFile, getPathToImage} from "../../util/path";
 import {Image} from "../Image/image";
 
-import markdownStyle from "./markdown.scss";
+import * as markdownStyle from "./markdown.scss";
 import type {StringToJsxRawDataType} from "./markdown-helper";
 import type {MarkdownItemCounter} from "./markdown-item-counter";
 

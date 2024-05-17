@@ -1,4 +1,4 @@
-/* eslint-disable capitalized-comments, line-comment-position, @typescript-eslint/no-floating-promises */
+/* eslint-disable capitalized-comments, @typescript-eslint/no-floating-promises */
 
 /* global Buffer */
 

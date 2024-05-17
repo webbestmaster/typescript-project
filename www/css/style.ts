@@ -1,6 +1,4 @@
-import {default as variableStyle} from "./variable.scss";
-
-// Use as * for css loader 7.x
+import * as variableStyle from "./variable.scss";
 
 export const cssVariable = {
     maxDesktopWidth: Number.parseInt(variableStyle.maxDesktopWidth, 10),

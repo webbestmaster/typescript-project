@@ -7,7 +7,7 @@ import {Image} from "../Image/image";
 import {secondsToHuman} from "../../util/time";
 import {cls} from "../../util/css";
 
-import videoStyle from "./video.scss";
+import * as videoStyle from "./video.scss";
 
 interface VideoPropsType {
     readonly alt: string;

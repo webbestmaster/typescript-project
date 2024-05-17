@@ -6,7 +6,7 @@ import {articleContext} from "../article/article-context/article-context";
 import type {ArticlePreviewType} from "../../../server/article/article-type";
 import {getArticleLinkToViewClient} from "../article/article-helper";
 
-import breadcrumbsStyle from "./breadcrumbs.scss";
+import * as breadcrumbsStyle from "./breadcrumbs.scss";
 
 export function Breadcrumbs(): JSX.Element {
     const {breadcrumbs, article} = useContext<ArticleContextType>(articleContext);
