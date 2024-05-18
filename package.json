@@ -67,7 +67,7 @@
     "make-static-site": "cross-env MAKE_STATIC_SITE=TRUE npm run build:prod:start",
     "check": "npm run ts-coverage && npm run tsc && npm run eslint && npm run stylelint",
     "check:fix": "npm run prettier && npm run ts-coverage && npm run tsc && npm run eslint:fix && npm run stylelint:fix",
-    "eslint": "eslint",
+    "eslint": "eslint .",
     "eslint:fix": "eslint . --fix",
     "eslint:watch": "npm-watch eslint",
     "stylelint": "stylelint ./**.scss",
