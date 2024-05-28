@@ -35,3 +35,6 @@ export const loginResponseSchema: JSONSchemaType<LoginResponseType> = {
     required: ["user", "errorList"],
     type: "object",
 };
+
+export const hasSuccessLoginLocalStorageKey = "auth-has-success-login-key-v.1.0";
+export const hasSuccessLoginLocalStorageValue = "auth-has-success-login-value-v.1.0";

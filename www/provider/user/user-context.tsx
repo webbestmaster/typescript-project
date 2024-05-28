@@ -4,6 +4,7 @@ import {getAutoAuthLogin} from "../../service/auth/auth-api";
 import {useMakeExecutableState} from "../../util/function";
 import type {LoginResponseType} from "../../service/auth/auth-type";
 import {throwError} from "../../util/error";
+import {getIsNeedAutologin} from "../../service/auth/auth-util";
 
 import {defaultUserContext} from "./user-context-const";
 import type {UserContextType, UserType} from "./user-context-type";
@@ -32,13 +33,13 @@ export function UserProvider(props: UserProviderPropsType): JSX.Element {
     }, [isInProgressAutoLogin, user]);
 
     useEffect(() => {
-        // A if ( typeof location === "object" && location.pathname.includes("/cms/")) {
-        executeAutoLogin()
-            .then((loginResponse: LoginResponseType) => {
-                setUser(loginResponse.user);
-            })
-            .catch(throwError);
-        // }
+        if (getIsNeedAutologin()) {
+            executeAutoLogin()
+                .then((loginResponse: LoginResponseType) => {
+                    setUser(loginResponse.user);
+                })
+                .catch(throwError);
+        }
     }, [executeAutoLogin]);
 
     return <UserContextProvider value={providedData}>{children}</UserContextProvider>;

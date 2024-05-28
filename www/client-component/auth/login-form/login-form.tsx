@@ -6,6 +6,7 @@ import {loginUser, logoutUser, registerUser} from "../../../service/auth/auth-ap
 import type {LoginResponseType} from "../../../service/auth/auth-type";
 import {throwError} from "../../../util/error";
 import {apiUrl} from "../../../../server/const";
+import {handleLogout, handleSuccessLogin} from "../../../service/auth/auth-util";
 
 export function LoginForm(): JSX.Element {
     const userContext = useUserContext();
@@ -28,6 +29,7 @@ export function LoginForm(): JSX.Element {
                     const {user} = loginResponse;
 
                     userContext.setUser(user);
+                    handleLogout();
                 })
                 .catch(throwError);
         },
@@ -44,6 +46,7 @@ export function LoginForm(): JSX.Element {
                     const {user} = loginResponse;
 
                     userContext.setUser(user);
+                    handleSuccessLogin();
                 })
                 .catch(throwError);
         },
@@ -62,6 +65,7 @@ export function LoginForm(): JSX.Element {
                     console.log(loginResponse);
 
                     userContext.setUser(user);
+                    handleSuccessLogin();
                 })
                 .catch((error: Error) => {
                     console.log(error);
