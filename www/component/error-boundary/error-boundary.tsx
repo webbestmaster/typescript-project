@@ -9,6 +9,7 @@ interface StateType {
     hasError: boolean;
 }
 
+// eslint-disable-next-line react/require-optimization
 export class ErrorBoundary extends Component<PropsType, StateType> {
     public constructor(props: PropsType) {
         super(props);
@@ -20,6 +21,7 @@ export class ErrorBoundary extends Component<PropsType, StateType> {
         console.log("[ERROR]:", error);
         console.log("[ERROR-INFO]:", errorInfo);
 
+        // eslint-disable-next-line react/no-set-state
         this.setState({hasError: true});
     }
 

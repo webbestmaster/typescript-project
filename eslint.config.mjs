@@ -10,7 +10,7 @@ import reactRecommended from "eslint-plugin-react/configs/recommended.js";
 
 /**
  * List of plugins to add
- * react
+ * react - from eslint-plugin-react
  * react-hooks
  * babel - maybe not needed
  * JSX-a11y
@@ -30,14 +30,13 @@ export default [
         ...reactRecommended,
     },
     {
+        settings: {react: {version: "detect"}},
         languageOptions: {
             parserOptions: {
                 project: ["./tsconfig.json"],
                 ecmaVersion: 2020,
                 sourceType: "module",
-                ecmaFeatures: {
-                    jsx: true,
-                },
+                ecmaFeatures: {jsx: true},
             },
             globals: {
                 JSX: true,
@@ -79,7 +78,7 @@ export default [
             "react/jsx-indent-props": [2, "first"],
             "react/jsx-no-literals": 0,
             "react/require-default-props": 0,
-            "react/require-optimization": 0,
+            "react/require-optimization": 2,
             "react/jsx-max-depth": [2, {max: 5}],
             "react/jsx-tag-spacing": [
                 2,
@@ -93,7 +92,7 @@ export default [
             "react/jsx-max-props-per-line": [2, {maximum: 5}],
             "react/jsx-one-expression-per-line": 0,
             "react/state-in-constructor": 0,
-            "react/no-set-state": 0,
+            "react/no-set-state": 2,
 
             // React-hooks, need to uncomment
             // "react-hooks/rules-of-hooks": 2,
