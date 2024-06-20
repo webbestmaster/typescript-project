@@ -6,6 +6,7 @@ import sonarjs from "eslint-plugin-sonarjs";
 import eslintPluginUnicorn from "eslint-plugin-unicorn";
 import jest from "eslint-plugin-jest";
 import reactRecommended from "eslint-plugin-react/configs/recommended.js";
+import jsxA11y from 'eslint-plugin-jsx-a11y';
 
 
 /**
@@ -28,6 +29,10 @@ export default [
     {
         files: ["**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}"],
         ...reactRecommended,
+    },
+    {
+        files: ["**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}"],
+        ...jsxA11y.flatConfigs.strict,
     },
     {
         settings: {react: {version: "detect"}},
@@ -107,13 +112,6 @@ export default [
             // "babel/semi": 2,
             // "babel/no-unused-expressions": 2,
             // "babel/valid-typeof": 2,
-
-            // JSX-a11y, need to uncomment
-            // Deprecated
-            // "jsx-a11y/label-has-for": 0,
-            // "jsx-a11y/no-access-key": 2,
-            // "jsx-a11y/no-autofocus": 2,
-            // "jsx-a11y/no-onchange": 2,
 
             // Filenames, need to uncomment
             // "filenames/no-index": 2,

@@ -105,6 +105,7 @@ export function Video(props: VideoPropsType): JSX.Element {
                 width={width}
             />
 
+            {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
             <video
                 className={cls(videoStyle.video__tag, videoClassName, {
                     [videoStyle.video__tag__started]: isStarted,
