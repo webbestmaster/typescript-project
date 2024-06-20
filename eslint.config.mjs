@@ -14,7 +14,7 @@ import jsxA11y from 'eslint-plugin-jsx-a11y';
  * react - from eslint-plugin-react
  * react-hooks
  * babel - maybe not needed
- * JSX-a11y
+ * JSX-a11y - from eslint-plugin-jsx-a11y
  * filenames
  * import
  * optimize-regex
