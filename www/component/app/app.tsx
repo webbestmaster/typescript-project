@@ -1,14 +1,12 @@
 import {AudioPlayerControlSprite} from "react-audio-player-pro";
 
-import {ErrorBoundary} from "../error-boundary/error-boundary";
-
-import type {NavigationContextType} from "../../client-component/navigation/navigation-context/navigation-context-type";
 import type {ArticleContextType} from "../../client-component/article/article-context/article-context-type";
+import type {NavigationContextType} from "../../client-component/navigation/navigation-context/navigation-context-type";
 import {ShareButtonSprite} from "../../client-component/share/share-button/share-button-sprite";
-import {ThemeProvider} from "../../provider/theme/theme-context";
 import {GdprInfo} from "../../layout/gdpr-info/gdpr-info";
+import {ThemeProvider} from "../../provider/theme/theme-context";
 import type {ThemeNameEnum} from "../../provider/theme/theme-context-type";
-
+import {ErrorBoundary} from "../error-boundary/error-boundary";
 import {AppProvider} from "./app-provider";
 import {AppRouting} from "./app-routing";
 

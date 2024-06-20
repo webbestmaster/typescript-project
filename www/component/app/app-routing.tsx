@@ -1,17 +1,16 @@
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {StaticRouter} from "react-router-dom/server";
 
-import {isBrowser} from "../../util/system";
+import {Page} from "../../client-component/page/page";
+import {ClientArticle} from "../../page/client/client-article/client-article";
 import {ClientHome} from "../../page/client/client-home/client-home";
-import {Error404} from "../../page/service/error-404/error-404";
-import {LoginAsync} from "../../page/service/login/login-async";
-import {CmsArticleListAsync} from "../../page/cms/cms-article-list/cms-article-list-async";
-import {CmsArticleTreeAsync} from "../../page/cms/cms-article-tree/cms-article-tree-async";
 import {CmsArticleCreateAsync} from "../../page/cms/cms-article/cms-article-create/cms-article-create-async";
 import {CmsArticleEditAsync} from "../../page/cms/cms-article/cms-article-edit/cms-article-edit-async";
-import {ClientArticle} from "../../page/client/client-article/client-article";
-import {Page} from "../../client-component/page/page";
-
+import {CmsArticleListAsync} from "../../page/cms/cms-article-list/cms-article-list-async";
+import {CmsArticleTreeAsync} from "../../page/cms/cms-article-tree/cms-article-tree-async";
+import {Error404} from "../../page/service/error-404/error-404";
+import {LoginAsync} from "../../page/service/login/login-async";
+import {isBrowser} from "../../util/system";
 import {appRoute} from "./app-route";
 
 interface PropsType {

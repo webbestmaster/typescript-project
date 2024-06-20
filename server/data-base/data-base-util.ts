@@ -3,7 +3,6 @@
 // import {PromiseResolveType} from '../../www/util/promise';
 // import {extractFromUnknown} from '../../www/util/type';
 import {makeDirectory} from "../file/directory";
-
 // import {CrudSearchQueryType, RegExpQueryType} from './data-base-type';
 import {dataBaseBackUpPathAbsolute} from "./data-base-const";
 

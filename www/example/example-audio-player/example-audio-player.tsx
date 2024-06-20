@@ -1,10 +1,9 @@
 import {AudioPlayer, AudioPlayerControlSprite, type TrackType} from "react-audio-player-pro";
 
-import {Markdown} from "../../layout/markdown/markdown";
 import {demoUrl} from "../../const";
-
-import exampleAudioPlayer from "./example-audio-player.md";
+import {Markdown} from "../../layout/markdown/markdown";
 import {CustomContent} from "./custom-content";
+import exampleAudioPlayer from "./example-audio-player.md";
 
 const icon64 = `${demoUrl}/image-file/react-icon-64.png`;
 const icon128 = `${demoUrl}/image-file/react-icon-128.png`;

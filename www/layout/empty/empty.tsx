@@ -1,11 +1,10 @@
 import {useMemo} from "react";
 
-import type {LangKeyType} from "../../provider/locale/translation/type";
 import {Locale} from "../../provider/locale/locale-context";
+import type {LangKeyType} from "../../provider/locale/translation/type";
 import {cls} from "../../util/css";
-
-import emptyImageSrc from "./image/empty.svg";
 import * as emptyStyle from "./empty.scss";
+import emptyImageSrc from "./image/empty.svg";
 
 interface PropsType {
     readonly className?: string;

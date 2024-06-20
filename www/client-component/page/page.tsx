@@ -1,21 +1,19 @@
 import {type ReactNode, useContext, useEffect} from "react";
-import {useParams, useLocation, type Location} from "react-router-dom";
+import {type Location, useLocation, useParams} from "react-router-dom";
 
-import {Header} from "../header/header";
+import {rootArticleSlug} from "../../../server/article/article-const";
+import {appRoute} from "../../component/app/app-route";
+import {googleAnalyticsId} from "../../const";
+import {noop} from "../../util/function";
+import type {ExtractPathKeysType} from "../../util/url";
+import {articleContext} from "../article/article-context/article-context";
+import type {ArticleContextType} from "../article/article-context/article-context-type";
+import {getArticleLinkToViewClient} from "../article/article-helper";
+import {LoginForm} from "../auth/login-form/login-form";
 import {Footer} from "../footer/footer";
 import {useGoogleAnalytics} from "../google-analytics/google-analytics";
-import {googleAnalyticsId} from "../../const";
-import type {ExtractPathKeysType} from "../../util/url";
-import {appRoute} from "../../component/app/app-route";
-import {rootArticleSlug} from "../../../server/article/article-const";
-import {noop} from "../../util/function";
-import type {ArticleContextType} from "../article/article-context/article-context-type";
-import {articleContext} from "../article/article-context/article-context";
-import {getArticleLinkToViewClient} from "../article/article-helper";
+import {Header} from "../header/header";
 import {ReactScrollRestoration} from "../scroll-restoration/react-scroll-restoration";
-
-import {LoginForm} from "../auth/login-form/login-form";
-
 import * as pageStyle from "./page.scss";
 
 interface PagePropsType {

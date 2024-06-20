@@ -3,10 +3,10 @@
 import Ajv, {type JSONSchemaType} from "ajv";
 import {Petsdb, type PetsdbItemType, type PetsdbQueryType, type PetsdbReadPageConfigType} from "petsdb";
 
-import {getPartialData, makeBackUpFolder} from "./data-base-util";
-import type {CrudConfigOnChangeArgumentType, CrudConfigType, CrudType, PaginationResultType} from "./data-base-type";
 import {makeDataBaseBackUp} from "./data-base-back-up";
 import {dataBaseFolderPath} from "./data-base-const";
+import type {CrudConfigOnChangeArgumentType, CrudConfigType, CrudType, PaginationResultType} from "./data-base-type";
+import {getPartialData, makeBackUpFolder} from "./data-base-util";
 
 const ajv = new Ajv();
 

@@ -1,16 +1,16 @@
+import {message, Typography} from "antd";
 import {useEffect} from "react";
-import {Typography, message} from "antd";
 import {useParams} from "react-router-dom";
 
-import {CmsArticle} from "../cms-article";
-import {CmsArticleModeEnum} from "../cms-article-const";
 import type {ArticleType} from "../../../../../server/article/article-type";
-import {getArticleListPagination, postArticleUpdate} from "../../../../service/article/article-api";
-import {useMakeExecutableState} from "../../../../util/function";
-import {Spinner} from "../../../../layout/spinner/spinner";
-import {CmsPage} from "../../layout/cms-page/cms-page";
 import type {PaginationResultType} from "../../../../../server/data-base/data-base-type";
 import {IsRender} from "../../../../layout/is-render/is-render";
+import {Spinner} from "../../../../layout/spinner/spinner";
+import {getArticleListPagination, postArticleUpdate} from "../../../../service/article/article-api";
+import {useMakeExecutableState} from "../../../../util/function";
+import {CmsPage} from "../../layout/cms-page/cms-page";
+import {CmsArticle} from "../cms-article";
+import {CmsArticleModeEnum} from "../cms-article-const";
 
 const {Title} = Typography;
 

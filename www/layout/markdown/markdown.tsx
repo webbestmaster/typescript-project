@@ -1,15 +1,13 @@
 /* global HTMLDivElement */
 
+import {classNameMdPro, classNameMdProThemeLight, markdown} from "markdown-pro";
 import {type HTMLAttributes, useContext} from "react";
-import {markdown, classNameMdPro, classNameMdProThemeLight} from "markdown-pro";
 
-import {cls} from "../../util/css";
-import type {ThemeContextType} from "../../provider/theme/theme-context-type";
 import {ThemeContext} from "../../provider/theme/theme-context";
-
-import {MarkdownHtmlToReact} from "./markdown-html-to-react";
-
+import type {ThemeContextType} from "../../provider/theme/theme-context-type";
+import {cls} from "../../util/css";
 import * as markdownStyle from "./markdown.scss";
+import {MarkdownHtmlToReact} from "./markdown-html-to-react";
 
 type PropsType = HTMLAttributes<HTMLDivElement> & {
     readonly articleTitle: string;

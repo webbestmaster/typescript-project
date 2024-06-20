@@ -1,7 +1,6 @@
 /* eslint-disable capitalized-comments */
 
 import {cls} from "../../util/css";
-
 import * as spinnerStyle from "./spinner.scss";
 import {defaultSpinnerSize} from "./spinner-const";
 import {SpinnerPositionEnum} from "./spinner-type";

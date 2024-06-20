@@ -1,7 +1,7 @@
 /* global MediaMetadataInit */
 
-import {getPathToImage} from "../../util/path";
 import {appIconPngFileName} from "../../const";
+import {getPathToImage} from "../../util/path";
 
 export const defaultMediaMetadata: MediaMetadataInit = {
     artwork: [

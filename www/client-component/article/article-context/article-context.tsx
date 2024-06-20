@@ -1,13 +1,12 @@
 /* global ARTICLE_DATA */
 import {createContext, useEffect, useState} from "react";
 
-import {isBrowser} from "../../../util/system";
 import {getArticleContextBySlug} from "../../../service/article/article-api";
 import {useMakeExecutableState} from "../../../util/function";
-
-import type {ArticleContextType} from "./article-context-type";
+import {isBrowser} from "../../../util/system";
 import {defaultArticleContextData} from "./article-context-const";
 import {articleContextDom} from "./article-context-dom";
+import type {ArticleContextType} from "./article-context-type";
 
 export const articleContext = createContext<ArticleContextType>(defaultArticleContextData);
 

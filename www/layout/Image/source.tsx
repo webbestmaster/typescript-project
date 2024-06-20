@@ -1,5 +1,4 @@
 import type {GetPathToImageType} from "../../util/path";
-
 import {getFullHorizontalPadding} from "./image-helper";
 
 const screenAspectRation: Array<number> = [1, 1.5, 2, 3];

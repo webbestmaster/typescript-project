@@ -1,7 +1,6 @@
 /* eslint-disable max-len */
 
 import {IsHidden} from "../../../layout/is-hidden/is-hidden";
-
 import {shareButtonName} from "./share-button-const";
 
 export function ShareButtonSprite(): JSX.Element {

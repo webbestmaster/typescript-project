@@ -1,6 +1,7 @@
 /* global File */
 
-import {useEffect, useState} from "react";
+import {red} from "@ant-design/colors";
+import {QuestionCircleOutlined} from "@ant-design/icons";
 import {
     Button,
     Checkbox,
@@ -14,13 +15,12 @@ import {
     Typography,
     Upload,
 } from "antd";
-import type {FieldData, ValidateErrorEntity} from "rc-field-form/lib/interface";
 import type {UploadChangeParam, UploadFile} from "antd/es/upload/interface";
-import {Link} from "react-router-dom";
-import {QuestionCircleOutlined} from "@ant-design/icons";
-import {red} from "@ant-design/colors";
 import dayjs, {type Dayjs} from "dayjs";
 import utc from "dayjs/plugin/utc";
+import type {FieldData, ValidateErrorEntity} from "rc-field-form/lib/interface";
+import {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 
 function innerInitialization(): undefined {
     dayjs.extend(utc);
@@ -28,6 +28,8 @@ function innerInitialization(): undefined {
 
 innerInitialization();
 
+import {rootArticleId} from "../../../../server/article/article-const";
+import {makeDefaultArticleFile} from "../../../../server/article/article-helper";
 import {
     type ArticleFileType,
     type ArticleType,
@@ -35,6 +37,15 @@ import {
     SubDocumentListViewTypeEnum,
 } from "../../../../server/article/article-type";
 import {validateArticle} from "../../../../server/article/article-validation";
+import type {PaginationResultType} from "../../../../server/data-base/data-base-type";
+import {getArticleLinkToViewClient} from "../../../client-component/article/article-helper";
+import {Box} from "../../../layout/box/box";
+import {IsRender} from "../../../layout/is-render/is-render";
+import {MarkdownInputWrapper} from "../../../layout/markdown-input-wrapper/markdown-input-wrapper";
+import {Spinner} from "../../../layout/spinner/spinner";
+import {getArticleListPaginationPick} from "../../../service/article/article-api";
+import {useMakeExecutableState} from "../../../util/function";
+import {HotKeyModifierEnum, useHotKey} from "../../../util/hot-key";
 import {
     arrayToStringByComma,
     humanNormalizeString,
@@ -42,18 +53,14 @@ import {
     stringToArrayByComma,
     textToSlug,
 } from "../../../util/human";
-import {useMakeExecutableState} from "../../../util/function";
-import type {PaginationResultType} from "../../../../server/data-base/data-base-type";
-import {getArticleListPaginationPick} from "../../../service/article/article-api";
-import {MarkdownInputWrapper} from "../../../layout/markdown-input-wrapper/markdown-input-wrapper";
-import {IsRender} from "../../../layout/is-render/is-render";
-import {rootArticleId} from "../../../../server/article/article-const";
-import {getArticleLinkToViewClient} from "../../../client-component/article/article-helper";
-import {Box} from "../../../layout/box/box";
-import {HotKeyModifierEnum, useHotKey} from "../../../util/hot-key";
-import {makeDefaultArticleFile} from "../../../../server/article/article-helper";
-import {Spinner} from "../../../layout/spinner/spinner";
-
+import {
+    CmsArticleModeEnum,
+    fileSizeLimit,
+    imageAccept,
+    imageFileSizeLimit,
+    keyForValidationList,
+    noDateUTC,
+} from "./cms-article-const";
 import {
     getAbsentIdList,
     getArticleLinkToEdit,
@@ -70,14 +77,6 @@ import {
     renderParentList,
     UploadButton,
 } from "./cms-article-layout";
-import {
-    CmsArticleModeEnum,
-    fileSizeLimit,
-    imageAccept,
-    imageFileSizeLimit,
-    keyForValidationList,
-    noDateUTC,
-} from "./cms-article-const";
 import type {ArticleForValidationType} from "./cms-article-type";
 import {renderUploadedFileListItem} from "./render-uploaded-file-list-item";
 

@@ -1,9 +1,9 @@
 import {Fragment} from "react";
 
+import {getIsEmptyHtml, type StringToJsxRawDataType} from "./markdown-helper";
 import {getAudioFromHtml} from "./markdown-helper-audio";
 import {getImageFromHtml} from "./markdown-helper-image";
 import {getVideoFromHtml} from "./markdown-helper-video";
-import {getIsEmptyHtml, type StringToJsxRawDataType} from "./markdown-helper";
 import {MarkdownItemCounter} from "./markdown-item-counter";
 
 const markdownVideoRegExp = /<video [^>]+\/>/giu;

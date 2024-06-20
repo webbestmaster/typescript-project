@@ -1,7 +1,7 @@
-import {lazy, Suspense, type ComponentType} from "react";
+import {type ComponentType, lazy, Suspense} from "react";
 
-import {Spinner} from "../../../../layout/spinner/spinner";
 import {LoginAdminRequired} from "../../../../layout/login-admin-required/login-admin-required";
+import {Spinner} from "../../../../layout/spinner/spinner";
 import type {LazyResultType} from "../../../../util/type";
 
 const AsyncLazy = lazy<ComponentType<unknown>>(async (): Promise<LazyResultType<unknown>> => {

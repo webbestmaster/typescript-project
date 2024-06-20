@@ -3,17 +3,16 @@
 import {type SyntheticEvent, useCallback, useEffect, useRef, useState} from "react";
 
 import type {PaginationResultType} from "../../../server/data-base/data-base-type";
-import {noop, useMakeExecutableState} from "../../util/function";
-import {getArticleClientListPaginationPick} from "../../service/article/article-api";
 import {useLocale} from "../../provider/locale/locale-context";
+import {getArticleClientListPaginationPick} from "../../service/article/article-api";
 import {cls} from "../../util/css";
+import {noop, useMakeExecutableState} from "../../util/function";
 import {useHotKey} from "../../util/hot-key";
 import {makeSafeRegExp} from "../../util/regexp";
-
-import {articlePreviewKeyList} from "./search-const";
-import type {SearchArticleType} from "./search-type";
 import * as searchStyle from "./search.scss";
+import {articlePreviewKeyList} from "./search-const";
 import {SearchResult} from "./search-result/search-result";
+import type {SearchArticleType} from "./search-type";
 
 interface SearchPropsType {
     readonly className?: string;

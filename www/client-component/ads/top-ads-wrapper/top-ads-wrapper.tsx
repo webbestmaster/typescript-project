@@ -1,9 +1,8 @@
-import {useLocation, type Location} from "react-router-dom";
+import {type Location, useLocation} from "react-router-dom";
 import {useScreenWidth} from "react-system-hook";
 
-import {AdSenseAds} from "../adsense/ad-sense-ads";
 import {googleAdSenseTopAdId} from "../../../const";
-
+import {AdSenseAds} from "../adsense/ad-sense-ads";
 import * as bottomAdsWrapperStyle from "../bottom-ads-wrapper/bottom-ads-wrapper.scss";
 
 export function TopAdsWrapper(): JSX.Element {

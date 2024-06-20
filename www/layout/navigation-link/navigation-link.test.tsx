@@ -1,12 +1,11 @@
 /* global HTMLElement */
 
-import {describe, it, expect} from "@jest/globals";
-import {useSearchParams} from "react-router-dom";
-import {useEffect} from "react";
+import {describe, expect, it} from "@jest/globals";
 import {render, screen} from "@testing-library/react";
+import {useEffect} from "react";
+import {useSearchParams} from "react-router-dom";
 
 import {TestUtilNavigationProvider} from "../../../test-unit/util/test-util-navigation-provider";
-
 import {NavigationLink} from "./navigation-link";
 
 describe("navigationLink", () => {

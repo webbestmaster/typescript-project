@@ -1,16 +1,15 @@
 /* global window, document, requestAnimationFrame, sessionStorage */
 
-import {useEffect, useState, useCallback, useContext} from "react";
+import {useCallback, useContext, useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
 
-import {debounce} from "../../util/function";
-import {cls} from "../../util/css";
-import type {ArticleContextType} from "../article/article-context/article-context-type";
-import {articleContext} from "../article/article-context/article-context";
 import {useLocale} from "../../provider/locale/locale-context";
-
-import {getAbsoluteScrollTop, getRelativeScrollTop, smoothScrollToTop} from "./scroll-restoration-helper";
+import {cls} from "../../util/css";
+import {debounce} from "../../util/function";
+import {articleContext} from "../article/article-context/article-context";
+import type {ArticleContextType} from "../article/article-context/article-context-type";
 import * as scrollRestorationStyle from "./scroll-restoration.scss";
+import {getAbsoluteScrollTop, getRelativeScrollTop, smoothScrollToTop} from "./scroll-restoration-helper";
 
 export function ReactScrollRestoration(): JSX.Element {
     const topScrollPositionToShowToTopButton = 100;

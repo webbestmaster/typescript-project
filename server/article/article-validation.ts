@@ -2,7 +2,6 @@
 import Ajv, {type JSONSchemaType, type ValidateFunction} from "ajv";
 
 import type {PaginationResultType} from "../data-base/data-base-type";
-
 import {
     type ArticleFileType,
     ArticleFileTypeEnum,

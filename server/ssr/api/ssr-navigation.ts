@@ -1,14 +1,13 @@
+import {navigationSsrFieldName} from "../../../www/client-component/navigation/navigation-const";
 // eslint-disable-next-line max-len
 import type {NavigationContextType} from "../../../www/client-component/navigation/navigation-context/navigation-context-type";
-import {navigationSsrFieldName} from "../../../www/client-component/navigation/navigation-const";
-import {
-    articleToArticlePreview,
-    getSubDocumentListByParentIdFiltered,
-    getIsActiveArticlePreview,
-} from "../../article/article-util";
 import {rootArticleId} from "../../article/article-const";
 import type {ArticlePreviewType} from "../../article/article-type";
-
+import {
+    articleToArticlePreview,
+    getIsActiveArticlePreview,
+    getSubDocumentListByParentIdFiltered,
+} from "../../article/article-util";
 import {replaceSpecialSymbols} from "./ssr-helper/ssr-symbol";
 
 export async function getNavigationContextData(): Promise<[NavigationContextType, string]> {

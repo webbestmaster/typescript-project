@@ -1,9 +1,8 @@
 import {Audio} from "react-audio-player-pro";
 
-import {defaultMediaMetadata} from "../audio-player/audio-player-const";
 import {textToSlug} from "../../util/human";
 import {getPathToFile} from "../../util/path";
-
+import {defaultMediaMetadata} from "../audio-player/audio-player-const";
 import * as markdownStyle from "./markdown.scss";
 import type {StringToJsxRawDataType} from "./markdown-helper";
 

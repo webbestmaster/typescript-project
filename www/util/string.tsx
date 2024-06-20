@@ -1,5 +1,4 @@
 import type {LocaleNameEnum} from "../provider/locale/locale-context-type";
-
 import {makeSafeRegExpPatter} from "./regexp";
 
 export function getHash(data: Array<unknown> | Record<string, unknown> | string): string {

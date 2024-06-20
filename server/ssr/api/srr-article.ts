@@ -1,5 +1,7 @@
+import {articleSsrFieldName} from "../../../www/client-component/article/article-const";
 import type {ArticleContextType} from "../../../www/client-component/article/article-context/article-context-type";
 import {makeDefaultArticle} from "../../article/article-helper";
+import type {ArticlePreviewType, ArticleType} from "../../article/article-type";
 import {
     getActiveArticleBySlugEnsure,
     getArticlePreviewBreadcrumbListById,
@@ -7,9 +9,6 @@ import {
     getIsActiveArticlePreview,
     getSiblingPreviewListById,
 } from "../../article/article-util";
-import type {ArticlePreviewType, ArticleType} from "../../article/article-type";
-import {articleSsrFieldName} from "../../../www/client-component/article/article-const";
-
 import {replaceSpecialSymbols} from "./ssr-helper/ssr-symbol";
 
 export async function makeClientArticleContextData(slug: string): Promise<[ArticleContextType, string]> {

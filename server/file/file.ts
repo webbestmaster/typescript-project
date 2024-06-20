@@ -2,28 +2,27 @@
 
 import {
     constants as fileSystemConstants,
+    createReadStream,
+    createWriteStream,
     type ReadStream,
     type Stats,
-    createWriteStream,
-    createReadStream,
 } from "node:fs";
 import fileSystem from "node:fs/promises";
 import path from "node:path";
 
+import type {MultipartFile} from "@fastify/multipart";
 // import sharp from 'sharp';
 import type {FastifyReply, FastifyRequest} from "fastify";
-import type {MultipartFile} from "@fastify/multipart";
 import webpConverter from "webp-converter";
 
+import {fileSizeLimit} from "../../www/page/cms/cms-article/cms-article-const";
+import {getFileExtension, getIsAudio, getIsImage, getIsVideo} from "../../www/page/cms/cms-article/cms-article-helper";
 import type {PromiseResolveType} from "../../www/util/promise";
 import {getRandomString} from "../../www/util/string";
 import {getStringFromUnknown} from "../../www/util/type";
-import {getFileExtension, getIsAudio, getIsImage, getIsVideo} from "../../www/page/cms/cms-article/cms-article-helper";
 import {type ArticleFileType, ArticleFileTypeEnum} from "../article/article-type";
-import {fileSizeLimit} from "../../www/page/cms/cms-article/cms-article-const";
-
-import {temporaryUploadFolder, uploadFolder} from "./file-const";
 import {makeAudioFile} from "./file-audio";
+import {temporaryUploadFolder, uploadFolder} from "./file-const";
 
 // eslint-disable-next-line max-statements
 export async function uploadFile(request: FastifyRequest): Promise<ArticleFileType> {

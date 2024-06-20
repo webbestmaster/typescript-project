@@ -4,11 +4,10 @@ import "markdown-pro/dist/style.css";
 import "react-audio-player-pro/dist/style.css";
 
 import {StrictMode} from "react";
-import {hydrateRoot, createRoot} from "react-dom/client";
+import {createRoot, hydrateRoot} from "react-dom/client";
 
-import {selector} from "./const";
 import {App} from "./component/app/app";
-
+import {selector} from "./const";
 import {ErrorData} from "./layout/error-data/error-data";
 import {Popup} from "./layout/popup/popup";
 

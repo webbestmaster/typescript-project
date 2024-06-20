@@ -1,8 +1,7 @@
-import type {ArticleType} from "../../../article/article-type";
 import {httpsSiteDomain} from "../../../../www/const";
 import {getPathToImage} from "../../../../www/util/path";
 import {convertStringForHtml} from "../../../../www/util/string";
-
+import type {ArticleType} from "../../../article/article-type";
 import type {SsrReplaceDataType} from "./ssr-helper-type";
 
 export function getMetaTwitterCardSsrReplaceData(article: ArticleType): SsrReplaceDataType {

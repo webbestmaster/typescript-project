@@ -1,29 +1,27 @@
 /* eslint-disable capitalized-comments */
 
 import type {FastifyReply, FastifyRequest} from "fastify";
-import type {PetsdbQueryType, PetsdbReadPageConfigType} from "petsdb";
-
 import {
+    type ExecutionResult,
     graphql,
-    GraphQLSchema,
-    GraphQLObjectType,
-    GraphQLString,
-    GraphQLInt,
-    GraphQLFloat,
-    GraphQLList,
+    GraphQLBoolean,
     // type ExecutionResult,
     // GraphQLNonNull,
     GraphQLEnumType,
-    GraphQLBoolean,
-    type GraphQLResolveInfo,
     type GraphQLFieldConfig,
-    type ExecutionResult,
+    GraphQLFloat,
+    GraphQLInt,
+    GraphQLList,
+    GraphQLObjectType,
+    type GraphQLResolveInfo,
+    GraphQLSchema,
+    GraphQLString,
 } from "graphql";
+import type {PetsdbQueryType, PetsdbReadPageConfigType} from "petsdb";
 
 import {mainResponseHeader} from "../const";
 import {defaultPaginationQuery} from "../data-base/data-base-const";
 import type {PaginationResultType} from "../data-base/data-base-type";
-
 import {articleCrud} from "./article";
 import {
     type ArticleFileType,

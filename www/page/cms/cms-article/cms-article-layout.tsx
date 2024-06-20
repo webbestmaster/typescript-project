@@ -1,14 +1,13 @@
-import {Typography, Select, Button} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
+import {Button, Select, Typography} from "antd";
 import type {UploadFile} from "antd/es/upload/interface";
 import {Link} from "react-router-dom";
 
 import type {ArticleFileType, ArticleType} from "../../../../server/article/article-type";
 import {getArticleLinkToViewClient} from "../../../client-component/article/article-helper";
-import {getPathToImage, getPathToFile} from "../../../util/path";
-
-import type {ArticleForValidationType} from "./cms-article-type";
+import {getPathToFile, getPathToImage} from "../../../util/path";
 import {getArticleLinkToEdit, getIsImage} from "./cms-article-helper";
+import type {ArticleForValidationType} from "./cms-article-type";
 
 const {Option} = Select;
 const {Text: TypographyText} = Typography;

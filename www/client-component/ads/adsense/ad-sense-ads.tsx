@@ -1,13 +1,12 @@
 /* global window, setInterval, clearInterval */
-import {useState, useRef, useEffect} from "react";
-import {useLocation, type Location} from "react-router-dom";
+import {useEffect, useRef, useState} from "react";
+import {type Location, useLocation} from "react-router-dom";
 
 import {googleAdSenseId} from "../../../const";
 import {cls} from "../../../util/css";
-import {waitForCallback} from "../../../util/time";
 import {getRandomString} from "../../../util/string";
+import {waitForCallback} from "../../../util/time";
 import {getNeedUseThirdPartyServices} from "../../../util/url";
-
 import {loadAdSenseScript} from "./ad-sense-helper";
 
 interface AdSenseAdsPropsType {

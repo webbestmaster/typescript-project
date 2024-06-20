@@ -1,10 +1,9 @@
 import {useEffect, useState} from "react";
 
 import {Locale} from "../../provider/locale/locale-context";
-
-import {applyGdpr, getDefaultIsVisible} from "./gdpr-info-helper";
 import * as gdprInfoStyle from "./gdpr-info.scss";
 import {gdprLinkAboutCookie} from "./gdpr-info-const";
+import {applyGdpr, getDefaultIsVisible} from "./gdpr-info-helper";
 
 export function GdprInfo(): JSX.Element | null {
     const [isVisible, setIsVisible] = useState<boolean>(getDefaultIsVisible());

@@ -1,12 +1,11 @@
-import type {DataNode} from "rc-tree/lib/interface";
 import {Typography} from "antd";
+import type {DataNode} from "rc-tree/lib/interface";
 import {Link} from "react-router-dom";
 
 import {rootArticleId} from "../../../../server/article/article-const";
-import {getArticleLinkToEdit} from "../cms-article/cms-article-helper";
-import {getTickCross} from "../../../util/string";
 import {getArticleLinkToViewClient} from "../../../client-component/article/article-helper";
-
+import {getTickCross} from "../../../util/string";
+import {getArticleLinkToEdit} from "../cms-article/cms-article-helper";
 import type {ArticleForTreeType} from "./cms-article-tree-type";
 
 const {Text: TypographyText} = Typography;

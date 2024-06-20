@@ -1,8 +1,7 @@
-import {FetchMethodEnum, fetchX} from "../../util/fetch";
 import {apiUrl} from "../../../server/const";
-
-import type {LoginResponseType} from "./auth-type";
+import {FetchMethodEnum, fetchX} from "../../util/fetch";
 import {loginResponseSchema} from "./auth-const";
+import type {LoginResponseType} from "./auth-type";
 
 export async function loginUser(userData: Record<"login" | "password", string>): Promise<LoginResponseType> {
     return fetchX<LoginResponseType>(apiUrl.login, loginResponseSchema, {

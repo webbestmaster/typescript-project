@@ -1,13 +1,12 @@
 import type {ReactNode} from "react";
 
-import {ShareButtonVkontakte} from "../../share-button/button/share-button-vkontakte";
 import {ShareButtonFacebook} from "../../share-button/button/share-button-facebook";
 import {ShareButtonOdnoklassniki} from "../../share-button/button/share-button-odnoklassniki";
-import {ShareButtonTwitter} from "../../share-button/button/share-button-twitter";
 import {ShareButtonTelegram} from "../../share-button/button/share-button-telegram";
+import {ShareButtonTwitter} from "../../share-button/button/share-button-twitter";
 import {ShareButtonViber} from "../../share-button/button/share-button-viber";
+import {ShareButtonVkontakte} from "../../share-button/button/share-button-vkontakte";
 import {ShareButtonWhatsApp} from "../../share-button/button/share-button-whats-app";
-
 import * as shareButtonListContentStyle from "./share-button-list-content.scss";
 
 interface ShareButtonListContentPropsType {

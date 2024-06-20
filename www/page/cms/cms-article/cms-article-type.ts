@@ -1,5 +1,4 @@
 import type {ArticleType} from "../../../../server/article/article-type";
-
 import type {CmsArticleModeEnum} from "./cms-article-const";
 
 export type ArticleForValidationKeysType = "id" | "slug" | "subDocumentIdList" | "title";

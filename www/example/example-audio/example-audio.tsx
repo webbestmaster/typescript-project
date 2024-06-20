@@ -1,8 +1,7 @@
-import {AudioPlayerControlSprite, Audio} from "react-audio-player-pro";
+import {Audio, AudioPlayerControlSprite} from "react-audio-player-pro";
 
 import {demoUrl} from "../../const";
 import {Markdown} from "../../layout/markdown/markdown";
-
 import exampleAudio from "./example-audio.md";
 const meydnPureWater = `${demoUrl}/audio-file/meydn-pure-water.mp3`;
 

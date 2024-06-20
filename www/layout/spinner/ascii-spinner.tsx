@@ -1,5 +1,4 @@
 import {cls} from "../../util/css";
-
 import * as spinnerStyle from "./spinner.scss";
 
 interface PropsType {

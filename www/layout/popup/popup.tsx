@@ -1,10 +1,9 @@
 /* global document, setTimeout, clearTimeout, NodeJS, HTMLDivElement */
 
-import {type ReactNode, useEffect, useRef, useState, type DetailedHTMLProps, type HTMLAttributes} from "react";
+import {type DetailedHTMLProps, type HTMLAttributes, type ReactNode, useEffect, useRef, useState} from "react";
 import {createPortal} from "react-dom";
 
 import {cls} from "../../util/css";
-
 import * as popupStyle from "./popup.scss";
 import {PopupVisibleStateEnum} from "./popup-const";
 

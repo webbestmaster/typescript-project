@@ -1,18 +1,18 @@
 import type {PetsdbQueryType, PetsdbReadPageConfigType} from "petsdb";
 
-import type {PaginationResultType} from "../../../server/data-base/data-base-type";
 import type {ArticleType} from "../../../server/article/article-type";
-import {FetchMethodEnum, fetchX} from "../../util/fetch";
 import {
     makeArticlePaginationSchema,
     makeArticlePaginationSchemaPick,
     makeArticleSchema,
 } from "../../../server/article/article-validation";
 import {apiUrl} from "../../../server/const";
-import {paginationQueryToURLSearchParameters} from "../../util/url";
-import type {UnknownObjectType} from "../../util/type";
-import type {ArticleContextType} from "../../client-component/article/article-context/article-context-type";
+import type {PaginationResultType} from "../../../server/data-base/data-base-type";
 import {articleContextDataSchema} from "../../client-component/article/article-context/article-context-const";
+import type {ArticleContextType} from "../../client-component/article/article-context/article-context-type";
+import {FetchMethodEnum, fetchX} from "../../util/fetch";
+import type {UnknownObjectType} from "../../util/type";
+import {paginationQueryToURLSearchParameters} from "../../util/url";
 
 export async function getArticleListPagination(
     query: PetsdbQueryType<ArticleType>,

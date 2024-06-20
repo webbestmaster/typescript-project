@@ -1,7 +1,7 @@
 /* global fetch, document, URL, Response, Blob */
 
-import {FetchMethodEnum} from "../../util/fetch";
 import {apiUrl} from "../../../server/const";
+import {FetchMethodEnum} from "../../util/fetch";
 
 export async function makePdf(html: string, fileName: string): Promise<void> {
     /**

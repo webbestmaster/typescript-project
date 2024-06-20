@@ -1,13 +1,13 @@
 import {useContext} from "react";
 import {AudioPlayer, type TrackType} from "react-audio-player-pro";
 
-import type {ArticleContextType} from "../article-context/article-context-type";
-import {articleContext} from "../article-context/article-context";
+import {defaultMediaMetadata} from "../../../layout/audio-player/audio-player-const";
 import {Markdown} from "../../../layout/markdown/markdown";
 import {markdownAudioRegExp, parseAudioTag} from "../../../layout/markdown/markdown-helper-audio";
-import {defaultMediaMetadata} from "../../../layout/audio-player/audio-player-const";
-import * as articleStyle from "../article.scss";
 import {getPathToFile} from "../../../util/path";
+import * as articleStyle from "../article.scss";
+import {articleContext} from "../article-context/article-context";
+import type {ArticleContextType} from "../article-context/article-context-type";
 
 export function ArticleAudioList(): JSX.Element {
     const {article} = useContext<ArticleContextType>(articleContext);

@@ -1,7 +1,5 @@
-import type {ArticleType} from "../../../article/article-type";
-
 import {getClientArticleLinkWithDomain} from "../../../../www/client-component/article/article-helper";
-
+import type {ArticleType} from "../../../article/article-type";
 import type {SsrReplaceDataType} from "./ssr-helper-type";
 
 export function getCanonicalLinkSsrReplaceData(article: ArticleType): SsrReplaceDataType {

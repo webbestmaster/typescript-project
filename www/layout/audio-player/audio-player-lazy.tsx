@@ -1,9 +1,8 @@
-import {lazy, Suspense, type ComponentType} from "react";
-import type {AudioPropsType, AudioPlayerPropsType, PlayListProviderPropsType} from "react-audio-player-pro";
+import {type ComponentType, lazy, Suspense} from "react";
+import type {AudioPlayerPropsType, AudioPropsType, PlayListProviderPropsType} from "react-audio-player-pro";
 
 import type {LazyResultType} from "../../util/type";
 import {AsciiSpinner} from "../spinner/ascii-spinner";
-
 import * as audioPlayerStyle from "./audio-player.scss";
 
 function AudioPlayerLoading(): JSX.Element {

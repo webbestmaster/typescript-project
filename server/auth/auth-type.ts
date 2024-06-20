@@ -1,5 +1,4 @@
 import type {UserRoleEnum} from "../../www/provider/user/user-context-type";
-
 import type {CookieFieldEnum} from "./auth-const";
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions

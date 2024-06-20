@@ -1,7 +1,7 @@
-import type {ArticleType} from "../article/article-type";
-import {getPathToImage} from "../../www/util/path";
-import {httpsSiteDomain} from "../../www/const";
 import {getClientArticleLinkWithDomain} from "../../www/client-component/article/article-helper";
+import {httpsSiteDomain} from "../../www/const";
+import {getPathToImage} from "../../www/util/path";
+import type {ArticleType} from "../article/article-type";
 
 export interface ArticleImageDataType {
     alt: string;

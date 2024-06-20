@@ -8,7 +8,6 @@ import {useRef} from "react";
 
 import {waitForCallback} from "../../util/time";
 import {getNeedUseThirdPartyServices} from "../../util/url";
-
 import {loadGoogleAnalyticsScript} from "./google-analytics-helper";
 
 interface GoogleAnalyticsType {

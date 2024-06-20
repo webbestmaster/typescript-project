@@ -1,12 +1,12 @@
-import {useCallback, useState, type SyntheticEvent} from "react";
+import {type SyntheticEvent, useCallback, useState} from "react";
 
+import {apiUrl} from "../../../../server/const";
 import {useUserContext} from "../../../provider/user/user-context";
-import {useMakeExecutableState} from "../../../util/function";
 import {loginUser, logoutUser, registerUser} from "../../../service/auth/auth-api";
 import type {LoginResponseType} from "../../../service/auth/auth-type";
-import {throwError} from "../../../util/error";
-import {apiUrl} from "../../../../server/const";
 import {handleLogout, handleSuccessLogin} from "../../../service/auth/auth-util";
+import {throwError} from "../../../util/error";
+import {useMakeExecutableState} from "../../../util/function";
 
 export function LoginForm(): JSX.Element {
     const userContext = useUserContext();

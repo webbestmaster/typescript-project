@@ -1,11 +1,10 @@
-import {createContext, useMemo, useState, useContext, useEffect, type ReactNode} from "react";
+import {createContext, type ReactNode, useContext, useEffect, useMemo, useState} from "react";
 
 import {getAutoAuthLogin} from "../../service/auth/auth-api";
-import {useMakeExecutableState} from "../../util/function";
 import type {LoginResponseType} from "../../service/auth/auth-type";
-import {throwError} from "../../util/error";
 import {getIsNeedAutologin} from "../../service/auth/auth-util";
-
+import {throwError} from "../../util/error";
+import {useMakeExecutableState} from "../../util/function";
 import {defaultUserContext} from "./user-context-const";
 import type {UserContextType, UserType} from "./user-context-type";
 

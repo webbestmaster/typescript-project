@@ -1,21 +1,21 @@
 import {useContext} from "react";
-import {type TrackType, AudioPlayer} from "react-audio-player-pro";
+import {AudioPlayer, type TrackType} from "react-audio-player-pro";
 import {Link} from "react-router-dom";
 
-import type {ArticleContextType} from "../article-context/article-context-type";
-import {articleContext} from "../article-context/article-context";
-import {Markdown} from "../../../layout/markdown/markdown";
-import {getFileMarkdownByFullInfo} from "../../../layout/markdown/markdown-helper";
 import {
     type ArticleFileType,
     ArticleFileTypeEnum,
     type ArticlePreviewType,
 } from "../../../../server/article/article-type";
-import {getArticleLinkToViewClient} from "../article-helper";
-import {defaultMediaMetadata} from "../../../layout/audio-player/audio-player-const";
 import * as audioPlayerStyle from "../../../layout/audio-player/audio-player.scss";
+import {defaultMediaMetadata} from "../../../layout/audio-player/audio-player-const";
+import {Markdown} from "../../../layout/markdown/markdown";
+import {getFileMarkdownByFullInfo} from "../../../layout/markdown/markdown-helper";
 import {getPathToFile} from "../../../util/path";
 import * as articleStyle from "../article.scss";
+import {articleContext} from "../article-context/article-context";
+import type {ArticleContextType} from "../article-context/article-context-type";
+import {getArticleLinkToViewClient} from "../article-helper";
 
 export function ArticleAudioChildrenList(): JSX.Element {
     const {article, childList} = useContext<ArticleContextType>(articleContext);

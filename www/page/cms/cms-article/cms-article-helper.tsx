@@ -1,21 +1,19 @@
 /* global document, Image, HTMLImageElement, Audio, HTMLAudioElement, HTMLVideoElement, File, FormData, location */
 import type {Rule, RuleObject} from "rc-field-form/lib/interface";
 
-import {generatePath} from "../../../util/url";
-import {textToSlug} from "../../../util/human";
-import {appRoute} from "../../../component/app/app-route";
-import type {PromiseResolveType} from "../../../util/promise";
-import {apiUrl} from "../../../../server/const";
-import {FetchMethodEnum, fetchX} from "../../../util/fetch";
-import {deleteArticle} from "../../../service/article/article-api";
 import {type ArticleFileType, ArticleFileTypeEnum} from "../../../../server/article/article-type";
 import {makeArticleFileSchema} from "../../../../server/article/article-validation";
+import {apiUrl} from "../../../../server/const";
+import {appRoute} from "../../../component/app/app-route";
+import {deleteArticle} from "../../../service/article/article-api";
 import {NeverError} from "../../../util/error";
-
+import {FetchMethodEnum, fetchX} from "../../../util/fetch";
+import {textToSlug} from "../../../util/human";
 import {getPathToFile} from "../../../util/path";
-
-import type {ArticleForValidationType, MakeSlugValidatorArgumentType} from "./cms-article-type";
+import type {PromiseResolveType} from "../../../util/promise";
+import {generatePath} from "../../../util/url";
 import {CmsArticleModeEnum} from "./cms-article-const";
+import type {ArticleForValidationType, MakeSlugValidatorArgumentType} from "./cms-article-type";
 
 export async function fetchImage(pathToImage: string): Promise<HTMLImageElement> {
     const image = new Image();

@@ -1,12 +1,13 @@
-/* eslint-disable sort-keys, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable sort-keys, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment, sonarjs/no-duplicate-string */
 import eslintJs from "@eslint/js";
 import eslintConfigPrettier from "eslint-config-prettier";
-import typescriptEslint from "typescript-eslint";
+import jest from "eslint-plugin-jest";
+import jsxA11y from "eslint-plugin-jsx-a11y";
+import reactRecommended from "eslint-plugin-react/configs/recommended.js";
+import simpleImportSort from "eslint-plugin-simple-import-sort";
 import sonarjs from "eslint-plugin-sonarjs";
 import eslintPluginUnicorn from "eslint-plugin-unicorn";
-import jest from "eslint-plugin-jest";
-import reactRecommended from "eslint-plugin-react/configs/recommended.js";
-import jsxA11y from 'eslint-plugin-jsx-a11y';
+import typescriptEslint from "typescript-eslint";
 
 
 /**
@@ -15,8 +16,8 @@ import jsxA11y from 'eslint-plugin-jsx-a11y';
  * react-hooks
  * babel - maybe not needed
  * JSX-a11y - from eslint-plugin-jsx-a11y
- * filenames
- * import
+ * filenames - not needed, because we have `unicorn/filename-case`
+ * import - from eslint-plugin-simple-import-sort
  * optimize-regex
  */
 
@@ -33,6 +34,16 @@ export default [
     {
         files: ["**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}"],
         ...jsxA11y.flatConfigs.strict,
+    },
+    {
+        files: ["**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}"],
+        plugins: {
+            "simple-import-sort": simpleImportSort,
+        },
+        rules: {
+            "simple-import-sort/imports": "error",
+            "simple-import-sort/exports": "error",
+        },
     },
     {
         settings: {react: {version: "detect"}},

@@ -7,7 +7,6 @@ import {
     getFormattedNumber,
     type NumberFormatOptionsType,
 } from "../../util/format";
-
 import type {UseFormatHookType} from "./format-hook-type";
 
 export function useFormat(): UseFormatHookType {

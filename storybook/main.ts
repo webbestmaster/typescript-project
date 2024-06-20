@@ -1,8 +1,9 @@
-import {cwd} from "node:process";
 import path from "node:path";
+import {cwd} from "node:process";
 
-import type {Configuration} from "webpack";
 import type {StorybookConfig} from "@storybook/react-webpack5";
+import type {Configuration} from "webpack";
+
 import {isProduction} from "../webpack/config";
 
 const styleLoader = {

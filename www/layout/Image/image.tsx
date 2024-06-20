@@ -1,7 +1,6 @@
 /* global HTMLImageElement */
 
 import type {GetPathToFileType, GetPathToImageType} from "../../util/path";
-
 import {Source} from "./source";
 
 // Max website width is 1200

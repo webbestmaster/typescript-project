@@ -1,9 +1,9 @@
-import {createContext, useMemo, useState, type ReactNode, useCallback, useEffect} from "react";
+import {createContext, type ReactNode, useCallback, useEffect, useMemo, useState} from "react";
 
-import type {ThemeContextType, ThemeNameEnum} from "./theme-context-type";
-import {defaultThemeContext} from "./theme-context-const";
-import * as themeContextStyle from "./theme-context.scss";
 import {maxFontSize, minFontSize, saveFontSize} from "./font-size-helper";
+import * as themeContextStyle from "./theme-context.scss";
+import {defaultThemeContext} from "./theme-context-const";
+import type {ThemeContextType, ThemeNameEnum} from "./theme-context-type";
 
 export const ThemeContext = createContext<ThemeContextType>(defaultThemeContext);
 

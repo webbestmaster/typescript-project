@@ -1,7 +1,6 @@
 import {useCallback, useMemo, useState} from "react";
 
 import type {UseRefreshApiHookType} from "../service/api-hook/api-hook-type";
-
 import {getRandomString} from "./string";
 
 export function useRefreshId(): UseRefreshApiHookType {

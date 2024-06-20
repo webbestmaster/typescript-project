@@ -1,11 +1,11 @@
-import type {ReactNode} from "react";
-import {Layout, Menu} from "antd";
-import {Link, useLocation, type Location} from "react-router-dom";
-
 import "antd/dist/reset.css";
 
-import {Box} from "../../../../layout/box/box";
+import {Layout, Menu} from "antd";
+import type {ReactNode} from "react";
+import {Link, type Location, useLocation} from "react-router-dom";
+
 import {appRoute} from "../../../../component/app/app-route";
+import {Box} from "../../../../layout/box/box";
 
 const {Content} = Layout;
 

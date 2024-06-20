@@ -1,10 +1,9 @@
 import {makeCrud} from "../data-base/data-base";
 import type {CrudConfigOnChangeArgumentType} from "../data-base/data-base-type";
 import {updateSiteMapXml} from "../sitemap/sitemap";
-
+import {clearCacheHtmlFileFolder} from "./article-cache";
 import type {ArticleType} from "./article-type";
 import {makeArticleSchema} from "./article-validation";
-import {clearCacheHtmlFileFolder} from "./article-cache";
 
 export const articleCrud = makeCrud<ArticleType>(
     {

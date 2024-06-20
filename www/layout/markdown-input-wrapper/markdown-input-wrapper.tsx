@@ -1,8 +1,7 @@
-import {Row, Col} from "antd";
+import {Col, Row} from "antd";
 
 import {Box} from "../box/box";
 import {Markdown} from "../markdown/markdown";
-
 import * as markdownInputWrapperStyle from "./markdown-input-wrapper.scss";
 
 interface MarkdownInputWrapperPropsType {

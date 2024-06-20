@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import type {FastifyReply, FastifyRequest} from "fastify";
 
-import type {LoginResponseType} from "../../www/service/auth/auth-type";
-import {getSha256HashServer} from "../util/string";
 import {UserRoleEnum} from "../../www/provider/user/user-context-type";
-import {mainResponseHeader} from "../const";
+import type {LoginResponseType} from "../../www/service/auth/auth-type";
 import {getRandomString} from "../../www/util/string";
-
+import {mainResponseHeader} from "../const";
+import {getSha256HashServer} from "../util/string";
 import {authCrud} from "./auth";
 import {CookieFieldEnum} from "./auth-const";
 

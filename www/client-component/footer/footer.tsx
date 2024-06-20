@@ -1,8 +1,7 @@
 import {Link} from "react-router-dom";
 
-import {getArticleLinkToViewClient} from "../article/article-helper";
 import {copyrightName} from "../../const";
-
+import {getArticleLinkToViewClient} from "../article/article-helper";
 import * as footerStyle from "./footer.scss";
 
 export function Footer(): JSX.Element {

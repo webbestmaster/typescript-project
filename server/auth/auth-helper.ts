@@ -2,10 +2,9 @@ import type {FastifyReply, FastifyRequest} from "fastify";
 
 import {UserRoleEnum} from "../../www/provider/user/user-context-type";
 import {mainResponseHeader} from "../const";
-
 import {authCrud} from "./auth";
-import type {AuthUserType} from "./auth-type";
 import {CookieFieldEnum} from "./auth-const";
+import type {AuthUserType} from "./auth-type";
 
 export function makeDefaultAuthUser(): AuthUserType {
     const defaultUserData: AuthUserType = {

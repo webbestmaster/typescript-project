@@ -1,12 +1,11 @@
 import {useContext} from "react";
 import {Link} from "react-router-dom";
 
-import {Locale} from "../../provider/locale/locale-context";
-import type {ArticleContextType} from "../article/article-context/article-context-type";
-import {articleContext} from "../article/article-context/article-context";
 import type {ArticlePreviewType} from "../../../server/article/article-type";
+import {Locale} from "../../provider/locale/locale-context";
+import {articleContext} from "../article/article-context/article-context";
+import type {ArticleContextType} from "../article/article-context/article-context-type";
 import {getArticleLinkToViewClient} from "../article/article-helper";
-
 import * as siblingsStyle from "./siblings.scss";
 
 export function Siblings(): JSX.Element {

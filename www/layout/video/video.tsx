@@ -1,12 +1,11 @@
 /* global HTMLVideoElement, HTMLImageElement */
 
-import {useRef, useState, useCallback} from "react";
+import {useCallback, useRef, useState} from "react";
 
-import type {GetPathToFileType, GetPathToImageType} from "../../util/path";
-import {Image} from "../Image/image";
-import {secondsToHuman} from "../../util/time";
 import {cls} from "../../util/css";
-
+import type {GetPathToFileType, GetPathToImageType} from "../../util/path";
+import {secondsToHuman} from "../../util/time";
+import {Image} from "../Image/image";
 import * as videoStyle from "./video.scss";
 
 interface VideoPropsType {

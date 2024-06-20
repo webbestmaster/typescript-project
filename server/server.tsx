@@ -2,51 +2,50 @@
 
 /* global Buffer */
 
-import {cwd, env} from "node:process";
 import path from "node:path";
+import {cwd, env} from "node:process";
 
-import {fastifyCors} from "@fastify/cors";
-import {fastifyStatic, type FastifyStaticOptions} from "@fastify/static";
 import {fastifyCompress} from "@fastify/compress";
+import {fastifyCors} from "@fastify/cors";
+import type {FastifyError} from "@fastify/error";
 import {fastifyMultipart} from "@fastify/multipart";
 import {fastifySecureSession, type SecureSessionPluginOptions} from "@fastify/secure-session";
-import type {FastifyError} from "@fastify/error";
-import fastifyConstructor, {type FastifyRequest, type FastifyReply} from "fastify";
+import {fastifyStatic, type FastifyStaticOptions} from "@fastify/static";
+import fastifyConstructor, {type FastifyReply, type FastifyRequest} from "fastify";
 import type {ExecutionResult} from "graphql";
 
 import {appRoute} from "../www/component/app/app-route";
-
-import {getAutoAuthLogin, postAuthLogin, postAuthLogout, postAuthRegister} from "./auth/auth-api";
-import {getHtmlCallBack} from "./ssr/ssr";
-import {secretKey} from "./key";
-import {apiUrl, serverPort, siteCookieKey} from "./const";
 import {
-    getArticleListPagination,
-    getArticleListPaginationPick,
-    postAdminArticleCreate,
     deleteAdminArticleDelete,
-    postAdminArticleUpdate,
-    getClientArticleContextData,
     getArticleClientListPaginationPick,
     getArticleClientUrlList,
+    getArticleListPagination,
+    getArticleListPaginationPick,
+    getClientArticleContextData,
+    postAdminArticleCreate,
+    postAdminArticleUpdate,
 } from "./article/article-api";
-import {getImage, uploadFile} from "./file/file";
-import {adminOnly} from "./auth/auth-helper";
-import {makeCacheFile} from "./article/article-cache";
-import {getPdf} from "./pdf/pdf";
-import type {ArticleFileType, ArticleType} from "./article/article-type";
-import {makeStatic} from "./make-static";
-import {temporaryUploadFolder, uploadFileFolder, uploadFolder} from "./file/file-const";
-import {getHtmlCallBackRequest} from "./ssr/ssr-helper";
-import {rootArticleSlug} from "./article/article-const";
-import {type GetExtraFilesType, removeExtraStaticFiles} from "./file/extra-static-files";
-import {makeDirectory, tryToRemoveDirectory} from "./file/directory";
-import type {PaginationResultType} from "./data-base/data-base-type";
 import {
     // type ArticlePaginationGraphQlType,
     getAdminArticlePaginationGraphQl,
     getClientArticlePaginationGraphQl,
 } from "./article/article-api-graphql";
+import {makeCacheFile} from "./article/article-cache";
+import {rootArticleSlug} from "./article/article-const";
+import type {ArticleFileType, ArticleType} from "./article/article-type";
+import {getAutoAuthLogin, postAuthLogin, postAuthLogout, postAuthRegister} from "./auth/auth-api";
+import {adminOnly} from "./auth/auth-helper";
+import {apiUrl, serverPort, siteCookieKey} from "./const";
+import type {PaginationResultType} from "./data-base/data-base-type";
+import {makeDirectory, tryToRemoveDirectory} from "./file/directory";
+import {type GetExtraFilesType, removeExtraStaticFiles} from "./file/extra-static-files";
+import {getImage, uploadFile} from "./file/file";
+import {temporaryUploadFolder, uploadFileFolder, uploadFolder} from "./file/file-const";
+import {secretKey} from "./key";
+import {makeStatic} from "./make-static";
+import {getPdf} from "./pdf/pdf";
+import {getHtmlCallBack} from "./ssr/ssr";
+import {getHtmlCallBackRequest} from "./ssr/ssr-helper";
 
 const isMakeStaticSite = env.MAKE_STATIC_SITE === "TRUE";
 

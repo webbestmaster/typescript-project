@@ -1,7 +1,7 @@
 /* eslint-disable capitalized-comments */
 
-import type {ArticlePreviewType, ArticleType} from "./article-type";
 import {articleCrud} from "./article";
+import type {ArticlePreviewType, ArticleType} from "./article-type";
 
 export function getIsActiveArticlePreview(article: ArticlePreviewType): article is ArticlePreviewType {
     return article.isActive;

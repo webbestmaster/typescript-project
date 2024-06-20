@@ -1,6 +1,5 @@
 /* global setTimeout */
 import type {LocaleNameEnum} from "../provider/locale/locale-context-type";
-
 import {getFormattedNumber, type NumberFormatOptionsType, TimeSizeEnum} from "./format";
 
 export interface TimeItemType {

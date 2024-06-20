@@ -1,20 +1,18 @@
-import {useState, useEffect, useCallback} from "react";
-import {Tree, Typography, List, Divider, message} from "antd";
-import type {DataNode} from "rc-tree/lib/interface";
 import {DownOutlined} from "@ant-design/icons";
+import {Divider, List, message, Tree, Typography} from "antd";
+import type {DataNode} from "rc-tree/lib/interface";
+import {useCallback, useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 
-import {CmsPage} from "../layout/cms-page/cms-page";
-import {useMakeExecutableState} from "../../../util/function";
 import type {PaginationResultType} from "../../../../server/data-base/data-base-type";
-import {getArticleListPaginationPick} from "../../../service/article/article-api";
-import {Spinner} from "../../../layout/spinner/spinner";
+import {getArticleLinkToViewClient} from "../../../client-component/article/article-helper";
 import {Box} from "../../../layout/box/box";
+import {Spinner} from "../../../layout/spinner/spinner";
+import {getArticleListPaginationPick} from "../../../service/article/article-api";
+import {useMakeExecutableState} from "../../../util/function";
 import {getTickCross} from "../../../util/string";
 import {getArticleLinkToEdit} from "../cms-article/cms-article-helper";
-import {getArticleLinkToViewClient} from "../../../client-component/article/article-helper";
-
-import type {ArticleForTreeType} from "./cms-article-tree-type";
+import {CmsPage} from "../layout/cms-page/cms-page";
 import {keyForTreeList} from "./cms-article-tree-const";
 import {
     getArticleForTreeById,
@@ -22,6 +20,7 @@ import {
     getArticleWithoutParentList,
     makeArticleTree,
 } from "./cms-article-tree-helper";
+import type {ArticleForTreeType} from "./cms-article-tree-type";
 
 const {Title, Text: TypographyText} = Typography;
 const {Item: ListItem} = List;

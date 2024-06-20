@@ -3,18 +3,17 @@
 import type {FastifyReply, FastifyRequest} from "fastify";
 import type {PetsdbQueryType, PetsdbReadPageConfigType} from "petsdb";
 
+import type {ArticleContextType} from "../../www/client-component/article/article-context/article-context-type";
+import {getArticleLinkToViewClient} from "../../www/client-component/article/article-helper";
+import {getStringFromUnknown} from "../../www/util/type";
 import {mainResponseHeader} from "../const";
 import {defaultPaginationQuery} from "../data-base/data-base-const";
-import {makeClientArticleContextData} from "../ssr/api/srr-article";
-import {getStringFromUnknown} from "../../www/util/type";
-import type {ArticleContextType} from "../../www/client-component/article/article-context/article-context-type";
 import type {PaginationResultType} from "../data-base/data-base-type";
-import {getArticleLinkToViewClient} from "../../www/client-component/article/article-helper";
-
+import {makeClientArticleContextData} from "../ssr/api/srr-article";
 import {articleCrud} from "./article";
 import type {ArticleType, ParsedRequestQueryType} from "./article-type";
-import {validateArticle} from "./article-validation";
 import {tryQueryStringToRegExp} from "./article-util";
+import {validateArticle} from "./article-validation";
 
 export async function getArticleListPagination(
     request: FastifyRequest,

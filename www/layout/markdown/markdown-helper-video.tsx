@@ -1,7 +1,6 @@
-import {getPathToFile, getPathToImage} from "../../util/path";
 import {appIconPngFileName} from "../../const";
+import {getPathToFile, getPathToImage} from "../../util/path";
 import {Video} from "../video/video";
-
 import * as markdownStyle from "./markdown.scss";
 import type {StringToJsxRawDataType} from "./markdown-helper";
 import type {MarkdownItemCounter} from "./markdown-item-counter";

@@ -1,7 +1,7 @@
 import {type ArticleFileType, ArticleFileTypeEnum} from "../../../server/article/article-type";
-import {getPathToFile} from "../../util/path";
-import {textToSlug} from "../../util/human";
 import {NeverError} from "../../util/error";
+import {textToSlug} from "../../util/human";
+import {getPathToFile} from "../../util/path";
 
 export interface StringToJsxRawDataType {
     articleTitle: string;

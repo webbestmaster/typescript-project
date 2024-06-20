@@ -1,11 +1,10 @@
-import {useContext, useCallback} from "react";
+import {useCallback, useContext} from "react";
 import {Link} from "react-router-dom";
 
-import type {ArticleContextType} from "../article/article-context/article-context-type";
-import {articleContext} from "../article/article-context/article-context";
 import type {ArticlePreviewType} from "../../../server/article/article-type";
+import {articleContext} from "../article/article-context/article-context";
+import type {ArticleContextType} from "../article/article-context/article-context-type";
 import {getArticleLinkToViewClient} from "../article/article-helper";
-
 import * as breadcrumbsStyle from "./breadcrumbs.scss";
 
 export function Breadcrumbs(): JSX.Element {

@@ -1,8 +1,7 @@
 /* global Buffer */
 
-import puppeteer from "puppeteer";
-
 import type {FastifyRequest} from "fastify";
+import puppeteer from "puppeteer";
 
 async function htmlToPdf(html: string): Promise<Buffer> {
     const browser = await puppeteer.launch({

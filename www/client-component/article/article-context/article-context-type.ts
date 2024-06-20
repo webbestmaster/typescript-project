@@ -1,4 +1,4 @@
-import type {ArticleType, ArticlePreviewType} from "../../../../server/article/article-type";
+import type {ArticlePreviewType, ArticleType} from "../../../../server/article/article-type";
 
 export interface ArticleContextType {
     article: ArticleType;

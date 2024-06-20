@@ -2,9 +2,7 @@
 
 // Used - JSON-LD (recommended)
 
-import type {ArticleType} from "../../../article/article-type";
-import type {SsrReplaceDataType} from "../ssr-helper/ssr-helper-type";
-import {getPathToImage} from "../../../../www/util/path";
+import {getClientArticleLinkWithDomain} from "../../../../www/client-component/article/article-helper";
 import {
     companyLogoPngFileName,
     companyLogoPngHeight,
@@ -12,10 +10,11 @@ import {
     copyrightName,
     httpsSiteDomain,
 } from "../../../../www/const";
-import {type ArticleImageDataType, getImageListFromArticle} from "../../../sitemap/sitemap-img-xml";
-import {getClientArticleLinkWithDomain} from "../../../../www/client-component/article/article-helper";
+import {getPathToImage} from "../../../../www/util/path";
 import {convertStringForHtml} from "../../../../www/util/string";
-
+import type {ArticleType} from "../../../article/article-type";
+import {type ArticleImageDataType, getImageListFromArticle} from "../../../sitemap/sitemap-img-xml";
+import type {SsrReplaceDataType} from "../ssr-helper/ssr-helper-type";
 import {fitTextTo, timeTo0000} from "./schema-markup-helper";
 
 // eslint-disable-next-line id-length

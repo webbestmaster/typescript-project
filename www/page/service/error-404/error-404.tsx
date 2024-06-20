@@ -1,8 +1,7 @@
-import {Spinner} from "../../../layout/spinner/spinner";
-import {IsRender} from "../../../layout/is-render/is-render";
-import {IsHidden} from "../../../layout/is-hidden/is-hidden";
 import {Empty} from "../../../layout/empty/empty";
-
+import {IsHidden} from "../../../layout/is-hidden/is-hidden";
+import {IsRender} from "../../../layout/is-render/is-render";
+import {Spinner} from "../../../layout/spinner/spinner";
 import * as page404Style from "./page-404.scss";
 
 export function Error404(): JSX.Element {

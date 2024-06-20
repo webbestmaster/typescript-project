@@ -1,9 +1,8 @@
 import {Link} from "react-router-dom";
 
 import {type ArticlePreviewType, SubDocumentListViewTypeEnum} from "../../../../server/article/article-type";
-import {getArticleLinkToViewClient} from "../../article/article-helper";
 import {getPathToImage} from "../../../util/path";
-
+import {getArticleLinkToViewClient} from "../../article/article-helper";
 import * as articlePreviewListStyle from "./article-preview.scss";
 
 interface ArticlePreviewPropsType {
