@@ -1,8 +1,6 @@
-/* global HTMLInputElement, setTimeout */
+/* global HTMLInputElement */
 import {SearchOutlined} from "@ant-design/icons";
-import {Input, type InputRef} from "antd";
 import type {ColumnType, FilterDropdownProps} from "antd/es/table/interface";
-import {type SyntheticEvent, useEffect, useRef} from "react";
 import {Link} from "react-router-dom";
 
 import type {ArticleFileType} from "../../../../server/article/article-type";
@@ -11,6 +9,7 @@ import {getPathToImage} from "../../../util/path";
 import {getTickCross} from "../../../util/string";
 import {dateIsoToHumanView} from "../../../util/time";
 import {getArticleLinkToEdit} from "../cms-article/cms-article-helper";
+import {CmsArticleListFilterDropdown} from "./cms-article-list-filter-dropdown";
 import {
     type ArticleForTableListKeysType,
     type ArticleForTableListType,
@@ -18,42 +17,24 @@ import {
     SortDirectionEnum,
 } from "./cms-article-list-type";
 
-interface GetArticleTableColumnListArgumentType {
+export interface GetArticleTableColumnListArgumentType {
     setSearchText: (searchText: string) => void;
     setSearchedColumn: (dataIndex: ArticleForTableListKeysType) => void;
 }
 
 export function getArticleTableColumnList(
-    data: GetArticleTableColumnListArgumentType
+    articleTableColumnListProps: GetArticleTableColumnListArgumentType
 ): Array<ColumnType<ArticleForTableListType>> {
-    const {setSearchedColumn, setSearchText} = data;
-
     const articleTableColumnList: Array<ColumnType<ArticleForTableListType>> = [
         {
             dataIndex: "title",
             defaultSortOrder: SortDirectionEnum.ascend,
             filterDropdown: (filterProps: FilterDropdownProps): JSX.Element => {
-                const {visible} = filterProps;
-                const inputRef = useRef<InputRef>(null);
-
-                useEffect(() => {
-                    if (visible) {
-                        // Wait until the input appears
-                        setTimeout(() => {
-                            inputRef.current?.focus({cursor: "start"});
-                        }, 100);
-                    }
-                }, [visible]);
-
                 return (
-                    <Input
-                        key="title"
-                        onInput={(evt: SyntheticEvent<HTMLInputElement>): undefined => {
-                            setSearchedColumn("title");
-                            setSearchText(evt.currentTarget.value.trim());
-                        }}
-                        placeholder="Search..."
-                        ref={inputRef}
+                    <CmsArticleListFilterDropdown
+                        articleTableColumnListProps={articleTableColumnListProps}
+                        columnName="title"
+                        filterProps={filterProps}
                     />
                 );
             },
@@ -75,27 +56,11 @@ export function getArticleTableColumnList(
             dataIndex: "slug",
             defaultSortOrder: null,
             filterDropdown: (filterProps: FilterDropdownProps): JSX.Element => {
-                const {visible} = filterProps;
-                const inputRef = useRef<InputRef>(null);
-
-                useEffect(() => {
-                    if (visible) {
-                        // Wait until the input appears
-                        setTimeout(() => {
-                            inputRef.current?.focus({cursor: "start"});
-                        }, 100);
-                    }
-                }, [visible]);
-
                 return (
-                    <Input
-                        key="slug"
-                        onInput={(evt: SyntheticEvent<HTMLInputElement>): undefined => {
-                            setSearchedColumn("slug");
-                            setSearchText(evt.currentTarget.value);
-                        }}
-                        placeholder="Search..."
-                        ref={inputRef}
+                    <CmsArticleListFilterDropdown
+                        articleTableColumnListProps={articleTableColumnListProps}
+                        columnName="slug"
+                        filterProps={filterProps}
                     />
                 );
             },

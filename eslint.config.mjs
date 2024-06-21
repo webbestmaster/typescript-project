@@ -4,6 +4,7 @@ import eslintConfigPrettier from "eslint-config-prettier";
 import jest from "eslint-plugin-jest";
 import jsxA11y from "eslint-plugin-jsx-a11y";
 import reactRecommended from "eslint-plugin-react/configs/recommended.js";
+import reactHooks from "eslint-plugin-react-hooks";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 import sonarjs from "eslint-plugin-sonarjs";
 import eslintPluginUnicorn from "eslint-plugin-unicorn";
@@ -13,7 +14,7 @@ import typescriptEslint from "typescript-eslint";
 /**
  * List of plugins to add
  * - react - from eslint-plugin-react
- * - react-hooks
+ * - react-hooks - from eslint-plugin-react-hooks@5.1.0-rc-e684ca66ab-20240619
  * - babel - maybe not needed
  * - JSX-a11y - from eslint-plugin-jsx-a11y
  * - filenames - not needed, because we have `unicorn/filename-case`
@@ -36,6 +37,13 @@ export default [
     {
         files,
         ...jsxA11y.flatConfigs.strict,
+    },
+    {
+        files,
+        ...reactHooks.configs.recommended,
+        plugins: {
+            'react-hooks': reactHooks,
+        },
     },
     {
         files,
@@ -66,7 +74,6 @@ export default [
         plugins: {
             unicorn: eslintPluginUnicorn,
             // Sonarjs: sonarjs,
-
         },
         rules: {
             // Jest
@@ -113,8 +120,8 @@ export default [
             "react/no-set-state": 2,
 
             // React-hooks, need to uncomment
-            // "react-hooks/rules-of-hooks": 2,
-            // "react-hooks/exhaustive-deps": 2,
+            "react-hooks/rules-of-hooks": 2,
+            "react-hooks/exhaustive-deps": 2,
 
             // Babel, need to uncomment
             // "babel/new-cap": 2,
