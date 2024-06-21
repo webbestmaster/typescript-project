@@ -1,4 +1,4 @@
-/* eslint-disable sort-keys, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment, sonarjs/no-duplicate-string */
+/* eslint-disable sort-keys, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment */
 import eslintJs from "@eslint/js";
 import eslintConfigPrettier from "eslint-config-prettier";
 import jest from "eslint-plugin-jest";
@@ -12,14 +12,16 @@ import typescriptEslint from "typescript-eslint";
 
 /**
  * List of plugins to add
- * react - from eslint-plugin-react
- * react-hooks
- * babel - maybe not needed
- * JSX-a11y - from eslint-plugin-jsx-a11y
- * filenames - not needed, because we have `unicorn/filename-case`
- * import - from eslint-plugin-simple-import-sort
- * optimize-regex
+ * - react - from eslint-plugin-react
+ * - react-hooks
+ * - babel - maybe not needed
+ * - JSX-a11y - from eslint-plugin-jsx-a11y
+ * - filenames - not needed, because we have `unicorn/filename-case`
+ * - import - from eslint-plugin-simple-import-sort
+ * - optimize-regex
  */
+
+const files = ["**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}"];
 
 export default [
     eslintJs.configs.all,
@@ -28,15 +30,15 @@ export default [
     sonarjs.configs.recommended,
     eslintConfigPrettier,
     {
-        files: ["**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}"],
+        files,
         ...reactRecommended,
     },
     {
-        files: ["**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}"],
+        files,
         ...jsxA11y.flatConfigs.strict,
     },
     {
-        files: ["**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}"],
+        files,
         plugins: {
             "simple-import-sort": simpleImportSort,
         },
