@@ -97,7 +97,7 @@
   "dependencies": {
     "@fastify/compress": "^7.0.3",
     "@fastify/cors": "^9.0.1",
-    "@fastify/error": "^3.4.1",
+    "@fastify/error": "^4.0.0",
     "@fastify/multipart": "^8.3.0",
     "@fastify/secure-session": "^7.5.1",
     "@fastify/static": "^7.0.4",
@@ -108,7 +108,7 @@
     "dotenv": "^16.4.5",
     "fastify": "^4.28.0",
     "get-audio-duration": "^4.0.1",
-    "graphql": "^16.8.2",
+    "graphql": "^16.9.0",
     "jszip": "^3.10.1",
     "markdown-pro": "^1.1.8",
     "node-lame": "^1.3.2",
