@@ -360,6 +360,12 @@ export default [
 
             // Storybook
             "storybook-static/*",
+
+            // WASM
+            "wasm/*",
+
+            // Res
+            "_res/*",
         ],
     },
 ];
