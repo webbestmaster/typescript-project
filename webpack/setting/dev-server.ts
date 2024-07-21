@@ -4,8 +4,8 @@ import type {WebpackOptionsNormalized} from "webpack";
 import {webpackDevServerPort} from "../config";
 
 const serverPort = 3011;
-const host = "localhost";
-// const host = '192.168.147.45';
+// const host = "localhost";
+const host = "0.0.0.0";
 
 /*
 const mainProxyUrlSetting = {
