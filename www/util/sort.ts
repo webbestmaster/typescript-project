@@ -1,26 +1,14 @@
 type SupportedType = Record<string, unknown> | string | number | boolean;
 
+const allowedTypeList = ["number", "string", "boolean", "object"];
+
 function getIsSupportType(value: unknown): value is SupportedType {
     // eslint-disable-next-line no-undefined
     if (value === null || value === undefined) {
         return false;
     }
 
-    const valueType = typeof value;
-
-    if (valueType === "number") {
-        return true;
-    }
-
-    if (valueType === "string") {
-        return true;
-    }
-
-    if (valueType === "boolean") {
-        return true;
-    }
-
-    return valueType === "object";
+    return allowedTypeList.includes(typeof value);
 }
 
 function getDifferentByValue(itemA: SupportedType, itemB: SupportedType, keyList: Array<string>): number {
@@ -55,8 +43,12 @@ function getDifferentByValue(itemA: SupportedType, itemB: SupportedType, keyList
     return 0;
 }
 
-export function sort<ItemType extends SupportedType>(list: Array<ItemType>, keyList?: Array<string>): Array<ItemType> {
+export function sort<ItemType extends SupportedType>(
+    list: Array<ItemType>,
+    direction: -1 | 1,
+    keyList?: Array<string>
+): Array<ItemType> {
     return list.sort((itemA: ItemType, itemB: ItemType): number => {
-        return getDifferentByValue(itemA, itemB, keyList ?? []);
+        return getDifferentByValue(itemA, itemB, keyList ?? []) * direction;
     });
 }
