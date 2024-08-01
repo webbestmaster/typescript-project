@@ -1,0 +1,62 @@
+type SupportedType = Record<string, unknown> | string | number | boolean;
+
+function getIsSupportType(value: unknown): value is SupportedType {
+    // eslint-disable-next-line no-undefined
+    if (value === null || value === undefined) {
+        return false;
+    }
+
+    const valueType = typeof value;
+
+    if (valueType === "number") {
+        return true;
+    }
+
+    if (valueType === "string") {
+        return true;
+    }
+
+    if (valueType === "boolean") {
+        return true;
+    }
+
+    return valueType === "object";
+}
+
+function getDifferentByValue(itemA: SupportedType, itemB: SupportedType, keyList: Array<string>): number {
+    if (typeof itemA === "string" && typeof itemB === "string") {
+        return itemA.localeCompare(itemB);
+    }
+
+    if (typeof itemA === "number" && typeof itemB === "number") {
+        return itemA - itemB;
+    }
+
+    if (typeof itemA === "boolean" && typeof itemB === "boolean") {
+        return Number(itemA) - Number(itemB);
+    }
+
+    const [ignoredFirstKey, ...restOfKeys] = keyList;
+
+    const firstKey = keyList.at(0);
+
+    // eslint-disable-next-line sonarjs/no-collapsible-if
+    if (typeof itemA === "object" && typeof itemB === "object") {
+        if (typeof firstKey === "string" && firstKey in itemA && firstKey in itemB) {
+            const valueA = itemA[firstKey];
+            const valueB = itemB[firstKey];
+
+            if (getIsSupportType(valueA) && getIsSupportType(valueB)) {
+                return getDifferentByValue(valueA, valueB, restOfKeys);
+            }
+        }
+    }
+
+    return 0;
+}
+
+export function sort<ItemType extends SupportedType>(list: Array<ItemType>, keyList?: Array<string>): Array<ItemType> {
+    return list.sort((itemA: ItemType, itemB: ItemType): number => {
+        return getDifferentByValue(itemA, itemB, keyList ?? []);
+    });
+}
