@@ -45,10 +45,12 @@ function getDifferentByValue(itemA: SupportedType, itemB: SupportedType, keyList
 
 export function sort<ItemType extends SupportedType>(
     list: Array<ItemType>,
-    direction: -1 | 1,
+    direction: number,
     keyList?: Array<string>
 ): Array<ItemType> {
+    const normalizedDirection: 1 | -1 = direction < 0 ? -1 : 1;
+
     return list.sort((itemA: ItemType, itemB: ItemType): number => {
-        return getDifferentByValue(itemA, itemB, keyList ?? []) * direction;
+        return getDifferentByValue(itemA, itemB, keyList ?? []) * normalizedDirection;
     });
 }
