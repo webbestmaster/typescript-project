@@ -104,7 +104,7 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@types/sharp": "^0.32.0",
-    "antd": "^5.19.4",
+    "antd": "^5.20.0",
     "dotenv": "^16.4.5",
     "fastify": "^4.28.1",
     "get-audio-duration": "^4.0.1",
