@@ -35,7 +35,9 @@ npm-debug.log*
 # other
 .DS_Store
 
+# environment
 .env
+/ssl/
 
 # cache
 /article-cache/
