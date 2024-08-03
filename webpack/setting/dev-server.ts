@@ -42,6 +42,22 @@ export const devServer: WebpackOptionsNormalized["devServer"] = {
             target: `http://127.0.0.1:${serverPort}/`,
         },
     ],
+
+    /*
+    server: isDevelopment
+        ? {
+              // Import fileSystem from "node:fs";
+              options: {
+                  // eslint-disable-next-line id-length
+                  ca: fileSystem.readFileSync("ssl/rootCA.pem"),
+                  cert: fileSystem.readFileSync("ssl/localhost+1.pem"),
+                  key: fileSystem.readFileSync("ssl/localhost+1-key.pem"),
+              },
+              type: "https",
+          }
+        : {},
+    */
+
     // hotOnly: false,
     // disableHostCheck: true,
     // proxy: {

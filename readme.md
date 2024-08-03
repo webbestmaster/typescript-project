@@ -31,6 +31,20 @@
 3. run `npm run front:start-*` and\or `npm run back:start-*`
 
 
+## HTTPS localhost (MacOS)
+See [guide](https://johnkagga.medium.com/use-https-with-webpack-dev-server-c378f0e8c6ff) for generating self-signed certificate.
+Generated certificate (localhost+1.pem, localhost+1-key.pem) and root certificate (rootCA.pem) should be placed into ssl directory.
+
+```bash
+$ brew install mkcert           // Install mkcert
+$ mkcert -install               // Create a new local CA
+$ mkcert localhost 127.0.0.1    // Generate a certificate for the host you are using locally, e.g localhost
+$ mkcert -CAROOT                // Locate the path of you rootCA.pem file
+```
+
+Uncomment `devServer.server` to use ssl certificates locally
+
+
 ### CMS Limits
 
 - Max file size is 75MB
