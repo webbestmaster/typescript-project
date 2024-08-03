@@ -41,7 +41,6 @@ export function adminOnly<ResponseType>(
             return callBack(request, reply);
         }
 
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         reply.code(403).header(...mainResponseHeader);
 
         throw new Error("403 Forbidden");

@@ -1,4 +1,3 @@
-/* global HTMLInputElement */
 import {SearchOutlined} from "@ant-design/icons";
 import type {ColumnType, FilterDropdownProps} from "antd/es/table/interface";
 import {Link} from "react-router-dom";

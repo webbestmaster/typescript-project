@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-floating-promises */
 import type {FastifyReply, FastifyRequest} from "fastify";
 
 import {UserRoleEnum} from "../../www/provider/user/user-context-type";

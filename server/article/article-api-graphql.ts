@@ -280,7 +280,6 @@ export async function getAdminArticlePaginationGraphQl(
 ): Promise<ExecutionResult> {
     const {source, query, pagination} = parseGraphQlRequestQuery(request);
 
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     reply.code(200).header(...mainResponseHeader);
 
     return getArticlePaginationGraphQl({
@@ -297,7 +296,6 @@ export async function getClientArticlePaginationGraphQl(
 ): Promise<ExecutionResult> {
     const {source, query, pagination} = parseGraphQlRequestQuery(request);
 
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     reply.code(200).header(...mainResponseHeader);
 
     return getArticlePaginationGraphQl({

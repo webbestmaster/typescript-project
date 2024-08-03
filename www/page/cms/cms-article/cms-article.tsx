@@ -157,7 +157,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             })
             .catch((error: Error): void => {
                 console.log(error);
-                // eslint-disable-next-line @typescript-eslint/no-floating-promises
+
                 message.error("Can not fetch article list.");
             });
     }, [executeArticleListPaginationPick]);
@@ -191,12 +191,10 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
             return;
         }
 
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         message.error(JSON.stringify(validateFunction.errors));
     }
 
     function onFinishFailedForm(errorInfo: ValidateErrorEntity<ArticleType>): undefined {
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         message.error(JSON.stringify(errorInfo.errorFields));
         console.log("onFinishFailedForm:", errorInfo);
         console.log("onFinishFailedForm:", article);
@@ -431,7 +429,6 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                         } catch (error: unknown) {
                             const errorMessage = error instanceof Error ? error.message : "Too big file";
 
-                            // eslint-disable-next-line @typescript-eslint/no-floating-promises
                             message.error(errorMessage);
                         } finally {
                             setIsFileLoading(false);

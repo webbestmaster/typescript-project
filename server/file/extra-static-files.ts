@@ -44,7 +44,6 @@ export async function removeExtraStaticFiles(request: FastifyRequest, reply: Fas
         extraFileList.push(fileName);
     });
 
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     reply.code(200).header(...mainResponseHeader);
 
     return {

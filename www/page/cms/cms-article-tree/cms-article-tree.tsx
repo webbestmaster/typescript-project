@@ -41,7 +41,7 @@ export function CmsArticleTree(): JSX.Element {
             })
             .catch((error: Error) => {
                 console.log(error);
-                // eslint-disable-next-line @typescript-eslint/no-floating-promises
+
                 message.error("Can not fetch article list.");
             });
     }, [executeArticleListPaginationPick]);

@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-floating-promises */
-
 import type {FastifyReply, FastifyRequest} from "fastify";
 import type {PetsdbQueryType, PetsdbReadPageConfigType} from "petsdb";
 
