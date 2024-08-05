@@ -5,6 +5,7 @@ import {cwd} from "node:process";
 import type {FastifyReply, FastifyRequest} from "fastify";
 
 import {specialFileNameList} from "../../www/const";
+import {sortStringCallback} from "../../www/util/string";
 import {articleCrud} from "../article/article";
 import type {ArticleType} from "../article/article-type";
 import {getIsFileInArticle} from "../article/article-util";
@@ -47,8 +48,8 @@ export async function removeExtraStaticFiles(request: FastifyRequest, reply: Fas
     reply.code(200).header(...mainResponseHeader);
 
     return {
-        actualSpecialFileList: actualSpecialFileList.sort(),
-        expectedSpecialFileList: specialFileNameList.sort(),
-        extraFileList: extraFileList.sort(),
+        actualSpecialFileList: actualSpecialFileList.toSorted(sortStringCallback),
+        expectedSpecialFileList: specialFileNameList.toSorted(sortStringCallback),
+        extraFileList: extraFileList.toSorted(sortStringCallback),
     };
 }

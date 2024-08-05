@@ -19,7 +19,7 @@ async function removeOldDataBaseBackUp(dataBaseInfo: CrudConfigOnChangeArgumentT
     const fileList: Array<string> = await fileSystem.readdir(path.join(dataBaseBackUpPathAbsolute, dataBaseId));
 
     // new files at first
-    const sortedFileNameList = fileList.sort(sortStringCallbackReverse);
+    const sortedFileNameList = fileList.toSorted(sortStringCallbackReverse);
 
     // all files after maxBackUpCount
     const extraFileNameList = sortedFileNameList.slice(maxBackUpCount);

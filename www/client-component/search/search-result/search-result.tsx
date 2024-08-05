@@ -51,7 +51,7 @@ export function SearchResult(props: SearchResultPropsType): JSX.Element {
     return (
         <div className={fullClassName}>
             <ul className={searchResultStyle.search_result__list}>
-                {list.sort(sortSearchArticle).map<JSX.Element>((searchArticle: SearchArticleType): JSX.Element => {
+                {list.toSorted(sortSearchArticle).map<JSX.Element>((searchArticle: SearchArticleType): JSX.Element => {
                     const {slug} = searchArticle;
 
                     return (

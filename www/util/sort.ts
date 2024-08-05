@@ -50,7 +50,7 @@ export function sort<ItemType extends SupportedType>(
 ): Array<ItemType> {
     const normalizedDirection: 1 | -1 = direction < 0 ? -1 : 1;
 
-    return list.sort((itemA: ItemType, itemB: ItemType): number => {
+    return list.toSorted((itemA: ItemType, itemB: ItemType): number => {
         return getDifferentByValue(itemA, itemB, keyList ?? []) * normalizedDirection;
     });
 }
