@@ -42,7 +42,7 @@ export default [
         files,
         ...reactHooks.configs.recommended,
         plugins: {
-            'react-hooks': reactHooks,
+            "react-hooks": reactHooks,
         },
     },
     {
@@ -215,6 +215,7 @@ export default [
             "@typescript-eslint/block-spacing": 0,
             "@typescript-eslint/quotes": 0,
             "@typescript-eslint/use-unknown-in-catch-callback-variable": 0,
+            "@typescript-eslint/require-array-sort-compare": [2, {ignoreStringArrays: false}],
             // TODO: enable this
             "@typescript-eslint/prefer-readonly-parameter-types": 0,
             // "@typescript-eslint/prefer-readonly-parameter-types": [
