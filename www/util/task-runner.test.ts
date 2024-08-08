@@ -10,6 +10,7 @@ const defaultTimeOut = 50;
 describe("test TaskRunner", () => {
     it("constructor", () => {
         expect.assertions(1);
+
         const taskRunner = new TaskRunner({maxWorkerCount: 2});
 
         expect(taskRunner instanceof TaskRunner).toBe(true);
@@ -24,6 +25,7 @@ describe("test TaskRunner", () => {
 
     it("add task", async () => {
         expect.assertions(1);
+
         const taskRunner = new TaskRunner({maxWorkerCount: 1});
 
         let increaseMe = 0;
@@ -38,6 +40,7 @@ describe("test TaskRunner", () => {
 
     it("check queue order", async () => {
         expect.assertions(2);
+
         const taskRunner = new TaskRunner({maxWorkerCount: 1});
 
         let increaseMe = 0;
@@ -60,6 +63,7 @@ describe("test TaskRunner", () => {
 
     it("add task with known/regular Error", async () => {
         expect.assertions(3);
+
         const taskRunner = new TaskRunner({maxWorkerCount: 1});
 
         let increaseMe = 0;
@@ -79,6 +83,7 @@ describe("test TaskRunner", () => {
         } catch (error: unknown) {
             // eslint-disable-next-line jest/no-conditional-in-test, jest/no-conditional-expect
             expect(error instanceof Error ? error.message : "").toBe("I am the ERROR!");
+
             isErrorCaught = true;
         }
 
@@ -93,6 +98,7 @@ describe("test TaskRunner", () => {
 
     it("add task with unknown Error", async () => {
         expect.assertions(3);
+
         const taskRunner = new TaskRunner({maxWorkerCount: 1});
 
         let increaseMe = 0;
@@ -128,6 +134,7 @@ describe("test TaskRunner", () => {
 
     it("add several tasks and with different time of execution, maxWorkerCount: 1", async () => {
         expect.assertions(1);
+
         const taskRunner = new TaskRunner({maxWorkerCount: 1});
 
         const listOfTime: Array<number> = [];
@@ -152,6 +159,7 @@ describe("test TaskRunner", () => {
 
     it("add several tasks and with different time of execution, maxWorkerCount: 2", async () => {
         expect.assertions(1);
+
         const taskRunner = new TaskRunner({maxWorkerCount: 2});
 
         const listOfTime: Array<number> = [];
@@ -176,6 +184,7 @@ describe("test TaskRunner", () => {
 
     it("add several tasks and with different time of execution, maxWorkerCount: 3", async () => {
         expect.assertions(1);
+
         const taskRunner = new TaskRunner({maxWorkerCount: 3});
 
         const listOfTime: Array<number> = [];
@@ -200,6 +209,7 @@ describe("test TaskRunner", () => {
 
     it("onTaskEnd", async () => {
         expect.assertions(2);
+
         const taskRunnerDataList: Array<TaskRunnerOnTaskDoneArgumentType> = [];
 
         const taskRunner = new TaskRunner({

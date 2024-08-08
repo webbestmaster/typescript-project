@@ -30,6 +30,7 @@ describe("my companies", () => {
 
     it("main table", async () => {
         expect.assertions(0);
+
         await page?.goto(pageFullUrl.myCompanies, defaultPageGoToOption);
 
         // Wait for table's pagination, .ant-pagination-options - item for page selector

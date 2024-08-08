@@ -27,6 +27,7 @@ describe("auth", () => {
 
     it("login", async () => {
         expect.assertions(0);
+
         await makeLogin(page);
     });
 });

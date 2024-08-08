@@ -30,6 +30,7 @@ describe("reviews", () => {
 
     it("review list", async () => {
         expect.assertions(0);
+
         await page?.goto(pageFullUrl.reviewsManagementReviews, defaultPageGoToOption);
 
         // Review should contain at least one review, main ul li svg[fill=currentColor] - rating selector

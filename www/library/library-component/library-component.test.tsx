@@ -7,6 +7,7 @@ import {LibraryComponent} from "./library-component";
 describe("libraryComponent", () => {
     it("default state", () => {
         expect.assertions(1);
+
         render(<LibraryComponent textContent="some text">child node</LibraryComponent>);
 
         expect(screen.getByText("child node") instanceof HTMLElement).toBe(true);

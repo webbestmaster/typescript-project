@@ -1,27 +1,10 @@
 /* eslint-disable capitalized-comments */
 
-import puppeteer, {
-    type Browser,
-    type BrowserConnectOptions,
-    type BrowserLaunchArgumentOptions,
-    type LaunchOptions,
-    type Page,
-    type Product,
-} from "puppeteer";
+import puppeteer, {type Browser, type Page, type PuppeteerLaunchOptions} from "puppeteer";
 
 import {defaultPageGoToOption, pageFullUrl, user} from "./const";
 
-interface AdditionalBrowserOptionsType {
-    extraPrefsFirefox?: Record<string, unknown>;
-    product?: Product;
-}
-
-type PuppeteerLaunchOptionsType = AdditionalBrowserOptionsType &
-    BrowserConnectOptions &
-    BrowserLaunchArgumentOptions &
-    LaunchOptions;
-
-const defaultBrowserOptions: PuppeteerLaunchOptionsType = {
+const defaultBrowserOptions: PuppeteerLaunchOptions = {
     args: [
         // https://github.com/puppeteer/puppeteer/blob/main/docs/api.md - api
         // https://peter.sh/experiments/chromium-command-line-switches/ - all arguments for chrome
@@ -45,9 +28,9 @@ const defaultBrowserOptions: PuppeteerLaunchOptionsType = {
 };
 
 export async function createBrowser(
-    puppeteerLaunchOptions: Partial<PuppeteerLaunchOptionsType> = defaultBrowserOptions
+    puppeteerLaunchOptions: Partial<PuppeteerLaunchOptions> = defaultBrowserOptions
 ): Promise<Browser> {
-    const fullBrowserOptions: PuppeteerLaunchOptionsType = {
+    const fullBrowserOptions: PuppeteerLaunchOptions = {
         ...defaultBrowserOptions,
         ...puppeteerLaunchOptions,
     };

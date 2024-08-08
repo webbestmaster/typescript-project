@@ -8,6 +8,7 @@ const defaultTimeOut = 50;
 describe("queue", () => {
     it("constructor", () => {
         expect.assertions(1);
+
         const queue = new Queue();
 
         expect(queue instanceof Queue).toBe(true);
@@ -15,6 +16,7 @@ describe("queue", () => {
 
     it("add task", async () => {
         expect.assertions(1);
+
         const queue = new Queue();
 
         let increaseMe = 0;
@@ -29,6 +31,7 @@ describe("queue", () => {
 
     it("check queue order", async () => {
         expect.assertions(2);
+
         const queue = new Queue();
 
         let increaseMe = 0;
@@ -51,6 +54,7 @@ describe("queue", () => {
 
     it("add task with known/regular Error", async () => {
         expect.assertions(3);
+
         const queue = new Queue();
 
         let increaseMe = 0;
@@ -70,6 +74,7 @@ describe("queue", () => {
         } catch (error: unknown) {
             // eslint-disable-next-line jest/no-conditional-in-test, jest/no-conditional-expect
             expect(error instanceof Error ? error.message : "").toBe("I am the ERROR!");
+
             isErrorCaught = true;
         }
 
@@ -84,6 +89,7 @@ describe("queue", () => {
 
     it("add task with unknown Error", async () => {
         expect.assertions(3);
+
         const queue = new Queue();
 
         let increaseMe = 0;
