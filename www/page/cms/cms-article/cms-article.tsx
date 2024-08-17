@@ -207,7 +207,10 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
         console.log("onValuesChangeForm:", article);
     }
 
-    function onFieldsChangeForm(changedFields: Array<FieldData>, allFields: Array<FieldData>): undefined {
+    function onFieldsChangeForm(
+        changedFields: Array<FieldData<ArticleType>>,
+        allFields: Array<FieldData<ArticleType>>
+    ): undefined {
         console.log("onFieldsChangeForm:", changedFields, allFields);
         console.log("onFieldsChangeForm:", article);
     }
