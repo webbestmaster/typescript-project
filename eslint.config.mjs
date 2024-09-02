@@ -10,7 +10,6 @@ import sonarjs from "eslint-plugin-sonarjs";
 import eslintPluginUnicorn from "eslint-plugin-unicorn";
 import typescriptEslint from "typescript-eslint";
 
-
 /**
  * List of plugins to add
  * - react - from eslint-plugin-react
@@ -79,6 +78,8 @@ export default [
             // Jest
             ...jest.configs["flat/all"].rules,
             "jest/require-hook": [2, {allowedFunctionCalls: ["innerInitialization"]}],
+
+            "sonarjs/sonar-no-fallthrough": "off",
 
             // React
             "react/jsx-uses-react": 2,
@@ -183,7 +184,8 @@ export default [
                 },
             ],
             "@typescript-eslint/no-shadow": [
-                2, {
+                2,
+                {
                     builtinGlobals: false,
                     hoist: "all",
                 },
