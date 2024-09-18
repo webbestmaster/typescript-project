@@ -4,7 +4,7 @@ export const selector = {
     appWrapper: ".js-app-wrapper",
 };
 
-export const demoUrl = "http://webbestmaster.github.io/react-audio-player-pro";
+export const demoUrl = "https://webbestmaster.github.io/react-audio-player-pro";
 
 export const googleAnalyticsId = "UA-156987706-1";
 export const googleAdSenseId = "ca-pub-8997870404482178";

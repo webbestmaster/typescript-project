@@ -1,4 +1,4 @@
-import {useContext} from "react";
+import {type JSX, useContext} from "react";
 
 import {Locale} from "../../../provider/locale/locale-context";
 import {articleContext} from "../../article/article-context/article-context";

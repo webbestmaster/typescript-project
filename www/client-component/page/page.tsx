@@ -1,4 +1,4 @@
-import {type ReactNode, useContext, useEffect} from "react";
+import {type JSX, type ReactNode, useContext, useEffect} from "react";
 import {type Location, useLocation, useParams} from "react-router-dom";
 
 import {rootArticleSlug} from "../../../server/article/article-const";

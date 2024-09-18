@@ -1,6 +1,6 @@
 /* global URLSearchParams */
 
-import type {ReactNode} from "react";
+import type {JSX, ReactNode} from "react";
 import {Link, useSearchParams} from "react-router-dom";
 
 export interface NavigationLinkPropsType {

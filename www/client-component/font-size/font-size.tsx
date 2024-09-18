@@ -1,4 +1,4 @@
-import {useCallback, useContext} from "react";
+import {type JSX, useCallback, useContext} from "react";
 
 import {ThemeContext} from "../../provider/theme/theme-context";
 import type {ThemeContextType} from "../../provider/theme/theme-context-type";

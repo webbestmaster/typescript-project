@@ -79,7 +79,15 @@ export default [
             ...jest.configs["flat/all"].rules,
             "jest/require-hook": [2, {allowedFunctionCalls: ["innerInitialization"]}],
 
+            "sonarjs/sonar-no-unused-vars": "off",
+            "sonarjs/no-dead-store": "off",
             "sonarjs/sonar-no-fallthrough": "off",
+            "sonarjs/todo-tag": "off",
+            "sonarjs/no-commented-code": "off",
+            "sonarjs/pseudo-random": "off",
+            "sonarjs/pseudo-randoms": "off",
+            "sonarjs/no-invariant-returns": "off",
+            "sonarjs/function-return-type": "off",
 
             // React
             "react/jsx-uses-react": 2,
@@ -352,7 +360,7 @@ export default [
             "coverage/*",
 
             // Style's d.ts
-            // eslint-disable-next-line arrow-body-style, @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-unsafe-argument
+            // eslint-disable-next-line arrow-body-style, @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-unsafe-argument, sonarjs/slow-regex
             pathToFile => /\S+\.s?css\.d\.ts/u.test(pathToFile),
 
             // Test

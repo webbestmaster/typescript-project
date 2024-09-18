@@ -1,3 +1,4 @@
+import type {JSX} from "react";
 import {AudioPlayer, AudioPlayerControlSprite, type TrackType} from "react-audio-player-pro";
 
 import {demoUrl} from "../../const";

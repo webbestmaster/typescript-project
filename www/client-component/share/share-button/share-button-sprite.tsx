@@ -1,5 +1,7 @@
 /* eslint-disable max-len */
 
+import type {JSX} from "react";
+
 import {IsHidden} from "../../../layout/is-hidden/is-hidden";
 import {shareButtonName} from "./share-button-const";
 

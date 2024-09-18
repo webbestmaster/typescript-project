@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {type JSX, useEffect, useState} from "react";
 
 import {Locale} from "../../provider/locale/locale-context";
 import * as gdprInfoStyle from "./gdpr-info.scss";

@@ -1,3 +1,5 @@
+import type {JSX} from "react";
+
 import {getPathToFile, getPathToImage} from "../../util/path";
 import {Image} from "../Image/image";
 import * as markdownStyle from "./markdown.scss";

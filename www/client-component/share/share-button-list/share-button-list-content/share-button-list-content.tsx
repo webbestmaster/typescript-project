@@ -1,4 +1,4 @@
-import type {ReactNode} from "react";
+import type {JSX, ReactNode} from "react";
 
 import {ShareButtonFacebook} from "../../share-button/button/share-button-facebook";
 import {ShareButtonOdnoklassniki} from "../../share-button/button/share-button-odnoklassniki";

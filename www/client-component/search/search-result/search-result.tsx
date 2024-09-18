@@ -1,3 +1,5 @@
+import type {JSX} from "react";
+
 import {Spinner} from "../../../layout/spinner/spinner";
 import {Locale} from "../../../provider/locale/locale-context";
 import {cls} from "../../../util/css";

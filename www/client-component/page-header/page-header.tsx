@@ -1,4 +1,4 @@
-import type {ReactNode} from "react";
+import type {JSX, ReactNode} from "react";
 
 import {FontSize} from "../font-size/font-size";
 import * as pageHeader from "./page-header.scss";

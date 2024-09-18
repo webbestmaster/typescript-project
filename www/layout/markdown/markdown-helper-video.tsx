@@ -1,3 +1,5 @@
+import type {JSX} from "react";
+
 import {appIconPngFileName} from "../../const";
 import {getPathToFile, getPathToImage} from "../../util/path";
 import {Video} from "../video/video";

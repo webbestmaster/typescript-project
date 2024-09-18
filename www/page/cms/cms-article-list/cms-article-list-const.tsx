@@ -1,5 +1,6 @@
 import {SearchOutlined} from "@ant-design/icons";
 import type {ColumnType, FilterDropdownProps} from "antd/es/table/interface";
+import type {JSX} from "react";
 import {Link} from "react-router-dom";
 
 import type {ArticleFileType} from "../../../../server/article/article-type";

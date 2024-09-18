@@ -1,7 +1,7 @@
 import {DownOutlined} from "@ant-design/icons";
 import {Divider, List, message, Tree, Typography} from "antd";
 import type {DataNode} from "rc-tree/lib/interface";
-import {useCallback, useEffect, useState} from "react";
+import {type JSX, useCallback, useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 
 import type {PaginationResultType} from "../../../../server/data-base/data-base-type";

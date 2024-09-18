@@ -1,4 +1,4 @@
-import {type ComponentType, lazy, Suspense} from "react";
+import {type ComponentType, type JSX, lazy, Suspense} from "react";
 
 import {LoginAdminRequired} from "../../../../layout/login-admin-required/login-admin-required";
 import {Spinner} from "../../../../layout/spinner/spinner";

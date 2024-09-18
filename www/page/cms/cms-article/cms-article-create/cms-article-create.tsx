@@ -1,4 +1,5 @@
 import {message, Typography} from "antd";
+import type {JSX} from "react";
 import {useNavigate} from "react-router-dom";
 
 import {makeDefaultArticle} from "../../../../../server/article/article-helper";

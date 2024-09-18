@@ -1,3 +1,4 @@
+import type {JSX} from "react";
 import {Link} from "react-router-dom";
 
 import {type ArticlePreviewType, SubDocumentListViewTypeEnum} from "../../../../server/article/article-type";

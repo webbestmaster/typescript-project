@@ -1,3 +1,5 @@
+import type {JSX} from "react";
+
 import {SvgImage} from "../../../../layout/svg-image/svg-image";
 import * as shareButtonStyle from "../share-button.scss";
 import {shareButtonName} from "../share-button-const";

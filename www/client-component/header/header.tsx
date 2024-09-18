@@ -1,4 +1,4 @@
-import {useCallback, useState} from "react";
+import {type JSX, useCallback, useState} from "react";
 import {Link} from "react-router-dom";
 
 import {appRoute} from "../../component/app/app-route";

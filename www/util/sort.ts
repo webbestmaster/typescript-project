@@ -24,11 +24,11 @@ function getDifferentByValue(itemA: SupportedType, itemB: SupportedType, keyList
         return Number(itemA) - Number(itemB);
     }
 
+    // eslint-disalbe-next-line sonarjs/no-dead-store, sonarjs/sonar-no-unused-vars
     const [ignoredFirstKey, ...restOfKeys] = keyList;
 
     const firstKey = keyList.at(0);
 
-    // eslint-disable-next-line sonarjs/no-collapsible-if
     if (typeof itemA === "object" && typeof itemB === "object") {
         if (typeof firstKey === "string" && firstKey in itemA && firstKey in itemB) {
             const valueA = itemA[firstKey];

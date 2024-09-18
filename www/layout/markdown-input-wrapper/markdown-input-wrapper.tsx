@@ -1,4 +1,5 @@
 import {Col, Row} from "antd";
+import type {JSX} from "react";
 
 import {Box} from "../box/box";
 import {Markdown} from "../markdown/markdown";

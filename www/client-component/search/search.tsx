@@ -1,6 +1,6 @@
 /* global HTMLInputElement, document, MouseEvent, HTMLDivElement */
 
-import {type SyntheticEvent, useCallback, useEffect, useRef, useState} from "react";
+import {type JSX, type SyntheticEvent, useCallback, useEffect, useRef, useState} from "react";
 
 import type {PaginationResultType} from "../../../server/data-base/data-base-type";
 import {useLocale} from "../../provider/locale/locale-context";

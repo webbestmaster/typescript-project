@@ -19,7 +19,7 @@ import type {UploadChangeParam, UploadFile} from "antd/es/upload/interface";
 import dayjs, {type Dayjs} from "dayjs";
 import utc from "dayjs/plugin/utc";
 import type {FieldData, ValidateErrorEntity} from "rc-field-form/lib/interface";
-import {useEffect, useState} from "react";
+import {type JSX, useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 
 function innerInitialization(): undefined {
@@ -631,7 +631,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                         disabled={isDisableToDelete}
                         icon={<QuestionCircleOutlined style={{color: red.primary}} />}
                         okText="Delete"
-                        // eslint-disable-next-line @typescript-eslint/no-misused-promises
+                        // eslint-disable-next-line @typescript-eslint/no-misused-promises, sonarjs/no-misused-promises
                         onConfirm={async (): Promise<void> => {
                             await handleDeleteArticle(id);
                         }}

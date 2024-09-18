@@ -28,7 +28,7 @@ export class ErrorBoundary extends Component<PropsType, StateType> {
     public override render(): ReactNode {
         const {state, props} = this;
         const {hasError} = state;
-        // eslint-disable-next-line react/prop-types
+
         const {children, errorFallBack} = props;
 
         return hasError ? errorFallBack : children;

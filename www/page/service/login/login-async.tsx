@@ -1,4 +1,4 @@
-import {type ComponentType, lazy, Suspense} from "react";
+import {type ComponentType, type JSX, lazy, Suspense} from "react";
 
 import {Spinner} from "../../../layout/spinner/spinner";
 import type {LazyResultType} from "../../../util/type";

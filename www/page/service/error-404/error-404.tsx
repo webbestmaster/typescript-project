@@ -1,3 +1,5 @@
+import type {JSX} from "react";
+
 import {Empty} from "../../../layout/empty/empty";
 import {IsHidden} from "../../../layout/is-hidden/is-hidden";
 import {IsRender} from "../../../layout/is-render/is-render";

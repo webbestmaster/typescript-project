@@ -1,4 +1,4 @@
-import {useContext} from "react";
+import {type JSX, useContext} from "react";
 
 import {ArticleTypeEnum} from "../../../server/article/article-type";
 import {NeverError} from "../../util/error";
@@ -35,5 +35,6 @@ export function Article(): JSX.Element {
         }
     }
 
+    // eslint-disable-next-line sonarjs/no-unreachable
     return <ArticleArticle />;
 }

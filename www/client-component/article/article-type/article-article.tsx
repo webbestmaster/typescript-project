@@ -1,4 +1,4 @@
-import {useContext} from "react";
+import {type JSX, useContext} from "react";
 
 import {Markdown} from "../../../layout/markdown/markdown";
 import * as articleStyle from "../article.scss";

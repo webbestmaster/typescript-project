@@ -1,3 +1,4 @@
+import type {JSX} from "react";
 import {Audio} from "react-audio-player-pro";
 
 import {textToSlug} from "../../util/human";

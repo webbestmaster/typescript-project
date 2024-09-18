@@ -1,4 +1,4 @@
-import {type SyntheticEvent, useCallback, useState} from "react";
+import {type JSX, type SyntheticEvent, useCallback, useState} from "react";
 
 import {apiUrl} from "../../../../server/const";
 import {useUserContext} from "../../../provider/user/user-context";

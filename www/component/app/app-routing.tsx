@@ -1,3 +1,4 @@
+import type {JSX} from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {StaticRouter} from "react-router-dom/server";
 

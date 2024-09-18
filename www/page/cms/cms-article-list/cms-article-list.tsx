@@ -1,6 +1,6 @@
 import {Table, Typography} from "antd";
 import type {FilterValue, SorterResult, TableCurrentDataSource, TablePaginationConfig} from "antd/es/table/interface";
-import {useEffect, useState} from "react";
+import {type JSX, useEffect, useState} from "react";
 
 import type {PaginationQueryType, PaginationResultType} from "../../../../server/data-base/data-base-type";
 import {getArticleListPaginationPick} from "../../../service/article/article-api";

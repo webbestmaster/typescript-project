@@ -1,5 +1,7 @@
 import "./button.css";
 
+import type {JSX} from "react";
+
 interface ButtonProps {
     /**
      * What background color to use

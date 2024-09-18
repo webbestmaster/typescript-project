@@ -1,4 +1,4 @@
-import {useContext} from "react";
+import {type JSX, useContext} from "react";
 
 import {BottomAdsWrapper} from "../../../client-component/ads/bottom-ads-wrapper/bottom-ads-wrapper";
 import {TopAdsWrapper} from "../../../client-component/ads/top-ads-wrapper/top-ads-wrapper";

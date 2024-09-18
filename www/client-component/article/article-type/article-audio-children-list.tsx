@@ -1,4 +1,4 @@
-import {useContext} from "react";
+import {type JSX, useContext} from "react";
 import {AudioPlayer, type TrackType} from "react-audio-player-pro";
 import {Link} from "react-router-dom";
 

@@ -1,4 +1,4 @@
-import {useCallback, useContext} from "react";
+import {type JSX, useCallback, useContext} from "react";
 import {Link} from "react-router-dom";
 
 import {rootArticleSlug} from "../../../server/article/article-const";

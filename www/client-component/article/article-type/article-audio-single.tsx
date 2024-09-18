@@ -1,4 +1,4 @@
-import {useContext} from "react";
+import {type JSX, useContext} from "react";
 import {Audio} from "react-audio-player-pro";
 
 import {type ArticleFileType, ArticleFileTypeEnum} from "../../../../server/article/article-type";

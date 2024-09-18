@@ -1,4 +1,4 @@
-import type {ReactNode} from "react";
+import type {JSX, ReactNode} from "react";
 
 import {ArticleProvider} from "../../client-component/article/article-context/article-context";
 import type {ArticleContextType} from "../../client-component/article/article-context/article-context-type";

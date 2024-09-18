@@ -1,5 +1,5 @@
 /* global ARTICLE_DATA */
-import {createContext, useEffect, useState} from "react";
+import {createContext, type JSX, useEffect, useState} from "react";
 
 import {getArticleContextBySlug} from "../../../service/article/article-api";
 import {useMakeExecutableState} from "../../../util/function";

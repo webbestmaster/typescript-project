@@ -17,14 +17,11 @@ export async function getArticleListPagination(
     request: FastifyRequest,
     reply: FastifyReply
 ): Promise<PaginationResultType<ArticleType>> {
-    // eslint-disable-next-line prefer-object-spread
-    const {pageConfig, query} = Object.assign(
-        {
-            pageConfig: encodeURIComponent(JSON.stringify(defaultPaginationQuery)),
-            query: encodeURIComponent(JSON.stringify({})),
-        },
-        request.query
-    );
+    const {pageConfig, query} = {
+        pageConfig: encodeURIComponent(JSON.stringify(defaultPaginationQuery)),
+        query: encodeURIComponent(JSON.stringify({})),
+        ...request.query,
+    };
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const pageConfigParsed: PetsdbReadPageConfigType<ArticleType> = JSON.parse(decodeURIComponent(pageConfig));
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -50,15 +47,12 @@ export async function getArticleListPagination(
 }
 
 function parseRequestQuery(request: FastifyRequest): ParsedRequestQueryType {
-    // eslint-disable-next-line prefer-object-spread
-    const {pageConfig, pick, query} = Object.assign(
-        {
-            pageConfig: encodeURIComponent(JSON.stringify(defaultPaginationQuery)),
-            pick: encodeURIComponent(JSON.stringify([])),
-            query: encodeURIComponent(JSON.stringify({})),
-        },
-        request.query
-    );
+    const {pageConfig, pick, query} = {
+        pageConfig: encodeURIComponent(JSON.stringify(defaultPaginationQuery)),
+        pick: encodeURIComponent(JSON.stringify([])),
+        query: encodeURIComponent(JSON.stringify({})),
+        ...request.query,
+    };
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const pageConfigParsed: PetsdbReadPageConfigType<ArticleType> = JSON.parse(decodeURIComponent(pageConfig));
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment

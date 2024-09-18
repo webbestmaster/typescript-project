@@ -1,5 +1,7 @@
 /* global HTMLImageElement */
 
+import type {JSX} from "react";
+
 import type {GetPathToFileType, GetPathToImageType} from "../../util/path";
 import {Source} from "./source";
 

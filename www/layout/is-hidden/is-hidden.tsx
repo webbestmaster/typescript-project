@@ -1,4 +1,4 @@
-import type {ReactNode} from "react";
+import type {JSX, ReactNode} from "react";
 
 import {cls} from "../../util/css";
 import * as isHiddenStyle from "./is-hidden.scss";

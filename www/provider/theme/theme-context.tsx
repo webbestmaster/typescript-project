@@ -1,4 +1,4 @@
-import {createContext, type ReactNode, useCallback, useEffect, useMemo, useState} from "react";
+import {createContext, type JSX, type ReactNode, useCallback, useEffect, useMemo, useState} from "react";
 
 import {maxFontSize, minFontSize, saveFontSize} from "./font-size-helper";
 import * as themeContextStyle from "./theme-context.scss";

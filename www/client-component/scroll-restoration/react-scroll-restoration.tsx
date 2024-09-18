@@ -1,6 +1,6 @@
 /* global window, document, requestAnimationFrame, sessionStorage */
 
-import {useCallback, useContext, useEffect, useState} from "react";
+import {type JSX, useCallback, useContext, useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
 
 import {useLocale} from "../../provider/locale/locale-context";

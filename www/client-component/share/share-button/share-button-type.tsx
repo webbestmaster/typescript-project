@@ -1,4 +1,4 @@
 export interface ShareButtonPropsType {
-    title: string;
-    url: string;
+    readonly title: string;
+    readonly url: string;
 }

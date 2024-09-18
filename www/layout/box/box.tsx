@@ -1,4 +1,4 @@
-import type {CSSProperties, ElementType, ReactNode} from "react";
+import type {CSSProperties, ElementType, JSX, ReactNode} from "react";
 
 import {makeCssArray} from "./box-helper";
 

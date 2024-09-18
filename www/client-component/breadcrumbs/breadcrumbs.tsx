@@ -1,4 +1,4 @@
-import {useCallback, useContext} from "react";
+import {type JSX, useCallback, useContext} from "react";
 import {Link} from "react-router-dom";
 
 import type {ArticlePreviewType} from "../../../server/article/article-type";

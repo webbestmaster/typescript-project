@@ -1,15 +1,15 @@
 import {Input, type InputRef} from "antd";
 import type {FilterDropdownProps} from "antd/es/table/interface";
-import {type SyntheticEvent, useEffect, useRef} from "react";
+import {type JSX, type SyntheticEvent, useEffect, useRef} from "react";
 
 import {useLocale} from "../../../provider/locale/locale-context";
 import type {GetArticleTableColumnListArgumentType} from "./cms-article-list-const";
 import type {ArticleForTableListKeysType} from "./cms-article-list-type";
 
 interface FilterDropdownPropsType {
-    filterProps: FilterDropdownProps;
-    articleTableColumnListProps: GetArticleTableColumnListArgumentType;
-    columnName: ArticleForTableListKeysType;
+    readonly filterProps: FilterDropdownProps;
+    readonly articleTableColumnListProps: GetArticleTableColumnListArgumentType;
+    readonly columnName: ArticleForTableListKeysType;
 }
 
 export function CmsArticleListFilterDropdown(filterDropdownProps: FilterDropdownPropsType): JSX.Element {

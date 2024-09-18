@@ -1,7 +1,7 @@
 /* global HTMLDivElement */
 
 import {classNameMdPro, classNameMdProThemeLight, markdown} from "markdown-pro";
-import {type HTMLAttributes, useContext} from "react";
+import {type HTMLAttributes, type JSX, useContext} from "react";
 
 import {ThemeContext} from "../../provider/theme/theme-context";
 import type {ThemeContextType} from "../../provider/theme/theme-context-type";

@@ -1,5 +1,5 @@
 // ignored import {useSystem} from 'react-system-hook';
-import {useContext, useEffect} from "react";
+import {type JSX, useContext, useEffect} from "react";
 
 import {SubDocumentListViewTypeEnum} from "../../../../server/article/article-type";
 import {apiUrl} from "../../../../server/const";

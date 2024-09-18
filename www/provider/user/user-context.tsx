@@ -1,4 +1,4 @@
-import {createContext, type ReactNode, useContext, useEffect, useMemo, useState} from "react";
+import {createContext, type JSX, type ReactNode, useContext, useEffect, useMemo, useState} from "react";
 
 import {getAutoAuthLogin} from "../../service/auth/auth-api";
 import type {LoginResponseType} from "../../service/auth/auth-type";
@@ -16,7 +16,9 @@ export function useUserContext(): UserContextType {
 
 const {Provider: UserContextProvider} = UserContext;
 
-type UserProviderPropsType = Record<"children", ReactNode>;
+interface UserProviderPropsType {
+    readonly children: ReactNode;
+}
 
 export function UserProvider(props: UserProviderPropsType): JSX.Element {
     const {children} = props;

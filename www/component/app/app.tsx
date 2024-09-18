@@ -1,3 +1,4 @@
+import type {JSX} from "react";
 import {AudioPlayerControlSprite} from "react-audio-player-pro";
 
 import type {ArticleContextType} from "../../client-component/article/article-context/article-context-type";

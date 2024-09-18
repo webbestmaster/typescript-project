@@ -1,3 +1,5 @@
+import type {JSX} from "react";
+
 import {cls} from "../../util/css";
 import * as spinnerStyle from "./spinner.scss";
 

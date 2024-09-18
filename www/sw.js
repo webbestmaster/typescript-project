@@ -67,5 +67,5 @@ async function fetchCallBack(evt /* :: : ServiceWorkerEvent */) /* :: : Promise<
     }
 }
 
-// eslint-disable-next-line jest/require-hook, @typescript-eslint/no-misused-promises
+// eslint-disable-next-line jest/require-hook, @typescript-eslint/no-misused-promises, sonarjs/no-misused-promises
 self.addEventListener("fetch", fetchCallBack);

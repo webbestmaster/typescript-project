@@ -131,6 +131,6 @@ const webpackConfig: Configuration = ((): Configuration => {
     throw new Error("Can not detect config");
 })();
 
-// webpackConfig.plugins?.push(new BundleAnalyzerPlugin());
+// WebpackConfig.plugins?.push(new BundleAnalyzerPlugin());
 
 export const webpackRunningConfig = {...webpackConfig, devServer};

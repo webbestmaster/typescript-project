@@ -72,7 +72,7 @@ class StaticSite {
         const {log} = console;
 
         await makeDirectory(cwd, staticSiteFolderName, "api");
-        // eslint-disable-next-line sonarjs/no-duplicate-string
+
         await makeDirectory(cwd, staticSiteFolderName, "api", "client-article");
 
         const progressCounterMax: number = this.pageList.length;

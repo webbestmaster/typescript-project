@@ -1,3 +1,4 @@
+import type {JSX} from "react";
 import {type Location, useLocation} from "react-router-dom";
 import {useScreenWidth} from "react-system-hook";
 

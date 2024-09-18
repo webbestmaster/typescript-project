@@ -4,7 +4,7 @@ import type {WebpackOptionsNormalized} from "webpack";
 import {webpackDevServerPort} from "../config";
 
 const serverPort = 3011;
-// const host = "localhost";
+// Const host = "localhost";
 const host = "0.0.0.0";
 
 /*

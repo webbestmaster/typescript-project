@@ -3,7 +3,7 @@
 import "markdown-pro/dist/style.css";
 import "react-audio-player-pro/dist/style.css";
 
-import {StrictMode} from "react";
+import {type JSX, StrictMode} from "react";
 import {createRoot, hydrateRoot} from "react-dom/client";
 
 import {App} from "./component/app/app";

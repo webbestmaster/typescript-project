@@ -1,5 +1,5 @@
 import {message, Typography} from "antd";
-import {useEffect} from "react";
+import {type JSX, useEffect} from "react";
 import {useParams} from "react-router-dom";
 
 import type {ArticleType} from "../../../../../server/article/article-type";

@@ -1,5 +1,5 @@
 /* global NAVIGATION_DATA */
-import {createContext} from "react";
+import {createContext, type JSX} from "react";
 
 import {isBrowser} from "../../../util/system";
 import {defaultNavigationContextData} from "./navigation-context-const";

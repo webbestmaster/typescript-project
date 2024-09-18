@@ -2,7 +2,7 @@
 
 import {describe, expect, it} from "@jest/globals";
 import {render, screen} from "@testing-library/react";
-import {useEffect} from "react";
+import {type JSX, useEffect} from "react";
 import {useSearchParams} from "react-router-dom";
 
 import {TestUtilNavigationProvider} from "../../../test-unit/util/test-util-navigation-provider";

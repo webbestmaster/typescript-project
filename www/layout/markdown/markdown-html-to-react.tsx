@@ -1,4 +1,4 @@
-import {Fragment} from "react";
+import {Fragment, type JSX} from "react";
 
 import {getIsEmptyHtml, type StringToJsxRawDataType} from "./markdown-helper";
 import {getAudioFromHtml} from "./markdown-helper-audio";
@@ -74,5 +74,5 @@ export function MarkdownHtmlToReact(props: PropsType): JSX.Element {
         );
     });
 
-    return <>{jsxList}</>;
+    return <Fragment key={htmlCode}>{jsxList}</Fragment>;
 }

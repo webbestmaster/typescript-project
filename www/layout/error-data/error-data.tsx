@@ -1,3 +1,5 @@
+import type {JSX} from "react";
+
 import {Locale} from "../../provider/locale/locale-context";
 import type {LangKeyType} from "../../provider/locale/translation/type";
 import {cls} from "../../util/css";

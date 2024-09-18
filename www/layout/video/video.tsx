@@ -1,6 +1,6 @@
 /* global HTMLVideoElement, HTMLImageElement */
 
-import {useCallback, useRef, useState} from "react";
+import {type JSX, useCallback, useRef, useState} from "react";
 
 import {cls} from "../../util/css";
 import type {GetPathToFileType, GetPathToImageType} from "../../util/path";
@@ -104,7 +104,7 @@ export function Video(props: VideoPropsType): JSX.Element {
                 width={width}
             />
 
-            {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+            {/* eslint-disable-next-line jsx-a11y/media-has-caption, sonarjs/media-has-caption */}
             <video
                 className={cls(videoStyle.video__tag, videoClassName, {
                     [videoStyle.video__tag__started]: isStarted,

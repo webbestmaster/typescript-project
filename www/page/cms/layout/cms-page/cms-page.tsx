@@ -1,7 +1,7 @@
 import "antd/dist/reset.css";
 
 import {Layout, Menu} from "antd";
-import type {ReactNode} from "react";
+import type {JSX, ReactNode} from "react";
 import {Link, type Location, useLocation} from "react-router-dom";
 
 import {appRoute} from "../../../../component/app/app-route";
@@ -9,7 +9,9 @@ import {Box} from "../../../../layout/box/box";
 
 const {Content} = Layout;
 
-type CmsPagePropsType = Record<"children", ReactNode>;
+interface CmsPagePropsType {
+    readonly children: ReactNode;
+}
 
 export function CmsPage(props: CmsPagePropsType): JSX.Element {
     const {children} = props;

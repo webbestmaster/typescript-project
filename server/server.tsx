@@ -140,7 +140,6 @@ async function innerInitialization(): Promise<undefined> {
 
         makeCacheFile("index", html).catch(console.error);
 
-        // eslint-disable-next-line sonarjs/no-duplicate-string
         reply.header("X-file-generated", "use-nginx");
         reply.type("text/html");
 
@@ -222,7 +221,7 @@ async function innerInitialization(): Promise<undefined> {
         return html;
     });
 
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises, sonarjs/no-misused-promises
     fastify.listen({host: "0.0.0.0", port: serverPort}, async (error: Error | null): Promise<void> => {
         if (error) {
             console.log(error);

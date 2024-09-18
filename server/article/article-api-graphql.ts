@@ -223,15 +223,12 @@ const articlePaginationSchema: GraphQLSchema = new GraphQLSchema({
 });
 
 function parseGraphQlRequestQuery(request: FastifyRequest): ParsedGraphQlRequestQueryType {
-    // eslint-disable-next-line prefer-object-spread
-    const {pagination, source, query} = Object.assign(
-        {
-            pagination: JSON.stringify(defaultPaginationQuery),
-            query: JSON.stringify({}),
-            source: "",
-        },
-        request.query
-    );
+    const {pagination, source, query} = {
+        pagination: JSON.stringify(defaultPaginationQuery),
+        query: JSON.stringify({}),
+        source: "",
+        ...request.query,
+    };
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const paginationParsed: PetsdbReadPageConfigType<ArticleType> = JSON.parse(pagination);

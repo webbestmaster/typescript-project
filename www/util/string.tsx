@@ -53,6 +53,7 @@ export function sortStringCallback(stringA: string, stringB: string): number {
 }
 
 export function sortStringCallbackReverse(stringA: string, stringB: string): number {
+    // eslint-disable-next-line sonarjs/arguments-order
     return sortStringCallback(stringB, stringA);
 }
 
