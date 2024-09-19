@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
 import type {FastifyReply, FastifyRequest} from "fastify";
 import type {PetsdbQueryType, PetsdbReadPageConfigType} from "petsdb";
 
@@ -17,14 +19,14 @@ export async function getArticleListPagination(
     request: FastifyRequest,
     reply: FastifyReply
 ): Promise<PaginationResultType<ArticleType>> {
-    const {pageConfig, query} = {
+    const {pageConfig, query}: Record<"pageConfig" | "query", string> = {
         pageConfig: encodeURIComponent(JSON.stringify(defaultPaginationQuery)),
         query: encodeURIComponent(JSON.stringify({})),
-        ...request.query,
+        ...Object(request.query),
     };
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
     const pageConfigParsed: PetsdbReadPageConfigType<ArticleType> = JSON.parse(decodeURIComponent(pageConfig));
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
     const queryParsed: PetsdbQueryType<ArticleType> = JSON.parse(decodeURIComponent(query));
 
     // eslint-disable-next-line guard-for-in
@@ -47,17 +49,17 @@ export async function getArticleListPagination(
 }
 
 function parseRequestQuery(request: FastifyRequest): ParsedRequestQueryType {
-    const {pageConfig, pick, query} = {
+    const {pageConfig, pick, query}: Record<"pageConfig" | "pick" | "query", string> = {
         pageConfig: encodeURIComponent(JSON.stringify(defaultPaginationQuery)),
         pick: encodeURIComponent(JSON.stringify([])),
         query: encodeURIComponent(JSON.stringify({})),
-        ...request.query,
+        ...Object(request.query),
     };
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+     
     const pageConfigParsed: PetsdbReadPageConfigType<ArticleType> = JSON.parse(decodeURIComponent(pageConfig));
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
     const pickParsed: Array<keyof ArticleType> = JSON.parse(decodeURIComponent(pick));
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
     const queryParsed: PetsdbQueryType<ArticleType> = JSON.parse(decodeURIComponent(query));
 
     // eslint-disable-next-line guard-for-in
@@ -106,7 +108,7 @@ export async function postAdminArticleCreate(
     reply: FastifyReply
 ): Promise<ArticleType | Record<"message", string>> {
     const {body} = request;
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
     const parsedCreateData: ArticleType = JSON.parse(String(body ?? "{}"));
     const [isValidArticle, modelJsonSchemaValidate] = validateArticle(parsedCreateData);
 
@@ -168,7 +170,7 @@ export async function postAdminArticleUpdate(
     reply: FastifyReply
 ): Promise<ArticleType | Record<"message", string>> {
     const {body} = request;
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
     const parsedUpdateData: ArticleType = JSON.parse(String(body ?? "{}"));
     const [isValidArticle, modelJsonSchemaValidate] = validateArticle(parsedUpdateData);
 

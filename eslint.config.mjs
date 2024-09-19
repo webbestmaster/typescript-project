@@ -80,6 +80,7 @@ export default [
             "jest/require-hook": [2, {allowedFunctionCalls: ["innerInitialization"]}],
 
             "sonarjs/sonar-no-unused-vars": "off",
+            "sonarjs/sonar-prefer-read-only-props": "off",
             "sonarjs/no-dead-store": "off",
             "sonarjs/sonar-no-fallthrough": "off",
             "sonarjs/todo-tag": "off",

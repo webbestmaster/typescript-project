@@ -1,4 +1,4 @@
-/* eslint-disable capitalized-comments */
+/* eslint-disable capitalized-comments, @typescript-eslint/no-unsafe-assignment */
 
 import type {FastifyReply, FastifyRequest} from "fastify";
 import {
@@ -223,16 +223,14 @@ const articlePaginationSchema: GraphQLSchema = new GraphQLSchema({
 });
 
 function parseGraphQlRequestQuery(request: FastifyRequest): ParsedGraphQlRequestQueryType {
-    const {pagination, source, query} = {
+    const {pagination, source, query}: Record<"pagination" | "source" | "query", string> = {
         pagination: JSON.stringify(defaultPaginationQuery),
         query: JSON.stringify({}),
         source: "",
-        ...request.query,
+        ...Object(request.query),
     };
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const paginationParsed: PetsdbReadPageConfigType<ArticleType> = JSON.parse(pagination);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const queryParsed: PetsdbQueryType<ArticleType> = JSON.parse(query);
 
     // eslint-disable-next-line guard-for-in
