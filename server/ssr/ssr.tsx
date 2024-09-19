@@ -6,7 +6,6 @@ import {navigationReplaceSelector} from "../../www/client-component/navigation/n
 import {App} from "../../www/component/app/app";
 import {ThemeNameEnum} from "../../www/provider/theme/theme-context-type";
 import type {ArticleType} from "../article/article-type";
-import {streamToStringServer} from "../util/stream";
 import {getSchemaMarkupArticleSsrReplaceData} from "./api/schema-markup/schema-markup-article";
 import {getSchemaMarkupBreadcrumbsSsrReplaceData} from "./api/schema-markup/schema-markup-breadcrumbs";
 import {makeClientArticleContextData} from "./api/srr-article";
@@ -43,7 +42,7 @@ export async function getHtmlCallBack(
     const metaOpenGraphSsrReplaceData = getMetaOpenGraphSsrReplaceData(article);
     const metaTwitterCardSsrReplaceData = getMetaTwitterCardSsrReplaceData(article);
 
-    const appStream = ReactDOMServer.renderToStaticNodeStream(
+    const htmlString = ReactDOMServer.renderToStaticMarkup(
         <StrictMode>
             <App
                 articleData={articleData}
@@ -54,7 +53,7 @@ export async function getHtmlCallBack(
         </StrictMode>
     );
 
-    const htmlString = await streamToStringServer(appStream);
+    // Const htmlString = await streamToStringServer(appStream);
 
     const html = indexHtml
         .replace(titleSsrReplaceData.selector, titleSsrReplaceData.value)

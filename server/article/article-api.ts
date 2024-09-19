@@ -55,7 +55,6 @@ function parseRequestQuery(request: FastifyRequest): ParsedRequestQueryType {
         query: encodeURIComponent(JSON.stringify({})),
         ...Object(request.query),
     };
-     
     const pageConfigParsed: PetsdbReadPageConfigType<ArticleType> = JSON.parse(decodeURIComponent(pageConfig));
 
     const pickParsed: Array<keyof ArticleType> = JSON.parse(decodeURIComponent(pick));
