@@ -50,26 +50,26 @@ export default [
             "simple-import-sort": simpleImportSort,
         },
         rules: {
-            "simple-import-sort/imports": "error",
             "simple-import-sort/exports": "error",
+            "simple-import-sort/imports": "error",
         },
     },
     {
-        settings: {react: {version: "detect"}},
         languageOptions: {
-            parserOptions: {
-                project: ["./tsconfig.json"],
-                ecmaVersion: 2020,
-                sourceType: "module",
-                ecmaFeatures: {jsx: true},
-            },
             globals: {
                 JSX: true,
-                require: true,
-                module: true,
                 console: true,
+                module: true,
+                require: true,
+            },
+            parserOptions: {
+                ecmaFeatures: {jsx: true},
+                ecmaVersion: 2020,
+                project: ["./tsconfig.eslint.json"],
+                sourceType: "module",
             },
         },
+        settings: {react: {version: "detect"}},
         plugins: {
             unicorn: eslintPluginUnicorn,
             // Sonarjs: sonarjs,
@@ -362,7 +362,7 @@ export default [
 
             // Style's d.ts
             // eslint-disable-next-line arrow-body-style, @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-unsafe-argument, sonarjs/slow-regex
-            pathToFile => /\S+\.s?css\.d\.ts/u.test(pathToFile),
+            pathToFile => /\S+\.s?css\.d\.ts$/u.test(pathToFile),
 
             // Test
             "test-backstop/*",
