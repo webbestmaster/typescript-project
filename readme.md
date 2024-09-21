@@ -19,7 +19,7 @@
 
 ## Installation
 
-1. install nodejs v18.x or newer for your platform
+1. install nodejs v20 .x or newer for your platform
 2. go to project's directory
 3. run `npm i`
 
