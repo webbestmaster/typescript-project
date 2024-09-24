@@ -40,8 +40,8 @@ const configFront: Configuration = {
     optimization: {...optimization},
     output: {
         assetModuleFilename: isDevelopment
-            ? "build-asset/[name]----[fullhash:6][ext][query]"
-            : "build-asset/[fullhash:6][ext][query]",
+            ? "build-asset/[name]----[hash:6][ext][query]"
+            : "build-asset/[hash:6][ext][query]",
         chunkFilename: isDevelopment ? "[name].chunk.js" : "[name].[fullhash:6].chunk.js",
         filename: isDevelopment ? "[name].js" : "index.js",
         path: path.join(cwd(), pathToDistribution),

@@ -36,7 +36,7 @@ const config: StorybookConfig = {
                         loader: "css-loader",
                         options: {
                             modules: {
-                                localIdentName: "[local]----[fullhash:6]",
+                                localIdentName: "[local]----[hash:6]",
                             },
                             sourceMap: true,
                         },
