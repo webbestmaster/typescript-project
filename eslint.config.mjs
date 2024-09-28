@@ -259,6 +259,8 @@ export default [
                         attrs: false,
                         arg: false,
                         args: false,
+                        env: false,
+                        params: false,
                         prop: false,
                         props: false,
                         prev: false,
