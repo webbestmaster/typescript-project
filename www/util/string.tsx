@@ -58,6 +58,7 @@ export function sortStringCallbackReverse(stringA: string, stringB: string): num
 }
 
 export function getTickCross(isEnable: boolean): string {
+    // eslint-disable-next-line sonarjs/no-selector-parameter
     return isEnable ? "✔" : "❌";
 }
 
