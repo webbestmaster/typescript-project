@@ -1,12 +1,12 @@
-@import './../../../css/variable';
-@import './../../../css/service';
+@use '../../../css/variable';
+@use '../../../css/service';
 
 .search_result_wrapper {
-    background-color: $main-background-color;
-    border: 1px solid $main-font-color;
+    background-color: variable.$main-background-color;
+    border: 1px solid variable.$main-font-color;
     border-radius: 5px;
     box-shadow: 1px 1px 3px rgb(0 0 0 / 30%);
-    color: $main-font-color;
+    color: variable.$main-font-color;
     display: block;
     overflow: hidden;
 }
@@ -32,7 +32,7 @@
     margin: 0;
     max-height: 60vh;
     overflow: auto;
-    padding: $ui-unit;
+    padding: variable.$ui-unit;
 }
 
 .search_result__list_item {

@@ -11,7 +11,13 @@ export function getStringFromUnknown(data: Record<string, unknown> | null | unde
         return "";
     }
 
-    return String(data[requiredKey] ?? "");
+    const value: unknown = data[requiredKey];
+
+    if (typeof value === "string") {
+        return value;
+    }
+
+    return "";
 }
 
 export function extractFromUnknown<ExtractType extends Record<string, boolean | number | string | null>>(

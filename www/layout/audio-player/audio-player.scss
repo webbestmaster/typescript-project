@@ -1,5 +1,5 @@
-@import './../../css/service';
-@import './../../css/variable';
+@use '../../css/service';
+@use '../../css/variable';
 
 .audio_player__spinner {
     display: block;
@@ -10,5 +10,5 @@
     @extend %link;
 
     display: block;
-    padding: $ui-unit 0;
+    padding: variable.$ui-unit 0;
 }

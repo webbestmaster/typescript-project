@@ -1,10 +1,13 @@
-@import './../../css/service';
+/* stylelint-disable media-feature-name-no-unknown */
+
+@use "../../css/service";
+@use "../../css/variable";
 
 .header {
     @extend %width-limit;
 
     align-items: center;
-    background-color: $main-background-color;
+    background-color: variable.$main-background-color;
     display: flex;
     flex-direction: row;
     height: 50px;
@@ -33,9 +36,9 @@
 .header__home_text {
     @extend %ellipsis;
 
-    color: $main-font-color;
+    color: variable.$main-font-color;
     display: block;
-    font-family: $main-font-family;
+    font-family: variable.$main-font-family;
     font-size: 1.625em;
     line-height: 1.4;
     padding-top: 5px;
@@ -64,7 +67,7 @@
 
     &:before,
     &:after {
-        background-color: $main-font-color;
+        background-color: variable.$main-font-color;
         border-radius: 1px;
         content: '';
         display: block;
@@ -94,7 +97,7 @@
     @extend %header-navigation-toggle-button;
 
     &:before {
-        box-shadow: 0 -7px 0 0 $main-font-color, 0 7px 0 0 $main-font-color;
+        box-shadow: 0 -7px 0 0 variable.$main-font-color, 0 7px 0 0 variable.$main-font-color;
     }
 
     &:after {
@@ -110,13 +113,13 @@
     }
 }
 
-@media screen and (width <= $tablet-width) {
+@media screen and (width <= variable.$tablet-width) {
     .header {
-        border-bottom: 1px solid $main-font-color;
+        border-bottom: 1px solid variable.$main-font-color;
     }
 
     .header__navigation_wrapper__open {
-        border-bottom: 1px solid $main-font-color;
+        border-bottom: 1px solid variable.$main-font-color;
     }
 
     %header-navigation-toggle-button {

@@ -1,9 +1,9 @@
-@import './../../css/variable';
+@use '../../css/variable';
 
 .article_markdown {
-    padding-bottom: $ui-unit * 3;
+    padding-bottom: variable.$ui-unit * 3;
 }
 
 .article_audio_player {
-    padding-bottom: $ui-unit * 3;
+    padding-bottom: variable.$ui-unit * 3;
 }

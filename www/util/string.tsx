@@ -45,7 +45,7 @@ export function sortCompare(shortLocaleName: LocaleNameEnum, stringA: string, st
 }
 
 export function toTrimmedString(value: unknown): string {
-    return String(value ?? "").trim();
+    return typeof value === "string" ? value.trim() : "";
 }
 
 export function sortStringCallback(stringA: string, stringB: string): number {

@@ -1,15 +1,17 @@
-@import './variable';
+/* stylelint-disable media-feature-name-no-unknown */
+
+@use 'variable';
 
 %width-limit,
 .width_limit {
-    background-color: $main-background-color;
+    background-color: variable.$main-background-color;
     box-sizing: border-box;
     display: block;
-    font-family: $main-font-family;
+    font-family: variable.$main-font-family;
     margin: 0 auto;
-    max-width: $max-width;
-    padding-left: $width-limiter-desktop-side-padding;
-    padding-right: $width-limiter-desktop-side-padding;
+    max-width: variable.$max-width;
+    padding-left: variable.$width-limiter-desktop-side-padding;
+    padding-right: variable.$width-limiter-desktop-side-padding;
 }
 
 %ellipsis,
@@ -46,11 +48,11 @@
 */
 
 .main_font_color {
-    color: $main-font-color;
+    color: variable.$main-font-color;
 }
 
 .secondary_font_color {
-    color: $secondary-font-color;
+    color: variable.$secondary-font-color;
 }
 
 %link,
@@ -104,18 +106,18 @@
     display: inline;
 }
 
-@media screen and (width <= $tablet-width) {
+@media screen and (width <= variable.$tablet-width) {
     %width-limit,
     .width_limit {
-        padding-left: $width-limiter-tablet-side-padding;
-        padding-right: $width-limiter-tablet-side-padding;
+        padding-left: variable.$width-limiter-tablet-side-padding;
+        padding-right: variable.$width-limiter-tablet-side-padding;
     }
 }
 
-@media screen and (width <= $phone-width) {
+@media screen and (width <= variable.$phone-width) {
     %width-limit,
     .width_limit {
-        padding-left: $width-limiter-phone-side-padding;
-        padding-right: $width-limiter-phone-side-padding;
+        padding-left: variable.$width-limiter-phone-side-padding;
+        padding-right: variable.$width-limiter-phone-side-padding;
     }
 }

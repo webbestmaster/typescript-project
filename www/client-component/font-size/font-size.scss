@@ -1,4 +1,4 @@
-@import './../../css/variable';
+@use '../../css/variable';
 
 .font_size {
     align-items: flex-start;
@@ -9,9 +9,9 @@
 
 .font_size__button {
     background-color: transparent;
-    border: 1px solid $main-font-color;
+    border: 1px solid variable.$main-font-color;
     box-sizing: border-box;
-    color: $main-font-color;
+    color: variable.$main-font-color;
     cursor: pointer;
     display: block;
     font-size: 1.125em;

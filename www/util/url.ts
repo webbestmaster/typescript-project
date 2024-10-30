@@ -18,18 +18,18 @@ export function paginationQueryToURLSearchParameters<DataType extends Record<str
 }
 
 export type ExtractPathDataType<StringConstType> = StringConstType extends `${string}:${infer KeyNames}/${infer Rest}`
-    ? ExtractPathDataType<Rest> & {[key in KeyNames]: string}
+    ? ExtractPathDataType<Rest> & Record<KeyNames, string>
     : StringConstType extends `${string}:${infer KeyNames}`
-      ? ExtractPathDataType<string> & {[key in KeyNames]: string}
+      ? ExtractPathDataType<string> & Record<KeyNames, string>
       : Record<never, string>;
 
 export type ExtractPathKeysType<StringConstType> = keyof ExtractPathDataType<StringConstType>;
 
 // Just workaround for react-router-dom, should be the same as ExtractPathDataType, but use Record<string, string> in the and
 type RouterPathDataType<StringConstType> = StringConstType extends `${string}:${infer KeyNames}/${infer Rest}`
-    ? ExtractPathDataType<Rest> & {[key in KeyNames]: string}
+    ? ExtractPathDataType<Rest> & Record<KeyNames, string>
     : StringConstType extends `${string}:${infer KeyNames}`
-      ? ExtractPathDataType<string> & {[key in KeyNames]: string}
+      ? ExtractPathDataType<string> & Record<KeyNames, string>
       : Record<string, string>;
 
 export function generatePath<PathType extends string>(

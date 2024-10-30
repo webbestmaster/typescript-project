@@ -43,7 +43,7 @@ $glitch-step-count: 20;
 
 @keyframes glitch-effect-animation {
     @for $i from 0 through $glitch-step-count {
-        #{percentage($i * (math.div(1, $glitch-step-count)))} {
+        #{math.percentage($i * (math.div(1, $glitch-step-count)))} {
             clip: rect(math.random(100) + px, 9999px, math.random(100) + px, 0);
         }
     }
