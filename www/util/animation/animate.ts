@@ -1,6 +1,9 @@
-import {type EasingFunction} from "./easing";
+import type {EasingFunctionType} from "./easing";
 
-type AnimateInputType = Record<"periodMs" | "begin" | "end", number> & {easing: EasingFunction; onFinish: () => void};
+type AnimateInputType = Record<"periodMs" | "begin" | "end", number> & {
+    easing: EasingFunctionType;
+    onFinish: () => void;
+};
 type AnimateCallbackDataType = Record<"progressMs" | "progress" | "deltaValue" | "value", number>;
 type AnimateCallbackType = (data: AnimateCallbackDataType) => void;
 
