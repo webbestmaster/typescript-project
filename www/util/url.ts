@@ -47,7 +47,6 @@ export function getNeedUseThirdPartyServices(): boolean {
         return false;
     }
 
-    // eslint-disable-next-line sonarjs/prefer-single-boolean-return
     if (location.hostname === "localhost") {
         return false;
     }

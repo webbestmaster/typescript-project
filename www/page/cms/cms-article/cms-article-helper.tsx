@@ -133,7 +133,6 @@ export async function uploadFile(file: File, fileSizeLimitBytes: number): Promis
         }
     }
 
-    // eslint-disable-next-line sonarjs/no-unreachable
     return fileInfo;
 }
 

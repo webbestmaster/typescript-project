@@ -631,7 +631,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
                         disabled={isDisableToDelete}
                         icon={<QuestionCircleOutlined style={{color: red.primary}} />}
                         okText="Delete"
-                        // eslint-disable-next-line @typescript-eslint/no-misused-promises, sonarjs/no-misused-promises
+                        // eslint-disable-next-line @typescript-eslint/no-misused-promises
                         onConfirm={async (): Promise<void> => {
                             await handleDeleteArticle(id);
                         }}

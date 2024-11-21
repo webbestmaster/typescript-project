@@ -6,7 +6,6 @@ import jsxA11y from "eslint-plugin-jsx-a11y";
 import reactRecommended from "eslint-plugin-react/configs/recommended.js";
 import reactHooks from "eslint-plugin-react-hooks";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
-import sonarjs from "eslint-plugin-sonarjs";
 import eslintPluginUnicorn from "eslint-plugin-unicorn";
 import typescriptEslint from "typescript-eslint";
 
@@ -27,7 +26,6 @@ export default [
     eslintJs.configs.all,
     ...typescriptEslint.configs.all,
     jest.configs["flat/all"],
-    sonarjs.configs.recommended,
     eslintConfigPrettier,
     {
         files,
@@ -72,23 +70,11 @@ export default [
         settings: {react: {version: "detect"}},
         plugins: {
             unicorn: eslintPluginUnicorn,
-            // Sonarjs: sonarjs,
         },
         rules: {
             // Jest
             ...jest.configs["flat/all"].rules,
             "jest/require-hook": [2, {allowedFunctionCalls: ["innerInitialization"]}],
-
-            "sonarjs/sonar-no-unused-vars": "off",
-            "sonarjs/sonar-prefer-read-only-props": "off",
-            "sonarjs/no-dead-store": "off",
-            "sonarjs/sonar-no-fallthrough": "off",
-            "sonarjs/todo-tag": "off",
-            "sonarjs/no-commented-code": "off",
-            "sonarjs/pseudo-random": "off",
-            "sonarjs/pseudo-randoms": "off",
-            "sonarjs/no-invariant-returns": "off",
-            "sonarjs/function-return-type": "off",
 
             // React
             "react/jsx-uses-react": 2,
@@ -363,7 +349,7 @@ export default [
             "coverage/*",
 
             // Style's d.ts
-            // eslint-disable-next-line arrow-body-style, @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-unsafe-argument, sonarjs/slow-regex
+            // eslint-disable-next-line arrow-body-style, @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-unsafe-argument
             pathToFile => /\S+\.s?css\.d\.ts$/u.test(pathToFile),
 
             // Test

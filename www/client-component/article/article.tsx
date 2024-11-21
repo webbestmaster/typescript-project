@@ -35,6 +35,5 @@ export function Article(): JSX.Element {
         }
     }
 
-    // eslint-disable-next-line sonarjs/no-unreachable
     return <ArticleArticle />;
 }

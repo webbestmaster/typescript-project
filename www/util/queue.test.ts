@@ -111,7 +111,7 @@ describe("queue", () => {
         await expect(async () => {
             await queue.add(async () => {
                 await waitForTime(defaultTimeOut);
-                // eslint-disable-next-line @typescript-eslint/only-throw-error, sonarjs/no-throw-literal
+                // eslint-disable-next-line @typescript-eslint/only-throw-error
                 throw "I am an ERROR!";
             });
         }).rejects.toThrow("[Queue]: Task running with error!");

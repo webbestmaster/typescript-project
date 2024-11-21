@@ -14,7 +14,6 @@ export function ArticleAudioList(): JSX.Element {
     const {content, title} = article;
 
     const splitTextList: Array<string> = content.split(markdownAudioRegExp);
-    // eslint-disable-next-line sonarjs/sonar-prefer-regexp-exec
     const audioList: Array<string> = content.match(markdownAudioRegExp) ?? [];
 
     const trackList: Array<TrackType> = audioList.map<TrackType>((audioTag: string): TrackType => {

@@ -39,7 +39,6 @@ export function getFileMarkdownByFullInfo(
         }
     }
 
-    // eslint-disable-next-line sonarjs/no-unreachable
     return `<a href="${pathToFile}" target="_blank" download="${name}">${name}</a>`;
 }
 
