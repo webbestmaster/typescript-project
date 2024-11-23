@@ -42,15 +42,17 @@ export function CmsArticleEdit(): JSX.Element {
         ArticleType
     >(postArticleUpdate);
 
-    function handleOnFinish(article: ArticleType): undefined {
-        updateArticle(article)
-            .then((savedArticle: ArticleType) => {
-                console.log(savedArticle);
-                return message.success("Article has been updated!");
-            })
-            .catch((requestError: Error) => {
-                return message.error(`ERROR: ${requestError.message}`);
-            });
+    async function handleOnFinish(article: ArticleType): Promise<void> {
+        try {
+            await updateArticle(article);
+            message.success("Article has been updated!");
+        } catch (requestError: unknown) {
+            if (requestError instanceof Error) {
+                message.error(`ERROR: ${requestError.message}`);
+                return;
+            }
+            message.error(`ERROR: ${requestError?.toString()}`);
+        }
     }
 
     const articleToEdit: ArticleType | null = articleByIdResult?.list[0] ?? null;

@@ -44,6 +44,7 @@ import {IsRender} from "../../../layout/is-render/is-render";
 import {MarkdownInputWrapper} from "../../../layout/markdown-input-wrapper/markdown-input-wrapper";
 import {Spinner} from "../../../layout/spinner/spinner";
 import {getArticleListPaginationPick} from "../../../service/article/article-api";
+import {throwError} from "../../../util/error";
 import {useMakeExecutableState} from "../../../util/function";
 import {HotKeyModifierEnum, useHotKey} from "../../../util/hot-key";
 import {
@@ -87,7 +88,7 @@ const {TextArea} = Input;
 interface CmsArticlePropsType {
     readonly article: ArticleType;
     readonly mode: CmsArticleModeEnum;
-    readonly onFinish: (article: ArticleType) => void;
+    readonly onFinish: (article: ArticleType) => Promise<void>;
 }
 
 // eslint-disable-next-line max-statements
@@ -187,7 +188,7 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
         console.log("---> onFinishForm, fileList -", fileList);
 
         if (isValidArticle) {
-            onFinish(values);
+            onFinish(values).catch(throwError);
             return;
         }
 

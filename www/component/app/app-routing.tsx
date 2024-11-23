@@ -1,6 +1,6 @@
 import type {JSX} from "react";
+import {StaticRouter} from "react-router";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import {StaticRouter} from "react-router-dom/server";
 
 import {Page} from "../../client-component/page/page";
 import {ClientArticle} from "../../page/client/client-article/client-article";

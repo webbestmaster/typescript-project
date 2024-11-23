@@ -23,18 +23,18 @@ export function CmsArticleCreate(): JSX.Element {
         ArticleType
     >(postArticleCreate);
 
-    function handleOnFinish(article: ArticleType): undefined {
-        createArticle(article)
-            .then((savedArticle: ArticleType) => {
-                console.log(savedArticle);
-
-                navigate(getArticleLinkToEdit(article.id));
-
-                message.success("Article has been created!");
-            })
-            .catch((requestError: Error) => {
+    async function handleOnFinish(article: ArticleType): Promise<void> {
+        try {
+            await createArticle(article);
+            await navigate(getArticleLinkToEdit(article.id));
+            message.success("Article has been created!");
+        } catch (requestError: unknown) {
+            if (requestError instanceof Error) {
                 message.error(`ERROR: ${requestError.message}`);
-            });
+                return;
+            }
+            message.error(`ERROR: ${requestError?.toString()}`);
+        }
     }
 
     return (
