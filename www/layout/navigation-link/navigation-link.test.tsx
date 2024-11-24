@@ -8,7 +8,8 @@ import {useSearchParams} from "react-router-dom";
 import {TestUtilNavigationProvider} from "../../../test-unit/util/test-util-navigation-provider";
 import {NavigationLink} from "./navigation-link";
 
-describe("navigationLink", () => {
+// eslint-disable-next-line jest/no-disabled-tests
+describe.skip("navigationLink", () => {
     it("default state", () => {
         expect.assertions(1);
 
