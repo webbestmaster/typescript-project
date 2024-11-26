@@ -49,6 +49,7 @@ declare module "webp-converter" {
         | "-short"
         | "-v";
 
+    // eslint-disable-next-line @typescript-eslint/max-params
     declare type CwebpType = (
         sourcePath: string,
         destinationPath: string,

@@ -18,6 +18,7 @@ interface GoogleAnalyticsType {
 declare global {
     interface Window {
         dataLayer?: Array<unknown>;
+        // eslint-disable-next-line @typescript-eslint/max-params
         ga?: (key: string, valueA: string, valueB?: string, valueC?: string) => void;
         gtag?: (key: "config" | "js", value: Date | string) => void;
     }
