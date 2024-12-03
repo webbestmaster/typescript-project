@@ -1,10 +1,10 @@
 /* eslint-disable capitalized-comments */
 
-import puppeteer, {type Browser, type Page, type PuppeteerLaunchOptions} from "puppeteer";
+import puppeteer, {type Browser, type LaunchOptions,type Page} from "puppeteer";
 
 import {defaultPageGoToOption, pageFullUrl, user} from "./const";
 
-const defaultBrowserOptions: PuppeteerLaunchOptions = {
+const defaultBrowserOptions: LaunchOptions = {
     args: [
         // https://github.com/puppeteer/puppeteer/blob/main/docs/api.md - api
         // https://peter.sh/experiments/chromium-command-line-switches/ - all arguments for chrome
@@ -28,9 +28,9 @@ const defaultBrowserOptions: PuppeteerLaunchOptions = {
 };
 
 export async function createBrowser(
-    puppeteerLaunchOptions: Partial<PuppeteerLaunchOptions> = defaultBrowserOptions
+    puppeteerLaunchOptions: Partial<LaunchOptions> = defaultBrowserOptions
 ): Promise<Browser> {
-    const fullBrowserOptions: PuppeteerLaunchOptions = {
+    const fullBrowserOptions: LaunchOptions = {
         ...defaultBrowserOptions,
         ...puppeteerLaunchOptions,
     };
