@@ -46,7 +46,6 @@ import {Spinner} from "../../../layout/spinner/spinner";
 import {getArticleListPaginationPick} from "../../../service/article/article-api";
 import {throwError} from "../../../util/error";
 import {useMakeExecutableState} from "../../../util/function";
-import {HotKeyModifierEnum, useHotKey} from "../../../util/hot-key";
 import {
     arrayToStringByComma,
     humanNormalizeString,
@@ -54,6 +53,7 @@ import {
     stringToArrayByComma,
     textToSlug,
 } from "../../../util/human";
+import {HotKeyModifierEnum, useHotKey} from "../../../util/use-hot-key";
 import {
     CmsArticleModeEnum,
     fileSizeLimit,
@@ -134,7 +134,11 @@ export function CmsArticle(props: CmsArticlePropsType): JSX.Element {
     const [currentArticleState, setCurrentArticleState] = useState<ArticleType>(article);
     const [isFileLoading, setIsFileLoading] = useState<boolean>(false);
 
-    useHotKey([HotKeyModifierEnum.ctrl], "s", form.submit);
+    useHotKey({
+        code: "KeyS",
+        handleHotKey: form.submit,
+        modifierList: [HotKeyModifierEnum.ctrl],
+    });
 
     const {execute: executeArticleListPaginationPick} = useMakeExecutableState<
         Parameters<typeof getArticleListPaginationPick<keyof ArticleForValidationType>>,

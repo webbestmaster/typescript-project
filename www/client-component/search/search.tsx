@@ -7,8 +7,8 @@ import {useLocale} from "../../provider/locale/locale-context";
 import {getArticleClientListPaginationPick} from "../../service/article/article-api";
 import {cls} from "../../util/css";
 import {noop, useMakeExecutableState} from "../../util/function";
-import {useHotKey} from "../../util/hot-key";
 import {makeSafeRegExp} from "../../util/regexp";
+import {useHotKey} from "../../util/use-hot-key";
 import * as searchStyle from "./search.scss";
 import {articlePreviewKeyList} from "./search-const";
 import {SearchResult} from "./search-result/search-result";
@@ -33,7 +33,10 @@ export function Search(props: SearchPropsType): JSX.Element {
     }, []);
     const [searchString, setSearchString] = useState<string>("");
 
-    useHotKey([], "Escape", forceBlur);
+    useHotKey({
+        code: "Escape",
+        handleHotKey: forceBlur,
+    });
 
     useEffect(() => {
         function handleBodyOnClick(evt: MouseEvent): undefined {
@@ -73,7 +76,9 @@ export function Search(props: SearchPropsType): JSX.Element {
         if (searchString.length >= minLetters) {
             // eslint-disable-next-line @typescript-eslint/no-floating-promises
             executeArticleList(
-                {title: makeSafeRegExp(searchString, "gi").toString()},
+                {
+                    title: makeSafeRegExp(searchString, "gi").toString(),
+                },
                 {
                     pageIndex: 0,
                     pageSize: 0,

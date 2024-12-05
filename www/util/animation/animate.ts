@@ -1,11 +1,11 @@
-import type {EasingFunctionType} from "./easing";
+import type {EasingFunctionType} from "./easing-function";
 
 type AnimateInputType = Record<"periodMs" | "begin" | "end", number> & {
     easing: EasingFunctionType;
-    onFinish: () => void;
+    onFinish?: () => void;
 };
-type AnimateCallbackDataType = Record<"progressMs" | "progress" | "deltaValue" | "value", number>;
-type AnimateCallbackType = (data: AnimateCallbackDataType) => void;
+export type AnimateCallbackDataType = Record<"progressMs" | "progress" | "deltaValue" | "value", number>;
+export type AnimateCallbackType = (data: AnimateCallbackDataType) => void;
 
 interface AnimateControllerType {
     play: () => void;
@@ -57,7 +57,7 @@ export function animate(data: AnimateInputType, callback: AnimateCallbackType): 
                 value: end,
             });
 
-            onFinish();
+            onFinish?.();
         }
     }
 
@@ -89,33 +89,33 @@ export function animate(data: AnimateInputType, callback: AnimateCallbackType): 
 }
 
 /**
-Example
-const animation = animate(
-    {
-        begin: 0,
-        easing: Easing.Linear.In,
-        end: 1,
-        onFinish: () => {
-            console.log("done");
-        },
-        periodMs: 3e3,
-    },
-    (data: AnimateCallbackDataType) => {
-        console.log("".padStart(data.value * 200, "_"));
-    }
-);
+ Example
+ const animation = animate(
+ {
+ begin: 0,
+ easing: Easing.Linear.In,
+ end: 1,
+ onFinish: () => {
+ console.log("done");
+ },
+ periodMs: 3e3,
+ },
+ (data: AnimateCallbackDataType) => {
+ console.log("".padStart(data.value * 200, "_"));
+ }
+ );
 
-animation.play();
+ animation.play();
 
-setTimeout(() => {
-    animation.seek(0.1);
-}, 1e3);
+ setTimeout(() => {
+ animation.seek(0.1);
+ }, 1e3);
 
-setTimeout(() => {
-    animation.pause();
-}, 1e3);
+ setTimeout(() => {
+ animation.pause();
+ }, 1e3);
 
-setTimeout(() => {
-    animation.play();
-}, 2e3);
-*/
+ setTimeout(() => {
+ animation.play();
+ }, 2e3);
+ */

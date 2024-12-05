@@ -16,7 +16,7 @@ type EasingFunctionNameType =
     | "back"
     | "bounce";
 
-export const easing: Readonly<Record<EasingFunctionNameType, EasingFunctionGroupType>> = {
+export const easingFunction: Readonly<Record<EasingFunctionNameType, EasingFunctionGroupType>> = {
     linear: {
         in(amount: number): number {
             return amount;
@@ -204,7 +204,7 @@ export const easing: Readonly<Record<EasingFunctionNameType, EasingFunctionGroup
 
     bounce: {
         in(amount: number): number {
-            return 1 - easing.bounce.out(1 - amount);
+            return 1 - easingFunction.bounce.out(1 - amount);
         },
         out(amount: number): number {
             if (amount < 1 / 2.75) {
@@ -221,9 +221,9 @@ export const easing: Readonly<Record<EasingFunctionNameType, EasingFunctionGroup
         },
         inOut(amount: number): number {
             if (amount < 0.5) {
-                return easing.bounce.in(amount * 2) * 0.5;
+                return easingFunction.bounce.in(amount * 2) * 0.5;
             }
-            return easing.bounce.out(amount * 2 - 1) * 0.5 + 0.5;
+            return easingFunction.bounce.out(amount * 2 - 1) * 0.5 + 0.5;
         },
     },
 };
