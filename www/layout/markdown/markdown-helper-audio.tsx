@@ -16,8 +16,11 @@ export interface AudioTagDataType {
 }
 
 export function parseAudioTag(audioTag: string): AudioTagDataType {
+    // eslint-disable-next-line sonarjs/no-dead-store, sonarjs/no-unused-vars
     const [ignoredFullSrcString, srcAsString = ""] = /src="([^"]*?)"/u.exec(audioTag) ?? ["", ""];
+    // eslint-disable-next-line sonarjs/no-dead-store, sonarjs/no-unused-vars
     const [ignoredFullDurationString, durationAsString = ""] = /data-duration="([^"]*?)"/u.exec(audioTag) ?? ["", ""];
+    // eslint-disable-next-line sonarjs/no-dead-store, sonarjs/no-unused-vars
     const [ignoredFullTitleString, titleAsString = ""] = /data-title="([^"]*?)"/u.exec(audioTag) ?? ["", ""];
     const durationAsNumber = Number.parseFloat(durationAsString) || 0;
 

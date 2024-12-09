@@ -14,6 +14,7 @@ export function getHash(data: Array<unknown> | Record<string, unknown> | string)
 }
 
 export function getRandomString(): string {
+    // eslint-disable-next-line sonarjs/pseudo-random
     const fromRandom = Math.random().toString(32).replace("0.", "");
     const fromTime = Date.now().toString(32);
 
@@ -53,10 +54,12 @@ export function sortStringCallback(stringA: string, stringB: string): number {
 }
 
 export function sortStringCallbackReverse(stringA: string, stringB: string): number {
+    // eslint-disable-next-line sonarjs/arguments-order
     return sortStringCallback(stringB, stringA);
 }
 
 export function getTickCross(isEnable: boolean): string {
+    // eslint-disable-next-line sonarjs/no-selector-parameter
     return isEnable ? "✔" : "❌";
 }
 

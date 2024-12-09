@@ -27,6 +27,7 @@ async function getAudioFileBitrate(fullFilePath: string): Promise<BitrateType> {
     );
 }
 
+// eslint-disable-next-line sonarjs/no-invariant-returns
 export async function makeAudioFile(fullFilePath: string): Promise<string> {
     const audioFileName = `${getRandomString()}.mp3`;
     const outputPath = path.join(uploadFolder, audioFileName);

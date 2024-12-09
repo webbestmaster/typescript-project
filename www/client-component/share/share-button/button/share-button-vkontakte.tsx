@@ -6,7 +6,7 @@ import {shareButtonName} from "../share-button-const";
 import {share} from "../share-button-helper";
 import type {ShareButtonPropsType} from "../share-button-type";
 
-export function ShareButtonVkontakte(props: ShareButtonPropsType): JSX.Element {
+export function ShareButtonVkontakte(props: Readonly<ShareButtonPropsType>): JSX.Element {
     const {url, title} = props;
 
     function handleClick(): undefined {

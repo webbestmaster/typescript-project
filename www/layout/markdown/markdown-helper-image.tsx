@@ -11,11 +11,15 @@ export function getImageFromHtml(
     markdownItemCounter: MarkdownItemCounter
 ): JSX.Element {
     const {htmlString, articleTitle} = rawData;
-
+    // eslint-disable-next-line sonarjs/no-dead-store, sonarjs/no-unused-vars
     const [ignoredFullWidthString, widthAsString = ""] = /width="(\d+)"/u.exec(htmlString) ?? ["", "0"];
+    // eslint-disable-next-line sonarjs/no-dead-store, sonarjs/no-unused-vars
     const [ignoredFullHeightString, heightAsString = ""] = /height="(\d+)"/u.exec(htmlString) ?? ["", "0"];
+    // eslint-disable-next-line sonarjs/no-dead-store, sonarjs/no-unused-vars
     const [ignoredFullSrcString, srcAsString = ""] = /src="([^"]*?)"/u.exec(htmlString) ?? ["", ""];
+    // eslint-disable-next-line sonarjs/no-dead-store, sonarjs/no-unused-vars
     const [ignoredFullAltString, altAsString = ""] = /alt="([^"]*?)"/u.exec(htmlString) ?? ["", ""];
+    // eslint-disable-next-line sonarjs/no-dead-store, sonarjs/no-unused-vars
     const [ignoredFullTitleString, titleAsString = ""] = /title="([^"]*?)"/u.exec(htmlString) ?? ["", ""];
 
     return (

@@ -12,17 +12,23 @@ export function getVideoFromHtml(
     markdownItemCounter: MarkdownItemCounter
 ): JSX.Element {
     const {htmlString, articleTitle} = rawData;
+    // eslint-disable-next-line sonarjs/no-dead-store, sonarjs/no-unused-vars
     const [ignoredFullWidthString, widthAsString = ""] = /width="(\d+)"/u.exec(htmlString) ?? ["", "0"];
+    // eslint-disable-next-line sonarjs/no-dead-store, sonarjs/no-unused-vars
     const [ignoredFullHeightString, heightAsString = ""] = /height="(\d+)"/u.exec(htmlString) ?? ["", "0"];
+    // eslint-disable-next-line sonarjs/no-dead-store, sonarjs/no-unused-vars
     const [ignoredFullPosterString, posterAsString = ""] = /poster="([^"]*?)"/u.exec(htmlString) ?? [
         "",
         appIconPngFileName,
     ];
+    // eslint-disable-next-line sonarjs/no-dead-store, sonarjs/no-unused-vars
     const [ignoredFullDurationString, durationAsString = ""] = /data-duration="([^"]*?)"/u.exec(htmlString) ?? [
         "",
         "0",
     ];
+    // eslint-disable-next-line sonarjs/no-dead-store, sonarjs/no-unused-vars
     const [ignoredFullTitleString, titleAsString = ""] = /title="([^"]*?)"/u.exec(htmlString) ?? ["", "THE TITLE"];
+    // eslint-disable-next-line sonarjs/no-dead-store, sonarjs/no-unused-vars
     const [ignoredFullSrcString, srcAsString = ""] = /src="([^"]*?)"/u.exec(htmlString) ?? ["", ""];
 
     return (

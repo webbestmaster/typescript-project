@@ -11,8 +11,8 @@ import {getNeedUseThirdPartyServices} from "../../util/url";
 import {loadGoogleAnalyticsScript} from "./google-analytics-helper";
 
 interface GoogleAnalyticsType {
-    googleAnalyticsId: string;
-    pathname: string;
+    readonly googleAnalyticsId: string;
+    readonly pathname: string;
 }
 
 declare global {
@@ -24,6 +24,7 @@ declare global {
     }
 }
 
+// eslint-disable-next-line sonarjs/no-invariant-returns
 export function useGoogleAnalytics(config: GoogleAnalyticsType): null {
     const {googleAnalyticsId, pathname} = config;
     const pathnameRef = useRef<string>("");

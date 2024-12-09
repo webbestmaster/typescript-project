@@ -6,7 +6,7 @@ import {shareButtonName} from "../share-button-const";
 import {share} from "../share-button-helper";
 import type {ShareButtonPropsType} from "../share-button-type";
 
-export function ShareButtonViber(props: ShareButtonPropsType): JSX.Element {
+export function ShareButtonViber(props: Readonly<ShareButtonPropsType>): JSX.Element {
     const {url, title} = props;
 
     function handleClick(): undefined {

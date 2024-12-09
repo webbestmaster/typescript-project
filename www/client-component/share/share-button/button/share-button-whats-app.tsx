@@ -6,7 +6,7 @@ import {shareButtonName} from "../share-button-const";
 import {share} from "../share-button-helper";
 import type {ShareButtonPropsType} from "../share-button-type";
 
-export function ShareButtonWhatsApp(props: ShareButtonPropsType): JSX.Element {
+export function ShareButtonWhatsApp(props: Readonly<ShareButtonPropsType>): JSX.Element {
     const {title} = props;
 
     function handleClick(): undefined {

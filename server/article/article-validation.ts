@@ -118,6 +118,7 @@ export function makeArticleSchema(): JSONSchemaType<ArticleType> {
     return articleSchema;
 }
 
+// eslint-disable-next-line sonarjs/function-return-type
 export function makeArticleSchemaPick<KeyOfArticle extends keyof ArticleType>(
     fieldList: Array<KeyOfArticle>
 ): JSONSchemaType<Pick<ArticleType, KeyOfArticle>> {

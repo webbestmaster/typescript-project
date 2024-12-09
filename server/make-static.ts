@@ -227,6 +227,7 @@ class StaticSite {
             async (imageUrl: ImageUrlType): Promise<unknown> => {
                 return taskRunner.add(async () => {
                     const imageUrlChunks = imageUrl.url.split("/");
+                    // eslint-disable-next-line sonarjs/no-dead-store, sonarjs/no-unused-vars
                     const [ignoredSpace, ignoredImageApiString, imageSize, imageName] = imageUrlChunks;
 
                     if (!imageName || !imageSize) {

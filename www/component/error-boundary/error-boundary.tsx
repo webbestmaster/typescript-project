@@ -25,6 +25,7 @@ export class ErrorBoundary extends Component<PropsType, StateType> {
         this.setState({hasError: true});
     }
 
+    // eslint-disable-next-line sonarjs/function-return-type
     public override render(): ReactNode {
         const {state, props} = this;
         const {hasError} = state;

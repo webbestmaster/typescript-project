@@ -24,7 +24,7 @@ function getDifferentByValue(itemA: SupportedType, itemB: SupportedType, keyList
         return Number(itemA) - Number(itemB);
     }
 
-    // eslint-disalbe-next-line sonarjs/no-dead-store, sonarjs/sonar-no-unused-vars
+    // eslint-disable-next-line sonarjs/no-dead-store, sonarjs/no-unused-vars
     const [ignoredFirstKey, ...restOfKeys] = keyList;
 
     const firstKey = keyList.at(0);

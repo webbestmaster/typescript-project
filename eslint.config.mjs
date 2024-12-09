@@ -1,4 +1,4 @@
-/* eslint-disable sort-keys, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable sort-keys, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment, sonarjs/todo-tag */
 import eslintJs from "@eslint/js";
 import eslintConfigPrettier from "eslint-config-prettier";
 import jest from "eslint-plugin-jest";
@@ -6,6 +6,7 @@ import jsxA11y from "eslint-plugin-jsx-a11y";
 import reactRecommended from "eslint-plugin-react/configs/recommended.js";
 import reactHooks from "eslint-plugin-react-hooks";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
+import sonarjs from "eslint-plugin-sonarjs";
 import eslintPluginUnicorn from "eslint-plugin-unicorn";
 import typescriptEslint from "typescript-eslint";
 
@@ -26,6 +27,7 @@ export default [
     eslintJs.configs.all,
     ...typescriptEslint.configs.all,
     jest.configs["flat/all"],
+    sonarjs.configs.recommended,
     eslintConfigPrettier,
     {
         files,
@@ -68,9 +70,7 @@ export default [
             },
         },
         settings: {react: {version: "detect"}},
-        plugins: {
-            unicorn: eslintPluginUnicorn,
-        },
+        plugins: {unicorn: eslintPluginUnicorn},
         rules: {
             // Jest
             ...jest.configs["flat/all"].rules,
@@ -349,7 +349,7 @@ export default [
             "coverage/*",
 
             // Style's d.ts
-            // eslint-disable-next-line arrow-body-style, @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-unsafe-argument
+            // eslint-disable-next-line arrow-body-style, @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-unsafe-argument, sonarjs/slow-regex
             pathToFile => /\S+\.s?css\.d\.ts$/u.test(pathToFile),
 
             // Test

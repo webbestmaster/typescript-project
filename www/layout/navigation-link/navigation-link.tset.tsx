@@ -53,6 +53,7 @@ describe.skip("navigationLink", () => {
         expect.assertions(1);
 
         function UseQuery(): JSX.Element {
+            // eslint-disable-next-line sonarjs/no-dead-store, sonarjs/no-unused-vars
             const [ignoredSearch, setSearch] = useSearchParams();
 
             useEffect(() => {
@@ -75,6 +76,7 @@ describe.skip("navigationLink", () => {
         expect.assertions(1);
 
         function UseQuery(): JSX.Element {
+            // eslint-disable-next-line sonarjs/no-dead-store, sonarjs/no-unused-vars
             const [ignoredSearch, setSearch] = useSearchParams();
 
             useEffect(() => {
@@ -97,6 +99,7 @@ describe.skip("navigationLink", () => {
         expect.assertions(1);
 
         function DoNotUseQuery(): JSX.Element {
+            // eslint-disable-next-line sonarjs/no-dead-store, sonarjs/no-unused-vars
             const [ignoredSearch, setSearch] = useSearchParams();
 
             useEffect(() => {
@@ -119,6 +122,7 @@ describe.skip("navigationLink", () => {
         expect.assertions(1);
 
         function UseOwnQueries(): JSX.Element {
+            // eslint-disable-next-line sonarjs/no-dead-store, sonarjs/no-unused-vars
             const [ignoredSearch, setSearch] = useSearchParams();
 
             useEffect(() => {
@@ -141,6 +145,7 @@ describe.skip("navigationLink", () => {
         expect.assertions(1);
 
         function UseOwnQueriesOnly(): JSX.Element {
+            // eslint-disable-next-line sonarjs/no-dead-store, sonarjs/no-unused-vars
             const [ignoredSearch, setSearch] = useSearchParams();
 
             useEffect(() => {

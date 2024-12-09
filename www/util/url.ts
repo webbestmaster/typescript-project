@@ -43,13 +43,5 @@ export function generatePath<PathType extends string>(
 }
 
 export function getNeedUseThirdPartyServices(): boolean {
-    if (typeof location === "undefined") {
-        return false;
-    }
-
-    if (location.hostname === "localhost") {
-        return false;
-    }
-
-    return true;
+    return !(typeof location === "undefined" || location.hostname === "localhost");
 }

@@ -136,6 +136,7 @@ export function getIsFileInArticle(fileName: string, article: ArticleType): bool
     return JSON.stringify(article).toLowerCase().includes(fileName.toLowerCase());
 }
 
+// eslint-disable-next-line sonarjs/function-return-type
 export function tryQueryStringToRegExp(value: string): RegExp | string {
     const partList = value.split("/");
 

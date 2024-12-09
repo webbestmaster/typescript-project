@@ -1,4 +1,4 @@
-/* eslint-disable no-param-reassign, id-length, no-plusplus, sort-keys */
+/* eslint-disable no-param-reassign, id-length, no-plusplus, sort-keys, sonarjs/no-nested-assignment */
 export type EasingFunctionType = (amount: number) => number;
 
 export type EasingFunctionGroupType = Readonly<Record<"in" | "out" | "inOut", EasingFunctionType>>;

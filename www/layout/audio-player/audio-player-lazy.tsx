@@ -35,7 +35,7 @@ const AudioLazy = lazy<ComponentType<AudioPropsType>>(async (): Promise<LazyResu
     return {"default": Audio};
 });
 
-export function AudioAsync(props: AudioPropsType): JSX.Element {
+export function AudioAsync(props: Readonly<AudioPropsType>): JSX.Element {
     return (
         <Suspense fallback={<AudioPlayerLoading />}>
             <AudioLazy {...props} />

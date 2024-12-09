@@ -5,6 +5,7 @@ const domain = "https://mvp0.mememe.io";
 
 export const user = {
     login: "user@mememe.io",
+    // eslint-disable-next-line sonarjs/no-hardcoded-passwords
     password: "password-is-here!",
 };
 
