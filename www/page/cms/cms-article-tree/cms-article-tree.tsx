@@ -107,13 +107,7 @@ export function CmsArticleTree(): JSX.Element {
             <Divider orientation="left">
                 Articles in a tree, total (include non-parents): {savedArticleList.length}
             </Divider>
-            <Tree<DataNode>
-                autoExpandParent
-                defaultExpandAll
-                showLine
-                switcherIcon={<DownOutlined />}
-                treeData={[tree]}
-            />
+            <Tree autoExpandParent defaultExpandAll showLine switcherIcon={<DownOutlined />} treeData={[tree]} />
 
             <Divider orientation="left">Articles without parent, total: {articleWithoutParentList.length}</Divider>
             <Box backgroundColor="#fff">

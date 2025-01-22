@@ -53,6 +53,7 @@ const duplicateCheckerPluginInstance: WebpackPluginInstance = {
         // eslint-disable-next-line no-undefined
         return undefined;
     },
+    // eslint-disable-next-line @typescript-eslint/no-misused-spread
     ...new DuplicatePackageCheckerPlugin(),
 };
 

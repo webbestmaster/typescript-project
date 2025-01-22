@@ -51,6 +51,7 @@ function charToLatin(char: string): string {
 }
 
 function textToLatin(text: string): string {
+    // eslint-disable-next-line @typescript-eslint/no-misused-spread
     return [...text].map(charToLatin).join("");
 }
 
@@ -75,6 +76,7 @@ export function arrayToStringByComma(texts: Array<string> | string): string {
 }
 
 export function textToSlug(test: string): string {
+    // eslint-disable-next-line @typescript-eslint/no-misused-spread
     return [...textToLatin(test.trim().toLowerCase().replace(/\s+/giu, wordSeparator))]
         .filter<string>((char: string): char is string => {
             return char === wordSeparator || /[\da-z]/giu.test(char);

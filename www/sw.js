@@ -44,6 +44,7 @@ const urlStartWithList = ["/static/", "/manifest.json"];
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function isUrlStartWithListContainPathname(pathname /* :: : string */) /* :: : boolean */ {
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     return urlStartWithList.some((url /* :: : string */) /* :: : boolean */ => {
         return pathname.startsWith(url);
     });
