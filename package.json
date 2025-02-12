@@ -57,7 +57,8 @@
   "scripts": {
     "front:start-dev": "cross-env NODE_ENV=development SIDE=front webpack-cli serve --progress",
     "front:start-dev:transpile-only": "cross-env NODE_ENV=development SIDE=front TS_TRANSPILE_ONLY=true webpack-cli serve --progress",
-    "front:build": "cross-env NODE_ENV=production SIDE=front NODE_OPTIONS=--max-old-space-size=512 NODE_OPTIONS=--no-experimental-strip-types webpack --progress",
+    "front:build": "cross-env NODE_ENV=production SIDE=front NODE_OPTIONS=--max-old-space-size=512 webpack --progress",
+    "__front:build": "cross-env NODE_ENV=production SIDE=front NODE_OPTIONS=--max-old-space-size=512 NODE_OPTIONS=--no-experimental-strip-types webpack --progress",
     "back:start": "cross-env NODE_ENV=production node ./dist-server/dist/index.js",
     "back:build": "cross-env NODE_ENV=production SIDE=back IS_SERVER_PROD_BUILD=true NODE_OPTIONS=--max-old-space-size=512 webpack --progress",
     "back:build:watch": "cross-env NODE_ENV=production SIDE=back webpack --progress --watch",
