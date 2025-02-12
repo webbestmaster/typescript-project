@@ -11,7 +11,7 @@ import type {FastifyError} from "@fastify/error";
 import {fastifyMultipart} from "@fastify/multipart";
 import {fastifySecureSession, type SecureSessionPluginOptions} from "@fastify/secure-session";
 import {fastifyStatic, type FastifyStaticOptions} from "@fastify/static";
-import fastifyConstructor, {type FastifyReply, type FastifyRequest} from "fastify";
+import fastifyConstructor, {type FastifyRegisterOptions, type FastifyReply, type FastifyRequest} from "fastify";
 import type {ExecutionResult} from "graphql";
 
 import {appRoute} from "../www/component/app/app-route";
@@ -62,7 +62,7 @@ async function innerInitialization(): Promise<undefined> {
     await fastify.register(fastifyMultipart);
 
     // eslint-disable-next-line id-length
-    const fastifyStaticConfigUploadFileFolder: FastifyStaticOptions = {
+    const fastifyStaticConfigUploadFileFolder: FastifyRegisterOptions<FastifyStaticOptions> = {
         prefix: `/${uploadFileFolder}/`,
         root: uploadFolder,
         setHeaders: (response: {setHeader: (header: string, value: string) => void}) => {
@@ -74,7 +74,7 @@ async function innerInitialization(): Promise<undefined> {
     // First of two fastifyStaticServer plugin
     await fastify.register(fastifyStatic, fastifyStaticConfigUploadFileFolder);
 
-    const fastifyStaticConfigDistribution: FastifyStaticOptions = {
+    const fastifyStaticConfigDistribution: FastifyRegisterOptions<FastifyStaticOptions> = {
         decorateReply: false, // the reply decorator has been added by the first plugin registration
         prefix: "/", // optional: default '/'
         root: path.join(cwd(), "dist"),
