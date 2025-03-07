@@ -8,7 +8,7 @@ import {specialFileNameList} from "../../www/const";
 import {sortStringCallback} from "../../www/util/string";
 import {articleCrud} from "../article/article";
 import type {ArticleType} from "../article/article-type";
-import {getIsFileInArticle} from "../article/article-util";
+import {getIsFileInArticle} from "../article/article-utility";
 import {mainResponseHeader} from "../const";
 import {uploadFileFolder} from "./file-const";
 

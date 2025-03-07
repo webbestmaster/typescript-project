@@ -8,7 +8,7 @@ import {
     getArticlePreviewListByIdListFiltered,
     getIsActiveArticlePreview,
     getSiblingPreviewListById,
-} from "../../article/article-util";
+} from "../../article/article-utility";
 import {replaceSpecialSymbols} from "./ssr-helper/ssr-symbol";
 
 export async function makeClientArticleContextData(slug: string): Promise<[ArticleContextType, string]> {

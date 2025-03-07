@@ -31,7 +31,7 @@ import {
     type ParsedGraphQlRequestQueryType,
     SubDocumentListViewTypeEnum,
 } from "./article-type";
-import {tryQueryStringToRegExp} from "./article-util";
+import {tryQueryStringToRegExp} from "./article-utility";
 
 export interface ArticlePaginationGraphQlType {
     data: {articlePagination: PaginationResultType<Partial<ArticleType>>};

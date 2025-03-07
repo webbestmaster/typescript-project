@@ -5,7 +5,7 @@ interface NavigationProviderPropsType {
     readonly component: () => JSX.Element;
 }
 
-export function TestUtilNavigationProvider(props: NavigationProviderPropsType): JSX.Element {
+export function TestUtilityNavigationProvider(props: NavigationProviderPropsType): JSX.Element {
     const {component: Page} = props;
 
     return (

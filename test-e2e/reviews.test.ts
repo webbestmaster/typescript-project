@@ -4,7 +4,7 @@ import {afterAll, afterEach, beforeAll, beforeEach, describe, expect, it} from "
 import type {Browser, Page} from "puppeteer";
 
 import {defaultPageGoToOption, pageFullUrl} from "./util/const";
-import {createBrowser, makeLogin} from "./util/util";
+import {createBrowser, makeLogin} from "./util/utility";
 
 let browser: Browser | null = null;
 

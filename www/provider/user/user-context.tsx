@@ -2,7 +2,7 @@ import {createContext, type JSX, type ReactNode, useContext, useEffect, useMemo,
 
 import {getAutoAuthLogin} from "../../service/auth/auth-api";
 import type {LoginResponseType} from "../../service/auth/auth-type";
-import {getIsNeedAutologin} from "../../service/auth/auth-util";
+import {getIsNeedAutologin} from "../../service/auth/auth-utility";
 import {throwError} from "../../util/error";
 import {useMakeExecutableState} from "../../util/function";
 import {defaultUserContext} from "./user-context-const";

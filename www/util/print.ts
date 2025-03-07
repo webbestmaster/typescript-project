@@ -1,6 +1,7 @@
-/* global document, location, requestAnimationFrame */
+/* __global document, location, requestAnimationFrame */
 
-export function sendToPrint(htmlCode: string): undefined {
+/*
+Export function sendToPrint(htmlCode: string): undefined {
     const iframe = document.createElement("iframe");
 
     iframe.src = location.origin;
@@ -25,3 +26,4 @@ export function sendToPrint(htmlCode: string): undefined {
 
     document.body.append(iframe);
 }
+*/

@@ -3,7 +3,7 @@
 import {afterAll, afterEach, beforeAll, beforeEach, describe, expect, it} from "@jest/globals";
 import type {Browser, Page} from "puppeteer";
 
-import {createBrowser, makeLogin} from "./util/util";
+import {createBrowser, makeLogin} from "./util/utility";
 
 describe("auth", () => {
     let browser: Browser | null = null;

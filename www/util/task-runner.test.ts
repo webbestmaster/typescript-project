@@ -1,6 +1,6 @@
 import {describe, expect, it} from "@jest/globals";
 
-import {waitForTime} from "../../test-unit/util/test-util-time";
+import {waitForTime} from "../../test-unit/util/test-utility-time";
 import {TaskRunner, type TaskRunnerOnTaskDoneArgumentType} from "./task-runner";
 
 const defaultTimeOut = 50;

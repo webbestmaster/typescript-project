@@ -1,4 +1,4 @@
-/* eslint-disable sort-keys, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment, sonarjs/todo-tag */
+/* eslint-disable sort-keys, @typescript-eslint/no-unsafe-member-access, sonarjs/todo-tag */
 import eslintJs from "@eslint/js";
 import eslintConfigPrettier from "eslint-config-prettier";
 import jest from "eslint-plugin-jest";
@@ -236,7 +236,8 @@ export default [
             "unicorn/filename-case": 2,
             "unicorn/no-array-reduce": 0,
             "unicorn/no-null": 0,
-            "unicorn/no-fn-reference-in-iterator": 2,
+            "sonarjs/no-commented-code": 0,
+            // "unicorn/no-fn-reference-in-iterator": 2,
             "unicorn/prevent-abbreviations": [
                 2,
                 {

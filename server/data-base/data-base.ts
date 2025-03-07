@@ -6,7 +6,7 @@ import {Petsdb, type PetsdbItemType, type PetsdbQueryType, type PetsdbReadPageCo
 import {makeDataBaseBackUp} from "./data-base-back-up";
 import {dataBaseFolderPath} from "./data-base-const";
 import type {CrudConfigOnChangeArgumentType, CrudConfigType, CrudType, PaginationResultType} from "./data-base-type";
-import {getPartialData, makeBackUpFolder} from "./data-base-util";
+import {getPartialData, makeBackUpFolder} from "./data-base-utility";
 
 const ajv = new Ajv();
 

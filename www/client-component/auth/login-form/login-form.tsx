@@ -4,7 +4,7 @@ import {apiUrl} from "../../../../server/const";
 import {useUserContext} from "../../../provider/user/user-context";
 import {loginUser, logoutUser, registerUser} from "../../../service/auth/auth-api";
 import type {LoginResponseType} from "../../../service/auth/auth-type";
-import {handleLogout, handleSuccessLogin} from "../../../service/auth/auth-util";
+import {handleLogout, handleSuccessLogin} from "../../../service/auth/auth-utility";
 import {throwError} from "../../../util/error";
 import {useMakeExecutableState} from "../../../util/function";
 

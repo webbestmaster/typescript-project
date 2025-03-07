@@ -12,7 +12,7 @@ import type {PaginationResultType} from "../data-base/data-base-type";
 import {makeClientArticleContextData} from "../ssr/api/srr-article";
 import {articleCrud} from "./article";
 import type {ArticleType, ParsedRequestQueryType} from "./article-type";
-import {tryQueryStringToRegExp} from "./article-util";
+import {tryQueryStringToRegExp} from "./article-utility";
 import {validateArticle} from "./article-validation";
 
 export async function getArticleListPagination(
