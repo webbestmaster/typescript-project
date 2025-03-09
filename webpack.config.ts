@@ -1,1 +1,1 @@
-export {webpackRunningConfig as default} from "./webpack/running-config.ts";
+export {webpackRunningConfig as default} from "./webpack/running-config";

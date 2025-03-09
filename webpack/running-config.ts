@@ -6,15 +6,15 @@ import {cwd} from "node:process";
 import type {Configuration} from "webpack";
 import nodeExternals from "webpack-node-externals";
 
-import {devServer} from "./setting/dev-server.ts";
-import {experiments} from "./setting/experiments.ts";
-import {rules} from "./setting/module/rules.ts";
+import {devServer} from "./setting/dev-server";
+import {experiments} from "./setting/experiments";
+import {rules} from "./setting/module/rules";
 // import {BundleAnalyzerPlugin} from "webpack-bundle-analyzer";
-import {optimization} from "./setting/optimization.ts";
-import {plugins} from "./setting/plugins.ts";
-import {alias} from "./setting/resolve/alias.ts";
-import {extensions} from "./setting/resolve/extensions.ts";
-import {watchOptions} from "./setting/watch-options.ts";
+import {optimization} from "./setting/optimization";
+import {plugins} from "./setting/plugins";
+import {alias} from "./setting/resolve/alias";
+import {extensions} from "./setting/resolve/extensions";
+import {watchOptions} from "./setting/watch-options";
 
 const externals = [nodeExternals()]; // in order to ignore all modules in node_modules folder
 const externalsPresets = {node: true}; // in order to ignore built-in modules like path, fs, etc.
@@ -29,7 +29,7 @@ import {
     pathToDistribution,
     pathToStaticFileFolder,
     // isServerProdBuild,
-} from "./config.ts";
+} from "./config";
 
 const configFront: Configuration = {
     devtool: "source-map", // isDevelopment ? 'source-map' : false,

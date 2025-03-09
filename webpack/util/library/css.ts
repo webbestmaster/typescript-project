@@ -4,7 +4,7 @@ import fileSystem from "node:fs/promises";
 import path from "node:path";
 import {cwd, env} from "node:process";
 
-import {pathToDistribution} from "../../config.ts";
+import {pathToDistribution} from "../../config";
 
 const packageName = String(env.npm_package_name);
 

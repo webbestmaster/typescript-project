@@ -1,4 +1,4 @@
-/* __global BUILD_DATE_H, IS_PRODUCTION */
+/* global BUILD_DATE_H, IS_PRODUCTION */
 
 export const selector = {
     appWrapper: ".js-app-wrapper",
@@ -42,8 +42,8 @@ function innerInitialization(): undefined {
 
     log(hiString);
 
-    // Log("Build date:", BUILD_DATE_H);
-    // Log("Is production:", IS_PRODUCTION);
+    log("Build date:", BUILD_DATE_H);
+    log("Is production:", IS_PRODUCTION);
 
     log("===================\n");
 }

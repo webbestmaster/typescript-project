@@ -1,7 +1,7 @@
 import path from "node:path";
 import {cwd} from "node:process";
 
-import {isFront, isProduction} from "../../config.ts";
+import {isFront, isProduction} from "../../config";
 
 const duplicateList = ["rc-resize-observer", "isarray", "@segment/isodate", "component-type", "uuid", "ms", "debug"];
 
