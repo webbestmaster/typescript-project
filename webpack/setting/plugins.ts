@@ -5,31 +5,33 @@ import DuplicatePackageCheckerPlugin from "duplicate-package-checker-webpack-plu
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import ScriptExtHtmlWebpackPlugin from "script-ext-html-webpack-plugin";
-import {
-    type Compiler,
-    type Configuration,
-    ContextReplacementPlugin,
-    DefinePlugin,
-    type WebpackPluginInstance,
+import type {
+    Compiler,
+    Configuration,
+    // ContextReplacementPlugin,
+    // DefinePlugin,
+    WebpackPluginInstance,
 } from "webpack";
 
-import {isBuildLibrary, isDevelopment, isProduction} from "../config";
+import {isBuildLibrary, isDevelopment, isProduction} from "../config.ts";
 
 const filePathPrefix = isProduction ? "./../" : "./";
 
-const date = new Date();
+// Const date = new Date();
 
-const definePluginParameters: Record<string, string> = {
+/*
+Const definePluginParameters: Record<string, string> = {
     // BUILD_DATE: JSON.stringify(date.getTime()),
 
     BUILD_DATE_H: JSON.stringify(date.toISOString()),
     // NODE_ENV: JSON.stringify(NODE_ENV),
     IS_PRODUCTION: JSON.stringify(isProduction),
-    /*
+    /!*
      * PROJECT_ID: JSON.stringify('my-best-project')
      * IS_DEVELOPMENT: JSON.stringify(IS_DEVELOPMENT)
-     */
+     *!/
 };
+*/
 
 type StaticFilesDataType = Record<"from" | "to", string>;
 
@@ -61,7 +63,7 @@ const pluginList: Configuration["plugins"] = [
     new CircularDependencyPlugin({exclude: /node_modules/u}),
     duplicateCheckerPluginInstance,
     new CleanWebpackPlugin(),
-    new DefinePlugin(definePluginParameters),
+    // New DefinePlugin(definePluginParameters),
     new ScriptExtHtmlWebpackPlugin({defaultAttribute: "defer"}),
     new MiniCssExtractPlugin({
         // Options similar to the same options in webpackOptions.output, both options are optional
@@ -83,21 +85,21 @@ const pluginList: Configuration["plugins"] = [
     new CopyWebpackPlugin({
         patterns: staticFilesSiteList,
     }),
-    new ContextReplacementPlugin(/moment[/\\]locale$/u, /en|ru/u),
+    // New ContextReplacementPlugin(/moment[/\\]locale$/u, /en|ru/u),
 ];
 
 const pluginBuildLibraryList: Configuration["plugins"] = [
     new CircularDependencyPlugin({exclude: /node_modules/u}),
     duplicateCheckerPluginInstance,
     new CleanWebpackPlugin(),
-    new DefinePlugin(definePluginParameters),
+    // New DefinePlugin(definePluginParameters),
     // ignored new ScriptExtHtmlWebpackPlugin({defaultAttribute: 'defer'}),
     new MiniCssExtractPlugin({
         // Options similar to the same options in webpackOptions.output, both options are optional
         chunkFilename: isDevelopment ? "[id].css" : "[id].[fullhash:6].css",
         filename: isDevelopment ? "[name].css" : "style.css",
     }),
-    new ContextReplacementPlugin(/moment[/\\]locale$/u, /en|ru/u),
+    // New ContextReplacementPlugin(/moment[/\\]locale$/u, /en|ru/u),
 ];
 
 export const plugins = isBuildLibrary ? pluginBuildLibraryList : pluginList;

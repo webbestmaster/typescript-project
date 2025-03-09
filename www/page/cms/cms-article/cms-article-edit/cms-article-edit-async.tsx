@@ -7,7 +7,7 @@ import type {LazyResultType} from "../../../../util/type";
 const AsyncLazy = lazy<ComponentType<unknown>>(async (): Promise<LazyResultType<unknown>> => {
     const {CmsArticleEdit} = await import(
         /* webpackChunkName: 'page-cms-article-edit' */
-        "./cms-article-edit"
+        "./cms-article-edit.tsx"
     );
 
     return {"default": CmsArticleEdit};

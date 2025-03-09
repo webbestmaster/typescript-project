@@ -5,7 +5,7 @@ import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 import TerserPlugin from "terser-webpack-plugin";
 import type {Configuration} from "webpack";
 
-import {isDevelopment} from "../config";
+import {isDevelopment} from "../config.ts";
 
 const optimizationDevelopment: Configuration["optimization"] = {
     removeAvailableModules: false,

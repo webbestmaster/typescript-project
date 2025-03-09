@@ -1,7 +1,7 @@
 /* eslint-disable capitalized-comments, sonarjs/todo-tag */
 import type {WebpackOptionsNormalized} from "webpack";
 
-import {webpackDevServerPort} from "../config";
+import {webpackDevServerPort} from "../config.ts";
 
 const serverPort = 3011;
 // Const host = "localhost";
