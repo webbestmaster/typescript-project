@@ -1,4 +1,4 @@
-/* eslint-disable capitalized-comments, sonarjs/todo-tag */
+/* eslint-disable sonarjs/todo-tag */
 import type {WebpackOptionsNormalized} from "webpack";
 
 import {webpackDevServerPort} from "../config";

@@ -1,4 +1,4 @@
-/* eslint-disable capitalized-comments */
+ 
 
 /* global fetch, Response, Buffer */
 import {createWriteStream} from "node:fs";

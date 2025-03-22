@@ -1,4 +1,4 @@
-/* eslint-disable capitalized-comments */
+ 
 
 import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 // ignored const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');

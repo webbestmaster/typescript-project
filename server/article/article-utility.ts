@@ -1,4 +1,4 @@
-/* eslint-disable capitalized-comments */
+ 
 
 import {articleCrud} from "./article";
 import type {ArticlePreviewType, ArticleType} from "./article-type";

@@ -1,4 +1,4 @@
-/* eslint-disable capitalized-comments */
+ 
 
 import puppeteer, {type Browser, type LaunchOptions, type Page} from "puppeteer";
 

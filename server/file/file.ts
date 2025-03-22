@@ -1,4 +1,4 @@
-/* eslint-disable capitalized-comments */
+ 
 
 import {
     constants as fileSystemConstants,
