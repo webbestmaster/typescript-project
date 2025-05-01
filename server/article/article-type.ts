@@ -1,5 +1,3 @@
- 
-
 import type {PetsdbQueryType, PetsdbReadPageConfigType} from "petsdb";
 
 export enum ArticleTypeEnum {

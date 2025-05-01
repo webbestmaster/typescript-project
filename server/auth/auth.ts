@@ -1,5 +1,3 @@
- 
-
 import {makeCrud} from "../data-base/data-base";
 import type {CrudConfigOnChangeArgumentType} from "../data-base/data-base-type";
 import type {AuthUserType} from "./auth-type";

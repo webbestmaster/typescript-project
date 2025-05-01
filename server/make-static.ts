@@ -1,5 +1,3 @@
- 
-
 /* global fetch, Response, Buffer */
 import {createWriteStream} from "node:fs";
 import fileSystem from "node:fs/promises";

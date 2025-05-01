@@ -1,5 +1,3 @@
- 
-
 import {launch} from "chrome-launcher";
 
 enum CategoryNameEnum {

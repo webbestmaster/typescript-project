@@ -1,5 +1,3 @@
- 
-
 import Ajv, {type JSONSchemaType} from "ajv";
 import {Petsdb, type PetsdbItemType, type PetsdbQueryType, type PetsdbReadPageConfigType} from "petsdb";
 

@@ -1,5 +1,3 @@
- 
-
 // import {PromiseResolveType} from '../../www/util/promise';
 // import {extractFromUnknown} from '../../www/util/type';
 import {makeDirectory} from "../file/directory";

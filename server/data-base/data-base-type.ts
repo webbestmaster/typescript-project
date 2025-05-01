@@ -1,5 +1,3 @@
- 
-
 import type {PetsdbItemType, PetsdbQueryType, PetsdbReadPageConfigType} from "petsdb";
 
 export interface CrudConfigOnChangeArgumentType {

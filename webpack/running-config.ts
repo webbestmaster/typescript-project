@@ -1,5 +1,3 @@
- 
-
 import path from "node:path";
 import {cwd} from "node:process";
 

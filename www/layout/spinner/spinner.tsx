@@ -1,5 +1,3 @@
- 
-
 import type {JSX} from "react";
 
 import {cls} from "../../util/css";

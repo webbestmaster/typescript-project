@@ -1,5 +1,3 @@
- 
-
 import puppeteer, {type Browser, type LaunchOptions, type Page} from "puppeteer";
 
 import {defaultPageGoToOption, pageFullUrl, user} from "./const";
