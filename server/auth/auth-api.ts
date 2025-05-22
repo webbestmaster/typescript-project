@@ -15,7 +15,7 @@ export async function postAuthLogin(
     const {body, session} = request;
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const parsedData: Record<string, unknown> = JSON.parse(String(body ?? "{}"));
+    const parsedData: Record<string, unknown> = JSON.parse(body ?? "{}");
 
     const {login, password} = parsedData;
 
@@ -56,7 +56,7 @@ export async function getAutoAuthLogin(request: FastifyRequest, reply: FastifyRe
         user: {id: "", login: "", role: UserRoleEnum.user},
     };
     const {session} = request;
-    const userId = String(session.get(CookieFieldEnum.userId) ?? "");
+    const userId: string = session.get(CookieFieldEnum.userId) ?? "";
 
     reply.header(...mainResponseHeader);
 
@@ -117,7 +117,7 @@ export async function postAuthRegister(
     const {body, session} = request;
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const parsedData: Record<string, unknown> = JSON.parse(String(body ?? "{}"));
+    const parsedData: Record<string, unknown> = JSON.parse(body ?? "{}");
 
     const {login, password, email} = parsedData;
 

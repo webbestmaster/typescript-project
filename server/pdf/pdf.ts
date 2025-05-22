@@ -32,9 +32,9 @@ async function htmlToPdf(html: string): Promise<Uint8Array> {
 export async function getPdf(request: FastifyRequest<{Body?: string}>): Promise<Uint8Array> {
     const {body} = request;
 
-    const rawHtml = String(body ?? "");
+    const rawHtml: string = body ?? "";
 
-    const html = decodeURIComponent(rawHtml);
+    const html: string = decodeURIComponent(rawHtml);
 
     return htmlToPdf(html);
 }

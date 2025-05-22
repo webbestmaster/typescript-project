@@ -108,7 +108,7 @@ export async function postAdminArticleCreate(
 ): Promise<ArticleType | Record<"message", string>> {
     const {body} = request;
 
-    const parsedCreateData: ArticleType = JSON.parse(String(body ?? "{}"));
+    const parsedCreateData: ArticleType = JSON.parse(body ?? "{}");
     const [isValidArticle, modelJsonSchemaValidate] = validateArticle(parsedCreateData);
 
     reply.header(...mainResponseHeader);
@@ -170,7 +170,7 @@ export async function postAdminArticleUpdate(
 ): Promise<ArticleType | Record<"message", string>> {
     const {body} = request;
 
-    const parsedUpdateData: ArticleType = JSON.parse(String(body ?? "{}"));
+    const parsedUpdateData: ArticleType = JSON.parse(body ?? "{}");
     const [isValidArticle, modelJsonSchemaValidate] = validateArticle(parsedUpdateData);
 
     reply.header(...mainResponseHeader);

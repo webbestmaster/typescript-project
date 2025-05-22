@@ -71,9 +71,9 @@ export function Popup(props: PopupPropsType): JSX.Element | null {
     containerProps.style = {...containerProps.style, ...mainStyle};
 
     const infoState = [
-        `Popup - isOpen: ${String(isOpen)}`,
-        `Popup - isSelfOpen: ${String(isSelfOpen)}`,
-        `Popup - visibleState: ${String(visibleState)}`,
+        `Popup - isOpen: ${isOpen}`,
+        `Popup - isSelfOpen: ${isSelfOpen}`,
+        `Popup - visibleState: ${visibleState}`,
     ].join("\n");
 
     console.info(`%c${infoState}`, "font-size: 24px");

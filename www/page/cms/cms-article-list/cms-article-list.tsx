@@ -50,7 +50,7 @@ export function CmsArticleList(): JSX.Element {
             (
                 currentPagination: PaginationQueryType<ArticleForTableListType>
             ): PaginationQueryType<ArticleForTableListType> => {
-                const rawDirection = String({...currentPagination.pageConfig.sort}[String(searchedColumn)]);
+                const rawDirection = String({...currentPagination.pageConfig.sort}[searchedColumn]);
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
                 const sortDirection = rawDirection === SortDirectionEnum.descend ? -1 : 1;
                 const {pageSize} = currentPagination.pageConfig;
@@ -59,7 +59,7 @@ export function CmsArticleList(): JSX.Element {
                     pageConfig: {
                         pageIndex: 0,
                         pageSize,
-                        sort: {[String(searchedColumn)]: sortDirection},
+                        sort: {[searchedColumn]: sortDirection},
                     },
                     query: {[searchedColumn]: makeSafeRegExp(searchText, "i").toString()},
                 };

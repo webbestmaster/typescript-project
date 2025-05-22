@@ -19,7 +19,7 @@ export function developmentGetTestNodeData(data: Record<string, string> | string
     return typeof data === "string" ? data : JSON.stringify(data);
 }
 
-const isProduction = Boolean(typeof IS_PRODUCTION === "boolean" && IS_PRODUCTION);
+const isProduction: boolean = typeof IS_PRODUCTION === "boolean" && IS_PRODUCTION;
 
 export const getTestNodeId: GetTestNodeIdType = isProduction ? productionGetTestNodeId : developmentGetTestNodeId;
 export const getTestNodeData: GetTestNodeDataType = isProduction
