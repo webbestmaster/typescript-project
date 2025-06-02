@@ -16,9 +16,6 @@ const config: StorybookConfig = {
     core: {
         builder: "@storybook/builder-webpack5",
     },
-    docs: {
-        autodocs: "tag",
-    },
     framework: {
         name: "@storybook/react-webpack5",
         options: {},

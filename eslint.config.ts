@@ -1,4 +1,4 @@
-/* eslint-disable sort-keys, @typescript-eslint/no-unsafe-member-access, sonarjs/todo-tag */
+/* eslint-disable sort-keys, sonarjs/todo-tag */
 import eslintJs from "@eslint/js";
 import eslintConfigPrettier from "eslint-config-prettier";
 import jest from "eslint-plugin-jest";
@@ -9,17 +9,6 @@ import simpleImportSort from "eslint-plugin-simple-import-sort";
 import sonarjs from "eslint-plugin-sonarjs";
 import eslintPluginUnicorn from "eslint-plugin-unicorn";
 import typescriptEslint from "typescript-eslint";
-
-/**
- * List of plugins to add
- * - react - from eslint-plugin-react
- * - react-hooks - from eslint-plugin-react-hooks@5.1.0-rc-e684ca66ab-20240619
- * - babel - maybe not needed
- * - JSX-a11y - from eslint-plugin-jsx-a11y
- * - filenames - not needed, because we have `unicorn/filename-case`
- * - import - from eslint-plugin-simple-import-sort
- * - optimize-regex
- */
 
 const files = ["**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}"];
 
@@ -119,49 +108,6 @@ export default [
             "react-hooks/rules-of-hooks": 2,
             "react-hooks/exhaustive-deps": 2,
 
-            // Babel, need to uncomment
-            // "babel/new-cap": 2,
-            // "babel/camelcase": 2,
-            // "babel/no-invalid-this": 2,
-            // "babel/object-curly-spacing": 2,
-            // "babel/quotes": 0,
-            // "babel/semi": 2,
-            // "babel/no-unused-expressions": 2,
-            // "babel/valid-typeof": 2,
-
-            // Filenames, need to uncomment
-            // "filenames/no-index": 2,
-            // "filenames/match-regex": [
-            //     2,
-            //     "^[a-z\\.\\-\\d]+$",
-            //     True
-            // ],
-            // "filenames/match-exported": 0,
-
-            // Import, need to uncomment
-            // "import/no-named-as-default-member": 0,
-            // "import/default": 2,
-            // "import/no-unused-modules": 2,
-            // "import/no-useless-path-segments": 2,
-            // "import/no-default-export": 2,
-            // "import/order": [
-            //     2,
-            //     {
-            //         "newlines-between": "always-and-inside-groups",
-            //         "groups": [
-            //             "builtin",
-            //             "internal",
-            //             "external",
-            //             "parent",
-            //             "sibling",
-            //             "index"
-            //         ]
-            //     }
-            // ],
-
-            // Optimize-regex, need to uncomment
-            // "optimize-regex/optimize-regex": 2,
-
             // Typescript
             "@typescript-eslint/array-type": [2, {"default": "generic"}],
             "@typescript-eslint/ban-ts-comment": 1,
@@ -213,20 +159,20 @@ export default [
             "@typescript-eslint/quotes": 0,
             "@typescript-eslint/use-unknown-in-catch-callback-variable": 0,
             "@typescript-eslint/require-array-sort-compare": [2, {ignoreStringArrays: false}],
-            // TODO: enable this
-            "@typescript-eslint/prefer-readonly-parameter-types": 0,
-            // "@typescript-eslint/prefer-readonly-parameter-types": [
-            //    2,
-            //    {
-            //        "allow": [
-            //            {
-            //                "from": "package",
-            //                "name": "Compiler",
-            //                "package": "webpack"
-            //            }
-            //        ]
-            //    }
-            // ],
+            "@typescript-eslint/prefer-readonly-parameter-types": [
+                0,
+                /*
+               {
+                   "allow": [
+                       {
+                           "from": "package",
+                           "name": "ReactNode",
+                           "package": "react"
+                       }
+                   ]
+               }
+*/
+            ],
 
             // Unicorn
             "unicorn/prefer-string-replace-all": 0,
@@ -350,8 +296,8 @@ export default [
             "coverage/*",
 
             // Style's d.ts
-            // eslint-disable-next-line arrow-body-style, @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-unsafe-argument, sonarjs/slow-regex
-            pathToFile => /\S+\.s?css\.d\.ts$/u.test(pathToFile),
+            // eslint-disable-next-line arrow-body-style, sonarjs/slow-regex
+            (pathToFile: string): boolean => /\S+\.s?css\.d\.ts$/u.test(pathToFile),
 
             // Test
             "test-backstop/*",

@@ -56,7 +56,7 @@ export async function getAutoAuthLogin(request: FastifyRequest, reply: FastifyRe
         user: {id: "", login: "", role: UserRoleEnum.user},
     };
     const {session} = request;
-    const userId: string = session.get(CookieFieldEnum.userId) ?? "";
+    const userId = session.get(CookieFieldEnum.userId) ?? "";
 
     reply.header(...mainResponseHeader);
 

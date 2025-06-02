@@ -65,9 +65,10 @@ declare module "webp-converter" {
     export default webpConverter;
 }
 
-/*
-declare module '*.scss';
-declare module '*.png';
-declare module '*.jpg';
-declare module '*.mp3';
-*/
+declare module "eslint-plugin-react/configs/recommended.js" {
+    declare type ConfigType = Record<string, string>;
+
+    const config: ConfigType;
+
+    export default config;
+}
