@@ -25,6 +25,7 @@ describe("auth", () => {
         await browser?.close();
     });
 
+    // eslint-disable-next-line jest/prefer-ending-with-an-expect
     it("login", async () => {
         expect.assertions(0);
 

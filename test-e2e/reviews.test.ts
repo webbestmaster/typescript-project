@@ -28,6 +28,7 @@ describe("reviews", () => {
         await browser?.close();
     });
 
+    // eslint-disable-next-line jest/prefer-ending-with-an-expect
     it("review list", async () => {
         expect.assertions(0);
 

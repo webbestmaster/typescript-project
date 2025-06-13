@@ -1,3 +1,5 @@
+/* eslint-disable jest/prefer-ending-with-an-expect */
+
 /* global HTMLElement */
 
 import {describe, expect, it} from "@jest/globals";
