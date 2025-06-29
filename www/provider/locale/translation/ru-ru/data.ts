@@ -27,6 +27,7 @@ export const ruRu: LocaleDictionaryType = {
     UI__UPDATE_INFO: "Обновить информацию",
     UI__SAVE_INFORMATION: "Сохранить информацию",
     UI__COMPLETE_CREATION: "Завершить создание",
+    // eslint-disable-next-line sonarjs/no-hardcoded-passwords
     UI__CHANGE_PASSWORD: "Сменить пароль",
     UI__SAVE: "Сохранить",
     UI__SAVE_SETTINGS: "Сохранить настройки",

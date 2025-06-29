@@ -25,6 +25,7 @@ export const enUs = {
     UI__UPDATE_INFO: "Update info",
     UI__SAVE_INFORMATION: "Save information",
     UI__COMPLETE_CREATION: "Complete creation",
+    // eslint-disable-next-line sonarjs/no-hardcoded-passwords
     UI__CHANGE_PASSWORD: "Change password",
     UI__SAVE: "Save",
     UI__SAVE_SETTINGS: "Save settings",
