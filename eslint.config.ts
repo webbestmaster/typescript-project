@@ -1,4 +1,6 @@
 /* eslint-disable sort-keys, sonarjs/todo-tag */
+import {cwd as getCwd} from "node:process";
+
 import eslintJs from "@eslint/js";
 import eslintConfigPrettier from "eslint-config-prettier";
 import jest from "eslint-plugin-jest";
@@ -55,6 +57,7 @@ export default [
                 ecmaFeatures: {jsx: true},
                 ecmaVersion: 2020,
                 project: ["./tsconfig.eslint.json"],
+                tsconfigRootDir: getCwd(),
                 sourceType: "module",
             },
         },

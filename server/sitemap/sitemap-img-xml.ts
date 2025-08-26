@@ -28,7 +28,7 @@ export function getImageListFromArticle(article: ArticleType): ArticleXmlImgData
         });
     }
 
-    // eslint-disable-next-line sonarjs/no-ignored-return
+     
     content.replace(findImageRegExpGlobal, (matchedString: string, alt: string, src: string): string => {
         imageList.push({alt, src: httpsSiteDomain + src});
 
