@@ -28,7 +28,6 @@ export function getImageListFromArticle(article: ArticleType): ArticleXmlImgData
         });
     }
 
-     
     content.replace(findImageRegExpGlobal, (matchedString: string, alt: string, src: string): string => {
         imageList.push({alt, src: httpsSiteDomain + src});
 

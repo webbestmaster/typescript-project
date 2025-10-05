@@ -2,6 +2,7 @@
 import {cwd as getCwd} from "node:process";
 
 import eslintJs from "@eslint/js";
+import {defineConfig, globalIgnores} from "eslint/config";
 import eslintConfigPrettier from "eslint-config-prettier";
 import jest from "eslint-plugin-jest";
 import jsxA11y from "eslint-plugin-jsx-a11y";
@@ -14,7 +15,7 @@ import typescriptEslint from "typescript-eslint";
 
 const files = ["**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}"];
 
-export default [
+export default defineConfig([
     eslintJs.configs.all,
     ...typescriptEslint.configs.all,
     jest.configs["flat/all"],
@@ -30,10 +31,10 @@ export default [
     },
     {
         files,
-        ...reactHooks.configs.recommended,
         plugins: {
             "react-hooks": reactHooks,
         },
+        "extends": ["react-hooks/recommended"],
     },
     {
         files,
@@ -284,38 +285,39 @@ export default [
             ],
         },
     },
-    {
-        ignores: [
-            // Dist
-            "dist/*",
-            "dist-server/*",
+    globalIgnores([
+        // Dist
+        "dist/*",
+        "dist-server/*",
 
-            // NPM
-            "node_modules/*",
+        // NPM
+        "node_modules/*",
 
-            // Report
-            "coverage-ts/*",
-            "tsc-check/*",
-            "coverage/*",
+        // Report
+        "coverage-ts/*",
+        "tsc-check/*",
+        "coverage/*",
 
-            // Style's d.ts
-            // eslint-disable-next-line arrow-body-style, sonarjs/slow-regex
-            (pathToFile: string): boolean => /\S+\.s?css\.d\.ts$/u.test(pathToFile),
+        // Test
+        "test-backstop/*",
 
-            // Test
-            "test-backstop/*",
+        // Static site
+        "static-site/*",
 
-            // Static site
-            "static-site/*",
+        // Storybook
+        "storybook-static/*",
 
-            // Storybook
-            "storybook-static/*",
+        // WASM
+        "wasm/*",
 
-            // WASM
-            "wasm/*",
+        // Res
+        "_res/*",
 
-            // Res
-            "_res/*",
-        ],
-    },
-];
+        // css
+        "**/*.scss.d.ts",
+        "**/*.css.d.ts",
+
+        // "next.config.mjs",
+        // "app/image/**",
+    ]),
+]);
