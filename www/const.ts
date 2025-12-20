@@ -1,6 +1,6 @@
 /* global BUILD_DATE_H, IS_PRODUCTION */
 
-import wasmInit, {add, start} from "my-web-asm";
+import wasmInit, {add, start} from "../my-web-asm/my-web-asm";
 
 (async () => {
     await wasmInit();
@@ -9,6 +9,9 @@ import wasmInit, {add, start} from "my-web-asm";
     console.log(add(3, 2));
 
     start();
+
+    console.log(11);
+
 
     console.log("0000");
 })();
