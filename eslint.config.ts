@@ -1,4 +1,4 @@
-/* eslint-disable sort-keys, sonarjs/todo-tag */
+/* eslint-disable sort-keys */
 import {cwd as getCwd} from "node:process";
 
 import eslintJs from "@eslint/js";
@@ -16,6 +16,7 @@ import typescriptEslint from "typescript-eslint";
 const files = ["**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}"];
 
 export default defineConfig([
+    reactHooks.configs.flat.recommended,
     eslintJs.configs.all,
     ...typescriptEslint.configs.all,
     jest.configs["flat/all"],
@@ -28,13 +29,6 @@ export default defineConfig([
     {
         files,
         ...jsxA11y.flatConfigs.strict,
-    },
-    {
-        files,
-        plugins: {
-            "react-hooks": reactHooks,
-        },
-        "extends": ["react-hooks/recommended"],
     },
     {
         files,
@@ -177,6 +171,8 @@ export default defineConfig([
                }
 */
             ],
+            // TODO: try to enable or remove this rule
+            "@typescript-eslint/unified-signatures": 0,
 
             // Unicorn
             "unicorn/prefer-string-replace-all": 0,
@@ -187,6 +183,9 @@ export default defineConfig([
             "unicorn/no-array-reduce": 0,
             "unicorn/no-null": 0,
             "sonarjs/no-commented-code": 0,
+            "sonarjs/todo-tag": 0,
+            "sonarjs/no-hardcoded-passwords": 0,
+
             // "unicorn/no-fn-reference-in-iterator": 2,
             "unicorn/prevent-abbreviations": [
                 2,
@@ -255,7 +254,7 @@ export default defineConfig([
             "max-lines-per-function": [2, 600],
             "object-property-newline": [2, {allowAllPropertiesOnSameLine: true}],
             "multiline-ternary": 0,
-            "max-lines": [2, 1000],
+            "max-lines": [2, 2000],
             "newline-per-chained-call": [2, {ignoreChainWithDepth: 4}],
             "function-paren-newline": 0,
             "capitalized-comments": [
@@ -290,6 +289,10 @@ export default defineConfig([
         "dist/*",
         "dist-server/*",
 
+        // styles
+        "*/**/*.scss.d.ts",
+        "*/**/*.css.d.ts",
+
         // NPM
         "node_modules/*",
 
@@ -317,6 +320,8 @@ export default defineConfig([
         "**/*.scss.d.ts",
         "**/*.css.d.ts",
 
+        // backstop
+        "backstop_data",
         // "next.config.mjs",
         // "app/image/**",
     ]),

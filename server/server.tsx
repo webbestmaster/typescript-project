@@ -39,7 +39,6 @@ import {apiUrl, serverPort, siteCookieKey} from "./const";
 import type {PaginationResultType} from "./data-base/data-base-type";
 import {makeDirectory, tryToRemoveDirectory} from "./file/directory";
 import {type GetExtraFilesType, removeExtraStaticFiles} from "./file/extra-static-files";
-import {getImage, uploadFile} from "./file/file";
 import {temporaryUploadFolder, uploadFileFolder, uploadFolder} from "./file/file-const";
 import {secretKey} from "./key";
 import {makeStatic} from "./make-static";
@@ -114,8 +113,8 @@ async function innerInitialization(): Promise<undefined> {
         apiUrl.adminArticleListPaginationPick,
         adminOnly<PaginationResultType<Partial<ArticleType>>>(getArticleListPaginationPick)
     );
-    fastify.post(apiUrl.adminFileUpload, adminOnly<ArticleFileType>(uploadFile));
-    fastify.get(apiUrl.imageGet, getImage);
+    // fastify.post(apiUrl.adminFileUpload, adminOnly<ArticleFileType>(uploadFile));
+    // fastify.get(apiUrl.imageGet, getImage);
     fastify.get(apiUrl.clientArticleContextGet, getClientArticleContextData);
     fastify.get(apiUrl.articleClientUrlListGet, getArticleClientUrlList);
     fastify.get(
