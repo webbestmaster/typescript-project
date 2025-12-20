@@ -24,9 +24,9 @@ import {Popup} from "./layout/popup/popup";
     const {innerHTML} = nodeWrapper;
 
     const appNode: JSX.Element = (
-        <StrictMode>
+        // <StrictMode>
             <App articleData={null} defaultThemeName={null} navigationData={null} url="" />
-        </StrictMode>
+        // </StrictMode>
     );
 
     if (innerHTML.trim() === "") {

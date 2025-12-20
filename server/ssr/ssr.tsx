@@ -43,14 +43,14 @@ export async function getHtmlCallBack(
     const metaTwitterCardSsrReplaceData = getMetaTwitterCardSsrReplaceData(article);
 
     const htmlString = ReactDOMServer.renderToStaticMarkup(
-        <StrictMode>
+        // <StrictMode>
             <App
                 articleData={articleData}
                 defaultThemeName={ThemeNameEnum.light}
                 navigationData={navigationData}
                 url={url}
             />
-        </StrictMode>
+        // </StrictMode>
     );
 
     // Const htmlString = await streamToStringServer(appStream);
