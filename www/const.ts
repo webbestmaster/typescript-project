@@ -1,14 +1,16 @@
 /* global BUILD_DATE_H, IS_PRODUCTION */
 
-import wasmInit, {add} from "my-web-asm";
+import wasmInit, {add, start} from "my-web-asm";
 
 (async () => {
     await wasmInit();
+    // initSync(wasmData);
     // this function will work after initalisation only
     console.log(add(3, 2));
-    // console.log(start());
 
-    console.log('0000');
+    start();
+
+    console.log("0000");
 })();
 
 export const selector = {
