@@ -51,3 +51,4 @@ npm-debug.log*
 # temp
 /static-file-temp/
 /**/.idea/
+/my-web-asm/target/
