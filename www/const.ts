@@ -1,14 +1,15 @@
 /* global BUILD_DATE_H, IS_PRODUCTION */
 
-import wasmInit, {add, start} from "../my-web-asm/my-web-asm";
+import wasmInit, {add, start, remove} from "../my-web-asm/my-web-asm";
 
 (async () => {
     await wasmInit();
     // initSync(wasmData);
     // this function will work after initalisation only
     console.log(add(3, 2));
+    console.log(remove(3, 2));
 
-    start();
+    // start();
 
     console.log(11);
 

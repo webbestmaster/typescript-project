@@ -1,10 +1,18 @@
 // wasm-pack build -t web --out-dir "./my-web-asm" --release
+use serde::Serialize;
 use std::cell::RefCell;
 use std::rc::Rc;
 use std::{thread, time};
 use wasm_bindgen::JsCast;
+use wasm_bindgen::JsValue;
 use wasm_bindgen::prelude::*;
-use web_sys::CustomEvent;
+use web_sys::{CustomEvent, CustomEventInit};
+
+#[derive(Serialize)]
+struct MyDetail {
+    count: i32,
+    message: String,
+}
 
 const ENTER_KEY: u32 = 13;
 
@@ -15,8 +23,11 @@ pub fn add(a: i32, b: i32) -> i32 {
 }
 
 #[wasm_bindgen]
-pub fn remove(a: i32, b: i32) -> i32 {
-    a - b
+pub fn remove(a: i32, b: i32) -> JsValue {
+    serde_wasm_bindgen::to_value(&MyDetail {
+        count: a - b,
+        message: format!("remove {}", a - b),
+    }).unwrap()
 }
 
 fn window() -> web_sys::Window {
@@ -49,7 +60,21 @@ pub fn start() -> Result<(), JsValue> {
 
     // ОТПРАВЛЯЕМ событие
     let custom_event = CustomEvent::new("my-rust-event")?;
-    document.dispatch_event(&custom_event)?;
+
+    let detail: MyDetail = MyDetail {
+        count: 3,
+        message: String::from("Hello"),
+    };
+
+    let detail_js = serde_wasm_bindgen::to_value(&detail).unwrap();
+
+    let init = CustomEventInit::new();
+
+    init.set_detail(&detail_js);
+
+    let event = CustomEvent::new_with_event_init_dict("my-event", &init).unwrap();
+
+    document.dispatch_event(&event)?;
 
     let delay = time::Duration::from_secs(3);
 
@@ -102,6 +127,10 @@ pub fn start() -> Result<(), JsValue> {
         }
 
         let custom_event = CustomEvent::new("my-rust-event").unwrap();
+
+        let event = CustomEvent::new_with_event_init_dict("my-rust-event", &init).unwrap();
+
+        document.dispatch_event(&event);
         document.dispatch_event(&custom_event);
         // Set the body's text content to how many times this
         // requestAnimationFrame callback has fired.

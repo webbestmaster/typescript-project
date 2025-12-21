@@ -18,6 +18,15 @@ export function ClientHome(): JSX.Element {
     const {content, title} = article;
 
     useEffect(() => {
+        document.addEventListener(
+            "my-rust-event",
+            (...args) => {
+                console.log("from js");
+                console.log(...args);
+            },
+            false
+        );
+
         (async (): Promise<void> => {
             const resultQueries: Record<string, string> = {
                 pagination: JSON.stringify({
