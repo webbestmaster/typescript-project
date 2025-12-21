@@ -1,3 +1,6 @@
+// levels are here
+// https://borgar.net/programs/sokoban/#Microban
+
 // wasm-pack build -t web --out-dir "./my-web-asm" --release
 use serde::Serialize;
 use std::cell::RefCell;
