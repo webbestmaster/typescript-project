@@ -1,10 +1,10 @@
 // wasm-pack build -t web --out-dir "./my-web-asm" --release
-use std::{thread, time};
 use std::cell::RefCell;
 use std::rc::Rc;
+use std::{thread, time};
 use wasm_bindgen::JsCast;
 use wasm_bindgen::prelude::*;
-use web_sys::{CustomEvent};
+use web_sys::CustomEvent;
 
 const ENTER_KEY: u32 = 13;
 
@@ -32,7 +32,9 @@ fn request_animation_frame(f: &Closure<dyn FnMut()>) {
 #[wasm_bindgen]
 pub fn start() -> Result<(), JsValue> {
     let window = window();
-    let document = window.document().unwrap();
+    let document = window
+        .document()
+        .expect("Can NOT get document from the window");
 
     // СЛУШАЕМ событие
     let listener = Closure::<dyn FnMut(_)>::new(move |event: web_sys::Event| {
@@ -40,10 +42,8 @@ pub fn start() -> Result<(), JsValue> {
         web_sys::console::log_1(&event.type_().into());
     });
 
-    document.add_event_listener_with_callback(
-        "my-rust-event",
-        listener.as_ref().unchecked_ref(),
-    )?;
+    document
+        .add_event_listener_with_callback("my-rust-event", listener.as_ref().unchecked_ref())?;
 
     listener.forget(); // чтобы не был удалён GC
 
@@ -51,32 +51,27 @@ pub fn start() -> Result<(), JsValue> {
     let custom_event = CustomEvent::new("my-rust-event")?;
     document.dispatch_event(&custom_event)?;
 
-
     let delay = time::Duration::from_secs(3);
-
 
     let f = Rc::new(RefCell::new(None));
     let g = f.clone();
 
-
-
     let set_page = Closure::<dyn FnMut(_)>::new(move |event: web_sys::Event| {
-
-    if let Some(key_e) = JsCast::dyn_ref::<web_sys::KeyboardEvent>(&event) {
-        if key_e.key_code() == ENTER_KEY {
-            web_sys::console::log_1(&"ENTER KEY".into());
-        }
-    }
-
-/*        if let Some(key_e) = wasm_bindgen::JsCast::dyn_ref::<web_sys::KeyboardEvent>(&key_e) {
+        if let Some(key_e) = JsCast::dyn_ref::<web_sys::KeyboardEvent>(&event) {
             if key_e.key_code() == ENTER_KEY {
-                if let Some(target) = e.target() {
-                    let mut el: Element = target.into();
-                    el.blur();
-                }
+                web_sys::console::log_1(&"ENTER KEY".into());
             }
         }
-*/
+
+        /*        if let Some(key_e) = wasm_bindgen::JsCast::dyn_ref::<web_sys::KeyboardEvent>(&key_e) {
+                    if key_e.key_code() == ENTER_KEY {
+                        if let Some(target) = e.target() {
+                            let mut el: Element = target.into();
+                            el.blur();
+                        }
+                    }
+                }
+        */
         web_sys::console::log_1(&"!!!!".into());
 
         // if let Some(location) = document.location() {
@@ -94,7 +89,6 @@ pub fn start() -> Result<(), JsValue> {
         .unwrap();
 
     set_page.forget(); // чтобы не был удалён GC
-
 
     let mut i = 0;
     *g.borrow_mut() = Some(Closure::new(move || {
@@ -121,12 +115,13 @@ pub fn start() -> Result<(), JsValue> {
 
     request_animation_frame(g.borrow().as_ref().unwrap());
 
-/*    loop{
+    /*    loop{
 
-        let custom_event = CustomEvent::new("my-rust-event")?;
-        document.dispatch_event(&custom_event)?;
+            let custom_event = CustomEvent::new("my-rust-event")?;
+            document.dispatch_event(&custom_event)?;
 
-        thread::sleep(delay);
-    }
-*/    Ok(())
+            thread::sleep(delay);
+        }
+    */
+    Ok(())
 }
