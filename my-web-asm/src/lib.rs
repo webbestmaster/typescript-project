@@ -24,7 +24,7 @@ pub fn add(a: i32, b: i32) -> i32 {
 
 #[wasm_bindgen]
 pub fn remove(a: i32, b: i32) -> JsValue {
-    serde_wasm_bindgen::to_value(&MyDetail {
+    serde_wasm_bindgen::to_value::<MyDetail>(&MyDetail {
         count: a - b,
         message: format!("remove {}", a - b),
     }).unwrap()
