@@ -2,9 +2,11 @@
 use std::{thread, time};
 use std::cell::RefCell;
 use std::rc::Rc;
-use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsCast;
+use wasm_bindgen::prelude::*;
 use web_sys::{CustomEvent};
+
+const ENTER_KEY: u32 = 13;
 
 // функция, доступная из JavaScript
 #[wasm_bindgen]
@@ -55,6 +57,44 @@ pub fn start() -> Result<(), JsValue> {
 
     let f = Rc::new(RefCell::new(None));
     let g = f.clone();
+
+
+
+    let set_page = Closure::<dyn FnMut(_)>::new(move |event: web_sys::Event| {
+
+    if let Some(key_e) = JsCast::dyn_ref::<web_sys::KeyboardEvent>(&event) {
+        if key_e.key_code() == ENTER_KEY {
+            web_sys::console::log_1(&"ENTER KEY".into());
+        }
+    }
+
+/*        if let Some(key_e) = wasm_bindgen::JsCast::dyn_ref::<web_sys::KeyboardEvent>(&key_e) {
+            if key_e.key_code() == ENTER_KEY {
+                if let Some(target) = e.target() {
+                    let mut el: Element = target.into();
+                    el.blur();
+                }
+            }
+        }
+*/
+        web_sys::console::log_1(&"!!!!".into());
+
+        // if let Some(location) = document.location() {
+        //     if let Ok(hash) = location.hash() {
+        //         if let Ok(sched) = &(sched.try_borrow_mut()) {
+        //             sched.add_message(Message::Controller(ControllerMessage::SetPage(hash)));
+        //         }
+        //     }
+        // }
+    });
+
+    // let window_et: web_sys::EventTarget = window.into();
+    document
+        .add_event_listener_with_callback("keyup", set_page.as_ref().unchecked_ref())
+        .unwrap();
+
+    set_page.forget(); // чтобы не был удалён GC
+
 
     let mut i = 0;
     *g.borrow_mut() = Some(Closure::new(move || {

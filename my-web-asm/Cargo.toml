@@ -15,5 +15,6 @@ web-sys = { version = "0.3", features = [
     "Event",
     "EventTarget",
     "CustomEvent",
-    "console"
+    "console",
+    "KeyboardEvent"
 ]}
